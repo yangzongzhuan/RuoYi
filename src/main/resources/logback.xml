@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="log_home" value="/home/logs/ruoyi" />
+
+	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志输出 -->
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log_home}/boss.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 按天回滚 daily -->
+			<fileNamePattern>${log_home}/boss.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- 日志最大的历史 30天 -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 用户访问日志输出  -->
+    <appender name="SYS-USER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log_home}/sys-user.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${log_home}/sys-user.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{80} - %msg%n</pattern>
+        </encoder>
+    </appender>
+	
+	<!-- 显示形成的sql、使用的参数、结果集 -->
+	<!--
+		<logger name="java.sql" level="debug" />
+		<logger name="org.springframework.jdbc" level="debug" />
+	-->
+
+	<logger name="com.ruoyi" level="info" />
+
+	<root level="info">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="file" />
+	</root>
+	
+	<!--系统用户操作日志-->
+    <logger name="sys-user" level="info">
+        <appender-ref ref="SYS-USER"/>
+    </logger>
+</configuration> 

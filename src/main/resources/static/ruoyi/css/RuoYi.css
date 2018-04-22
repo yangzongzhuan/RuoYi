@@ -1,0 +1,117 @@
+/*!
+ *   ruoyi.css v1.1.1
+ *   Author: Ruoyi
+ */
+
+/** 用户管理 样式布局 */
+
+.box {
+	position: relative;
+	border-radius: 3px;
+	background: #ffffff;
+	border-top: 3px solid #d2d6de;
+	margin-bottom: 20px;
+	width: 100%;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1)
+}
+
+.box-header:before,.box-body:before,.box-footer:before,.box-header:after,.box-body:after,.box-footer:after {
+	content: " ";
+	display: table
+}
+
+.box-header:after,.box-body:after,.box-footer:after {
+	clear: both
+}
+
+.btn-box-tool {
+  padding: 5px;
+  font-size: 12px;
+  background: transparent;
+  color: #97a0b3;
+}
+.open .btn-box-tool,
+.btn-box-tool:hover {
+  color: #606c84;
+}
+
+.box-main {
+	margin: 0;
+	border: 0;
+	padding-top: 2px;
+	border-radius: 0;
+	box-shadow: none
+}
+
+.box-main>.box-header {
+	border-bottom: 1px solid #eee;
+	padding: 12px 10px 2px 15px
+}
+
+.box-header .box-title {
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+  line-height: 1;
+}
+
+.box-main>.box-header .box-title {
+	font-size: 16px;
+	margin-bottom: 13px;
+	float: left
+}
+
+.box-main>.box-header .box-title .fa {
+	font-size: 14px;
+	padding-right: 3px;
+	margin-top: -2px
+}
+
+.box-main>.box-header .box-tools {
+	position: relative;
+	top: -5px;
+	right: 0
+}
+
+.box-main>.box-header .box-tools .btn {
+	padding: 3px 10px 5px 10px;
+	font-size: 14px;
+	margin-bottom: 2px
+}
+
+.box-main>.box-header .box-tools .btn-box-tool {
+	padding: 4px 2px
+}
+
+.box-main form>.box-footer,.nav-main form>.box-footer {
+	background: #fafafa
+}
+
+.box-main form>.box-footer .row,.nav-main form>.box-footer .row {
+	margin: 5px 0 5px -25px
+}
+
+
+/** select2 样式修改 */
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: #1AB394;
+	border-color: #1AB394;
+	padding: 1px 10px;
+	color: #fff
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	margin-right: 5px;
+	color: rgba(255,255,255,0.7)
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+	color: #fff
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+	padding-right: 10px
+}
+
+ 

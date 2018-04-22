@@ -1,0 +1,213 @@
+/*this file is used for the bootdo project, it is a unique css file*/
+@charset "utf-8";
+*{
+	font-size: 14px;
+	font-family: "microsoft yahei";
+	padding:0;
+	margin: 0;
+	
+}
+a{
+	text-decoration: none !important;
+}
+ul{
+	list-style: none !important;
+}
+.gg-font0{
+	font-size: 0;
+}
+/*表单通用的样式*/
+.gg-star{
+	color: red;
+	font-style: normal;
+}
+.gg-form{
+	margin-top: 15px;
+	padding: 20px;
+    position: relative;
+}
+.gg-formGroup{
+	width: 100%;
+    margin-bottom: 15px;
+    font-size: 0;
+}
+.gg-formGroup .gg-formTitle{
+	width:30%;
+	display: inline-block;
+	text-align: right;
+	padding-right: 2%;
+	white-space: nowrap;
+}
+.gg-formGroup .gg-formTitle span{
+	font-size: 14px;
+    color: #666666;
+    font-family: "microsoft yahei";
+    line-height: 28px;
+    white-space: nowrap;
+}
+.gg-formGroup .gg-formDetail{
+	width:60%;
+	display: inline-block;
+}
+.gg-area{
+	width: 33.33%;
+	display: inline-block;
+	padding-right: 2%;
+}
+.gg-area:last-child{
+	padding-right: 0;
+}
+.gg-btnGroup{
+	text-align: center;
+}
+.gg-border0{
+	border: 0;
+}
+.gg-dashed{
+	border-bottom: 1px dashed #b3afaf;
+	width: 40% !important;
+	position: relative;
+}
+.error-mes{
+	position: relative;
+    margin-left: 30%;
+}
+.gg-faeye{
+	position: absolute;
+    top: 24%;
+    right: 10%;
+    padding: 10px;
+    color: #666;
+
+}
+/*头像裁剪上传部分*/
+.avatar-view {
+  display: block;
+  margin: 12% auto 5%;
+  height: 220px;
+  width: 220px;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.avatar-view img {
+  width: 100%;
+}
+.avatar-body {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.avatar-upload {
+  overflow: hidden;
+}
+
+.avatar-upload label {
+  display: block;
+  float: left;
+  clear: left;
+  width: 100px;
+}
+
+.avatar-upload input {
+  display: block;
+  margin-left: 110px;
+}
+
+.avater-alert {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.avatar-wrapper {
+  height: 364px;
+  width: 100%;
+  margin-top: 15px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.avatar-wrapper img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+.avatar-preview {
+  float: left;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.avatar-preview:hover {
+  border-color: #ccf;
+  box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.avatar-preview img {
+  width: 100%;
+}
+
+.preview-lg {
+  height: 184px;
+  width: 184px;
+  margin-top: 15px;
+}
+
+.preview-md {
+  height: 100px;
+  width: 100px;
+}
+
+.preview-sm {
+  height: 50px;
+  width: 50px;
+}
+
+@media (min-width: 992px) {
+  .avatar-preview {
+    float: none;
+  }
+}
+
+.avatar-btns {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.avatar-btns .btn-group {
+  margin-right: 5px;
+}
+
+.loading {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff url("/img/loading.gif") no-repeat center center;
+  opacity: .75;
+  filter: alpha(opacity=75);
+  z-index: 20140628;
+}
+.avatar-title{
+	color:#999;
+	font-size: 12px;
+	text-align: center;
+}
+.modal-backdrop{
+}
+.gg-avatarShow{
+	position: relative;
+	margin-top: -10%;
+	margin-bottom: 12%;
+}

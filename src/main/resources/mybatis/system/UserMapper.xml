@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.user.dao.IUserDao">
+
+	<resultMap type="User" id="UserResult">
+		<id     property="userId"       column="user_id"      />
+		<result property="deptId"       column="dept_id"      />
+		<result property="loginName"    column="login_name"   />
+		<result property="userName"     column="user_name"    />
+		<result property="email"        column="email"        />
+		<result property="phonenumber"  column="phonenumber"  />
+		<result property="password"     column="password"     />
+		<result property="salt"         column="salt"         />
+		<result property="userType"     column="user_type"    />
+		<result property="status"       column="status"       />
+		<result property="refuseDes"    column="refuse_des"   />
+		<result property="createBy"     column="create_by"    />
+		<result property="createTime"   column="create_time"  />
+		<result property="updateBy"     column="update_by"    />
+		<result property="updateTime"   column="update_time"  />
+		<association property="dept"    column="dept_id" javaType="Dept" resultMap="deptResult"/>
+	</resultMap>
+	
+	<resultMap id="deptResult" type="Dept">
+		<id     property="deptId"   column="dept_id"     />
+		<result property="parentId" column="parent_id"   />
+		<result property="deptName" column="dept_name"   />
+		<result property="orderNum" column="order_num"   />
+		<result property="status"   column="dept_status" />
+	</resultMap>
+	
+	<select id="selectUserList" parameterType="User" resultMap="UserResult">
+		select user_id, dept_id, login_name, user_name, email, phonenumber, password, salt, user_type, status, refuse_des, create_by, create_time from sys_user
+		<where>
+			<if test="searchValue != null and searchValue != ''">
+				AND login_name = #{searchValue}
+			</if>
+			<if test="deptId != null and parentId != null and parentId != 0">
+				AND dept_id IN (SELECT dept_id FROM sys_dept WHERE dept_id = #{deptId} OR parent_id = #{deptId})
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectUserByName" parameterType="String" resultMap="UserResult">
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.password, u.salt, u.status, u.refuse_des, u.create_time,
+       		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
+		from sys_user u
+			 left join sys_dept d on u.dept_id = d.dept_id
+			 left join sys_user_role ur on u.user_id = ur.user_id
+		where u.login_name = #{userName}
+	</select>
+	
+	<select id="checkUserNameUnique" parameterType="String" resultType="int">
+		select count(*) from sys_user where login_name=#{loginName}
+	</select>
+	
+	<select id="selectUserById" parameterType="Long" resultMap="UserResult">
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.password, u.salt, u.status, u.refuse_des, u.create_time,
+       		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
+		from sys_user u
+			 left join sys_dept d on u.dept_id = d.dept_id
+			 left join sys_user_role ur on u.user_id = ur.user_id
+		where u.user_id = #{userId}
+	</select>
+	
+	<delete id="deleteUserById" parameterType="Long">
+ 		delete from sys_user where user_id = #{userId}
+ 	</delete>
+ 	
+ 	<delete id="batchDeleteUser" parameterType="String">
+ 		delete from sys_user where user_id in
+ 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+ 			#{userId}
+        </foreach> 
+ 	</delete>
+ 	
+ 	<update id="updateUser" parameterType="User">
+ 		update sys_user
+ 		<set>
+ 			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
+ 			<if test="loginName != null and loginName != ''">login_name = #{loginName},</if>
+ 			<if test="userName != null and userName != ''">user_name = #{userName},</if>
+ 			<if test="email != null and email != ''">email = #{email},</if>
+ 			<if test="phonenumber != null and phonenumber != ''">phonenumber = #{phonenumber},</if>
+ 			<if test="password != null and password != ''">password = #{password},</if>
+ 			<if test="salt != null and salt != ''">salt = #{salt},</if>
+ 			<if test="status !=null">status = #{status},</if>
+ 			<if test="refuseDes != null and refuseDes != ''">refuse_des = #{refuseDes},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where 1=1
+ 		<if test="userId != null and userId  != ''">and user_id = #{userId}</if>
+	</update>
+ 	
+ 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
+ 		insert into sys_user(
+ 			<if test="userId != null and userId != 0">user_id,</if>
+ 			<if test="deptId != null and deptId != 0">dept_id,</if>
+ 			<if test="loginName != null and loginName != ''">login_name,</if>
+ 			<if test="userName != null and userName != ''">user_name,</if>
+ 			<if test="email != null and email != ''">email,</if>
+ 			<if test="phonenumber != null and phonenumber != ''">phonenumber,</if>
+ 			<if test="password != null and password != ''">password,</if>
+ 			<if test="salt != null and salt != ''">salt,</if>
+ 			<if test="status !=null and status != ''">status,</if>
+ 			<if test="refuseDes != null and refuseDes != ''">refuse_des,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="userId != null and userId != ''">#{userId},</if>
+ 			<if test="deptId != null and deptId != ''">#{deptId},</if>
+ 			<if test="loginName != null and loginName != ''">#{loginName},</if>
+ 			<if test="userName != null and userName != ''">#{userName},</if>
+ 			<if test="email != null and email != ''">#{email},</if>
+ 			<if test="phonenumber != null and phonenumber != ''">#{phonenumber},</if>
+ 			<if test="password != null and password != ''">#{password},</if>
+ 			<if test="salt != null and salt != ''">#{salt},</if>
+ 			<if test="status !=null and status != ''">#{status},</if>
+ 			<if test="refuseDes != null and refuseDes != ''">#{refuseDes},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	
+</mapper> 

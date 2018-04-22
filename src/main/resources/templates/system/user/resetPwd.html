@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-user-resetPwd">
+			<input name="userId"  type="hidden"  th:value="${user.userId}" />
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">登录名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" readonly="true" name="loginName" th:value="${user.loginName}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">输入密码：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="password" name="password" id="password" value="123456">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="form-control-static col-sm-offset-9">
+					<button type="submit" class="btn btn-primary">提交</button>
+					<button th:onclick="'javascript:layer_close()'" class="btn btn-danger" type="button">关闭</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="include :: footer"></div>
+
+	<script type="text/javascript">
+		$("#form-user-resetPwd").validate({
+			rules:{
+				password:{
+					required:true,
+					minlength: 6
+				},
+			},
+			submitHandler:function(form){
+				resetPwd();
+			}
+		});
+		
+		function resetPwd() {
+			$.ajax({
+				cache : true,
+				type : "post",
+				url : "/system/user/resetPwd",
+				data : $('#form-user-resetPwd').serialize(),
+				async : false,
+				error : function(request) {
+					parent.layer.alert("系统错误");
+				},
+				success : function(data) {
+					if (data.code == 0) {
+						parent.layer.msg("修改成功,正在刷新数据请稍后……",{icon:1,time: 500,shade: [0.1,'#fff']},function(){
+							window.parent.location.reload();
+						});
+					} else {
+						parent.layer.alert(data.m , {icon: 2,title:"系统提示"});
+					}
+
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>

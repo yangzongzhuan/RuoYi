@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet">
+<link href="/ruoyi/css/RuoYi.css" rel="stylesheet"/>
+<style>
+body{height:auto;font-family: "Microsoft YaHei";}
+button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
+</style>
+<body class="hold-transition box box-main">
+	<input id="treeId"   type="hidden"/>
+	<input id="treeName" type="hidden"/>
+	<div class="wrapper"><div class="treeShowHideButton" onclick="search();">
+		<label id="btnShow" title="显示搜索" style="display:none;">︾</label>
+		<label id="btnHide" title="隐藏搜索">︽</label>
+	</div>
+	<div class="treeSearchInput" id="search">
+		<label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
+		<button class="btn" id="btn" onclick="searchNode()"> 搜索 </button>
+	</div>
+	<div class="treeExpandCollapse">
+		<a href="javascript:" id="btnExpand">展开</a> /
+		<a href="javascript:" id="btnCollapse">折叠</a>
+	</div>
+	<div id="tree" class="ztree treeselect"></div>
+	</div>
+	<div class="layui-layer-btn">
+		<a class="layui-layer-btn0" th:onclick="'javascript:loadUser()'"><i class="fa fa-check"></i> 确定</a>
+		<a class="layui-layer-btn1" th:onclick="'javascript:layer_close()'"><i class="fa fa-close"></i> 关闭</a>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
+	<script type="text/javascript" src="/ruoyi/system/dept/tree.js"></script>
+	<script th:inline="javascript" type="text/javascript">
+		var treeName = [[${treeName}]];
+		$("#treeName").val(treeName);
+	</script>
+</body>
+</html>

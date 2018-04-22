@@ -1,0 +1,205 @@
+html{
+	height: 100%;
+    font-family: PingFangSC-Light,'helvetica neue','hiragino sans gb',arial,'microsoft yahei ui','microsoft yahei',simsun,sans-serif;
+    font-size: 14px;
+}
+body.signin {
+    background: #18c8f6;
+    height: auto;
+    background:url("../img/backg02.jpg") no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: rgba(255,255,255,.95);
+}
+.logopanel h1{
+	font-size: 40px;
+}
+.signin-info h3{
+	font-size: 24px;
+}
+
+.signinpanel {
+    width: 912px;
+    margin: 7% auto 0 auto;
+}
+.btn-login{
+	border: 1px solid #00a3ff;
+	background-color: #00A3FF;
+	color: #fff;
+	border-radius: 2px;
+}
+.btn-login:hover{
+	color: #fff;
+    background-color: #0097ee;
+    border: 1px solid #0097ee;
+}
+.signinpanel .logopanel {
+    float: none;
+    width: auto;
+    padding: 0;
+    background: none;
+}
+
+.signinpanel .signin-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    font-size: 20px;
+    
+}
+
+.signinpanel .form-control {
+    display: block;
+    margin-top: 15px;
+}
+
+.signinpanel .uname {
+    background: #fff url(../img/user.png) no-repeat 95% center;color:#333;
+}
+
+.signinpanel .pword {
+    background: #fff url(../img/locked.png) no-repeat 95% center;color:#333;
+}
+
+.signinpanel .btn {
+    margin-top: 15px;
+}
+
+.signinpanel form {
+    background: #fff;
+    border: 1px solid rgba(255,255,255,.3);
+    -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+    -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+    box-shadow: 0 3px 0 rgba(12, 12, 12, 0.03);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 30px;
+    color:#666;
+}
+.signinpanel form >h3{
+	color: #333333;
+	font-size: 24px;
+	font-family: "microsoft yahei";
+	font-weight: 400;
+}
+.signup-footer{border-top: solid 1px rgba(255,255,255,.3);margin:20px 0;padding-top: 15px;}
+.outside-login{
+    border-top: #dcdee3 1px solid;
+    padding: 7% 0 0;
+    text-align: center;
+    position: relative;
+    margin: 9% 0% 0;
+    border-radius: 0 0 1% 1%;
+}
+.outside-login-tit{
+	position: absolute;
+    top: -8px;
+    left: 50%;
+    margin: 0 0 0 -50px;
+    text-align: center;
+    width: 100px;
+    height: 14px;
+    line-height: 1;
+    color: #999;
+}
+.outside-login-tit span{
+	position: relative;
+	z-index: 2;
+}
+.outside-login-tit:before {
+    top: 0;
+    left: 0;
+    background-color: #fff;
+}
+.outside-login-tit:after {
+    top: 7px;
+    left: 0;
+    background-color: #fff;
+}
+.outside-login-tit:after, .outside-login-tit:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 7px;
+    position: absolute;
+    z-index: 1;
+}
+.outside-login-con {
+    font-size: 0;
+    padding-top: 10px;
+}
+.outside-login-list {
+    width: 116%;
+    margin-left: -8%;
+}
+.outside-login-btn {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 33.3333%;
+}
+.outside-login-list .actived {
+    display: inline-block;
+}
+.outside-login-btn em {
+    display: block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    margin: 0 auto 5px;
+    white-space: normal;
+    font-size: 20px;
+    color: #fff;
+}
+.outside-login-btn:first-child, .outside-login-btn:last-child {
+    width: 30.3333%;
+}
+.outside-login-btn span {
+    font-size: 14px;
+    color: #333;
+}
+.oschina em{
+	background-color: #4ec34d;
+}
+.git em{
+	background-color: #211b1b;
+}
+.my em{
+	background-color: #ff4700
+}
+@media screen and (max-width: 768px) {
+    .signinpanel,
+    .signuppanel {
+        margin: 0 auto;
+        width: 413px!important;
+        padding: 20px;
+    }
+    .signinpanel form {
+        margin-top: 20px;
+    }
+    .signup-footer {
+        margin-bottom: 10px;
+    }
+    .signuppanel .form-control {
+        margin-bottom: 10px;
+    }
+    .signup-footer .pull-left,
+    .signup-footer .pull-right {
+        float: none !important;
+        text-align: center;
+    }
+    .signinpanel .signin-info ul {
+        display: none;
+    }
+}
+@media screen and (max-width: 320px) {
+    .signinpanel,
+    .signuppanel {
+        margin:0 20px;
+        width:auto;
+    }
+}

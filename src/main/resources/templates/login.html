@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>若依管理系统 - 登录</title>
+    <meta name="keywords" content="若依管理系统">
+    <meta name="description" content="RuoYi">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/css/login.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
+    <script>
+        if(window.top!==window.self){window.top.location=window.location};
+    </script>
+</head>
+
+<body class="signin">
+    <div class="signinpanel">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="signin-info">
+                    <div class="logopanel m-b">
+                        <h1><img alt="[ 若依 ]" src="/ruoyi.png"></h1>
+                    </div>
+                    <div class="m-b"></div>
+                    <h4>欢迎使用 <strong>若依 后台管理系统</strong></h4>
+                    <ul class="m-b">
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> SpringBoot</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Mybatis</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Shiro</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Bootstrap</li>
+                    </ul>
+                    <strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <form id="signupForm">
+                    <h4 class="no-margins">登录：</h4>
+                    <p class="m-t-md">若依出品必属精品</p>
+                    <input type="text"     name="username" class="form-control uname"     placeholder="用户名" value="admin"    />
+                    <input type="password" name="password" class="form-control pword m-b" placeholder="密码"   value="admin123" />
+                    <a href="#">忘记密码了？</a>
+                    <button class="btn btn-success btn-block">登录</button>
+                </form>
+            </div>
+        </div>
+        <div class="signup-footer">
+            <div class="pull-left">
+                &copy; 2018 All Rights Reserved. RuoYi
+            </div>
+        </div>
+    </div>
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+<!-- 全局js -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- 验证插件 -->
+<script src="/ajax/libs/validate/jquery.validate.min.js"></script>
+<script src="/ajax/libs/validate/messages_zh.min.js"></script>
+<script src="/ajax/libs/layer/layer.min.js"></script>
+<script src="http://tajs.qq.com/stats?sId=62048022"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    console.log(ctx);
+	    validateRule();
+	});
+	
+	$.validator.setDefaults({
+	    submitHandler: function() {
+	        login();
+	    }
+	});
+	
+	function login() {
+	    $.ajax({
+	        type: "POST",
+	        url: ctx + "login",
+	        data: $('#signupForm').serialize(),
+	        success: function(r) {
+	            if (r.code == 0) {
+	                parent.location.href = '/index';
+	            } else {
+	                layer.msg(r.msg);
+	            }
+	        }
+	    });
+	}
+
+    function validateRule() {
+        var icon = "<i class='fa fa-times-circle'></i> ";
+        $("#signupForm").validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true
+                }
+            },
+            messages: {
+                username: {
+                    required: icon + "请输入您的用户名",
+                },
+                password: {
+                    required: icon + "请输入您的密码",
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

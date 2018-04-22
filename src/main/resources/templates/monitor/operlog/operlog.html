@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+       <div class="btn-group hidden-xs" id="tableToolbar" role="group">
+			<button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:batchRemove()'" shiro:hasPermission="monitor:operlog:batchRemove">
+	            <i class="glyphicon glyphicon-trash"></i>
+	        </button>
+        </div>
+        
+		<table class="bootstrap-table" data-mobile-responsive="true"
+			   data-sort-name="oper_time" data-sort-order="desc">
+		</table>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/ruoyi/monitor/operlog/operlog.js"></script>
+	<script th:inline="javascript" type="text/javascript">
+		var detailFlag = [[${@permissionService.hasPermi('monitor:operlog:detail')}]];
+	</script>
+</body>
+</html>

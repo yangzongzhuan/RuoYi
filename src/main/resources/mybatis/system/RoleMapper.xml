@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.role.dao.IRoleDao">
+
+	<resultMap type="Role" id="RoleResult">
+		<id     property="roleId"       column="role_id"        />
+		<result property="roleName"     column="role_name"      />
+		<result property="roleKey"      column="role_key"       />
+		<result property="roleSort"     column="role_sort"      />
+		<result property="status"       column="status"         />
+		<result property="createBy"     column="create_by"      />
+		<result property="createTime"   column="create_time"    />
+		<result property="updateBy"     column="update_by"      />
+		<result property="updateTime"   column="update_time"    />
+		<result property="remark"       column="remark"         />
+	</resultMap>
+	
+	<select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
+		select role_id, role_name, role_key, role_sort, status, create_time from sys_role
+		<where>
+			<if test="searchValue != null and searchValue != ''">
+				AND role_name = #{searchValue} OR role_key = #{searchValue}
+			</if>
+		</where>
+	</select>
+
+	<select id="selectRolesByUserId" parameterType="Long" resultMap="RoleResult">
+		SELECT r.role_id, r.role_name, r.role_key
+		FROM sys_user u
+			 LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+			 LEFT JOIN sys_role r ON ur.role_id = r.role_id
+		WHERE ur.user_id = #{userId}
+	</select>
+	
+	<select id="selectRolesAll" resultMap="RoleResult">
+		SELECT role_id, role_name, role_key, role_sort, status, create_time FROM sys_role
+	</select>
+	
+	<select id="selectRoleById" parameterType="Long" resultMap="RoleResult">
+		select role_id, role_name, role_key, role_sort, status, create_time
+		from sys_role u
+		where u.role_id = #{roleId}
+	</select>
+	
+	<select id="checkRoleNameUnique" parameterType="String" resultMap="RoleResult">
+		select role_id, role_name, role_key, role_sort, status, create_time 
+		from sys_role where role_name=#{roleName}
+	</select>
+	
+	<delete id="deleteRoleById" parameterType="Long">
+ 		delete from sys_role where role_id = #{roleId}
+ 	</delete>
+ 	
+ 	<delete id="batchDeleteRole" parameterType="String">
+ 		delete from sys_role where role_id in
+ 		<foreach collection="array" item="roleId" open="(" separator="," close=")">
+ 			#{roleId}
+        </foreach> 
+ 	</delete>
+ 	
+ 	<update id="updateRole" parameterType="Role">
+ 		update sys_role
+ 		<set>
+ 			<if test="roleName != null and roleName != ''">role_name = #{roleName},</if>
+ 			<if test="roleKey != null and roleKey != ''">role_key = #{roleKey},</if>
+ 			<if test="roleSort != null and roleSort != ''">role_sort = #{roleSort},</if>
+ 			<if test="status !=null">status = #{status},</if>
+ 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where 1=1
+ 		<if test="roleId != null">and role_id = #{roleId}</if>
+	</update>
+ 	
+ 	<insert id="insertRole" parameterType="Role" useGeneratedKeys="true" keyProperty="roleId">
+ 		insert into sys_role(
+ 			<if test="roleId != null and roleId != 0">role_id,</if>
+ 			<if test="roleName != null and roleName != ''">role_name,</if>
+ 			<if test="roleKey != null and roleKey != ''">role_key,</if>
+ 			<if test="roleSort != null and roleSort != ''">role_sort,</if>
+ 			<if test="status !=null and status != ''">status,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="roleId != null and roleId != 0">#{roleId},</if>
+ 			<if test="roleName != null and roleName != ''">#{roleName},</if>
+ 			<if test="roleKey != null and roleKey != ''">#{roleKey},</if>
+ 			<if test="roleSort != null and roleSort != ''">#{roleSort},</if>
+ 			<if test="status !=null and status != ''">#{status},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	
+</mapper> 
