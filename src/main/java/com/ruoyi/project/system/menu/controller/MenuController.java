@@ -19,7 +19,7 @@ import com.ruoyi.project.system.menu.service.IMenuService;
 import com.ruoyi.project.system.role.domain.Role;
 
 /**
- * 角色信息
+ * 菜单信息
  * 
  * @author ruoyi
  */
@@ -170,7 +170,7 @@ public class MenuController extends BaseController
      * 选择菜单树
      */
     @GetMapping("/selectMenuTree/{menuId}")
-    public String selectDeptTree(@PathVariable("menuId") Long  menuId, Model model)
+    public String selectMenuTree(@PathVariable("menuId") Long  menuId, Model model)
     {
         model.addAttribute("treeName", menuService.selectMenuById(menuId).getMenuName());
         return prefix + "/tree";
