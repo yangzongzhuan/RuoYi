@@ -47,11 +47,4 @@ public class IndexController extends BaseController
         return "main";
     }
 
-    // 捐助列表
-    @GetMapping("/system/juanzhu")
-    public String juanzhu(Model model)
-    {
-        return "juanzhu";
-    }
-
 }

@@ -6,18 +6,19 @@
 
 ## 内置功能
 
-1.	用户管理：用户是系统操作者。
-2.	部门管理：配置系统组织机构。
-3.	岗位管理：岗位是用户所属职务。
-4.	菜单管理：配置系统菜单（支持控制到按钮）。
-5.	角色管理：角色菜单权限分配。
-6.	字典管理：对系统中经常使用的一些较为固定的数据进行维护。
-7.	操作日志：系统操作日志记录（含异常）。
-8.	登录日志：系统登录情况记录（含异常）。
-9.	在线用户：当前系统中活跃用户状态监控。
-10.	定时任务：在线添加、修改和删除任务调度(含执行日志)。
+1.  用户管理：用户是系统操作者。
+2.  部门管理：配置系统组织机构。
+3.  岗位管理：岗位是用户所属职务。
+4.  菜单管理：配置系统菜单（支持控制到按钮）。
+5.  角色管理：角色菜单权限分配。
+6.  字典管理：对系统中经常使用的一些较为固定的数据进行维护。
+7.  操作日志：系统操作日志记录（含异常）。
+8.  登录日志：系统登录情况记录（含异常）。
+9.  在线用户：当前系统中活跃用户状态监控。
+10. 定时任务：在线添加、修改和删除任务调度(含执行日志)。
 11. 代码生成：生成包括 java、html、js、xml、sql
-12. 连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
+12. 在线构建器：拖动表单元素生成相应的HTML代码
+13. 连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
 ## 系统演示
 
@@ -25,25 +26,23 @@
 
 ![首页](https://static.oschina.net/uploads/space/2018/0301/221159_e9GB_1438828.png)
 
-![操作日志](https://static.oschina.net/uploads/space/2018/0303/011028_xWoa_1438828.png)
+![用户管理](https://static.oschina.net/uploads/space/2018/0424/233815_kb8P_1438828.png)
 
-![部门管理](https://static.oschina.net/uploads/space/2018/0311/235903_p5W6_1438828.png)
+![用户修改](https://static.oschina.net/uploads/space/2018/0424/233819_spnr_1438828.png)
 
-![用户管理](https://static.oschina.net/uploads/space/2018/0315/005844_Qduc_1438828.png)
+![部门选择](https://static.oschina.net/uploads/space/2018/0424/233826_J5NV_1438828.png)
 
-![用户修改](https://static.oschina.net/uploads/space/2018/0403/234316_tMEP_1438828.png)
+![部门修改](https://static.oschina.net/uploads/space/2018/0424/234035_gkfz_1438828.png)
 
-![部门选择](https://static.oschina.net/uploads/space/2018/0315/005851_bFzg_1438828.png)
+![菜单选择](https://static.oschina.net/uploads/space/2018/0424/233929_xcaM_1438828.png)
 
-![角色修改](https://static.oschina.net/uploads/space/2018/0310/164644_Jsre_1438828.png)
+![菜单修改](https://static.oschina.net/uploads/space/2018/0311/235921_7txy_1438828.png)
 
-![菜单修改](https://static.oschina.net/uploads/space/2018/0311/235934_lHXI_1438828.png)
+![在线构建](https://static.oschina.net/uploads/space/2018/0424/233957_fRat_1438828.png)
 
-![岗位管理](https://static.oschina.net/uploads/space/2018/0403/234336_BqKh_1438828.png)
+![代码生成](https://static.oschina.net/uploads/space/2018/0424/233952_QXsG_1438828.png)
 
-![调度日志](https://static.oschina.net/uploads/space/2018/0407/173459_d28s_1438828.png)
-
-![代码生成](https://static.oschina.net/uploads/space/2018/0413/172629_IQ1C_1438828.png)
+![操作日志](https://static.oschina.net/uploads/space/2018/0424/234055_8omc_1438828.png)
 
 
 ## 若依交流群

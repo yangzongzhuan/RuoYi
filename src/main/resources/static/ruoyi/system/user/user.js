@@ -106,6 +106,12 @@ function queryDeptTreeDaTa()
 	});
 }
 
+/*用户管理-部门*/
+function dept() {
+	var url = "/system/dept";
+	createMenuItem(url, "部门管理");
+}
+
 /*用户管理-删除*/
 function remove(userId) {
 	$.modalConfirm("确定要删除选中用户吗？", function(r) {
