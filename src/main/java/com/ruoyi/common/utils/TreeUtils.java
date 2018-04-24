@@ -21,14 +21,14 @@ public class TreeUtils
      * @param typeId 传入的父节点ID
      * @return String
      */
-    public static List<Menu> getChildPerms(List<Menu> list, int praentId)
+    public static List<Menu> getChildPerms(List<Menu> list, int parentId)
     {
         List<Menu> returnList = new ArrayList<Menu>();
         for (Iterator<Menu> iterator = list.iterator(); iterator.hasNext();)
         {
             Menu t = (Menu) iterator.next();
             // 一、根据传入的某个父节点ID,遍历该父节点的所有子节点
-            if (t.getParentId() == praentId)
+            if (t.getParentId() == parentId)
             {
                 recursionFn(list, t);
                 returnList.add(t);
