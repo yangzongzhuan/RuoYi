@@ -65,10 +65,7 @@ _ajax_save = function(url, data) {
 };
 
 //对jquery的ajax方法再次封装
-_ajax = function(url, data, type, r) {
-	if (!r) {
-		return;
-	}
+_ajax = function(url, data, type) {
     var config = {
         url: url,
         type: type,
@@ -101,20 +98,6 @@ function handleSuccess(result) {
     	$.modalAlert(result.msg, "error");
     }
 }
-
-$(document).ready(function() {  
-    $(".onoffswitch-checkbox").on('click', function(){  
-        clickSwitch()  
-    });  
-  
-    var clickSwitch = function() {  
-        if ($(".onoffswitch-checkbox").is(':checked')) {  
-            alert("在ON的状态下");
-        } else {  
-        	alert("在OFF的状态下");
-        }  
-    };  
-});  
 
 /** 时间格式化 */
 function formatDate(_date, _pattern) {

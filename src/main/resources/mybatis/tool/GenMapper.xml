@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
 		select table_name, table_comment, create_time, update_time
 		from information_schema.tables
-		where table_name like 'sys_%' and table_schema = (select database())
+		where table_comment <![CDATA[ <> ]]> '' and table_schema = (select database())
 		and table_name = #{tableName}
 	</select>
 	

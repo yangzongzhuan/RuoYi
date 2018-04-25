@@ -69,15 +69,15 @@ function statusTools(row) {
 
 /*调度任务-停用*/
 function stop(obj, jobId) {
-	$.modalConfirm("确认要停用吗？", function(r) {
-		_ajax(prefix + "/changeStatus/", { "jobId": jobId, "status": 1 }, "post", r);
+	$.modalConfirm("确认要停用吗？", function() {
+		_ajax(prefix + "/changeStatus/", { "jobId": jobId, "status": 1 }, "post");
     })
 }
 
 /*调度任务-启用*/
 function start(obj, jobId) {
-	$.modalConfirm("确认要启用吗？", function(r) {
-		_ajax(prefix + "/changeStatus/", { "jobId": jobId, "status": 0 }, "post", r);
+	$.modalConfirm("确认要启用吗？", function() {
+		_ajax(prefix + "/changeStatus/", { "jobId": jobId, "status": 0 }, "post");
     })
 }
 
@@ -95,8 +95,8 @@ function edit(jobId) {
 
 // 单条删除
 function remove(id) {
-	$.modalConfirm("确定要删除选中调度任务吗？", function(r) {
-		_ajax(prefix + "/remove/" + id, "", "post", r);
+	$.modalConfirm("确定要删除选中调度任务吗？", function() {
+		_ajax(prefix + "/remove/" + id, "", "post");
     })
 }
 
@@ -107,8 +107,8 @@ function batchRemove() {
 		$.modalMsg("请选择要删除的数据", "warning");
 		return;
 	}
-	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function(r) {
-		_ajax(prefix + '/batchRemove', { "ids": rows }, "post", r);
+	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function() {
+		_ajax(prefix + '/batchRemove', { "ids": rows }, "post");
 	});
 }
 

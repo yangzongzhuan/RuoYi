@@ -34,11 +34,9 @@ $(function() {
 
 // 生成代码
 function genCode(tableName) {
-	$.modalConfirm("确定要生成" + tableName + "表代码吗？", function(r) {
-		if (!r) {
-			return;
-		}
+	$.modalConfirm("确定要生成" + tableName + "表代码吗？", function() {
 		location.href = prefix + "/genCode/" + tableName;
+		layer.msg('执行成功,正在生成代码请稍后…', {icon: 1});
     })
 }
 
@@ -49,10 +47,7 @@ function batchGenCode() {
 		$.modalMsg("请选择要生成的数据", "warning");
 		return;
 	}
-	$.modalConfirm("确认要生成选中的" + rows.length + "条数据吗?", function(r) {
-		if (!r) {
-			return;
-		}
+	$.modalConfirm("确认要生成选中的" + rows.length + "条数据吗?", function() {
 		location.href = prefix + "/batchGenCode?tables=" + JSON.stringify(rows);
 	});
 }
