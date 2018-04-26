@@ -114,8 +114,8 @@ function dept() {
 
 /*用户管理-删除*/
 function remove(userId) {
-	$.modalConfirm("确定要删除选中用户吗？", function(r) {
-		_ajax(prefix + "/remove/" + userId, "", "post", r);
+	$.modalConfirm("确定要删除选中用户吗？", function() {
+		_ajax(prefix + "/remove/" + userId, "", "post");
     })
 }
 
@@ -144,7 +144,7 @@ function batchRemove() {
 		$.modalMsg("请选择要删除的数据", "warning");
 		return;
 	}
-	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function(r) {
-		_ajax(prefix + '/batchRemove', { "ids": rows }, "post", r);
+	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function() {
+		_ajax(prefix + '/batchRemove', { "ids": rows }, "post");
 	});
 }

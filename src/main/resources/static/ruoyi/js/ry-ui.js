@@ -51,7 +51,7 @@ $(function(){
 	    }, function () {
 	        callBack(true);
 	    }, function () {
-	        callBack(false)
+	        // callBack(false)
 	    });
 	}
 	// 关闭窗体

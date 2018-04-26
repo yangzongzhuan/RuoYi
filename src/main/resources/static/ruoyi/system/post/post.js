@@ -64,8 +64,8 @@ function edit(postId) {
 
 // 单条删除
 function remove(id) {
-	$.modalConfirm("确定要删除选中岗位吗？", function(r) {
-		_ajax(prefix + "/remove/" + id, "", "post", r);
+	$.modalConfirm("确定要删除选中岗位吗？", function() {
+		_ajax(prefix + "/remove/" + id, "", "post");
     })
 }
 
@@ -76,7 +76,7 @@ function batchRemove() {
 		$.modalMsg("请选择要删除的数据", "warning");
 		return;
 	}
-	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function(r) {
-		_ajax(prefix + '/batchRemove', { "ids": rows }, "post", r);
+	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function() {
+		_ajax(prefix + '/batchRemove', { "ids": rows }, "post");
 	});
 }
