@@ -24,7 +24,7 @@
 
 ![登录界面](https://static.oschina.net/uploads/space/2018/0425/110329_Ftsu_1438828.png)
 
-![首页](https://static.oschina.net/uploads/space/2018/0301/221159_e9GB_1438828.png)
+![首页](https://static.oschina.net/uploads/space/2018/0426/215626_fkrN_1438828.png)
 
 ![用户管理](https://static.oschina.net/uploads/space/2018/0424/233815_kb8P_1438828.png)
 
