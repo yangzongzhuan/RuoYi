@@ -126,7 +126,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int deleteRoleById(Long roleId)
     {
-        userRoleDao.deleteUserRoleByUserId(roleId);
+        userRoleDao.deleteUserRoleByRoleId(roleId);
         roleMenuDao.deleteRoleMenuByRoleId(roleId);
         return roleDao.deleteRoleById(roleId);
     }
