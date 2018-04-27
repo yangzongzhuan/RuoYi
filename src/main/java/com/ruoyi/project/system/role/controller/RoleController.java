@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.role.domain.Role;
 import com.ruoyi.project.system.role.service.IRoleService;
@@ -81,45 +81,45 @@ public class RoleController extends BaseController
     @Log(title = "系统管理", action = "角色管理-保存角色")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(Role role)
+    public Message save(Role role)
     {
         if (roleService.saveRole(role) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @RequiresPermissions("system:role:remove")
     @Log(title = "系统管理", action = "角色管理-删除角色")
     @RequestMapping("/remove/{roleId}")
     @ResponseBody
-    public JSON remove(@PathVariable("roleId") Long roleId)
+    public Message remove(@PathVariable("roleId") Long roleId)
     {
         Role role = roleService.selectRoleById(roleId);
         if (role == null)
         {
-            return JSON.error("角色不存在");
+            return Message.error("角色不存在");
         }
         if (roleService.deleteRoleById(roleId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @RequiresPermissions("system:role:batchRemove")
     @Log(title = "系统管理", action = "角色管理-批量删除")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         int rows = roleService.batchDeleteRole(ids);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
     
     /**

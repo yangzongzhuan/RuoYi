@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.project.system.menu.domain.Menu;
 import com.ruoyi.project.system.menu.service.IMenuService;
 import com.ruoyi.project.system.role.domain.Role;
@@ -56,15 +56,15 @@ public class MenuController extends BaseController
     @RequiresPermissions("system:menu:remove")
     @GetMapping("/remove/{menuId}")
     @ResponseBody
-    public JSON remove(@PathVariable("menuId") Long menuId)
+    public Message remove(@PathVariable("menuId") Long menuId)
     {
         if (menuService.deleteMenuById(menuId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
         else
         {
-            return JSON.error(1, "删除失败");
+            return Message.error(1, "删除失败");
         }
     }
 
@@ -111,13 +111,13 @@ public class MenuController extends BaseController
     @RequiresPermissions("system:menu:save")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(Menu menu)
+    public Message save(Menu menu)
     {
         if (menuService.saveMenu(menu) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**

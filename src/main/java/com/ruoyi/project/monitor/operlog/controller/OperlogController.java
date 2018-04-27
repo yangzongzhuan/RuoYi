@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.monitor.operlog.domain.OperLog;
 import com.ruoyi.project.monitor.operlog.service.IOperLogService;
@@ -53,14 +53,14 @@ public class OperlogController extends BaseController
     @Log(title = "监控管理", action = "操作日志-批量删除")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         int rows = operLogService.batchDeleteOperLog(ids);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @RequiresPermissions("monitor:operlog:detail")

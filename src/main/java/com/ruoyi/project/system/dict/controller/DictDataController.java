@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.dict.domain.DictData;
 import com.ruoyi.project.system.dict.service.IDictDataService;
@@ -81,13 +81,13 @@ public class DictDataController extends BaseController
     @RequiresPermissions("system:dict:save")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(DictData dict)
+    public Message save(DictData dict)
     {
         if (dictDataService.saveDictData(dict) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
     
     /**
@@ -97,31 +97,31 @@ public class DictDataController extends BaseController
     @RequiresPermissions("system:dict:remove")
     @RequestMapping("/remove/{dictCode}")
     @ResponseBody
-    public JSON remove(@PathVariable("dictCode") Long dictCode)
+    public Message remove(@PathVariable("dictCode") Long dictCode)
     {
         DictData dictData = dictDataService.selectDictDataById(dictCode);
         if (dictData == null)
         {
-            return JSON.error("字典数据不存在");
+            return Message.error("字典数据不存在");
         }
         if (dictDataService.deleteDictDataById(dictCode) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @Log(title = "系统管理", action = "字典类型-批量删除")
     @RequiresPermissions("system:dict:batchRemove")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         int rows = dictDataService.batchDeleteDictData(ids);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 }

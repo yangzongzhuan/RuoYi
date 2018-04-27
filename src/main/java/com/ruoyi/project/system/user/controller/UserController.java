@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.post.domain.Post;
 import com.ruoyi.project.system.post.service.IPostService;
@@ -106,46 +106,46 @@ public class UserController extends BaseController
     @Log(title = "系统管理", action = "用户管理-重置密码")
     @PostMapping("/resetPwd")
     @ResponseBody
-    public JSON resetPwd(User user)
+    public Message resetPwd(User user)
     {
         int rows = userService.updateUser(user);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @RequiresPermissions("system:user:remove")
     @Log(title = "系统管理", action = "用户管理-删除用户")
     @RequestMapping("/remove/{userId}")
     @ResponseBody
-    public JSON remove(@PathVariable("userId") Long userId)
+    public Message remove(@PathVariable("userId") Long userId)
     {
         User user = userService.selectUserById(userId);
         if (user == null)
         {
-            return JSON.error("用户不存在");
+            return Message.error("用户不存在");
         }
         if (userService.deleteUserById(userId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @RequiresPermissions("system:user:batchRemove")
     @Log(title = "系统管理", action = "用户管理-批量删除")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         int rows = userService.batchDeleteUser(ids);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**
@@ -155,13 +155,13 @@ public class UserController extends BaseController
     @Log(title = "系统管理", action = "部门管理-保存部门")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(User user)
+    public Message save(User user)
     {
         if (userService.saveUser(user) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**

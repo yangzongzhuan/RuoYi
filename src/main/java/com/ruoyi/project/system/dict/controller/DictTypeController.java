@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.dict.domain.DictType;
 import com.ruoyi.project.system.dict.service.IDictTypeService;
@@ -82,13 +82,13 @@ public class DictTypeController extends BaseController
     @RequiresPermissions("system:dict:save")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(DictType dict)
+    public Message save(DictType dict)
     {
         if (dictTypeService.saveDictType(dict) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
     
     /**
@@ -98,32 +98,32 @@ public class DictTypeController extends BaseController
     @RequiresPermissions("system:dict:remove")
     @RequestMapping("/remove/{dictId}")
     @ResponseBody
-    public JSON remove(@PathVariable("dictId") Long dictId)
+    public Message remove(@PathVariable("dictId") Long dictId)
     {
         DictType dictType = dictTypeService.selectDictTypeById(dictId);
         if (dictType == null)
         {
-            return JSON.error("字典不存在");
+            return Message.error("字典不存在");
         }
         if (dictTypeService.deleteDictTypeById(dictId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @Log(title = "系统管理", action = "字典类型-批量删除")
     @RequiresPermissions("system:dict:batchRemove")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         int rows = dictTypeService.batchDeleteDictType(ids);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**

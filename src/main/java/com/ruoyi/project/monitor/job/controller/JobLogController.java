@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.monitor.job.domain.JobLog;
 import com.ruoyi.project.monitor.job.service.IJobLogService;
@@ -55,35 +55,35 @@ public class JobLogController extends BaseController
     @RequiresPermissions("monitor:job:remove")
     @RequestMapping("/remove/{jobLogId}")
     @ResponseBody
-    public JSON remove(@PathVariable("jobLogId") Long jobLogId)
+    public Message remove(@PathVariable("jobLogId") Long jobLogId)
     {
         JobLog jobLog = jobLogService.selectJobLogById(jobLogId);
         if (jobLog == null)
         {
-            return JSON.error("调度任务不存在");
+            return Message.error("调度任务不存在");
         }
         if (jobLogService.deleteJobLogById(jobLogId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @Log(title = "监控管理", action = "定时任务-批量删除日志")
     @RequiresPermissions("monitor:job:batchRemove")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         try
         {
             jobLogService.batchDeleteJoblog(ids);
-            return JSON.ok();
+            return Message.ok();
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return JSON.error(e.getMessage());
+            return Message.error(e.getMessage());
         }
     }
 }

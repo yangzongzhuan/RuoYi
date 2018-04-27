@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.dept.service.IDeptService;
 
@@ -80,13 +80,13 @@ public class DeptController extends BaseController
     @RequiresPermissions("system:dept:save")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(Dept dept)
+    public Message save(Dept dept)
     {
         if (deptService.saveDept(dept) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**
@@ -96,22 +96,22 @@ public class DeptController extends BaseController
     @RequiresPermissions("system:dept:remove")
     @GetMapping("/remove/{deptId}")
     @ResponseBody
-    public JSON remove(@PathVariable("deptId") Long deptId)
+    public Message remove(@PathVariable("deptId") Long deptId)
     {
         if (deptService.selectDeptCount(deptId) > 0)
         {
-            return JSON.error(1, "存在下级部门,不允许删除");
+            return Message.error(1, "存在下级部门,不允许删除");
         }
 
         if (deptService.checkDeptExistUser(deptId))
         {
-            return JSON.error(1, "部门存在用户,不允许删除");
+            return Message.error(1, "部门存在用户,不允许删除");
         }
         if (deptService.deleteDeptById(deptId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**

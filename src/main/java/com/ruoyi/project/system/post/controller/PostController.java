@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.system.post.domain.Post;
 import com.ruoyi.project.system.post.service.IPostService;
@@ -56,32 +56,32 @@ public class PostController extends BaseController
     @RequiresPermissions("system:post:remove")
     @RequestMapping("/remove/{postId}")
     @ResponseBody
-    public JSON remove(@PathVariable("postId") Long postId)
+    public Message remove(@PathVariable("postId") Long postId)
     {
         Post post = postService.selectPostById(postId);
         if (post == null)
         {
-            return JSON.error("岗位不存在");
+            return Message.error("岗位不存在");
         }
         if (postService.deletePostById(postId) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     @RequiresPermissions("system:post:batchRemove")
     @Log(title = "系统管理", action = "岗位管理-批量删除")
     @PostMapping("/batchRemove")
     @ResponseBody
-    public JSON batchRemove(@RequestParam("ids[]") Long[] ids)
+    public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
         int rows = postService.batchDeletePost(ids);
         if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
     /**
@@ -115,13 +115,13 @@ public class PostController extends BaseController
     @RequiresPermissions("system:post:save")
     @PostMapping("/save")
     @ResponseBody
-    public JSON save(Post post)
+    public Message save(Post post)
     {
         if (postService.savePost(post) > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
     }
 
 }
