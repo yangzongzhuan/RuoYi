@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.JSON;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.dept.service.IDeptService;
@@ -23,7 +24,7 @@ import com.ruoyi.project.system.dept.service.IDeptService;
  */
 @Controller
 @RequestMapping("/system/dept")
-public class DeptController
+public class DeptController extends BaseController
 {
     private String prefix = "system/dept";
 
