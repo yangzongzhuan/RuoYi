@@ -18,10 +18,10 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script src="/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js"></script>
-	<script src="/ajax/libs/bootstrap-table/extensions/export/tableExport.js"></script>
-	<script type="text/javascript" src="/ruoyi/system/role/role.js"></script>
-	<script th:inline="javascript" type="text/javascript">
+	<script src="/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js" th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js}"></script>
+	<script src="/ajax/libs/bootstrap-table/extensions/export/tableExport.js" th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.js}"></script>
+	<script src="/ruoyi/system/role/role.js" th:src="@{/ruoyi/system/role/role.js}"></script>
+	<script th:inline="javascript">
 		var editFlag = [[${@permissionService.hasPermi('system:role:edit')}]];
 		var removeFlag = [[${@permissionService.hasPermi('system:role:remove')}]];
 	</script>

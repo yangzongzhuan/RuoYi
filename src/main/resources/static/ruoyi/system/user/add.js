@@ -4,7 +4,7 @@ $("#form-user-add").validate({
 			required:true,
 			minlength: 5,
 			remote: {
-                url: "/system/user/checkUserNameUnique",
+                url: ctx + "system/user/checkUserNameUnique",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -57,7 +57,7 @@ function add() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/user/save",
+		url : ctx + "system/user/save",
 		data : {
 			"userId": userId,
 			"deptId": deptId,
@@ -91,6 +91,6 @@ function add() {
 function selectDeptTree() {
 	var treeId = $("#treeId").val();
 	var deptId = treeId == null || treeId == "" ? "100" : treeId;
-	var url = "/system/dept/selectDeptTree/" + deptId;
+	var url = ctx + "system/dept/selectDeptTree/" + deptId;
     layer_show("选择部门", url, '380', '380');
 }

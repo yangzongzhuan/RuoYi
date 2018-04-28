@@ -1,4 +1,4 @@
-var prefix = "/system/role"
+var prefix = ctx + "system/role"
 
 $(function() {
 	var columns = [{

@@ -7,7 +7,7 @@ $("#form-dict-edit").validate({
 			required:true,
 			minlength: 5,
 			remote: {
-                url: "/system/dict/checkDictTypeUnique",
+                url: ctx + "system/dict/checkDictTypeUnique",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -36,5 +36,5 @@ $("#form-dict-edit").validate({
 });
 
 function update() {
-	_ajax_save("/system/dict/save", $("#form-dict-edit").serialize());
+	_ajax_save(ctx + "system/dict/save", $("#form-dict-edit").serialize());
 }

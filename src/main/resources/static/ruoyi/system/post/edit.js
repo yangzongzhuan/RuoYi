@@ -17,5 +17,5 @@ $("#form-post-edit").validate({
 
 /** 岗位管理-修改岗位 */
 function edit() {
-	_ajax_save(ctx + "/system/post/save", $("#form-post-edit").serialize());
+	_ajax_save(ctx + "system/post/save", $("#form-post-edit").serialize());
 }

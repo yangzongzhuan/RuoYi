@@ -1,4 +1,4 @@
-var prefix = "/system/dept"
+var prefix = ctx + "system/dept"
 
 window.onload = function() {
 	loading();

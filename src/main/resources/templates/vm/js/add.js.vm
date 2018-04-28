@@ -10,5 +10,5 @@ $("#form-${classname}-add").validate({
 });
 
 function add() {
-    _ajax_save("/${moduleName}/${classname}/save", $('#form-${classname}-add').serialize());
+    _ajax_save(ctx + "${moduleName}/${classname}/save", $('#form-${classname}-add').serialize());
 }

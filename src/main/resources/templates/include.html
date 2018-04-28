@@ -5,14 +5,14 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<link rel="shortcut icon" href="favicon.ico">
-	<link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-	<link href="../static/css/font-awesome.css" rel="stylesheet" th:href="@{/css/font-awesome.css}">
+	<link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+	<link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
 	<!-- bootstrap-table 表格插件样式 -->
-	<link href="../static/ajax/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}">
-	<link href="../static/ajax/libs/jqTreeGrid/jquery.treegrid.css" rel="stylesheet" th:href="@{/ajax/libs/jqTreeGrid/jquery.treegrid.css}">
-	<link href="../static/css/animate.css" rel="stylesheet" th:href="@{/css/animate.css}">
-	<link href="../static/css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
-	<link href="../static/css/checkbox.css" rel="stylesheet" th:href="@{/css/checkbox.css}">
+	<link href="../static/ajax/libs/bootstrap-table/bootstrap-table.min.css" th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet"/>
+	<link href="../static/ajax/libs/jqTreeGrid/jquery.treegrid.css" th:href="@{/ajax/libs/jqTreeGrid/jquery.treegrid.css}" rel="stylesheet"/>
+	<link href="../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet"/>
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+	<link href="../static/css/checkbox.css" th:href="@{/css/checkbox.css}" rel="stylesheet"/>
 </head>
 <div th:fragment="footer">
 	<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
@@ -35,5 +35,6 @@
 	<script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 	<script src="../static/ruoyi/js/common.js?v=1.1.1" th:src="@{/ruoyi/js/common.js?v=1.1.1}"></script>
 	<script src="../static/ruoyi/js/ry-ui.js?v=1.1.1" th:src="@{/ruoyi/js/ry-ui.js?v=1.1.1}"></script>
+	<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
 	<script src="http://tajs.qq.com/stats?sId=62048022"></script>
 </div>

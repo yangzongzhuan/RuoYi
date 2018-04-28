@@ -1,4 +1,4 @@
-var prefix = "/system/menu"
+var prefix = ctx + "system/menu"
 
 window.onload = function() {
 	loading();

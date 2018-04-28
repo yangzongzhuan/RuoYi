@@ -3,7 +3,7 @@ $("#form-dept-add").validate({
 		deptName:{
 			required:true,
 			remote: {
-                url: "/system/dept/checkDeptNameUnique",
+                url: ctx + "system/dept/checkDeptNameUnique",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -33,12 +33,12 @@ $("#form-dept-add").validate({
 });
 
 function update() {
-	_ajax_save("/system/dept/save", $("#form-dept-add").serialize());
+	_ajax_save(ctx + "system/dept/save", $("#form-dept-add").serialize());
 }
 
 /*部门管理-新增-选择父部门树*/
 function selectDeptTree() {
     var deptId = $("#treeId").val();
-	var url = "/system/dept/selectDeptTree/" + deptId;
+	var url = ctx + "system/dept/selectDeptTree/" + deptId;
     layer_show("选择部门", url, '380', '380');
 }

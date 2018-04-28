@@ -17,5 +17,5 @@ $("#form-post-add").validate({
 
 /** 岗位管理-新增岗位 */
 function add() {
-	_ajax_save(ctx + "/system/post/save", $("#form-post-add").serialize());
+	_ajax_save(ctx + "system/post/save", $("#form-post-add").serialize());
 }

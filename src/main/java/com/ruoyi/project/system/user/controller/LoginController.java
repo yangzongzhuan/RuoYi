@@ -17,7 +17,6 @@ import com.ruoyi.framework.web.domain.Message;
  * 
  * @author ruoyi
  */
-// @RestController
 @Controller
 public class LoginController extends BaseController
 {

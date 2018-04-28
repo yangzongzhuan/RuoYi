@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/iCheck/custom.css" rel="stylesheet">
-<link href="/ajax/libs/select/select2.css" rel="stylesheet">
-<link href="/ruoyi/css/RuoYi.css" rel="stylesheet"/>
+<link href="/ajax/libs/iCheck/custom.css" th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
+<link href="/ajax/libs/select/select2.css" th:href="@{/ajax/libs/select/select2.css}" rel="stylesheet"/>
+<link href="/ruoyi/css/RuoYi.css" th:href="@{/ruoyi/css/RuoYi.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-user-edit">
@@ -79,10 +79,10 @@
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/ruoyi/system/user/edit.js">
+	<script src="/ruoyi/system/user/edit.js" th:src="@{/ruoyi/system/user/edit.js}">
 	</script>
-	<script src="/ajax/libs/iCheck/icheck.min.js"></script>
-	<script src="/ajax/libs/select/select2.js"></script>
+	<script src="/ajax/libs/iCheck/icheck.min.js" th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
+	<script src="/ajax/libs/select/select2.js" th:src="@{/ajax/libs/select/select2.js}"></script>
 	 <script>
         $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
     </script>

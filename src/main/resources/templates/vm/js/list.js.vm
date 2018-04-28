@@ -1,4 +1,4 @@
-var prefix = "/${moduleName}/${classname}"
+var prefix = ctx + "${moduleName}/${classname}"
 
 $(function() {
 	var columns = [{

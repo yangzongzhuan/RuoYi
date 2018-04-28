@@ -1,4 +1,4 @@
-var prefix = "/tool/gen"
+var prefix = ctx + "tool/gen"
 
 $(function() {
 	var columns = [{

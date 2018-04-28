@@ -1,5 +1,4 @@
-var prefix = ctx + "/system/post"
-
+var prefix = ctx + "system/post"
 $(function() {
 	var columns = [{
             checkbox: true

@@ -1,4 +1,4 @@
-var prefix = "/system/user"
+var prefix = ctx + "system/user"
 
 
 $(document).ready(function(){
@@ -76,7 +76,7 @@ function queryDeptTreeDaTa()
 			$('.bootstrap-table').bootstrapTable('refresh', opt);
 		}}
 	}, tree, loadTree = function(){
-		$.get("/system/dept/treeData", function(data) {
+		$.get(ctx + "system/dept/treeData", function(data) {
 		    tree = $.fn.zTree.init($("#tree"), setting, data); //.expandAll(true);
 		    // 展开第一级节点
 		    var nodes = tree.getNodesByParam("level", 0);
@@ -108,7 +108,7 @@ function queryDeptTreeDaTa()
 
 /*用户管理-部门*/
 function dept() {
-	var url = "/system/dept";
+	var url = ctx + "system/dept";
 	createMenuItem(url, "部门管理");
 }
 

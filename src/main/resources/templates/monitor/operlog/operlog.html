@@ -16,8 +16,8 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/ruoyi/monitor/operlog/operlog.js"></script>
-	<script th:inline="javascript" type="text/javascript">
+	<script src="/ruoyi/monitor/operlog/operlog.js" th:src="@{/ruoyi/monitor/operlog/operlog.js}"></script>
+	<script th:inline="javascript">
 		var detailFlag = [[${@permissionService.hasPermi('monitor:operlog:detail')}]];
 	</script>
 </body>

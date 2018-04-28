@@ -33,7 +33,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/user/save",
+		url : ctx + "system/user/save",
 		data : {
 			"userId": userId,
 			"deptId": deptId,
@@ -64,6 +64,6 @@ function update() {
 /*用户管理-修改-选择部门树*/
 function selectDeptTree() {
 	var deptId = $("#treeId").val();
-    var url = "/system/dept/selectDeptTree/" + deptId;
+    var url = ctx + "system/dept/selectDeptTree/" + deptId;
     layer_show("选择部门", url, '380', '380');
 }

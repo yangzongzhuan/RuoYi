@@ -28,7 +28,7 @@
 	</div>
 	<div th:include="include :: footer"></div>
 
-	<script type="text/javascript">
+	<script>
 		$("#form-user-resetPwd").validate({
 			rules:{
 				password:{
@@ -45,7 +45,7 @@
 			$.ajax({
 				cache : true,
 				type : "post",
-				url : "/system/user/resetPwd",
+				url : ctx + "/system/user/resetPwd",
 				data : $('#form-user-resetPwd').serialize(),
 				async : false,
 				error : function(request) {

@@ -8,7 +8,7 @@ $("#form-menu-edit").validate({
 		menuName:{
 			required:true,
 			remote: {
-                url: "/system/menu/checkMenuNameUnique",
+                url: ctx + "system/menu/checkMenuNameUnique",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -78,7 +78,7 @@ function menuVisible(menuType) {
 }
 
 function update() {
-	_ajax_save("/system/menu/save", $("#form-menu-edit").serialize());
+	_ajax_save(ctx + "system/menu/save", $("#form-menu-edit").serialize());
 }
 
 /*菜单管理-修改-选择菜单树*/
@@ -86,7 +86,7 @@ function selectMenuTree() {
 	var menuId = $("#treeId").val();
 	if(menuId > 0)
 	{
-		var url = "/system/menu/selectMenuTree/" + menuId;
+		var url = ctx + "system/menu/selectMenuTree/" + menuId;
         layer_show("选择菜单", url, '380', '380');
 	}
 	else

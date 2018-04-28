@@ -13,5 +13,5 @@ $("#form-dict-add").validate({
 });
 
 function add() {
-	_ajax_save("/system/dict/data/save", $("#form-dict-add").serialize());
+	_ajax_save(ctx + "system/dict/data/save", $("#form-dict-add").serialize());
 }

@@ -3,7 +3,7 @@ $("#form-menu-add").validate({
 		menuName:{
 			required:true,
 			remote: {
-                url: "/system/menu/checkMenuNameUnique",
+                url: ctx + "system/menu/checkMenuNameUnique",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -64,7 +64,7 @@ $(function() {
 });
 
 function add() {
-	_ajax_save("/system/menu/save", $("#form-menu-add").serialize());
+	_ajax_save(ctx + "system/menu/save", $("#form-menu-add").serialize());
 }
 
 /*菜单管理-新增-选择菜单树*/
@@ -72,12 +72,12 @@ function selectMenuTree() {
 	var menuId = $("#treeId").val();
 	if(menuId > 0)
 	{
-		var url = "/system/menu/selectMenuTree/" + menuId;
+		var url = ctx + "system/menu/selectMenuTree/" + menuId;
         layer_show("选择菜单", url, '380', '380');
 	}
 	else
 	{
-        var url = "/system/menu/selectMenuTree/1";
+        var url = ctx + "system/menu/selectMenuTree/1";
         layer_show("选择菜单", url, '380', '380');
     }
 }

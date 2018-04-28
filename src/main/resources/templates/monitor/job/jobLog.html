@@ -15,8 +15,8 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/ruoyi/monitor/job/jobLog.js"></script>
-	<script th:inline="javascript" type="text/javascript">
+	<script src="/ruoyi/monitor/job/jobLog.js" th:src="@{/ruoyi/monitor/job/jobLog.js}"></script>
+	<script th:inline="javascript">
 		var removeFlag = [[${@permissionService.hasPermi('monitor:job:remove')}]];
 	</script>
 </body>

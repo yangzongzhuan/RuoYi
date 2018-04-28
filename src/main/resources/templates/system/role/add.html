@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet">
+<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-role-add">
@@ -57,8 +57,8 @@
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
-	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
-	<script type="text/javascript" src="/ruoyi/system/role/add.js">
+	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js" th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+	<script src="/ruoyi/system/role/add.js" th:src="@{/ruoyi/system/role/add.js}">
 	</script>
 </body>
 </html>

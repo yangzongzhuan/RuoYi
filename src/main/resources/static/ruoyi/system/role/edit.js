@@ -11,7 +11,7 @@ var setting = {
 		}
 	}
 }, menuTrees, loadTree = function(){
-	$.get("/system/menu/roleMenuTreeData?roleId=" + $("#roleId").val(), function(data) {
+	$.get(ctx + "system/menu/roleMenuTreeData?roleId=" + $("#roleId").val(), function(data) {
 		menuTrees = $.fn.zTree.init($("#menuTrees"), setting, data); //.expandAll(true);
 	}, null, null, "正在加载，请稍后...");
 };loadTree();
@@ -21,7 +21,7 @@ $("#form-role-edit").validate({
 		roleName:{
 			required:true,
 			remote: {
-                url: "/system/role/checkRoleNameUnique",
+                url: ctx + "system/role/checkRoleNameUnique",
                 type: "post",
                 dataType: "text",
                 data: {
@@ -79,7 +79,7 @@ function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/system/role/save",
+		url : ctx + "system/role/save",
 		data : {
 			"roleId": roleId,
 			"roleName": roleName,

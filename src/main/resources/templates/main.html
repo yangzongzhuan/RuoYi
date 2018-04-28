@@ -6,10 +6,10 @@
     <!--360浏览器优先以webkit内核解析-->
     <title>若依介绍</title>
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.css}" rel="stylesheet">
-    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet">
-    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
 </head>
 
 <body class="gray-bg">
@@ -28,7 +28,7 @@
             <small>移动设备访问请扫描以下二维码：</small>
             <br>
             <br>
-            <img src="../static/img/qr_code.png" width="100%" style="max-width:264px;">
+            <img th:src="@{/img/qr_code.png}" width="100%" style="max-width:264px;">
             <br>
         </div>
         <div class="col-sm-5">
@@ -297,7 +297,7 @@
                             	请作者喝杯咖啡。
                         </div>
                         <p id="pay-qrcode">
-                            <a href="javascript:;"><img src="../static/img/pay.png" width="100%" alt="请使用手机支付宝或者微信扫码支付">
+                            <a href="javascript:;"><img th:src="@{/img/pay.png}" width="100%" alt="请使用手机支付宝或者微信扫码支付">
                             </a>
                         </p>
 

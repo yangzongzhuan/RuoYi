@@ -3,9 +3,9 @@
 	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/jquery-layout/jquery.layout-latest.css" rel="stylesheet">
-<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" rel="stylesheet">
-<link href="/ruoyi/css/RuoYi.css" rel="stylesheet"/>
+<link href="/ruoyi/css/RuoYi.css" th:href="@{/ruoyi/css/RuoYi.css}" rel="stylesheet"/>
+<link href="/ajax/libs/jquery-layout/jquery.layout-latest.css" th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 <body class="white-bg">
 
 	<div class="ui-layout-west">
@@ -44,10 +44,10 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/ruoyi/system/user/user.js"></script>
-	<script src="/ajax/libs/jquery-layout/jquery.layout-latest.js"></script>
-	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js"></script>
-	<script th:inline="javascript" type="text/javascript">
+	<script src="/ruoyi/system/user/user.js" th:src="@{/ruoyi/system/user/user.js}"></script>
+	<script src="/ajax/libs/jquery-layout/jquery.layout-latest.js" th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
+	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js" th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+	<script th:inline="javascript">
 		var editFlag = [[${@permissionService.hasPermi('system:user:edit')}]];
 		var removeFlag = [[${@permissionService.hasPermi('system:user:remove')}]];
 		var resetPwdFlag = [[${@permissionService.hasPermi('system:user:resetPwd')}]];

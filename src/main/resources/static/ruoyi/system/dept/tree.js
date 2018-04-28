@@ -7,7 +7,7 @@ var setting = {view:{selectedMulti:false},data:{key:{title:"title"},simpleData:{
 		$("#treeName").val(treeName);
 	}}
 }, tree, loadTree = function(){
-	$.get("/system/dept/treeData", function(data) {
+	$.get(ctx + "system/dept/treeData", function(data) {
 		var treeName = $("#treeName").val();
 	    tree = $.fn.zTree.init($("#tree"), setting, data);
 	    // 展开第一级节点

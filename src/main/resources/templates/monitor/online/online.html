@@ -16,8 +16,8 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/ruoyi/monitor/online/online.js"></script>
-	<script th:inline="javascript" type="text/javascript">
+	<script src="/ruoyi/monitor/online/online.js" th:src="@{/ruoyi/monitor/online/online.js}"></script>
+	<script th:inline="javascript">
 		var forceFlag = [[${@permissionService.hasPermi('monitor:online:forceLogout')}]];
 	</script>
 </body>

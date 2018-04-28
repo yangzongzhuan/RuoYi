@@ -16,5 +16,5 @@ $("#form-job-add").validate({
 });
 
 function add() {
-	_ajax_save("/monitor/job/save", $("#form-job-add").serialize());
+	_ajax_save(ctx + "/monitor/job/save", $("#form-job-add").serialize());
 }

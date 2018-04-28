@@ -1,4 +1,4 @@
-var prefix = "/system/dict/data"
+var prefix = ctx + "system/dict/data"
 
 $(function() {
 		var columns = [{
