@@ -6,7 +6,7 @@
 	<groupId>com.ruoyi</groupId>
 	<artifactId>RuoYi</artifactId>
 	<version>1.1.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>RuoYi</name>
 	<description>若依管理系统</description>
@@ -41,6 +41,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			 <exclusions>
+                <exclusion>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+            </exclusions> 
 		</dependency>
 
 		<!-- SpringBoot 测试 -->
