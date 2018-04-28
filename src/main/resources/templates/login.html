@@ -86,7 +86,7 @@
 	        data: $('#signupForm').serialize(),
 	        success: function(r) {
 	            if (r.code == 0) {
-	                parent.location.href = '/index';
+	                parent.location.href = ctx + 'index';
 	            } else {
 	                layer.msg(r.msg);
 	            }

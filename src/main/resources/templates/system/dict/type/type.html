@@ -19,7 +19,7 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/ruoyi/system/dict/type/type.js"></script>
+	<script type="text/javascript" src="/ruoyi/system/dict/type/type.js" th:src="@{/ruoyi/system/dict/type/type.js}"></script>
 	<script th:inline="javascript" type="text/javascript">
 		var editFlag = [[${@permissionService.hasPermi('system:dict:edit')}]];
 		var listFlag = [[${@permissionService.hasPermi('system:dict:list')}]];

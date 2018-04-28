@@ -17,6 +17,7 @@
     <link href="../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet">
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
 </head>
+<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
 
@@ -36,7 +37,7 @@
                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
                              <li><a class="menuItem" href="profile.html">个人信息</a></li>
                              <li class="divider"></li>
-                             <li><a href="/logout">退出</a></li>
+                             <li><a th-href="@{/logout}">退出</a></li>
                          </ul>
                     </div>
                 </li>
@@ -54,7 +55,7 @@
                 	</a>
                    <ul class="nav nav-second-level collapse">
                         <li th:each="cmenu : ${menu.children}">
-                        	<a class="menuItem" th:text="${cmenu.menuName}" th:href="${cmenu.url}">二级菜单</a>
+                        	<a class="menuItem" th:text="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
                         </li>
                     </ul>
                 </li>
@@ -83,7 +84,7 @@
 	                <li>
 	                    <span class="m-r-sm text-muted welcome-message">欢迎来到若依管理后台.</span>
 	                </li>
-                    <li class="hidden-xs"><a href="/logout" ><i class="fa fa-sign-out"></i>退出</li>
+                    <li class="hidden-xs"><a th:href="@{logout}"><i class="fa fa-sign-out"></i>退出</li>
                 </ul>
             </nav>
         </div>
@@ -121,10 +122,10 @@
     <!--右侧部分结束-->
 </div>
 <!-- 全局js -->
-<script src="/js/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/ruoyi/js/index.js"></script>
+<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="../static/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js" th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script src="../static/ruoyi/js/index.js" th:src="@{/ruoyi/js/index.js}"></script>
 </body>
 </html>

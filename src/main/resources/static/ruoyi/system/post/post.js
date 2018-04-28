@@ -1,4 +1,4 @@
-var prefix = "/system/post"
+var prefix = ctx + "/system/post"
 
 $(function() {
 	var columns = [{
