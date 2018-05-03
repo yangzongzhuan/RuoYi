@@ -16,7 +16,7 @@
         </table>
     </div>
     <div th:include="include :: footer"></div>
-    <script src="/ruoyi/${moduleName}/${classname}/${classname}.js"></script>
+    <script src="/ruoyi/${moduleName}/${classname}/${classname}.js" th:src="/ruoyi/${moduleName}/${classname}/${classname}.js"></script>
     <script th:inline="javascript">
         var editFlag = [[${@permissionService.hasPermi('${moduleName}:${classname}:edit')}]];
         var removeFlag = [[${@permissionService.hasPermi('${moduleName}:${classname}:remove')}]];

@@ -25,7 +25,7 @@
         </form>
     </div>
     <div th:include="include::footer"></div>
-    <script src="/ruoyi/${moduleName}/${classname}/edit.js">
+    <script src="/ruoyi/${moduleName}/${classname}/edit.js" th:src="/ruoyi/${moduleName}/${classname}/edit.js">
     </script>
 </body>
 </html>
