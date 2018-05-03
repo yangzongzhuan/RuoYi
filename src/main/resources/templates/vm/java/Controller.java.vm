@@ -15,7 +15,7 @@ import ${package}.domain.${className};
 import ${package}.service.I${className}Service;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
-import com.ruoyi.framework.web.domain.JSON;
+import com.ruoyi.framework.web.domain.Message;
 
 /**
  * ${tableComment} 控制层处理
@@ -80,13 +80,13 @@ public class ${className}Controller extends BaseController
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("${moduleName}:${classname}:add")
-	public JSON save(${className} ${classname})
+	public Message save(${className} ${classname})
 	{
 		if (${classname}Service.save${className}(${classname}) > 0)
 		{
-			return JSON.ok();
+			return Message.ok();
 		}
-		return JSON.error();
+		return Message.error();
 	}
 	
 	/**
@@ -95,13 +95,13 @@ public class ${className}Controller extends BaseController
 	@PostMapping( "/remove/{${primaryKey.attrname}}")
 	@ResponseBody
 	@RequiresPermissions("${moduleName}:${classname}:remove")
-	public JSON remove(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname})
+	public Message remove(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname})
 	{
 		if (${classname}Service.delete${className}ById(${primaryKey.attrname}) > 0)
 		{
-		    return JSON.ok();
+		    return Message.ok();
 		}
-		return JSON.error();
+		return Message.error();
 	}
 	
 	/**
@@ -110,14 +110,14 @@ public class ${className}Controller extends BaseController
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("${moduleName}:${classname}:batchRemove")
-	public JSON remove(@RequestParam("ids[]") ${primaryKey.attrType}[] ${primaryKey.attrname}s)
+	public Message remove(@RequestParam("ids[]") ${primaryKey.attrType}[] ${primaryKey.attrname}s)
 	{
 		int rows = ${classname}Service.batchDelete${className}(${primaryKey.attrname}s);
 		if (rows > 0)
         {
-            return JSON.ok();
+            return Message.ok();
         }
-        return JSON.error();
+        return Message.error();
 	}
 	
 }
