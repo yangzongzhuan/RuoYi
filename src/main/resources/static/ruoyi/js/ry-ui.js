@@ -138,15 +138,27 @@ $(function(){
 	}
 	// 获取选中复选框项
 	$.getCheckeds = function (_name) {
-	    var roleIds = "";
+	    var checkeds = "";
 	    $('input:checkbox[name="' + _name + '"]:checked').each(function(i) {
 	        if (0 == i) {
-	        	roleIds = $(this).val();
+	        	checkeds = $(this).val();
 	        } else {
-	        	roleIds += ("," + $(this).val());
+	        	checkeds += ("," + $(this).val());
 	        }
 	    });
-	    return roleIds;
+	    return checkeds;
+	}
+	// 获取选中复选框项
+	$.getSelects = function (_name) {
+	    var selects = "";
+	    $('#' + _name + ' option:selected').each(function (i) {
+	        if (0 == i) {
+	        	selects = $(this).val();
+	        } else {
+	        	selects += ("," + $(this).val());
+	        }
+	    });
+	    return selects;
 	}
 	// 复选框事件绑定
 	if ($.fn.select2 !== undefined) {

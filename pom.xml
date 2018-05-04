@@ -23,7 +23,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<shiro.version>1.3.2</shiro.version>
-		<thymeleaf-extras-shiro.version>1.2.1</thymeleaf-extras-shiro.version>
+		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+    	<thymeleaf-layout-dialect.version>2.0.1</thymeleaf-layout-dialect.version>
+		<thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
 		<mybatis-spring-boot-starter.version>1.1.1</mybatis-spring-boot-starter.version>
 		<fastjson.version>1.2.31</fastjson.version>
 		<druid.version>1.0.28</druid.version>		

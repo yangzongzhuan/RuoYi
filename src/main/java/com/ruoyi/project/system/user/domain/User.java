@@ -28,6 +28,10 @@ public class User extends PageDomain
     private String email;
     /** 手机号码 */
     private String phonenumber;
+    /** 用户性别 */
+    private String sex;
+    /** 用户头像 */
+    private String avatar;
     /** 密码 */
     private String password;
     /** 盐加密 */
@@ -121,6 +125,26 @@ public class User extends PageDomain
     public void setPhonenumber(String phonenumber)
     {
         this.phonenumber = phonenumber;
+    }
+
+    public String getSex()
+    {
+        return sex;
+    }
+
+    public void setSex(String sex)
+    {
+        this.sex = sex;
+    }
+
+    public String getAvatar()
+    {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar)
+    {
+        this.avatar = avatar;
     }
 
     public String getPassword()

@@ -58,7 +58,7 @@ public interface IUserService
      * @return 结果
      */
     public int saveUser(User user);
-    
+
     /**
      * 修改用户信息
      * 
@@ -74,5 +74,21 @@ public interface IUserService
      * @return 结果
      */
     public String checkUserNameUnique(String loginName);
+
+    /**
+     * 根据用户ID查询用户所属角色组
+     * 
+     * @param userId 用户ID
+     * @return 结果
+     */
+    public String selectUserRoleGroup(Long userId);
+
+    /**
+     * 根据用户ID查询用户所属岗位组
+     * 
+     * @param userId 用户ID
+     * @return 结果
+     */
+    public String selectUserPostGroup(Long userId);
 
 }

@@ -18,23 +18,35 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>个人资料</h5>
+                        <h5>个人信息</h5>
+                    <div class="ibox-tools">
+                        
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="javascript:editProfile()">修改信息</a></li>
+                            <li><a href="javascript:editHead()">修改头像</a></li>
+                            <li><a href="javascript:editPasswod()">修改密码</a></li>
+                        </ul>
+                       
+                    </div>
                     </div>
                     <div class="contact-box">
 	                        <div class="col-sm-4">
 	                            <div class="text-center">
-	                                <img alt="image" class="img-circle m-t-xs img-responsive" src="/img/a2.jpg">
+	                                <img alt="image" class="img-circle m-t-xs img-responsive" src="/img/a5.jpg">
 	                                <div class="m-t-xs font-bold">CEO</div>
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-8">
-	                            <h3><strong>admin</strong></h3>
-	                            <p><i class="fa fa-user"></i> 若依 / 管理员</p>
-	                            <p><i class="fa fa-phone"></i> 15888888888</p>
-	                            <p><i class="fa fa-group"></i> 开发一部 / 初级开发</p>
-	                            <p><i class="fa fa-transgender"></i> 女</p>
-	                            <p><i class="fa fa-envelope-o"></i> ruoyi@163.com</p>
-	                            <p><i class="fa fa-calendar"></i> 2018-05-20 13:14:00</p>
+	                            <h3><strong>[[${user.loginName}]]</strong></h3>
+	                            <p><i class="fa fa-user"></i> [[${user.userName}]] / [[${#strings.defaultString(roleGroup,'无角色')}]]
+	                            <p><i class="fa fa-phone"></i> [[${user.phonenumber}]]</p>
+	                            <p><i class="fa fa-group"></i> [[${user.dept.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
+	                            <p><i class="fa fa-transgender"></i> [[${user.sex}]]</p>
+	                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
+	                            <p><i class="fa fa-calendar"></i> [[${user.createTime}]]</p>
 	                        </div>
 	                        <div class="clearfix"></div>
 	                    </a>
@@ -43,7 +55,23 @@
             </div>
         </div>
     </div>
-    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
-    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    
+    <div th:include="include::footer"></div>
+    <script>
+        var userId = [[${user.userId}]];
+	    /*用户信息-修改*/
+	    function editProfile() {
+	        var url = ctx + "system/user/edit/" + userId;
+	        layer_showAuto("修改用户", url);
+	    }
+	    /*用户头像-修改*/
+	    function editHead() {
+	    	$.modalAlert("敬请期待", "success");
+	    }
+	    /*用户密码-修改*/
+	    function editPasswod() {
+	    	$.modalAlert("敬请期待", "success");
+	    }
+	</script>
 </body>
 </html>

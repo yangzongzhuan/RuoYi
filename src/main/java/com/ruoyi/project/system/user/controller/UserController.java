@@ -37,10 +37,10 @@ public class UserController extends BaseController
 
     @Autowired
     private IUserService userService;
-    
+
     @Autowired
     private IRoleService roleService;
-    
+
     @Autowired
     private IPostService postService;
 
@@ -92,7 +92,7 @@ public class UserController extends BaseController
         model.addAttribute("posts", posts);
         return prefix + "/add";
     }
-    
+
     @RequiresPermissions("system:user:resetPwd")
     @Log(title = "系统管理", action = "用户管理-重置密码")
     @GetMapping("/resetPwd/{userId}")
@@ -102,7 +102,7 @@ public class UserController extends BaseController
         model.addAttribute("user", user);
         return prefix + "/resetPwd";
     }
-    
+
     @RequiresPermissions("system:user:resetPwd")
     @Log(title = "系统管理", action = "用户管理-重置密码")
     @PostMapping("/resetPwd")
@@ -120,7 +120,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:remove")
     @Log(title = "系统管理", action = "用户管理-删除用户")
     @RequestMapping("/remove/{userId}")
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public Message remove(@PathVariable("userId") Long userId)
     {
@@ -139,7 +139,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:batchRemove")
     @Log(title = "系统管理", action = "用户管理-批量删除")
     @PostMapping("/batchRemove")
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
@@ -157,7 +157,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:save")
     @Log(title = "系统管理", action = "部门管理-保存部门")
     @PostMapping("/save")
-    @Transactional(rollbackFor=Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     @ResponseBody
     public Message save(User user)
     {
@@ -181,6 +181,30 @@ public class UserController extends BaseController
             uniqueFlag = userService.checkUserNameUnique(user.getLoginName());
         }
         return uniqueFlag;
+    }
+
+    /**
+     * 个人信息
+     */
+    @GetMapping("/profile")
+    public String profile(Model model)
+    {
+        User user = getUser();
+        String sex = user.getSex();
+        if ("0".equals(sex))
+        {
+            user.setSex("性别：男");
+        }
+        else if ("1".equals(sex))
+        {
+            user.setSex("性别：女");
+        }
+        String roleGroup = userService.selectUserRoleGroup(user.getUserId());
+        String postGroup = userService.selectUserPostGroup(user.getUserId());
+        model.addAttribute("user", user);
+        model.addAttribute("roleGroup", roleGroup);
+        model.addAttribute("postGroup", postGroup);
+        return prefix + "/profile";
     }
 
 }

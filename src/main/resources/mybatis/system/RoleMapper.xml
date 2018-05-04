@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
-		select role_id, role_name, role_key, role_sort, status, create_time from sys_role
+		select role_id, role_name, role_key, role_sort, status, create_time, remark from sys_role
 		<where>
 			<if test="searchValue != null and searchValue != ''">
 				AND role_name = #{searchValue} OR role_key = #{searchValue}
@@ -35,11 +35,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectRolesAll" resultMap="RoleResult">
-		SELECT role_id, role_name, role_key, role_sort, status, create_time FROM sys_role
+		SELECT role_id, role_name, role_key, role_sort, status, create_time, remark FROM sys_role
 	</select>
 	
 	<select id="selectRoleById" parameterType="Long" resultMap="RoleResult">
-		select role_id, role_name, role_key, role_sort, status, create_time
+		select role_id, role_name, role_key, role_sort, status, create_time, remark
 		from sys_role u
 		where u.role_id = #{roleId}
 	</select>

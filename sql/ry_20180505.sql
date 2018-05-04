@@ -44,6 +44,8 @@ create table sys_user (
   user_name 		varchar(30) 	default '' 				   comment '用户昵称',
   email  			varchar(100) 	default '' 				   comment '用户邮箱',
   phonenumber  		varchar(20) 	default '' 				   comment '手机号码',
+  sex  		        char(20) 	    default '0' 			   comment '用户性别:0男,1女',
+  avatar            varchar(100) 	default '' 				   comment '头像路径',
   password 			varchar(100) 	default '' 				   comment '密码',
   salt 				varchar(100) 	default '' 				   comment '盐加密',
   user_type         char(1)         default 'N'                comment '类型:Y默认用户,N非默认用户',
@@ -59,8 +61,8 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1, 106, 'admin', '若依', 'yzz_ivy@163.com', '15088888888', '29c67a30398638269fe600f73a054934', '111111', 'Y', 0, '维护中', 'admin', '2018-03-01', 'ry', '2018-03-01');
-insert into sys_user values(2, 108, 'ry',    '若依', 'ry@163.com',      '15288888888', '8e6d98b90472783cc73c17047ddccf36', '222222', 'N', 1, '锁定中', 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_user values(1, 106, 'admin', '若依', 'yzz_ivy@163.com', '15088888888', '0', 'img/a5.jpg', '29c67a30398638269fe600f73a054934', '111111', 'N', 1, '维护中', 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_user values(2, 108, 'ry',    '若依', 'ry@163.com',      '15288888888', '1', 'img/a5.jpg', '8e6d98b90472783cc73c17047ddccf36', '222222', 'N', 1, '锁定中', 'admin', '2018-03-01', 'ry', '2018-03-01');
 
 
 -- ----------------------------

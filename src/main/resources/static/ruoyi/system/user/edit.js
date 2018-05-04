@@ -27,9 +27,10 @@ function update() {
 	var password = $("input[name='password']").val();
 	var email = $("input[name='email']").val();
 	var phonenumber = $("input[name='phonenumber']").val();
+	var sex = $("input[name='sex']:checked").val();
 	var status = $("input[name='status']").is(':checked') == true ? 0 : 1;
 	var roleIds = $.getCheckeds("role");
-	var postIds = $("#post").val() + "";
+	var postIds = $.getSelects("post");
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -41,6 +42,7 @@ function update() {
 			"password": password,
 			"email": email,
 			"phonenumber": phonenumber,
+			"sex": sex,
 			"status": status,
 			"roleIds": roleIds,
 			"postIds": postIds

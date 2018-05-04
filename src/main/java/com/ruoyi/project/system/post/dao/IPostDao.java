@@ -12,10 +12,10 @@ public interface IPostDao
 {
 
     /**
-     * 查询系统操作日志集合
+     * 查询岗位数据集合
      * 
      * @param post 岗位信息
-     * @return 操作日志集合
+     * @return 岗位数据集合
      */
     public List<Post> selectPostList(Post post);
 
