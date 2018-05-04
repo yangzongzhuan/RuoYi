@@ -9,13 +9,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="roleId"     column="role_id"      />
 	</resultMap>
 
-	<delete id="deleteUserRoleByUserId">
+	<delete id="deleteUserRoleByUserId" parameterType="Long">
 		delete from sys_user_role where user_id=#{userId}
 	</delete>
 	
-	<delete id="deleteUserRoleByRoleId">
-		delete from sys_user_role where role_id=#{roleId}
-	</delete>
+	<select id="selectCountUserRoleByRoleId" resultType="Integer">
+	    select count(*) from sys_user_role where role_id=#{roleId}  
+	</select>
+	
+	<delete id="deleteUserRole" parameterType="Long">
+ 		delete from sys_user_role where user_id in
+ 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+ 			#{userId}
+        </foreach> 
+ 	</delete>
 	
 	<insert id="batchUserRole">
 		insert into sys_user_role(user_id, role_id) values

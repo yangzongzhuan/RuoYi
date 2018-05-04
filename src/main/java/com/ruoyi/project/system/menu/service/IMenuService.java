@@ -77,6 +77,22 @@ public interface IMenuService
     public Menu selectMenuById(Long menuId);
 
     /**
+     * 查询子菜单数量
+     * 
+     * @param menuId 菜单ID
+     * @return 结果
+     */
+    public int selectCountMenuByParentId(Long parentId);
+
+    /**
+     * 查询菜单使用数量
+     * 
+     * @param menuId 菜单ID
+     * @return 结果
+     */
+    public int selectCountRoleMenuByMenuId(Long menuId);
+
+    /**
      * 保存菜单信息
      * 
      * @param menu 菜单信息

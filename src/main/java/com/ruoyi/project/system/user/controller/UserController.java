@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,6 +120,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:remove")
     @Log(title = "系统管理", action = "用户管理-删除用户")
     @RequestMapping("/remove/{userId}")
+    @Transactional
     @ResponseBody
     public Message remove(@PathVariable("userId") Long userId)
     {
@@ -137,6 +139,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:batchRemove")
     @Log(title = "系统管理", action = "用户管理-批量删除")
     @PostMapping("/batchRemove")
+    @Transactional
     @ResponseBody
     public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
@@ -154,6 +157,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:save")
     @Log(title = "系统管理", action = "部门管理-保存部门")
     @PostMapping("/save")
+    @Transactional
     @ResponseBody
     public Message save(User user)
     {

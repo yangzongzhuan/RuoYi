@@ -1,4 +1,4 @@
-var prefix = ctx + "/monitor/logininfor"
+var prefix = ctx + "monitor/logininfor"
 
 $(function() {
 		var columns = [{

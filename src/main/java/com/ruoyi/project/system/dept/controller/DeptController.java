@@ -102,7 +102,6 @@ public class DeptController extends BaseController
         {
             return Message.error(1, "存在下级部门,不允许删除");
         }
-
         if (deptService.checkDeptExistUser(deptId))
         {
             return Message.error(1, "部门存在用户,不允许删除");

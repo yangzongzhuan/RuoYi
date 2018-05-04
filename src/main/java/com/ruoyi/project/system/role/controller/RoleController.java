@@ -4,6 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ public class RoleController extends BaseController
 
     @Autowired
     private IRoleService roleService;
-    
+
     @RequiresPermissions("system:role:view")
     @GetMapping()
     public String role()
@@ -49,7 +50,7 @@ public class RoleController extends BaseController
         List<Role> list = roleService.selectRoleList(role);
         return getDataTable(list);
     }
-    
+
     /**
      * 新增角色
      */
@@ -80,6 +81,7 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:save")
     @Log(title = "系统管理", action = "角色管理-保存角色")
     @PostMapping("/save")
+    @Transactional
     @ResponseBody
     public Message save(Role role)
     {
@@ -93,6 +95,7 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:remove")
     @Log(title = "系统管理", action = "角色管理-删除角色")
     @RequestMapping("/remove/{roleId}")
+    @Transactional
     @ResponseBody
     public Message remove(@PathVariable("roleId") Long roleId)
     {
@@ -100,6 +103,10 @@ public class RoleController extends BaseController
         if (role == null)
         {
             return Message.error("角色不存在");
+        }
+        if (roleService.selectCountUserRoleByRoleId(roleId) > 0)
+        {
+            return Message.error("角色已分配,不能删除");
         }
         if (roleService.deleteRoleById(roleId) > 0)
         {
@@ -121,7 +128,7 @@ public class RoleController extends BaseController
         }
         return Message.error();
     }
-    
+
     /**
      * 校验角色名称
      */

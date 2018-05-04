@@ -82,5 +82,13 @@ public interface IRoleService
      * @return 结果
      */
     public String checkRoleNameUnique(Role role);
+    
+    /**
+     * 通过角色ID查询角色使用数量
+     * 
+     * @param roleId 角色ID
+     * @return 结果
+     */
+    public int selectCountUserRoleByRoleId(Long roleId);
 
 }

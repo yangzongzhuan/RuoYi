@@ -58,14 +58,19 @@ public class MenuController extends BaseController
     @ResponseBody
     public Message remove(@PathVariable("menuId") Long menuId)
     {
+        if (menuService.selectCountMenuByParentId(menuId) > 0)
+        {
+            return Message.error(1, "存在子菜单,不允许删除");
+        }
+        if (menuService.selectCountRoleMenuByMenuId(menuId) > 0)
+        {
+            return Message.error(1, "菜单已分配,不允许删除");
+        }
         if (menuService.deleteMenuById(menuId) > 0)
         {
             return Message.ok();
         }
-        else
-        {
-            return Message.error(1, "删除失败");
-        }
+        return Message.error();
     }
 
     /**

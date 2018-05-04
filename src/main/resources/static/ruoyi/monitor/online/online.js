@@ -1,4 +1,4 @@
-var prefix = ctx + "/monitor/online"
+var prefix = ctx + "monitor/online"
 
 $(function() {
 	var columns = [{

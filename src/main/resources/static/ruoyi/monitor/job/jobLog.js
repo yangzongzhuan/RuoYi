@@ -1,4 +1,4 @@
-var prefix = ctx + "/monitor/jobLog"
+var prefix = ctx + "monitor/jobLog"
 
 $(function() {
 	var columns = [{

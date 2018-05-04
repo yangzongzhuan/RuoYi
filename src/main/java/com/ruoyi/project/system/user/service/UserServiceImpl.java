@@ -86,6 +86,8 @@ public class UserServiceImpl implements IUserService
     {
         // 删除用户与角色关联
         userRoleDao.deleteUserRoleByUserId(userId);
+        // 删除用户与岗位表
+        userPostDao.deleteUserPostByUserId(userId);
         return userDao.deleteUserById(userId);
     }
 
@@ -98,6 +100,8 @@ public class UserServiceImpl implements IUserService
     @Override
     public int batchDeleteUser(Long[] ids)
     {
+        userRoleDao.deleteUserRole(ids);
+        userPostDao.deleteUserPost(ids);
         return userDao.batchDeleteUser(ids);
     }
 

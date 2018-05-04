@@ -1,4 +1,4 @@
-var prefix = ctx + "/monitor/job"
+var prefix = ctx + "monitor/job"
 
 $(function() {
 	var columns = [{
@@ -114,6 +114,6 @@ function batchRemove() {
 
 //调度日志查询
 function jobLog(id) {
-	var url = ctx + '/monitor/jobLog';
+	var url = ctx + 'monitor/jobLog';
 	createMenuItem(url, "调度日志");
 }

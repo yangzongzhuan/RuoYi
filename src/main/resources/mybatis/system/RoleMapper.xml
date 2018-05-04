@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from sys_role where role_id = #{roleId}
  	</delete>
  	
- 	<delete id="batchDeleteRole" parameterType="String">
+ 	<delete id="batchDeleteRole" parameterType="Long">
  		delete from sys_role where role_id in
  		<foreach collection="array" item="roleId" open="(" separator="," close=")">
  			#{roleId}

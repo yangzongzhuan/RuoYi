@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from sys_job where job_id = #{jobId}
  	</delete>
  	
- 	<delete id="batchDeleteJob" parameterType="String">
+ 	<delete id="batchDeleteJob" parameterType="Long">
  		delete from sys_job where job_id in
  		<foreach collection="array" item="jobId" open="(" separator="," close=")">
  			#{jobId}

@@ -19,6 +19,7 @@ import com.ruoyi.common.utils.TreeUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.menu.dao.IMenuDao;
 import com.ruoyi.project.system.menu.domain.Menu;
+import com.ruoyi.project.system.role.dao.IRoleMenuDao;
 import com.ruoyi.project.system.role.domain.Role;
 
 /**
@@ -33,6 +34,9 @@ public class MenuServiceImpl implements IMenuService
 
     @Autowired
     private IMenuDao menuDao;
+
+    @Autowired
+    private IRoleMenuDao roleMenuDao;
 
     /**
      * 根据用户ID查询菜单
@@ -203,6 +207,30 @@ public class MenuServiceImpl implements IMenuService
     public Menu selectMenuById(Long menuId)
     {
         return menuDao.selectMenuById(menuId);
+    }
+
+    /**
+     * 查询子菜单数量
+     * 
+     * @param menuId 菜单ID
+     * @return 结果
+     */
+    @Override
+    public int selectCountMenuByParentId(Long parentId)
+    {
+        return menuDao.selectCountMenuByParentId(parentId);
+    }
+
+    /**
+     * 查询菜单使用数量
+     * 
+     * @param menuId 菜单ID
+     * @return 结果
+     */
+    @Override
+    public int selectCountRoleMenuByMenuId(Long menuId)
+    {
+        return roleMenuDao.selectCountRoleMenuByMenuId(menuId);
     }
 
     /**

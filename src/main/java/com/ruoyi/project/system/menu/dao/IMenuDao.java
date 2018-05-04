@@ -57,6 +57,14 @@ public interface IMenuDao
      * @return 菜单信息
      */
     public Menu selectMenuById(Long menuId);
+    
+    /**
+     * 查询子菜单数量
+     * 
+     * @param menuId 菜单ID
+     * @return 结果
+     */
+    public int selectCountMenuByParentId(Long parentId);
 
     /**
      * 新增菜单信息

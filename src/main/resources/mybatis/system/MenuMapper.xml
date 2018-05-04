@@ -62,6 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where t.menu_id = #{menuId}
 	</select>
 	
+	<select id="selectCountMenuByParentId" resultType="Integer">
+	    select count(*) from sys_menu where parent_id=#{menuId}  
+	</select>
+	
 	<select id="checkMenuNameUnique" parameterType="String" resultMap="MenuResult">
 		select t.menu_id, t.parent_id, t.menu_name, t.order_num, t.url, t.menu_type, t.visible, t.perms, t.icon, t.remark 
 		from sys_menu t where menu_name=#{menuName}

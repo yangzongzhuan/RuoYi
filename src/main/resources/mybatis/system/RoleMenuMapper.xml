@@ -9,9 +9,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="menuId"     column="menu_id"      />
 	</resultMap>
 
-	<delete id="deleteRoleMenuByRoleId">
+	<delete id="deleteRoleMenuByRoleId" parameterType="Long">
 		delete from sys_role_menu where role_id=#{roleId}
 	</delete>
+	
+	<select id="selectCountRoleMenuByMenuId" resultType="Integer">
+	    select count(*) from sys_role_menu where menu_id=#{menuId}  
+	</select>
+	
+	<delete id="deleteRoleMenu" parameterType="Long">
+ 		delete from sys_role_menu where role_id in
+ 		<foreach collection="array" item="roleId" open="(" separator="," close=")">
+ 			#{roleId}
+        </foreach> 
+ 	</delete>
 	
 	<insert id="batchRoleMenu">
 		insert into sys_role_menu(role_id, menu_id) values

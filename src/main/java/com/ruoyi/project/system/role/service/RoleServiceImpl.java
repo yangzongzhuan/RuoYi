@@ -126,7 +126,6 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int deleteRoleById(Long roleId)
     {
-        userRoleDao.deleteUserRoleByRoleId(roleId);
         roleMenuDao.deleteRoleMenuByRoleId(roleId);
         return roleDao.deleteRoleById(roleId);
     }
@@ -140,6 +139,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int batchDeleteRole(Long[] ids)
     {
+        roleMenuDao.deleteRoleMenu(ids);
         return roleDao.batchDeleteRole(ids);
     }
 
@@ -193,7 +193,7 @@ public class RoleServiceImpl implements IRoleService
         }
         return rows;
     }
-    
+
     /**
      * 校验角色名称是否唯一
      * 
@@ -205,11 +205,23 @@ public class RoleServiceImpl implements IRoleService
     {
         Long roleId = role.getRoleId();
         Role info = roleDao.checkRoleNameUnique(role.getRoleName());
-        if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getRoleId()) &&  info.getRoleId() != roleId)
+        if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getRoleId()) && info.getRoleId() != roleId)
         {
             return UserConstants.NAME_NOT_UNIQUE;
         }
         return UserConstants.NAME_UNIQUE;
+    }
+
+    /**
+     * 通过角色ID查询角色使用数量
+     * 
+     * @param roleId 角色ID
+     * @return 结果
+     */
+    @Override
+    public int selectCountUserRoleByRoleId(Long roleId)
+    {
+        return userRoleDao.selectCountUserRoleByRoleId(roleId);
     }
 
 }

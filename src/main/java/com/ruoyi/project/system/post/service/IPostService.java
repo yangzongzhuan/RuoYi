@@ -64,4 +64,12 @@ public interface IPostService
      * @return 结果
      */
     public int savePost(Post post);
+    
+    /**
+     * 通过岗位ID查询岗位使用数量
+     * 
+     * @param postId 岗位ID
+     * @return 结果
+     */
+    public int selectCountPostById(Long postId);
 }

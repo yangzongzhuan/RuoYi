@@ -25,7 +25,6 @@ public interface IDeptService
      * @return 所有部门信息
      */
     public List<Map<String, Object>> selectDeptTree();
-    
 
     /**
      * 查询部门人数

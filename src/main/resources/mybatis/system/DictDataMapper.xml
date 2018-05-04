@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from sys_dict_data where dict_code = #{dictCode}
  	</delete>
 	
- 	<delete id="batchDeleteDictData" parameterType="String">
+ 	<delete id="batchDeleteDictData" parameterType="Long">
  		delete from sys_dict_data where dict_code in
  		<foreach collection="array" item="dictCode" open="(" separator="," close=")">
  			#{dictCode}

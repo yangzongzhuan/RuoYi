@@ -55,11 +55,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where ${primaryKey.columnName} = #{${primaryKey.attrname}}
     </update>
 	
-    <delete id="delete${className}ById">
+    <delete id="delete${className}ById" parameterType="${primaryKey.attrType}">
         delete from ${tableName} where ${primaryKey.columnName} = #{value}
     </delete>
 	
-    <delete id="batchDelete${className}">
+    <delete id="batchDelete${className}" parameterType="${primaryKey.attrType}">
         delete from ${tableName} where ${primaryKey.columnName} in 
         <foreach item="${primaryKey.attrname}" collection="array" open="(" separator="," close=")">
         #{${primaryKey.attrname}}

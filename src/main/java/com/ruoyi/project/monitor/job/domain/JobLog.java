@@ -11,7 +11,7 @@ import com.ruoyi.framework.web.page.PageDomain;
 public class JobLog extends PageDomain
 {
     /** ID */
-    private Integer jobLogId;
+    private Long jobLogId;
     /** 任务名称 */
     private String jobName;
     /** 任务组名 */
@@ -29,12 +29,12 @@ public class JobLog extends PageDomain
     /** 创建时间 */
     private Date createTime;
 
-    public Integer getJobLogId()
+    public Long getJobLogId()
     {
         return jobLogId;
     }
 
-    public void setJobLogId(Integer jobLogId)
+    public void setJobLogId(Long jobLogId)
     {
         this.jobLogId = jobLogId;
     }

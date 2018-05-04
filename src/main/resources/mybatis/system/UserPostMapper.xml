@@ -9,9 +9,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="postId"     column="post_id"      />
 	</resultMap>
 
-	<delete id="deleteUserPostByUserId">
+	<delete id="deleteUserPostByUserId" parameterType="Long">
 		delete from sys_user_post where user_id=#{userId}
 	</delete>
+	
+	<select id="selectCountPostById" resultType="Integer">
+	    select count(*) from sys_user_post where post_id=#{postId}  
+	</select>
+	
+	<delete id="deleteUserPost" parameterType="Long">
+ 		delete from sys_user_post where user_id in
+ 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+ 			#{userId}
+        </foreach> 
+ 	</delete>
 	
 	<insert id="batchUserPost">
 		insert into sys_user_post(user_id, post_id) values

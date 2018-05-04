@@ -69,7 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		delete from sys_user where user_id = #{userId}
  	</delete>
  	
- 	<delete id="batchDeleteUser" parameterType="String">
+ 	<delete id="batchDeleteUser" parameterType="Long">
  		delete from sys_user where user_id in
  		<foreach collection="array" item="userId" open="(" separator="," close=")">
  			#{userId}
