@@ -120,7 +120,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:remove")
     @Log(title = "系统管理", action = "用户管理-删除用户")
     @RequestMapping("/remove/{userId}")
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     @ResponseBody
     public Message remove(@PathVariable("userId") Long userId)
     {
@@ -139,7 +139,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:batchRemove")
     @Log(title = "系统管理", action = "用户管理-批量删除")
     @PostMapping("/batchRemove")
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     @ResponseBody
     public Message batchRemove(@RequestParam("ids[]") Long[] ids)
     {
@@ -157,7 +157,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:save")
     @Log(title = "系统管理", action = "部门管理-保存部门")
     @PostMapping("/save")
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     @ResponseBody
     public Message save(User user)
     {

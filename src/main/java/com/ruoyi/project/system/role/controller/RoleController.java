@@ -81,7 +81,7 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:save")
     @Log(title = "系统管理", action = "角色管理-保存角色")
     @PostMapping("/save")
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     @ResponseBody
     public Message save(Role role)
     {
@@ -95,7 +95,7 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:remove")
     @Log(title = "系统管理", action = "角色管理-删除角色")
     @RequestMapping("/remove/{roleId}")
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     @ResponseBody
     public Message remove(@PathVariable("roleId") Long roleId)
     {

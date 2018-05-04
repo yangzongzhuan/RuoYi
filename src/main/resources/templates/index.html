@@ -16,6 +16,9 @@
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.css}" rel="stylesheet"/>
     <link href="../static/css/animate.css" th:href="@{/css/animate.css}" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style type="text/css">
+        .nav > li:hover .dropdown-menu {display: block;}
+    </style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
@@ -32,11 +35,11 @@
                          <img src="img/profile_small.jpg" alt="image" class="img-circle" height="60" width="60"/></span>
                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                          <span class="clear"><span class="block m-t-xs"><strong class="font-bold" th:text="${user.userName}">RuoYi</strong></span>
-                         <span class="text-muted text-xs block" th:text="${user.dept.deptName}">研发部<b class="caret"></b></span> </span> </a>
+                         <span class="text-muted text-xs block"><span th:text="${user.dept.deptName}">研发部</span> <b class="caret"></b></span> </span> </a>
                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                             <li><a class="menuItem" href="profile.html">个人信息</a></li>
+                             <li><a class="menuItem" th:href="@{/system/profile}">个人信息</a></li>
                              <li class="divider"></li>
-                             <li><a th-href="@{/logout}">退出</a></li>
+                             <li><a th:href="@{logout}">退出</a></li>
                          </ul>
                     </div>
                 </li>

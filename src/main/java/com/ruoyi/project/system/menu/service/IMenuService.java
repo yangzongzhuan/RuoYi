@@ -77,9 +77,9 @@ public interface IMenuService
     public Menu selectMenuById(Long menuId);
 
     /**
-     * 查询子菜单数量
+     * 查询菜单数量
      * 
-     * @param menuId 菜单ID
+     * @param parentId 菜单父ID
      * @return 结果
      */
     public int selectCountMenuByParentId(Long parentId);

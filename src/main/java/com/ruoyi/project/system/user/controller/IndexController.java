@@ -47,4 +47,11 @@ public class IndexController extends BaseController
         return "main";
     }
 
+    // 个人信息
+    @GetMapping("/system/profile")
+    public String profile(Model model)
+    {
+        return "system/user/profile";
+    }
+
 }
