@@ -162,6 +162,7 @@ public class UserServiceImpl implements IUserService
      * @param user 用户信息
      * @return 结果
      */
+    @Override
     public int updateUser(User user)
     {
         return userDao.updateUser(user);

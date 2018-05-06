@@ -20,6 +20,9 @@ public class UserConstants
     /** 角色封禁状态 */
     public static final int ROLE_BLOCKED = 1;
 
+    /** 部门正常状态 */
+    public static final int DEPT_NORMAL = 0;
+
     /**
      * 用户名长度限制
      */

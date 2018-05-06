@@ -20,7 +20,7 @@ function loading() {
 				if (item.status == '0') {
 					return '<span class="label label-primary">正常</span>';
 				} else if (item.status == '1') {
-					return '<span class="label label-danger">禁用</span>';
+					return '<span class="label label-danger">停用</span>';
 				}
 			}
         },
