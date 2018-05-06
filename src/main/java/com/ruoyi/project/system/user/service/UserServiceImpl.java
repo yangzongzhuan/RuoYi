@@ -260,7 +260,7 @@ public class UserServiceImpl implements IUserService
         }
         if (StringUtils.isNotEmpty(idsStr.toString()))
         {
-            idsStr.substring(0, idsStr.length() - 1);
+            return idsStr.substring(0, idsStr.length() - 1);
         }
         return idsStr.toString();
     }
@@ -282,7 +282,7 @@ public class UserServiceImpl implements IUserService
         }
         if (StringUtils.isNotEmpty(idsStr.toString()))
         {
-            idsStr.substring(0, idsStr.length() - 1);
+            return idsStr.substring(0, idsStr.length() - 1);
         }
         return idsStr.toString();
     }
