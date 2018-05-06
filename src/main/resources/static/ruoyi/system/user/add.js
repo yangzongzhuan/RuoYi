@@ -6,7 +6,7 @@ $("#form-user-add").validate({
 			remote: {
                 url: ctx + "system/user/checkUserNameUnique",
                 type: "post",
-                dataType: "text",
+                dataType: "json",
                 data: {
                 	name : function() {
                         return $.trim($("#loginName").val());

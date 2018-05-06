@@ -25,9 +25,8 @@
                             <i class="fa fa-edit"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="javascript:editProfile()">修改信息</a></li>
-                            <li><a href="javascript:editHead()">修改头像</a></li>
-                            <li><a href="javascript:editPasswod()">修改密码</a></li>
+                            <li><a href="javascript:edit()">修改信息</a></li>
+                            <li><a href="javascript:resetPwd()">修改密码</a></li>
                         </ul>
                        
                     </div>
@@ -35,7 +34,7 @@
                     <div class="contact-box">
 	                        <div class="col-sm-4">
 	                            <div class="text-center">
-	                                <img alt="image" class="img-circle m-t-xs img-responsive" src="/img/a5.jpg">
+	                                <img alt="image" class="img-circle m-t-xs img-responsive" src="/img/profilel.jpg">
 	                                <div class="m-t-xs font-bold">CEO</div>
 	                            </div>
 	                        </div>
@@ -60,17 +59,14 @@
     <script>
         var userId = [[${user.userId}]];
 	    /*用户信息-修改*/
-	    function editProfile() {
-	        var url = ctx + "system/user/edit/" + userId;
+	    function edit() {
+	        var url = ctx + "system/user/profile/edit/" + userId;
 	        layer_showAuto("修改用户", url);
 	    }
-	    /*用户头像-修改*/
-	    function editHead() {
-	    	$.modalAlert("敬请期待", "success");
-	    }
-	    /*用户密码-修改*/
-	    function editPasswod() {
-	    	$.modalAlert("敬请期待", "success");
+	    /*用户管理-重置密码*/
+	    function resetPwd() {
+	        var url = ctx + 'system/user/profile/resetPwd/' + userId;
+	        layer_show("重置密码", url, '800', '500');
 	    }
 	</script>
 </body>

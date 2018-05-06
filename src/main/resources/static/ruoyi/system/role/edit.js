@@ -23,7 +23,7 @@ $("#form-role-edit").validate({
 			remote: {
                 url: ctx + "system/role/checkRoleNameUnique",
                 type: "post",
-                dataType: "text",
+                dataType: "json",
                 data: {
 					"roleId": function() {
 					    return $("input[name='roleId']").val();

@@ -5,7 +5,7 @@ $("#form-dept-edit").validate({
 			remote: {
                 url: ctx + "system/dept/checkDeptNameUnique",
                 type: "post",
-                dataType: "text",
+                dataType: "json",
                 data: {
                 	"deptId": function() {
                         return $("input[name='deptId']").val();

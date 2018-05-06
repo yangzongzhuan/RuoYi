@@ -58,6 +58,11 @@ public class BaseController
     {
         return ShiroUtils.getUser();
     }
+    
+    public void setUser(User user)
+    {
+        ShiroUtils.setUser(user);
+    }
 
     public Long getUserId()
     {

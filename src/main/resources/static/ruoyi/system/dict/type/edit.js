@@ -9,7 +9,7 @@ $("#form-dict-edit").validate({
 			remote: {
                 url: ctx + "system/dict/checkDictTypeUnique",
                 type: "post",
-                dataType: "text",
+                dataType: "json",
                 data: {
                 	dictId : function() {
                         return $.trim($("#dictId").val());

@@ -109,7 +109,7 @@ public class UserController extends BaseController
     @ResponseBody
     public Message resetPwd(User user)
     {
-        int rows = userService.updateUser(user);
+        int rows = userService.resetUserPwd(user);
         if (rows > 0)
         {
             return Message.ok();
@@ -152,10 +152,10 @@ public class UserController extends BaseController
     }
 
     /**
-     * 保存
+     * 保存用户
      */
     @RequiresPermissions("system:user:save")
-    @Log(title = "系统管理", action = "部门管理-保存部门")
+    @Log(title = "系统管理", action = "用户管理-保存用户")
     @PostMapping("/save")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
@@ -181,30 +181,6 @@ public class UserController extends BaseController
             uniqueFlag = userService.checkUserNameUnique(user.getLoginName());
         }
         return uniqueFlag;
-    }
-
-    /**
-     * 个人信息
-     */
-    @GetMapping("/profile")
-    public String profile(Model model)
-    {
-        User user = getUser();
-        String sex = user.getSex();
-        if ("0".equals(sex))
-        {
-            user.setSex("性别：男");
-        }
-        else if ("1".equals(sex))
-        {
-            user.setSex("性别：女");
-        }
-        String roleGroup = userService.selectUserRoleGroup(user.getUserId());
-        String postGroup = userService.selectUserPostGroup(user.getUserId());
-        model.addAttribute("user", user);
-        model.addAttribute("roleGroup", roleGroup);
-        model.addAttribute("postGroup", postGroup);
-        return prefix + "/profile";
     }
 
 }

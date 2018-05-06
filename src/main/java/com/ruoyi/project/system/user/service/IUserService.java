@@ -58,7 +58,7 @@ public interface IUserService
      * @return 结果
      */
     public int saveUser(User user);
-
+    
     /**
      * 修改用户信息
      * 
@@ -66,6 +66,14 @@ public interface IUserService
      * @return 结果
      */
     public int updateUser(User user);
+
+    /**
+     * 修改用户密码信息
+     * 
+     * @param user 用户信息
+     * @return 结果
+     */
+    public int resetUserPwd(User user);
 
     /**
      * 校验用户名称是否唯一

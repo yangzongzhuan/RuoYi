@@ -25,10 +25,10 @@ insert into sys_dept values(100,  0,   '若依集团', 0, '马云', '15011112221
 insert into sys_dept values(101,  100, '研发部门', 1, '马研', '15011112222', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
 insert into sys_dept values(102,  100, '市场部门', 2, '马市', '15011112223', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
 insert into sys_dept values(103,  100, '测试部门', 3, '马测', '15011112224', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
-insert into sys_dept values(104,  100, '财务部门', 4, '马财', '15011112225', 'ry@qq.com', 1, 'admin', '2018-03-01', 'ry', '2018-03-01');
-insert into sys_dept values(105,  100, '运维部门', 5, '马运', '15011112226', 'ry@qq.com', 1, 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_dept values(104,  100, '财务部门', 4, '马财', '15011112225', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_dept values(105,  100, '运维部门', 5, '马运', '15011112226', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
 insert into sys_dept values(106,  101, '研发一部', 1, '马一', '15011112227', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
-insert into sys_dept values(107,  101, '研发二部', 2, '马二', '15011112228', 'ry@qq.com', 1, 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_dept values(107,  101, '研发二部', 2, '马二', '15011112228', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
 insert into sys_dept values(108,  102, '市场一部', 1, '马一', '15011112229', 'ry@qq.com', 0, 'admin', '2018-03-01', 'ry', '2018-03-01');
 insert into sys_dept values(109,  102, '市场二部', 2, '马二', '15011112210', 'ry@qq.com', 1, 'admin', '2018-03-01', 'ry', '2018-03-01');
 
@@ -61,8 +61,8 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1, 106, 'admin', '若依', 'yzz_ivy@163.com', '15088888888', '0', 'img/a5.jpg', '29c67a30398638269fe600f73a054934', '111111', 'N', 1, '维护中', 'admin', '2018-03-01', 'ry', '2018-03-01');
-insert into sys_user values(2, 108, 'ry',    '若依', 'ry@163.com',      '15288888888', '1', 'img/a5.jpg', '8e6d98b90472783cc73c17047ddccf36', '222222', 'N', 1, '锁定中', 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_user values(1, 106, 'admin', '若依', 'yzz_ivy@163.com', '15088888888', '0', 'img/a5.jpg', '29c67a30398638269fe600f73a054934', '111111', 'N', 0, '维护中', 'admin', '2018-03-01', 'ry', '2018-03-01');
+insert into sys_user values(2, 108, 'ry',    '若依', 'ry@163.com',      '15288888888', '1', 'img/a5.jpg', '8e6d98b90472783cc73c17047ddccf36', '222222', 'N', 0, '锁定中', 'admin', '2018-03-01', 'ry', '2018-03-01');
 
 
 -- ----------------------------

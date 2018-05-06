@@ -5,7 +5,7 @@ $("#form-menu-add").validate({
 			remote: {
                 url: ctx + "system/menu/checkMenuNameUnique",
                 type: "post",
-                dataType: "text",
+                dataType: "json",
                 data: {
                 	"menuName" : function() {
                         return $.trim($("#menuName").val());

@@ -10,7 +10,7 @@ $("#form-menu-edit").validate({
 			remote: {
                 url: ctx + "system/menu/checkMenuNameUnique",
                 type: "post",
-                dataType: "text",
+                dataType: "json",
                 data: {
                 	"menuId": function() {
                         return $("input[name='menuId']").val();
