@@ -3,6 +3,9 @@ $("#form-user-edit").validate({
 		userName:{
 			required:true,
 		},
+		deptName:{
+			required:true,
+		},
 		password:{
 			required:true,
 			minlength: 6
