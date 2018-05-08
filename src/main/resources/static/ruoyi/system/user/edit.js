@@ -6,10 +6,6 @@ $("#form-user-edit").validate({
 		deptName:{
 			required:true,
 		},
-		password:{
-			required:true,
-			minlength: 6
-		},
 		email:{
 			required:true,
 			email:true
@@ -27,7 +23,6 @@ function update() {
 	var userId = $("input[name='userId']").val();
 	var deptId = $("input[name='deptId']").val();
 	var userName = $("input[name='userName']").val();
-	var password = $("input[name='password']").val();
 	var email = $("input[name='email']").val();
 	var phonenumber = $("input[name='phonenumber']").val();
 	var sex = $("input[name='sex']:checked").val();
@@ -42,7 +37,6 @@ function update() {
 			"userId": userId,
 			"deptId": deptId,
 			"userName": userName,
-			"password": password,
 			"email": email,
 			"phonenumber": phonenumber,
 			"sex": sex,

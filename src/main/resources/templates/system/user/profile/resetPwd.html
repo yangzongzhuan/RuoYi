@@ -45,7 +45,6 @@
 			rules:{
 				oldPassword:{
 					required:true,
-					minlength: 6,
 					remote: {
 	                    url: ctx + "system/user/profile/checkPassword",
 	                    type: "get",
@@ -59,7 +58,8 @@
 				},
 				password: {
 	                required: true,
-	                minlength: 6
+	                minlength: 5,
+	    			maxlength: 20
 	            },
 	            confirm: {
 	                required: true,
@@ -73,7 +73,8 @@
 	            },
 	            password: {
 	                required: "请输入新密码",
-	                minlength: "密码不能小于6个字符"
+	                minlength: "密码不能小于6个字符",
+	                maxlength: "密码不能大于20个字符"
 	            },
 	            confirm: {
 	                required: "请再次输入新密码",

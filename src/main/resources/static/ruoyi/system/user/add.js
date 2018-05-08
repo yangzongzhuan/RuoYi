@@ -3,6 +3,7 @@ $("#form-user-add").validate({
 		loginName:{
 			required:true,
 			minlength: 2,
+			maxlength: 20,
 			remote: {
                 url: ctx + "system/user/checkUserNameUnique",
                 type: "post",
@@ -26,7 +27,8 @@ $("#form-user-add").validate({
 		},
 		password:{
 			required:true,
-			minlength: 6
+			minlength: 5,
+			maxlength: 20
 		},
 		email:{
 			required:true,
