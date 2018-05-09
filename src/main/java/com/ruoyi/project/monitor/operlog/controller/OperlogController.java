@@ -50,7 +50,6 @@ public class OperlogController extends BaseController
     }
 
     @RequiresPermissions("monitor:operlog:batchRemove")
-    @Log(title = "监控管理", action = "操作日志-批量删除")
     @PostMapping("/batchRemove")
     @ResponseBody
     public Message batchRemove(@RequestParam("ids[]") Long[] ids)
