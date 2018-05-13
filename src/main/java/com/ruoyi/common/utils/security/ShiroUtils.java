@@ -1,10 +1,10 @@
 package com.ruoyi.common.utils.security;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
-
 import com.ruoyi.project.system.user.domain.User;
 
 /**
@@ -18,6 +18,11 @@ public class ShiroUtils
     public static Subject getSubjct()
     {
         return SecurityUtils.getSubject();
+    }
+    
+    public static Session getSession()
+    {
+        return SecurityUtils.getSubject().getSession();
     }
 
     public static void logout()

@@ -58,7 +58,7 @@ public interface IUserService
      * @return 结果
      */
     public int saveUser(User user);
-    
+
     /**
      * 修改用户信息
      * 

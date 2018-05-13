@@ -1,7 +1,6 @@
 package com.ruoyi.project.system.dict.controller;
 
 import java.util.List;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.Message;
@@ -46,7 +44,7 @@ public class DictTypeController extends BaseController
     @ResponseBody
     public TableDataInfo list(DictType dictType)
     {
-        setPageInfo(dictType);
+        startPage();
         List<DictType> list = dictTypeService.selectDictTypeList(dictType);
         return getDataTable(list);
     }
@@ -86,7 +84,7 @@ public class DictTypeController extends BaseController
     {
         if (dictTypeService.saveDictType(dict) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -107,7 +105,7 @@ public class DictTypeController extends BaseController
         }
         if (dictTypeService.deleteDictTypeById(dictId) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -121,7 +119,7 @@ public class DictTypeController extends BaseController
         int rows = dictTypeService.batchDeleteDictType(ids);
         if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

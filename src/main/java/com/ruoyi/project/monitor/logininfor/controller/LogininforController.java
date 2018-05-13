@@ -42,7 +42,7 @@ public class LogininforController extends BaseController
     @ResponseBody
     public TableDataInfo list(Logininfor logininfor)
     {
-        setPageInfo(logininfor);
+        startPage();
         List<Logininfor> list = logininforService.selectLogininforList(logininfor);
         return getDataTable(list);
     }
@@ -56,7 +56,7 @@ public class LogininforController extends BaseController
         int rows = logininforService.batchDeleteLogininfor(ids);
         if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

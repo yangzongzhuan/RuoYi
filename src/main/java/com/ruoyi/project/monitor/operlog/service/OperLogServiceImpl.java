@@ -3,8 +3,8 @@ package com.ruoyi.project.monitor.operlog.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.monitor.operlog.dao.IOperLogDao;
 import com.ruoyi.project.monitor.operlog.domain.OperLog;
+import com.ruoyi.project.monitor.operlog.mapper.OperLogMapper;
 
 /**
  * 操作日志 服务层处理
@@ -15,7 +15,7 @@ import com.ruoyi.project.monitor.operlog.domain.OperLog;
 public class OperLogServiceImpl implements IOperLogService
 {
     @Autowired
-    private IOperLogDao operLogDao;
+    private OperLogMapper operLogMapper;
 
     /**
      * 新增操作日志
@@ -25,7 +25,7 @@ public class OperLogServiceImpl implements IOperLogService
     @Override
     public void insertOperlog(OperLog operLog)
     {
-        operLogDao.insertOperlog(operLog);
+        operLogMapper.insertOperlog(operLog);
     }
 
     /**
@@ -37,7 +37,7 @@ public class OperLogServiceImpl implements IOperLogService
     @Override
     public List<OperLog> selectOperLogList(OperLog operLog)
     {
-        return operLogDao.selectOperLogList(operLog);
+        return operLogMapper.selectOperLogList(operLog);
     }
 
     /**
@@ -49,7 +49,7 @@ public class OperLogServiceImpl implements IOperLogService
     @Override
     public int batchDeleteOperLog(Long[] ids)
     {
-        return operLogDao.batchDeleteOperLog(ids);
+        return operLogMapper.batchDeleteOperLog(ids);
     }
 
     /**
@@ -61,6 +61,6 @@ public class OperLogServiceImpl implements IOperLogService
     @Override
     public OperLog selectOperLogById(Long operId)
     {
-        return operLogDao.selectOperLogById(operId);
+        return operLogMapper.selectOperLogById(operId);
     }
 }

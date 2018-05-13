@@ -33,7 +33,7 @@ $(function() {
             title: '备注'
         },
         {
-            field: 'createTime',
+            field: 'createDateTimeStr',
             title: '创建时间'
         },
         {

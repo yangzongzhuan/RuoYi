@@ -44,7 +44,7 @@ public class PostController extends BaseController
     @ResponseBody
     public TableDataInfo list(Post post)
     {
-        setPageInfo(post);
+        startPage();
         List<Post> list = postService.selectPostList(post);
         return getDataTable(list);
     }
@@ -69,7 +69,7 @@ public class PostController extends BaseController
         }
         if (postService.deletePostById(postId) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -83,7 +83,7 @@ public class PostController extends BaseController
         int rows = postService.batchDeletePost(ids);
         if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -123,7 +123,7 @@ public class PostController extends BaseController
     {
         if (postService.savePost(post) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

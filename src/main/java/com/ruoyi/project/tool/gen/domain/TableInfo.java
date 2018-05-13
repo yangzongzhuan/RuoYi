@@ -1,28 +1,23 @@
 package com.ruoyi.project.tool.gen.domain;
 
 import java.util.List;
-
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * ry 数据库表
  * 
  * @author ruoyi
  */
-public class TableInfo extends PageDomain
+public class TableInfo extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
+    
     /** 表名称 */
     private String tableName;
 
     /** 表描述 */
     private String tableComment;
-
-    /** 表创建时间 */
-    private String createTime;
-
-    /** 表更新时间 */
-    private String updateTime;
 
     /** 表的主键列信息 */
     private ColumnInfo primaryKey;
@@ -54,26 +49,6 @@ public class TableInfo extends PageDomain
     public void setTableComment(String tableComment)
     {
         this.tableComment = tableComment;
-    }
-
-    public String getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime)
-    {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime()
-    {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime)
-    {
-        this.updateTime = updateTime;
     }
 
     public List<ColumnInfo> getColumns()
@@ -129,8 +104,8 @@ public class TableInfo extends PageDomain
     @Override
     public String toString()
     {
-        return "Gen [tableName=" + tableName + ", tableComment=" + tableComment + ", createTime=" + createTime
-                + ", updateTime=" + updateTime + "]";
+        return "TableInfo [tableName=" + tableName + ", tableComment=" + tableComment + ", primaryKey=" + primaryKey
+                + ", columns=" + columns + ", className=" + className + ", classname=" + classname + "]";
     }
 
 }

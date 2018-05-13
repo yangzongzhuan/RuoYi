@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.system.dict.dao.IDictTypeDao;
 import com.ruoyi.project.system.dict.domain.DictType;
+import com.ruoyi.project.system.dict.mapper.DictTypeMapper;
 
 /**
  * 字典 业务层处理
@@ -18,7 +18,7 @@ import com.ruoyi.project.system.dict.domain.DictType;
 public class DictTypeServiceImpl implements IDictTypeService
 {
     @Autowired
-    private IDictTypeDao dictTypeDao;
+    private DictTypeMapper dictTypeMapper;
 
     /**
      * 根据条件分页查询字典类型
@@ -29,7 +29,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public List<DictType> selectDictTypeList(DictType dictType)
     {
-        return dictTypeDao.selectDictTypeList(dictType);
+        return dictTypeMapper.selectDictTypeList(dictType);
     }
 
     /**
@@ -41,7 +41,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public DictType selectDictTypeById(Long dictId)
     {
-        return dictTypeDao.selectDictTypeById(dictId);
+        return dictTypeMapper.selectDictTypeById(dictId);
     }
 
     /**
@@ -53,7 +53,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public int deleteDictTypeById(Long dictId)
     {
-        return dictTypeDao.deleteDictTypeById(dictId);
+        return dictTypeMapper.deleteDictTypeById(dictId);
     }
 
     /**
@@ -65,7 +65,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public int batchDeleteDictType(Long[] ids)
     {
-        return dictTypeDao.batchDeleteDictType(ids);
+        return dictTypeMapper.batchDeleteDictType(ids);
     }
 
     /**
@@ -81,12 +81,12 @@ public class DictTypeServiceImpl implements IDictTypeService
         if (StringUtils.isNotNull(dictId))
         {
             dictType.setUpdateBy(ShiroUtils.getLoginName());
-            return dictTypeDao.updateDictType(dictType);
+            return dictTypeMapper.updateDictType(dictType);
         }
         else
         {
             dictType.setCreateBy(ShiroUtils.getLoginName());
-            return dictTypeDao.insertDictType(dictType);
+            return dictTypeMapper.insertDictType(dictType);
         }
     }
 
@@ -104,7 +104,7 @@ public class DictTypeServiceImpl implements IDictTypeService
             dict.setDictId(-1L);
         }
         Long dictId = dict.getDictId();
-        DictType dictType = dictTypeDao.checkDictTypeUnique(dict.getDictType());
+        DictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
         if (StringUtils.isNotNull(dictType) && dictType.getDictId() != dictId)
         {
             return UserConstants.NAME_NOT_UNIQUE;

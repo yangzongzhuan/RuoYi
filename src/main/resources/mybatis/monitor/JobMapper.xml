@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.monitor.job.dao.IJobDao">
+<mapper namespace="com.ruoyi.project.monitor.job.mapper.JobMapper">
 
 	<resultMap type="Job" id="JobResult">
 		<id     property="jobId"          column="job_id"          />

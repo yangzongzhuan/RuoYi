@@ -43,7 +43,7 @@ public class JobLogController extends BaseController
     @ResponseBody
     public TableDataInfo list(JobLog jobLog)
     {
-        setPageInfo(jobLog);
+        startPage();
         List<JobLog> list = jobLogService.selectJobLogList(jobLog);
         return getDataTable(list);
     }
@@ -64,7 +64,7 @@ public class JobLogController extends BaseController
         }
         if (jobLogService.deleteJobLogById(jobLogId) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -78,7 +78,7 @@ public class JobLogController extends BaseController
         try
         {
             jobLogService.batchDeleteJoblog(ids);
-            return Message.ok();
+            return Message.success();
         }
         catch (Exception e)
         {

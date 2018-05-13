@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("com.ruoyi.project.*.*.dao")
+@MapperScan("com.ruoyi.project.*.*.mapper")
 public class RuoYiApplication
 {
     public static void main(String[] args)

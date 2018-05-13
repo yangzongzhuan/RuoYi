@@ -1,8 +1,9 @@
 # 项目名称、版本、版权年份
 ruoyi:
   name: RuoYi
-  version: 1.1.2
+  version: 1.1.3
   copyrightYear: 2018
+  profile: D:/profile/
 
 #开发环境配置
 server:
@@ -64,6 +65,19 @@ shiro:
     unauthorizedUrl: /unauth
     # 首页地址
     indexUrl: /index
+    # 验证码开关
+    captchaEbabled: true
+    # 验证码类型 math 数组计算 char 字符
+    captchaType: math
+  cookie:
+    # 设置Cookie的域名 默认空，即当前访问的域名
+    domain: 
+    # 设置cookie的有效访问路径
+    path: /
+    # 设置HttpOnly属性
+    httpOnly: true
+    # 设置Cookie的过期时间，天为单位
+    maxAge: 30
   session:
     # Session超时时间（默认30分钟）
     expireTime: 30

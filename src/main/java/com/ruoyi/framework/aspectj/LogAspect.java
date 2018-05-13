@@ -87,7 +87,7 @@ public class LogAspect
             // 请求的地址
             String ip = ShiroUtils.getIp();
             operLog.setOperIp(ip);
-            operLog.setOperUrl(ServletUtils.getHttpServletRequest().getRequestURI());
+            operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
             if (currentUser != null)
             {
                 operLog.setLoginName(currentUser.getLoginName());
@@ -148,7 +148,7 @@ public class LogAspect
      */
     private static void setRequestValue(OperLog operLog)
     {
-        Map<String, String[]> map = ServletUtils.getHttpServletRequest().getParameterMap();
+        Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
         String params = JSONObject.toJSONString(map);
         operLog.setOperParam(StringUtils.substring(params, 0, 255));
     }

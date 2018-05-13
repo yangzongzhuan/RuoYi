@@ -2,14 +2,16 @@ package com.ruoyi.project.system.menu.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 角色对象 sys_menu
  * 
  * @author ruoyi
  */
-public class Menu
+public class Menu extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** 菜单ID */
     private Long menuId;
     /** 菜单名称 */
@@ -30,16 +32,6 @@ public class Menu
     private String perms;
     /** 菜单图标 */
     private String icon;
-    /** 创建者 */
-    private String createBy;
-    /** 创建时间 */
-    private String createTime;
-    /** 更新时间 */
-    private String updateTime;
-    /** 更新者 */
-    private String updateBy;
-    /** 备注 */
-    private String remark;
     /** 子菜单 */
     private List<Menu> children = new ArrayList<Menu>();
 
@@ -143,56 +135,6 @@ public class Menu
         this.icon = icon;
     }
 
-    public String getCreateBy()
-    {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy)
-    {
-        this.createBy = createBy;
-    }
-
-    public String getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime)
-    {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime()
-    {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime)
-    {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy()
-    {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy)
-    {
-        this.updateBy = updateBy;
-    }
-
-    public String getRemark()
-    {
-        return remark;
-    }
-
-    public void setRemark(String remark)
-    {
-        this.remark = remark;
-    }
-
     public List<Menu> getChildren()
     {
         return children;
@@ -208,9 +150,7 @@ public class Menu
     {
         return "Menu [menuId=" + menuId + ", menuName=" + menuName + ", parentName=" + parentName + ", parentId="
                 + parentId + ", orderNum=" + orderNum + ", url=" + url + ", menuType=" + menuType + ", visible="
-                + visible + ", perms=" + perms + ", icon=" + icon + ", createBy=" + createBy + ", createTime="
-                + createTime + ", updateTime=" + updateTime + ", updateBy=" + updateBy + ", remark=" + remark
-                + ", children=" + children + "]";
+                + visible + ", perms=" + perms + ", icon=" + icon + ", children=" + children + "]";
     }
 
 }

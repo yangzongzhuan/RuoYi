@@ -68,7 +68,7 @@ public class MenuController extends BaseController
         }
         if (menuService.deleteMenuById(menuId) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -120,7 +120,7 @@ public class MenuController extends BaseController
     {
         if (menuService.saveMenu(menu) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

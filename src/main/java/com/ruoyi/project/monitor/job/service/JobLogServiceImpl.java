@@ -3,8 +3,8 @@ package com.ruoyi.project.monitor.job.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.monitor.job.dao.IJobLogDao;
 import com.ruoyi.project.monitor.job.domain.JobLog;
+import com.ruoyi.project.monitor.job.mapper.JobLogMapper;
 
 /**
  * 定时任务调度日志信息 服务层
@@ -16,7 +16,7 @@ public class JobLogServiceImpl implements IJobLogService
 {
 
     @Autowired
-    private IJobLogDao jobLogDao;
+    private JobLogMapper jobLogMapper;
 
     /**
      * 获取quartz调度器日志的计划任务
@@ -27,7 +27,7 @@ public class JobLogServiceImpl implements IJobLogService
     @Override
     public List<JobLog> selectJobLogList(JobLog jobLog)
     {
-        return jobLogDao.selectJobLogList(jobLog);
+        return jobLogMapper.selectJobLogList(jobLog);
     }
 
     /**
@@ -39,7 +39,7 @@ public class JobLogServiceImpl implements IJobLogService
     @Override
     public JobLog selectJobLogById(Long jobLogId)
     {
-        return jobLogDao.selectJobLogById(jobLogId);
+        return jobLogMapper.selectJobLogById(jobLogId);
     }
 
     /**
@@ -50,7 +50,7 @@ public class JobLogServiceImpl implements IJobLogService
     @Override
     public void addJobLog(JobLog jobLog)
     {
-        jobLogDao.insertJobLog(jobLog);
+        jobLogMapper.insertJobLog(jobLog);
     }
 
     /**
@@ -62,7 +62,7 @@ public class JobLogServiceImpl implements IJobLogService
     @Override
     public int batchDeleteJoblog(Long[] ids)
     {
-        return jobLogDao.batchDeleteJobLog(ids);
+        return jobLogMapper.batchDeleteJobLog(ids);
     }
 
     /**
@@ -73,7 +73,7 @@ public class JobLogServiceImpl implements IJobLogService
     @Override
     public int deleteJobLogById(Long jobId)
     {
-        return jobLogDao.deleteJobLogById(jobId);
+        return jobLogMapper.deleteJobLogById(jobId);
     }
 
 }

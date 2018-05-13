@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.system.dept.dao.IDeptDao;
 import com.ruoyi.project.system.dept.domain.Dept;
+import com.ruoyi.project.system.dept.mapper.DeptMapper;
 
 /**
  * 部门管理 服务实现
@@ -22,7 +21,7 @@ import com.ruoyi.project.system.dept.domain.Dept;
 public class DeptServiceImpl implements IDeptService
 {
     @Autowired
-    private IDeptDao deptDao;
+    private DeptMapper deptMapper;
 
     /**
      * 查询部门管理集合
@@ -32,7 +31,7 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public List<Dept> selectDeptAll()
     {
-        return deptDao.selectDeptAll();
+        return deptMapper.selectDeptAll();
     }
 
     /**
@@ -44,7 +43,7 @@ public class DeptServiceImpl implements IDeptService
     public List<Map<String, Object>> selectDeptTree()
     {
         List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
-        List<Dept> deptList = deptDao.selectDeptAll();
+        List<Dept> deptList = deptMapper.selectDeptAll();
 
         for (Dept dept : deptList)
         {
@@ -71,7 +70,7 @@ public class DeptServiceImpl implements IDeptService
     {
         Dept dept = new Dept();
         dept.setParentId(parentId);
-        return deptDao.selectDeptCount(dept);
+        return deptMapper.selectDeptCount(dept);
     }
 
     /**
@@ -83,7 +82,7 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public boolean checkDeptExistUser(Long deptId)
     {
-        int result = deptDao.checkDeptExistUser(deptId);
+        int result = deptMapper.checkDeptExistUser(deptId);
         return result > 0 ? true : false;
     }
 
@@ -96,7 +95,7 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public int deleteDeptById(Long deptId)
     {
-        return deptDao.deleteDeptById(deptId);
+        return deptMapper.deleteDeptById(deptId);
     }
 
     /**
@@ -111,12 +110,12 @@ public class DeptServiceImpl implements IDeptService
         if (StringUtils.isNotNull(dept.getDeptId()))
         {
             dept.setUpdateBy(ShiroUtils.getLoginName());
-            return deptDao.updateDept(dept);
+            return deptMapper.updateDept(dept);
         }
         else
         {
             dept.setCreateBy(ShiroUtils.getLoginName());
-            return deptDao.insertDept(dept);
+            return deptMapper.insertDept(dept);
         }
     }
 
@@ -129,7 +128,7 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public Dept selectDeptById(Long deptId)
     {
-        return deptDao.selectDeptById(deptId);
+        return deptMapper.selectDeptById(deptId);
     }
 
     /**
@@ -142,7 +141,7 @@ public class DeptServiceImpl implements IDeptService
     public String checkDeptNameUnique(Dept dept)
     {
         Long deptId = dept.getDeptId();
-        Dept info = deptDao.checkDeptNameUnique(dept.getDeptName());
+        Dept info = deptMapper.checkDeptNameUnique(dept.getDeptName());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getDeptId())
                 && info.getDeptId().longValue() != deptId.longValue())
         {

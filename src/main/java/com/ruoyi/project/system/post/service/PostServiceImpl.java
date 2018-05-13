@@ -1,15 +1,13 @@
 package com.ruoyi.project.system.post.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.system.post.dao.IPostDao;
 import com.ruoyi.project.system.post.domain.Post;
-import com.ruoyi.project.system.user.dao.IUserPostDao;
+import com.ruoyi.project.system.post.mapper.PostMapper;
+import com.ruoyi.project.system.user.mapper.UserPostMapper;
 
 /**
  * 岗位信息 服务层处理
@@ -20,10 +18,10 @@ import com.ruoyi.project.system.user.dao.IUserPostDao;
 public class PostServiceImpl implements IPostService
 {
     @Autowired
-    private IPostDao postDao;
+    private PostMapper postMapper;
     
     @Autowired
-    private IUserPostDao userPostDao;
+    private UserPostMapper userPostMapper;
 
     /**
      * 查询岗位信息集合
@@ -34,7 +32,7 @@ public class PostServiceImpl implements IPostService
     @Override
     public List<Post> selectPostList(Post post)
     {
-        return postDao.selectPostList(post);
+        return postMapper.selectPostList(post);
     }
 
     /**
@@ -45,7 +43,7 @@ public class PostServiceImpl implements IPostService
     @Override
     public List<Post> selectPostAll()
     {
-        return postDao.selectPostAll();
+        return postMapper.selectPostAll();
     }
 
     /**
@@ -57,8 +55,8 @@ public class PostServiceImpl implements IPostService
     @Override
     public List<Post> selectPostsByUserId(Long userId)
     {
-        List<Post> userPosts = postDao.selectPostsByUserId(userId);
-        List<Post> posts = postDao.selectPostAll();
+        List<Post> userPosts = postMapper.selectPostsByUserId(userId);
+        List<Post> posts = postMapper.selectPostAll();
         for (Post post : posts)
         {
             for (Post userRole : userPosts)
@@ -82,7 +80,7 @@ public class PostServiceImpl implements IPostService
     @Override
     public Post selectPostById(Long postId)
     {
-        return postDao.selectPostById(postId);
+        return postMapper.selectPostById(postId);
     }
 
     /**
@@ -94,7 +92,7 @@ public class PostServiceImpl implements IPostService
     @Override
     public int deletePostById(Long postId)
     {
-        return postDao.deletePostById(postId);
+        return postMapper.deletePostById(postId);
     }
 
     /**
@@ -106,7 +104,7 @@ public class PostServiceImpl implements IPostService
     @Override
     public int batchDeletePost(Long[] ids)
     {
-        return postDao.batchDeletePost(ids);
+        return postMapper.batchDeletePost(ids);
     }
 
     /**
@@ -124,13 +122,13 @@ public class PostServiceImpl implements IPostService
         {
             post.setUpdateBy(ShiroUtils.getLoginName());
             // 修改岗位信息
-            count = postDao.updatePost(post);
+            count = postMapper.updatePost(post);
         }
         else
         {
             post.setCreateBy(ShiroUtils.getLoginName());
             // 新增岗位信息
-            count = postDao.insertPost(post);
+            count = postMapper.insertPost(post);
         }
         return count;
     }
@@ -144,7 +142,7 @@ public class PostServiceImpl implements IPostService
     @Override
     public int selectCountPostById(Long postId)
     {
-        return userPostDao.selectCountPostById(postId);
+        return userPostMapper.selectCountPostById(postId);
     }
 
 }

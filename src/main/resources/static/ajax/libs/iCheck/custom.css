@@ -14,20 +14,33 @@
     cursor: pointer;
 }
 
-.icheckbox_square-green {
+.icheckbox_square-green-login{
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    background: url(green-login.png) no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+.icheckbox_square-green,.icheckbox_square-green-login {
     background-position: 0 0;
 }
-.icheckbox_square-green.hover {
+.icheckbox_square-green.hover,.icheckbox_square-green-login.hover {
     background-position: -24px 0;
 }
-.icheckbox_square-green.checked {
+.icheckbox_square-green.checked,.icheckbox_square-green-login.checked {
     background-position: -48px 0;
 }
-.icheckbox_square-green.disabled {
+.icheckbox_square-green.disabled,.icheckbox_square-green.disabled-login {
     background-position: -72px 0;
     cursor: default;
 }
-.icheckbox_square-green.checked.disabled {
+.icheckbox_square-green.checked.disabled,.icheckbox_square-green-login.checked.disabled {
     background-position: -96px 0;
 }
 
@@ -50,7 +63,7 @@
 
 /* HiDPI support */
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
-    .icheckbox_square-green,
+    .icheckbox_square-green,.icheckbox_square-green-login,
     .iradio_square-green {
         background-image: url(green%402x.png);
         -webkit-background-size: 240px 24px;

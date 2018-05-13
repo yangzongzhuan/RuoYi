@@ -29,14 +29,14 @@ public class LoginController extends BaseController
 
     @PostMapping("/login")
     @ResponseBody
-    public Message ajaxLogin(String username, String password)
+    public Message ajaxLogin(String username, String password, Boolean rememberMe)
     {
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         Subject subject = SecurityUtils.getSubject();
         try
         {
             subject.login(token);
-            return Message.ok();
+            return Message.success();
         }
         catch (AuthenticationException e)
         {

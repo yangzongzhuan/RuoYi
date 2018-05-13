@@ -2,24 +2,22 @@ package com.ruoyi.project.system.user.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.framework.shiro.service.PasswordService;
-import com.ruoyi.project.system.post.dao.IPostDao;
 import com.ruoyi.project.system.post.domain.Post;
-import com.ruoyi.project.system.role.dao.IRoleDao;
+import com.ruoyi.project.system.post.mapper.PostMapper;
 import com.ruoyi.project.system.role.domain.Role;
-import com.ruoyi.project.system.user.dao.IUserDao;
-import com.ruoyi.project.system.user.dao.IUserPostDao;
-import com.ruoyi.project.system.user.dao.IUserRoleDao;
+import com.ruoyi.project.system.role.mapper.RoleMapper;
 import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.domain.UserPost;
 import com.ruoyi.project.system.user.domain.UserRole;
+import com.ruoyi.project.system.user.mapper.UserMapper;
+import com.ruoyi.project.system.user.mapper.UserPostMapper;
+import com.ruoyi.project.system.user.mapper.UserRoleMapper;
 
 /**
  * 用户 业务层处理
@@ -31,19 +29,19 @@ public class UserServiceImpl implements IUserService
 {
 
     @Autowired
-    private IUserDao userDao;
+    private UserMapper userMapper;
 
     @Autowired
-    private IRoleDao roleDao;
+    private RoleMapper roleMapper;
 
     @Autowired
-    private IPostDao postDao;
+    private PostMapper postMapper;
 
     @Autowired
-    private IUserPostDao userPostDao;
+    private UserPostMapper userPostMapper;
 
     @Autowired
-    private IUserRoleDao userRoleDao;
+    private UserRoleMapper userRoleMapper;
 
     @Autowired
     private PasswordService passwordService;
@@ -58,7 +56,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public List<User> selectUserList(User user)
     {
-        return userDao.selectUserList(user);
+        return userMapper.selectUserList(user);
     }
 
     /**
@@ -70,7 +68,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public User selectUserByName(String userName)
     {
-        return userDao.selectUserByName(userName);
+        return userMapper.selectUserByName(userName);
     }
 
     /**
@@ -82,7 +80,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public User selectUserById(Long userId)
     {
-        return userDao.selectUserById(userId);
+        return userMapper.selectUserById(userId);
     }
 
     /**
@@ -95,10 +93,10 @@ public class UserServiceImpl implements IUserService
     public int deleteUserById(Long userId)
     {
         // 删除用户与角色关联
-        userRoleDao.deleteUserRoleByUserId(userId);
+        userRoleMapper.deleteUserRoleByUserId(userId);
         // 删除用户与岗位表
-        userPostDao.deleteUserPostByUserId(userId);
-        return userDao.deleteUserById(userId);
+        userPostMapper.deleteUserPostByUserId(userId);
+        return userMapper.deleteUserById(userId);
     }
 
     /**
@@ -110,9 +108,9 @@ public class UserServiceImpl implements IUserService
     @Override
     public int batchDeleteUser(Long[] ids)
     {
-        userRoleDao.deleteUserRole(ids);
-        userPostDao.deleteUserPost(ids);
-        return userDao.batchDeleteUser(ids);
+        userRoleMapper.deleteUserRole(ids);
+        userPostMapper.deleteUserPost(ids);
+        return userMapper.batchDeleteUser(ids);
     }
 
     /**
@@ -130,13 +128,13 @@ public class UserServiceImpl implements IUserService
         {
             user.setUpdateBy(ShiroUtils.getLoginName());
             // 修改用户信息
-            count = userDao.updateUser(user);
+            count = userMapper.updateUser(user);
             // 删除用户与角色关联
-            userRoleDao.deleteUserRoleByUserId(userId);
+            userRoleMapper.deleteUserRoleByUserId(userId);
             // 新增用户与角色管理
             insertUserRole(user);
             // 删除用户与岗位关联
-            userPostDao.deleteUserPostByUserId(userId);
+            userPostMapper.deleteUserPostByUserId(userId);
             // 新增用户与岗位管理
             insertUserPost(user);
 
@@ -147,7 +145,7 @@ public class UserServiceImpl implements IUserService
             user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
             user.setCreateBy(ShiroUtils.getLoginName());
             // 新增用户信息
-            count = userDao.insertUser(user);
+            count = userMapper.insertUser(user);
             // 新增用户岗位关联
             insertUserPost(user);
             // 新增用户与角色管理
@@ -165,7 +163,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public int updateUser(User user)
     {
-        return userDao.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
     /**
@@ -179,7 +177,7 @@ public class UserServiceImpl implements IUserService
     {
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
-        return userDao.updateUser(user);
+        return userMapper.updateUser(user);
     }
 
     /**
@@ -200,7 +198,7 @@ public class UserServiceImpl implements IUserService
         }
         if (list.size() > 0)
         {
-            userRoleDao.batchUserRole(list);
+            userRoleMapper.batchUserRole(list);
         }
     }
 
@@ -222,7 +220,7 @@ public class UserServiceImpl implements IUserService
         }
         if (list.size() > 0)
         {
-            userPostDao.batchUserPost(list);
+            userPostMapper.batchUserPost(list);
         }
     }
 
@@ -235,7 +233,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public String checkUserNameUnique(String loginName)
     {
-        int count = userDao.checkUserNameUnique(loginName);
+        int count = userMapper.checkUserNameUnique(loginName);
         if (count > 0)
         {
             return UserConstants.NAME_NOT_UNIQUE;
@@ -252,7 +250,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public String selectUserRoleGroup(Long userId)
     {
-        List<Role> list = roleDao.selectRolesByUserId(userId);
+        List<Role> list = roleMapper.selectRolesByUserId(userId);
         StringBuffer idsStr = new StringBuffer();
         for (Role role : list)
         {
@@ -274,7 +272,7 @@ public class UserServiceImpl implements IUserService
     @Override
     public String selectUserPostGroup(Long userId)
     {
-        List<Post> list = postDao.selectPostsByUserId(userId);
+        List<Post> list = postMapper.selectPostsByUserId(userId);
         StringBuffer idsStr = new StringBuffer();
         for (Post post : list)
         {

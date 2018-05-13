@@ -2,13 +2,11 @@ package com.ruoyi.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.ruoyi.common.constant.CommonConstant;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.project.monitor.logininfor.domain.Logininfor;
 import com.ruoyi.project.monitor.logininfor.service.LogininforServiceImpl;
-
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**
@@ -53,7 +51,7 @@ public class SystemLogUtils
 
     public static void saveOpLog(String username, String message, String status)
     {
-        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getHttpServletRequest().getHeader("User-Agent"));
+        UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
         // 获取客户端操作系统
         String os = userAgent.getOperatingSystem().getName();
         // 获取客户端浏览器

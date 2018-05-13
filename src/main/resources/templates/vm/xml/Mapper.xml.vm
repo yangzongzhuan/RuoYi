@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${package}.dao.I${className}Dao">
+<mapper namespace="${package}.mapper.I${className}Mapper">
     
     <resultMap type="${className}" id="${className}Result">
         #foreach ($column in $columns)
@@ -25,32 +25,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$primaryKey.attrname"#end>
-        insert into ${tableName}
-        (
-        #foreach($column in $columns)
-            #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-                $column.columnName#if($velocityCount != $columns.size()), #end
-            #end
-        #end
-        )
-        values
-        (
-        #foreach($column in $columns)
-            #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-                #{$column.attrname}#if($velocityCount != $columns.size()), #end
-            #end			
-        #end
-		)
+        insert into ${tableName} (
+                #foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
+$column.columnName#if($velocityCount != $columns.size()), #end
+#end
+#end
+)
+        values (
+                #foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
+#{$column.attrname}#if($velocityCount != $columns.size()), #end
+#end			
+#end
+)
     </insert>
 	 
     <update id="update${className}" parameterType="${className}">
         update ${tableName} 
         <set>
-        #foreach($column in $columns)
-            #if($column.columnName != $primaryKey.columnName)
-            <if test="$column.attrname != null">`$column.columnName` = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
-            #end
-        #end
+#foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName)
+            <if test="$column.attrname != null">$column.columnName = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+#end
+#end
         </set>
         where ${primaryKey.columnName} = #{${primaryKey.attrname}}
     </update>

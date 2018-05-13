@@ -85,7 +85,7 @@ public class GenUtils
     {
         List<String> templates = new ArrayList<String>();
         templates.add("templates/vm/java/domain.java.vm");
-        templates.add("templates/vm/java/Dao.java.vm");
+        templates.add("templates/vm/java/Mapper.java.vm");
         templates.add("templates/vm/java/Service.java.vm");
         templates.add("templates/vm/java/ServiceImpl.java.vm");
         templates.add("templates/vm/java/Controller.java.vm");
@@ -140,9 +140,9 @@ public class GenUtils
             return javaPath + "domain" + "/" + className + ".java";
         }
 
-        if (template.contains("Dao.java.vm"))
+        if (template.contains("Mapper.java.vm"))
         {
-            return javaPath + "dao" + "/" + "I" + className + "Dao.java";
+            return javaPath + "mapper" + "/" + "I" + className + "Mapper.java";
         }
 
         if (template.contains("Service.java.vm"))

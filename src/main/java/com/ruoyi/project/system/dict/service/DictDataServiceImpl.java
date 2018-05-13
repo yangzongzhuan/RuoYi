@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.system.dict.dao.IDictDataDao;
 import com.ruoyi.project.system.dict.domain.DictData;
+import com.ruoyi.project.system.dict.mapper.DictDataMapper;
 
 /**
  * 字典 业务层处理
@@ -17,7 +17,7 @@ import com.ruoyi.project.system.dict.domain.DictData;
 public class DictDataServiceImpl implements IDictDataService
 {
     @Autowired
-    private IDictDataDao dictDao;
+    private DictDataMapper dictDataMapper;
 
     /**
      * 根据条件分页查询字典数据
@@ -28,7 +28,7 @@ public class DictDataServiceImpl implements IDictDataService
     @Override
     public List<DictData> selectDictDataList(DictData dictData)
     {
-        return dictDao.selectDictDataList(dictData);
+        return dictDataMapper.selectDictDataList(dictData);
     }
 
     /**
@@ -40,7 +40,7 @@ public class DictDataServiceImpl implements IDictDataService
     @Override
     public DictData selectDictDataById(Long dictCode)
     {
-        return dictDao.selectDictDataById(dictCode);
+        return dictDataMapper.selectDictDataById(dictCode);
     }
 
     /**
@@ -52,7 +52,7 @@ public class DictDataServiceImpl implements IDictDataService
     @Override
     public int deleteDictDataById(Long dictCode)
     {
-        return dictDao.deleteDictDataById(dictCode);
+        return dictDataMapper.deleteDictDataById(dictCode);
     }
 
     /**
@@ -64,7 +64,7 @@ public class DictDataServiceImpl implements IDictDataService
     @Override
     public int batchDeleteDictData(Long[] ids)
     {
-        return dictDao.batchDeleteDictData(ids);
+        return dictDataMapper.batchDeleteDictData(ids);
     }
 
     /**
@@ -80,12 +80,12 @@ public class DictDataServiceImpl implements IDictDataService
         if (StringUtils.isNotNull(dictCode))
         {
             dictData.setUpdateBy(ShiroUtils.getLoginName());
-            return dictDao.updateDictData(dictData);
+            return dictDataMapper.updateDictData(dictData);
         }
         else
         {
             dictData.setCreateBy(ShiroUtils.getLoginName());
-            return dictDao.insertDictData(dictData);
+            return dictDataMapper.insertDictData(dictData);
         }
     }
 

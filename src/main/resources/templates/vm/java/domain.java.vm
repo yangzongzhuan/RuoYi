@@ -1,7 +1,6 @@
 package ${package}.domain;
 
-import java.io.Serializable;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
@@ -12,7 +11,7 @@ import java.math.BigDecimal;
  * @author ${author}
  * @date ${datetime}
  */
-public class ${className} extends PageDomain implements Serializable 
+public class ${className} extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	

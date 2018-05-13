@@ -27,6 +27,7 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="javascript:edit()">修改信息</a></li>
                             <li><a href="javascript:resetPwd()">修改密码</a></li>
+                            <li><a href="javascript:avatar()">修改头像</a></li>
                         </ul>
                        
                     </div>
@@ -34,7 +35,7 @@
                     <div class="contact-box">
 	                        <div class="col-sm-4">
 	                            <div class="text-center">
-	                                <img alt="image" class="img-circle m-t-xs img-responsive" src="/img/profilel.jpg">
+	                                <img alt="image" class="img-circle m-t-xs img-responsive" th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/' + ${user.avatar}">
 	                                <div class="m-t-xs font-bold">CEO</div>
 	                            </div>
 	                        </div>
@@ -45,7 +46,7 @@
 	                            <p><i class="fa fa-group"></i> [[${user.dept.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
 	                            <p><i class="fa fa-transgender"></i> [[${user.sex}]]</p>
 	                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
-	                            <p><i class="fa fa-calendar"></i> [[${user.createTime}]]</p>
+	                            <p><i class="fa fa-calendar"></i> [[${user.createDateTimeStr}]]</p>
 	                        </div>
 	                        <div class="clearfix"></div>
 	                    </a>
@@ -67,6 +68,11 @@
 	    function resetPwd() {
 	        var url = ctx + 'system/user/profile/resetPwd/' + userId;
 	        layer_show("重置密码", url, '800', '500');
+	    }
+	    /*用户管理-头像*/
+	    function avatar() {
+	        var url = ctx + 'system/user/profile/avatar/' + userId;
+	        layer_showAuto("修改头像", url);
 	    }
 	</script>
 </body>

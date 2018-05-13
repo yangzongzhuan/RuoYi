@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.StringUtils;
-import ${package}.dao.I${className}Dao;
+import ${package}.mapper.I${className}Mapper;
 import ${package}.domain.${className};
 import ${package}.service.I${className}Service;
 
@@ -18,7 +18,7 @@ import ${package}.service.I${className}Service;
 public class ${className}ServiceImpl implements I${className}Service 
 {
 	@Autowired
-	private I${className}Dao ${classname}Dao;
+	private I${className}Mapper ${classname}Mapper;
 	
 	/**
      * 查询${tableComment}信息
@@ -29,7 +29,7 @@ public class ${className}ServiceImpl implements I${className}Service
 	 @Override
 	public ${className} select${className}ById(${primaryKey.attrType} ${primaryKey.attrname})
 	{
-	    return ${classname}Dao.select${className}ById(${primaryKey.attrname});
+	    return ${classname}Mapper.select${className}ById(${primaryKey.attrname});
 	}
 	
 	/**
@@ -41,7 +41,7 @@ public class ${className}ServiceImpl implements I${className}Service
 	 @Override
 	public List<${className}> select${className}List(${className} ${classname})
 	{
-	    return ${classname}Dao.select${className}List(${classname});
+	    return ${classname}Mapper.select${className}List(${classname});
 	}
 	
     /**
@@ -53,7 +53,7 @@ public class ${className}ServiceImpl implements I${className}Service
 	 @Override
 	public int insert${className}(${className} ${classname})
 	{
-	    return ${classname}Dao.insert${className}(${classname});
+	    return ${classname}Mapper.insert${className}(${classname});
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class ${className}ServiceImpl implements I${className}Service
 	 @Override
 	public int update${className}(${className} ${classname})
 	{
-	    return ${classname}Dao.update${className}(${classname});
+	    return ${classname}Mapper.update${className}(${classname});
 	}
 	
 	/**
@@ -81,11 +81,11 @@ public class ${className}ServiceImpl implements I${className}Service
 		int rows = 0;
 		if (StringUtils.isNotNull(${primaryKey.attrname}))
         {
-		    rows = ${classname}Dao.update${className}(${classname});
+		    rows = ${classname}Mapper.update${className}(${classname});
 		}
 		else
         {
-		    rows = ${classname}Dao.insert${className}(${classname});
+		    rows = ${classname}Mapper.insert${className}(${classname});
 		}
 		return rows;
 	}
@@ -99,7 +99,7 @@ public class ${className}ServiceImpl implements I${className}Service
 	 @Override
 	public int delete${className}ById(${primaryKey.attrType} ${primaryKey.attrname})
 	{
-	    return ${classname}Dao.delete${className}ById(${primaryKey.attrname});
+	    return ${classname}Mapper.delete${className}ById(${primaryKey.attrname});
 	}
 	
 	/**
@@ -111,7 +111,7 @@ public class ${className}ServiceImpl implements I${className}Service
 	 @Override
 	public int batchDelete${className}(${primaryKey.attrType}[] ${primaryKey.attrname}s)
 	{
-		return ${classname}Dao.batchDelete${className}(${primaryKey.attrname}s);
+		return ${classname}Mapper.batchDelete${className}(${primaryKey.attrname}s);
 	}
 	
 }

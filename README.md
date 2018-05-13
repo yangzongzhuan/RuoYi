@@ -1,6 +1,6 @@
 ## 平台简介
 
-一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了若依管理系统。她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA。所有前端后台代码封装过后十分精简易上手，提高开发效率及质量。同时支持移动客户端访问。系统会陆续更新一些实用功能。
+一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适的。于是利用空闲休息时间开始自己写了一套后台系统。如此有了若依。她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
 
 寓意：你若不离不弃，我必生死相依
 
@@ -22,28 +22,19 @@
 
 ## 系统演示 [www.ruoyi.club](http://www.ruoyi.club)
 
-![登录界面](https://static.oschina.net/uploads/space/2018/0425/110329_Ftsu_1438828.png)
+![登录界面](https://static.oschina.net/uploads/space/2018/0513/145506_0712_1438828.png)
 
-![首页](https://static.oschina.net/uploads/space/2018/0426/215626_fkrN_1438828.png)
+![系统首页](https://static.oschina.net/uploads/space/2018/0513/145514_LKRy_1438828.png)
 
-![用户管理](https://static.oschina.net/uploads/space/2018/0424/233815_kb8P_1438828.png)
+![用户管理](https://static.oschina.net/uploads/space/2018/0513/145523_7Cuh_1438828.png)
 
-![用户修改](https://static.oschina.net/uploads/space/2018/0424/233819_spnr_1438828.png)
+![用户修改](https://static.oschina.net/uploads/space/2018/0513/145530_vE5H_1438828.png)
 
-![部门选择](https://static.oschina.net/uploads/space/2018/0424/233826_J5NV_1438828.png)
+![头像修改](https://static.oschina.net/uploads/space/2018/0513/145931_iibt_1438828.png)
 
-![部门修改](https://static.oschina.net/uploads/space/2018/0424/234035_gkfz_1438828.png)
+![菜单管理](https://static.oschina.net/uploads/space/2018/0513/145608_ex4U_1438828.png)
 
-![菜单选择](https://static.oschina.net/uploads/space/2018/0424/233929_xcaM_1438828.png)
-
-![菜单修改](https://static.oschina.net/uploads/space/2018/0311/235921_7txy_1438828.png)
-
-![在线构建](https://static.oschina.net/uploads/space/2018/0424/233957_fRat_1438828.png)
-
-![代码生成](https://static.oschina.net/uploads/space/2018/0424/233952_QXsG_1438828.png)
-
-![操作日志](https://static.oschina.net/uploads/space/2018/0424/234055_8omc_1438828.png)
-
+![角色管理](https://static.oschina.net/uploads/space/2018/0513/150005_gV8b_1438828.png)
 
 ## 若依交流群
 

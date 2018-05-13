@@ -1,12 +1,15 @@
 package com.ruoyi.project.system.dept.domain;
 
+import com.ruoyi.framework.web.domain.BaseEntity;
+
 /**
  * 部门对象 sys_dept
  * 
  * @author ruoyi
  */
-public class Dept
+public class Dept extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** 部门ID */
     private Long deptId;
     /** 父部门ID */
@@ -25,14 +28,6 @@ public class Dept
     private int status;
     /** 父部门名称 */
     private String parentName;
-    /** 创建者 */
-    private String createBy;
-    /** 创建时间 */
-    private String createTime;
-    /** 更新者 */
-    private String updateBy;
-    /** 更新时间 */
-    private String updateTime;
 
     public Long getDeptId()
     {
@@ -124,53 +119,12 @@ public class Dept
         this.parentName = parentName;
     }
 
-    public String getCreateBy()
-    {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy)
-    {
-        this.createBy = createBy;
-    }
-
-    public String getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime)
-    {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateBy()
-    {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy)
-    {
-        this.updateBy = updateBy;
-    }
-
-    public String getUpdateTime()
-    {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime)
-    {
-        this.updateTime = updateTime;
-    }
-
     @Override
     public String toString()
     {
         return "Dept [deptId=" + deptId + ", parentId=" + parentId + ", deptName=" + deptName + ", orderNum=" + orderNum
                 + ", leader=" + leader + ", phone=" + phone + ", email=" + email + ", status=" + status
-                + ", parentName=" + parentName + ", createBy=" + createBy + ", createTime=" + createTime + ", updateBy="
-                + updateBy + ", updateTime=" + updateTime + "]";
+                + ", parentName=" + parentName + "]";
     }
 
 }

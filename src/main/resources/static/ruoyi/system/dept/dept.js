@@ -25,10 +25,8 @@ function loading() {
 			}
         },
         {
-			title : '创建时间',
-			formatter : function(row, index) {
-				return formatDate(row.createTime,"yyyy-MM-dd");
-			}
+        	field: 'createTimeStr',
+			title : '创建时间'
         },
         {
         	title : '操作',

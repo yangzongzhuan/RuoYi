@@ -3,8 +3,8 @@ package com.ruoyi.project.monitor.logininfor.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.project.monitor.logininfor.dao.ILogininforDao;
 import com.ruoyi.project.monitor.logininfor.domain.Logininfor;
+import com.ruoyi.project.monitor.logininfor.mapper.LogininforMapper;
 
 /**
  * 系统访问日志情况信息 服务层处理
@@ -16,7 +16,7 @@ public class LogininforServiceImpl implements ILogininforService
 {
 
     @Autowired
-    private ILogininforDao logininforDao;
+    private LogininforMapper logininforMapper;
 
     /**
      * 新增系统登录日志
@@ -26,7 +26,7 @@ public class LogininforServiceImpl implements ILogininforService
     @Override
     public void insertLogininfor(Logininfor logininfor)
     {
-        logininforDao.insertLogininfor(logininfor);
+        logininforMapper.insertLogininfor(logininfor);
     }
 
     /**
@@ -38,7 +38,7 @@ public class LogininforServiceImpl implements ILogininforService
     @Override
     public List<Logininfor> selectLogininforList(Logininfor logininfor)
     {
-        return logininforDao.selectLogininforList(logininfor);
+        return logininforMapper.selectLogininforList(logininfor);
     }
 
     /**
@@ -50,6 +50,6 @@ public class LogininforServiceImpl implements ILogininforService
     @Override
     public int batchDeleteLogininfor(Long[] ids)
     {
-        return logininforDao.batchDeleteLogininfor(ids);
+        return logininforMapper.batchDeleteLogininfor(ids);
     }
 }

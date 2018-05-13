@@ -44,7 +44,7 @@ public class DictDataController extends BaseController
     @ResponseBody
     public TableDataInfo list(DictData dictData)
     {
-        setPageInfo(dictData);
+        startPage();
         List<DictData> list = dictDataService.selectDictDataList(dictData);
         return getDataTable(list);
     }
@@ -85,7 +85,7 @@ public class DictDataController extends BaseController
     {
         if (dictDataService.saveDictData(dict) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -106,7 +106,7 @@ public class DictDataController extends BaseController
         }
         if (dictDataService.deleteDictDataById(dictCode) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -120,7 +120,7 @@ public class DictDataController extends BaseController
         int rows = dictDataService.batchDeleteDictData(ids);
         if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

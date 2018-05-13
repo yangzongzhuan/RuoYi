@@ -5,18 +5,16 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.system.role.dao.IRoleDao;
-import com.ruoyi.project.system.role.dao.IRoleMenuDao;
 import com.ruoyi.project.system.role.domain.Role;
 import com.ruoyi.project.system.role.domain.RoleMenu;
-import com.ruoyi.project.system.user.dao.IUserRoleDao;
+import com.ruoyi.project.system.role.mapper.RoleMapper;
+import com.ruoyi.project.system.role.mapper.RoleMenuMapper;
+import com.ruoyi.project.system.user.mapper.UserRoleMapper;
 
 /**
  * 角色 业务层处理
@@ -28,13 +26,13 @@ public class RoleServiceImpl implements IRoleService
 {
 
     @Autowired
-    private IRoleDao roleDao;
+    private RoleMapper roleMapper;
 
     @Autowired
-    private IRoleMenuDao roleMenuDao;
+    private RoleMenuMapper roleMenuMapper;
 
     @Autowired
-    private IUserRoleDao userRoleDao;
+    private UserRoleMapper userRoleMapper;
 
     /**
      * 根据条件分页查询角色数据
@@ -45,7 +43,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public List<Role> selectRoleList(Role role)
     {
-        return roleDao.selectRoleList(role);
+        return roleMapper.selectRoleList(role);
     }
 
     /**
@@ -57,7 +55,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public Set<String> selectRoleKeys(Long userId)
     {
-        List<Role> perms = roleDao.selectRolesByUserId(userId);
+        List<Role> perms = roleMapper.selectRolesByUserId(userId);
         Set<String> permsSet = new HashSet<>();
         for (Role perm : perms)
         {
@@ -78,8 +76,8 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public List<Role> selectRolesByUserId(Long userId)
     {
-        List<Role> userRoles = roleDao.selectRolesByUserId(userId);
-        List<Role> roles = roleDao.selectRolesAll();
+        List<Role> userRoles = roleMapper.selectRolesByUserId(userId);
+        List<Role> roles = roleMapper.selectRolesAll();
         for (Role role : roles)
         {
             for (Role userRole : userRoles)
@@ -102,7 +100,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public List<Role> selectRoleAll()
     {
-        return roleDao.selectRolesAll();
+        return roleMapper.selectRolesAll();
     }
 
     /**
@@ -114,7 +112,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public Role selectRoleById(Long roleId)
     {
-        return roleDao.selectRoleById(roleId);
+        return roleMapper.selectRoleById(roleId);
     }
 
     /**
@@ -126,8 +124,8 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int deleteRoleById(Long roleId)
     {
-        roleMenuDao.deleteRoleMenuByRoleId(roleId);
-        return roleDao.deleteRoleById(roleId);
+        roleMenuMapper.deleteRoleMenuByRoleId(roleId);
+        return roleMapper.deleteRoleById(roleId);
     }
 
     /**
@@ -139,8 +137,8 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int batchDeleteRole(Long[] ids)
     {
-        roleMenuDao.deleteRoleMenu(ids);
-        return roleDao.batchDeleteRole(ids);
+        roleMenuMapper.deleteRoleMenu(ids);
+        return roleMapper.batchDeleteRole(ids);
     }
 
     /**
@@ -157,15 +155,15 @@ public class RoleServiceImpl implements IRoleService
         {
             role.setUpdateBy(ShiroUtils.getLoginName());
             // 修改角色信息
-            roleDao.updateRole(role);
+            roleMapper.updateRole(role);
             // 删除角色与菜单关联
-            roleMenuDao.deleteRoleMenuByRoleId(roleId);
+            roleMenuMapper.deleteRoleMenuByRoleId(roleId);
         }
         else
         {
             role.setCreateBy(ShiroUtils.getLoginName());
             // 新增角色信息
-            roleDao.insertRole(role);
+            roleMapper.insertRole(role);
         }
         return insertRoleMenu(role);
     }
@@ -189,7 +187,7 @@ public class RoleServiceImpl implements IRoleService
         }
         if (list.size() > 0)
         {
-            rows = roleMenuDao.batchRoleMenu(list);
+            rows = roleMenuMapper.batchRoleMenu(list);
         }
         return rows;
     }
@@ -204,7 +202,7 @@ public class RoleServiceImpl implements IRoleService
     public String checkRoleNameUnique(Role role)
     {
         Long roleId = role.getRoleId();
-        Role info = roleDao.checkRoleNameUnique(role.getRoleName());
+        Role info = roleMapper.checkRoleNameUnique(role.getRoleName());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getRoleId()) && info.getRoleId() != roleId)
         {
             return UserConstants.NAME_NOT_UNIQUE;
@@ -221,7 +219,7 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public int selectCountUserRoleByRoleId(Long roleId)
     {
-        return userRoleDao.selectCountUserRoleByRoleId(roleId);
+        return userRoleMapper.selectCountUserRoleByRoleId(roleId);
     }
 
 }

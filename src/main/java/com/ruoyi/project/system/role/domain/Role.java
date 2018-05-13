@@ -1,16 +1,16 @@
 package com.ruoyi.project.system.role.domain;
 
 import java.util.Arrays;
-import java.util.Date;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 角色对象 sys_role
  * 
  * @author ruoyi
  */
-public class Role extends PageDomain
+public class Role extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** 角色ID */
     private Long roleId;
     /** 角色名 */
@@ -21,16 +21,6 @@ public class Role extends PageDomain
     private String roleSort;
     /** 角色状态:0正常,1禁用 */
     private int status;
-    /** 创建者 */
-    private String createBy;
-    /** 创建时间 */
-    private Date createTime;
-    /** 更新时间 */
-    private Date updateTime;
-    /** 更新者 */
-    private String updateBy;
-    /** 备注 */
-    private String remark;
     /** 用户是否存在此角色标识 默认不存在 */
     private boolean flag = false;
     /** 菜单组 */
@@ -86,56 +76,6 @@ public class Role extends PageDomain
         this.status = status;
     }
 
-    public String getCreateBy()
-    {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy)
-    {
-        this.createBy = createBy;
-    }
-
-    public Date getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime)
-    {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime()
-    {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime)
-    {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy()
-    {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy)
-    {
-        this.updateBy = updateBy;
-    }
-
-    public String getRemark()
-    {
-        return remark;
-    }
-
-    public void setRemark(String remark)
-    {
-        this.remark = remark;
-    }
-
     public boolean isFlag()
     {
         return flag;
@@ -160,9 +100,7 @@ public class Role extends PageDomain
     public String toString()
     {
         return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleKey=" + roleKey + ", roleSort=" + roleSort
-                + ", status=" + status + ", createBy=" + createBy + ", createTime=" + createTime + ", updateTime="
-                + updateTime + ", updateBy=" + updateBy + ", remark=" + remark + ", flag=" + flag + ", menuIds="
-                + Arrays.toString(menuIds) + "]";
+                + ", status=" + status + ", flag=" + flag + ", menuIds=" + Arrays.toString(menuIds) + "]";
     }
 
 }

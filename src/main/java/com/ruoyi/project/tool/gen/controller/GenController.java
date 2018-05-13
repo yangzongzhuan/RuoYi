@@ -44,7 +44,7 @@ public class GenController extends BaseController
     @ResponseBody
     public TableDataInfo list(TableInfo tableInfo)
     {
-        setPageInfo(tableInfo);
+        startPage();
         List<TableInfo> list = genService.selectTableList(tableInfo);
         return getDataTable(list);
     }

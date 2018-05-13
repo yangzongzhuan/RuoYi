@@ -44,7 +44,7 @@ public class JobController extends BaseController
     @ResponseBody
     public TableDataInfo list(Job job)
     {
-        setPageInfo(job);
+        startPage();
         List<Job> list = jobService.selectJobList(job);
         return getDataTable(list);
     }
@@ -65,7 +65,7 @@ public class JobController extends BaseController
         }
         if (jobService.deleteJob(job) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -79,7 +79,7 @@ public class JobController extends BaseController
         try
         {
             jobService.batchDeleteJob(ids);
-            return Message.ok();
+            return Message.success();
         }
         catch (Exception e)
         {
@@ -99,7 +99,7 @@ public class JobController extends BaseController
     {
         if (jobService.changeStatus(job) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -139,7 +139,7 @@ public class JobController extends BaseController
     {
         if (jobService.saveJobCron(job) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

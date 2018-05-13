@@ -13,11 +13,11 @@ $(function() {
             title: '表描述'
         },
         {
-            field: 'createTime',
+            field: 'createDateTimeStr',
             title: '创建时间'
         },
         {
-            field: 'updateTime',
+            field: 'updateDateTimeStr',
             title: '更新时间'
         },
         {

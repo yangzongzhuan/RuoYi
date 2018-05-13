@@ -43,7 +43,7 @@ public class OperlogController extends BaseController
     @ResponseBody
     public TableDataInfo list(OperLog operLog)
     {
-        setPageInfo(operLog);
+        startPage();
         List<OperLog> list = operLogService.selectOperLogList(operLog);
         return getDataTable(list);
     }
@@ -56,7 +56,7 @@ public class OperlogController extends BaseController
         int rows = operLogService.batchDeleteOperLog(ids);
         if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

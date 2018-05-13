@@ -1,15 +1,16 @@
 package com.ruoyi.project.monitor.logininfor.domain;
 
 import java.util.Date;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 系统访问日志情况信息 sys_logininfor
  * 
  * @author ruoyi
  */
-public class Logininfor extends PageDomain
+public class Logininfor extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** ID */
     private Integer infoId;
     /** 用户账号 */

@@ -44,7 +44,7 @@ function queryUserList() {
             }
         },
         {
-            field: 'createTime',
+            field: 'createDateTimeStr',
             title: '创建时间'
         },
         {
@@ -63,7 +63,20 @@ function queryUserList() {
             }
         }];
 	var url = prefix + "/list";
-	$.initTable(columns, url);
+	$.initTableParams(columns, url, queryParams);
+}
+
+function queryParams(params) {
+	return {
+		// 传递参数查询参数
+		pageSize:       params.limit,
+		pageNum:        params.offset / params.limit + 1,
+		searchValue:    params.search,
+		orderByColumn:  params.sort,
+		isAsc:          params.order,
+		deptId:         $("#deptId").val(),
+		parentId:       $("#parentId").val()
+	};
 }
 
 function queryDeptTreeDaTa()
@@ -72,8 +85,9 @@ function queryDeptTreeDaTa()
 	var setting = {view:{selectedMulti:false},data:{key:{title:"title"},simpleData:{enable:true}},
 		callback:{onClick:function(event, treeId, treeNode){
 			tree.expandNode(treeNode);
-			var opt = { query : { deptId : treeNode.id, parentId : treeNode.pId, } };
-			$('.bootstrap-table').bootstrapTable('refresh', opt);
+			$("#deptId").val(treeNode.id);
+			$("#parentId").val(treeNode.pId);
+			$('.bootstrap-table').bootstrapTable('refresh', queryParams);
 		}}
 	}, tree, loadTree = function(){
 		$.get(ctx + "system/dept/treeData", function(data) {

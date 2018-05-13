@@ -18,7 +18,7 @@ import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.framework.web.domain.Message;
 
 /**
- * ${tableComment} 控制层处理
+ * ${tableComment} 信息操作处理
  * 
  * @author ${author}
  * @date ${datetime}
@@ -47,7 +47,7 @@ public class ${className}Controller extends BaseController
 	@ResponseBody
 	public TableDataInfo list(${className} ${classname})
 	{
-		setPageInfo(${classname});
+		startPage();
         List<${className}> list = ${classname}Service.select${className}List(${classname});
 		return getDataTable(list);
 	}
@@ -84,7 +84,7 @@ public class ${className}Controller extends BaseController
 	{
 		if (${classname}Service.save${className}(${classname}) > 0)
 		{
-			return Message.ok();
+			return Message.success();
 		}
 		return Message.error();
 	}
@@ -99,7 +99,7 @@ public class ${className}Controller extends BaseController
 	{
 		if (${classname}Service.delete${className}ById(${primaryKey.attrname}) > 0)
 		{
-		    return Message.ok();
+		    return Message.success();
 		}
 		return Message.error();
 	}
@@ -115,7 +115,7 @@ public class ${className}Controller extends BaseController
 		int rows = ${classname}Service.batchDelete${className}(${primaryKey.attrname}s);
 		if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
 	}

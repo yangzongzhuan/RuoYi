@@ -48,7 +48,7 @@ public class UserOnlineController extends BaseController
     @ResponseBody
     public TableDataInfo list(UserOnline userOnline)
     {
-        setPageInfo(userOnline);
+        startPage();
         List<UserOnline> list = userOnlineService.selectUserOnlineList(userOnline);
         return getDataTable(list);
     }
@@ -75,7 +75,7 @@ public class UserOnlineController extends BaseController
             online.setStatus(OnlineSession.OnlineStatus.off_line);
             userOnlineService.saveOnline(online);
         }
-        return Message.ok();
+        return Message.success();
     }
 
     @RequiresPermissions("monitor:online:forceLogout")
@@ -97,7 +97,7 @@ public class UserOnlineController extends BaseController
         onlineSession.setStatus(OnlineSession.OnlineStatus.off_line);
         online.setStatus(OnlineSession.OnlineStatus.off_line);
         userOnlineService.saveOnline(online);
-        return Message.ok();
+        return Message.success();
     }
 
 }

@@ -46,7 +46,7 @@ public class RoleController extends BaseController
     @ResponseBody
     public TableDataInfo list(Role role)
     {
-        setPageInfo(role);
+        startPage();
         List<Role> list = roleService.selectRoleList(role);
         return getDataTable(list);
     }
@@ -87,7 +87,7 @@ public class RoleController extends BaseController
     {
         if (roleService.saveRole(role) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -110,7 +110,7 @@ public class RoleController extends BaseController
         }
         if (roleService.deleteRoleById(roleId) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -124,7 +124,7 @@ public class RoleController extends BaseController
         int rows = roleService.batchDeleteRole(ids);
         if (rows > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

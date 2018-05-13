@@ -1,15 +1,15 @@
 package com.ruoyi.project.monitor.job.domain;
 
-import java.util.Date;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 定时任务调度日志信息 sys_job_log
  * 
  * @author ruoyi
  */
-public class JobLog extends PageDomain
+public class JobLog extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** ID */
     private Long jobLogId;
     /** 任务名称 */
@@ -26,8 +26,6 @@ public class JobLog extends PageDomain
     private int isException;
     /** 异常信息 */
     private String exceptionInfo;
-    /** 创建时间 */
-    private Date createTime;
 
     public Long getJobLogId()
     {
@@ -109,22 +107,12 @@ public class JobLog extends PageDomain
         this.exceptionInfo = exceptionInfo;
     }
 
-    public Date getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime)
-    {
-        this.createTime = createTime;
-    }
-
     @Override
     public String toString()
     {
         return "JobLog [jobLogId=" + jobLogId + ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", methodName="
                 + methodName + ", params=" + params + ", jobMessage=" + jobMessage + ", isException=" + isException
-                + ", exceptionInfo=" + exceptionInfo + ", createTime=" + createTime + "]";
+                + ", exceptionInfo=" + exceptionInfo + "]";
     }
 
 }

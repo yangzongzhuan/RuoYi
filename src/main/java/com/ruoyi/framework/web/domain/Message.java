@@ -1,7 +1,6 @@
 package com.ruoyi.framework.web.domain;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 操作消息提醒
@@ -13,12 +12,10 @@ public class Message extends HashMap<String, Object>
     private static final long serialVersionUID = 1L;
 
     /**
-     * 初始化一个新创建的 Message 对象，默认成功。
+     * 初始化一个新创建的 Message 对象
      */
     public Message()
     {
-        put("code", 0);
-        put("msg", "操作成功");
     }
 
     /**
@@ -63,34 +60,22 @@ public class Message extends HashMap<String, Object>
      * @param msg 内容
      * @return 成功消息
      */
-    public static Message ok(String msg)
+    public static Message success(String msg)
     {
         Message json = new Message();
         json.put("msg", msg);
+        json.put("code", 0);
         return json;
     }
-
-    /**
-     * 返回成功消息
-     * 
-     * @param map 内容
-     * @return 成功消息
-     */
-    public static Message ok(Map<String, Object> map)
-    {
-        Message json = new Message();
-        json.putAll(map);
-        return json;
-    }
-
+    
     /**
      * 返回成功消息
      * 
      * @return 成功消息
      */
-    public static Message ok()
+    public static Message success()
     {
-        return new Message();
+        return Message.success("操作成功");
     }
 
     /**

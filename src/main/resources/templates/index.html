@@ -32,7 +32,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                         <img src="img/profile_small.jpg" alt="image" class="img-circle" height="60" width="60"/></span>
+                         <img th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/' + ${user.avatar}" alt="image" class="img-circle" height="60" width="60"/></span>
                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                           <span class="clear"><span class="block m-t-xs"><strong class="font-bold">[[${user.userName}]]</strong></span>
                          <span class="text-muted text-xs block"><span>[[${user.dept.deptName}]]</span> <b class="caret"></b></span> </span> </a>
@@ -128,6 +128,6 @@
 <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js" th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
 <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js" th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
-<script src="../static/ruoyi/js/index.js" th:src="@{/ruoyi/js/index.js}"></script>
+<script src="../static/ruoyi/index.js" th:src="@{/ruoyi/index.js}"></script>
 </body>
 </html>

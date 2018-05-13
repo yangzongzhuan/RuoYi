@@ -1,14 +1,14 @@
 package com.ruoyi.project.monitor.job.domain;
 
 import java.io.Serializable;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 定时任务调度信息 sys_job
  * 
  * @author ruoyi
  */
-public class Job extends PageDomain implements Serializable
+public class Job extends BaseEntity implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
@@ -26,16 +26,6 @@ public class Job extends PageDomain implements Serializable
     private String cronExpression;
     /** 状态（0正常 1暂停） */
     private int status;
-    /** 创建者 */
-    private String createBy;
-    /** 创建时间 */
-    private String createTime;
-    /** 更新时间 */
-    private String updateTime;
-    /** 更新者 */
-    private String updateBy;
-    /** 备注 */
-    private String remark;
 
     public Long getJobId()
     {
@@ -107,63 +97,11 @@ public class Job extends PageDomain implements Serializable
         this.status = status;
     }
 
-    public String getCreateBy()
-    {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy)
-    {
-        this.createBy = createBy;
-    }
-
-    public String getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime)
-    {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime()
-    {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime)
-    {
-        this.updateTime = updateTime;
-    }
-
-    public String getUpdateBy()
-    {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy)
-    {
-        this.updateBy = updateBy;
-    }
-
-    public String getRemark()
-    {
-        return remark;
-    }
-
-    public void setRemark(String remark)
-    {
-        this.remark = remark;
-    }
-
     @Override
     public String toString()
     {
         return "Job [jobId=" + jobId + ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", methodName=" + methodName
-                + ", params=" + params + ", cronExpression=" + cronExpression + ", status=" + status + ", createBy="
-                + createBy + ", createTime=" + createTime + ", updateTime=" + updateTime + ", updateBy=" + updateBy
-                + ", remark=" + remark + "]";
+                + ", params=" + params + ", cronExpression=" + cronExpression + ", status=" + status + "]";
     }
 
 }

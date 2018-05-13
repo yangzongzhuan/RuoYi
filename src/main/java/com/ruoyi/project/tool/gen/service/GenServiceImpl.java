@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.exception.base.BaseException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.config.GenConfig;
-import com.ruoyi.project.tool.gen.dao.IGenDao;
 import com.ruoyi.project.tool.gen.domain.ColumnInfo;
 import com.ruoyi.project.tool.gen.domain.TableInfo;
+import com.ruoyi.project.tool.gen.mapper.GenMapper;
 import com.ruoyi.project.tool.gen.util.GenUtils;
 import com.ruoyi.project.tool.gen.util.VelocityInitializer;
 
@@ -30,7 +30,7 @@ import com.ruoyi.project.tool.gen.util.VelocityInitializer;
 public class GenServiceImpl implements IGenService
 {
     @Autowired
-    private IGenDao genDao;
+    private GenMapper genMapper;
 
     /**
      * 查询ry数据库表信息
@@ -41,7 +41,7 @@ public class GenServiceImpl implements IGenService
     @Override
     public List<TableInfo> selectTableList(TableInfo tableInfo)
     {
-        return genDao.selectTableList(tableInfo);
+        return genMapper.selectTableList(tableInfo);
     }
 
     /**
@@ -56,9 +56,9 @@ public class GenServiceImpl implements IGenService
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         // 查询表信息
-        TableInfo table = genDao.selectTableByName(tableName);
+        TableInfo table = genMapper.selectTableByName(tableName);
         // 查询列信息
-        List<ColumnInfo> columns = genDao.selectTableColumnsByName(tableName);
+        List<ColumnInfo> columns = genMapper.selectTableColumnsByName(tableName);
         // 生成代码
         generatorCode(table, columns, zip);
         IOUtils.closeQuietly(zip);
@@ -79,9 +79,9 @@ public class GenServiceImpl implements IGenService
         for (String tableName : tableNames)
         {
             // 查询表信息
-            TableInfo table = genDao.selectTableByName(tableName);
+            TableInfo table = genMapper.selectTableByName(tableName);
             // 查询列信息
-            List<ColumnInfo> columns = genDao.selectTableColumnsByName(tableName);
+            List<ColumnInfo> columns = genMapper.selectTableColumnsByName(tableName);
             // 生成代码
             generatorCode(table, columns, zip);
         }

@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
-import com.ruoyi.project.monitor.online.dao.IUserOnlineDao;
 import com.ruoyi.project.monitor.online.domain.UserOnline;
+import com.ruoyi.project.monitor.online.mapper.UserOnlineMapper;
 
 /**
  * 在线用户 服务层处理
@@ -19,7 +19,7 @@ import com.ruoyi.project.monitor.online.domain.UserOnline;
 public class UserOnlineServiceImpl implements IUserOnlineService
 {
     @Autowired
-    private IUserOnlineDao userOnlineDao;
+    private UserOnlineMapper userOnlineDao;
 
     @Autowired
     private OnlineSessionDAO onlineSessionDAO;
@@ -118,7 +118,7 @@ public class UserOnlineServiceImpl implements IUserOnlineService
     @Override
     public List<UserOnline> selectOnlineByExpired(Date expiredDate)
     {
-        String lastAccessTime = DateUtils.dateTime("yyyy-MM-dd HH:mm:ss", expiredDate);
+        String lastAccessTime = DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, expiredDate);
         return userOnlineDao.selectOnlineByExpired(lastAccessTime);
     }
 }

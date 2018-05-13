@@ -18,6 +18,8 @@ public class RuoYiConfig
     private String version;
     /** 版权年份 */
     private String copyrightYear;
+    /** 上传路径 */
+    private static String profile;
 
     public String getName()
     {
@@ -47,6 +49,16 @@ public class RuoYiConfig
     public void setCopyrightYear(String copyrightYear)
     {
         this.copyrightYear = copyrightYear;
+    }
+
+    public static String getProfile()
+    {
+        return profile;
+    }
+
+    public static void setProfile(String profile)
+    {
+        RuoYiConfig.profile = profile;
     }
 
 }

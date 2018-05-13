@@ -11,7 +11,6 @@ import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.project.monitor.online.domain.OnlineSession;
 import com.ruoyi.project.monitor.online.domain.UserOnline;
-
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**
@@ -42,8 +41,7 @@ public class OnlineSessionFactory implements SessionFactory
             HttpServletRequest request = (HttpServletRequest) sessionContext.getServletRequest();
             if (request != null)
             {
-                UserAgent userAgent = UserAgent
-                        .parseUserAgentString(ServletUtils.getHttpServletRequest().getHeader("User-Agent"));
+                UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
                 // 获取客户端操作系统
                 String os = userAgent.getOperatingSystem().getName();
                 // 获取客户端浏览器

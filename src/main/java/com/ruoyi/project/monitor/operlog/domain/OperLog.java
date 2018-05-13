@@ -1,15 +1,16 @@
 package com.ruoyi.project.monitor.operlog.domain;
 
 import java.util.Date;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
  * 操作日志记录 oper_log
  * 
  * @author ruoyi
  */
-public class OperLog extends PageDomain
+public class OperLog extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** 日志主键 */
     private Integer operId;
     /** 模块标题 */

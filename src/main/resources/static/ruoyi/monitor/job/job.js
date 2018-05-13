@@ -41,7 +41,7 @@ $(function() {
             }
         },
         {
-            field: 'createTime',
+            field: 'createDateTimeStr',
             title: '创建时间'
         },
         {

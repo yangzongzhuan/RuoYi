@@ -7,7 +7,6 @@
 <link href="/ajax/libs/jquery-layout/jquery.layout-latest.css" th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
 <link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 <body class="white-bg">
-
 	<div class="ui-layout-west">
 	<div class="main-content">
 		<div class="box box-main">
@@ -38,7 +37,8 @@
                 <i class="glyphicon glyphicon-trash"></i>
             </button>
         </div>
-        
+        <input type="hidden" id="deptId">
+        <input type="hidden" id="parentId">
 		<table class="bootstrap-table" data-mobile-responsive="true" 
 			   data-sort-name="create_time" data-sort-order="desc">
 		</table>

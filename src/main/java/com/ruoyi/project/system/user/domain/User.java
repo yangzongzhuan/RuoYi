@@ -1,10 +1,8 @@
 package com.ruoyi.project.system.user.domain;
 
 import java.util.Arrays;
-
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.system.dept.domain.Dept;
 
 /**
@@ -12,8 +10,9 @@ import com.ruoyi.project.system.dept.domain.Dept;
  * 
  * @author ruoyi
  */
-public class User extends PageDomain
+public class User extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** 用户ID */
     private Long userId;
     /** 部门ID */
@@ -42,14 +41,6 @@ public class User extends PageDomain
     private int status;
     /** 拒绝登录描述 */
     private String refuseDes;
-    /** 创建者 */
-    private String createBy;
-    /** 创建时间 */
-    private String createTime;
-    /** 更新者 */
-    private String updateBy;
-    /** 更新时间 */
-    private String updateTime;
     /** 部门对象 */
     private Dept dept;
     /** 角色组 */
@@ -208,46 +199,6 @@ public class User extends PageDomain
         this.refuseDes = refuseDes;
     }
 
-    public String getCreateBy()
-    {
-        return createBy;
-    }
-
-    public void setCreateBy(String createBy)
-    {
-        this.createBy = createBy;
-    }
-
-    public String getCreateTime()
-    {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime)
-    {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateBy()
-    {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy)
-    {
-        this.updateBy = updateBy;
-    }
-
-    public String getUpdateTime()
-    {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime)
-    {
-        this.updateTime = updateTime;
-    }
-
     public Dept getDept()
     {
         return dept;
@@ -282,11 +233,10 @@ public class User extends PageDomain
     public String toString()
     {
         return "User [userId=" + userId + ", deptId=" + deptId + ", parentId=" + parentId + ", loginName=" + loginName
-                + ", userName=" + userName + ", email=" + email + ", phonenumber=" + phonenumber + ", password="
-                + password + ", salt=" + salt + ", userType=" + userType + ", status=" + status + ", refuseDes="
-                + refuseDes + ", createBy=" + createBy + ", createTime=" + createTime + ", updateBy=" + updateBy
-                + ", updateTime=" + updateTime + ", dept=" + dept + ", roleIds=" + Arrays.toString(roleIds)
-                + ", postIds=" + Arrays.toString(postIds) + "]";
+                + ", userName=" + userName + ", email=" + email + ", phonenumber=" + phonenumber + ", sex=" + sex
+                + ", avatar=" + avatar + ", password=" + password + ", salt=" + salt + ", userType=" + userType
+                + ", status=" + status + ", refuseDes=" + refuseDes + ", dept=" + dept + ", roleIds="
+                + Arrays.toString(roleIds) + ", postIds=" + Arrays.toString(postIds) + "]";
     }
 
 }

@@ -1,7 +1,7 @@
 package com.ruoyi.project.monitor.online.domain;
 
 import java.util.Date;
-import com.ruoyi.framework.web.page.PageDomain;
+import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.monitor.online.domain.OnlineSession.OnlineStatus;
 
 /**
@@ -9,8 +9,9 @@ import com.ruoyi.project.monitor.online.domain.OnlineSession.OnlineStatus;
  * 
  * @author ruoyi
  */
-public class UserOnline extends PageDomain
+public class UserOnline extends BaseEntity
 {
+    private static final long serialVersionUID = 1L;
     /** 用户会话id */
     private String sessionId;
 

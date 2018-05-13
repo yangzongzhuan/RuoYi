@@ -84,7 +84,7 @@ public class DeptController extends BaseController
     {
         if (deptService.saveDept(dept) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }
@@ -108,7 +108,7 @@ public class DeptController extends BaseController
         }
         if (deptService.deleteDeptById(deptId) > 0)
         {
-            return Message.ok();
+            return Message.success();
         }
         return Message.error();
     }

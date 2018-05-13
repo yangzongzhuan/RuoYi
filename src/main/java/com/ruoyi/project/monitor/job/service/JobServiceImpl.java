@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.project.monitor.job.dao.IJobDao;
 import com.ruoyi.project.monitor.job.domain.Job;
+import com.ruoyi.project.monitor.job.mapper.JobMapper;
 import com.ruoyi.project.monitor.job.util.ScheduleUtils;
 
 /**
@@ -25,7 +25,7 @@ public class JobServiceImpl implements IJobService
     private Scheduler scheduler;
 
     @Autowired
-    private IJobDao jobDao;
+    private JobMapper jobMapper;
 
     /**
      * 项目启动时，初始化定时器
@@ -33,7 +33,7 @@ public class JobServiceImpl implements IJobService
     @PostConstruct
     public void init()
     {
-        List<Job> jobList = jobDao.selectJobAll();
+        List<Job> jobList = jobMapper.selectJobAll();
         for (Job job : jobList)
         {
             CronTrigger cronTrigger = ScheduleUtils.getCronTrigger(scheduler, job.getJobId());
@@ -58,7 +58,7 @@ public class JobServiceImpl implements IJobService
     @Override
     public List<Job> selectJobList(Job job)
     {
-        return jobDao.selectJobList(job);
+        return jobMapper.selectJobList(job);
     }
 
     /**
@@ -70,7 +70,7 @@ public class JobServiceImpl implements IJobService
     @Override
     public Job selectJobById(Long jobId)
     {
-        return jobDao.selectJobById(jobId);
+        return jobMapper.selectJobById(jobId);
     }
 
     /**
@@ -83,7 +83,7 @@ public class JobServiceImpl implements IJobService
     {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
         job.setUpdateBy(ShiroUtils.getLoginName());
-        int rows = jobDao.updateJob(job);
+        int rows = jobMapper.updateJob(job);
         if (rows > 0)
         {
             ScheduleUtils.pauseJob(scheduler, job.getJobId());
@@ -101,7 +101,7 @@ public class JobServiceImpl implements IJobService
     {
         job.setStatus(ScheduleConstants.Status.NORMAL.getValue());
         job.setUpdateBy(ShiroUtils.getLoginName());
-        int rows = jobDao.updateJob(job);
+        int rows = jobMapper.updateJob(job);
         if (rows > 0)
         {
             ScheduleUtils.resumeJob(scheduler, job.getJobId());
@@ -117,7 +117,7 @@ public class JobServiceImpl implements IJobService
     @Override
     public int deleteJob(Job job)
     {
-        int rows = jobDao.deleteJobById(job);
+        int rows = jobMapper.deleteJobById(job);
         if (rows > 0)
         {
             ScheduleUtils.deleteScheduleJob(scheduler, job.getJobId());
@@ -136,7 +136,7 @@ public class JobServiceImpl implements IJobService
     {
         for (Long jobId : ids)
         {
-            Job job = jobDao.selectJobById(jobId);
+            Job job = jobMapper.selectJobById(jobId);
             deleteJob(job);
         }
     }
@@ -170,7 +170,7 @@ public class JobServiceImpl implements IJobService
     @Override
     public int triggerJob(Job job)
     {
-        int rows = jobDao.updateJob(job);
+        int rows = jobMapper.updateJob(job);
         if (rows > 0)
         {
             ScheduleUtils.run(scheduler, job);
@@ -188,7 +188,7 @@ public class JobServiceImpl implements IJobService
     {
         job.setCreateBy(ShiroUtils.getLoginName());
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
-        int rows = jobDao.insertJob(job);
+        int rows = jobMapper.insertJob(job);
         if (rows > 0)
         {
             ScheduleUtils.createScheduleJob(scheduler, job);
@@ -204,7 +204,7 @@ public class JobServiceImpl implements IJobService
     @Override
     public int updateJobCron(Job job)
     {
-        int rows = jobDao.updateJob(job);
+        int rows = jobMapper.updateJob(job);
         if (rows > 0)
         {
             ScheduleUtils.updateScheduleJob(scheduler, job);

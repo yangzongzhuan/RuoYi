@@ -11,16 +11,4 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<setting name="logImpl"             value="SLF4J" /> <!-- 指定 MyBatis 所用日志的具体实现 -->
 	</settings>
 	
-	<typeAliases>
-		<!-- 分页 -->
-		<typeAlias type="com.ruoyi.framework.web.page.PageUtilEntity" alias="PageUtilEntity"/>
-	</typeAliases>
-	
-	<plugins>
-		<plugin interceptor="com.ruoyi.framework.mybatis.ExecutorPageMethodInterceptor">
-			<property name="dialect" value="mysql" />
-			<property name="pageSqlId" value=".*pageInfoQuery.*" />
-		</plugin>
-	</plugins>
-	
 </configuration>
