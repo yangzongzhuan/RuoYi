@@ -34,7 +34,7 @@ public class ${className}Controller extends BaseController
 	
 	@GetMapping()
 	@RequiresPermissions("${moduleName}:${classname}:view")
-	String ${classname}()
+	public String ${classname}()
 	{
 	    return prefix + "/${classname}";
 	}

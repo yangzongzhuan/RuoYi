@@ -142,7 +142,7 @@ public class GenUtils
 
         if (template.contains("Mapper.java.vm"))
         {
-            return javaPath + "mapper" + "/" + "I" + className + "Mapper.java";
+            return javaPath + "mapper" + "/" + className + "Mapper.java";
         }
 
         if (template.contains("Service.java.vm"))

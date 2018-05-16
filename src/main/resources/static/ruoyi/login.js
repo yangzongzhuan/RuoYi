@@ -17,7 +17,7 @@ $.validator.setDefaults({
 function login() {
 	var username = $("input[name='username']").val().trim();
     var password = $("input[name='password']").val().trim();
-    var validateCode = $("input[name='validateCode']").val().trim();
+    var validateCode = $("input[name='validateCode']").val();
     var rememberMe = $("input[name='rememberme']").is(':checked');
     $.ajax({
         type: "POST",

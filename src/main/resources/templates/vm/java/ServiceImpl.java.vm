@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.StringUtils;
-import ${package}.mapper.I${className}Mapper;
+import ${package}.mapper.${className}Mapper;
 import ${package}.domain.${className};
 import ${package}.service.I${className}Service;
 
@@ -18,7 +18,7 @@ import ${package}.service.I${className}Service;
 public class ${className}ServiceImpl implements I${className}Service 
 {
 	@Autowired
-	private I${className}Mapper ${classname}Mapper;
+	private ${className}Mapper ${classname}Mapper;
 	
 	/**
      * 查询${tableComment}信息

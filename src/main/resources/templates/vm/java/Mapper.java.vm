@@ -9,7 +9,7 @@ import java.util.List;
  * @author ${author}
  * @date ${datetime}
  */
-public interface I${className}Mapper 
+public interface ${className}Mapper 
 {
 
 	/**
