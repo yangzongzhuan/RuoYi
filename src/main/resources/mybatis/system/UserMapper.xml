@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select user_id, dept_id, login_name, user_name, email, phonenumber, password, sex, avatar, salt, user_type, status, refuse_des, create_by, create_time from sys_user
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND login_name = #{searchValue}
+				AND login_name like concat(concat('%', #{searchValue}), '%')
 			</if>
 			<if test="deptId != null and parentId != null and parentId != 0">
 				AND dept_id IN (SELECT dept_id FROM sys_dept WHERE dept_id = #{deptId} OR parent_id = #{deptId})

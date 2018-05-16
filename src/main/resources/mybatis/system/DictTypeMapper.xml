@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select dict_id, dict_name, dict_type, status, create_by, create_time, remark  from sys_dict_type
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND dict_name = #{searchValue} OR dict_type = #{searchValue}
+				AND dict_name like concat(concat('%', #{searchValue}), '%') OR dict_type like concat(concat('%', #{searchValue}), '%')
 			</if>
 		</where>
 	</select>

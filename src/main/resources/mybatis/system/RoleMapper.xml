@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select role_id, role_name, role_key, role_sort, status, create_time, remark from sys_role
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND role_name = #{searchValue} OR role_key = #{searchValue}
+				AND role_name like concat(concat('%', #{searchValue}), '%') OR role_key like concat(concat('%', #{searchValue}), '%')
 			</if>
 		</where>
 	</select>

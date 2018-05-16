@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select dict_code, dict_sort, dict_label, dict_value, dict_type, status, create_by, create_time, remark from sys_dict_data
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND dict_label = #{searchValue}
+				AND dict_label like concat(concat('%', #{searchValue}), '%')
 			</if>
 			<if test="dictType != null and dictType != ''">
 				AND dict_type = #{dictType}

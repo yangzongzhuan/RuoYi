@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from information_schema.tables
 		where table_comment <![CDATA[ <> ]]> '' and table_schema = (select database())
 		<if test="searchValue != null and searchValue != ''">
-			AND table_name = #{searchValue}
+			AND table_name like concat(concat('%', #{searchValue}), '%');
 		</if>
 	</select>
 	
