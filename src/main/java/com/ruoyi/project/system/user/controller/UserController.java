@@ -171,16 +171,46 @@ public class UserController extends BaseController
     /**
      * 校验用户名
      */
-    @PostMapping("/checkUserNameUnique")
+    @PostMapping("/checkLoginNameUnique")
     @ResponseBody
-    public String checkUserNameUnique(User user)
+    public String checkLoginNameUnique(User user)
     {
         String uniqueFlag = "0";
         if (user != null)
         {
-            uniqueFlag = userService.checkUserNameUnique(user.getLoginName());
+            uniqueFlag = userService.checkLoginNameUnique(user.getLoginName());
         }
         return uniqueFlag;
     }
 
+
+    /**
+     * 校验手机号码
+     */
+    @PostMapping("/checkPhoneUnique")
+    @ResponseBody
+    public String checkPhoneUnique(User user)
+    {
+        String uniqueFlag = "0";
+        if (user != null)
+        {
+            uniqueFlag = userService.checkPhoneUnique(user);
+        }
+        return uniqueFlag;
+    }
+
+    /**
+     * 校验手机号码
+     */
+    @PostMapping("/checkEmailUnique")
+    @ResponseBody
+    public String checkEmailUnique(User user)
+    {
+        String uniqueFlag = "0";
+        if (user != null)
+        {
+            uniqueFlag = userService.checkEmailUnique(user);
+        }
+        return uniqueFlag;
+    }
 }

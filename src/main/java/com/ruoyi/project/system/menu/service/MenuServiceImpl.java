@@ -267,9 +267,9 @@ public class MenuServiceImpl implements IMenuService
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getMenuId())
                 && info.getMenuId().longValue() != menuId.longValue())
         {
-            return UserConstants.NAME_NOT_UNIQUE;
+            return UserConstants.MENU_NAME_NOT_UNIQUE;
         }
-        return UserConstants.NAME_UNIQUE;
+        return UserConstants.MENU_NAME_UNIQUE;
     }
 
 }

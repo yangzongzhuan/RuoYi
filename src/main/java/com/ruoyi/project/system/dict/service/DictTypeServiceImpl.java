@@ -107,8 +107,8 @@ public class DictTypeServiceImpl implements IDictTypeService
         DictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
         if (StringUtils.isNotNull(dictType) && dictType.getDictId() != dictId)
         {
-            return UserConstants.NAME_NOT_UNIQUE;
+            return UserConstants.DICT_TYPE_NOT_UNIQUE;
         }
-        return UserConstants.NAME_UNIQUE;
+        return UserConstants.DICT_TYPE_UNIQUE;
     }
 }

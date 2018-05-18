@@ -205,9 +205,9 @@ public class RoleServiceImpl implements IRoleService
         Role info = roleMapper.checkRoleNameUnique(role.getRoleName());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getRoleId()) && info.getRoleId() != roleId)
         {
-            return UserConstants.NAME_NOT_UNIQUE;
+            return UserConstants.ROLE_NAME_NOT_UNIQUE;
         }
-        return UserConstants.NAME_UNIQUE;
+        return UserConstants.ROLE_NAME_UNIQUE;
     }
 
     /**

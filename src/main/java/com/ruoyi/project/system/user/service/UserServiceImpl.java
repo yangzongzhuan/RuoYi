@@ -66,9 +66,33 @@ public class UserServiceImpl implements IUserService
      * @return 用户对象信息
      */
     @Override
-    public User selectUserByName(String userName)
+    public User selectUserByLoginName(String userName)
     {
-        return userMapper.selectUserByName(userName);
+        return userMapper.selectUserByLoginName(userName);
+    }
+
+    /**
+     * 通过手机号码查询用户
+     * 
+     * @param userName 用户名
+     * @return 用户对象信息
+     */
+    @Override
+    public User selectUserByPhoneNumber(String phoneNumber)
+    {
+        return userMapper.selectUserByPhoneNumber(phoneNumber);
+    }
+
+    /**
+     * 通过邮箱查询用户
+     * 
+     * @param email 邮箱
+     * @return 用户对象信息
+     */
+    @Override
+    public User selectUserByEmail(String email)
+    {
+        return userMapper.selectUserByEmail(email);
     }
 
     /**
@@ -227,18 +251,56 @@ public class UserServiceImpl implements IUserService
     /**
      * 校验用户名称是否唯一
      * 
-     * @param userName 用户名
+     * @param loginName 用户名
      * @return
      */
     @Override
-    public String checkUserNameUnique(String loginName)
+    public String checkLoginNameUnique(String loginName)
     {
-        int count = userMapper.checkUserNameUnique(loginName);
+        int count = userMapper.checkLoginNameUnique(loginName);
         if (count > 0)
         {
-            return UserConstants.NAME_NOT_UNIQUE;
+            return UserConstants.USER_NAME_NOT_UNIQUE;
         }
-        return UserConstants.NAME_UNIQUE;
+        return UserConstants.USER_NAME_UNIQUE;
+    }
+
+    /**
+     * 校验用户名称是否唯一
+     *
+     * @param phonenumber 用户名
+     * @return
+     */
+    @Override
+    public String checkPhoneUnique(User user)
+    {
+        Long userId = user.getUserId();
+        User info = userMapper.checkPhoneUnique(user.getPhonenumber());
+        if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getUserId())
+                && info.getUserId().longValue() != userId.longValue())
+        {
+            return UserConstants.USER_PHONE_NOT_UNIQUE;
+        }
+        return UserConstants.USER_PHONE_UNIQUE;
+    }
+
+    /**
+     * 校验email是否唯一
+     *
+     * @param email 用户名
+     * @return
+     */
+    @Override
+    public String checkEmailUnique(User user)
+    {
+        Long userId = user.getUserId();
+        User info = userMapper.checkEmailUnique(user.getEmail());
+        if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getUserId())
+                && info.getUserId().longValue() != userId.longValue())
+        {
+            return UserConstants.USER_EMAIL_NOT_UNIQUE;
+        }
+        return UserConstants.USER_EMAIL_UNIQUE;
     }
 
     /**

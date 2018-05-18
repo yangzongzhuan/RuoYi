@@ -145,8 +145,8 @@ public class DeptServiceImpl implements IDeptService
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getDeptId())
                 && info.getDeptId().longValue() != deptId.longValue())
         {
-            return UserConstants.NAME_NOT_UNIQUE;
+            return UserConstants.DEPT_NAME_NOT_UNIQUE;
         }
-        return UserConstants.NAME_UNIQUE;
+        return UserConstants.DEPT_NAME_UNIQUE;
     }
 }

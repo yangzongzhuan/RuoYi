@@ -64,8 +64,18 @@ public class LoginService
         }
 
         // 查询用户信息
-        User user = userService.selectUserByName(username);
+        User user = userService.selectUserByLoginName(username);
 
+        if (user == null && maybeMobilePhoneNumber(username))
+        {
+            user = userService.selectUserByPhoneNumber(username);
+        }
+        
+        if (user == null && maybeEmail(username))
+        {
+            user = userService.selectUserByEmail(username);
+        }
+        
         if (user == null)
         {
             SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.not.exists"));
@@ -79,9 +89,27 @@ public class LoginService
             SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRefuseDes()));
             throw new UserBlockedException(user.getRefuseDes());
         }
-        
+
         SystemLogUtils.log(username, CommonConstant.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         return user;
+    }
+
+    private boolean maybeEmail(String username)
+    {
+        if (!username.matches(UserConstants.EMAIL_PATTERN))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean maybeMobilePhoneNumber(String username)
+    {
+        if (!username.matches(UserConstants.MOBILE_PHONE_NUMBER_PATTERN))
+        {
+            return false;
+        }
+        return true;
     }
 
 }
