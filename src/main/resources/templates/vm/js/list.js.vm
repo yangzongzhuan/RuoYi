@@ -4,12 +4,12 @@ $(function() {
 	var columns = [{
             checkbox: true
         },
-		#foreach($column in $columns)
+#foreach($column in $columns)
 		{
 			field : '${column.attrname}', 
 			title : '${column.columnComment}' 
 		},
-		#end
+#end
         {
             title: '操作',
             align: 'center',

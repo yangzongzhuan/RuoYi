@@ -29,6 +29,7 @@ $("#form-user-edit").validate({
 		},
 		phonenumber:{
 			required:true,
+			isPhone:true,
             remote: {
                 url: ctx + "system/user/checkPhoneUnique",
                 type: "post",

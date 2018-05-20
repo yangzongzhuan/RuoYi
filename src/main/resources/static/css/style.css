@@ -6622,7 +6622,7 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 
 .blue-skin {
     font-weight: 600;
-    background: url("patterns/header-profile-skin-1.png") repeat scroll 0 0;
+    background: url("patterns/header-profile-skin-blue.png") repeat scroll 0 0;
 }
 
 .blue-skin:hover {
@@ -6631,7 +6631,7 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 
 .yellow-skin {
     font-weight: 600;
-    background: url("patterns/header-profile-skin-3.png") repeat scroll 0  100%;
+    background: url("patterns/header-profile-skin-yellow.png") repeat scroll 0  100%;
 }
 
 .yellow-skin:hover {
@@ -6661,295 +6661,295 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 }
 /*
  *
- *   SKIN 1 - H+ - 后台主题UI框架
- *   NAME - Blue light
+ *   SKIN blue 若依管理系统
+ *   NAME - blue/purple
  *
 */
-.skin-1 .minimalize-styl-2 {
+.skin-blue .minimalize-styl-2 {
     margin: 14px 5px 5px 30px;
 }
 
-.skin-1 .navbar-top-links li:last-child {
+.skin-blue .navbar-top-links li:last-child {
     margin-right: 30px;
 }
 
-.skin-1.fixed-nav .minimalize-styl-2 {
+.skin-blue.fixed-nav .minimalize-styl-2 {
     margin: 14px 5px 5px 15px;
 }
 
-.skin-1 .spin-icon {
+.skin-blue .spin-icon {
     background: #0e9aef !important;
 }
 
-.skin-1 .nav-header {
+.skin-blue .nav-header {
     background: #0e9aef;
-    background: url('patterns/header-profile-skin-1.png');
+    background: url('patterns/header-profile-skin-blue.png');
 }
 
-.skin-1.mini-navbar .nav-second-level {
+.skin-blue.mini-navbar .nav-second-level {
     background: #3e495f;
 }
 
-.skin-1 .breadcrumb {
+.skin-blue .breadcrumb {
     background: transparent;
 }
 
-.skin-1 .page-heading {
+.skin-blue .page-heading {
     border: none;
 }
 
-.skin-1 .nav>li.active {
+.skin-blue .nav>li.active {
     background: #3a4459;
 }
 
-.skin-1 .nav>li>a {
+.skin-blue .nav>li>a {
     color: #9ea6b9;
 }
 
-.skin-1 .nav>li.active>a {
+.skin-blue .nav>li.active>a {
     color: #fff;
 }
 
-.skin-1 .navbar-minimalize {
+.skin-blue .navbar-minimalize {
     background: #0e9aef;
     border-color: #0e9aef;
 }
 
-body.skin-1 {
+body.skin-blue {
     background: #3e495f;
 }
 
-.skin-1 .navbar-static-top {
+.skin-blue .navbar-static-top {
     background: #ffffff;
 }
 
-.skin-1 .dashboard-header {
+.skin-blue .dashboard-header {
     background: transparent;
     border-bottom: none !important;
     border-top: none;
     padding: 20px 30px 10px 30px;
 }
 
-.fixed-nav.skin-1 .navbar-fixed-top {
+.fixed-nav.skin-blue .navbar-fixed-top {
     background: #fff;
 }
 
-.skin-1 .wrapper-content {
+.skin-blue .wrapper-content {
     padding: 30px 15px;
 }
 
-.skin-1 #page-wrapper {
+.skin-blue #page-wrapper {
     background: #f4f6fa;
 }
 
-.skin-1 .ibox-title, .skin-1 .ibox-content {
+.skin-blue .ibox-title, .skin-blue .ibox-content {
     border-width: 1px;
 }
 
-.skin-1 .ibox-content:last-child {
+.skin-blue .ibox-content:last-child {
     border-style: solid solid solid solid;
 }
 
-.skin-1 .nav>li.active {
+.skin-blue .nav>li.active {
     border: none;
 }
 
-.skin-1 .nav-header {
+.skin-blue .nav-header {
     padding: 35px 25px 25px 25px;
 }
 
-.skin-1 .nav-header a.dropdown-toggle {
+.skin-blue .nav-header a.dropdown-toggle {
     color: #fff;
     margin-top: 10px;
 }
 
-.skin-1 .nav-header a.dropdown-toggle .text-muted {
+.skin-blue .nav-header a.dropdown-toggle .text-muted {
     color: #fff;
     opacity: 0.8;
 }
 
-.skin-1 .profile-element {
+.skin-blue .profile-element {
     text-align: center;
 }
 
-.skin-1 .img-circle {
+.skin-blue .img-circle {
     border-radius: 5px;
 }
 
-.skin-1 .navbar-default .nav>li>a:hover, .skin-1 .navbar-default .nav>li>a:focus {
+.skin-blue .navbar-default .nav>li>a:hover, .skin-blue .navbar-default .nav>li>a:focus {
     background: #39aef5;
     color: #fff;
 }
 
-.skin-1 .nav.nav-tabs>li.active>a {
+.skin-blue .nav.nav-tabs>li.active>a {
     color: #555;
 }
 
-.skin-1 .content-tabs {
+.skin-blue .content-tabs {
     border-bottom: solid 2px #39aef5;
 }
 
-.skin-1 .nav.nav-tabs>li.active {
+.skin-blue .nav.nav-tabs>li.active {
     background: transparent;
 }
 
-.skin-1 .page-tabs a.active {
+.skin-blue .page-tabs a.active {
     background: #39aef5;
     color: #fff;
 }
 
-.skin-1 .page-tabs a.active:hover, .skin-1 .page-tabs a.active i:hover {
+.skin-blue .page-tabs a.active:hover, .skin-blue .page-tabs a.active i:hover {
     background: #0e9aef;
     color: #fff;
 }
 /*
  *
- *   SKIN 3 - H+ - 后台主题UI框架
+ *   SKIN Yellow 若依管理系统
  *   NAME - Yellow/purple
  *
 */
-.skin-3 .minimalize-styl-2 {
+.skin-yellow .minimalize-styl-2 {
     margin: 14px 5px 5px 30px;
 }
 
-.skin-3 .navbar-top-links li:last-child {
+.skin-yellow .navbar-top-links li:last-child {
     margin-right: 30px;
 }
 
-.skin-3.fixed-nav .minimalize-styl-2 {
+.skin-yellow.fixed-nav .minimalize-styl-2 {
     margin: 14px 5px 5px 15px;
 }
 
-.skin-3 .spin-icon {
+.skin-yellow .spin-icon {
     background: #ecba52 !important;
 }
 
-body.boxed-layout.skin-3 #wrapper {
+body.boxed-layout.skin-yellow #wrapper {
     background: #3e2c42;
 }
 
-.skin-3 .nav-header {
+.skin-yellow .nav-header {
     background: #ecba52;
-    background: url('patterns/header-profile-skin-3.png');
+    background: url('patterns/header-profile-skin-yellow.png');
 }
 
-.skin-3.mini-navbar .nav-second-level {
+.skin-yellow.mini-navbar .nav-second-level {
     background: #3e2c42;
 }
 
-.skin-3 .breadcrumb {
+.skin-yellow .breadcrumb {
     background: transparent;
 }
 
-.skin-3 .page-heading {
+.skin-yellow .page-heading {
     border: none;
 }
 
-.skin-3 .nav>li.active {
+.skin-yellow .nav>li.active {
     background: #38283c;
 }
 
-.fixed-nav.skin-3 .navbar-fixed-top {
+.fixed-nav.skin-yellow .navbar-fixed-top {
     background: #fff;
 }
 
-.skin-3 .nav>li>a {
+.skin-yellow .nav>li>a {
     color: #948b96;
 }
 
-.skin-3 .nav>li.active>a {
+.skin-yellow .nav>li.active>a {
     color: #fff;
 }
 
-.skin-3 .navbar-minimalize {
+.skin-yellow .navbar-minimalize {
     background: #ecba52;
     border-color: #ecba52;
 }
 
-body.skin-3 {
+body.skin-yellow {
     background: #3e2c42;
 }
 
-.skin-3 .navbar-static-top {
+.skin-yellow .navbar-static-top {
     background: #ffffff;
 }
 
-.skin-3 .dashboard-header {
+.skin-yellow .dashboard-header {
     background: transparent;
     border-bottom: none !important;
     border-top: none;
     padding: 20px 30px 10px 30px;
 }
 
-.skin-3 .wrapper-content {
+.skin-yellow .wrapper-content {
     padding: 30px 15px;
 }
 
-.skin-3 #page-wrapper {
+.skin-yellow #page-wrapper {
     background: #f4f6fa;
 }
 
-.skin-3 .ibox-title, .skin-3 .ibox-content {
+.skin-yellow .ibox-title, .skin-yellow .ibox-content {
     border-width: 1px;
 }
 
-.skin-3 .ibox-content:last-child {
+.skin-yellow .ibox-content:last-child {
     border-style: solid solid solid solid;
 }
 
-.skin-3 .nav>li.active {
+.skin-yellow .nav>li.active {
     border: none;
 }
 
-.skin-3 .nav-header {
+.skin-yellow .nav-header {
     padding: 35px 25px 25px 25px;
 }
 
-.skin-3 .nav-header a.dropdown-toggle {
+.skin-yellow .nav-header a.dropdown-toggle {
     color: #fff;
     margin-top: 10px;
 }
 
-.skin-3 .nav-header a.dropdown-toggle .text-muted {
+.skin-yellow .nav-header a.dropdown-toggle .text-muted {
     color: #fff;
     opacity: 0.8;
 }
 
-.skin-3 .profile-element {
+.skin-yellow .profile-element {
     text-align: center;
 }
 
-.skin-3 .img-circle {
+.skin-yellow .img-circle {
     border-radius: 5px;
 }
 
-.skin-3 .navbar-default .nav>li>a:hover, .skin-3 .navbar-default .nav>li>a:focus {
+.skin-yellow .navbar-default .nav>li>a:hover, .skin-yellow .navbar-default .nav>li>a:focus {
     background: #38283c;
     color: #fff;
 }
 
-.skin-3 .nav.nav-tabs>li.active>a {
+.skin-yellow .nav.nav-tabs>li.active>a {
     color: #555;
 }
 
-.skin-3 .nav.nav-tabs>li.active {
+.skin-yellow .nav.nav-tabs>li.active {
     background: transparent;
 }
 
-.skin-3 .content-tabs {
+.skin-yellow .content-tabs {
     border-bottom: solid 2px #3e2c42;
 }
 
-.skin-3 .nav.nav-tabs>li.active {
+.skin-yellow .nav.nav-tabs>li.active {
     background: transparent;
 }
 
-.skin-3 .page-tabs a.active {
+.skin-yellow .page-tabs a.active {
     background: #3e2c42;
     color: #fff;
 }
 
-.skin-3 .page-tabs a.active:hover, .skin-3 .page-tabs a.active i:hover {
+.skin-yellow .page-tabs a.active:hover, .skin-yellow .page-tabs a.active i:hover {
     background: #38283c;
     color: #fff;
 }

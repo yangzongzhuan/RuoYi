@@ -5,7 +5,7 @@
 
 	<groupId>com.ruoyi</groupId>
 	<artifactId>RuoYi</artifactId>
-	<version>1.1.3</version>
+	<version>1.1.4</version>
 	<packaging>jar</packaging>
 
 	<name>RuoYi</name>
@@ -25,16 +25,19 @@
 		<shiro.version>1.3.2</shiro.version>
 		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
     	<thymeleaf-layout-dialect.version>2.0.1</thymeleaf-layout-dialect.version>
-		<thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
-		<mybatis-spring-boot-starter.version>1.1.1</mybatis-spring-boot-starter.version>
+		<thymeleaf.extras.shiro.version>2.0.0</thymeleaf.extras.shiro.version>
+		<mybatis.spring.boot.starter.version>1.1.1</mybatis.spring.boot.starter.version>
+		<pagehelper.spring.boot.starter.version>1.2.3</pagehelper.spring.boot.starter.version>
 		<fastjson.version>1.2.31</fastjson.version>
 		<druid.version>1.0.28</druid.version>		
-		<commons.lang3.version>3.6</commons.lang3.version>			
+		<commons.lang3.version>3.6</commons.lang3.version>
+		<commons.io.version>2.5</commons.io.version>
+		<commons.fileupload.version>1.3.3</commons.fileupload.version>
 		<bitwalker.version>1.19</bitwalker.version>
 		<lombok.version>1.16.18</lombok.version>
-		<mybatisplus-spring-boot-starter.version>1.0.4</mybatisplus-spring-boot-starter.version>
 		<velocity.version>1.7</velocity.version>
 		<quartz.version>2.3.0</quartz.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
 	</properties>
 
 	<dependencies>
@@ -94,14 +97,14 @@
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>${mybatis-spring-boot-starter.version}</version>
+			<version>${mybatis.spring.boot.starter.version}</version>
 		</dependency>
 		
 		<!-- pagehelper 分页插件 -->
 		<dependency>
 		    <groupId>com.github.pagehelper</groupId>
 		    <artifactId>pagehelper-spring-boot-starter</artifactId>
-		    <version>1.2.3</version>
+		    <version>${pagehelper.spring.boot.starter.version}</version>
 		</dependency>
 		
 		<!--阿里数据库连接池 -->
@@ -122,14 +125,14 @@
 		<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>${commons.io.version}</version>
         </dependency>
 		
 		<!--文件上传工具类 -->
 		<dependency>
 		   <groupId>commons-fileupload</groupId>
 		   <artifactId>commons-fileupload</artifactId>
-		   <version>1.3.3</version>
+		   <version>${commons.fileupload.version}</version>
 		</dependency>
 					
 		<!--Shiro核心框架 -->
@@ -157,7 +160,7 @@
 		<dependency>
 			<groupId>com.github.theborakompanioni</groupId>
 			<artifactId>thymeleaf-extras-shiro</artifactId>
-			<version>${thymeleaf-extras-shiro.version}</version>
+			<version>${thymeleaf.extras.shiro.version}</version>
 		</dependency>
 		
 		<!-- 阿里JSON解析器 -->
@@ -204,7 +207,7 @@
 		<dependency>
 			<groupId>com.github.penggle</groupId>
 			<artifactId>kaptcha</artifactId>
-			<version>2.3.2</version>
+			<version>${kaptcha.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>javax.servlet-api</artifactId>

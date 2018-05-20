@@ -165,6 +165,7 @@ public class RoleServiceImpl implements IRoleService
             // 新增角色信息
             roleMapper.insertRole(role);
         }
+        ShiroUtils.clearCachedAuthorizationInfo();
         return insertRoleMenu(role);
     }
 
@@ -201,6 +202,10 @@ public class RoleServiceImpl implements IRoleService
     @Override
     public String checkRoleNameUnique(Role role)
     {
+        if (role.getRoleId() == null)
+        {
+            role.setRoleId(-1L);
+        }
         Long roleId = role.getRoleId();
         Role info = roleMapper.checkRoleNameUnique(role.getRoleName());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getRoleId()) && info.getRoleId() != roleId)

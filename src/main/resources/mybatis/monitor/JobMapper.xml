@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="selectJobList" parameterType="Job" resultMap="JobResult">
-		select job_id, job_name, job_group, method_name, params, cron_expression, status, create_by, create_time remark from sys_job
+		select job_id, job_name, job_group, method_name, params, cron_expression, status, create_by, create_time, remark from sys_job
 		<where>
 			<if test="searchValue != null and searchValue != ''">
 				AND job_name like concat(concat('%', #{searchValue}), '%') OR method_name like concat(concat('%', #{searchValue}), '%')

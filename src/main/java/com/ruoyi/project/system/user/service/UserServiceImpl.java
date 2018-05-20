@@ -274,6 +274,10 @@ public class UserServiceImpl implements IUserService
     @Override
     public String checkPhoneUnique(User user)
     {
+        if (user.getUserId() == null)
+        {
+            user.setUserId(-1L);
+        }
         Long userId = user.getUserId();
         User info = userMapper.checkPhoneUnique(user.getPhonenumber());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getUserId())
@@ -293,6 +297,10 @@ public class UserServiceImpl implements IUserService
     @Override
     public String checkEmailUnique(User user)
     {
+        if (user.getUserId() == null)
+        {
+            user.setUserId(-1L);
+        }
         Long userId = user.getUserId();
         User info = userMapper.checkEmailUnique(user.getEmail());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getUserId())

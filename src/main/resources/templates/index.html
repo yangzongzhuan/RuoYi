@@ -20,7 +20,7 @@
         .nav > li:hover .dropdown-menu {display: block;}
     </style>
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden" th:classappend="${@configService.selectConfigByKey('sys.index.skinName')}">
 <div id="wrapper">
 
     <!--左侧导航开始-->
@@ -96,7 +96,7 @@
             </button>
             <nav class="page-tabs menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active menuTab">首页</a>
+                    <a href="javascript:;" class="active menuTab" data-id="/system/main">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right tabRight">
@@ -107,14 +107,15 @@
                     	页签操作<span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                    <li class="tabCloseAll"><a>全部关闭</a></li>
-                    <li class="tabCloseOther"><a>关闭其他</a></li>
+                     <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
+                     <li><a class="tabCloseOther" href="javascript:void();">关闭其他</a></li>
+					 <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
                 </ul>
             </div>
             <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
         <div class="row mainContent" id="content-main">
-            <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%"
+            <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
                     th:src="@{/system/main}" frameborder="0" seamless></iframe>
         </div>
         <div class="footer">

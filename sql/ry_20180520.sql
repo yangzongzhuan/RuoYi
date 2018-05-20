@@ -12,9 +12,9 @@ create table sys_dept (
   email             varchar(20)     default ''                 comment '邮箱',
   status 			int(1) 			default 0 				   comment '部门状态:0正常,1停用',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 	    timestamp                                  comment '创建时间',
+  create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
-  update_time       timestamp                                  comment '更新时间',
+  update_time       datetime                                   comment '更新时间',
   primary key (dept_id)
 ) engine=innodb auto_increment=200 default charset=utf8 comment = '部门表';
 
@@ -52,9 +52,9 @@ create table sys_user (
   status 			int(1) 			default 0 				   comment '帐号状态:0正常,1禁用',
   refuse_des 		varchar(500) 	default '' 				   comment '拒绝登录描述',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 	    timestamp                                  comment '创建时间',
+  create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
-  update_time       timestamp                                  comment '更新时间',
+  update_time       datetime                                   comment '更新时间',
   primary key (user_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '用户信息表';
 
@@ -76,9 +76,9 @@ create table sys_post
 	post_sort     int(4)          not null                   comment '显示顺序',
 	status        int(1)          not null                   comment '状态（0正常 1停用）',
     create_by     varchar(64)     default ''                 comment '创建者',
-    create_time   timestamp                                  comment '创建时间',
+    create_time   datetime                                   comment '创建时间',
     update_by     varchar(64) 	  default ''			     comment '更新者',
-	update_time   timestamp                                  comment '更新时间',
+	update_time   datetime                                   comment '更新时间',
     remark 		  varchar(500) 	  default '' 				 comment '备注',
 	primary key (post_id)
 ) engine=innodb default charset=utf8 comment = '岗位信息表';
@@ -103,9 +103,9 @@ create table sys_role (
   role_sort         int(10)         not null                   comment '显示顺序',
   status 			int(1) 			default 0 				   comment '角色状态:0正常,1禁用',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 		timestamp                                  comment '创建时间',
+  create_time 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
-  update_time 		timestamp                                  comment '更新时间',
+  update_time 		datetime                                   comment '更新时间',
   remark 			varchar(500) 	default '' 				   comment '备注',
   primary key (role_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '角色信息表';
@@ -132,9 +132,9 @@ create table sys_menu (
   perms 			varchar(100) 	default '' 				   comment '权限标识',
   icon 				varchar(100) 	default '' 				   comment '菜单图标',
   create_by         varchar(64)     default ''                 comment '创建者',
-  create_time 		timestamp                                  comment '创建时间',
+  create_time 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
-  update_time 		timestamp                                  comment '更新时间',
+  update_time 		datetime                                   comment '更新时间',
   remark 			varchar(500) 	default '' 				   comment '备注',
   primary key (menu_id)
 ) engine=innodb auto_increment=1000 default charset=utf8 comment = '菜单权限表';
@@ -202,28 +202,35 @@ insert into sys_menu values('49', '字典修改', '9', '3', '#',  'F', '0', 'sys
 insert into sys_menu values('50', '字典删除', '9', '4', '#',  'F', '0', 'system:dict:remove',       '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 insert into sys_menu values('51', '字典保存', '9', '5', '#',  'F', '0', 'system:dict:save',         '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 insert into sys_menu values('52', '批量删除', '9', '6', '#',  'F', '0', 'system:dict:batchRemove',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+-- 参数设置按钮
+insert into sys_menu values('53', '参数查询', '10', '1', '#',  'F', '0', 'system:config:list',              '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('54', '参数新增', '10', '2', '#',  'F', '0', 'system:config:add',               '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('55', '参数修改', '10', '3', '#',  'F', '0', 'system:config:edit',              '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('56', '参数删除', '10', '4', '#',  'F', '0', 'system:config:remove',            '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('57', '参数保存', '10', '5', '#',  'F', '0', 'system:config:save',              '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('58', '批量删除', '10', '6', '#',  'F', '0', 'system:config:batchRemove',       '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 -- 操作日志按钮
-insert into sys_menu values('53', '操作查询', '11', '1', '#',  'F', '0', 'monitor:operlog:list',            '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('54', '批量删除', '11', '2', '#',  'F', '0', 'monitor:operlog:batchRemove',     '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('55', '详细信息', '11', '3', '#',  'F', '0', 'monitor:operlog:detail',          '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('59', '操作查询', '11', '1', '#',  'F', '0', 'monitor:operlog:list',            '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('60', '批量删除', '11', '2', '#',  'F', '0', 'monitor:operlog:batchRemove',     '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('61', '详细信息', '11', '3', '#',  'F', '0', 'monitor:operlog:detail',          '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 -- 登录日志按钮
-insert into sys_menu values('56', '登录查询', '12', '1', '#',  'F', '0', 'monitor:logininfor:list',         '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('57', '批量删除', '12', '2', '#',  'F', '0', 'monitor:logininfor:batchRemove',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('62', '登录查询', '12', '1', '#',  'F', '0', 'monitor:logininfor:list',         '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('63', '批量删除', '12', '2', '#',  'F', '0', 'monitor:logininfor:batchRemove',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 -- 在线用户按钮
-insert into sys_menu values('58', '在线查询', '13', '1', '#',  'F', '0', 'monitor:online:list',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('59', '批量强退', '13', '2', '#',  'F', '0', 'monitor:online:batchForceLogout', '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('60', '单条强退', '13', '3', '#',  'F', '0', 'monitor:online:forceLogout',      '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('64', '在线查询', '13', '1', '#',  'F', '0', 'monitor:online:list',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('65', '批量强退', '13', '2', '#',  'F', '0', 'monitor:online:batchForceLogout', '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('66', '单条强退', '13', '3', '#',  'F', '0', 'monitor:online:forceLogout',      '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 -- 定时任务按钮
-insert into sys_menu values('61', '任务查询', '14', '1', '#',  'F', '0', 'monitor:job:list',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('62', '任务新增', '14', '2', '#',  'F', '0', 'monitor:job:add',              '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('63', '任务修改', '14', '3', '#',  'F', '0', 'monitor:job:edit',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('64', '任务删除', '14', '4', '#',  'F', '0', 'monitor:job:remove',           '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('65', '任务保存', '14', '5', '#',  'F', '0', 'monitor:job:save',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('66', '状态修改', '14', '6', '#',  'F', '0', 'monitor:job:changeStatus',     '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('67', '批量删除', '14', '7', '#',  'F', '0', 'monitor:job:batchRemove',      '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('67', '任务查询', '14', '1', '#',  'F', '0', 'monitor:job:list',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('68', '任务新增', '14', '2', '#',  'F', '0', 'monitor:job:add',              '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('69', '任务修改', '14', '3', '#',  'F', '0', 'monitor:job:edit',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('70', '任务删除', '14', '4', '#',  'F', '0', 'monitor:job:remove',           '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('71', '任务保存', '14', '5', '#',  'F', '0', 'monitor:job:save',             '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('72', '状态修改', '14', '6', '#',  'F', '0', 'monitor:job:changeStatus',     '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('73', '批量删除', '14', '7', '#',  'F', '0', 'monitor:job:batchRemove',      '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 -- 代码生成按钮
-insert into sys_menu values('68', '生成查询', '16', '1', '#',  'F', '0', 'tool:gen:list',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_menu values('69', '生成代码', '16', '2', '#',  'F', '0', 'tool:gen:code',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('74', '生成查询', '16', '1', '#',  'F', '0', 'tool:gen:list',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_menu values('75', '生成代码', '16', '2', '#',  'F', '0', 'tool:gen:code',  '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 
 
 -- ----------------------------
@@ -325,7 +332,12 @@ insert into sys_role_menu values ('1', '66');
 insert into sys_role_menu values ('1', '67');
 insert into sys_role_menu values ('1', '68');
 insert into sys_role_menu values ('1', '69');
-
+insert into sys_role_menu values ('1', '70');
+insert into sys_role_menu values ('1', '71');
+insert into sys_role_menu values ('1', '72');
+insert into sys_role_menu values ('1', '73');
+insert into sys_role_menu values ('1', '74');
+insert into sys_role_menu values ('1', '75');
 
 -- ----------------------------
 -- 8、用户与岗位关联表  用户1-N岗位
@@ -362,7 +374,7 @@ create table sys_oper_log (
   oper_param 		varchar(255) 	default '' 				   comment '请求参数',
   status 			int(1) 		    default 0				   comment '操作状态 0正常 1异常',
   error_msg 		varchar(2000) 	default '' 				   comment '错误消息',
-  oper_time 		timestamp                                  comment '操作时间',
+  oper_time 		datetime                                   comment '操作时间',
   primary key (oper_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '操作日志记录';
 
@@ -378,9 +390,9 @@ create table sys_dict_type
 	dict_type        varchar(100)    default ''                 comment '字典类型',
     status 			 int(1) 		 default 0				    comment '状态（0正常 1禁用）',
     create_by        varchar(64)     default ''                 comment '创建者',
-    create_time      timestamp                                  comment '创建时间',
+    create_time      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
-	update_time      timestamp                                  comment '更新时间',
+	update_time      datetime                                   comment '更新时间',
     remark 	         varchar(500) 	 default '' 				comment '备注',
 	primary key (dict_id),
 	unique (dict_type)
@@ -403,9 +415,9 @@ create table sys_dict_data
 	dict_type        varchar(100)    default ''                 comment '字典类型',
     status 			 int(1) 		 default 0				    comment '状态（0正常 1禁用）',
     create_by        varchar(64)     default ''                 comment '创建者',
-    create_time      timestamp                                  comment '创建时间',
+    create_time      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
-	update_time      timestamp                                  comment '更新时间',
+	update_time      datetime                                   comment '更新时间',
     remark 	         varchar(500) 	 default '' 				comment '备注',
 	primary key (dict_code)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典数据表';
@@ -425,7 +437,29 @@ insert into sys_dict_data values(12, 4, '京东支付', 'QQ',  'sys_pay_code',  
 
 
 -- ----------------------------
--- 12、系统访问记录
+-- 12、参数配置表
+-- ----------------------------
+drop table if exists sys_config;
+create table sys_config (
+	config_id 		   int(5) 	     not null auto_increment    comment '参数主键',
+	config_name        varchar(100)  default ''                 comment '参数名称',
+	config_key         varchar(100)  default ''                 comment '参数键名',
+	config_value       varchar(100)  default ''                 comment '参数键值',
+	config_type        char(1)       default 'N'                comment '系统内置（Y是 N否）',
+    create_by          varchar(64)   default ''                 comment '创建者',
+    create_time 	   datetime                                 comment '创建时间',
+    update_by          varchar(64)   default ''                 comment '更新者',
+    update_time        datetime                                 comment '更新时间',
+	remark 	         varchar(500) 	 default '' 				comment '备注',
+	primary key (config_id)
+) engine=innodb auto_increment=100 default charset=utf8 comment = '参数配置表';
+
+insert into sys_config values(1, '主框架页-默认皮肤样式名称', 'sys.index.skinName',     'skin-default',  'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '默认 skin-default、蓝色 skin-blue、黄色 skin-yellow' );
+insert into sys_config values(2, '用户管理-账号初始密码',     'sys.user.initPassword',  '123456',        'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '初始化密码 123456' );
+
+
+-- ----------------------------
+-- 13、系统访问记录
 -- ----------------------------
 drop table if exists sys_logininfor;
 create table sys_logininfor (
@@ -436,13 +470,13 @@ create table sys_logininfor (
   os      		varchar(50)  default '' 			   comment '操作系统',
   status 		int(1) 		 default 0 			 	   comment '登录状态 0成功 1失败',
   msg      		varchar(255) default '' 			   comment '提示消息',
-  login_time 	timestamp                              comment '访问时间',
+  login_time 	datetime                               comment '访问时间',
   primary key (info_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '系统访问记录';
 
 
 -- ----------------------------
--- 13、在线用户记录
+-- 14、在线用户记录
 -- ----------------------------
 drop table if exists sys_user_online;
 create table sys_user_online (
@@ -453,15 +487,15 @@ create table sys_user_online (
   browser  		    varchar(50)  default '' 			 	comment '浏览器类型',
   os      		    varchar(50)  default '' 			 	comment '操作系统',
   status      	    varchar(10)  default '' 			 	comment '在线状态on_line在线off_line离线',
-  start_timestsamp 	timestamp                               comment 'session创建时间',
-  last_access_time  timestamp                               comment 'session最后访问时间',
+  start_timestsamp 	datetime                                comment 'session创建时间',
+  last_access_time  datetime                                comment 'session最后访问时间',
   expire_time 	    int(5) 		 default 0 			 	    comment '超时时间，单位为分钟',
   primary key (sessionId)
 ) engine=innodb default charset=utf8 comment = '在线用户记录';
 
 
 -- ----------------------------
--- 14、定时任务调度表
+-- 15、定时任务调度表
 -- ----------------------------
 drop table if exists sys_job;
 create table sys_job (
@@ -473,9 +507,9 @@ create table sys_job (
   cron_expression     varchar(255)  default ''                 comment 'cron执行表达式',
   status              int(1)        default 0                  comment '状态（0正常 1暂停）',
   create_by           varchar(64)   default ''                 comment '创建者',
-  create_time         timestamp                                comment '创建时间',
+  create_time         datetime                                 comment '创建时间',
   update_by           varchar(64)   default ''                 comment '更新者',
-  update_time         timestamp                                comment '更新时间',
+  update_time         datetime                                 comment '更新时间',
   remark              varchar(500)  default ''                 comment '备注信息',
   primary key (job_id, job_name, job_group)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '定时任务调度表';
@@ -485,7 +519,7 @@ insert into sys_job values(2, 'ryTask', '系统默认（有参）', 'ryParams', 
 
 
 -- ----------------------------
--- 15、定时任务调度日志表
+-- 16、定时任务调度日志表
 -- ----------------------------
 drop table if exists sys_job_log;
 create table sys_job_log (
@@ -497,6 +531,6 @@ create table sys_job_log (
   job_message         varchar(500)                             comment '日志信息',
   is_exception        int(1)        default 0                  comment '是否异常',
   exception_info      text                                     comment '异常信息',
-  create_time         timestamp                                comment '创建时间',
+  create_time         datetime                                 comment '创建时间',
   primary key (job_log_id)
 ) engine=innodb default charset=utf8 comment = '定时任务调度日志表';

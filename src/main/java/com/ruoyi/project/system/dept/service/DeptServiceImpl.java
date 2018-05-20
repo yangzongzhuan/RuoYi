@@ -140,6 +140,10 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public String checkDeptNameUnique(Dept dept)
     {
+        if (dept.getDeptId() == null)
+        {
+            dept.setDeptId(-1L);
+        }
         Long deptId = dept.getDeptId();
         Dept info = deptMapper.checkDeptNameUnique(dept.getDeptName());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getDeptId())

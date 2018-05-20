@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache name="ruoyi">
 
+    <!-- 磁盘缓存位置 -->
     <diskStore path="java.io.tmpdir"/>
 
+    <!-- 默认缓存 -->
     <defaultCache
             maxEntriesLocalHeap="1000"
             eternal="false"

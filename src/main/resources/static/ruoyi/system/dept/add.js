@@ -28,11 +28,11 @@ $("#form-dept-add").validate({
         }
     },
 	submitHandler:function(form){
-		update();
+		add();
 	}
 });
 
-function update() {
+function add() {
 	_ajax_save(ctx + "system/dept/save", $("#form-dept-add").serialize());
 }
 

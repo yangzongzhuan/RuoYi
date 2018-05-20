@@ -16,8 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="Logininfor">
-		insert into sys_logininfor (login_name, status, ipaddr, browser, os, msg) 
-		values (#{loginName}, #{status}, #{ipaddr}, #{browser}, #{os}, #{msg})
+		insert into sys_logininfor (login_name, status, ipaddr, browser, os, msg, login_time) 
+		values (#{loginName}, #{status}, #{ipaddr}, #{browser}, #{os}, #{msg}, sysdate())
 	</insert>
 	
 	<select id="selectLogininforList" parameterType="Logininfor" resultMap="LogininforResult">

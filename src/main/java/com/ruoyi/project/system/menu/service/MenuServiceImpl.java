@@ -192,6 +192,7 @@ public class MenuServiceImpl implements IMenuService
     @Override
     public int deleteMenuById(Long menuId)
     {
+        ShiroUtils.clearCachedAuthorizationInfo();
         return menuMapper.deleteMenuById(menuId);
     }
 
@@ -244,11 +245,13 @@ public class MenuServiceImpl implements IMenuService
         if (StringUtils.isNotNull(menuId))
         {
             menu.setUpdateBy(ShiroUtils.getLoginName());
+            ShiroUtils.clearCachedAuthorizationInfo();
             return menuMapper.updateMenu(menu);
         }
         else
         {
             menu.setCreateBy(ShiroUtils.getLoginName());
+            ShiroUtils.clearCachedAuthorizationInfo();
             return menuMapper.insertMenu(menu);
         }
     }
@@ -262,6 +265,10 @@ public class MenuServiceImpl implements IMenuService
     @Override
     public String checkMenuNameUnique(Menu menu)
     {
+        if (menu.getMenuId() == null)
+        {
+            menu.setMenuId(-1L);
+        }
         Long menuId = menu.getMenuId();
         Menu info = menuMapper.checkMenuNameUnique(menu.getMenuName());
         if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getMenuId())

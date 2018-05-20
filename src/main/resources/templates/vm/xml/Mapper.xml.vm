@@ -5,40 +5,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="${package}.mapper.${className}Mapper">
     
     <resultMap type="${className}" id="${className}Result">
-        #foreach ($column in $columns)
+#foreach ($column in $columns)
         <result property="${column.attrname}"    column="${column.columnName}"    />
-        #end
+#end
     </resultMap>
     
     <select id="select${className}ById" parameterType="${primaryKey.attrType}" resultMap="${className}Result">
-        select #foreach($column in $columns) $column.columnName #if($velocityCount != $columns.size()),#end#end from ${tableName}
+        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
         where ${primaryKey.columnName} = #{${primaryKey.attrname}}
     </select>
     
     <select id="select${className}List" parameterType="${className}" resultMap="${className}Result">
-        select #foreach($column in $columns) $column.columnName #if($velocityCount != $columns.size()),#end#end from ${tableName}
+        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
         <where>  
-            #foreach($column in $columns)
-            <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname} </if>
-            #end
+#foreach($column in $columns)
+            <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname}</if>
+ #end
         </where>
     </select>
     
     <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$primaryKey.attrname"#end>
         insert into ${tableName} (
-                #foreach($column in $columns)
+#foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-$column.columnName#if($velocityCount != $columns.size()), #end
+			<if test="$column.attrname != null and $column.attrname != '' ">$column.columnName#if($velocityCount != $columns.size()), #end</if>
 #end
 #end
-)
-        values (
-                #foreach($column in $columns)
+        )values(
+#foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-#{$column.attrname}#if($velocityCount != $columns.size()), #end
+			<if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
 #end			
 #end
-)
+		)
     </insert>
 	 
     <update id="update${className}" parameterType="${className}">
@@ -46,7 +45,7 @@ $column.columnName#if($velocityCount != $columns.size()), #end
         <set>
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName)
-            <if test="$column.attrname != null">$column.columnName = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+            <if test="$column.attrname != null and $column.attrname != ''">$column.columnName = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
 #end
 #end
         </set>

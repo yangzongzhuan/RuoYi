@@ -365,10 +365,14 @@ $(function() {
 
     // 右移按扭
     $('.tabRight').on('click', scrollTabRight);
+    
+    // 关闭当前
+    $('.tabCloseCurrent').on('click', function () {
+        $('.page-tabs-content').find('.active i').trigger("click");
+    });
 
     // 关闭全部
-    $('.tabCloseAll').on('click',
-    function() {
+    $('.tabCloseAll').on('click', function() {
         $('.page-tabs-content').children("[data-id]").not(":first").each(function() {
             $('.RuoYi_iframe[data-id="' + $(this).data('id') + '"]').remove();
             $(this).remove();
@@ -379,4 +383,5 @@ $(function() {
         });
         $('.page-tabs-content').css("margin-left", "0");
     });
+    
 });

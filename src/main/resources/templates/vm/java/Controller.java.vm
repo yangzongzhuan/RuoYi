@@ -42,8 +42,8 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 查询${tableComment}列表
 	 */
-	@GetMapping("/list")
 	@RequiresPermissions("${moduleName}:${classname}:list")
+	@GetMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(${className} ${classname})
 	{
@@ -55,8 +55,8 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 新增${tableComment}
 	 */
-	@GetMapping("/add")
 	@RequiresPermissions("${moduleName}:${classname}:add")
+	@GetMapping("/add")
 	public String add()
 	{
 	    return prefix + "/add";
@@ -65,8 +65,8 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 修改${tableComment}
 	 */
-	@GetMapping("/edit/{${primaryKey.attrname}}")
 	@RequiresPermissions("${moduleName}:${classname}:edit")
+	@GetMapping("/edit/{${primaryKey.attrname}}")
 	public String edit(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname}, Model model)
 	{
 		${className} ${classname} = ${classname}Service.select${className}ById(${primaryKey.attrname});
@@ -77,9 +77,9 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 保存${tableComment}
 	 */
+	@RequiresPermissions("${moduleName}:${classname}:save")
+	PostMapping("/save")
 	@ResponseBody
-	@PostMapping("/save")
-	@RequiresPermissions("${moduleName}:${classname}:add")
 	public Message save(${className} ${classname})
 	{
 		if (${classname}Service.save${className}(${classname}) > 0)
@@ -92,9 +92,9 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 删除${tableComment}
 	 */
+	@RequiresPermissions("${moduleName}:${classname}:remove")
 	@PostMapping( "/remove/{${primaryKey.attrname}}")
 	@ResponseBody
-	@RequiresPermissions("${moduleName}:${classname}:remove")
 	public Message remove(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname})
 	{
 		if (${classname}Service.delete${className}ById(${primaryKey.attrname}) > 0)
@@ -107,9 +107,9 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 批量删除${tableComment}
 	 */
+	@RequiresPermissions("${moduleName}:${classname}:batchRemove")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("${moduleName}:${classname}:batchRemove")
 	public Message remove(@RequestParam("ids[]") ${primaryKey.attrType}[] ${primaryKey.attrname}s)
 	{
 		int rows = ${classname}Service.batchDelete${className}(${primaryKey.attrname}s);

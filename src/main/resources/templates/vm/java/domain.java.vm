@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 #end
 
 /**
- * ${tableName} ${tableComment}
+ * ${tableComment}表 ${tableName}
  * 
  * @author ${author}
  * @date ${datetime}
