@@ -4,9 +4,10 @@
 
 性别男，若依是女儿的名字。
 
-若依基于hplus和inspinia两套后台系统摸版开发。
-有需要可自行到群内下载。
+若依基于hplus和inspinia两套后台系统摸版开发。有需要可自行到群内下载。
+
 http://www.zi-han.net/theme/hplus
+
 http://webapplayers.com/inspinia_admin-v2.7.1 
 
 ## 内置功能
