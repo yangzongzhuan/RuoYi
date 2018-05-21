@@ -32,6 +32,7 @@ function login() {
             if (r.code == 0) {
                 parent.location.href = ctx + 'index';
             } else {
+            	$('.imgcode').click();
                 layer.msg(r.msg);
             }
         }
