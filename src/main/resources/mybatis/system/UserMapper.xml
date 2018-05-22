@@ -18,6 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userType"     column="user_type"    />
 		<result property="status"       column="status"       />
 		<result property="refuseDes"    column="refuse_des"   />
+		<result property="loginIp"      column="login_ip"     />
+		<result property="loginDate"    column="login_date"   />
 		<result property="createBy"     column="create_by"    />
 		<result property="createTime"   column="create_time"  />
 		<result property="updateBy"     column="update_by"    />
@@ -46,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserByLoginName" parameterType="String" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -55,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserByPhoneNumber" parameterType="String" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -64,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserByEmail" parameterType="String" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -85,7 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserById" parameterType="Long" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -118,6 +120,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="salt != null and salt != ''">salt = #{salt},</if>
  			<if test="status !=null">status = #{status},</if>
  			<if test="refuseDes != null and refuseDes != ''">refuse_des = #{refuseDes},</if>
+ 			<if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
+ 			<if test="loginDate != null">login_date = #{loginDate},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>

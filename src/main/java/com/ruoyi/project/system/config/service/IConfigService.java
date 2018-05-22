@@ -22,7 +22,7 @@ public interface IConfigService
     /**
      * 根据键名查询参数配置信息
      * 
-     * @param configName 参数名称
+     * @param configKey 参数键名
      * @return 参数键值
      */
     public String selectConfigByKey(String configKey);
@@ -78,7 +78,7 @@ public interface IConfigService
     /**
      * 校验参数键名是否唯一
      * 
-     * @param dept 部门信息
+     * @param config 参数信息
      * @return 结果
      */
     public String checkConfigKeyUnique(Config config);

@@ -345,6 +345,7 @@ $(function() {
         }
     }
 
+    // 点击选项卡菜单
     $('.menuTabs').on('click', '.menuTab', activeTab);
 
     //刷新iframe

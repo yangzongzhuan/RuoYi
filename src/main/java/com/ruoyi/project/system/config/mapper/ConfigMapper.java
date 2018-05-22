@@ -22,7 +22,7 @@ public interface ConfigMapper
     /**
      * 根据键名查询参数配置信息
      * 
-     * @param configName 参数名称
+     * @param configKey 参数键名
      * @return 参数配置信息
      */
     public Config selectConfigByKey(String configKey);

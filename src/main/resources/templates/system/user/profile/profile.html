@@ -36,7 +36,7 @@
 	                        <div class="col-sm-4">
 	                            <div class="text-center">
 	                                <img alt="image" class="img-circle m-t-xs img-responsive" th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/' + ${user.avatar}">
-	                                <div class="m-t-xs font-bold">CEO</div>
+	                                <div class="m-t-xs font-bold">[[${user.loginIp}]]</div>
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-8">
@@ -46,7 +46,7 @@
 	                            <p><i class="fa fa-group"></i> [[${user.dept.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
 	                            <p><i class="fa fa-transgender"></i> [[${user.sex}]]</p>
 	                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
-	                            <p><i class="fa fa-calendar"></i> [[${user.createDateTimeStr}]]</p>
+	                            <p><i class="fa fa-calendar"></i> [[${#dates.format(user.loginDate, 'yyyy-MM-dd HH:mm:ss')}]]</p>
 	                        </div>
 	                        <div class="clearfix"></div>
 	                    </a>

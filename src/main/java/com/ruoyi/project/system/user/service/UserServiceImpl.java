@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.framework.shiro.service.PasswordService;
@@ -152,7 +153,7 @@ public class UserServiceImpl implements IUserService
         {
             user.setUpdateBy(ShiroUtils.getLoginName());
             // 修改用户信息
-            count = userMapper.updateUser(user);
+            count = updateUser(user);
             // 删除用户与角色关联
             userRoleMapper.deleteUserRoleByUserId(userId);
             // 新增用户与角色管理
@@ -201,7 +202,7 @@ public class UserServiceImpl implements IUserService
     {
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
-        return userMapper.updateUser(user);
+        return updateUser(user);
     }
 
     /**

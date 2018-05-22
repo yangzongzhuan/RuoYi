@@ -3,7 +3,6 @@ package com.ruoyi.common.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
@@ -22,6 +21,16 @@ public class DateUtils
     public static String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 
     public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * 获取当前Date型日期
+     * 
+     * @return Date() 当前日期
+     */
+    public static Date getNowDate()
+    {
+        return new Date();
+    }
 
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd

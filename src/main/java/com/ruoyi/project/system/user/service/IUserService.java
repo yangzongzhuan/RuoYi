@@ -30,7 +30,7 @@ public interface IUserService
     /**
      * 通过手机号码查询用户
      * 
-     * @param userName 用户名
+     * @param phoneNumber 手机号码
      * @return 用户对象信息
      */
     public User selectUserByPhoneNumber(String phoneNumber);
@@ -103,7 +103,7 @@ public interface IUserService
     /**
      * 校验手机号码是否唯一
      *
-     * @param phonenumber 登录名称
+     * @param user 用户信息
      * @return 结果
      */
     public String checkPhoneUnique(User user);
@@ -112,7 +112,7 @@ public interface IUserService
     /**
      * 校验email是否唯一
      *
-     * @param email 登录名称
+     * @param user 用户信息
      * @return 结果
      */
     public String checkEmailUnique(User user);

@@ -51,6 +51,8 @@ create table sys_user (
   user_type         char(1)         default 'N'                comment '类型:Y默认用户,N非默认用户',
   status 			int(1) 			default 0 				   comment '帐号状态:0正常,1禁用',
   refuse_des 		varchar(500) 	default '' 				   comment '拒绝登录描述',
+  login_ip          varchar(100)    default ''                 comment '最后登陆IP',
+  login_date        datetime                                   comment '最后登陆时间',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
@@ -61,8 +63,8 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  106, 'admin', '若依', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', 'Y', 0, '正常', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_user values(2,  108, 'ry',    '若依', 'ry@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', 'N', 0, '正常', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_user values(1,  106, 'admin', '若依', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', 'Y', 0, '正常', '127.0.0.1', '2018-03-16 11-33-00', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_user values(2,  108, 'ry',    '若依', 'ry@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', 'N', 0, '正常', '127.0.0.1', '2018-03-16 11-33-00', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
 
 -- ----------------------------
 -- 3、岗位信息表

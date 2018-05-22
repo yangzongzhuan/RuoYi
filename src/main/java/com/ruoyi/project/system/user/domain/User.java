@@ -1,6 +1,7 @@
 package com.ruoyi.project.system.user.domain;
 
 import java.util.Arrays;
+import java.util.Date;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.system.dept.domain.Dept;
@@ -41,6 +42,10 @@ public class User extends BaseEntity
     private int status;
     /** 拒绝登录描述 */
     private String refuseDes;
+    /** 最后登陆IP */
+    private String loginIp;
+    /** 最后登陆时间 */
+    private Date loginDate;
     /** 部门对象 */
     private Dept dept;
     /** 角色组 */
@@ -197,6 +202,26 @@ public class User extends BaseEntity
     public void setRefuseDes(String refuseDes)
     {
         this.refuseDes = refuseDes;
+    }
+
+    public String getLoginIp()
+    {
+        return loginIp;
+    }
+
+    public void setLoginIp(String loginIp)
+    {
+        this.loginIp = loginIp;
+    }
+
+    public Date getLoginDate()
+    {
+        return loginDate;
+    }
+
+    public void setLoginDate(Date loginDate)
+    {
+        this.loginDate = loginDate;
     }
 
     public Dept getDept()

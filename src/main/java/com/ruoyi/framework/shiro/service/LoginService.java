@@ -10,9 +10,11 @@ import com.ruoyi.common.exception.user.CaptchaException;
 import com.ruoyi.common.exception.user.UserBlockedException;
 import com.ruoyi.common.exception.user.UserNotExistsException;
 import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.SystemLogUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.service.IUserService;
 
@@ -70,12 +72,12 @@ public class LoginService
         {
             user = userService.selectUserByPhoneNumber(username);
         }
-        
+
         if (user == null && maybeEmail(username))
         {
             user = userService.selectUserByEmail(username);
         }
-        
+
         if (user == null)
         {
             SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.not.exists"));
@@ -89,8 +91,8 @@ public class LoginService
             SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRefuseDes()));
             throw new UserBlockedException(user.getRefuseDes());
         }
-
         SystemLogUtils.log(username, CommonConstant.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
+        recordLoginInfo(user);
         return user;
     }
 
@@ -110,6 +112,16 @@ public class LoginService
             return false;
         }
         return true;
+    }
+
+    /**
+     * 记录登录信息
+     */
+    public void recordLoginInfo(User user)
+    {
+        user.setLoginIp(ShiroUtils.getIp());
+        user.setLoginDate(DateUtils.getNowDate());
+        userService.updateUser(user);
     }
 
 }

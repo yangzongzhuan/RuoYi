@@ -32,7 +32,6 @@ import com.ruoyi.project.system.user.domain.User;
  * 
  * @author ruoyi
  */
-
 @Aspect
 @Component
 @EnableAsync
