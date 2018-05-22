@@ -134,15 +134,15 @@ function createMenuItem(dataUrl, menuName) {
     dataIndex = Math.floor(Math.random()*100),
     flag = true;
     if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
-
+    var topWindow = $(window.parent.document);
     // 选项卡菜单已存在
-    $('.menuTab', window.parent.document).each(function() {
+    $('.menuTab', topWindow).each(function() {
         if ($(this).data('id') == dataUrl) {
             if (!$(this).hasClass('active')) {
                 $(this).addClass('active').siblings('.menuTab').removeClass('active');
-                scrollToTab(this);
+                $('.page-tabs-content').animate({ marginLeft: ""}, "fast");
                 // 显示tab对应的内容区
-                $('.mainContent .RuoYi_iframe', window.parent.document).each(function() {
+                $('.mainContent .RuoYi_iframe', topWindow).each(function() {
                     if ($(this).data('id') == dataUrl) {
                         $(this).show().siblings('.RuoYi_iframe').hide();
                         return false;
@@ -156,15 +156,14 @@ function createMenuItem(dataUrl, menuName) {
     // 选项卡菜单不存在
     if (flag) {
         var str = '<a href="javascript:;" class="active menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
-        $('.menuTab', window.parent.document).removeClass('active');
+        $('.menuTab', topWindow).removeClass('active');
 
         // 添加选项卡对应的iframe
         var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
-        $('.mainContent', window.parent.document).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
+        $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
 
         // 添加选项卡
-        $('.menuTabs .page-tabs-content', window.parent.document).append(str);
-        scrollToTab($('.menuTab.active'));
+        $('.menuTabs .page-tabs-content', topWindow).append(str);
     }
     return false;
 }
