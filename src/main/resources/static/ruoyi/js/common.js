@@ -167,3 +167,16 @@ function createMenuItem(dataUrl, menuName) {
     }
     return false;
 }
+
+//设置全局ajax超时处理
+$.ajaxSetup({
+    complete: function(XMLHttpRequest, textStatus) {
+        if (textStatus == "parsererror") {
+        	$.modalConfirm("登陆超时！请重新登陆！", function() {
+        		window.location.href = ctx + "login";
+        	})
+        } else if (textStatus == "error") {
+        	$.modalAlert("请求超时！请稍后再试！", 'warning');
+        }
+    }
+}); 
