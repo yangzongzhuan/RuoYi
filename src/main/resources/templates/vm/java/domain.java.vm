@@ -1,8 +1,11 @@
 package ${package}.domain;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
-#if(${hasBigDecimal})
-import java.math.BigDecimal;
+#foreach ($column in $columns)
+#if($column.attrType == 'Date')
+import java.util.Date;
+#break
+#end
 #end
 
 /**
