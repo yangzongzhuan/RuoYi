@@ -78,7 +78,7 @@ public class ${className}Controller extends BaseController
 	 * 保存${tableComment}
 	 */
 	@RequiresPermissions("${moduleName}:${classname}:save")
-	PostMapping("/save")
+	@PostMapping("/save")
 	@ResponseBody
 	public Message save(${className} ${classname})
 	{
