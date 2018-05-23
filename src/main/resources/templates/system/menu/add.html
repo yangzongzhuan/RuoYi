@@ -58,14 +58,10 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">菜单状态：</label>
-				<div class="col-sm-8">
-                     <div class="radio radio-info radio-inline">
-						<input type="radio" id="radio1" name="visible" value="0" checked="">
-						<label for="radio1">显示</label>
-					</div>
-					<div class="radio radio-danger radio-inline">
-						<input type="radio" id="radio2" name="visible" value="1">
-						<label for="radio2">隐藏</label>
+				<div class="col-sm-8" th:with="datas=${@dictService.selectDictData('sys_menu_visible')}">
+					<div th:each="dict : ${datas}" th:class="${dict['cssClass']}">
+						<input type="radio" th:id="${dict['dictCode']}" name="visible" th:value="${dict['dictValue']}" th:checked="${dict['isDefault'] == 'Y' ? true : false}">
+						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
 					</div>
 				</div>
 			</div>

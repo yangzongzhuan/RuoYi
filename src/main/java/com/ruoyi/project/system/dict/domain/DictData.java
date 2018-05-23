@@ -20,7 +20,11 @@ public class DictData extends BaseEntity
     private String dictValue;
     /** 字典类型 */
     private String dictType;
-    /** 状态（0正常 1禁用） */
+    /** 字典样式 */
+    private String cssClass;
+    /** 是否默认（Y是 N否） */
+    private String isDefault;
+    /** 状态（0正常 1停用） */
     private int status;
 
     public Long getDictCode()
@@ -73,6 +77,26 @@ public class DictData extends BaseEntity
         this.dictType = dictType;
     }
 
+    public String getCssClass()
+    {
+        return cssClass;
+    }
+
+    public void setCssClass(String cssClass)
+    {
+        this.cssClass = cssClass;
+    }
+
+    public String getIsDefault()
+    {
+        return isDefault;
+    }
+
+    public void setIsDefault(String isDefault)
+    {
+        this.isDefault = isDefault;
+    }
+
     public int getStatus()
     {
         return status;
@@ -87,7 +111,8 @@ public class DictData extends BaseEntity
     public String toString()
     {
         return "DictData [dictCode=" + dictCode + ", dictSort=" + dictSort + ", dictLabel=" + dictLabel + ", dictValue="
-                + dictValue + ", dictType=" + dictType + ", status=" + status + "]";
+                + dictValue + ", dictType=" + dictType + ", cssClass=" + cssClass + ", isDefault=" + isDefault
+                + ", status=" + status + "]";
     }
 
 }

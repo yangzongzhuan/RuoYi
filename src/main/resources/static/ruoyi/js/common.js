@@ -178,8 +178,6 @@ $.ajaxSetup({
         	$.modalConfirm("登陆超时！请重新登陆！", function() {
         		window.location.href = ctx + "login";
         	})
-        } else if (textStatus == "error") {
-        	$.modalAlert("请求超时！请稍后再试！", 'warning');
         }
     }
 }); 

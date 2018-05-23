@@ -26,14 +26,10 @@
             </div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">系统内置：</label>
-				<div class="col-sm-8">
-					<div class="radio radio-info radio-inline">
-						<input type="radio" id="radio1" th:field="*{config.configType}" name="configType" value="Y">
-						<label for="radio1">是</label>
-					</div>
-					<div class="radio radio-danger radio-inline">
-						<input type="radio" id="radio2" th:field="*{config.configType}" name="configType" value="N">
-						<label for="radio2">否</label>
+				<div class="col-sm-8" th:with="datas=${@dictService.selectDictData('sys_yes_no')}">
+					<div th:each="dict : ${datas}" th:class="${dict['cssClass']}">
+						<input type="radio" th:id="${dict['dictCode']}" name="configType" th:value="${dict['dictValue']}" th:field="*{config.configType}">
+						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
 					</div>
 				</div>
 			</div>

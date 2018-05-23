@@ -18,6 +18,14 @@ public interface DictDataMapper
      * @return 字典数据集合信息
      */
     public List<DictData> selectDictDataList(DictData dictData);
+    
+    /**
+     * 根据字典类型查询字典数据
+     * 
+     * @param dictType 字典类型
+     * @return 字典数据集合信息
+     */
+    public List<DictData> selectDictDataByType(String dictType);
 
     /**
      * 根据字典数据ID查询信息

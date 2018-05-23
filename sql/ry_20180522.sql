@@ -390,7 +390,7 @@ create table sys_dict_type
 	dict_id          int(11) 		 not null auto_increment    comment '字典主键',
 	dict_name        varchar(100)    default ''                 comment '字典名称',
 	dict_type        varchar(100)    default ''                 comment '字典类型',
-    status 			 int(1) 		 default 0				    comment '状态（0正常 1禁用）',
+    status 			 int(1) 		 default 0				    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',
     create_time      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
@@ -400,9 +400,13 @@ create table sys_dict_type
 	unique (dict_type)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典类型表';
 
-insert into sys_dict_type values(1, '银行列表', 'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '银行数据列表');
-insert into sys_dict_type values(2, '支付通道', 'sys_pay_code',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '支付通道列表');
-
+insert into sys_dict_type values(1, '用户性别', 'sys_user_sex',     0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '用户性别列表');
+insert into sys_dict_type values(2, '菜单状态', 'sys_menu_visible', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '菜单状态列表');
+insert into sys_dict_type values(3, '部门状态', 'sys_dept_status',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '部门状态列表');
+insert into sys_dict_type values(4, '岗位状态', 'sys_post_status',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '岗位状态列表');
+insert into sys_dict_type values(5, '字典状态', 'sys_dict_status',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '字典状态列表');
+insert into sys_dict_type values(5, '任务状态', 'sys_job_status',   0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '任务状态列表');
+insert into sys_dict_type values(6, '系统是否', 'sys_yes_no',       0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统是否列表');
 
 -- ----------------------------
 -- 11、字典数据表
@@ -415,7 +419,9 @@ create table sys_dict_data
 	dict_label       varchar(100)    default ''                 comment '字典标签',
 	dict_value       varchar(100)    default ''                 comment '字典键值',
 	dict_type        varchar(100)    default ''                 comment '字典类型',
-    status 			 int(1) 		 default 0				    comment '状态（0正常 1禁用）',
+	css_class        varchar(500)    default ''                 comment '样式属性',
+	is_default       char(1)         default 'N'                comment '是否默认（Y是 N否）',
+    status 			 int(1) 		 default 0				    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',
     create_time      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
@@ -424,19 +430,20 @@ create table sys_dict_data
 	primary key (dict_code)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典数据表';
 
-insert into sys_dict_data values(1,  1, '工商银行', '01',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(2,  2, '建设银行', '02',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(3,  3, '农业银行', '03',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(4,  4, '光大银行', '04',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(5,  5, '兴业银行', '05',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', ''); 
-insert into sys_dict_data values(6,  6, '中国银行', '06',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(7,  7, '平安银行', '07',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(8,  8, '招商银行', '08',  'sys_bank_code', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(9,  1, '微信支付', 'WX',  'sys_pay_code',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(10, 2, '支付宝',   'ZFB', 'sys_pay_code',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', ''); 
-insert into sys_dict_data values(11, 3, 'QQ支付',   'JD',  'sys_pay_code',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(12, 4, '京东支付', 'QQ',  'sys_pay_code',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-
+insert into sys_dict_data values(1,  1, '男',   '0',  'sys_user_sex',      'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(2,  2, '女',   '1',  'sys_user_sex',      'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(3,  1, '显示', '0',  'sys_menu_visible',  'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(4,  2, '隐藏', '1',  'sys_menu_visible',  'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(5,  1, '正常', '0',  'sys_dept_status',   'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(6,  2, '停用', '1',  'sys_dept_status',   'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(7,  1, '正常', '0',  'sys_dict_status',   'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(8,  2, '停用', '1',  'sys_dict_status',   'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(9,  1, '正常', '0',  'sys_post_status',   'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(10, 2, '停用', '1',  'sys_post_status',   'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(11, 1, '正常', '0',  'sys_job_status',    'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(12, 2, '暂停', '1',  'sys_job_status',    'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(13, 1, '是',   'Y',  'sys_yes_no',        'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(14, 2, '否',   'N',  'sys_yes_no',        'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 
 -- ----------------------------
 -- 12、参数配置表
@@ -452,7 +459,7 @@ create table sys_config (
     create_time 	   datetime                                 comment '创建时间',
     update_by          varchar(64)   default ''                 comment '更新者',
     update_time        datetime                                 comment '更新时间',
-	remark 	         varchar(500) 	 default '' 				comment '备注',
+	remark 	           varchar(500)  default '' 				comment '备注',
 	primary key (config_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '参数配置表';
 

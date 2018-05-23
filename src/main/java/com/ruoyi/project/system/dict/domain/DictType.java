@@ -16,7 +16,7 @@ public class DictType extends BaseEntity
     private String dictName;
     /** 字典类型 */
     private String dictType;
-    /** 状态（0正常 1禁用） */
+    /** 状态（0正常 1停用） */
     private int status;
 
     public Long getDictId()

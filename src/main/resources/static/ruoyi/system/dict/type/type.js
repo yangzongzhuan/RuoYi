@@ -18,13 +18,13 @@ $(function() {
         },
         {
             field: 'status',
-            title: '操作状态',
+            title: '状态',
             align: 'center',
             formatter: function(value, row, index) {
                 if (value == 0) {
                     return '<span class="label label-success">正常</span>';
                 } else if (value == 1) {
-                    return '<span class="label label-danger">禁用</span>';
+                    return '<span class="label label-danger">停用</span>';
                 }
             }
         },
