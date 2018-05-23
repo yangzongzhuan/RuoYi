@@ -91,7 +91,7 @@ function update() {
 		},
 		async : false,
 		error : function(request) {
-			$.modalAlert("系统错误", "error");
+			$.modalAlert("系统错误", modal_status.FAIL);
 		},
 		success : function(data) {
 			if (data.code == 0) {
@@ -99,7 +99,7 @@ function update() {
 					$.parentReload();
 				});
 			} else {
-				$.modalAlert(data.msg, "error");
+				$.modalAlert(data.msg, modal_status.FAIL);
 			}
 
 		}

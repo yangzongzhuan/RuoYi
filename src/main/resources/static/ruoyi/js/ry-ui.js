@@ -7,13 +7,13 @@ $(function(){
 	$.modalMsg = function(content, type) {
 	    if (type != undefined) {
 	        var icon = "";
-	        if (type == 'warning') {
+	        if (type == modal_status.WARNING) {
 	            icon = 0;
 	        }
-	        else if (type == 'success') {
+	        else if (type == modal_status.SUCCESS) {
 	            icon = 1;
 	        }
-	        else if (type == 'error') {
+	        else if (type == modal_status.FAIL) {
 	            icon = 2;
 	        }
 	        layer.msg(content, { icon: icon, time: 2000, shift: 0 });
@@ -25,11 +25,11 @@ $(function(){
 	// 弹出窗体
 	$.modalAlert = function(content, type) {
 	    var icon = "";
-	    if (type == 'warning') {
+	    if (type == modal_status.WARNING) {
 	        icon = 0;
-	    } else if (type == 'success') {
+	    } else if (type == modal_status.SUCCESS) {
 	        icon = 1;
-	    } else if (type == 'error') {
+	    } else if (type == modal_status.FAIL) {
 	        icon = 2;
 	    } else {
 	        icon = 3;

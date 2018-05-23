@@ -2,13 +2,21 @@
  * 通用方法封装处理
  * Copyright (c) 2018 ruoyi 
  */
-/*
-	参数解释：
-	title	标题
-	url		请求的url
-	w		弹出层宽度（缺省调默认值）
-	h		弹出层高度（缺省调默认值）
-*/
+
+/** 消息状态码 */
+web_status = {
+    SUCCESS: 0,
+    FAIL: 500
+};
+
+/** 弹窗状态码 */
+modal_status = {
+    SUCCESS: "success",
+    FAIL: "error",
+    WARNING: "warning"
+};
+
+/** 弹出层指定宽度 */
 function layer_show(title, url, w, h) {
     if (title == null || title == '') {
         title = false;
@@ -34,23 +42,18 @@ function layer_show(title, url, w, h) {
     });
 }
 
+/** 弹出层自动宽高 */
 function layer_showAuto(title, url) {
 	layer_show(title, url, '', '');
 }
 
-/*关闭弹出框口*/
+/** 关闭弹出框口 */
 function layer_close() {
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
 }
 
-//状态码
-web_status = {
-    SUCCESS: 0,
-    FAIL: 500
-};
-
-//对ajax的post方法再次封装
+/** 对ajax的post方法再次封装 */
 _ajax_save = function(url, data) {
     var config = {
         url: url,
@@ -64,7 +67,7 @@ _ajax_save = function(url, data) {
     $.ajax(config)
 };
 
-//对jquery的ajax方法再次封装
+/** 对jquery的ajax方法再次封装 */
 _ajax = function(url, data, type) {
     var config = {
         url: url,
@@ -81,10 +84,10 @@ _ajax = function(url, data, type) {
 /** 返回结果处理 */
 function simpleSuccess(result) {
     if (result.code == web_status.SUCCESS) {
-		$.modalMsg(result.msg, "success");
+		$.modalMsg(result.msg, modal_status.SUCCESS);
 		$.refreshTable();
     } else {
-    	$.modalAlert(result.msg, "error");
+    	$.modalAlert(result.msg, modal_status.FAIL);
     }
 }
 
@@ -95,7 +98,7 @@ function handleSuccess(result) {
 			$.parentReload();
 		});
     } else {
-    	$.modalAlert(result.msg, "error");
+    	$.modalAlert(result.msg, modal_status.FAIL);
     }
 }
 
@@ -129,7 +132,7 @@ Date.prototype.format = function(format) {
 	return format;
 }
 
-// 创建选项卡
+/** 创建选项卡 */
 function createMenuItem(dataUrl, menuName) {
     dataIndex = Math.floor(Math.random()*100),
     flag = true;
@@ -168,7 +171,7 @@ function createMenuItem(dataUrl, menuName) {
     return false;
 }
 
-//设置全局ajax超时处理
+/** 设置全局ajax超时处理 */
 $.ajaxSetup({
     complete: function(XMLHttpRequest, textStatus) {
         if (textStatus == "parsererror") {

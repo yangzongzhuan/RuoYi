@@ -91,6 +91,6 @@ function selectMenuTree() {
 	}
 	else
 	{
-		$.modalAlert("主菜单不能选择", "error");
+		$.modalAlert("主菜单不能选择", modal_status.FAIL);
 	}
 }

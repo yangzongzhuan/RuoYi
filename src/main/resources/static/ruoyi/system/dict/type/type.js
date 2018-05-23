@@ -80,7 +80,7 @@ function remove(id) {
 function batchRemove() {
 	var rows = $.getSelections("dictId");
 	if (rows.length == 0) {
-		$.modalMsg("请选择要删除的数据", "warning");
+		$.modalMsg("请选择要删除的数据", modal_status.WARNING);
 		return;
 	}
 	$.modalConfirm("确认要删除选中的" + rows.length + "条数据吗?", function() {
