@@ -49,5 +49,6 @@ function batchGenCode() {
 	}
 	$.modalConfirm("确认要生成选中的" + rows.length + "条数据吗?", function() {
 		location.href = prefix + "/batchGenCode?tables=" + JSON.stringify(rows);
+		layer.msg('执行成功,正在生成代码请稍后…', {icon: 1});
 	});
 }
