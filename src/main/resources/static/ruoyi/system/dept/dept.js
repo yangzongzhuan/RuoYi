@@ -34,9 +34,9 @@ function loading() {
 			formatter : function(row, index) {
 				if(row.parentId != 0) {
 					var actions = [];
-					actions.push('<a class="btn btn-primary btn-sm ' + editFlag + '" href="#" title="编辑" mce_href="#" onclick="edit(\'' + row.deptId + '\')"><i class="fa fa-edit"></i></a> ');
-					actions.push('<a class="btn btn-primary btn-sm ' + addFlag + '" href="#" title="新增" mce_href="#" onclick="add(\'' + row.deptId + '\')"><i class="fa fa-plus"></i></a> ');
-					actions.push('<a class="btn btn-warning btn-sm ' + removeFlag + '" href="#" title="删除" mce_href="#" onclick="remove(\'' + row.deptId + '\')"><i class="fa fa-remove"></i></a>');
+					actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="edit(\'' + row.deptId + '\')"><i class="fa fa-edit">编辑</i></a> ');
+					actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="#" onclick="add(\'' + row.deptId + '\')"><i class="fa fa-plus">新增</i></a> ');
+					actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.deptId + '\')"><i class="fa fa-remove">删除</i></a>');
 					return actions.join('');
 				} else {
 					return "";

@@ -405,8 +405,8 @@ insert into sys_dict_type values(2, '菜单状态', 'sys_menu_visible', 0, 'admi
 insert into sys_dict_type values(3, '部门状态', 'sys_dept_status',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '部门状态列表');
 insert into sys_dict_type values(4, '岗位状态', 'sys_post_status',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '岗位状态列表');
 insert into sys_dict_type values(5, '字典状态', 'sys_dict_status',  0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '字典状态列表');
-insert into sys_dict_type values(5, '任务状态', 'sys_job_status',   0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '任务状态列表');
-insert into sys_dict_type values(6, '系统是否', 'sys_yes_no',       0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统是否列表');
+insert into sys_dict_type values(6, '任务状态', 'sys_job_status',   0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '任务状态列表');
+insert into sys_dict_type values(7, '系统是否', 'sys_yes_no',       0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统是否列表');
 
 -- ----------------------------
 -- 11、字典数据表

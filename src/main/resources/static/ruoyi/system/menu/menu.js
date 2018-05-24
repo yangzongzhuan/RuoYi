@@ -9,6 +9,7 @@ function loading() {
         {
 			title : '菜单名称',
 			field : 'menuName',
+			width : '20%',
 			formatter : function(row, index) {
 				if(row.icon == null || row == "") {
 					return row.menuName;
@@ -19,17 +20,18 @@ function loading() {
 		},
         {
         	field : 'orderNum',
-			title : '排序'
+			title : '排序',
+			width : '10%',
         },
         {
         	field : 'url',
-			title : '请求地址'
+			title : '请求地址',
+			width : '15%',
         },
         {
 			title : '类型',
 			field : 'menuType',
-			align : 'center',
-			valign : 'middle',
+			width : '10%',
 			formatter : function(item, index) {
 				if (item.menuType == 'M') {
 					return '<span class="label label-primary">目录</span>';
@@ -45,7 +47,7 @@ function loading() {
 		{
             field: 'visible',
             title: '可见',
-            align: 'center',
+            width : '10%',
             formatter: function(row, index) {
                 if (row.visible == 0) {
                     return '<span class="label label-success">显示</span>';
@@ -56,16 +58,17 @@ function loading() {
         },
         {
         	field : 'perms',
-			title : '权限标识'
+			title : '权限标识',
+			width : '15%',
         },
         {
         	title : '操作',
-			align : 'center',
+			width : '20%',
 			formatter : function(row, index) {
 				var actions = [];
-				actions.push('<a class="btn btn-primary btn-sm ' + editFlag + '" href="#" title="编辑" mce_href="#" onclick="edit(\'' + row.menuId + '\')"><i class="fa fa-edit"></i></a> ');
-				actions.push('<a class="btn btn-primary btn-sm ' + addFlag + '" href="#" title="新增" mce_href="#" onclick="add(\'' + row.menuId + '\')"><i class="fa fa-plus"></i></a> ');
-				actions.push('<a class="btn btn-warning btn-sm ' + removeFlag + '" href="#" title="删除" mce_href="#" onclick="remove(\'' + row.menuId + '\')"><i class="fa fa-remove"></i></a>');
+				actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" mce_href="#" onclick="edit(\'' + row.menuId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+				actions.push('<a class="btn btn-info btn-xs ' + addFlag + '" href="#" onclick="add(\'' + row.menuId + '\')"><i class="fa fa-plus"></i>新增</a> ');
+				actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.menuId + '\')"><i class="fa fa-remove"></i>删除</a>');
 				return actions.join('');
 			}
         }];
