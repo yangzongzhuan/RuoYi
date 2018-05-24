@@ -15,15 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="avatar"       column="avatar"       />
 		<result property="password"     column="password"     />
 		<result property="salt"         column="salt"         />
-		<result property="userType"     column="user_type"    />
 		<result property="status"       column="status"       />
-		<result property="refuseDes"    column="refuse_des"   />
 		<result property="loginIp"      column="login_ip"     />
 		<result property="loginDate"    column="login_date"   />
 		<result property="createBy"     column="create_by"    />
 		<result property="createTime"   column="create_time"  />
 		<result property="updateBy"     column="update_by"    />
 		<result property="updateTime"   column="update_time"  />
+		<result property="remark"       column="remark"       />
 		<association property="dept"    column="dept_id" javaType="Dept" resultMap="deptResult"/>
 	</resultMap>
 	
@@ -36,19 +35,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="selectUserList" parameterType="User" resultMap="UserResult">
-		select user_id, dept_id, login_name, user_name, email, phonenumber, password, sex, avatar, salt, user_type, status, refuse_des, create_by, create_time from sys_user
-		<where>
-			<if test="searchValue != null and searchValue != ''">
-				AND login_name like concat(concat('%', #{searchValue}), '%')
-			</if>
-			<if test="deptId != null and parentId != null and parentId != 0">
-				AND dept_id IN (SELECT dept_id FROM sys_dept WHERE dept_id = #{deptId} OR parent_id = #{deptId})
-			</if>
-		</where>
+		select user_id, dept_id, login_name, user_name, email, phonenumber, password, sex, avatar, salt, status, create_by, create_time, remark from sys_user
+		where status in (0,1)
+		<if test="searchValue != null and searchValue != ''">
+			AND login_name like concat(concat('%', #{searchValue}), '%')
+		</if>
+		<if test="deptId != null and parentId != null and parentId != 0">
+			AND dept_id IN (SELECT dept_id FROM sys_dept WHERE dept_id = #{deptId} OR parent_id = #{deptId})
+		</if>
 	</select>
 	
 	<select id="selectUserByLoginName" parameterType="String" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -57,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserByPhoneNumber" parameterType="String" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -66,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserByEmail" parameterType="String" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -87,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectUserById" parameterType="Long" resultMap="UserResult">
-		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.refuse_des, u.login_ip, u.login_date, u.create_time,
+		select  u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.sex, u.avatar, u.password, u.salt, u.status, u.login_ip, u.login_date, u.create_time, u.remark,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.status as dept_status
 		from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -119,10 +117,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="password != null and password != ''">password = #{password},</if>
  			<if test="salt != null and salt != ''">salt = #{salt},</if>
  			<if test="status !=null">status = #{status},</if>
- 			<if test="refuseDes != null and refuseDes != ''">refuse_des = #{refuseDes},</if>
  			<if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
  			<if test="loginDate != null">login_date = #{loginDate},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			<if test="remark != null and remark != ''">remark = #{remark},</if>
  			update_time = sysdate()
  		</set>
  		where 1=1
@@ -141,8 +139,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="password != null and password != ''">password,</if>
  			<if test="salt != null and salt != ''">salt,</if>
  			<if test="status !=null and status != ''">status,</if>
- 			<if test="refuseDes != null and refuseDes != ''">refuse_des,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
  			create_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
@@ -155,8 +153,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="password != null and password != ''">#{password},</if>
  			<if test="salt != null and salt != ''">#{salt},</if>
  			<if test="status !=null and status != ''">#{status},</if>
- 			<if test="refuseDes != null and refuseDes != ''">#{refuseDes},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
  			sysdate()
  		)
 	</insert>

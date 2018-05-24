@@ -36,12 +36,8 @@ public class User extends BaseEntity
     private String password;
     /** 盐加密 */
     private String salt;
-    /** 类型:Y默认用户,N非默认用户 */
-    private String userType;
-    /** 帐号状态:0正常,1禁用 */
+    /** 帐号状态:0正常,1禁用,2删除 */
     private int status;
-    /** 拒绝登录描述 */
-    private String refuseDes;
     /** 最后登陆IP */
     private String loginIp;
     /** 最后登陆时间 */
@@ -61,6 +57,16 @@ public class User extends BaseEntity
     public void setUserId(Long userId)
     {
         this.userId = userId;
+    }
+
+    public boolean isAdmin()
+    {
+        return isAdmin(this.userId);
+    }
+
+    public static boolean isAdmin(Long userId)
+    {
+        return userId != null && 1L == userId;
     }
 
     public Long getDeptId()
@@ -174,16 +180,6 @@ public class User extends BaseEntity
         setSalt(hex);
     }
 
-    public String getUserType()
-    {
-        return userType;
-    }
-
-    public void setUserType(String userType)
-    {
-        this.userType = userType;
-    }
-
     public int getStatus()
     {
         return status;
@@ -192,16 +188,6 @@ public class User extends BaseEntity
     public void setStatus(int status)
     {
         this.status = status;
-    }
-
-    public String getRefuseDes()
-    {
-        return refuseDes;
-    }
-
-    public void setRefuseDes(String refuseDes)
-    {
-        this.refuseDes = refuseDes;
     }
 
     public String getLoginIp()
@@ -259,8 +245,8 @@ public class User extends BaseEntity
     {
         return "User [userId=" + userId + ", deptId=" + deptId + ", parentId=" + parentId + ", loginName=" + loginName
                 + ", userName=" + userName + ", email=" + email + ", phonenumber=" + phonenumber + ", sex=" + sex
-                + ", avatar=" + avatar + ", password=" + password + ", salt=" + salt + ", userType=" + userType
-                + ", status=" + status + ", refuseDes=" + refuseDes + ", dept=" + dept + ", roleIds="
+                + ", avatar=" + avatar + ", password=" + password + ", salt=" + salt + ", status=" + status
+                + ", loginIp=" + loginIp + ", loginDate=" + loginDate + ", dept=" + dept + ", roleIds="
                 + Arrays.toString(roleIds) + ", postIds=" + Arrays.toString(postIds) + "]";
     }
 

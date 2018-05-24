@@ -16,6 +16,7 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.SystemLogUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.user.domain.User;
+import com.ruoyi.project.system.user.domain.UserStatus;
 import com.ruoyi.project.system.user.service.IUserService;
 
 /**
@@ -78,7 +79,7 @@ public class LoginService
             user = userService.selectUserByEmail(username);
         }
 
-        if (user == null)
+        if (user == null || UserStatus.DELETED.getCode() == user.getStatus())
         {
             SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.not.exists"));
             throw new UserNotExistsException();
@@ -86,10 +87,10 @@ public class LoginService
 
         passwordService.validate(user, password);
 
-        if (UserConstants.USER_BLOCKED == user.getStatus())
+        if (UserStatus.DISABLE.getCode() == user.getStatus())
         {
-            SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRefuseDes()));
-            throw new UserBlockedException(user.getRefuseDes());
+            SystemLogUtils.log(username, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark()));
+            throw new UserBlockedException(user.getRemark());
         }
         SystemLogUtils.log(username, CommonConstant.LOGIN_SUCCESS, MessageUtils.message("user.login.success"));
         recordLoginInfo(user);

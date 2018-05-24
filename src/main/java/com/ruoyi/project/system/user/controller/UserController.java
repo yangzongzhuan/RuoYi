@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.Message;
@@ -21,6 +23,7 @@ import com.ruoyi.project.system.post.service.IPostService;
 import com.ruoyi.project.system.role.domain.Role;
 import com.ruoyi.project.system.role.service.IRoleService;
 import com.ruoyi.project.system.user.domain.User;
+import com.ruoyi.project.system.user.domain.UserStatus;
 import com.ruoyi.project.system.user.service.IUserService;
 
 /**
@@ -129,11 +132,12 @@ public class UserController extends BaseController
         {
             return Message.error("用户不存在");
         }
-        if (userService.deleteUserById(userId) > 0)
+        else if (User.isAdmin(userId))
         {
-            return Message.success();
+            return Message.error("不允许删除超级管理员用户");
         }
-        return Message.error();
+        user.setStatus(UserStatus.DELETED.getCode());
+        return userService.updateUser(user) > 0 ? Message.success() : Message.error();
     }
 
     @RequiresPermissions("system:user:batchRemove")
@@ -161,11 +165,11 @@ public class UserController extends BaseController
     @ResponseBody
     public Message save(User user)
     {
-        if (userService.saveUser(user) > 0)
+        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
         {
-            return Message.success();
+            return Message.error("不允许修改超级管理员用户");
         }
-        return Message.error();
+        return userService.saveUser(user) > 0 ? Message.success() : Message.error();
     }
 
     /**
@@ -182,7 +186,6 @@ public class UserController extends BaseController
         }
         return uniqueFlag;
     }
-
 
     /**
      * 校验手机号码
