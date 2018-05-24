@@ -29,19 +29,19 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 
 ## 系统演示 [www.ruoyi.club](http://www.ruoyi.club)
 
-![登录界面](https://static.oschina.net/uploads/space/2018/0513/145506_0712_1438828.png)
+![登录界面](https://static.oschina.net/uploads/space/2018/0524/212432_qg6h_1438828.png)
 
-![系统首页](https://static.oschina.net/uploads/space/2018/0513/145514_LKRy_1438828.png)
+![系统首页](https://static.oschina.net/uploads/space/2018/0524/212450_QgGF_1438828.png)
 
-![用户管理](https://static.oschina.net/uploads/space/2018/0513/145523_7Cuh_1438828.png)
+![用户管理](https://static.oschina.net/uploads/space/2018/0524/212457_GaY6_1438828.png)
 
-![用户修改](https://static.oschina.net/uploads/space/2018/0513/145530_vE5H_1438828.png)
+![用户修改](https://static.oschina.net/uploads/space/2018/0524/212505_rVZ1_1438828.png)
 
-![头像修改](https://static.oschina.net/uploads/space/2018/0513/145931_iibt_1438828.png)
+![头像修改](https://static.oschina.net/uploads/space/2018/0524/212518_Yfce_1438828.png)
 
-![菜单管理](https://static.oschina.net/uploads/space/2018/0513/145608_ex4U_1438828.png)
+![菜单管理](https://static.oschina.net/uploads/space/2018/0524/212531_h3M5_1438828.png)
 
-![角色管理](https://static.oschina.net/uploads/space/2018/0513/150005_gV8b_1438828.png)
+![角色管理](https://static.oschina.net/uploads/space/2018/0524/212539_4fu2_1438828.png)
 
 ## 若依交流群
 
