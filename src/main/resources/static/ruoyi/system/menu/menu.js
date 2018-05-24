@@ -34,10 +34,10 @@ function loading() {
 			width : '10%',
 			formatter : function(item, index) {
 				if (item.menuType == 'M') {
-					return '<span class="label label-primary">目录</span>';
+					return '<span class="label label-success">目录</span>';
 				}
 				if (item.menuType == 'C') {
-					return '<span class="label label-success">菜单</span>';
+					return '<span class="label label-primary">菜单</span>';
 				}
 				if (item.menuType == 'F') {
 					return '<span class="label label-warning">按钮</span>';

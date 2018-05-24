@@ -49,7 +49,7 @@ $(function() {
             align: 'center',
             formatter: function(value, row, index) {
             	var actions = [];
-            	actions.push('<a class="btn btn-warning btn-sm ' + detailFlag + '" href="#" title="详细信息" onclick="detail(\'' + row.operId + '\')"><i class="fa fa-search"></i></a>');
+            	actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="#" onclick="detail(\'' + row.operId + '\')"><i class="fa fa-search"></i>详细</a>');
             	return actions.join('');
             }
         }];

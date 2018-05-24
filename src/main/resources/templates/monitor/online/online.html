@@ -6,8 +6,8 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
         <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-            <button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:batchForceLogout()'" shiro:hasPermission="monitor:online:batchForceLogout">
-                <i class="glyphicon glyphicon-trash"></i>
+            <button class="btn btn-outline btn-default" onclick="javascript:batchForceLogout()" shiro:hasPermission="monitor:online:batchForceLogout">
+                <i class="fa fa-trash-o"></i> 删除
             </button>
         </div>
         

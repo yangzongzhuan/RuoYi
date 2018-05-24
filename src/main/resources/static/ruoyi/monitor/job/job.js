@@ -50,8 +50,8 @@ $(function() {
             formatter: function(value, row, index) {
             	var actions = [];
 				actions.push(statusTools(row));
-				actions.push('<a class="btn btn-primary btn-sm ' + editFlag + '" href="#" title="编辑" mce_href="#" onclick="edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i></a> ');
-				actions.push('<a class="btn btn-warning btn-sm ' + removeFlag + '" href="#" title="删除" onclick="remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i></a>');
+				actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+				actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a>');
 				return actions.join('');
             }
         }];
@@ -61,9 +61,9 @@ $(function() {
 
 function statusTools(row) {
     if (row.status == 1) {
-        return '<a class="btn btn-primary btn-sm ' + statusFlag + '" href="#" title="启用" onclick="start(this,\'' + row.jobId + '\')"><i class="fa fa-check"></i></a> ';
+        return '<a class="btn btn-info btn-xs ' + statusFlag + '" href="#" onclick="start(this,\'' + row.jobId + '\')"><i class="fa fa-play"></i>启用</a> ';
     } else {
-    	return '<a class="btn btn-primary btn-sm ' + statusFlag + '" href="#" title="停用" onclick="stop(this,\'' + row.jobId + '\')"><i class="fa fa-minus"></i></a> ';
+    	return '<a class="btn btn-warning btn-xs ' + statusFlag + '" href="#" onclick="stop(this,\'' + row.jobId + '\')"><i class="fa fa-pause"></i>暂停</a> ';
     }
 }
 

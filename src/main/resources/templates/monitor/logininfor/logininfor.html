@@ -6,8 +6,8 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
 		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
-			<button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:batchRemove()'" shiro:hasPermission="monitor:logininfor:batchRemove">
-	            <i class="glyphicon glyphicon-trash"></i>
+			<button class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="monitor:logininfor:batchRemove">
+	            <i class="fa fa-trash-o"></i> 删除
 	        </button>
         </div>
 		<table class="bootstrap-table" data-mobile-responsive="true" 

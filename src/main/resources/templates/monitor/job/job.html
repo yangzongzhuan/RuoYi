@@ -6,14 +6,14 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
 		<div class="btn-group hidden-xs" id="tableToolbar" role="group">
-			<button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:add()'" shiro:hasPermission="monitor:job:add">
-                <i class="glyphicon glyphicon-plus"></i>
+			<button class="btn btn-outline btn-default" onclick="javascript:add()" shiro:hasPermission="monitor:job:add">
+                <i class="fa fa-plus"></i> 新增
             </button>
-			<button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:batchRemove()'" shiro:hasPermission="monitor:job:batchRemove">
-	            <i class="glyphicon glyphicon-trash"></i>
+			<button class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="monitor:job:batchRemove">
+	            <i class="fa fa-trash-o"></i> 删除
 	        </button>
-	        <button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:jobLog()'" shiro:hasPermission="monitor:job:list">
-	            <i class="glyphicon glyphicon-list"></i>
+	        <button class="btn btn-outline btn-default" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
+	            <i class="fa fa-list"></i> 详细
 	        </button>
         </div>
 		<table class="bootstrap-table" data-mobile-responsive="true" 

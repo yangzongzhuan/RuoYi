@@ -53,9 +53,9 @@ function queryUserList() {
             formatter: function(value, row, index) {
             	if(row.userType == "N") {
             		var actions = [];
-                	actions.push('<a class="btn btn-primary btn-sm ' + editFlag + '" href="#" title="编辑" onclick="edit(\'' + row.userId + '\')"><i class="fa fa-edit"></i></a> ');
-                	actions.push('<a class="btn btn-warning btn-sm ' + removeFlag + '" href="#" title="删除" onclick="remove(\'' + row.userId + '\')"><i class="fa fa-remove"></i></a> ');
-                	actions.push('<a class="btn btn-success btn-sm ' + resetPwdFlag + '"  href="#" title="重置" onclick="resetPwd(\'' + row.userId + '\')"><i class="fa fa-key"></i></a>');
+                	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="edit(\'' + row.userId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                	actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.userId + '\')"><i class="fa fa-remove"></i>删除</a> ');
+                	actions.push('<a class="btn btn-info btn-xs ' + resetPwdFlag + '" href="#" onclick="resetPwd(\'' + row.userId + '\')"><i class="fa fa-key"></i>重置</a>');
                 	return actions.join('');
 				} else {
 					return "";

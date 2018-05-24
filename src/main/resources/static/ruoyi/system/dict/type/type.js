@@ -41,9 +41,9 @@ $(function() {
             align: 'center',
             formatter: function(value, row, index) {
             	var actions = [];
-            	actions.push('<a class="btn btn-primary btn-sm ' + editFlag + '" href="#" title="编辑" mce_href="#" onclick="edit(\'' + row.dictId + '\')"><i class="fa fa-edit"></i></a> ');
-            	actions.push('<a class="btn btn-info btn-sm ' + listFlag + '" href="#" title="详细" onclick="detail(\'' + row.dictId + '\')"><i class="fa fa-list-ul"></i></a> ');
-            	actions.push('<a class="btn btn-warning btn-sm ' + removeFlag + '" href="#" title="删除" mce_href="#" onclick="remove(\'' + row.dictId + '\')"><i class="fa fa-remove"></i></a>');
+            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="edit(\'' + row.dictId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+            	actions.push('<a class="btn btn-info btn-xs ' + listFlag + '" href="#" onclick="detail(\'' + row.dictId + '\')"><i class="fa fa-list-ul"></i>列表</a> ');
+            	actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.dictId + '\')"><i class="fa fa-remove"></i>删除</a>');
             	return actions.join('');
             }
         }];

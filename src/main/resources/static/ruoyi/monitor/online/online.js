@@ -52,7 +52,7 @@ $(function() {
             title: '操作',
             align: 'center',
             formatter: function(value, row, index) {
-                var msg = '<a class="btn btn-warning btn-sm ' + forceFlag + '" href="#" title="强退" onclick="forceLogout(\'' + row.sessionId + '\')"><i class="fa fa-remove"></i></a> ';
+                var msg = '<a class="btn btn-danger btn-xs ' + forceFlag + '" href="#" onclick="forceLogout(\'' + row.sessionId + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
                 return msg;
             }
         }];

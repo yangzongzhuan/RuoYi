@@ -30,11 +30,11 @@
 	
 	<div class="wrapper wrapper-content ui-layout-center">
         <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-        	<button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:add()'" shiro:hasPermission="system:user:add">
-                <i class="glyphicon glyphicon-plus"></i>
+        	<button class="btn btn-outline btn-default" onclick="javascript:add()" shiro:hasPermission="system:user:add">
+                <i class="fa fa-plus"></i> 新增
             </button>
-            <button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:batchRemove()'" shiro:hasPermission="system:user:batchRemove">
-                <i class="glyphicon glyphicon-trash"></i>
+            <button class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="system:user:batchRemove">
+                <i class="fa fa-trash-o"></i> 删除
             </button>
         </div>
         <input type="hidden" id="deptId">

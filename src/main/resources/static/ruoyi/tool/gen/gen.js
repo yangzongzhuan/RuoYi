@@ -24,7 +24,7 @@ $(function() {
             title: '操作',
             align: 'center',
             formatter: function(value, row, index) {
-                var msg = '<a class="btn btn-primary btn-sm" href="#" title="生成" onclick="genCode(\'' + row.tableName + '\')"><i class="fa fa-bug"></i></a> ';
+                var msg = '<a class="btn btn-primary btn-xs" href="#" onclick="genCode(\'' + row.tableName + '\')"><i class="fa fa-bug"></i>生成代码</a> ';
                 return msg;
             }
         }];

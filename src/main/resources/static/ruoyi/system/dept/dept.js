@@ -18,7 +18,7 @@ function loading() {
 			title : '状态',
 			formatter : function(item, index) {
 				if (item.status == '0') {
-					return '<span class="label label-primary">正常</span>';
+					return '<span class="label label-success">正常</span>';
 				} else if (item.status == '1') {
 					return '<span class="label label-danger">停用</span>';
 				}

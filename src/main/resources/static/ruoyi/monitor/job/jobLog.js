@@ -49,7 +49,7 @@ $(function() {
             align: 'center',
             formatter: function(value, row, index) {
             	var actions = [];
-				actions.push('<a class="btn btn-warning btn-sm ' + removeFlag + '" href="#" title="删除" onclick="remove(\'' + row.jobLogId + '\')"><i class="fa fa-remove"></i></a>');
+				actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.jobLogId + '\')"><i class="fa fa-remove"></i>删除</a>');
 				return actions.join('');
             }
         }];
