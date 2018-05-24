@@ -137,8 +137,8 @@ $(function(){
 	//初始化表格树，_expandAll true展开 false 不展开
 	$.initTreeTable = function (_id, _parentId, _columns, _url, _expandAll) {
 	    $('.bootstrap-table').bootstrapTreeTable({
-		    code : _id,                  // 用于设置父子关系
-	        parentCode : _parentId,      // 用于设置父子关系
+		    code : _id,                   // 用于设置父子关系
+	        parentCode : _parentId,       // 用于设置父子关系
 	    	type: 'get',                  // 请求方式（*）
 	        url: _url,                    // 请求后台的URL（*）
 	        ajaxParams : {},              // 请求数据的ajax的data属性
