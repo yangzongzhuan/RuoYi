@@ -34,9 +34,9 @@ $(function() {
             align: 'center',
             formatter: function(value, row, index) {
                 if (value == 'on_line') {
-                    return '<span class="label label-success">在线</span>';
+                    return '<span class="text-success">在线</span>';
                 } else if (value == 'off_line') {
-                    return '<span class="label label-primary">离线</span>';
+                    return '<span class="text-danger">离线</span>';
                 }
             }
         },

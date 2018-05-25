@@ -37,9 +37,9 @@ function queryUserList() {
             align: 'center',
             formatter: function(value, row, index) {
                 if (value == '0') {
-                    return '<span class="label label-success">正常</span>';
+                    return '<span class="text-success">正常</span>';
                 } else if (value == '1') {
-                    return '<span class="label label-danger">禁用</span>';
+                    return '<span class="text-danger">禁用</span>';
                 }
             }
         },
