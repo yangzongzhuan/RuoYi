@@ -147,7 +147,7 @@ function resetPwd(userId) {
     layer_show("重置密码", url, '800', '300');
 }
 
-// 批量强退
+// 批量删除用户
 function batchRemove() {
 	var rows = $.getSelections("userId");
 	if (rows.length == 0) {
