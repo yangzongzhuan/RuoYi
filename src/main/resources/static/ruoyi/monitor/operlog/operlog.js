@@ -34,9 +34,9 @@ $(function() {
             align: 'center',
             formatter: function(value, row, index) {
                 if (value == 0) {
-                    return '<span class="text-success">成功</span>';
+                    return '<span class="badge badge-primary">成功</span>';
                 } else if (value == 1) {
-                    return '<span class="text-danger">异常</span>';
+                    return '<span class="badge badge-danger">异常</span>';
                 }
             }
         },

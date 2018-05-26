@@ -429,20 +429,21 @@ create table sys_dict_data
 	primary key (dict_code)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典数据表';
 
-insert into sys_dict_data values(1,  1, '男',   '0',  'sys_user_sex',      'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(2,  2, '女',   '1',  'sys_user_sex',      'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(3,  1, '显示', '0',  'sys_menu_visible',  'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(4,  2, '隐藏', '1',  'sys_menu_visible',  'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(5,  1, '正常', '0',  'sys_dept_status',   'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(6,  2, '停用', '1',  'sys_dept_status',   'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(7,  1, '正常', '0',  'sys_dict_status',   'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(8,  2, '停用', '1',  'sys_dict_status',   'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(9,  1, '正常', '0',  'sys_post_status',   'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(10, 2, '停用', '1',  'sys_post_status',   'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(11, 1, '正常', '0',  'sys_job_status',    'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(12, 2, '暂停', '1',  'sys_job_status',    'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(13, 1, '是',   'Y',  'sys_yes_no',        'radio radio-info radio-inline',   'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
-insert into sys_dict_data values(14, 2, '否',   'N',  'sys_yes_no',        'radio radio-danger radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(1,  1, '男',   '0',  'sys_user_sex',      'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(2,  2, '女',   '1',  'sys_user_sex',      'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(3,  3, '未知', '2',  'sys_user_sex',      'radio radio-warning radio-inline', 'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(4,  1, '显示', '0',  'sys_menu_visible',  'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(5,  2, '隐藏', '1',  'sys_menu_visible',  'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(6,  1, '正常', '0',  'sys_dept_status',   'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(7,  2, '停用', '1',  'sys_dept_status',   'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(8,  1, '正常', '0',  'sys_dict_status',   'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(9,  2, '停用', '1',  'sys_dict_status',   'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(10, 1, '正常', '0',  'sys_post_status',   'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(11, 2, '停用', '1',  'sys_post_status',   'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(12, 1, '正常', '0',  'sys_job_status',    'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(13, 2, '暂停', '1',  'sys_job_status',    'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(14, 1, '是',   'Y',  'sys_yes_no',        'radio radio-info radio-inline',    'Y', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
+insert into sys_dict_data values(15, 2, '否',   'N',  'sys_yes_no',        'radio radio-danger radio-inline',  'N', 0, 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '');
 
 -- ----------------------------
 -- 12、参数配置表

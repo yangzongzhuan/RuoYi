@@ -4,13 +4,13 @@
 <head th:include="include :: header"></head>
 <body class="gray-bg">
     <div class="wrapper wrapper-content">
-        <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-        <button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:add()'" shiro:hasPermission="${moduleName}:${classname}:add">
-            <i class="glyphicon glyphicon-plus"></i>
-        </button>
-        <button type="button" class="btn btn-outline btn-default" th:onclick="'javascript:batchRemove()'" shiro:hasPermission="${moduleName}:${classname}:batchRemove">
-            <i class="glyphicon glyphicon-trash"></i>
-        </button>
+        <div class="btn-group hidden-xs" id="toolbar" role="group">
+	        <button type="button" class="btn btn-outline btn-default" onclick="javascript:add()" shiro:hasPermission="${moduleName}:${classname}:add">
+	            <i class="fa fa-plus"></i> 新增
+	        </button>
+	        <button type="button" class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="${moduleName}:${classname}:batchRemove">
+	            <i class="fa fa-trash-o"></i> 删除
+	        </button>
         </div>
         <table class="bootstrap-table" data-mobile-responsive="true">
         </table>

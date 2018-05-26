@@ -23,7 +23,7 @@
         excelRTL:          false,         // true = Set Excel option 'DisplayRightToLeft'
         excelstyles:       [],            // e.g. ['border-bottom', 'border-top', 'border-left', 'border-right']
         exportHiddenCells: false,         // true = speed up export of large tables with hidden cells (hidden cells will be exported !)
-        fileName:          'tableExport',
+        fileName:          'export',
         htmlContent:       false,
         ignoreColumn:      [],
         ignoreRow:         [],

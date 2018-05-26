@@ -59,8 +59,8 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">菜单状态：</label>
-				<div class="col-sm-8" th:with="datas=${@dictService.selectDictData('sys_menu_visible')}">
-					<div th:each="dict : ${datas}" th:class="${dict['cssClass']}">
+				<div class="col-sm-8" th:with="type=${@dictService.selectDictData('sys_menu_visible')}">
+					<div th:each="dict : ${type}" th:class="${dict['cssClass']}">
 						<input type="radio" th:id="${dict['dictCode']}" name="visible" th:value="${dict['dictValue']}" th:field="*{menu.visible}">
 						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
 					</div>

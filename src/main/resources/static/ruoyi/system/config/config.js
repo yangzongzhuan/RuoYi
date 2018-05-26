@@ -26,9 +26,9 @@ $(function() {
             align: 'center',
             formatter: function(value, row, index) {
                 if (value == 'Y') {
-                    return '<span class="text-success">是</span>';
+                    return '<span class="badge badge-primary">是</span>';
                 } else if (value == 'N') {
-                    return '<span class="text-danger">否</span>';
+                    return '<span class="badge badge-danger">否</span>';
                 }
             }
         },

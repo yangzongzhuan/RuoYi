@@ -50,9 +50,9 @@ function loading() {
             width : '10%',
             formatter: function(row, index) {
                 if (row.visible == 0) {
-                    return '<span class="text-success">显示</span>';
+                    return '<span class="badge badge-primary">显示</span>';
                 } else if (row.visible == 1) {
-                    return '<span class="text-danger">隐藏</span>';
+                    return '<span class="badge badge-danger">隐藏</span>';
                 }
             }
         },

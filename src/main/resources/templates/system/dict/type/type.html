@@ -5,8 +5,8 @@
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
-       <div class="btn-group hidden-xs" id="tableToolbar" role="group">
-            <button class="btn btn-outline btn-default" nclick="javascript:add()" shiro:hasPermission="system:dict:add">
+       <div class="btn-group hidden-xs" id="toolbar" role="group">
+            <button class="btn btn-outline btn-default" onclick="javascript:add()" shiro:hasPermission="system:dict:add">
                 <i class="fa fa-plus"></i> 新增
             </button>
 			<button class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="system:dict:batchRemove">

@@ -1,7 +1,7 @@
 # 项目名称、版本、版权年份
 ruoyi:
   name: RuoYi
-  version: 1.1.4
+  version: 1.1.5
   copyrightYear: 2018
   profile: D:/profile/
 
@@ -66,7 +66,7 @@ shiro:
     # 首页地址
     indexUrl: /index
     # 验证码开关
-    captchaEbabled: true
+    captchaEbabled: false
     # 验证码类型 math 数组计算 char 字符
     captchaType: math
   cookie:

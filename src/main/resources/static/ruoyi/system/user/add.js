@@ -91,7 +91,7 @@ function add() {
 	var password = $("input[name='password']").val();
 	var email = $("input[name='email']").val();
 	var phonenumber = $("input[name='phonenumber']").val();
-	var sex = $("input[name='sex']:checked").val();
+	var sex = $("#sex option:selected").val();
 	var status = $("input[name='status']").is(':checked') == true ? 0 : 1;
 	var roleIds = $.getCheckeds("role");
 	var postIds = $.getSelects("post");
