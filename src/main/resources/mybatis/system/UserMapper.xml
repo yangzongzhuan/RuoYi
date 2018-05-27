@@ -35,13 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<select id="selectUserList" parameterType="User" resultMap="UserResult">
-		select user_id, dept_id, login_name, user_name, email, phonenumber, password, sex, avatar, salt, status, create_by, create_time, remark from sys_user
-		where status in (0,1)
+		select u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.password, u.sex, u.avatar, u.salt, u.status, u.create_by, u.create_time, u.remark, d.dept_name from sys_user u
+		left join sys_dept d on u.dept_id = d.dept_id
+		where u.status in (0,1)
 		<if test="searchValue != null and searchValue != ''">
-			AND login_name like concat(concat('%', #{searchValue}), '%')
+			AND u.login_name like concat(concat('%', #{searchValue}), '%')
 		</if>
 		<if test="deptId != null and parentId != null and parentId != 0">
-			AND dept_id IN (SELECT dept_id FROM sys_dept WHERE dept_id = #{deptId} OR parent_id = #{deptId})
+			AND u.dept_id IN (SELECT t.dept_id FROM sys_dept t WHERE t.dept_id = #{deptId} OR t.parent_id = #{deptId})
 		</if>
 	</select>
 	
