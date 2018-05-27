@@ -25,7 +25,7 @@ user:
 #Spring配置
 spring:
   thymeleaf:
-    mode: LEGACYHTML5
+    mode: HTML
     cache: false
   messages:
     #国际化资源文件路径

@@ -24,6 +24,10 @@ function queryUserList() {
             title: '用户名称'
         },
         {
+            field: 'dept.deptName',
+            title: '部门'
+        },
+        {
             field: 'email',
             title: '邮箱'
         },
