@@ -29,6 +29,10 @@ $(function() {
             title: '主机'
         },
         {
+            field: 'operLocation',
+            title: '操作地点'
+        },
+        {
             field: 'status',
             title: '操作状态',
             align: 'center',

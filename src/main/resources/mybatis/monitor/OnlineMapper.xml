@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="loginName"         column="login_name"        />
 		<result property="deptName"          column="dept_name"         />
 		<result property="ipaddr"            column="ipaddr"            />
+		<result property="longinLocation"   column="login_location"     />
 		<result property="browser"           column="browser"           />
 		<result property="os"                column="os"                />
 		<result property="status"            column="status"            />
@@ -32,8 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="saveOnline" parameterType="UserOnline">
-		replace into sys_user_online(sessionId, login_name, dept_name, ipaddr, browser, os, status, start_timestsamp, last_access_time, expire_time) 
-        values (#{sessionId}, #{loginName}, #{deptName}, #{ipaddr}, #{browser}, #{os}, #{status}, #{startTimestamp}, #{lastAccessTime}, #{expireTime})
+		replace into sys_user_online(sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, start_timestsamp, last_access_time, expire_time)
+        values (#{sessionId}, #{loginName}, #{deptName}, #{ipaddr}, #{longinLocation}, #{browser}, #{os}, #{status}, #{startTimestamp}, #{lastAccessTime}, #{expireTime})
 	</insert>
 	
  	<delete id="deleteOnlineById" parameterType="String">

@@ -17,6 +17,10 @@ $(function() {
             title: '主机'
         },
         {
+            field: 'loginLocation',
+            title: '登录地点'
+        },
+        {
             field: 'browser',
             title: '浏览器'
         },
