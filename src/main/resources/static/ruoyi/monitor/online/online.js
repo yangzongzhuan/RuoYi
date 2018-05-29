@@ -21,6 +21,10 @@ $(function() {
             title: '主机'
         },
         {
+            field: 'longinLocation',
+            title: '登录地点'
+        },
+        {
             field: 'browser',
             title: '浏览器'
         },

@@ -1,7 +1,8 @@
 package com.ruoyi.project.monitor.operlog.domain;
 
-import java.util.Date;
 import com.ruoyi.framework.web.domain.BaseEntity;
+
+import java.util.Date;
 
 /**
  * 操作日志记录 oper_log
@@ -29,6 +30,8 @@ public class OperLog extends BaseEntity
     private String operUrl;
     /** 操作地址 */
     private String operIp;
+    /** 操作地点*/
+    private  String operLocation;
     /** 请求参数 */
     private String operParam;
     /** 状态0正常 1异常 */
@@ -128,6 +131,14 @@ public class OperLog extends BaseEntity
         this.operIp = operIp;
     }
 
+    public String getOperLocation() {
+        return operLocation;
+    }
+
+    public void setOperLocation(String operLocation) {
+        this.operLocation = operLocation;
+    }
+
     public String getOperParam()
     {
         return operParam;
@@ -173,7 +184,7 @@ public class OperLog extends BaseEntity
     {
         return "OperLog [operId=" + operId + ", title=" + title + ", action=" + action + ", method=" + method
                 + ", channel=" + channel + ", loginName=" + loginName + ", deptName=" + deptName + ", operUrl="
-                + operUrl + ", operIp=" + operIp + ", operParam=" + operParam + ", status=" + status + ", errorMsg="
+                + operUrl + ", operIp=" + operIp + ", operLocation=" + operLocation + ", operParam=" + operParam + ", status=" + status + ", errorMsg="
                 + errorMsg + ", operTime=" + operTime + "]";
     }
 

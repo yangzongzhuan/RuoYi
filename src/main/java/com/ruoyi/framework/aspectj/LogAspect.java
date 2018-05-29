@@ -3,6 +3,7 @@ package com.ruoyi.framework.aspectj;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import com.ruoyi.common.utils.AddressUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -72,7 +73,7 @@ public class LogAspect
     }
 
     @Async
-    private void handleLog(final JoinPoint joinPoint, final Exception e)
+    protected void handleLog(final JoinPoint joinPoint, final Exception e)
     {
         try
         {
@@ -92,6 +93,9 @@ public class LogAspect
             // 请求的地址
             String ip = ShiroUtils.getIp();
             operLog.setOperIp(ip);
+            //操作地点
+            operLog.setOperLocation(AddressUtils.getRealAddressByIP(ip));
+
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
             if (currentUser != null)
             {

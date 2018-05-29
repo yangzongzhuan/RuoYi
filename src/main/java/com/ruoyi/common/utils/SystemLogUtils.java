@@ -33,6 +33,7 @@ public class SystemLogUtils
     {
         StringBuilder s = new StringBuilder();
         s.append(LogUtils.getBlock(ShiroUtils.getIp()));
+        s.append(AddressUtils.getRealAddressByIP(ShiroUtils.getIp()));
         s.append(LogUtils.getBlock(username));
         s.append(LogUtils.getBlock(status));
         s.append(LogUtils.getBlock(msg));
@@ -61,6 +62,7 @@ public class SystemLogUtils
         logininfor.setLoginName(username);
         logininfor.setStatus(status);
         logininfor.setIpaddr(ShiroUtils.getIp());
+        logininfor.setLoginLocation(AddressUtils.getRealAddressByIP(ShiroUtils.getIp()));
         logininfor.setBrowser(browser);
         logininfor.setOs(os);
         logininfor.setMsg(message);

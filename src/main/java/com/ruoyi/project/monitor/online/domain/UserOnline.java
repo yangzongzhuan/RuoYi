@@ -1,8 +1,10 @@
 package com.ruoyi.project.monitor.online.domain;
 
-import java.util.Date;
+import com.ruoyi.common.utils.AddressUtils;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.monitor.online.domain.OnlineSession.OnlineStatus;
+
+import java.util.Date;
 
 /**
  * 当前在线会话 sys_user_online
@@ -23,6 +25,9 @@ public class UserOnline extends BaseEntity
 
     /** 登录IP地址 */
     private String ipaddr;
+
+    /**登录地址*/
+    private String longinLocation;
 
     /** 浏览器类型 */
     private String browser;
@@ -58,6 +63,7 @@ public class UserOnline extends BaseEntity
         online.setLastAccessTime(session.getLastAccessTime());
         online.setExpireTime(session.getTimeout());
         online.setIpaddr(session.getHost());
+        online.setLonginLocation(AddressUtils.getRealAddressByIP(session.getHost()));
         online.setBrowser(session.getBrowser());
         online.setOs(session.getOs());
         online.setStatus(session.getStatus());
@@ -103,6 +109,14 @@ public class UserOnline extends BaseEntity
     public void setIpaddr(String ipaddr)
     {
         this.ipaddr = ipaddr;
+    }
+
+    public String getLonginLocation() {
+        return longinLocation;
+    }
+
+    public void setLonginLocation(String longinLocation) {
+        this.longinLocation = longinLocation;
     }
 
     public String getBrowser()
