@@ -240,6 +240,9 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
+        //强制退出时, 退出logout地址，shiro去清除session，防止出现shiro报没有权限错误。
+        filterChainDefinitionMap.put("/monitor/online/batchForceLogout", "logout");
+        filterChainDefinitionMap.put("/monitor/online/forceLogout/**", "logout");
         // 不需要拦截的访问
         filterChainDefinitionMap.put("/login", "anon,captchaValidate");
         // 系统权限列表
