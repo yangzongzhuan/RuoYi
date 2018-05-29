@@ -38,6 +38,7 @@
 		<velocity.version>1.7</velocity.version>
 		<quartz.version>2.3.0</quartz.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
+		<swagger.version>2.7.0</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -214,6 +215,20 @@
 					<groupId>javax.servlet</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- swagger2-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+
+		<!-- swagger2-UI-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
 		</dependency>
 		 
 	</dependencies>
