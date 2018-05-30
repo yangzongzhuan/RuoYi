@@ -62,7 +62,8 @@ public class AddressUtils {
             reader.close();
             return buffer.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("温馨提醒：您的主机已经断网，请您检查主机的网络连接");
+            System.out.println("根据IP获取所在位置----------错误消息："+e.getMessage());
         } finally {
             if (connection != null) {
                 connection.disconnect();
