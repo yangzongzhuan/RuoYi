@@ -13,7 +13,7 @@
 	   <div class="action"> 
 	       <div class="new-contentarea tc">
 	           <a href="javascript:void(0)" class="upload-img"> <label for="avatar">上传图像</label> </a> 
-	           <input type="file" class="" name="avatar" id="avatar" /> 
+	           <input type="file" class="" name="avatar" id="avatar" accept="image/*"/>
 	       </div> 
 	   <input type="button" id="btnCrop" class="Btnsty_peyton" value="裁切" /> 
 	   <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+" /> 
@@ -37,7 +37,12 @@ $(window).load(function() {
         var reader = new FileReader();
         reader.onload = function(e) {
             options.imgSrc = e.target.result;
-            cropper = $('.imageBox').cropbox(options);
+            //根据MIME判断上传的文件是不是图片类型
+            if((options.imgSrc).indexOf("image/")==-1){
+                alert("错误提示\n" + " 请上传图片类型!");
+            } else {
+                cropper = $('.imageBox').cropbox(options);
+            }
         }
         reader.readAsDataURL(this.files[0]);
     })
