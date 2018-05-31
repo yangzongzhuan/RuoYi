@@ -119,7 +119,7 @@ $(function(){
 			search: true,                 // 是否显示搜索框功能
 			singleSelect: false,          // 是否禁止多选
 	        iconSize: 'outline',          // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
-	        toolbar: '#toolbar',     // 指定工作栏
+	        toolbar: '#toolbar',          // 指定工作栏
 	        sidePagination: "server",     // 启用服务端分页 
 			showRefresh: true,            // 是否显示刷新按钮
 			showColumns: true,            // 是否显示隐藏某列下拉框

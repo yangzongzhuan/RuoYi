@@ -8,6 +8,7 @@ $("#form-post-add").validate({
 		},
 		postSort:{
 			required:true,
+			digits:true
 		},
 	},
 	submitHandler:function(form){

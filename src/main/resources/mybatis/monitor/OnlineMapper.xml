@@ -9,13 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="loginName"         column="login_name"        />
 		<result property="deptName"          column="dept_name"         />
 		<result property="ipaddr"            column="ipaddr"            />
-		<result property="longinLocation"   column="login_location"     />
+		<result property="longinLocation"    column="login_location"    />
 		<result property="browser"           column="browser"           />
 		<result property="os"                column="os"                />
 		<result property="status"            column="status"            />
 		<result property="startTimestamp"    column="start_timestsamp"  />
 		<result property="lastAccessTime"    column="last_access_time"  />
-		<result property="expireTime"        column="expire_time"     />
+		<result property="expireTime"        column="expire_time"       />
 		<association property="session" javaType="OnlineSession" resultMap="OnlineSessionResult" />
 	</resultMap>
 	

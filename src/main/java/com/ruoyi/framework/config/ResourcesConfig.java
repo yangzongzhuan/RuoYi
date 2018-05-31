@@ -15,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class ResourcesConfig extends WebMvcConfigurerAdapter
 {
-
     /**
      * 首页地址
      */
@@ -38,7 +37,7 @@ public class ResourcesConfig extends WebMvcConfigurerAdapter
     {
         registry.addResourceHandler("/profile/**").addResourceLocations("file:" + RuoYiConfig.getProfile());
 
-        /**swagger配置*/
+        /** swagger配置 */
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }

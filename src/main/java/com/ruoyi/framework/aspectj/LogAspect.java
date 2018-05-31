@@ -93,7 +93,7 @@ public class LogAspect
             // 请求的地址
             String ip = ShiroUtils.getIp();
             operLog.setOperIp(ip);
-            //操作地点
+            // 操作地点
             operLog.setOperLocation(AddressUtils.getRealAddressByIP(ip));
 
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());

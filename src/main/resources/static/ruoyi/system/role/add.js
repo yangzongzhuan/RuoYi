@@ -40,6 +40,7 @@ $("#form-role-add").validate({
 		},
 		roleSort:{
 			required:true,
+			digits:true
 		},
 	},
 	messages: {

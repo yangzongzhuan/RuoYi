@@ -12,9 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="channel"        column="channel"       />
 		<result property="loginName"      column="login_name"    />
 		<result property="deptName"       column="dept_name"     />
-		<result property="operUrl"        column="oper_url"     />
-		<result property="operIp"         column="oper_ip"      />
-		<result property="operLocation"   column="oper_location"    />
+		<result property="operUrl"        column="oper_url"      />
+		<result property="operIp"         column="oper_ip"       />
+		<result property="operLocation"   column="oper_location" />
 		<result property="operParam"      column="oper_param"    />
 		<result property="status"         column="status"        />
 		<result property="errorMsg"       column="error_msg"     />

@@ -6,6 +6,10 @@ $("#form-dict-edit").validate({
 		dictValue:{
 			required:true,
 		},
+		dictSort:{
+			required:true,
+			digits:true
+		},
 	},
 	submitHandler:function(form){
 		update();

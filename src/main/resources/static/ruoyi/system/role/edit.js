@@ -43,6 +43,7 @@ $("#form-role-edit").validate({
 		},
 		roleSort:{
 			required:true,
+			digits:true
 		},
 	},
 	messages: {

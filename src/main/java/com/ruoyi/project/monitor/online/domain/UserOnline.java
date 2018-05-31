@@ -3,7 +3,6 @@ package com.ruoyi.project.monitor.online.domain;
 import com.ruoyi.common.utils.AddressUtils;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.monitor.online.domain.OnlineSession.OnlineStatus;
-
 import java.util.Date;
 
 /**
@@ -26,7 +25,7 @@ public class UserOnline extends BaseEntity
     /** 登录IP地址 */
     private String ipaddr;
 
-    /**登录地址*/
+    /** 登录地址 */
     private String longinLocation;
 
     /** 浏览器类型 */
@@ -111,11 +110,13 @@ public class UserOnline extends BaseEntity
         this.ipaddr = ipaddr;
     }
 
-    public String getLonginLocation() {
+    public String getLonginLocation()
+    {
         return longinLocation;
     }
 
-    public void setLonginLocation(String longinLocation) {
+    public void setLonginLocation(String longinLocation)
+    {
         this.longinLocation = longinLocation;
     }
 

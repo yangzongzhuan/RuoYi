@@ -3,7 +3,7 @@ package com.ruoyi.project.tool.gen.util;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.velocity.VelocityContext;
-import com.ruoyi.common.constant.CommonConstant;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.CommonMap;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
@@ -105,7 +105,7 @@ public class GenUtils
      */
     public static String tableToJava(String tableName)
     {
-        if (CommonConstant.AUTO_REOMVE_PRE.equals(GenConfig.getAutoRemovePre()))
+        if (Constants.AUTO_REOMVE_PRE.equals(GenConfig.getAutoRemovePre()))
         {
             tableName = tableName.substring(tableName.indexOf("_") + 1);
         }

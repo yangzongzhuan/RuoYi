@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ruoyi.common.constant.CommonConstant;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
 import com.ruoyi.common.exception.user.UserPasswordRetryLimitExceedException;
 import com.ruoyi.common.utils.MessageUtils;
@@ -52,13 +52,13 @@ public class PasswordService
         }
         if (retryCount.incrementAndGet() > Integer.valueOf(maxRetryCount).intValue())
         {
-            SystemLogUtils.log(loginName, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount));
+            SystemLogUtils.log(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount));
             throw new UserPasswordRetryLimitExceedException(Integer.valueOf(maxRetryCount).intValue());
         }
 
         if (!matches(user, password))
         {
-            SystemLogUtils.log(loginName, CommonConstant.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount, password));
+            SystemLogUtils.log(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount, password));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         }

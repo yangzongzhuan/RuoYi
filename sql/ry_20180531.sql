@@ -160,7 +160,7 @@ insert into sys_menu values('12',  '登录日志', '2', '2', '/monitor/logininfo
 insert into sys_menu values('13',  '在线用户', '2', '3', '/monitor/online',     'C', '0', 'monitor:online:view',      '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '在线用户菜单');
 insert into sys_menu values('14',  '定时任务', '2', '4', '/monitor/job',        'C', '0', 'monitor:job:view',         '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '定时任务菜单');
 insert into sys_menu values('15',  '数据监控', '2', '5', '/monitor/data',       'C', '0', 'monitor:data:view',        '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '数据监控菜单');
-insert into sys_menu values('16',  '系统接口API', '2', '6', '/swagger-ui.html',  'C', '0', 'onitor:api:view',        '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统API菜单');
+insert into sys_menu values('16',  '系统接口', '2', '6', '/swagger-ui.html',    'C', '0', 'onitor:api:view',          '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统API菜单');
 insert into sys_menu values('17',  '表单构建', '3', '1', '/tool/build',         'C', '0', 'tool:build:view',          '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '表单构建菜单');
 insert into sys_menu values('18',  '代码生成', '3', '2', '/tool/gen',           'C', '0', 'tool:gen:view',            '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '代码生成菜单');
 -- 用户管理按钮
@@ -374,7 +374,7 @@ create table sys_oper_log (
   dept_name 		varchar(50)     default '' 		 	 	   comment '部门名称',
   oper_url 		    varchar(255) 	default '' 				   comment '请求URL',
   oper_ip 			varchar(30) 	default '' 				   comment '主机地址',
-  oper_location    varchar(255)     default ''                 comment '操作地点',
+  oper_location     varchar(255)    default ''                 comment '操作地点',
   oper_param 		varchar(255) 	default '' 				   comment '请求参数',
   status 			int(1) 		    default 0				   comment '操作状态 0正常 1异常',
   error_msg 		varchar(2000) 	default '' 				   comment '错误消息',
@@ -475,15 +475,15 @@ insert into sys_config values(2, '用户管理-账号初始密码',     'sys.use
 -- ----------------------------
 drop table if exists sys_logininfor;
 create table sys_logininfor (
-  info_id 		int(11) 	 not null auto_increment   comment '访问ID',
-  login_name 	varchar(50)  default '' 			   comment '登录账号',
-  ipaddr 		varchar(50)  default '' 			   comment '登录IP地址',
-  login_location   varchar(255)  default ''            comment '登录地点',
-  browser  		varchar(50)  default '' 			   comment '浏览器类型',
-  os      		varchar(50)  default '' 			   comment '操作系统',
-  status 		int(1) 		 default 0 			 	   comment '登录状态 0成功 1失败',
-  msg      		varchar(255) default '' 			   comment '提示消息',
-  login_time 	datetime                               comment '访问时间',
+  info_id 		 int(11) 	   not null auto_increment   comment '访问ID',
+  login_name 	 varchar(50)   default '' 			     comment '登录账号',
+  ipaddr 		 varchar(50)   default '' 			     comment '登录IP地址',
+  login_location varchar(255)  default ''                comment '登录地点',
+  browser  		 varchar(50)   default '' 			     comment '浏览器类型',
+  os      		 varchar(50)   default '' 			     comment '操作系统',
+  status 		 int(1) 	   default 0 			     comment '登录状态 0成功 1失败',
+  msg      		 varchar(255)  default '' 			     comment '提示消息',
+  login_time 	 datetime                                comment '访问时间',
   primary key (info_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '系统访问记录';
 
@@ -497,7 +497,7 @@ create table sys_user_online (
   login_name 	    varchar(50)  default '' 		 	 	comment '登录账号',
   dept_name 		varchar(50)  default '' 		 	 	comment '部门名称',
   ipaddr 		    varchar(50)  default '' 			 	comment '登录IP地址',
-  login_location   varchar(255) default ''                  comment '登录地点',
+  login_location    varchar(255) default ''                 comment '登录地点',
   browser  		    varchar(50)  default '' 			 	comment '浏览器类型',
   os      		    varchar(50)  default '' 			 	comment '操作系统',
   status      	    varchar(10)  default '' 			 	comment '在线状态on_line在线off_line离线',

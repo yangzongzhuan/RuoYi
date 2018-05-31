@@ -1,7 +1,6 @@
 package com.ruoyi.project.monitor.logininfor.domain;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
-
 import java.util.Date;
 
 /**
@@ -20,8 +19,8 @@ public class Logininfor extends BaseEntity
     private String status;
     /** 登录IP地址 */
     private String ipaddr;
-    /**登录地点*/
-    private  String loginLocation;
+    /** 登录地点 */
+    private String loginLocation;
     /** 浏览器类型 */
     private String browser;
     /** 操作系统 */
@@ -71,11 +70,13 @@ public class Logininfor extends BaseEntity
         this.ipaddr = ipaddr;
     }
 
-    public String getLoginLocation() {
+    public String getLoginLocation()
+    {
         return loginLocation;
     }
 
-    public void setLoginLocation(String loginLocation) {
+    public void setLoginLocation(String loginLocation)
+    {
         this.loginLocation = loginLocation;
     }
 
@@ -123,7 +124,8 @@ public class Logininfor extends BaseEntity
     public String toString()
     {
         return "Logininfor [infoId=" + infoId + ", loginName=" + loginName + ", status=" + status + ", ipaddr=" + ipaddr
-                + ",loginLocation="+loginLocation+", browser=" + browser + ", os=" + os + ", msg=" + msg + ", loginTime=" + loginTime + "]";
+                + ",loginLocation=" + loginLocation + ", browser=" + browser + ", os=" + os + ", msg=" + msg
+                + ", loginTime=" + loginTime + "]";
     }
 
 }

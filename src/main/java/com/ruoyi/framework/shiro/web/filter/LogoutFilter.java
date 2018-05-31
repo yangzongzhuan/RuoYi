@@ -6,7 +6,7 @@ import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ruoyi.common.constant.CommonConstant;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.SystemLogUtils;
@@ -51,7 +51,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                 {
                     String loginName = user.getLoginName();
                     // 记录用户退出日志
-                    SystemLogUtils.log(loginName, CommonConstant.LOGOUT, MessageUtils.message("user.logout.success"));
+                    SystemLogUtils.log(loginName, Constants.LOGOUT, MessageUtils.message("user.logout.success"));
                 }
                 // 退出登录
                 subject.logout();

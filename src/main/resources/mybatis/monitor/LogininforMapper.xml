@@ -5,15 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.project.monitor.logininfor.mapper.LogininforMapper">
 
 	<resultMap type="Logininfor" id="LogininforResult">
-		<id     property="infoId"      column="info_id"      />
-		<result property="loginName"   column="login_name"   />
-		<result property="status"      column="status"       />
-		<result property="ipaddr"      column="ipaddr"       />
-		<result property="loginLocation"      column="login_location"       />
-		<result property="browser"     column="browser"      />
-		<result property="os"          column="os"           />
-		<result property="msg"         column="msg"          />
-		<result property="loginTime"   column="login_time"    />
+		<id     property="infoId"        column="info_id"           />
+		<result property="loginName"     column="login_name"        />
+		<result property="status"        column="status"            />
+		<result property="ipaddr"        column="ipaddr"            />
+		<result property="loginLocation" column="login_location"    />
+		<result property="browser"       column="browser"           />
+		<result property="os"            column="os"                />
+		<result property="msg"           column="msg"               />
+		<result property="loginTime"     column="login_time"        />
 	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="Logininfor">

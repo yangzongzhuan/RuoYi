@@ -5,8 +5,12 @@ package com.ruoyi.common.constant;
  * 
  * @author ruoyi
  */
-public class CommonConstant
+public class Constants
 {
+    /**
+     * UTF-8 字符集
+     */
+    public static final String UTF8 = "UTF-8";
 
     /**
      * 通用成功标识

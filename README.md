@@ -27,7 +27,12 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 13. 在线构建器：拖动表单元素生成相应的HTML代码。
 14. 连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
-## 系统演示 [www.ruoyi.club](http://www.ruoyi.club)
+## 在线体验
+> admin/admin123
+
+地址：http://www.ruoyi.club
+
+## 演示图
 
 ![登录界面](https://static.oschina.net/uploads/space/2018/0524/212432_qg6h_1438828.png)
 

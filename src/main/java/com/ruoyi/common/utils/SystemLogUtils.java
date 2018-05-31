@@ -2,7 +2,7 @@ package com.ruoyi.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ruoyi.common.constant.CommonConstant;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.project.monitor.logininfor.domain.Logininfor;
@@ -40,13 +40,13 @@ public class SystemLogUtils
 
         sys_user_logger.info(s.toString(), args);
 
-        if (CommonConstant.LOGIN_SUCCESS.equals(status) || CommonConstant.LOGOUT.equals(status))
+        if (Constants.LOGIN_SUCCESS.equals(status) || Constants.LOGOUT.equals(status))
         {
-            saveOpLog(username, msg, CommonConstant.SUCCESS);
+            saveOpLog(username, msg, Constants.SUCCESS);
         }
-        else if (CommonConstant.LOGIN_FAIL.equals(status))
+        else if (Constants.LOGIN_FAIL.equals(status))
         {
-            saveOpLog(username, msg, CommonConstant.FAIL);
+            saveOpLog(username, msg, Constants.FAIL);
         }
     }
 
