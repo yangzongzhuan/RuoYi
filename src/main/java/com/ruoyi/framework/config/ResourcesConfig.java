@@ -35,6 +35,7 @@ public class ResourcesConfig extends WebMvcConfigurerAdapter
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
+        /** 头像上传路径 */
         registry.addResourceHandler("/profile/**").addResourceLocations("file:" + RuoYiConfig.getProfile());
 
         /** swagger配置 */
