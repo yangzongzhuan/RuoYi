@@ -22,16 +22,19 @@ function loading() {
         	field : 'orderNum',
 			title : '排序',
 			width : '10%',
+			align : "center"
         },
         {
         	field : 'url',
 			title : '请求地址',
 			width : '15%',
+			align : "center"
         },
         {
 			title : '类型',
 			field : 'menuType',
 			width : '10%',
+			align : "center",
 			formatter : function(item, index) {
 				if (item.menuType == 'M') {
 					return '<span class="label label-success">目录</span>';
@@ -48,6 +51,7 @@ function loading() {
             field: 'visible',
             title: '可见',
             width : '10%',
+            align : "center",
             formatter: function(row, index) {
                 if (row.visible == 0) {
                     return '<span class="badge badge-primary">显示</span>';
@@ -60,10 +64,12 @@ function loading() {
         	field : 'perms',
 			title : '权限标识',
 			width : '15%',
+			align : "center",
         },
         {
         	title : '操作',
 			width : '20%',
+			align : "center",
 			formatter : function(row, index) {
 				var actions = [];
 				actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" mce_href="#" onclick="edit(\'' + row.menuId + '\')"><i class="fa fa-edit"></i>编辑</a> ');

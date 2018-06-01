@@ -7,15 +7,17 @@ window.onload = function() {
 function loading() {
 	var columns = [{
         	field : 'deptName',
-			title : '部门名称'
+			title : '部门名称',
         },
         {
         	field : 'orderNum',
-			title : '排序'
+			title : '排序',
+			align : "center"
         },
         {
         	field : 'status',
 			title : '状态',
+			align : "center",
 			formatter : function(item, index) {
 				if (item.status == '0') {
 					return '<span class="badge badge-primary">正常</span>';
@@ -26,7 +28,8 @@ function loading() {
         },
         {
         	field: 'createTimeStr',
-			title : '创建时间'
+			title : '创建时间',
+			align : "center"
         },
         {
         	title : '操作',

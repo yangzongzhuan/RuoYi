@@ -73,16 +73,16 @@
                     hasSelectItem = true;
                     var td = $('<td style="text-align:center;width:36px"></td>');
                     if(column.radio){
-                        var _ipt = $('<input name="select_item" type="radio" value="'+item[options.id]+'"></input>');
+                        var _ipt = $('<input text="select_item" type="radio" value="'+item[options.id]+'"></input>');
                         td.append(_ipt);
                     }
                     if(column.checkbox){
-                        var _ipt = $('<input name="select_item" type="checkbox" value="'+item[options.id]+'"></input>');
+                        var _ipt = $('<input text="select_item" type="checkbox" value="'+item[options.id]+'"></input>');
                         td.append(_ipt);
                     }
                     tr.append(td);
                 }else{
-                    var td = $('<td style="'+((column.width)?('width:'+column.width):'')+'"></td>');
+                    var td = $('<td style="text-align:'+column.align+';'+((column.width)?('width:'+column.width):'')+'"></td>');
                     // 增加formatter渲染
                     if (column.formatter) {
                         td.html(column.formatter.call(this, item, index));
@@ -104,9 +104,9 @@
                 // 判断有没有选择列
                 if(i==0&&item.field=='selectItem'){
                     hasSelectItem = true;
-                    th = $('<th style="width:36px"></th>');
+                    th = $('<th style="text-align:'+item.valign+';width:36px"></th>');
                 }else{
-                    th = $('<th style="padding:10px;'+((item.width)?('width:'+item.width):'')+'"></th>');
+                    th = $('<th style="text-align:'+item.valign+';padding:10px;'+((item.width)?('width:'+item.width):'')+'"></th>');
                 }
                 th.text(item.title);
                 thr.append(th);
@@ -170,7 +170,7 @@
                     // 行点击选中事件
                     target.find("tbody").find("tr").click(function(){
                         if(hasSelectItem){
-                            var _ipt = $(this).find("input[name='select_item']");
+                            var _ipt = $(this).find("input[text='select_item']");
                             if(_ipt.attr("type")=="radio"){
                                 _ipt.prop('checked',true);
                                 target.find("tbody").find("tr").removeClass("treegrid-selected");
@@ -209,7 +209,7 @@
         // 为了兼容bootstrap-table的写法，统一返回数组，这里只返回了指定的id
         getSelections : function(target, data) {
             // 所有被选中的记录input
-            var _ipt = target.find("tbody").find("tr").find("input[name='select_item']:checked");
+            var _ipt = target.find("tbody").find("tr").find("input[text='select_item']:checked");
             var chk_value =[];
             // 如果是radio
             if(_ipt.attr("type")=="radio"){
