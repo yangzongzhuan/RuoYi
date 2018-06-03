@@ -42,7 +42,7 @@ public class RoleController extends BaseController
     }
 
     @RequiresPermissions("system:role:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Role role)
     {

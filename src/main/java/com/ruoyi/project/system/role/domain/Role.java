@@ -20,7 +20,7 @@ public class Role extends BaseEntity
     /** 角色排序 */
     private String roleSort;
     /** 角色状态:0正常,1禁用 */
-    private int status;
+    private Integer status;
     /** 用户是否存在此角色标识 默认不存在 */
     private boolean flag = false;
     /** 菜单组 */
@@ -66,12 +66,12 @@ public class Role extends BaseEntity
         this.roleSort = roleSort;
     }
 
-    public int getStatus()
+    public Integer getStatus()
     {
         return status;
     }
 
-    public void setStatus(int status)
+    public void setStatus(Integer status)
     {
         this.status = status;
     }

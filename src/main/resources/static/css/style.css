@@ -3631,11 +3631,11 @@ code {
     -o-border-image: none;
     border-image: none;
     border-style: solid solid none;
-    border-width: 4px 0px 0;
+    border-width: 0px 0px 0;
     color: inherit;
     margin-bottom: 0;
     padding: 14px 15px 7px;
-    min-height: 48px;
+    min-height: 40px;
 }
 
 .ibox-content {
@@ -3719,7 +3719,7 @@ table.table-mail tr td {
 .ibox-tools a {
     cursor: pointer;
     margin-left: 5px;
-    color: #c4c4c4;
+    color: #676a6c;
 }
 
 .ibox-tools a.btn-primary {

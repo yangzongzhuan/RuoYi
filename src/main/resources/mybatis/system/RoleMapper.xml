@@ -20,8 +20,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectRoleList" parameterType="Role" resultMap="RoleResult">
 		select role_id, role_name, role_key, role_sort, status, create_time, remark from sys_role
 		<where>
-			<if test="searchValue != null and searchValue != ''">
-				AND role_name like concat(concat('%', #{searchValue}), '%') OR role_key like concat(concat('%', #{searchValue}), '%')
+			<if test="roleName != null and roleName != ''">
+				AND role_name like concat(concat('%', #{roleName}), '%')
+			</if>
+			<if test="roleKey != null and roleKey != ''">
+				AND role_key like concat(concat('%', #{roleKey}), '%')
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
 			</if>
 		</where>
 	</select>

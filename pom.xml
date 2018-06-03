@@ -5,7 +5,7 @@
 
 	<groupId>com.ruoyi</groupId>
 	<artifactId>RuoYi</artifactId>
-	<version>1.1.5</version>
+	<version>1.1.6</version>
 	<packaging>jar</packaging>
 
 	<name>RuoYi</name>
@@ -39,6 +39,7 @@
 		<quartz.version>2.3.0</quartz.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<swagger.version>2.7.0</swagger.version>
+		<jsoup.version>1.11.3</jsoup.version>
 	</properties>
 
 	<dependencies>
@@ -80,6 +81,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		
+		<!-- spring-boot-devtools -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional> <!-- 表示依赖不会传递 -->
 		</dependency>
 		
 		<!-- thymeleaf网页解析 -->
@@ -230,6 +238,13 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
+		
+		<!-- HTML解析器 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
 		 
 	</dependencies>
 	
@@ -240,7 +255,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<executable>true</executable>
+					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
 				</configuration>
 			</plugin>
 		</plugins>
