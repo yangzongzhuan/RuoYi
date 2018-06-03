@@ -22,7 +22,7 @@
 					<div class="col-lg-3">
 						<div class="input-group">
 							<div class="input-group-btn">
-								<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">角色名称</button>
+								<button class="btn btn-white" type="button">角色名称</button>
 							</div>
 							<input type="text" class="form-control" id="roleName" placeholder="角色名称">
 						</div>
@@ -31,16 +31,16 @@
 					<div class="col-lg-3">
 						<div class="input-group">
 							<div class="input-group-btn">
-								<button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">权限字符</button>
+								<button class="btn btn-white" type="button">权限字符</button>
 							</div>
-							 <input type="text" class="form-control" id="roleKey" placeholder="帐号/姓名/手机号">
+							 <input type="text" class="form-control" id="roleKey" placeholder="权限字符">
 						 </div>
 					</div>
 						
 					<div class="col-lg-3">
 						<div class="input-group">
 							 <div class="input-group-btn">
-								 <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button">角色状态</button>
+								 <button class="btn btn-white" type="button">角色状态</button>
 							 </div>
 							 <select class="form-control input-s-sm inline" id="status" th:with="type=${@dictService.selectDictData('sys_normal_disable')}">
 								<option value="">请选择</option>
