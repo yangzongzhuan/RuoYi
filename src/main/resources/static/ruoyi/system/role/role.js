@@ -50,7 +50,7 @@ $(function() {
 	            }
 	        }]
 		};
-	$.ryTable.init(options);
+	$.table.init(options);
 });
 
 /*角色管理-搜索*/

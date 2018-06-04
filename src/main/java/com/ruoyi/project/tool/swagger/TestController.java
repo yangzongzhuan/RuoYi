@@ -38,17 +38,17 @@ public class TestController
 
     @ApiOperation("新增用户")
     @PostMapping("save")
-    public Message save(Test Test)
+    public Message save(Test test)
     {
-        return testList.add(Test) ? Message.success() : Message.error();
+        return testList.add(test) ? Message.success() : Message.error();
     }
 
     @ApiOperation("更新用户")
     @ApiImplicitParam(name = "Test", value = "单个用户信息", dataType = "Test")
     @PutMapping("update")
-    public Message update(Test Test)
+    public Message update(Test test)
     {
-        return testList.remove(Test) && testList.add(Test) ? Message.success() : Message.error();
+        return testList.remove(test) && testList.add(test) ? Message.success() : Message.error();
     }
 
     @ApiOperation("删除用户")

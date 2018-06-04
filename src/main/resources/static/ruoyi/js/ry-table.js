@@ -4,12 +4,12 @@
  */
 (function($) {
     $.extend({
-        ryTable: {
+        table: {
             _option: {},
             _params: {},
             init: function(options) {
-                $.ryTable._option = options;
-                $.ryTable._params = options.queryParams == null ? $.ryTable.queryParams : options.queryParams;
+                $.table._option = options;
+                $.table._params = options.queryParams == null ? $.table.queryParams : options.queryParams;
                 $('.bootstrap-table').bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
@@ -24,7 +24,7 @@
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
                     pageSize: 10,                                       // 每页的记录行数（*） 
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）
-                    queryParams: $.ryTable._params,                     // 传递参数（*）
+                    queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns                            // 显示列信息（*）
                 });
             },
@@ -40,20 +40,9 @@
             },
             refresh: function() {
                 $(".bootstrap-table").bootstrapTable('refresh', {
-                    url: $.ryTable._option.url
+                    url: $.table._option.url
                 });
             }
         }
     });
 })(jQuery);
-
-function default_params(params) {
-	return {
-		// 传递参数查询参数
-		pageSize:       params.limit,
-		pageNum:        params.offset / params.limit + 1,
-		searchValue:    params.search,
-		orderByColumn:  params.sort,
-		isAsc:          params.order
-	};
-}
