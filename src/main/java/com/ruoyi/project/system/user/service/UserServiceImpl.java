@@ -401,11 +401,6 @@ public class UserServiceImpl implements IUserService
             //用户和岗位关联
             List<UserPost> userPosts=new ArrayList<UserPost>();
           for(User test:users){
-              System.out.println("userID="+test.getUserId());
-              System.out.println("username="+test.getUserName());
-              System.out.println("useroleids"+Arrays.toString(test.getRoleIds()));
-              System.out.println("userpostids"+Arrays.toString(test.getPostIds()));
-
               //添加用户-角色关联表
               for(int q=0;q<test.getRoleIds().length;q++){
                     UserRole userRole=new UserRole();
