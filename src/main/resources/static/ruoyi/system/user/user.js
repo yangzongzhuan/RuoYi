@@ -5,7 +5,10 @@ $(document).ready(function(){
 	$('body').layout({ west__size: 185 });
 	queryUserList();
 	queryDeptTreeDaTa();
+	//加载文件输入框
+    fileinputlist();
 });
+
 
 function queryUserList() {
 	var columns = [{
@@ -119,7 +122,25 @@ function queryDeptTreeDaTa()
 	    loadTree();
 	});
 }
-
+/** 初始化文件框*/
+function fileinputlist(){
+    $('#uploadfile').fileinput({
+        language: 'zh', //设置语言
+        showPreview: false,//是否显示预览,不写默认为true
+        showUpload: false, //是否显示上传按钮,跟随文本框的那个
+        showRemove : true, //显示移除按钮,跟随文本框的那个
+        showCaption: true,//是否显示标题,就是那个文本框
+        uploadAsync : false, //默认异步上传
+        elErrorContainer: '#upload-file-errors',
+        maxFileCount: 1, //表示允许同时上传的最大文件个数
+        maxFileSize: 102400,      //单位为kb，如果为0表示不限制文件大小
+        enctype: 'multipart/form-data',
+        dropZoneTitle: '拖拽文件到这里 &hellip;<br>仅仅支持单个文件同时上传',//重新定义提示
+        msgFilesTooMany: '选择上传的文件数量({n}) 超过允许的最大数值{m}！',
+        allowedFileExtensions: ["xls", "xlsx"],
+        uploadUrl: prefix+'/batchAdd'
+    });
+}
 /*用户管理-部门*/
 function dept() {
 	var url = ctx + "system/dept";
@@ -143,6 +164,42 @@ function edit(userId) {
 function add() {
     var url = prefix + '/add';
     layer_showAuto("新增用户", url);
+}
+/*用户管理-批量新增*/
+function batchAdd() {
+    //文件默认上传方法,传ID:uploadfile
+    $('#uploadfile').fileinput("upload");
+    //同步上传错误处理
+    $('#uploadfile').on('filebatchuploaderror', function(event, data, msg) {
+        // get message
+        $.modalAlert(msg, "error");
+        //重置
+        $('#uploadfile').fileinput("clear");
+        $('#uploadfile').fileinput("reset");
+        $('#uploadfile').fileinput('refresh');
+        $('#uploadfile').fileinput('enable');
+    });
+    //同步上传后从后台返回结果
+    $('#uploadfile').on('filebatchuploadsuccess', function(event, data, previewId, index) {
+        var result = data.response;
+        if (result.code == 0) {
+            //刷新数据表格
+            $('.bootstrap-table').bootstrapTable('refresh');
+            var count = result.msg;
+            $.modalAlert("成功导入"  +count+ "条数据","success");
+            $('#uploadfile').fileinput('reset');
+            $('#exampleModal').modal('hide');
+
+        } else {
+            $.modalAlert(result.msg, "error");
+            //重置
+            $('#uploadfile').fileinput("clear");
+            $('#uploadfile').fileinput("reset");
+            $('#uploadfile').fileinput('refresh');
+            $('#uploadfile').fileinput('enable');
+        }
+    });
+
 }
 
 /*用户管理-重置密码*/

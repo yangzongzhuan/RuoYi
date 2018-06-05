@@ -1,7 +1,9 @@
 package com.ruoyi.project.system.user.service;
 
-import java.util.List;
 import com.ruoyi.project.system.user.domain.User;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * 用户 业务层
@@ -132,5 +134,12 @@ public interface IUserService
      * @return 结果
      */
     public String selectUserPostGroup(Long userId);
+
+    /**
+     *   Excel批量导入用户
+     * @param myFile
+     * @return
+     */
+    public  int batchImportUsers(MultipartFile myFile);
 
 }

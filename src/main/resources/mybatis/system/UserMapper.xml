@@ -159,5 +159,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			sysdate()
  		)
 	</insert>
+
+	<insert id="batchAddUser" useGeneratedKeys="true" keyProperty="userId" >
+		insert into sys_user(
+		dept_id,
+	    login_name,
+	    user_name,
+		email,
+		phonenumber,
+		sex,
+		password,
+		salt,
+		status,
+		create_by,
+		remark,
+		create_time
+		)values
+		<foreach item="item" index="index" collection="list" separator=",">
+		(
+		#{item.deptId},
+		#{item.loginName},
+		#{item.userName},
+		#{item.email},
+		#{item.phonenumber},
+		#{item.sex},
+		#{item.password},
+		#{item.salt},
+	    #{item.status},
+		#{item.createBy},
+		#{item.remark},
+		sysdate()
+		)
+		</foreach>
+	</insert>
 	
 </mapper> 

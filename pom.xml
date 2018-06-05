@@ -40,6 +40,7 @@
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<swagger.version>2.7.0</swagger.version>
 		<jsoup.version>1.11.3</jsoup.version>
+		<poi.version>3.17</poi.version>
 	</properties>
 
 	<dependencies>
@@ -81,13 +82,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-		
-		<!-- spring-boot-devtools -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional> <!-- 表示依赖不会传递 -->
 		</dependency>
 		
 		<!-- thymeleaf网页解析 -->
@@ -238,14 +232,25 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		
 		<!-- HTML解析器 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
 		</dependency>
-		 
+
+		<!-- POI-->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
 	</dependencies>
 	
 	<build>
@@ -255,7 +260,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+					<executable>true</executable>
 				</configuration>
 			</plugin>
 		</plugins>
