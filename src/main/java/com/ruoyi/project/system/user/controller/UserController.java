@@ -1,5 +1,6 @@
 package com.ruoyi.project.system.user.controller;
 
+import com.ruoyi.common.exception.user.UserException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -186,8 +187,8 @@ public class UserController extends BaseController
                 return Message.success(String.valueOf(rows));
             }
             return Message.error();
-        }catch (Exception e){
-            log.error("批量添加用户失败 !", e);
+        }catch (UserException e){
+            log.error("批量添加用户失败 !---{}", e.getMessage());
             return Message.error(e.getMessage());
         }
     }

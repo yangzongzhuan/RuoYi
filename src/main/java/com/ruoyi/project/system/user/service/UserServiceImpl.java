@@ -210,23 +210,26 @@ public class UserServiceImpl implements IUserService
         Workbook workbook=null;
         //获取文件名
         String filename=myFile.getOriginalFilename();
-        log.info("【ExeclfileName】{}",filename);
-         //根据文件名判断文件是2003版本还是2007版本
-        if(ExcelImportUtils.isExcel2003(filename)){
-            try {
-                workbook=new HSSFWorkbook(myFile.getInputStream());//2003版本
-            }catch (IOException e){
-              log.error("获取Excel2003流错误"+e.getMessage());
+        log.info("【ExeclfileName】={}",filename);
+        if(StringUtils.isNotEmpty(filename)){
+            //根据文件名判断文件是2003版本还是2007版本
+            if(ExcelImportUtils.isExcel2003(filename)){
+                try {
+                    workbook=new HSSFWorkbook(myFile.getInputStream());//2003版本
+                }catch (IOException e){
+                    throw new UserException("user.import.excel.fileinput.error",null);
+                }
+            }else if(ExcelImportUtils.isExcel2007(filename)){
+                try {
+                    workbook=new XSSFWorkbook(myFile.getInputStream());//2007以上版本
+                }catch (IOException e){
+                    throw new UserException("user.import.excel.fileinputx.error",null);
+                }
+            }else{
+                throw new UserException("user.import.excel.filetype.error",null);
             }
-        }else  if(ExcelImportUtils.isExcel2007(filename)){
-            try {
-                workbook=new XSSFWorkbook(myFile.getInputStream());//2007以上版本
-            }catch (IOException e){
-                log.error("获取Excel2007以上版本流错误"+e.getMessage());
-            }
-        }else{
-
-            throw new UserException("1000",new Object[]{"文件不是Excel格式"});
+        }else {
+           throw new  UserException("user.import.excel.file.error",null);
         }
         //得到第一个sheet
         Sheet sheet = workbook.getSheetAt(0);
@@ -236,9 +239,9 @@ public class UserServiceImpl implements IUserService
         //新建用户list
         List<User> users=new ArrayList<User>();
 
-        List<Dept> depts;
-        List<Role> roles;
-        List<Post> posts;
+        List<Dept> depts=new ArrayList<Dept>();
+        List<Role> roles=new ArrayList<Role>();
+        List<Post> posts=new ArrayList<Post>();
 
         //如果行数为空
         /**
@@ -247,14 +250,16 @@ public class UserServiceImpl implements IUserService
          *     获取有记录的行数，即：最后有数据的行是第n行，前面有m行是空行没数据，则返回n-m；
          */
         if((totalRows==0)&&(sheet.getPhysicalNumberOfRows()==0)){
-            throw new UserException("1001",new Object[]{"数据为空 请填写数据"});
-        }else{
+            throw new UserException("user.import.excel.null",null);
+        }else if((totalRows==0)&&(sheet.getPhysicalNumberOfRows()==1)){
+            throw new UserException("user.import.excel.data.null",null);
+        } else{
             //获取全部部门信息
-              depts=deptService.selectDeptAll();
+            depts=deptService.selectDeptAll();
             //获取全部角色信息
-              roles=roleMapper.selectRolesAll();
+            roles=roleMapper.selectRolesAll();
             //获取全部岗位信息
-              posts=postMapper.selectPostAll();
+            posts=postMapper.selectPostAll();
         }
 
        for(int i=1;i<=totalRows;i++){
@@ -270,7 +275,7 @@ public class UserServiceImpl implements IUserService
                  if(checkLoginNameUnique(userName).equals(UserConstants.USER_NAME_UNIQUE)){
                      user.setLoginName(userName);
                  }else {
-                     log.error("【rows】{}行用户名已经存在",i+1);
+                     log.error("【rows】{}行用户名{}已经存在",i+1,userName);
                      continue;
                  }
                }
@@ -290,8 +295,13 @@ public class UserServiceImpl implements IUserService
                }
                //密码
                String passWord=ExcelImportUtils.getCellValue(row.getCell(3));
-               user.randomSalt();
-               user.setPassword(passwordService.encryptPassword(userName, passWord, user.getSalt()));
+               if(passWord.isEmpty()){
+                   continue;
+               }else{
+                   user.randomSalt();
+                   user.setPassword(passwordService.encryptPassword(userName, passWord, user.getSalt()));
+               }
+
                //部门
                String dept=ExcelImportUtils.getCellValue(row.getCell(4));
                if(StringUtils.isNotEmpty(dept)){
@@ -308,7 +318,7 @@ public class UserServiceImpl implements IUserService
                if(StringUtils.isNotEmpty(userRolesExcel)){
                    //Set可以去掉重复的值，
                    Set<Long> sets=new HashSet<Long>();
-                   //判断是否有"," 号
+                   //判断是否有英文的"," 号
                    if(userRolesExcel.contains(",")){
                        List<String> results= Arrays.asList(userRolesExcel.split(","));
                        for(String s:results){
@@ -330,9 +340,9 @@ public class UserServiceImpl implements IUserService
 
                    }
                    for(Long longTes:sets){
-                       log.info("username={},longTes={}",userName,longTes);
+                       log.info("用户名={},角色ID={}",userName,longTes);
                    }
-                   user.setRoleIds((Long[]) sets.toArray(new Long[sets.size()]));
+                   user.setRoleIds(sets.toArray(new Long[sets.size()]));
                }
 
                //岗位--多个岗位以","分割
@@ -340,7 +350,7 @@ public class UserServiceImpl implements IUserService
                if(StringUtils.isNotEmpty(userPostExcel)){
                    //去掉重复的值，
                    Set<Long> setPosts=new HashSet<Long>();
-                   //判断是否有"," 号
+                   //判断是否有英文的"," 号
                    if(userPostExcel.contains(",")){
                        List<String> resultsp= Arrays.asList(userPostExcel.split(","));
                        for(String p:resultsp){
@@ -363,9 +373,9 @@ public class UserServiceImpl implements IUserService
                    }
 
                    for(Long longTest:setPosts){
-                       log.info("username={},longTest={}",userName,longTest);
+                       log.info("用户名={},岗位ID={}",userName,longTest);
                    }
-                   user.setPostIds((Long[]) setPosts.toArray(new Long[setPosts.size()]));
+                   user.setPostIds(setPosts.toArray(new Long[setPosts.size()]));
                }
 
                //手机号
@@ -394,7 +404,7 @@ public class UserServiceImpl implements IUserService
            //批量插入用户
             realRow=userMapper.batchAddUser(users);
        }
-       System.out.println(realRow);
+        log.info("成功导入用户共{}个",realRow);
         if(realRow>0){
             //用户和角色关联
             List<UserRole> userRoles=new ArrayList<UserRole>();
@@ -407,7 +417,6 @@ public class UserServiceImpl implements IUserService
                     userRole.setUserId(test.getUserId());
                     userRole.setRoleId(test.getRoleIds()[q]);
                     userRoles.add(userRole);
-
               }
 
               for(int r=0;r<test.getPostIds().length;r++){
@@ -420,12 +429,11 @@ public class UserServiceImpl implements IUserService
           }
             //批量添加用户-角色关联数据
             userRoleMapper.batchUserRole(userRoles);
-
+            log.info("成功导入用户-角色关联数据");
           //批量添加用户-岗位关联数据
             userPostMapper.batchUserPost(userPosts);
-;
+            log.info("成功导入用户-岗位关联数据");
         }
-
         return  realRow;
     }
 
