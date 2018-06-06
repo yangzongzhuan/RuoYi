@@ -1,7 +1,8 @@
 package com.ruoyi.project.system.user.mapper;
 
-import java.util.List;
 import com.ruoyi.project.system.user.domain.User;
+
+import java.util.List;
 
 /**
  * 用户表 数据层
@@ -108,4 +109,12 @@ public interface UserMapper
      * @return 结果
      */
     public User checkEmailUnique(String email);
+
+
+    /**
+     * 批量添加用户
+     * @param userList
+     * @return
+     */
+   public int batchAddUser(List<User> userList);
 }

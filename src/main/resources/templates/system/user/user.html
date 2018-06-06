@@ -6,6 +6,9 @@
 <link href="/ruoyi/css/RuoYi.css" th:href="@{/ruoyi/css/RuoYi.css}" rel="stylesheet"/>
 <link href="/ajax/libs/jquery-layout/jquery.layout-latest.css" th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
 <link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<!--  文件输入框-->
+<link href="/css/plugins/fileinput/fileinput.min.css" th:href="@{/css/plugins/fileinput/fileinput.min.css}" rel="stylesheet"/>
+
 <body class="white-bg">
 	<div class="ui-layout-west">
 	<div class="main-content">
@@ -33,6 +36,10 @@
         	<button class="btn btn-outline btn-default" onclick="javascript:add()" shiro:hasPermission="system:user:add">
                 <i class="fa fa-plus"></i> 新增
             </button>
+			<button class="btn btn-outline btn-default" data-toggle="modal" data-target="#exampleModal" shiro:hasPermission="system:user:batchAdd">
+				<i class="fa fa-plus-square"></i> 批量新增
+			</button>
+
             <button class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="system:user:batchRemove">
                 <i class="fa fa-trash-o"></i> 删除
             </button>
@@ -43,10 +50,46 @@
 			   data-sort-name="create_time" data-sort-order="desc">
 		</table>
 	</div>
+	<!-- Modal -->
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="exampleModalLabel">导入Execl表</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<a  class="btn" style="font-size:15px" href="../static/template/用户导入模板.xlsx" th:href="@{/template/用户导入模板.xlsx}">
+						用户导入模板.xlsx
+					</a>
+				</div>
+					<div class="modal-body">
+						<div class="file-loading">
+							<input id="uploadfile" name="uploadfile" multiple type="file" accept=".xls,.xlsx">
+						</div>
+						<div id="upload-file-errors"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" onclick="javascript:batchAdd()">保存</button>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
 	<div th:include="include :: footer"></div>
 	<script src="/ruoyi/system/user/user.js" th:src="@{/ruoyi/system/user/user.js}"></script>
 	<script src="/ajax/libs/jquery-layout/jquery.layout-latest.js" th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
 	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js" th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+
+	<!--  文件输入框-->
+	<script src="/js/plugins/fileinput/fileinput.min.js" th:src="@{/js/plugins/fileinput/fileinput.min.js}"></script>
+	<script src="/js/plugins/fileinput/locales/zh.js" th:src="@{/js/plugins/fileinput/locales/zh.js}"></script>
+	<script src="/js/plugins/fileinput/plugins/piexif.js" th:src="@{/js/plugins/fileinput/plugins/piexif.js}"></script>
+	<script src="/js/plugins/fileinput/plugins/purify.js" th:src="@{/js/plugins/fileinput/plugins/purify.js}"></script>
+	<script src="/js/plugins/fileinput/plugins/sortable.js" th:src="@{/js/plugins/fileinput/plugins/sortable.js}"></script>
+
 	<script th:inline="javascript">
 		var editFlag = [[${@permissionService.hasPermi('system:user:edit')}]];
 		var removeFlag = [[${@permissionService.hasPermi('system:user:remove')}]];
