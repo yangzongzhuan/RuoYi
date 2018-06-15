@@ -40,7 +40,7 @@ public class JobController extends BaseController
     }
 
     @RequiresPermissions("monitor:job:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Job job)
     {

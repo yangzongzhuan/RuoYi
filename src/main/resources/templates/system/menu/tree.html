@@ -30,8 +30,8 @@ button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
 		<a class="layui-layer-btn1" th:onclick="'javascript:layer_close()'"><i class="fa fa-close"></i> 关闭</a>
 	</div>
 	<div th:include="include::footer"></div>
-	<script src="/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js" th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
-	<script src="/ruoyi/system/menu/tree.js" th:src="@{/ruoyi/system/menu/tree.js}"></script>
+	<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+	<script th:src="@{/ruoyi/system/menu/tree.js}"></script>
 	<script th:inline="javascript">
 		var treeName = [[${treeName}]];
 		$("#treeName").val(treeName);

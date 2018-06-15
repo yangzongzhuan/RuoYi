@@ -16,7 +16,7 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script src="/ruoyi/system/dept/dept.js" th:src="@{/ruoyi/system/dept/dept.js}"></script>
+	<script th:src="@{/ruoyi/system/dept/dept.js}"></script>
 	<script th:inline="javascript">
 		var addFlag = [[${@permissionService.hasPermi('system:dept:add')}]];
 		var editFlag = [[${@permissionService.hasPermi('system:dept:edit')}]];

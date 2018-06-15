@@ -39,7 +39,7 @@ public class DictDataController extends BaseController
         return prefix + "/data";
     }
 
-    @GetMapping("/list")
+    @PostMapping("/list")
     @RequiresPermissions("system:dict:list")
     @ResponseBody
     public TableDataInfo list(DictData dictData)

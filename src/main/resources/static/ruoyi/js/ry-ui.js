@@ -76,7 +76,7 @@ $(function(){
 	// 初始bootstrap table数据
 	$.initTable = function (_columns, _url) {
 	    $('.bootstrap-table').bootstrapTable({
-	        method: 'get',                // 请求方式（*）
+	        method: 'post',               // 请求方式（*）
 	        dataType: "json",             // 返回格式（*）
 	        url: _url,                    // 请求后台的URL（*）
 	        pagination: true,             // 是否显示分页（*）
@@ -93,6 +93,7 @@ $(function(){
 			showToggle: true,             // 是否显示详细视图和列表视图的切换按钮
 	        cache: false,                 // 是否使用缓存
 	        showExport: true,             // 是否支持导出文件
+	        contentType: "application/x-www-form-urlencoded",   // 编码类型
 	        queryParams: function(params) {
 	            return {
 	                // 传递参数查询参数
@@ -109,7 +110,7 @@ $(function(){
 	// 初始bootstrap table 自定义参数
 	$.initTableParams = function (_columns, _url, _queryParams) {
 	    $('.bootstrap-table').bootstrapTable({
-	        method: 'get',                // 请求方式（*）
+	        method: 'post',                // 请求方式（*）
 	        dataType: "json",             // 返回格式（*）
 	        url: _url,                    // 请求后台的URL（*）
 	        pagination: true,             // 是否显示分页（*）
@@ -126,6 +127,7 @@ $(function(){
 			showToggle: true,             // 是否显示详细视图和列表视图的切换按钮
 	        cache: false,                 // 是否使用缓存
 	        showExport: true,             // 是否支持导出文件
+	        contentType: "application/x-www-form-urlencoded",   // 编码类型
 	        queryParams: _queryParams,
 	        columns: _columns
 	    });

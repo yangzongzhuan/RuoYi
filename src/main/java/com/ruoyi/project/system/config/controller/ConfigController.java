@@ -43,7 +43,7 @@ public class ConfigController extends BaseController
      * 查询参数配置列表
      */
     @RequiresPermissions("system:config:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Config config)
     {

@@ -20,7 +20,7 @@
 		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script src="/ruoyi/system/dict/data/data.js" th:src="@{/ruoyi/system/dict/data/data.js}"></script>
+	<script th:src="@{/ruoyi/system/dict/data/data.js}"></script>
 	<script th:inline="javascript">
 		var editFlag = [[${@permissionService.hasPermi('system:dict:edit')}]];
 		var removeFlag = [[${@permissionService.hasPermi('system:dict:remove')}]];

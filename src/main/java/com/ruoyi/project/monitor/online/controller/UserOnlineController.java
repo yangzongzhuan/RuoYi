@@ -44,7 +44,7 @@ public class UserOnlineController extends BaseController
     }
 
     @RequiresPermissions("monitor:online:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(UserOnline userOnline)
     {

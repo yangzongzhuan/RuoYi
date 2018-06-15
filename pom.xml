@@ -40,7 +40,6 @@
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<swagger.version>2.7.0</swagger.version>
 		<jsoup.version>1.11.3</jsoup.version>
-		<poi.version>3.17</poi.version>
 	</properties>
 
 	<dependencies>
@@ -245,19 +244,6 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
-		</dependency>
-
-		<!-- POI-->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>${poi.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>${poi.version}</version>
 		</dependency>
 
 	</dependencies>

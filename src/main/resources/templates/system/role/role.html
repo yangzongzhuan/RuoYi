@@ -3,71 +3,22 @@
 	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<body class="white-bg">
-	<div class="row col-sm-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-title">
-				<h5>角色管理</h5>
-				<div class="ibox-tools">
-					<a href="javascript:add()" shiro:hasPermission="system:role:add">
-						<i class="fa fa-plus"></i>新增
-					</a>
-					<a href="javascript:batchRemove()" shiro:hasPermission="system:role:batchRemove">
-						<i class="fa fa-trash-o"></i>删除
-					</a>
-				</div>
-			</div>
-			<div class="ibox-content">
-				<div class="row">
-					<div class="col-xs-3">
-						<div class="input-group">
-							<div class="input-group-btn">
-								<button class="btn btn-white" type="button">角色名称</button>
-							</div>
-							<input type="text" class="form-control" id="roleName" placeholder="角色名称">
-						</div>
-					</div>
-						
-					<div class="col-xs-3">
-						<div class="input-group">
-							<div class="input-group-btn">
-								<button class="btn btn-white" type="button">权限字符</button>
-							</div>
-							 <input type="text" class="form-control" id="roleKey" placeholder="权限字符">
-						 </div>
-					</div>
-						
-					<div class="col-xs-3">
-						<div class="input-group">
-							 <div class="input-group-btn">
-								 <button class="btn btn-white" type="button">角色状态</button>
-							 </div>
-							 <select class="form-control input-s-sm inline" id="status" th:with="type=${@dictService.selectDictData('sys_normal_disable')}">
-								<option value="">请选择</option>
-								<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
-							</select>
-						 </div>
-					</div>
-						
-					<div class="col-xs-3">
-						<div class="col-lg-12 col-sm-12">
-							<button type="button" class="btn btn-primary" onclick="search()" id=""><i class="fa fa-search"></i>&nbsp;搜索</button>
-						</div>
-					</div>
-
-				</div>
-				
-				<div class="table-responsive">
-					<table class="bootstrap-table" data-mobile-responsive="true" 
-						data-sort-name="role_sort" data-sort-order="asc">
-					</table>
-				</div>
-			</div>
-		</div>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+		<div class="btn-group hidden-xs" id="toolbar" role="group">
+			<button class="btn btn-outline btn-default" onclick="javascript:add()" shiro:hasPermission="system:role:add">
+                <i class="fa fa-plus"></i> 新增
+            </button>
+			<button class="btn btn-outline btn-default" onclick="javascript:batchRemove()" shiro:hasPermission="system:role:batchRemove">
+	            <i class="fa fa-trash-o"></i> 删除
+	        </button>
+        </div>
+		<table class="bootstrap-table" data-mobile-responsive="true"
+			   data-sort-name="role_sort" data-sort-order="asc">
+		</table>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script src="../static/ruoyi/js/ry-table.js?v=1.1.6" th:src="@{/ruoyi/js/ry-table.js?v=1.1.6}"></script>
-	<script src="/ruoyi/system/role/role.js" th:src="@{/ruoyi/system/role/role.js}"></script>
+	<script th:src="@{/ruoyi/system/role/role.js}"></script>
 	<script th:inline="javascript">
 		var editFlag = [[${@permissionService.hasPermi('system:role:edit')}]];
 		var removeFlag = [[${@permissionService.hasPermi('system:role:remove')}]];

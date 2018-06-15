@@ -39,7 +39,7 @@ public class DictTypeController extends BaseController
         return prefix + "/type";
     }
 
-    @GetMapping("/list")
+    @PostMapping("/list")
     @RequiresPermissions("system:dict:list")
     @ResponseBody
     public TableDataInfo list(DictType dictType)

@@ -39,7 +39,7 @@ public class OperlogController extends BaseController
     }
 
     @RequiresPermissions("monitor:operlog:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(OperLog operLog)
     {

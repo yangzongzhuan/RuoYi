@@ -40,7 +40,7 @@ public class PostController extends BaseController
     }
 
     @RequiresPermissions("system:post:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Post post)
     {

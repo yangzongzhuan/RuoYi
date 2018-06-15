@@ -38,7 +38,7 @@ public class LogininforController extends BaseController
     }
 
     @RequiresPermissions("monitor:logininfor:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(Logininfor logininfor)
     {

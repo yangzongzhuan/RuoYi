@@ -1,6 +1,5 @@
 package com.ruoyi.project.system.user.controller;
 
-import com.ruoyi.common.exception.user.UserException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -14,15 +13,11 @@ import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.domain.UserStatus;
 import com.ruoyi.project.system.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 /**
@@ -34,7 +29,6 @@ import java.util.List;
 @RequestMapping("/system/user")
 public class UserController extends BaseController
 {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private String prefix = "system/user";
 
     @Autowired
@@ -54,7 +48,7 @@ public class UserController extends BaseController
     }
 
     @RequiresPermissions("system:user:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public TableDataInfo list(User user)
     {
@@ -169,28 +163,6 @@ public class UserController extends BaseController
             return Message.error("不允许修改超级管理员用户");
         }
         return userService.saveUser(user) > 0 ? Message.success() : Message.error();
-    }
-
-    /**
-     * 批量新增用户
-     */
-    @RequiresPermissions("system:user:batchAdd")
-    @Log(title = "系统管理", action = "用户管理-批量新增用户")
-    @PostMapping("/batchAdd")
-    @Transactional(rollbackFor = Exception.class)
-    @ResponseBody
-    public Message batchAdd( @RequestParam("uploadfile") MultipartFile file)
-    {
-        try {
-            if(!file.isEmpty()){
-               int rows=userService.batchImportUsers(file);
-                return Message.success(String.valueOf(rows));
-            }
-            return Message.error();
-        }catch (UserException e){
-            log.error("批量添加用户失败 !---{}", e.getMessage());
-            return Message.error(e.getMessage());
-        }
     }
 
     /**

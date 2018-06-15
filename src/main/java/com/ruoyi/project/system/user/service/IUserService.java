@@ -1,8 +1,6 @@
 package com.ruoyi.project.system.user.service;
 
 import com.ruoyi.project.system.user.domain.User;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 /**
@@ -28,7 +26,7 @@ public interface IUserService
      * @return 用户对象信息
      */
     public User selectUserByLoginName(String userName);
-    
+
     /**
      * 通过手机号码查询用户
      * 
@@ -36,7 +34,7 @@ public interface IUserService
      * @return 用户对象信息
      */
     public User selectUserByPhoneNumber(String phoneNumber);
-    
+
     /**
      * 通过邮箱查询用户
      * 
@@ -101,7 +99,6 @@ public interface IUserService
      */
     public String checkLoginNameUnique(String loginName);
 
-
     /**
      * 校验手机号码是否唯一
      *
@@ -109,7 +106,6 @@ public interface IUserService
      * @return 结果
      */
     public String checkPhoneUnique(User user);
-
 
     /**
      * 校验email是否唯一
@@ -134,12 +130,4 @@ public interface IUserService
      * @return 结果
      */
     public String selectUserPostGroup(Long userId);
-
-    /**
-     *   Excel批量导入用户
-     * @param myFile
-     * @return
-     */
-    public  int batchImportUsers(MultipartFile myFile);
-
 }
