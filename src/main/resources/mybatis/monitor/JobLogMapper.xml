@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sys_job_log
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND job_name like concat(concat('%', #{searchValue}), '%') OR method_name like concat(concat('%', #{searchValue}), '%')
+				AND job_name like concat('%', #{searchValue}, '%') OR method_name like concat('%', #{searchValue}, '%')
 			</if>
 		</where>
 	</select>

@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		left join sys_dept d on u.dept_id = d.dept_id
 		where u.status in (0,1)
 		<if test="searchValue != null and searchValue != ''">
-			AND u.login_name like concat(concat('%', #{searchValue}), '%')
+			AND u.login_name like concat('%', #{searchValue}, '%')
 		</if>
 		<if test="deptId != null and parentId != null and parentId != 0">
 			AND u.dept_id IN (SELECT t.dept_id FROM sys_dept t WHERE t.dept_id = #{deptId} OR t.parent_id = #{deptId})

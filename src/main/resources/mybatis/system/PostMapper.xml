@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select post_id, post_code, post_name, post_sort, status, create_by, create_time, remark from sys_post
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND post_code like concat(concat('%', #{searchValue}), '%') OR post_name like concat(concat('%', #{searchValue}), '%')
+				AND post_code like concat('%', #{searchValue}, '%') OR post_name like concat('%', #{searchValue}, '%')
 			</if>
 		</where>
 	</select>

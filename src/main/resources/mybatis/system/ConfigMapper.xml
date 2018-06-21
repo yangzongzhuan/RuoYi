@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select config_id, config_name, config_key, config_value, config_type, create_by, create_time, update_by, update_time, remark from sys_config
         <where>
 			<if test="searchValue != null and searchValue != ''">
-				AND config_name like concat(concat('%', #{searchValue}), '%') OR config_key like concat(concat('%', #{searchValue}), '%')
+				AND config_name like concat('%', #{searchValue}, '%') OR config_key like concat('%', #{searchValue}, '%')
 			</if>
 		</where>
     </select>

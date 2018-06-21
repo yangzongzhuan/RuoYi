@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from sys_oper_log
 		<where>
 			<if test="searchValue != null and searchValue != ''">
-				AND login_name like concat(concat('%', #{searchValue}), '%')
+				AND login_name like concat('%', #{searchValue}, '%')
 			</if>
 		</where>
 	</select>
