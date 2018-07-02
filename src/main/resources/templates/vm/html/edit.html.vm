@@ -4,14 +4,14 @@
 <head th:include="include :: header"></head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-${classname}-edit" th:object="${classname}">
-            <input id="${primaryKey.attrname}" name="${primaryKey.attrname}" th:field="*${${primaryKey.attrname}}"  type="hidden">
+        <form class="form-horizontal m" id="form-${classname}-edit" th:object="${${classname}}">
+            <input id="${primaryKey.attrname}" name="${primaryKey.attrname}" th:field="*{${primaryKey.attrname}}"  type="hidden">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName)
             <div class="form-group">	
                 <label class="col-sm-3 control-label">${column.columnComment}：</label>
                 <div class="col-sm-8">
-                    <input id="${column.attrname}" name="${column.attrname}" th:field="*${${column.attrname}}" class="form-control" type="text">
+                    <input id="${column.attrname}" name="${column.attrname}" th:field="*{${column.attrname}}" class="form-control" type="text">
                 </div>
             </div>
 #end
