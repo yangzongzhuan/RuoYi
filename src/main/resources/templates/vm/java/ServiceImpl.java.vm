@@ -1,0 +1,106 @@
+package ${package}.service;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.ruoyi.common.utils.StringUtils;
+import ${package}.mapper.${className}Mapper;
+import ${package}.domain.${className};
+import ${package}.service.I${className}Service;
+import com.ruoyi.common.support.Convert;
+
+/**
+ * ${tableComment} 服务层实现
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}ServiceImpl implements I${className}Service 
+{
+	@Autowired
+	private ${className}Mapper ${classname}Mapper;
+
+	/**
+     * 查询${tableComment}信息
+     * 
+     * @param ${primaryKey.attrname} ${tableComment}ID
+     * @return ${tableComment}信息
+     */
+    @Override
+	public ${className} select${className}ById(${primaryKey.attrType} ${primaryKey.attrname})
+	{
+	    return ${classname}Mapper.select${className}ById(${primaryKey.attrname});
+	}
+	
+	/**
+     * 查询${tableComment}列表
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return ${tableComment}集合
+     */
+	@Override
+	public List<${className}> select${className}List(${className} ${classname})
+	{
+	    return ${classname}Mapper.select${className}List(${classname});
+	}
+	
+    /**
+     * 新增${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	@Override
+	public int insert${className}(${className} ${classname})
+	{
+	    return ${classname}Mapper.insert${className}(${classname});
+	}
+	
+	/**
+     * 修改${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	@Override
+	public int update${className}(${className} ${classname})
+	{
+	    return ${classname}Mapper.update${className}(${classname});
+	}
+	
+	/**
+     * 保存${tableComment}
+     * 
+     * @param ${classname} ${tableComment}信息
+     * @return 结果
+     */
+	@Override
+	public int save${className}(${className} ${classname})
+	{
+	    ${primaryKey.attrType} ${primaryKey.attrname} = ${classname}.get${primaryKey.attrName}();
+		int rows = 0;
+		if (StringUtils.isNotNull(${primaryKey.attrname}))
+        {
+		    rows = ${classname}Mapper.update${className}(${classname});
+		}
+		else
+        {
+		    rows = ${classname}Mapper.insert${className}(${classname});
+		}
+		return rows;
+	}
+	
+	/**
+     * 删除${tableComment}对象
+     * 
+     * @param ids 需要删除的数据ID
+     * @return 结果
+     */
+	@Override
+	public int delete${className}ByIds(String ids)
+	{
+		return ${classname}Mapper.delete${className}ByIds(Convert.toIntArray(ids));
+	}
+	
+}

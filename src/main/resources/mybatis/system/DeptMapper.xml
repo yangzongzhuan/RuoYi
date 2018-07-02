@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.system.dept.mapper.DeptMapper">
+
+	<resultMap type="Dept" id="DeptResult">
+		<id     property="deptId"     column="dept_id"     />
+		<result property="parentId"   column="parent_id"   />
+		<result property="deptName"   column="dept_name"   />
+		<result property="orderNum"   column="order_num"   />
+		<result property="leader"     column="leader"      />
+		<result property="phone"      column="phone"       />
+		<result property="email"      column="email"       />
+		<result property="status"     column="status"      />
+		<result property="parentName" column="parent_name" />
+		<result property="createBy"   column="create_by"   />
+		<result property="createTime" column="create_time" />
+		<result property="updateBy"   column="update_by"   />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<select id="selectDeptAll" resultMap="DeptResult">
+		select dept_id, parent_id, dept_name, order_num, leader, phone, email, status, create_by, create_time from sys_dept
+	</select>
+	
+	<select id="checkDeptExistUser" parameterType="Long" resultType="int">
+		select count(*) from sys_user where dept_id = #{deptId}
+	</select>
+	
+	<select id="selectDeptCount" parameterType="Dept" resultType="int">
+		select count(*) from sys_dept
+		<where>
+			<if test="deptId != null and deptId != 0"> and dept_id = #{deptId} </if>
+			<if test="parentId != null and parentId != 0"> and parent_id = #{parentId} </if>
+		</where>
+	</select>
+	
+	<select id="checkDeptNameUnique" parameterType="String" resultMap="DeptResult">
+		select t.dept_id, t.parent_id, t.dept_name, t.order_num, t.leader, t.phone, t.email, t.status from sys_dept t
+		where dept_name=#{deptName}
+	</select>
+
+	<select id="selectDeptById" parameterType="Long" resultMap="DeptResult">
+		select t.dept_id, t.parent_id, t.dept_name, t.order_num, t.leader, t.phone, t.email, t.status,
+			(select dept_name from sys_dept where dept_id = t.parent_id) parent_name
+		from sys_dept t
+		where dept_id = #{deptId}
+	</select>
+	
+	<insert id="insertDept" parameterType="Dept">
+ 		insert into sys_dept(
+ 			<if test="deptId != null and deptId != 0">dept_id,</if>
+ 			<if test="parentId != null and parentId != 0">parent_id,</if>
+ 			<if test="deptName != null and deptName != ''">dept_name,</if>
+ 			<if test="orderNum != null and orderNum != ''">order_num,</if>
+ 			<if test="leader != null and leader != ''">leader,</if>
+ 			<if test="phone != null and phone != ''">phone,</if>
+ 			<if test="email != null and email != ''">email,</if>
+ 			<if test="status != null">status,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="deptId != null and deptId != 0">#{deptId},</if>
+ 			<if test="parentId != null and parentId != 0">#{parentId},</if>
+ 			<if test="deptName != null and deptName != ''">#{deptName},</if>
+ 			<if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+ 			<if test="leader != null and leader != ''">#{leader},</if>
+ 			<if test="phone != null and phone != ''">#{phone},</if>
+ 			<if test="email != null and email != ''">#{email},</if>
+ 			<if test="status != null">#{status},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	
+	<update id="updateDept" parameterType="Dept">
+ 		update sys_dept
+ 		<set>
+ 			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
+ 			<if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
+ 			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+ 			<if test="leader != null and leader != ''">leader = #{leader},</if>
+ 			<if test="phone != null and phone != ''">phone = #{phone},</if>
+ 			<if test="email != null and email != ''">email = #{email},</if>
+ 			<if test="status != null and status != ''">status = #{status},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where 1=1
+ 		<if test="deptId != null and deptId  != ''">and dept_id = #{deptId}</if>
+	</update>
+
+	<delete id="deleteDeptById" parameterType="Long">
+		delete from sys_dept where dept_id = #{deptId}
+	</delete>
+
+</mapper> 

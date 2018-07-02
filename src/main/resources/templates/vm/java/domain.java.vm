@@ -1,0 +1,44 @@
+package ${package}.domain;
+
+import com.ruoyi.framework.web.domain.BaseEntity;
+#foreach ($column in $columns)
+#if($column.attrType == 'Date')
+import java.util.Date;
+#break
+#end
+#end
+
+/**
+ * ${tableComment}表 ${tableName}
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+public class ${className} extends BaseEntity
+{
+	private static final long serialVersionUID = 1L;
+	
+#foreach ($column in $columns)
+	/** $column.columnComment */
+	private $column.attrType $column.attrname;
+#end
+
+#foreach ($column in $columns)
+	/**
+	 * 设置：${column.columnComment}
+	 */
+	public void set${column.attrName}($column.attrType $column.attrname) 
+	{
+		this.$column.attrname = $column.attrname;
+	}
+	
+	/**
+	 * 获取：${column.columnComment}
+	 */
+	public $column.attrType get${column.attrName}() 
+	{
+		return $column.attrname;
+	}
+	
+#end
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="btn-group hidden-xs" id="toolbar" role="group">
+	        <button class="btn btn-outline btn-default" onclick="$.operate.add()" shiro:hasPermission="${moduleName}:${classname}:add">
+	            <i class="fa fa-plus"></i> 新增
+	        </button>
+	        <button class="btn btn-outline btn-default" onclick="$.operate.batRemove()" shiro:hasPermission="${moduleName}:${classname}:remove">
+	            <i class="fa fa-trash-o"></i> 删除
+	        </button>
+        </div>
+        <table id="bootstrap-table" data-mobile-responsive="true">
+        </table>
+    </div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permissionService.hasPermi('${moduleName}:${classname}:edit')}]];
+        var removeFlag = [[${@permissionService.hasPermi('${moduleName}:${classname}:remove')}]];
+        var prefix = ctx + "${moduleName}/${classname}"
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                modalName: "${tableComment}",
+                columns: [{
+		            checkbox: true
+		        },
+#foreach($column in $columns)
+				{
+					field : '${column.attrname}', 
+					title : '${column.columnComment}' 
+				},
+#end
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.${primaryKey.attrname} + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.${primaryKey.attrname} + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

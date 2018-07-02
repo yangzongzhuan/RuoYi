@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+    <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-info">
+				<form id="operlog-form">
+					<div class="select-list gd">
+						<ul>
+							<li>
+								登录地址：<input type="text" name="ipaddr"/>
+							</li>
+							<li>
+								操作人员：<input type="text" name="loginName"/>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+	        <div class="btn-group hidden-xs" id="toolbar" role="group">
+	            <a class="btn btn-outline btn-danger btn-rounded" onclick="javascript:batchForceLogout()" shiro:hasPermission="monitor:online:batchForceLogout">
+	                <i class="fa fa-trash-o"></i> 删除
+	            </a>
+	        </div>
+	        
+	        <div class="col-sm-12 select-info order-table">
+			    <table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script th:inline="javascript">
+		var forceFlag = [[${@permissionService.hasPermi('monitor:online:forceLogout')}]];
+		var prefix = ctx + "monitor/online"
+
+		$(function() {
+		    var options = {
+		        url: prefix + "/list",
+		        exportUrl: prefix + "/export",
+		        sortName: "lastAccessTime",
+		        sortOrder: "desc",
+		        search: false,
+		        columns: [{
+		            checkbox: true
+		        },
+		        {
+		            field: 'sessionId',
+		            title: '会话编号'
+		        },
+		        {
+		            field: 'loginName',
+		            title: '登录名称'
+		        },
+		        {
+		            field: 'deptName',
+		            title: '部门名称'
+		        },
+		        {
+		            field: 'ipaddr',
+		            title: '主机'
+		        },
+		        {
+		            field: 'longinLocation',
+		            title: '登录地点'
+		        },
+		        {
+		            field: 'browser',
+		            title: '浏览器'
+		        },
+		        {
+		            field: 'os',
+		            title: '操作系统'
+		        },
+		        {
+		            field: 'status',
+		            title: '会话状态',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		                if (value == 'on_line') {
+		                    return '<span class="badge badge-primary">在线</span>';
+		                } else if (value == 'off_line') {
+		                    return '<span class="badge badge-danger">离线</span>';
+		                }
+		            }
+		        },
+		        {
+		            field: 'startTimestamp',
+		            title: '登录时间'
+		        },
+		        {
+		            field: 'lastAccessTime',
+		            title: '最后访问时间'
+		        },
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		                var msg = '<a class="btn btn-danger btn-xs ' + forceFlag + '" href="#" onclick="forceLogout(\'' + row.sessionId + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
+		                return msg;
+		            }
+		        }]
+		    };
+		    $.table.init(options);
+		});
+
+		// 单条强退
+		function forceLogout(sessionId) {
+		    $.modal.confirm("确定要强制选中用户下线吗？", function() {
+		    	var data = { "sessionId": sessionId };
+		        $.operate.post(prefix + "/forceLogout", data);
+		    })
+		}
+
+		// 批量强退
+		function batchForceLogout() {
+		    var rows = $.table.selectColumns("sessionId");
+		    if (rows.length == 0) {
+		        $.modal.alertWarning("请选择要强退的用户");
+		        return;
+		    }
+		    $.modal.confirm("确认要强退选中的" + rows.length + "条数据吗?", function() {
+		        var url = prefix + "/batchForceLogout";
+		        var data = { "ids": rows };
+		        $.operate.post(url, data);
+		    });
+		}
+	</script>
+</body>
+</html>

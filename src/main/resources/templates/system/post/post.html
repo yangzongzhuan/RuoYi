@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	
+	<div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-info">
+				<form id="operlog-form">
+					<div class="select-list gd">
+						<ul>
+							<li>
+								岗位编码：<input type="text" name="postCode"/>
+							</li>
+							<li>
+								岗位名称：<input type="text" name="postName"/>
+							</li>
+							<li>
+								岗位状态：<select name="status" th:with="type=${@dictService.selectDictData('sys_normal_disable')}">
+									<option value="">所有</option>
+									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+								</select>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							    <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel($('form').attr('id'))"><i class="fa fa-download"></i>&nbsp;下载</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+			<div class="btn-group hidden-xs" id="toolbar" role="group">
+				<button class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="system:post:add">
+	                <i class="fa fa-plus"></i> 新增
+	            </button>
+				<button class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="system:post:remove">
+		            <i class="fa fa-trash-o"></i> 删除
+		        </button>
+	        </div>
+	        
+	        <div class="col-sm-12 select-info order-table">
+			    <table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script th:inline="javascript">
+		var editFlag = [[${@permissionService.hasPermi('system:post:edit')}]];
+		var removeFlag = [[${@permissionService.hasPermi('system:post:remove')}]];
+		var prefix = ctx + "system/post"
+
+		$(function() {
+		    var options = {
+		        url: prefix + "/list",
+		        createUrl: prefix + "/add",
+		        updateUrl: prefix + "/edit/{id}",
+		        removeUrl: prefix + "/remove",
+		        exportUrl: prefix + "/export",
+		        sortName: "postSort",
+		        modalName: "岗位",
+		        search: false,
+		        showExport: false,
+		        columns: [{
+		            checkbox: true
+		        },
+		        {
+		            field: 'postId',
+		            title: '岗位编号'
+		        },
+		        {
+		            field: 'postCode',
+		            title: '岗位编码'
+		        },
+		        {
+		            field: 'postName',
+		            title: '岗位名称'
+		        },
+		        {
+		            field: 'postSort',
+		            title: '显示顺序'
+		        },
+		        {
+		            field: 'status',
+		            title: '状态',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		                if (value == 0) {
+		                    return '<span class="badge badge-primary">正常</span>';
+		                } else if (value == 1) {
+		                    return '<span class="badge badge-danger">停用</span>';
+		                }
+		            }
+		        },
+		        {
+		            field: 'createDateTimeStr',
+		            title: '创建时间'
+		        },
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		                var actions = [];
+		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.postId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.postId + '\')"><i class="fa fa-remove"></i>删除</a>');
+		                return actions.join('');
+		            }
+		        }]
+		    };
+		    $.table.init(options);
+		});
+	</script>
+</body>
+</html>

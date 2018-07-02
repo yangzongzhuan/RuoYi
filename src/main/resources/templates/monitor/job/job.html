@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	
+	<div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-info">
+				<form id="operlog-form">
+					<div class="select-list gd">
+						<ul>
+							<li>
+								任务名称：<input type="text" name="jobName"/>
+							</li>
+							<li>
+								方法名称：<input type="text" name="methodName"/>
+							</li>
+							<li>
+								任务状态：<select name="status" th:with="type=${@dictService.selectDictData('sys_job_status')}">
+									<option value="">所有</option>
+									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+								</select>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel($('form').attr('id'))"><i class="fa fa-download"></i>&nbsp;下载</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+			<div class="btn-group hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="monitor:job:add">
+	                <i class="fa fa-plus"></i> 新增
+	            </a>
+				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="monitor:job:remove">
+		            <i class="fa fa-trash-o"></i> 删除
+		        </a>
+		        <a class="btn btn-outline btn-info btn-rounded" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
+		            <i class="fa fa-list"></i> 日志
+		        </a>
+	        </div>
+        
+	        <div class="col-sm-12 select-info order-table">
+			    <table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script th:inline="javascript">
+		var editFlag = [[${@permissionService.hasPermi('monitor:job:edit')}]];
+		var removeFlag = [[${@permissionService.hasPermi('monitor:job:remove')}]];
+		var statusFlag = [[${@permissionService.hasPermi('monitor:job:changeStatus')}]];
+		var prefix = ctx + "monitor/job"
+
+		$(function() {
+		    var options = {
+		        url: prefix + "/list",
+		        createUrl: prefix + "/add",
+		        updateUrl: prefix + "/edit/{id}",
+		        removeUrl: prefix + "/remove",
+		        exportUrl: prefix + "/export",
+		        sortName: "createTime",
+		        sortOrder: "desc",
+		        modalName: "任务",
+		        search: false,
+		        showExport: false,
+		        columns: [{
+		            checkbox: true
+		        },
+		        {
+		            field: 'jobId',
+		            title: '任务编号'
+		        },
+		        {
+		            field: 'jobName',
+		            title: '任务名称'
+		        },
+		        {
+		            field: 'jobGroup',
+		            title: '任务组名'
+		        },
+		        {
+		            field: 'methodName',
+		            title: '方法名称'
+		        },
+		        {
+		            field: 'params',
+		            title: '方法参数'
+		        },
+		        {
+		            field: 'cronExpression',
+		            title: '执行表达式'
+		        },
+		        {
+		            field: 'status',
+		            title: '任务状态',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		                if (value == 0) {
+		                    return '<span class="badge badge-primary">正常</span>';
+		                } else if (value == 1) {
+		                    return '<span class="badge badge-danger">暂停</span>';
+		                }
+		            }
+		        },
+		        {
+		            field: 'createDateTimeStr',
+		            title: '创建时间'
+		        },
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		                var actions = [];
+		                actions.push(statusTools(row));
+		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a>');
+		                return actions.join('');
+		            }
+		        }]
+		    };
+		    $.table.init(options);
+		});
+
+		function statusTools(row) {
+		    if (row.status == 1) {
+		        return '<a class="btn btn-info btn-xs ' + statusFlag + '" href="#" onclick="start(this,\'' + row.jobId + '\')"><i class="fa fa-play"></i>启用</a> ';
+		    } else {
+		    	return '<a class="btn btn-warning btn-xs ' + statusFlag + '" href="#" onclick="stop(this,\'' + row.jobId + '\')"><i class="fa fa-pause"></i>暂停</a> ';
+		    }
+		}
+
+		/*调度任务-停用*/
+		function stop(obj, jobId) {
+			$.modal.confirm("确认要停用任务吗？", function() {
+				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "status": 1 });
+		    })
+		}
+
+		/*调度任务-启用*/
+		function start(obj, jobId) {
+			$.modal.confirm("确认要启用任务吗？", function() {
+				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "status": 0 });
+		    })
+		}
+
+		//调度日志查询
+		function jobLog(id) {
+			var url = ctx + 'monitor/jobLog';
+			createMenuItem(url, "调度日志");
+		}
+	</script>
+</body>
+</html>

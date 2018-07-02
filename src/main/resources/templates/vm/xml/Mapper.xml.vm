@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package}.mapper.${className}Mapper">
+    
+    <resultMap type="${className}" id="${className}Result">
+#foreach ($column in $columns)
+        <result property="${column.attrname}"    column="${column.columnName}"    />
+#end
+    </resultMap>
+    
+    <select id="select${className}ById" parameterType="${primaryKey.attrType}" resultMap="${className}Result">
+        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
+        where ${primaryKey.columnName} = #{${primaryKey.attrname}}
+    </select>
+    
+    <select id="select${className}List" parameterType="${className}" resultMap="${className}Result">
+        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
+        <where>  
+#foreach($column in $columns)
+            <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname}</if>
+ #end
+        </where>
+    </select>
+    
+    <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$primaryKey.attrname"#end>
+        insert into ${tableName} (
+#foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
+			<if test="$column.attrname != null and $column.attrname != '' ">$column.columnName#if($velocityCount != $columns.size()), #end</if>
+#end
+#end
+        )values(
+#foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
+			<if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+#end			
+#end
+		)
+    </insert>
+	 
+    <update id="update${className}" parameterType="${className}">
+        update ${tableName} 
+        <set>
+#foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName)
+            <if test="$column.attrname != null and $column.attrname != ''">$column.columnName = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+#end
+#end
+        </set>
+        where ${primaryKey.columnName} = #{${primaryKey.attrname}}
+    </update>
+	
+    <delete id="delete${className}ByIds" parameterType="${primaryKey.attrType}">
+        delete from ${tableName} where ${primaryKey.columnName} in 
+        <foreach item="${primaryKey.attrname}" collection="array" open="(" separator="," close=")">
+            #{${primaryKey.attrname}}
+        </foreach>
+    </delete>
+    
+</mapper>

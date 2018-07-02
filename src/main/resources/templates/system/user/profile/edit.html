@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-user-edit" th:object="${user}">
+			<input name="userId"  type="hidden"  th:field="*{userId}" />
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">登录名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" readonly="true" th:field="*{loginName}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">部门名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" readonly="true" th:field="*{dept.deptName}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用户名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="userName" id="userName" th:field="*{userName}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">邮箱：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="email" th:field="*{email}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">手机：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="phonenumber" id="phonenumber" th:field="*{phonenumber}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">性别：</label>
+				<div class="col-sm-8">
+					<div class="radio radio-info radio-inline">
+						<input type="radio" id="radio1" th:field="*{sex}" name="sex" value="0">
+						<label for="radio1">男</label>
+					</div>
+					<div class="radio radio-danger radio-inline">
+						<input type="radio" id="radio2" th:field="*{sex}" name="sex" value="1">
+						<label for="radio2">女</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div class="form-control-static col-sm-offset-9">
+					<button type="submit" class="btn btn-primary">提交</button>
+					<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div th:include="include::footer"></div>
+	<script>
+		$("#form-user-edit").validate({
+			rules:{
+				userName:{
+					required:true,
+				},
+				email:{
+					required:true,
+		            email:true,
+		            remote: {
+		                url: ctx + "system/user/checkEmailUnique",
+		                type: "post",
+		                dataType: "json",
+		                data: {
+		                	"userId": function() {
+		                        return $("input[name='userId']").val();
+		                    },
+		        			"email": function() {
+		                        return $("input[name='email']").val();
+		                    }
+		                },
+		                dataFilter: function (data, type) {
+		                    if (data == "0") return true;
+		                    else return false;
+		                }
+		            }
+				},
+				phonenumber:{
+					required:true,
+					isPhone:true,
+		            remote: {
+		                url: ctx + "system/user/checkPhoneUnique",
+		                type: "post",
+		                dataType: "json",
+		                data: {
+		                	"userId": function() {
+		                        return $("input[name='userId']").val();
+		                    },
+		        			"phonenumber": function() {
+		                        return $("input[name='phonenumber']").val();
+		                    }
+		                },
+		                dataFilter: function (data, type) {
+		                    if (data == "0") return true;
+		                    else return false;
+		                }
+		            }
+				},
+			},
+			messages: {
+				"email": {
+		            remote: "Email已经存在"
+		        },
+				"phonenumber":{
+		        	remote: "手机号码已经存在"
+				}
+		    },
+			submitHandler:function(form){
+				$.operate.save(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
+			}
+		});
+	</script>
+</body>
+</html>
