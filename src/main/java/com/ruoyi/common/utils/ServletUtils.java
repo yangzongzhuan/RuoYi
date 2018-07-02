@@ -1,5 +1,6 @@
 package com.ruoyi.common.utils;
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -78,12 +79,59 @@ public class ServletUtils
     }
 
     /**
-     * 是否ajax
+     * 将字符串渲染到客户端
+     * 
+     * @param response 渲染对象
+     * @param string 待渲染的字符串
+     * @return null
      */
-    public boolean isAjax()
+    public static String renderString(HttpServletResponse response, String string)
     {
-        String header = getRequest().getHeader("X-Requested-With");
-        boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(header);
-        return isAjax;
+        try
+        {
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().print(string);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 是否是Ajax异步请求
+     * 
+     * @param request
+     */
+    public static boolean isAjaxRequest(HttpServletRequest request)
+    {
+
+        String accept = request.getHeader("accept");
+        if (accept != null && accept.indexOf("application/json") != -1)
+        {
+            return true;
+        }
+
+        String xRequestedWith = request.getHeader("X-Requested-With");
+        if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1)
+        {
+            return true;
+        }
+
+        String uri = request.getRequestURI();
+        if (StringUtils.inStringIgnoreCase(uri, ".json", ".xml"))
+        {
+            return true;
+        }
+
+        String ajax = request.getParameter("__ajax");
+        if (StringUtils.inStringIgnoreCase(ajax, "json", "xml"))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
