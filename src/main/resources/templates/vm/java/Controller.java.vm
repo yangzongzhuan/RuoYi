@@ -42,7 +42,7 @@ public class ${className}Controller extends BaseController
 	 * 查询${tableComment}列表
 	 */
 	@RequiresPermissions("${moduleName}:${classname}:list")
-	@@PostMapping("/list")
+	@PostMapping("/list")
 	@ResponseBody
 	public TableDataInfo list(${className} ${classname})
 	{
