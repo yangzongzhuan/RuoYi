@@ -25,7 +25,7 @@ public class GenUtils
     private static final String myBatisPath = "main/resources/mybatis";
 
     /** html空间路径 */
-    private static final String templatesPath = "main/resources/templates/";
+    private static final String templatesPath = "main/resources/templates";
 
     /**
      * 设置列信息
