@@ -53,6 +53,7 @@ public class DeptServiceImpl implements IDeptService
                 deptMap.put("id", dept.getDeptId());
                 deptMap.put("pId", dept.getParentId());
                 deptMap.put("name", dept.getDeptName());
+                deptMap.put("title", dept.getDeptName());
                 trees.add(deptMap);
             }
         }
