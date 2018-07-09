@@ -1,0 +1,2890 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<!DOCTYPE html>
+<html lang='en' xmlns='http://www.w3.org/1999/xhtml' >
+<head>
+<title>RuoYi</title>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+<link rel="shortcut icon" href="https://www.dbschema.com/images/favicon.ico">
+<style type='text/css'>
+body {
+    font-family: 'Segoe UI', 'Lucida sans', Dialog;
+    font-size: 13px;
+    background-color:#f5f5f5;
+    margin: 10px;
+}
+</style>
+</head>
+
+<body>
+<div class='svg-container'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1890' height='1100' viewBox='0 0 1890 1100' >
+  <script type='text/ecmascript'>
+  <![CDATA[
+  function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
+  function uhghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','scene'); }  } 
+  ]]>
+  </script> 
+
+<style type='text/css'>
+  text                { fill:#000000; font-family: SimSun, 'Trebuchet MS', Dialog; font-size:11px; }
+  a text:hover        { fill:#94025f; text-shadow: 0px 0px 6px #d0ce00; font-size:13px; }
+  text.highlight      { fill:#94025f; text-shadow: 0px 0px 4px #eac533; font-size:13px; }
+  text.colType        { fill:#b3b3b3; }
+  text.relName        { fill:#b09c7c; }
+  path                { stroke:#5c554f; stroke-width:1.15; fill:none; }
+  path                { stroke:#5c554f; stroke-width:1.15; fill:none;}
+  path.virtual        { stroke:#b7642d; }
+  path.logo           { fill:#fbeac0;fill-opacity:1;stroke-width:0.3;stroke:#222222; }
+  path.dotted         { stroke-dasharray:4,2; }
+  path.scene          { stroke-width:10; opacity:0;}
+  path.highlight      { stroke-width:5; stroke:#c1a662; opacity:0.6;}
+  rect.entity         { fill:#ffffff; stroke:#aaa; stroke-width:1;shape-rendering:crispEdges;filter:url(#shadow); }
+  line.delim          { stroke-width:1; shape-rendering:crispEdges; }
+  text.callout        { fill:#000000; font-family: SimSun, 'Trebuchet MS', Dialog; font-size:12px; }
+  rect.callout        { fill:url(#calloutGradient); stroke:#bebdbd; stroke-width:0.5; filter: url(#shadow);}
+  rect.grp            { stroke:#b1b1b1; stroke-width:1.7; opacity:0.8; }
+  path.st0            { fill:#ececec;fill-opacity:1;stroke-width:0.6;stroke:#aaaaaa; }
+</style>
+<defs>
+  <pattern id='layoutBgA' patternUnits='userSpaceOnUse'  width='10' height='20' x='0' y='0' viewBox='0 0 5 10'>  
+     <line x1='-2' y1='1' x2='7' y2='10' stroke='#f3f3f3' stroke-width='.5'/>  
+     <line x1='-2' y1='6' x2='7' y2='15' stroke='#f3f3f3' stroke-width='.5'/>  
+     <line x1='-2' y1='-4' x2='7' y2='5' stroke='#f3f3f3' stroke-width='.5'/>  
+  </pattern>  
+  <radialGradient id='layoutBgB' gradientUnits='userSpaceOnUse' cx='50%' cy='50%' r='75%' fx='46%' fy='22%'>
+     <stop offset='0%' stop-opacity='.2' stop-color='#f5f5f5' />  
+     <stop offset='100%' stop-color='#efefef' />  
+  </radialGradient>
+  <pattern id='layoutBgTr' patternUnits='userSpaceOnUse'  width='300' height='300' x='0' y='0' viewBox='0 0 300 300'>  
+  <path class='st0' d='m 62.011835,91.267143 c 3.536475,3.175214 2.262669,8.705999 -1.637711,11.015197 -3.594697,5.8423 -6.34682,-2.892623 -9.715478,-4.653898 -5.609222,-2.838926 2.050802,-6.680123 4.77004,-8.319046 2.334696,-0.724067 4.935143,0.312302 6.583149,1.957747 z m -2.720492,2.538595 c -2.698397,-3.517732 -9.282815,1.269287 -3.69635,3.568637 2.765331,5.605665 7.052809,-0.56184 3.69635,-3.568637 z' />
+  <path class='st0' d='m 72.25864,84.624638 c 4.108046,3.143003 -0.737059,6.895259 -1.994918,8.323564 -3.586718,5.561143 -6.495079,-4.197379 -10.07759,-5.582178 -4.443422,-1.088878 1.349298,-7.249213 2.503526,-2.503449 2.464639,4.517161 2.304019,-3.70697 6.291113,-1.995914 1.280083,0.137865 2.410691,0.864819 3.277869,1.757977 z m -2.646109,2.323242 c -4.797162,-3.078383 -2.810517,6.305507 0.515161,1.990646 0.296432,-0.688582 0.01209,-1.493412 -0.515161,-1.990646 z' />
+  <path class='st0' d='m 78.230641,79.436735 c 4.142121,3.027466 -2.020102,10.435276 -3.450543,5.477315 3.306312,-5.248112 -9.186019,-2.220094 -5.805994,-8.77679 -0.544141,-3.93011 6.797826,-2.102227 3.386015,0.245477 -0.181085,2.915838 4.637371,1.019311 5.870522,3.053982 z' />
+  <path class='st0' d='m 82.744502,72.597397 c -4.901605,1.926521 1.146497,6.285555 2.559694,2.225783 6.21817,3.539297 -6.640186,8.416664 -7.590325,1.997457 -2.24365,-2.914883 4.026676,-10.148618 5.030631,-4.22324 z' />
+  <path class='st0' d='m 90.727458,64.259158 c 1.583987,1.690029 3.321317,3.2696 4.81267,5.026353 -2.535706,6.849794 -6.445583,-5.918773 -8.388458,-0.167017 0.782768,2.03426 5.877405,3.752079 2.670979,5.711199 -3.315119,1.519161 -5.782422,-5.157931 -8.858893,-6.780537 -4.229842,-1.139816 1.510134,-7.074128 2.586227,-2.385939 3.141198,5.495193 1.840537,-5.598295 7.177489,-1.404062 z' />
+  <path class='st0' d='m 99.622027,58.374253 c 1.493293,1.9548 -6.281936,7.024659 -0.885258,4.740447 0.386238,-4.434477 6.131941,-1.133173 2.175851,1.618005 -4.421491,6.12739 -13.666659,-3.151506 -7.058299,-7.136537 1.785129,-1.119329 4.348209,-0.743179 5.767706,0.778085 z m -2.900824,1.89746 c -3.608188,-2.208543 -2.280489,5.00803 -0.12563,0.329531 z' />
+  <path class='st0' d='m 115.18023,50.570441 c -1.61703,5.201678 -4.6204,-0.364502 -7.01598,-1.749619 -4.40977,2.122562 4.89641,4.913939 1.89606,7.018157 -2.48061,3.877635 -4.11404,-4.060614 -7.01192,-2.6391 -1.76318,3.107252 7.28394,6.252304 0.87346,7.876177 -1.74515,-2.956649 -9.055498,-5.610518 -3.950378,-8.66062 1.696478,1.897023 1.770418,-5.43503 5.347308,-3.072411 -0.44014,-5.474701 6.11995,-4.950882 7.7846,-0.815355 0.69076,0.682329 1.39587,1.351469 2.07685,2.042771 z' />
+  <path class='st0' d='m 120.54891,39.417125 c 2.50681,1.334124 4.80466,4.941837 0.75044,5.297362 -0.46414,1.89865 -5.25369,5.602652 -8.01742,1.815475 -3.87345,-2.809139 -0.0676,-7.603869 2.3036,-8.133924 1.6795,-3.853018 3.16703,-1.199465 4.96338,1.021087 z m -2.2464,2.175828 c -4.8049,-2.992167 -3.08987,6.380358 0.42374,2.036159 0.33052,-0.677508 0.12099,-1.525836 -0.42374,-2.036159 z' />
+  <path class='st0' d='m 128.50836,24.06821 c -5.10403,3.035506 3.20535,6.383175 5.05938,9.450276 -0.91853,2.95886 -4.06493,3.650723 -5.34691,0.265618 -2.25715,-2.089033 -4.65672,-6.948595 -7.07024,-2.584686 -4.71758,-3.764394 3.81217,-5.812054 5.12382,-9.226328 0.75738,0.677487 1.38637,1.498638 2.23389,2.095175 z' />
+  <path class='st0' d='m 137.14366,22.299812 c -3.09615,2.259885 0.71537,4.412454 1.99042,6.435866 -3.08975,5.080354 -5.91384,-2.98648 -8.92144,-4.094939 1.44369,-3.219573 3.3497,-1.335928 4.27156,-4.41058 0.97822,-0.894325 1.75044,1.871047 2.65946,2.069653 z' />
+  <path class='st0' d='m 136.85093,14.890174 c 2.31562,5.283511 -7.17975,1.771993 -1.29675,-0.475107 l 0.7108,0.08973 z m 4.867,5.317354 c 2.56912,1.439678 4.26517,4.725219 0.30678,5.233637 -1.56592,-3.098864 -9.51683,-5.749448 -3.64502,-8.633714 1.17746,0.325095 2.15375,2.591149 3.33824,3.400077 z' />
+  <path class='st0' d='m 149.95578,11.976423 c 2.50679,1.334142 4.80455,4.94192 0.75041,5.297394 -0.4641,1.898604 -5.25368,5.602645 -8.0174,1.81545 -3.87347,-2.80918 -0.0676,-7.603844 2.30366,-8.133968 1.67949,-3.8530525 3.16695,-1.1993573 4.96333,1.021124 z m -2.24641,2.175828 c -4.80489,-2.992177 -3.08986,6.380343 0.42374,2.036167 0.33055,-0.677518 0.121,-1.52585 -0.42374,-2.036167 z' />
+  <path class='st0' d='m 153.26135,7.538431 c 2.60497,1.5799548 6.03999,5.944272 1.08117,6.050232 -2.53319,-3.231828 -7.20316,-6.4304525 -8.84748,-9.4582682 1.89121,-2.8664883 3.78452,-2.247699 5.38514,0.8929426 0.78017,0.8503859 1.57195,1.6911437 2.38118,2.5150667 z' />
+  </pattern>  
+  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
+          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
+          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
+   </linearGradient>
+  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
+	   <stop offset='0%' stop-color='#ffffff' />
+    <stop offset='100%' stop-color='#f8f6d1' />
+  </radialGradient>
+  <filter id='shadow' width='120%' height='120%'> 
+      <feOffset result='offOut' in='SourceGraphic' dx='1' dy='1' /> 
+      <feColorMatrix result='matrixOut' in='offOut' type='matrix' 
+      values='0.1 0 0 0 0 0 0.4 0 0 0 0 0 0.6 0 0 0 0 0 0.3 0' /> 
+      <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' /> 
+      <feBlend in='SourceGraphic' in2='blurOut' mode='normal' /> 
+    </filter> 
+  <filter id='fkShadow' height='130%'> 
+    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
+    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
+    <feMerge>
+    <feMergeNode/> <!-- this contains the offset blurred image -->
+    <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
+    </feMerge>
+  </filter>
+  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
+          <stop offset='0%' stop-color='#eefbf2' stop-opacity='1'/> 
+          <stop offset='100%' stop-color='#cff9cb' stop-opacity='1' /> 
+   </radialGradient>
+  <symbol id='calloutArrowDown' overflow='visible' >
+      <path d='M 0,0 L 7,11 L 15,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
+      <path d='M 0,0 L 7,11 L 15,0' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='calloutArrowUp' overflow='visible' >
+      <path d='M 0,15 L 7,3 L 15,15 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
+      <path d='M 0,15 L 7,3 L 15,15' style='stroke:#bebdbd; stroke-width:0.5;' />
+  </symbol>
+  <symbol id='pk' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <path style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
+        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
+     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
+        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
+    </g>
+  </symbol>
+  <symbol id='dist' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <path style='fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;' d='M 0.177,11.431 12.28,11.449'/>
+      <path style='fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;' d='m 6.124,3.954 0.066,7.154 v 0'/>
+      <rect width='11.78' height='3.40' x='0.40' y='0.44' style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;' ry='0.83'/>
+      <rect width='11.78' height='3.40' x='0.40' y='5.609' style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;' ry='0.832'/>
+    </g>
+  </symbol>
+  <symbol id='unq' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+      <text x='5.8' y='7.4' style='font-size:7px;fill:#8a8a8a;'>1</text>
+    </g>
+  </symbol>
+  <symbol id='idx' overflow='visible' >
+    <g transform='scale(0.99)'>
+      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
+         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
+      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
+         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
+         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
+    </g>
+  </symbol>
+  <symbol id='fk' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
+    </g>
+  </symbol>
+  <symbol id='ref' overflow='visible' >
+    <g transform='scale(0.87)'>
+      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag0' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag1' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#f4a393;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='flag2' overflow='visible' >
+    <g transform='scale(0.92)'>
+      <path style='fill:#77ec8b;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
+    </g>
+  </symbol>
+  <symbol id='nn' overflow='visible' >
+  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
+          d='M 0,0 3,3 M 0,3 3,0 z'/>
+  </symbol>
+  <symbol id='view' overflow='visible' >
+    <g transform='scale(0.99)'>
+     <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
+     <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
+     <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+     <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
+    </g>
+  </symbol>
+  <marker id='arrow01' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 7.500,3.750 L 15.000,3.750 L 7.500,0.000 L 15.000,3.750 L 7.500,7.500' />
+  </marker>
+  <marker id='arrow1' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 7.500,3.750 L 15.000,3.750 L 7.500,0.000 L 15.000,3.750 L 7.500,7.500' />
+  </marker>
+  <marker id='foot01' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <circle cx='11.25' cy='3.75' r='2.50' style='fill:white;stroke:#5e554d;' />
+    <path d='M 3.75,0.00 L 3.75, 7.50 z' />
+  </marker>
+  <marker id='foot0p' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <circle cx='11.25' cy='3.75' r='2.50' style='fill:white;stroke:#5e554d;' />
+    <path d='M 0.00,0.00 L 7.50,3.75 L 0.00,7.50' />
+  </marker>
+  <marker id='foot1' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <path d='M 7.50,0.00 L 7.50, 7.50 z' />
+    <path d='M 3.75,0.00 L 3.75, 7.50 z' />
+  </marker>
+  <marker id='foot1p' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
+    <path d='M 0.00,3.75 L 15.00,3.75 z' />
+    <path d='M 7.50,0.00 L 7.50, 7.50 z' />
+    <path d='M 0.00,0.00 L 7.50,3.75 L 0.00,7.50' />
+  </marker>
+  <linearGradient id='tbg_bfd4f5' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#496ba1' /> 
+     <stop offset='100%' stop-color='#1f4682' /> 
+  </linearGradient>
+  <linearGradient id='tbg_c8f5bf' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#58a149' /> 
+     <stop offset='100%' stop-color='#30821f' /> 
+  </linearGradient>
+  <linearGradient id='tbg_f5ddbf' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#a17a49' /> 
+     <stop offset='100%' stop-color='#82561f' /> 
+  </linearGradient>
+  <linearGradient id='tbg_bfbff5' x1='0%' y1='0%' x2='0%' y2='100%' >
+     <stop offset='0%' stop-color='#4949a1' /> 
+     <stop offset='100%' stop-color='#1f1f82' /> 
+  </linearGradient>
+</defs>
+
+<!-- == Desktop == -->
+<rect x='1' y='1' width='1888' height='1098' rx='7' ry='7' style='fill:url(#layoutBgB); stroke:#777777; stroke-width:0.5;' />
+<rect x='1' y='1' width='1888' height='1098' rx='7' ry='7' style='fill:url(#layoutBgA); stroke:#777777; stroke-width:0.5;' />
+
+<!-- == Legend == -->
+<g transform='translate(10,10)'>
+  <rect x='10' y='10' width='330' height='56' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
+  <text x='20' y='43'>RuoYi</text> 
+  <text x='20' y='57' style='fill:#aaaaaa; font-size:11px;'><tspan>Move the mouse over tables &amp; columns to read the comments.</tspan></text> 
+<a xlink:href='https://www.dbschema.com'> <path class='logo' d='m 32.309685,20.963194 c 0.411708,4.732616 -4.298055,7.925636 -8.723583,6.970196 -6.616967,1.8448 -2.656457,-6.434594 -3.911969,-10.01566 -2.15469,-5.89407 6.06247,-3.508505 9.167655,-2.863689 2.199228,1.054873 3.389343,3.582089 3.467897,5.909153 z m -3.720955,0.01451 c 0.434195,-4.414565 -7.644142,-5.37533 -5.137307,0.107342 -1.812268,5.992146 5.532698,4.379388 5.137307,-0.107342 z' /> <path class='logo' d='m 44.329732,23.050637 c 0.850982,5.097305 -5.250434,4.558924 -7.144836,4.752415 -6.418993,1.64391 -1.872992,-7.49274 -3.541914,-10.942842 -2.499646,-3.817859 5.939283,-4.402698 3.538545,-0.13612 -1.287874,4.989123 4.215411,-1.154796 5.956717,2.809584 0.840273,0.970849 1.168829,2.272413 1.191488,3.516963 z m -3.519477,-0.09299 c -1.398216,-5.518069 -6.361061,2.717467 -0.984368,1.810718 0.686994,-0.30388 1.029454,-1.087638 0.984368,-1.810718 z' /> <path class='logo' d='m 52.234961,23.301163 c 0.954818,5.035675 -8.606408,6.284861 -6.262292,1.674914 6.000358,-1.604717 -5.188764,-7.870044 1.75972,-10.384908 2.288682,-3.253567 6.399287,3.075831 2.304111,2.48058 -2.124941,2.016587 2.688777,3.89858 2.198472,6.229403 z' /> <path class='logo' d='m 60.204336,21.349224 c -4.894917,-1.916474 -3.458707,5.391212 0.347494,3.37231 2.120589,6.821713 -10.599623,1.664746 -6.906229,-3.691132 0.354172,-3.663246 9.875349,-4.711252 6.558735,0.318822 z' /> <path class='logo' d='m 71.730617,20.654299 c 0.0013,2.316285 0.190131,4.655698 0.07825,6.958009 -6.532419,3.303565 -0.660423,-8.722256 -6.009639,-5.821653 -0.818815,2.024533 1.726403,6.746337 -1.95327,6.005484 -3.458346,-1.137537 -0.696275,-7.713407 -1.833252,-10.994208 -2.308916,-3.710131 5.93704,-4.164951 3.518609,0.0063 -1.462376,6.166445 5.169629,-2.857523 6.19931,3.846079 z' /> <path class='logo' d='m 82.245738,22.378957 c -0.24581,2.448954 -9.386766,0.8867 -3.885979,2.877055 3.312576,-2.99157 5.250902,3.334514 0.482647,2.665545 -7.415384,1.492275 -7.823196,-11.597641 -0.275476,-10.032117 2.068161,0.391458 3.682204,2.408824 3.678808,4.489517 z m -3.414436,-0.578473 c -1.124703,-4.072004 -5.087405,2.125488 -0.316922,0.156453 z' /> <path class='logo' d='m 98.936899,27.222794 c -4.73541,2.718339 -3.1239,-3.406557 -3.92611,-6.050494 -4.66985,-1.438471 0.21621,6.932413 -3.41219,6.438039 -4.46096,1.160054 -0.22824,-5.774711 -3.31526,-6.700429 -3.410722,1.082173 1.04451,9.536575 -4.745091,6.372895 0.746632,-3.355214 -2.776394,-10.269232 3.034971,-9.038963 -0.058,2.544602 5.00686,-2.785359 6.00342,1.37844 3.42021,-4.316316 7.851251,0.524966 6.24018,4.690538 0.0379,0.969988 0.0954,1.940046 0.12008,2.909974 z' /> <path class='logo' d='m 110.47859,22.686058 c 0.91826,2.682088 0.13016,6.890551 -3.0725,4.397004 -1.63641,1.077877 -7.664291,0.541832 -7.09365,-4.114836 -0.907891,-4.692933 5.14729,-5.625578 7.24058,-4.40354 3.85932,-1.686263 3.13176,1.271515 2.92557,4.121372 z m -3.12695,0.0704 c -1.46278,-5.460062 -6.61615,2.5826 -1.08221,1.782003 0.70431,-0.272594 1.13111,-1.037444 1.08221,-1.782003 z' /> </a>
+</g>
+
+<g transform='translate(0,110)'>
+<!-- == Fk 'qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1' == -->
+<path id='qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1'  onmouseover="hghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" transform='translate(7,0)' class='scene' d='M 270 525 L 270,480' >
+	<title>Fk qrtz_blob_triggers_ibfk_1
+qrtz_blob_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )</title>
+</path>
+<path transform='translate(7,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 270 525 L 270,480' ></path>
+<text x='272' y='520' transform='rotate(270 272,520)' title='Fk qrtz_blob_triggers_ibfk_1
+qrtz_blob_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )' class='relName' style='fill:#5f789f'>sched_name,trigger_name,trigger_group</text>
+<!-- == Fk 'qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1' == -->
+<path id='qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1'  onmouseover="hghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" transform='translate(7,0)' class='scene' d='M 420 540 L 397,540 Q 390,540 390,532 L 390,472 Q 390,465 382,465 L 375,465' >
+	<title>Fk qrtz_cron_triggers_ibfk_1
+qrtz_cron_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )</title>
+</path>
+<path transform='translate(7,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 420 540 L 397,540 Q 390,540 390,532 L 390,472 Q 390,465 382,465 L 375,465' ></path>
+<text x='205' y='535' transform='rotate(0 205,535)' title='Fk qrtz_cron_triggers_ibfk_1
+qrtz_cron_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )' class='relName' style='fill:#5f789f'>sched_name,trigger_name,trigger_group</text>
+<!-- == Fk 'qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1' == -->
+<path id='qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1'  onmouseover="hghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" transform='translate(7,0)' class='scene' d='M 180 525 L 180,502 Q 180,495 187,495 L 277,495 Q 285,495 285,487 L 285,480' >
+	<title>Fk qrtz_simple_triggers_ibfk_1
+qrtz_simple_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )</title>
+</path>
+<path transform='translate(7,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 180 525 L 180,502 Q 180,495 187,495 L 277,495 Q 285,495 285,487 L 285,480' ></path>
+<text x='182' y='520' transform='rotate(270 182,520)' title='Fk qrtz_simple_triggers_ibfk_1
+qrtz_simple_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )' class='relName' style='fill:#5f789f'>sched_name,trigger_name,trigger_group</text>
+<!-- == Fk 'qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1' == -->
+<path id='qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1'  onmouseover="hghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" transform='translate(7,0)' class='scene' d='M 195 240 L 240,240' >
+	<title>Fk qrtz_simprop_triggers_ibfk_1
+qrtz_simprop_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )</title>
+</path>
+<path transform='translate(7,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'    d='M 195 240 L 240,240' ></path>
+<text x='202' y='235' transform='rotate(0 202,235)' title='Fk qrtz_simprop_triggers_ibfk_1
+qrtz_simprop_triggers ref qrtz_triggers ( sched_name, trigger_name, trigger_group )' class='relName' style='fill:#5f789f'>sched_name,trigger_name,trigger_group</text>
+<!-- == Fk 'qrtz_triggers_qrtz_triggers_ibfk_1' == -->
+<path id='qrtz_triggers_qrtz_triggers_ibfk_1'  onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group'])" transform='translate(7,0)' class='scene' d='M 375 210 L 420,210' >
+	<title>Fk qrtz_triggers_ibfk_1
+qrtz_triggers ref qrtz_job_details ( sched_name, job_name, job_group )</title>
+</path>
+<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 375 210 L 420,210' ></path>
+<text x='382' y='205' transform='rotate(0 382,205)' title='Fk qrtz_triggers_ibfk_1
+qrtz_triggers ref qrtz_job_details ( sched_name, job_name, job_group )' class='relName' style='fill:#5f789f'>sched_name,job_name,job_group</text>
+<!-- == Table 'qrtz_blob_triggers' == -->
+<rect class='entity' x='255' y='533' width='120' height='105' rx='7' ry='7' style='stroke:none'/>
+<path d='M 255 559 L 255 540 Q 255 533 262 533 L 368 533 Q 375 533 375 540 L 375 559 L255 559 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='255' y='533' width='120' height='105' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='255' y1='559' x2='375' y2='559' style='stroke:#5f656e'/>
+<line class='delim' x1='270' y1='559' x2='270' y2='638' style='stroke:#5f656e'/>
+<line class='delim' x1='364' y1='559' x2='364' y2='638' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_blob_triggers'><text x='258' y='551'>qrtz_blob_triggers</text><title>Table ry.qrtz_blob_triggers</title></a>
+  <use id='nn' x='257' y='567' xlink:href='#nn'/><a xlink:href='#qrtz_blob_triggers.sched_name'><use id='pk' x='257' y='566' xlink:href='#pk'/><title>Pk pk_qrtz_blob_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_blob_triggers.sched_name'><text id='ry.qrtz_blob_triggers.sched_name' x='273' y='576' onmouseover="hghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<a xlink:href='#qrtz_blob_triggers.sched_name'><use id='fk' x='364' y='566' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='257' y='582' xlink:href='#nn'/><a xlink:href='#qrtz_blob_triggers.trigger_name'><use id='pk' x='257' y='581' xlink:href='#pk'/><title>Pk pk_qrtz_blob_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_blob_triggers.trigger_name'><text id='ry.qrtz_blob_triggers.trigger_name' x='273' y='591' onmouseover="hghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_name</text><title>trigger_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_blob_triggers.trigger_name'><use id='fk' x='364' y='581' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='257' y='597' xlink:href='#nn'/><a xlink:href='#qrtz_blob_triggers.trigger_group'><use id='pk' x='257' y='596' xlink:href='#pk'/><title>Pk pk_qrtz_blob_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_blob_triggers.trigger_group'><text id='ry.qrtz_blob_triggers.trigger_group' x='273' y='606' onmouseover="hghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_blob_triggers.trigger_group'><use id='fk' x='364' y='596' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <a xlink:href='#qrtz_blob_triggers.blob_data'><text id='ry.qrtz_blob_triggers.blob_data' x='273' y='621'>blob_data</text><title>blob_data
+blob</title></a>
+<text x='372' y='618' text-anchor='end' class='colType'>~</text>
+<!-- == Table 'qrtz_calendars' == -->
+<rect class='entity' x='75' y='38' width='120' height='90' rx='7' ry='7' style='stroke:none'/>
+<path d='M 75 64 L 75 45 Q 75 38 82 38 L 188 38 Q 195 38 195 45 L 195 64 L75 64 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='75' y='38' width='120' height='90' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='75' y1='64' x2='195' y2='64' style='stroke:#5f656e'/>
+<line class='delim' x1='90' y1='64' x2='90' y2='128' style='stroke:#5f656e'/>
+<line class='delim' x1='184' y1='64' x2='184' y2='128' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_calendars'><text x='90' y='56'>qrtz_calendars</text><title>Table ry.qrtz_calendars</title></a>
+  <use id='nn' x='77' y='72' xlink:href='#nn'/><a xlink:href='#qrtz_calendars.sched_name'><use id='pk' x='77' y='71' xlink:href='#pk'/><title>Pk pk_qrtz_calendars ( sched_name, calendar_name ) </title></a>
+<a xlink:href='#qrtz_calendars.sched_name'><text id='ry.qrtz_calendars.sched_name' x='93' y='81'>sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<text x='192' y='78' text-anchor='end' class='colType'>t</text>  <use id='nn' x='77' y='87' xlink:href='#nn'/><a xlink:href='#qrtz_calendars.calendar_name'><use id='pk' x='77' y='86' xlink:href='#pk'/><title>Pk pk_qrtz_calendars ( sched_name, calendar_name ) </title></a>
+<a xlink:href='#qrtz_calendars.calendar_name'><text id='ry.qrtz_calendars.calendar_name' x='93' y='96'>calendar_name</text><title>calendar_name
+* varchar(200)</title></a>
+<text x='192' y='93' text-anchor='end' class='colType'>t</text>  <use id='nn' x='77' y='102' xlink:href='#nn'/><a xlink:href='#qrtz_calendars.calendar'><text id='ry.qrtz_calendars.calendar' x='93' y='111'>calendar</text><title>calendar
+* blob</title></a>
+<text x='192' y='108' text-anchor='end' class='colType'>~</text>
+<!-- == Table 'qrtz_cron_triggers' == -->
+<rect class='entity' x='435' y='533' width='135' height='120' rx='7' ry='7' style='stroke:none'/>
+<path d='M 435 559 L 435 540 Q 435 533 442 533 L 563 533 Q 570 533 570 540 L 570 559 L435 559 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='435' y='533' width='135' height='120' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='435' y1='559' x2='570' y2='559' style='stroke:#5f656e'/>
+<line class='delim' x1='450' y1='559' x2='450' y2='653' style='stroke:#5f656e'/>
+<line class='delim' x1='559' y1='559' x2='559' y2='653' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_cron_triggers'><text x='445' y='551'>qrtz_cron_triggers</text><title>Table ry.qrtz_cron_triggers</title></a>
+  <use id='nn' x='437' y='567' xlink:href='#nn'/><a xlink:href='#qrtz_cron_triggers.sched_name'><use id='pk' x='437' y='566' xlink:href='#pk'/><title>Pk pk_qrtz_cron_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_cron_triggers.sched_name'><text id='ry.qrtz_cron_triggers.sched_name' x='453' y='576' onmouseover="hghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<a xlink:href='#qrtz_cron_triggers.sched_name'><use id='fk' x='559' y='566' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='437' y='582' xlink:href='#nn'/><a xlink:href='#qrtz_cron_triggers.trigger_name'><use id='pk' x='437' y='581' xlink:href='#pk'/><title>Pk pk_qrtz_cron_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_cron_triggers.trigger_name'><text id='ry.qrtz_cron_triggers.trigger_name' x='453' y='591' onmouseover="hghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_name</text><title>trigger_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_cron_triggers.trigger_name'><use id='fk' x='559' y='581' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='437' y='597' xlink:href='#nn'/><a xlink:href='#qrtz_cron_triggers.trigger_group'><use id='pk' x='437' y='596' xlink:href='#pk'/><title>Pk pk_qrtz_cron_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_cron_triggers.trigger_group'><text id='ry.qrtz_cron_triggers.trigger_group' x='453' y='606' onmouseover="hghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_cron_triggers.trigger_group'><use id='fk' x='559' y='596' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='437' y='612' xlink:href='#nn'/><a xlink:href='#qrtz_cron_triggers.cron_expression'><text id='ry.qrtz_cron_triggers.cron_expression' x='453' y='621'>cron_expression</text><title>cron_expression
+* varchar(200)</title></a>
+<text x='567' y='618' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_cron_triggers.time_zone_id'><text id='ry.qrtz_cron_triggers.time_zone_id' x='453' y='636'>time_zone_id</text><title>time_zone_id
+varchar(80)</title></a>
+<text x='567' y='633' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'qrtz_job_details' == -->
+<rect class='entity' x='435' y='188' width='135' height='195' rx='7' ry='7' style='stroke:none'/>
+<path d='M 435 214 L 435 195 Q 435 188 442 188 L 563 188 Q 570 188 570 195 L 570 214 L435 214 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='435' y='188' width='135' height='195' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='435' y1='214' x2='570' y2='214' style='stroke:#5f656e'/>
+<line class='delim' x1='450' y1='214' x2='450' y2='383' style='stroke:#5f656e'/>
+<line class='delim' x1='559' y1='214' x2='559' y2='383' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_job_details'><text x='451' y='206'>qrtz_job_details</text><title>Table ry.qrtz_job_details</title></a>
+  <use id='nn' x='437' y='222' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.sched_name'><use id='pk' x='437' y='221' xlink:href='#pk'/><title>Pk pk_qrtz_job_details ( sched_name, job_name, job_group ) </title></a>
+<a xlink:href='#qrtz_job_details.sched_name'><text id='ry.qrtz_job_details.sched_name' x='453' y='231' onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group'])">sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<a xlink:href='#qrtz_job_details.sched_name'><use id='ref' x='559' y='221' xlink:href='#ref'/><title>Referred by qrtz_triggers ( sched_name, job_name, job_group ) </title></a>
+  <use id='nn' x='437' y='237' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.job_name'><use id='pk' x='437' y='236' xlink:href='#pk'/><title>Pk pk_qrtz_job_details ( sched_name, job_name, job_group ) </title></a>
+<a xlink:href='#qrtz_job_details.job_name'><text id='ry.qrtz_job_details.job_name' x='453' y='246' onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group'])">job_name</text><title>job_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_job_details.job_name'><use id='ref' x='559' y='236' xlink:href='#ref'/><title>Referred by qrtz_triggers ( sched_name, job_name, job_group ) </title></a>
+  <use id='nn' x='437' y='252' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.job_group'><use id='pk' x='437' y='251' xlink:href='#pk'/><title>Pk pk_qrtz_job_details ( sched_name, job_name, job_group ) </title></a>
+<a xlink:href='#qrtz_job_details.job_group'><text id='ry.qrtz_job_details.job_group' x='453' y='261' onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.job_name','ry.qrtz_triggers.job_group'])">job_group</text><title>job_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_job_details.job_group'><use id='ref' x='559' y='251' xlink:href='#ref'/><title>Referred by qrtz_triggers ( sched_name, job_name, job_group ) </title></a>
+  <a xlink:href='#qrtz_job_details.description'><text id='ry.qrtz_job_details.description' x='453' y='276'>description</text><title>description
+varchar(250)</title></a>
+<text x='567' y='273' text-anchor='end' class='colType'>t</text>  <use id='nn' x='437' y='282' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.job_class_name'><text id='ry.qrtz_job_details.job_class_name' x='453' y='291'>job_class_name</text><title>job_class_name
+* varchar(250)</title></a>
+<text x='567' y='288' text-anchor='end' class='colType'>t</text>  <use id='nn' x='437' y='297' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.is_durable'><text id='ry.qrtz_job_details.is_durable' x='453' y='306'>is_durable</text><title>is_durable
+* varchar(1)</title></a>
+<text x='567' y='303' text-anchor='end' class='colType'>t</text>  <use id='nn' x='437' y='312' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.is_nonconcurrent'><text id='ry.qrtz_job_details.is_nonconcurrent' x='453' y='321'>is_nonconcurrent</text><title>is_nonconcurrent
+* varchar(1)</title></a>
+<text x='567' y='318' text-anchor='end' class='colType'>t</text>  <use id='nn' x='437' y='327' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.is_update_data'><text id='ry.qrtz_job_details.is_update_data' x='453' y='336'>is_update_data</text><title>is_update_data
+* varchar(1)</title></a>
+<text x='567' y='333' text-anchor='end' class='colType'>t</text>  <use id='nn' x='437' y='342' xlink:href='#nn'/><a xlink:href='#qrtz_job_details.requests_recovery'><text id='ry.qrtz_job_details.requests_recovery' x='453' y='351'>requests_recovery</text><title>requests_recovery
+* varchar(1)</title></a>
+<text x='567' y='348' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_job_details.job_data'><text id='ry.qrtz_job_details.job_data' x='453' y='366'>job_data</text><title>job_data
+blob</title></a>
+<text x='567' y='363' text-anchor='end' class='colType'>~</text>
+<!-- == Table 'qrtz_locks' == -->
+<rect class='entity' x='255' y='53' width='105' height='75' rx='7' ry='7' style='stroke:none'/>
+<path d='M 255 79 L 255 60 Q 255 53 262 53 L 353 53 Q 360 53 360 60 L 360 79 L255 79 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='255' y='53' width='105' height='75' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='255' y1='79' x2='360' y2='79' style='stroke:#5f656e'/>
+<line class='delim' x1='270' y1='79' x2='270' y2='128' style='stroke:#5f656e'/>
+<line class='delim' x1='349' y1='79' x2='349' y2='128' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_locks'><text x='274' y='71'>qrtz_locks</text><title>Table ry.qrtz_locks</title></a>
+  <use id='nn' x='257' y='87' xlink:href='#nn'/><a xlink:href='#qrtz_locks.sched_name'><use id='pk' x='257' y='86' xlink:href='#pk'/><title>Pk pk_qrtz_locks ( sched_name, lock_name ) </title></a>
+<a xlink:href='#qrtz_locks.sched_name'><text id='ry.qrtz_locks.sched_name' x='273' y='96'>sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<text x='357' y='93' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='102' xlink:href='#nn'/><a xlink:href='#qrtz_locks.lock_name'><use id='pk' x='257' y='101' xlink:href='#pk'/><title>Pk pk_qrtz_locks ( sched_name, lock_name ) </title></a>
+<a xlink:href='#qrtz_locks.lock_name'><text id='ry.qrtz_locks.lock_name' x='273' y='111'>lock_name</text><title>lock_name
+* varchar(40)</title></a>
+<text x='357' y='108' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'qrtz_scheduler_state' == -->
+<rect class='entity' x='255' y='728' width='135' height='105' rx='7' ry='7' style='stroke:none'/>
+<path d='M 255 754 L 255 735 Q 255 728 262 728 L 383 728 Q 390 728 390 735 L 390 754 L255 754 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='255' y='728' width='135' height='105' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='255' y1='754' x2='390' y2='754' style='stroke:#5f656e'/>
+<line class='delim' x1='270' y1='754' x2='270' y2='833' style='stroke:#5f656e'/>
+<line class='delim' x1='379' y1='754' x2='379' y2='833' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_scheduler_state'><text x='259' y='746'>qrtz_scheduler_state</text><title>Table ry.qrtz_scheduler_state</title></a>
+  <use id='nn' x='257' y='762' xlink:href='#nn'/><a xlink:href='#qrtz_scheduler_state.sched_name'><use id='pk' x='257' y='761' xlink:href='#pk'/><title>Pk pk_qrtz_scheduler_state ( sched_name, instance_name ) </title></a>
+<a xlink:href='#qrtz_scheduler_state.sched_name'><text id='ry.qrtz_scheduler_state.sched_name' x='273' y='771'>sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<text x='387' y='768' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='777' xlink:href='#nn'/><a xlink:href='#qrtz_scheduler_state.instance_name'><use id='pk' x='257' y='776' xlink:href='#pk'/><title>Pk pk_qrtz_scheduler_state ( sched_name, instance_name ) </title></a>
+<a xlink:href='#qrtz_scheduler_state.instance_name'><text id='ry.qrtz_scheduler_state.instance_name' x='273' y='786'>instance_name</text><title>instance_name
+* varchar(200)</title></a>
+<text x='387' y='783' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='792' xlink:href='#nn'/><a xlink:href='#qrtz_scheduler_state.last_checkin_time'><text id='ry.qrtz_scheduler_state.last_checkin_time' x='273' y='801'>last_checkin_time</text><title>last_checkin_time
+* bigint</title></a>
+<text x='387' y='798' text-anchor='end' class='colType'>#</text>  <use id='nn' x='257' y='807' xlink:href='#nn'/><a xlink:href='#qrtz_scheduler_state.checkin_interval'><text id='ry.qrtz_scheduler_state.checkin_interval' x='273' y='816'>checkin_interval</text><title>checkin_interval
+* bigint</title></a>
+<text x='387' y='813' text-anchor='end' class='colType'>#</text>
+<!-- == Table 'qrtz_simple_triggers' == -->
+<rect class='entity' x='60' y='533' width='135' height='135' rx='7' ry='7' style='stroke:none'/>
+<path d='M 60 559 L 60 540 Q 60 533 67 533 L 188 533 Q 195 533 195 540 L 195 559 L60 559 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='60' y='533' width='135' height='135' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='60' y1='559' x2='195' y2='559' style='stroke:#5f656e'/>
+<line class='delim' x1='75' y1='559' x2='75' y2='668' style='stroke:#5f656e'/>
+<line class='delim' x1='184' y1='559' x2='184' y2='668' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_simple_triggers'><text x='64' y='551'>qrtz_simple_triggers</text><title>Table ry.qrtz_simple_triggers</title></a>
+  <use id='nn' x='62' y='567' xlink:href='#nn'/><a xlink:href='#qrtz_simple_triggers.sched_name'><use id='pk' x='62' y='566' xlink:href='#pk'/><title>Pk pk_qrtz_simple_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_simple_triggers.sched_name'><text id='ry.qrtz_simple_triggers.sched_name' x='78' y='576' onmouseover="hghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<a xlink:href='#qrtz_simple_triggers.sched_name'><use id='fk' x='184' y='566' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='62' y='582' xlink:href='#nn'/><a xlink:href='#qrtz_simple_triggers.trigger_name'><use id='pk' x='62' y='581' xlink:href='#pk'/><title>Pk pk_qrtz_simple_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_simple_triggers.trigger_name'><text id='ry.qrtz_simple_triggers.trigger_name' x='78' y='591' onmouseover="hghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_name</text><title>trigger_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_simple_triggers.trigger_name'><use id='fk' x='184' y='581' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='62' y='597' xlink:href='#nn'/><a xlink:href='#qrtz_simple_triggers.trigger_group'><use id='pk' x='62' y='596' xlink:href='#pk'/><title>Pk pk_qrtz_simple_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_simple_triggers.trigger_group'><text id='ry.qrtz_simple_triggers.trigger_group' x='78' y='606' onmouseover="hghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_simple_triggers.trigger_group'><use id='fk' x='184' y='596' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='62' y='612' xlink:href='#nn'/><a xlink:href='#qrtz_simple_triggers.repeat_count'><text id='ry.qrtz_simple_triggers.repeat_count' x='78' y='621'>repeat_count</text><title>repeat_count
+* bigint</title></a>
+<text x='192' y='618' text-anchor='end' class='colType'>#</text>  <use id='nn' x='62' y='627' xlink:href='#nn'/><a xlink:href='#qrtz_simple_triggers.repeat_interval'><text id='ry.qrtz_simple_triggers.repeat_interval' x='78' y='636'>repeat_interval</text><title>repeat_interval
+* bigint</title></a>
+<text x='192' y='633' text-anchor='end' class='colType'>#</text>  <use id='nn' x='62' y='642' xlink:href='#nn'/><a xlink:href='#qrtz_simple_triggers.times_triggered'><text id='ry.qrtz_simple_triggers.times_triggered' x='78' y='651'>times_triggered</text><title>times_triggered
+* bigint</title></a>
+<text x='192' y='648' text-anchor='end' class='colType'>#</text>
+<!-- == Table 'qrtz_simprop_triggers' == -->
+<rect class='entity' x='45' y='218' width='150' height='255' rx='7' ry='7' style='stroke:none'/>
+<path d='M 45 244 L 45 225 Q 45 218 52 218 L 188 218 Q 195 218 195 225 L 195 244 L45 244 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='45' y='218' width='150' height='255' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='45' y1='244' x2='195' y2='244' style='stroke:#5f656e'/>
+<line class='delim' x1='60' y1='244' x2='60' y2='473' style='stroke:#5f656e'/>
+<line class='delim' x1='184' y1='244' x2='184' y2='473' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_simprop_triggers'><text x='54' y='236'>qrtz_simprop_triggers</text><title>Table ry.qrtz_simprop_triggers</title></a>
+  <use id='nn' x='47' y='252' xlink:href='#nn'/><a xlink:href='#qrtz_simprop_triggers.sched_name'><use id='pk' x='47' y='251' xlink:href='#pk'/><title>Pk pk_qrtz_simprop_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_simprop_triggers.sched_name'><text id='ry.qrtz_simprop_triggers.sched_name' x='63' y='261' onmouseover="hghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<a xlink:href='#qrtz_simprop_triggers.sched_name'><use id='fk' x='184' y='251' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='47' y='267' xlink:href='#nn'/><a xlink:href='#qrtz_simprop_triggers.trigger_name'><use id='pk' x='47' y='266' xlink:href='#pk'/><title>Pk pk_qrtz_simprop_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_simprop_triggers.trigger_name'><text id='ry.qrtz_simprop_triggers.trigger_name' x='63' y='276' onmouseover="hghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_name</text><title>trigger_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_simprop_triggers.trigger_name'><use id='fk' x='184' y='266' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='47' y='282' xlink:href='#nn'/><a xlink:href='#qrtz_simprop_triggers.trigger_group'><use id='pk' x='47' y='281' xlink:href='#pk'/><title>Pk pk_qrtz_simprop_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_simprop_triggers.trigger_group'><text id='ry.qrtz_simprop_triggers.trigger_group' x='63' y='291' onmouseover="hghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_triggers.sched_name','ry.qrtz_triggers.trigger_name','ry.qrtz_triggers.trigger_group'])">trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_simprop_triggers.trigger_group'><use id='fk' x='184' y='281' xlink:href='#fk'/><title>References qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <a xlink:href='#qrtz_simprop_triggers.str_prop_1'><text id='ry.qrtz_simprop_triggers.str_prop_1' x='63' y='306'>str_prop_1</text><title>str_prop_1
+varchar(512)</title></a>
+<text x='192' y='303' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_simprop_triggers.str_prop_2'><text id='ry.qrtz_simprop_triggers.str_prop_2' x='63' y='321'>str_prop_2</text><title>str_prop_2
+varchar(512)</title></a>
+<text x='192' y='318' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_simprop_triggers.str_prop_3'><text id='ry.qrtz_simprop_triggers.str_prop_3' x='63' y='336'>str_prop_3</text><title>str_prop_3
+varchar(512)</title></a>
+<text x='192' y='333' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_simprop_triggers.int_prop_1'><text id='ry.qrtz_simprop_triggers.int_prop_1' x='63' y='351'>int_prop_1</text><title>int_prop_1
+int</title></a>
+<text x='192' y='348' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_simprop_triggers.int_prop_2'><text id='ry.qrtz_simprop_triggers.int_prop_2' x='63' y='366'>int_prop_2</text><title>int_prop_2
+int</title></a>
+<text x='192' y='363' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_simprop_triggers.long_prop_1'><text id='ry.qrtz_simprop_triggers.long_prop_1' x='63' y='381'>long_prop_1</text><title>long_prop_1
+bigint</title></a>
+<text x='192' y='378' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_simprop_triggers.long_prop_2'><text id='ry.qrtz_simprop_triggers.long_prop_2' x='63' y='396'>long_prop_2</text><title>long_prop_2
+bigint</title></a>
+<text x='192' y='393' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_simprop_triggers.dec_prop_1'><text id='ry.qrtz_simprop_triggers.dec_prop_1' x='63' y='411'>dec_prop_1</text><title>dec_prop_1
+decimal(13,4)</title></a>
+<text x='192' y='408' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_simprop_triggers.dec_prop_2'><text id='ry.qrtz_simprop_triggers.dec_prop_2' x='63' y='426'>dec_prop_2</text><title>dec_prop_2
+decimal(13,4)</title></a>
+<text x='192' y='423' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_simprop_triggers.bool_prop_1'><text id='ry.qrtz_simprop_triggers.bool_prop_1' x='63' y='441'>bool_prop_1</text><title>bool_prop_1
+varchar(1)</title></a>
+<text x='192' y='438' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_simprop_triggers.bool_prop_2'><text id='ry.qrtz_simprop_triggers.bool_prop_2' x='63' y='456'>bool_prop_2</text><title>bool_prop_2
+varchar(1)</title></a>
+<text x='192' y='453' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'qrtz_triggers' == -->
+<rect class='entity' x='255' y='188' width='120' height='285' rx='7' ry='7' style='stroke:none'/>
+<path d='M 255 214 L 255 195 Q 255 188 262 188 L 368 188 Q 375 188 375 195 L 375 214 L255 214 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='255' y='188' width='120' height='285' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
+<line class='delim' x1='255' y1='214' x2='375' y2='214' style='stroke:#5f656e'/>
+<line class='delim' x1='270' y1='214' x2='270' y2='473' style='stroke:#5f656e'/>
+<line class='delim' x1='364' y1='214' x2='364' y2='473' style='stroke:#5f656e'/>
+<a xlink:href='#qrtz_triggers'><text x='273' y='206'>qrtz_triggers</text><title>Table ry.qrtz_triggers</title></a>
+  <use id='nn' x='257' y='222' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.sched_name'><use id='pk' x='257' y='221' xlink:href='#pk'/><title>Pk pk_qrtz_triggers ( sched_name, trigger_name, trigger_group ) sched_name ( sched_name, job_name, job_group ) </title></a>
+<a xlink:href='#qrtz_triggers.sched_name'><text id='ry.qrtz_triggers.sched_name' x='273' y='231' onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group','qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group','qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group'])">sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<a xlink:href='#qrtz_triggers.sched_name'><use id='fk' x='364' y='221' xlink:href='#fk'/><title>References qrtz_job_details ( sched_name, job_name, job_group ) 
+Referred by qrtz_blob_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_cron_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_simple_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_simprop_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='257' y='237' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.trigger_name'><use id='pk' x='257' y='236' xlink:href='#pk'/><title>Pk pk_qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_triggers.trigger_name'><text id='ry.qrtz_triggers.trigger_name' x='273' y='246' onmouseover="hghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group'])">trigger_name</text><title>trigger_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_triggers.trigger_name'><use id='ref' x='364' y='236' xlink:href='#ref'/><title>Referred by qrtz_blob_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_cron_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_simple_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_simprop_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='257' y='252' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.trigger_group'><use id='pk' x='257' y='251' xlink:href='#pk'/><title>Pk pk_qrtz_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_triggers.trigger_group'><text id='ry.qrtz_triggers.trigger_group' x='273' y='261' onmouseover="hghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group'])" onmouseout="uhghl(['qrtz_blob_triggers_qrtz_blob_triggers_ibfk_1','ry.qrtz_blob_triggers.sched_name','ry.qrtz_blob_triggers.trigger_name','ry.qrtz_blob_triggers.trigger_group','qrtz_cron_triggers_qrtz_cron_triggers_ibfk_1','ry.qrtz_cron_triggers.sched_name','ry.qrtz_cron_triggers.trigger_name','ry.qrtz_cron_triggers.trigger_group','qrtz_simple_triggers_qrtz_simple_triggers_ibfk_1','ry.qrtz_simple_triggers.sched_name','ry.qrtz_simple_triggers.trigger_name','ry.qrtz_simple_triggers.trigger_group','qrtz_simprop_triggers_qrtz_simprop_triggers_ibfk_1','ry.qrtz_simprop_triggers.sched_name','ry.qrtz_simprop_triggers.trigger_name','ry.qrtz_simprop_triggers.trigger_group'])">trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_triggers.trigger_group'><use id='ref' x='364' y='251' xlink:href='#ref'/><title>Referred by qrtz_blob_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_cron_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_simple_triggers ( sched_name, trigger_name, trigger_group ) 
+Referred by qrtz_simprop_triggers ( sched_name, trigger_name, trigger_group ) </title></a>
+  <use id='nn' x='257' y='267' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.job_name'><use id='idx' x='257' y='266' xlink:href='#idx'/><title>sched_name ( sched_name, job_name, job_group ) </title></a>
+<a xlink:href='#qrtz_triggers.job_name'><text id='ry.qrtz_triggers.job_name' x='273' y='276' onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group'])">job_name</text><title>job_name
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_triggers.job_name'><use id='fk' x='364' y='266' xlink:href='#fk'/><title>References qrtz_job_details ( sched_name, job_name, job_group ) </title></a>
+  <use id='nn' x='257' y='282' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.job_group'><use id='idx' x='257' y='281' xlink:href='#idx'/><title>sched_name ( sched_name, job_name, job_group ) </title></a>
+<a xlink:href='#qrtz_triggers.job_group'><text id='ry.qrtz_triggers.job_group' x='273' y='291' onmouseover="hghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group'])" onmouseout="uhghl(['qrtz_triggers_qrtz_triggers_ibfk_1','ry.qrtz_job_details.sched_name','ry.qrtz_job_details.job_name','ry.qrtz_job_details.job_group'])">job_group</text><title>job_group
+* varchar(200)</title></a>
+<a xlink:href='#qrtz_triggers.job_group'><use id='fk' x='364' y='281' xlink:href='#fk'/><title>References qrtz_job_details ( sched_name, job_name, job_group ) </title></a>
+  <a xlink:href='#qrtz_triggers.description'><text id='ry.qrtz_triggers.description' x='273' y='306'>description</text><title>description
+varchar(250)</title></a>
+<text x='372' y='303' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_triggers.next_fire_time'><text id='ry.qrtz_triggers.next_fire_time' x='273' y='321'>next_fire_time</text><title>next_fire_time
+bigint</title></a>
+<text x='372' y='318' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_triggers.prev_fire_time'><text id='ry.qrtz_triggers.prev_fire_time' x='273' y='336'>prev_fire_time</text><title>prev_fire_time
+bigint</title></a>
+<text x='372' y='333' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_triggers.priority'><text id='ry.qrtz_triggers.priority' x='273' y='351'>priority</text><title>priority
+int</title></a>
+<text x='372' y='348' text-anchor='end' class='colType'>#</text>  <use id='nn' x='257' y='357' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.trigger_state'><text id='ry.qrtz_triggers.trigger_state' x='273' y='366'>trigger_state</text><title>trigger_state
+* varchar(16)</title></a>
+<text x='372' y='363' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='372' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.trigger_type'><text id='ry.qrtz_triggers.trigger_type' x='273' y='381'>trigger_type</text><title>trigger_type
+* varchar(8)</title></a>
+<text x='372' y='378' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='387' xlink:href='#nn'/><a xlink:href='#qrtz_triggers.start_time'><text id='ry.qrtz_triggers.start_time' x='273' y='396'>start_time</text><title>start_time
+* bigint</title></a>
+<text x='372' y='393' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_triggers.end_time'><text id='ry.qrtz_triggers.end_time' x='273' y='411'>end_time</text><title>end_time
+bigint</title></a>
+<text x='372' y='408' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_triggers.calendar_name'><text id='ry.qrtz_triggers.calendar_name' x='273' y='426'>calendar_name</text><title>calendar_name
+varchar(200)</title></a>
+<text x='372' y='423' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_triggers.misfire_instr'><text id='ry.qrtz_triggers.misfire_instr' x='273' y='441'>misfire_instr</text><title>misfire_instr
+smallint</title></a>
+<text x='372' y='438' text-anchor='end' class='colType'>#</text>  <a xlink:href='#qrtz_triggers.job_data'><text id='ry.qrtz_triggers.job_data' x='273' y='456'>job_data</text><title>job_data
+blob</title></a>
+<text x='372' y='453' text-anchor='end' class='colType'>~</text>
+<!-- == Table 'sys_dict_data' == -->
+<rect class='entity' x='1170' y='38' width='105' height='210' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1170 64 L 1170 45 Q 1170 38 1177 38 L 1268 38 Q 1275 38 1275 45 L 1275 64 L1170 64 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1170' y='38' width='105' height='210' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='1170' y1='64' x2='1275' y2='64' style='stroke:#626e5f'/>
+<line class='delim' x1='1185' y1='64' x2='1185' y2='248' style='stroke:#626e5f'/>
+<line class='delim' x1='1264' y1='64' x2='1264' y2='248' style='stroke:#626e5f'/>
+<a xlink:href='#sys_dict_data'><text x='1180' y='56'>sys_dict_data</text><title>Table ry.sys_dict_data</title></a>
+  <use id='nn' x='1172' y='72' xlink:href='#nn'/><a xlink:href='#sys_dict_data.dict_code'><use id='pk' x='1172' y='71' xlink:href='#pk'/><title>Pk pk_sys_dict_data ( dict_code ) </title></a>
+<a xlink:href='#sys_dict_data.dict_code'><text id='ry.sys_dict_data.dict_code' x='1188' y='81'>dict_code</text><title>dict_code
+* int
+字典编码</title></a>
+<text x='1272' y='78' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dict_data.dict_sort'><text id='ry.sys_dict_data.dict_sort' x='1188' y='96'>dict_sort</text><title>dict_sort
+int default 0
+字典排序</title></a>
+<text x='1272' y='93' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dict_data.dict_label'><text id='ry.sys_dict_data.dict_label' x='1188' y='111'>dict_label</text><title>dict_label
+varchar(100) default ''
+字典标签</title></a>
+<text x='1272' y='108' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dict_data.dict_value'><text id='ry.sys_dict_data.dict_value' x='1188' y='126'>dict_value</text><title>dict_value
+varchar(100) default ''
+字典键值</title></a>
+<text x='1272' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dict_data.dict_type'><text id='ry.sys_dict_data.dict_type' x='1188' y='141'>dict_type</text><title>dict_type
+varchar(100) default ''
+字典类型</title></a>
+<text x='1272' y='138' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dict_data.status'><text id='ry.sys_dict_data.status' x='1188' y='156'>status</text><title>status
+int default 0
+状态（0正常 1禁用）</title></a>
+<text x='1272' y='153' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dict_data.create_by'><text id='ry.sys_dict_data.create_by' x='1188' y='171'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='1272' y='168' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1172' y='177' xlink:href='#nn'/><a xlink:href='#sys_dict_data.create_time'><text id='ry.sys_dict_data.create_time' x='1188' y='186'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1272' y='183' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_dict_data.update_by'><text id='ry.sys_dict_data.update_by' x='1188' y='201'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='1272' y='198' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1172' y='207' xlink:href='#nn'/><a xlink:href='#sys_dict_data.update_time'><text id='ry.sys_dict_data.update_time' x='1188' y='216'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='1272' y='213' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_dict_data.remark'><text id='ry.sys_dict_data.remark' x='1188' y='231'>remark</text><title>remark
+varchar(500) default ''
+备注</title></a>
+<text x='1272' y='228' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_dict_type' == -->
+<rect class='entity' x='1005' y='38' width='105' height='180' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1005 64 L 1005 45 Q 1005 38 1012 38 L 1103 38 Q 1110 38 1110 45 L 1110 64 L1005 64 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1005' y='38' width='105' height='180' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='1005' y1='64' x2='1110' y2='64' style='stroke:#626e5f'/>
+<line class='delim' x1='1020' y1='64' x2='1020' y2='218' style='stroke:#626e5f'/>
+<line class='delim' x1='1099' y1='64' x2='1099' y2='218' style='stroke:#626e5f'/>
+<a xlink:href='#sys_dict_type'><text x='1015' y='56'>sys_dict_type</text><title>Table ry.sys_dict_type</title></a>
+  <use id='nn' x='1007' y='72' xlink:href='#nn'/><a xlink:href='#sys_dict_type.dict_id'><use id='pk' x='1007' y='71' xlink:href='#pk'/><title>Pk pk_sys_dict_type ( dict_id ) </title></a>
+<a xlink:href='#sys_dict_type.dict_id'><text id='ry.sys_dict_type.dict_id' x='1023' y='81'>dict_id</text><title>dict_id
+* int
+字典主键</title></a>
+<text x='1107' y='78' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dict_type.dict_name'><text id='ry.sys_dict_type.dict_name' x='1023' y='96'>dict_name</text><title>dict_name
+varchar(100) default ''
+字典名称</title></a>
+<text x='1107' y='93' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dict_type.dict_type'><use id='unq' x='1007' y='101' xlink:href='#unq'/><title>Unq dict_type ( dict_type ) </title></a>
+<a xlink:href='#sys_dict_type.dict_type'><text id='ry.sys_dict_type.dict_type' x='1023' y='111'>dict_type</text><title>dict_type
+varchar(100) default ''
+字典类型</title></a>
+<text x='1107' y='108' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dict_type.status'><text id='ry.sys_dict_type.status' x='1023' y='126'>status</text><title>status
+int default 0
+状态（0正常 1禁用）</title></a>
+<text x='1107' y='123' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dict_type.create_by'><text id='ry.sys_dict_type.create_by' x='1023' y='141'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='1107' y='138' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1007' y='147' xlink:href='#nn'/><a xlink:href='#sys_dict_type.create_time'><text id='ry.sys_dict_type.create_time' x='1023' y='156'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1107' y='153' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_dict_type.update_by'><text id='ry.sys_dict_type.update_by' x='1023' y='171'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='1107' y='168' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1007' y='177' xlink:href='#nn'/><a xlink:href='#sys_dict_type.update_time'><text id='ry.sys_dict_type.update_time' x='1023' y='186'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='1107' y='183' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_dict_type.remark'><text id='ry.sys_dict_type.remark' x='1023' y='201'>remark</text><title>remark
+varchar(500) default ''
+备注</title></a>
+<text x='1107' y='198' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_job' == -->
+<rect class='entity' x='1545' y='38' width='135' height='225' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1545 64 L 1545 45 Q 1545 38 1552 38 L 1673 38 Q 1680 38 1680 45 L 1680 64 L1545 64 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1545' y='38' width='135' height='225' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1545' y1='64' x2='1680' y2='64' style='stroke:#6e675f'/>
+<line class='delim' x1='1560' y1='64' x2='1560' y2='263' style='stroke:#6e675f'/>
+<line class='delim' x1='1669' y1='64' x2='1669' y2='263' style='stroke:#6e675f'/>
+<a xlink:href='#sys_job'><text x='1588' y='56'>sys_job</text><title>Table ry.sys_job</title></a>
+  <use id='nn' x='1547' y='72' xlink:href='#nn'/><a xlink:href='#sys_job.job_id'><use id='pk' x='1547' y='71' xlink:href='#pk'/><title>Pk pk_sys_job ( job_id, job_name, job_group ) </title></a>
+<a xlink:href='#sys_job.job_id'><text id='ry.sys_job.job_id' x='1563' y='81'>job_id</text><title>job_id
+* int
+任务ID</title></a>
+<text x='1677' y='78' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1547' y='87' xlink:href='#nn'/><a xlink:href='#sys_job.job_name'><use id='pk' x='1547' y='86' xlink:href='#pk'/><title>Pk pk_sys_job ( job_id, job_name, job_group ) </title></a>
+<a xlink:href='#sys_job.job_name'><text id='ry.sys_job.job_name' x='1563' y='96'>job_name</text><title>job_name
+* varchar(64) default ''
+任务名称</title></a>
+<text x='1677' y='93' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='102' xlink:href='#nn'/><a xlink:href='#sys_job.job_group'><use id='pk' x='1547' y='101' xlink:href='#pk'/><title>Pk pk_sys_job ( job_id, job_name, job_group ) </title></a>
+<a xlink:href='#sys_job.job_group'><text id='ry.sys_job.job_group' x='1563' y='111'>job_group</text><title>job_group
+* varchar(64) default ''
+任务组名</title></a>
+<text x='1677' y='108' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job.method_name'><text id='ry.sys_job.method_name' x='1563' y='126'>method_name</text><title>method_name
+varchar(500) default ''
+任务方法</title></a>
+<text x='1677' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job.params'><text id='ry.sys_job.params' x='1563' y='141'>params</text><title>params
+varchar(200) default ''
+方法参数</title></a>
+<text x='1677' y='138' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job.cron_expression'><text id='ry.sys_job.cron_expression' x='1563' y='156'>cron_expression</text><title>cron_expression
+varchar(255) default ''
+cron执行表达式</title></a>
+<text x='1677' y='153' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job.status'><text id='ry.sys_job.status' x='1563' y='171'>status</text><title>status
+int default 0
+状态（0正常 1暂停）</title></a>
+<text x='1677' y='168' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_job.create_by'><text id='ry.sys_job.create_by' x='1563' y='186'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='1677' y='183' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='192' xlink:href='#nn'/><a xlink:href='#sys_job.create_time'><text id='ry.sys_job.create_time' x='1563' y='201'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1677' y='198' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_job.update_by'><text id='ry.sys_job.update_by' x='1563' y='216'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='1677' y='213' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='222' xlink:href='#nn'/><a xlink:href='#sys_job.update_time'><text id='ry.sys_job.update_time' x='1563' y='231'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='1677' y='228' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_job.remark'><text id='ry.sys_job.remark' x='1563' y='246'>remark</text><title>remark
+varchar(500) default ''
+备注信息</title></a>
+<text x='1677' y='243' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_job_log' == -->
+<rect class='entity' x='1365' y='38' width='120' height='180' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1365 64 L 1365 45 Q 1365 38 1372 38 L 1478 38 Q 1485 38 1485 45 L 1485 64 L1365 64 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1365' y='38' width='120' height='180' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1365' y1='64' x2='1485' y2='64' style='stroke:#6e675f'/>
+<line class='delim' x1='1380' y1='64' x2='1380' y2='218' style='stroke:#6e675f'/>
+<line class='delim' x1='1474' y1='64' x2='1474' y2='218' style='stroke:#6e675f'/>
+<a xlink:href='#sys_job_log'><text x='1389' y='56'>sys_job_log</text><title>Table ry.sys_job_log</title></a>
+  <use id='nn' x='1367' y='72' xlink:href='#nn'/><a xlink:href='#sys_job_log.job_log_id'><use id='pk' x='1367' y='71' xlink:href='#pk'/><title>Pk pk_sys_job_log ( job_log_id ) </title></a>
+<a xlink:href='#sys_job_log.job_log_id'><text id='ry.sys_job_log.job_log_id' x='1383' y='81'>job_log_id</text><title>job_log_id
+* int
+任务日志ID</title></a>
+<text x='1482' y='78' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1367' y='87' xlink:href='#nn'/><a xlink:href='#sys_job_log.job_name'><text id='ry.sys_job_log.job_name' x='1383' y='96'>job_name</text><title>job_name
+* varchar(64)
+任务名称</title></a>
+<text x='1482' y='93' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1367' y='102' xlink:href='#nn'/><a xlink:href='#sys_job_log.job_group'><text id='ry.sys_job_log.job_group' x='1383' y='111'>job_group</text><title>job_group
+* varchar(64)
+任务组名</title></a>
+<text x='1482' y='108' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job_log.method_name'><text id='ry.sys_job_log.method_name' x='1383' y='126'>method_name</text><title>method_name
+varchar(500)
+任务方法</title></a>
+<text x='1482' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job_log.params'><text id='ry.sys_job_log.params' x='1383' y='141'>params</text><title>params
+varchar(200) default ''
+方法参数</title></a>
+<text x='1482' y='138' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job_log.job_message'><text id='ry.sys_job_log.job_message' x='1383' y='156'>job_message</text><title>job_message
+varchar(500)
+日志信息</title></a>
+<text x='1482' y='153' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_job_log.is_exception'><text id='ry.sys_job_log.is_exception' x='1383' y='171'>is_exception</text><title>is_exception
+int default 0
+是否异常</title></a>
+<text x='1482' y='168' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_job_log.exception_info'><text id='ry.sys_job_log.exception_info' x='1383' y='186'>exception_info</text><title>exception_info
+text
+异常信息</title></a>
+<text x='1482' y='183' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1367' y='192' xlink:href='#nn'/><a xlink:href='#sys_job_log.create_time'><text id='ry.sys_job_log.create_time' x='1383' y='201'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1482' y='198' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'sys_logininfor' == -->
+<rect class='entity' x='1740' y='323' width='105' height='165' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1740 349 L 1740 330 Q 1740 323 1747 323 L 1838 323 Q 1845 323 1845 330 L 1845 349 L1740 349 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1740' y='323' width='105' height='165' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1740' y1='349' x2='1845' y2='349' style='stroke:#6e675f'/>
+<line class='delim' x1='1755' y1='349' x2='1755' y2='488' style='stroke:#6e675f'/>
+<line class='delim' x1='1834' y1='349' x2='1834' y2='488' style='stroke:#6e675f'/>
+<a xlink:href='#sys_logininfor'><text x='1747' y='341'>sys_logininfor</text><title>Table ry.sys_logininfor</title></a>
+  <use id='nn' x='1742' y='357' xlink:href='#nn'/><a xlink:href='#sys_logininfor.info_id'><use id='pk' x='1742' y='356' xlink:href='#pk'/><title>Pk pk_sys_logininfor ( info_id ) </title></a>
+<a xlink:href='#sys_logininfor.info_id'><text id='ry.sys_logininfor.info_id' x='1758' y='366'>info_id</text><title>info_id
+* int
+访问ID</title></a>
+<text x='1842' y='363' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_logininfor.login_name'><text id='ry.sys_logininfor.login_name' x='1758' y='381'>login_name</text><title>login_name
+varchar(50) default ''
+登录账号</title></a>
+<text x='1842' y='378' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_logininfor.ipaddr'><text id='ry.sys_logininfor.ipaddr' x='1758' y='396'>ipaddr</text><title>ipaddr
+varchar(50) default ''
+登录IP地址</title></a>
+<text x='1842' y='393' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_logininfor.browser'><text id='ry.sys_logininfor.browser' x='1758' y='411'>browser</text><title>browser
+varchar(50) default ''
+浏览器类型</title></a>
+<text x='1842' y='408' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_logininfor.os'><text id='ry.sys_logininfor.os' x='1758' y='426'>os</text><title>os
+varchar(50) default ''
+操作系统</title></a>
+<text x='1842' y='423' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_logininfor.status'><text id='ry.sys_logininfor.status' x='1758' y='441'>status</text><title>status
+int default 0
+登录状态 0成功 1失败</title></a>
+<text x='1842' y='438' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_logininfor.msg'><text id='ry.sys_logininfor.msg' x='1758' y='456'>msg</text><title>msg
+varchar(255) default ''
+提示消息</title></a>
+<text x='1842' y='453' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1742' y='462' xlink:href='#nn'/><a xlink:href='#sys_logininfor.login_time'><text id='ry.sys_logininfor.login_time' x='1758' y='471'>login_time</text><title>login_time
+* timestamp default CURRENT_TIMESTAMP
+访问时间</title></a>
+<text x='1842' y='468' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'sys_menu' == -->
+<rect class='entity' x='1380' y='323' width='105' height='255' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1380 349 L 1380 330 Q 1380 323 1387 323 L 1478 323 Q 1485 323 1485 330 L 1485 349 L1380 349 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1380' y='323' width='105' height='255' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1380' y1='349' x2='1485' y2='349' style='stroke:#6e675f'/>
+<line class='delim' x1='1395' y1='349' x2='1395' y2='578' style='stroke:#6e675f'/>
+<line class='delim' x1='1474' y1='349' x2='1474' y2='578' style='stroke:#6e675f'/>
+<a xlink:href='#sys_menu'><text x='1405' y='341'>sys_menu</text><title>Table ry.sys_menu</title></a>
+  <use id='nn' x='1382' y='357' xlink:href='#nn'/><a xlink:href='#sys_menu.menu_id'><use id='pk' x='1382' y='356' xlink:href='#pk'/><title>Pk pk_sys_menu ( menu_id ) </title></a>
+<a xlink:href='#sys_menu.menu_id'><text id='ry.sys_menu.menu_id' x='1398' y='366'>menu_id</text><title>menu_id
+* int
+菜单ID</title></a>
+<text x='1482' y='363' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1382' y='372' xlink:href='#nn'/><a xlink:href='#sys_menu.menu_name'><text id='ry.sys_menu.menu_name' x='1398' y='381'>menu_name</text><title>menu_name
+* varchar(50)
+菜单名称</title></a>
+<text x='1482' y='378' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_menu.parent_id'><text id='ry.sys_menu.parent_id' x='1398' y='396'>parent_id</text><title>parent_id
+int default 0
+父菜单ID</title></a>
+<text x='1482' y='393' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_menu.order_num'><text id='ry.sys_menu.order_num' x='1398' y='411'>order_num</text><title>order_num
+int
+显示顺序</title></a>
+<text x='1482' y='408' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_menu.url'><text id='ry.sys_menu.url' x='1398' y='426'>url</text><title>url
+varchar(200) default ''
+请求地址</title></a>
+<text x='1482' y='423' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_menu.menu_type'><text id='ry.sys_menu.menu_type' x='1398' y='441'>menu_type</text><title>menu_type
+char(1) default ''
+类型:M目录,C菜单,F按钮</title></a>
+<text x='1482' y='438' text-anchor='end' class='colType'>c</text>  <a xlink:href='#sys_menu.visible'><text id='ry.sys_menu.visible' x='1398' y='456'>visible</text><title>visible
+int default 0
+菜单状态:0显示,1隐藏</title></a>
+<text x='1482' y='453' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_menu.perms'><text id='ry.sys_menu.perms' x='1398' y='471'>perms</text><title>perms
+varchar(100) default ''
+权限标识</title></a>
+<text x='1482' y='468' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_menu.icon'><text id='ry.sys_menu.icon' x='1398' y='486'>icon</text><title>icon
+varchar(100) default ''
+菜单图标</title></a>
+<text x='1482' y='483' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_menu.create_by'><text id='ry.sys_menu.create_by' x='1398' y='501'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='1482' y='498' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1382' y='507' xlink:href='#nn'/><a xlink:href='#sys_menu.create_time'><text id='ry.sys_menu.create_time' x='1398' y='516'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1482' y='513' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_menu.update_by'><text id='ry.sys_menu.update_by' x='1398' y='531'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='1482' y='528' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1382' y='537' xlink:href='#nn'/><a xlink:href='#sys_menu.update_time'><text id='ry.sys_menu.update_time' x='1398' y='546'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='1482' y='543' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_menu.remark'><text id='ry.sys_menu.remark' x='1398' y='561'>remark</text><title>remark
+varchar(500) default ''
+备注</title></a>
+<text x='1482' y='558' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_oper_log' == -->
+<rect class='entity' x='1005' y='278' width='105' height='240' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1005 304 L 1005 285 Q 1005 278 1012 278 L 1103 278 Q 1110 278 1110 285 L 1110 304 L1005 304 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1005' y='278' width='105' height='240' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='1005' y1='304' x2='1110' y2='304' style='stroke:#626e5f'/>
+<line class='delim' x1='1020' y1='304' x2='1020' y2='518' style='stroke:#626e5f'/>
+<line class='delim' x1='1099' y1='304' x2='1099' y2='518' style='stroke:#626e5f'/>
+<a xlink:href='#sys_oper_log'><text x='1018' y='296'>sys_oper_log</text><title>Table ry.sys_oper_log</title></a>
+  <use id='nn' x='1007' y='312' xlink:href='#nn'/><a xlink:href='#sys_oper_log.oper_id'><use id='pk' x='1007' y='311' xlink:href='#pk'/><title>Pk pk_sys_oper_log ( oper_id ) </title></a>
+<a xlink:href='#sys_oper_log.oper_id'><text id='ry.sys_oper_log.oper_id' x='1023' y='321'>oper_id</text><title>oper_id
+* int
+日志主键</title></a>
+<text x='1107' y='318' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_oper_log.title'><text id='ry.sys_oper_log.title' x='1023' y='336'>title</text><title>title
+varchar(50) default ''
+模块标题</title></a>
+<text x='1107' y='333' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.action'><text id='ry.sys_oper_log.action' x='1023' y='351'>action</text><title>action
+varchar(100) default ''
+功能请求</title></a>
+<text x='1107' y='348' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.method'><text id='ry.sys_oper_log.method' x='1023' y='366'>method</text><title>method
+varchar(100) default ''
+方法名称</title></a>
+<text x='1107' y='363' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.channel'><text id='ry.sys_oper_log.channel' x='1023' y='381'>channel</text><title>channel
+varchar(20) default ''
+来源渠道</title></a>
+<text x='1107' y='378' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.login_name'><text id='ry.sys_oper_log.login_name' x='1023' y='396'>login_name</text><title>login_name
+varchar(50) default ''
+登录账号</title></a>
+<text x='1107' y='393' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.dept_name'><text id='ry.sys_oper_log.dept_name' x='1023' y='411'>dept_name</text><title>dept_name
+varchar(50) default ''
+部门名称</title></a>
+<text x='1107' y='408' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.oper_url'><text id='ry.sys_oper_log.oper_url' x='1023' y='426'>oper_url</text><title>oper_url
+varchar(255) default ''
+请求URL</title></a>
+<text x='1107' y='423' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.oper_ip'><text id='ry.sys_oper_log.oper_ip' x='1023' y='441'>oper_ip</text><title>oper_ip
+varchar(30) default ''
+主机地址</title></a>
+<text x='1107' y='438' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.oper_param'><text id='ry.sys_oper_log.oper_param' x='1023' y='456'>oper_param</text><title>oper_param
+varchar(255) default ''
+请求参数</title></a>
+<text x='1107' y='453' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_oper_log.status'><text id='ry.sys_oper_log.status' x='1023' y='471'>status</text><title>status
+int default 0
+操作状态 0正常 1异常</title></a>
+<text x='1107' y='468' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_oper_log.error_msg'><text id='ry.sys_oper_log.error_msg' x='1023' y='486'>error_msg</text><title>error_msg
+varchar(2000) default ''
+错误消息</title></a>
+<text x='1107' y='483' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1007' y='492' xlink:href='#nn'/><a xlink:href='#sys_oper_log.oper_time'><text id='ry.sys_oper_log.oper_time' x='1023' y='501'>oper_time</text><title>oper_time
+* timestamp default CURRENT_TIMESTAMP
+操作时间</title></a>
+<text x='1107' y='498' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'sys_post' == -->
+<rect class='entity' x='1740' y='38' width='105' height='195' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1740 64 L 1740 45 Q 1740 38 1747 38 L 1838 38 Q 1845 38 1845 45 L 1845 64 L1740 64 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1740' y='38' width='105' height='195' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1740' y1='64' x2='1845' y2='64' style='stroke:#6e675f'/>
+<line class='delim' x1='1755' y1='64' x2='1755' y2='233' style='stroke:#6e675f'/>
+<line class='delim' x1='1834' y1='64' x2='1834' y2='233' style='stroke:#6e675f'/>
+<a xlink:href='#sys_post'><text x='1765' y='56'>sys_post</text><title>Table ry.sys_post</title></a>
+  <use id='nn' x='1742' y='72' xlink:href='#nn'/><a xlink:href='#sys_post.post_id'><use id='pk' x='1742' y='71' xlink:href='#pk'/><title>Pk pk_sys_post ( post_id ) </title></a>
+<a xlink:href='#sys_post.post_id'><text id='ry.sys_post.post_id' x='1758' y='81'>post_id</text><title>post_id
+* int
+岗位ID</title></a>
+<text x='1842' y='78' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1742' y='87' xlink:href='#nn'/><a xlink:href='#sys_post.post_code'><text id='ry.sys_post.post_code' x='1758' y='96'>post_code</text><title>post_code
+* varchar(64)
+岗位编码</title></a>
+<text x='1842' y='93' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1742' y='102' xlink:href='#nn'/><a xlink:href='#sys_post.post_name'><text id='ry.sys_post.post_name' x='1758' y='111'>post_name</text><title>post_name
+* varchar(100)
+岗位名称</title></a>
+<text x='1842' y='108' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1742' y='117' xlink:href='#nn'/><a xlink:href='#sys_post.post_sort'><text id='ry.sys_post.post_sort' x='1758' y='126'>post_sort</text><title>post_sort
+* int
+显示顺序</title></a>
+<text x='1842' y='123' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1742' y='132' xlink:href='#nn'/><a xlink:href='#sys_post.status'><text id='ry.sys_post.status' x='1758' y='141'>status</text><title>status
+* int
+状态（0正常 1停用）</title></a>
+<text x='1842' y='138' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_post.create_by'><text id='ry.sys_post.create_by' x='1758' y='156'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='1842' y='153' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1742' y='162' xlink:href='#nn'/><a xlink:href='#sys_post.create_time'><text id='ry.sys_post.create_time' x='1758' y='171'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1842' y='168' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_post.update_by'><text id='ry.sys_post.update_by' x='1758' y='186'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='1842' y='183' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1742' y='192' xlink:href='#nn'/><a xlink:href='#sys_post.update_time'><text id='ry.sys_post.update_time' x='1758' y='201'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='1842' y='198' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_post.remark'><text id='ry.sys_post.remark' x='1758' y='216'>remark</text><title>remark
+varchar(500) default ''
+备注</title></a>
+<text x='1842' y='213' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_role' == -->
+<rect class='entity' x='1545' y='458' width='105' height='195' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1545 484 L 1545 465 Q 1545 458 1552 458 L 1643 458 Q 1650 458 1650 465 L 1650 484 L1545 484 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1545' y='458' width='105' height='195' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1545' y1='484' x2='1650' y2='484' style='stroke:#6e675f'/>
+<line class='delim' x1='1560' y1='484' x2='1560' y2='653' style='stroke:#6e675f'/>
+<line class='delim' x1='1639' y1='484' x2='1639' y2='653' style='stroke:#6e675f'/>
+<a xlink:href='#sys_role'><text x='1570' y='476'>sys_role</text><title>Table ry.sys_role</title></a>
+  <use id='nn' x='1547' y='492' xlink:href='#nn'/><a xlink:href='#sys_role.role_id'><use id='pk' x='1547' y='491' xlink:href='#pk'/><title>Pk pk_sys_role ( role_id ) </title></a>
+<a xlink:href='#sys_role.role_id'><text id='ry.sys_role.role_id' x='1563' y='501'>role_id</text><title>role_id
+* int
+角色ID</title></a>
+<text x='1647' y='498' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1547' y='507' xlink:href='#nn'/><a xlink:href='#sys_role.role_name'><text id='ry.sys_role.role_name' x='1563' y='516'>role_name</text><title>role_name
+* varchar(30)
+角色名称</title></a>
+<text x='1647' y='513' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='522' xlink:href='#nn'/><a xlink:href='#sys_role.role_key'><text id='ry.sys_role.role_key' x='1563' y='531'>role_key</text><title>role_key
+* varchar(100)
+角色权限字符串</title></a>
+<text x='1647' y='528' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='537' xlink:href='#nn'/><a xlink:href='#sys_role.role_sort'><text id='ry.sys_role.role_sort' x='1563' y='546'>role_sort</text><title>role_sort
+* int
+显示顺序</title></a>
+<text x='1647' y='543' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_role.status'><text id='ry.sys_role.status' x='1563' y='561'>status</text><title>status
+int default 0
+角色状态:0正常,1禁用</title></a>
+<text x='1647' y='558' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_role.create_by'><text id='ry.sys_role.create_by' x='1563' y='576'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='1647' y='573' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='582' xlink:href='#nn'/><a xlink:href='#sys_role.create_time'><text id='ry.sys_role.create_time' x='1563' y='591'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='1647' y='588' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_role.update_by'><text id='ry.sys_role.update_by' x='1563' y='606'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='1647' y='603' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1547' y='612' xlink:href='#nn'/><a xlink:href='#sys_role.update_time'><text id='ry.sys_role.update_time' x='1563' y='621'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='1647' y='618' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_role.remark'><text id='ry.sys_role.remark' x='1563' y='636'>remark</text><title>remark
+varchar(500) default ''
+备注</title></a>
+<text x='1647' y='633' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_role_menu' == -->
+<rect class='entity' x='1545' y='323' width='90' height='75' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1545 349 L 1545 330 Q 1545 323 1552 323 L 1628 323 Q 1635 323 1635 330 L 1635 349 L1545 349 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1545' y='323' width='90' height='75' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
+<line class='delim' x1='1545' y1='349' x2='1635' y2='349' style='stroke:#6e675f'/>
+<line class='delim' x1='1560' y1='349' x2='1560' y2='398' style='stroke:#6e675f'/>
+<line class='delim' x1='1624' y1='349' x2='1624' y2='398' style='stroke:#6e675f'/>
+<a xlink:href='#sys_role_menu'><text x='1548' y='341'>sys_role_menu</text><title>Table ry.sys_role_menu</title></a>
+  <use id='nn' x='1547' y='357' xlink:href='#nn'/><a xlink:href='#sys_role_menu.role_id'><use id='pk' x='1547' y='356' xlink:href='#pk'/><title>Pk pk_sys_role_menu ( role_id, menu_id ) </title></a>
+<a xlink:href='#sys_role_menu.role_id'><text id='ry.sys_role_menu.role_id' x='1563' y='366'>role_id</text><title>role_id
+* int
+角色ID</title></a>
+<text x='1632' y='363' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1547' y='372' xlink:href='#nn'/><a xlink:href='#sys_role_menu.menu_id'><use id='pk' x='1547' y='371' xlink:href='#pk'/><title>Pk pk_sys_role_menu ( role_id, menu_id ) </title></a>
+<a xlink:href='#sys_role_menu.menu_id'><text id='ry.sys_role_menu.menu_id' x='1563' y='381'>menu_id</text><title>menu_id
+* int
+菜单ID</title></a>
+<text x='1632' y='378' text-anchor='end' class='colType'>#</text>
+<!-- == Table 'sys_user' == -->
+<rect class='entity' x='690' y='83' width='105' height='270' rx='7' ry='7' style='stroke:none'/>
+<path d='M 690 109 L 690 90 Q 690 83 697 83 L 788 83 Q 795 83 795 90 L 795 109 L690 109 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='690' y='83' width='105' height='270' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='690' y1='109' x2='795' y2='109' style='stroke:#626e5f'/>
+<line class='delim' x1='705' y1='109' x2='705' y2='353' style='stroke:#626e5f'/>
+<line class='delim' x1='784' y1='109' x2='784' y2='353' style='stroke:#626e5f'/>
+<a xlink:href='#sys_user'><text x='715' y='101'>sys_user</text><title>Table ry.sys_user</title></a>
+  <use id='nn' x='692' y='117' xlink:href='#nn'/><a xlink:href='#sys_user.user_id'><use id='pk' x='692' y='116' xlink:href='#pk'/><title>Pk pk_sys_user ( user_id ) </title></a>
+<a xlink:href='#sys_user.user_id'><text id='ry.sys_user.user_id' x='708' y='126'>user_id</text><title>user_id
+* int
+用户ID</title></a>
+<text x='792' y='123' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_user.dept_id'><text id='ry.sys_user.dept_id' x='708' y='141'>dept_id</text><title>dept_id
+int
+部门ID</title></a>
+<text x='792' y='138' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_user.login_name'><text id='ry.sys_user.login_name' x='708' y='156'>login_name</text><title>login_name
+varchar(30) default ''
+登录账号</title></a>
+<text x='792' y='153' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.user_name'><text id='ry.sys_user.user_name' x='708' y='171'>user_name</text><title>user_name
+varchar(30) default ''
+用户昵称</title></a>
+<text x='792' y='168' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.email'><text id='ry.sys_user.email' x='708' y='186'>email</text><title>email
+varchar(100) default ''
+用户邮箱</title></a>
+<text x='792' y='183' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.phonenumber'><text id='ry.sys_user.phonenumber' x='708' y='201'>phonenumber</text><title>phonenumber
+varchar(20) default ''
+手机号码</title></a>
+<text x='792' y='198' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.password'><text id='ry.sys_user.password' x='708' y='216'>password</text><title>password
+varchar(100) default ''
+密码</title></a>
+<text x='792' y='213' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.salt'><text id='ry.sys_user.salt' x='708' y='231'>salt</text><title>salt
+varchar(100) default ''
+盐加密</title></a>
+<text x='792' y='228' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.user_type'><text id='ry.sys_user.user_type' x='708' y='246'>user_type</text><title>user_type
+char(1) default 'N'
+类型:Y默认用户,N非默认用户</title></a>
+<text x='792' y='243' text-anchor='end' class='colType'>c</text>  <a xlink:href='#sys_user.status'><text id='ry.sys_user.status' x='708' y='261'>status</text><title>status
+int default 0
+帐号状态:0正常,1禁用</title></a>
+<text x='792' y='258' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_user.refuse_des'><text id='ry.sys_user.refuse_des' x='708' y='276'>refuse_des</text><title>refuse_des
+varchar(500) default ''
+拒绝登录描述</title></a>
+<text x='792' y='273' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user.create_by'><text id='ry.sys_user.create_by' x='708' y='291'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='792' y='288' text-anchor='end' class='colType'>t</text>  <use id='nn' x='692' y='297' xlink:href='#nn'/><a xlink:href='#sys_user.create_time'><text id='ry.sys_user.create_time' x='708' y='306'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='792' y='303' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_user.update_by'><text id='ry.sys_user.update_by' x='708' y='321'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='792' y='318' text-anchor='end' class='colType'>t</text>  <use id='nn' x='692' y='327' xlink:href='#nn'/><a xlink:href='#sys_user.update_time'><text id='ry.sys_user.update_time' x='708' y='336'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='792' y='333' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'sys_user_online' == -->
+<rect class='entity' x='660' y='413' width='135' height='195' rx='7' ry='7' style='stroke:none'/>
+<path d='M 660 439 L 660 420 Q 660 413 667 413 L 788 413 Q 795 413 795 420 L 795 439 L660 439 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='660' y='413' width='135' height='195' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='660' y1='439' x2='795' y2='439' style='stroke:#626e5f'/>
+<line class='delim' x1='675' y1='439' x2='675' y2='608' style='stroke:#626e5f'/>
+<line class='delim' x1='784' y1='439' x2='784' y2='608' style='stroke:#626e5f'/>
+<a xlink:href='#sys_user_online'><text x='679' y='431'>sys_user_online</text><title>Table ry.sys_user_online</title></a>
+  <use id='nn' x='662' y='447' xlink:href='#nn'/><a xlink:href='#sys_user_online.sessionId'><use id='pk' x='662' y='446' xlink:href='#pk'/><title>Pk pk_sys_user_online ( sessionId ) </title></a>
+<a xlink:href='#sys_user_online.sessionId'><text id='ry.sys_user_online.sessionId' x='678' y='456'>sessionId</text><title>sessionId
+* varchar(50) default ''
+用户会话id</title></a>
+<text x='792' y='453' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user_online.login_name'><text id='ry.sys_user_online.login_name' x='678' y='471'>login_name</text><title>login_name
+varchar(50) default ''
+登录账号</title></a>
+<text x='792' y='468' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user_online.dept_name'><text id='ry.sys_user_online.dept_name' x='678' y='486'>dept_name</text><title>dept_name
+varchar(50) default ''
+部门名称</title></a>
+<text x='792' y='483' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user_online.ipaddr'><text id='ry.sys_user_online.ipaddr' x='678' y='501'>ipaddr</text><title>ipaddr
+varchar(50) default ''
+登录IP地址</title></a>
+<text x='792' y='498' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user_online.browser'><text id='ry.sys_user_online.browser' x='678' y='516'>browser</text><title>browser
+varchar(50) default ''
+浏览器类型</title></a>
+<text x='792' y='513' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user_online.os'><text id='ry.sys_user_online.os' x='678' y='531'>os</text><title>os
+varchar(50) default ''
+操作系统</title></a>
+<text x='792' y='528' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_user_online.status'><text id='ry.sys_user_online.status' x='678' y='546'>status</text><title>status
+varchar(10) default ''
+在线状态on_line在线off_line离线</title></a>
+<text x='792' y='543' text-anchor='end' class='colType'>t</text>  <use id='nn' x='662' y='552' xlink:href='#nn'/><a xlink:href='#sys_user_online.start_timestsamp'><text id='ry.sys_user_online.start_timestsamp' x='678' y='561'>start_timestsamp</text><title>start_timestsamp
+* timestamp default CURRENT_TIMESTAMP
+session创建时间</title></a>
+<text x='792' y='558' text-anchor='end' class='colType'>d</text>  <use id='nn' x='662' y='567' xlink:href='#nn'/><a xlink:href='#sys_user_online.last_access_time'><text id='ry.sys_user_online.last_access_time' x='678' y='576'>last_access_time</text><title>last_access_time
+* timestamp default '0000-00-00 00:00:00'
+session最后访问时间</title></a>
+<text x='792' y='573' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_user_online.expire_time'><text id='ry.sys_user_online.expire_time' x='678' y='591'>expire_time</text><title>expire_time
+int default 0
+超时时间，单位为分钟</title></a>
+<text x='792' y='588' text-anchor='end' class='colType'>#</text>
+<!-- == Table 'sys_user_post' == -->
+<rect class='entity' x='855' y='413' width='90' height='75' rx='7' ry='7' style='stroke:none'/>
+<path d='M 855 439 L 855 420 Q 855 413 862 413 L 938 413 Q 945 413 945 420 L 945 439 L855 439 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='855' y='413' width='90' height='75' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='855' y1='439' x2='945' y2='439' style='stroke:#626e5f'/>
+<line class='delim' x1='870' y1='439' x2='870' y2='488' style='stroke:#626e5f'/>
+<line class='delim' x1='934' y1='439' x2='934' y2='488' style='stroke:#626e5f'/>
+<a xlink:href='#sys_user_post'><text x='858' y='431'>sys_user_post</text><title>Table ry.sys_user_post</title></a>
+  <use id='nn' x='857' y='447' xlink:href='#nn'/><a xlink:href='#sys_user_post.user_id'><use id='pk' x='857' y='446' xlink:href='#pk'/><title>Pk pk_sys_user_post ( user_id, post_id ) </title></a>
+<a xlink:href='#sys_user_post.user_id'><text id='ry.sys_user_post.user_id' x='873' y='456'>user_id</text><title>user_id
+* varchar(64)
+用户ID</title></a>
+<text x='942' y='453' text-anchor='end' class='colType'>t</text>  <use id='nn' x='857' y='462' xlink:href='#nn'/><a xlink:href='#sys_user_post.post_id'><use id='pk' x='857' y='461' xlink:href='#pk'/><title>Pk pk_sys_user_post ( user_id, post_id ) </title></a>
+<a xlink:href='#sys_user_post.post_id'><text id='ry.sys_user_post.post_id' x='873' y='471'>post_id</text><title>post_id
+* varchar(64)
+岗位ID</title></a>
+<text x='942' y='468' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'sys_user_role' == -->
+<rect class='entity' x='855' y='278' width='90' height='75' rx='7' ry='7' style='stroke:none'/>
+<path d='M 855 304 L 855 285 Q 855 278 862 278 L 938 278 Q 945 278 945 285 L 945 304 L855 304 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='855' y='278' width='90' height='75' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
+<line class='delim' x1='855' y1='304' x2='945' y2='304' style='stroke:#626e5f'/>
+<line class='delim' x1='870' y1='304' x2='870' y2='353' style='stroke:#626e5f'/>
+<line class='delim' x1='934' y1='304' x2='934' y2='353' style='stroke:#626e5f'/>
+<a xlink:href='#sys_user_role'><text x='858' y='296'>sys_user_role</text><title>Table ry.sys_user_role</title></a>
+  <use id='nn' x='857' y='312' xlink:href='#nn'/><a xlink:href='#sys_user_role.user_id'><use id='pk' x='857' y='311' xlink:href='#pk'/><title>Pk pk_sys_user_role ( user_id, role_id ) </title></a>
+<a xlink:href='#sys_user_role.user_id'><text id='ry.sys_user_role.user_id' x='873' y='321'>user_id</text><title>user_id
+* int
+用户ID</title></a>
+<text x='942' y='318' text-anchor='end' class='colType'>#</text>  <use id='nn' x='857' y='327' xlink:href='#nn'/><a xlink:href='#sys_user_role.role_id'><use id='pk' x='857' y='326' xlink:href='#pk'/><title>Pk pk_sys_user_role ( user_id, role_id ) </title></a>
+<a xlink:href='#sys_user_role.role_id'><text id='ry.sys_user_role.role_id' x='873' y='336'>role_id</text><title>role_id
+* int
+角色ID</title></a>
+<text x='942' y='333' text-anchor='end' class='colType'>#</text>
+<!-- == Table 'sys_dept' == -->
+<rect class='entity' x='645' y='713' width='105' height='225' rx='7' ry='7' style='stroke:none'/>
+<path d='M 645 739 L 645 720 Q 645 713 652 713 L 743 713 Q 750 713 750 720 L 750 739 L645 739 ' style='fill:url(#tbg_bfbff5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='645' y='713' width='105' height='225' rx='7' ry='7' style='fill:none;stroke:#5f5f6e'/>
+<line class='delim' x1='645' y1='739' x2='750' y2='739' style='stroke:#5f5f6e'/>
+<line class='delim' x1='660' y1='739' x2='660' y2='938' style='stroke:#5f5f6e'/>
+<line class='delim' x1='739' y1='739' x2='739' y2='938' style='stroke:#5f5f6e'/>
+<a xlink:href='#sys_dept'><text x='670' y='731'>sys_dept</text><title>Table ry.sys_dept</title></a>
+  <use id='nn' x='647' y='747' xlink:href='#nn'/><a xlink:href='#sys_dept.dept_id'><use id='pk' x='647' y='746' xlink:href='#pk'/><title>Pk pk_sys_dept ( dept_id ) </title></a>
+<a xlink:href='#sys_dept.dept_id'><text id='ry.sys_dept.dept_id' x='663' y='756'>dept_id</text><title>dept_id
+* int
+部门id</title></a>
+<text x='747' y='753' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dept.parent_id'><text id='ry.sys_dept.parent_id' x='663' y='771'>parent_id</text><title>parent_id
+int default 0
+父部门id</title></a>
+<text x='747' y='768' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dept.dept_name'><text id='ry.sys_dept.dept_name' x='663' y='786'>dept_name</text><title>dept_name
+varchar(30) default ''
+部门名称</title></a>
+<text x='747' y='783' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dept.order_num'><text id='ry.sys_dept.order_num' x='663' y='801'>order_num</text><title>order_num
+int default 0
+显示顺序</title></a>
+<text x='747' y='798' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dept.leader'><text id='ry.sys_dept.leader' x='663' y='816'>leader</text><title>leader
+varchar(20) default ''
+负责人</title></a>
+<text x='747' y='813' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dept.phone'><text id='ry.sys_dept.phone' x='663' y='831'>phone</text><title>phone
+varchar(20) default ''
+联系电话</title></a>
+<text x='747' y='828' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dept.email'><text id='ry.sys_dept.email' x='663' y='846'>email</text><title>email
+varchar(20) default ''
+邮箱</title></a>
+<text x='747' y='843' text-anchor='end' class='colType'>t</text>  <a xlink:href='#sys_dept.status'><text id='ry.sys_dept.status' x='663' y='861'>status</text><title>status
+int default 0
+部门状态:0正常,1停用</title></a>
+<text x='747' y='858' text-anchor='end' class='colType'>#</text>  <a xlink:href='#sys_dept.create_by'><text id='ry.sys_dept.create_by' x='663' y='876'>create_by</text><title>create_by
+varchar(64) default ''
+创建者</title></a>
+<text x='747' y='873' text-anchor='end' class='colType'>t</text>  <use id='nn' x='647' y='882' xlink:href='#nn'/><a xlink:href='#sys_dept.create_time'><text id='ry.sys_dept.create_time' x='663' y='891'>create_time</text><title>create_time
+* timestamp default CURRENT_TIMESTAMP
+创建时间</title></a>
+<text x='747' y='888' text-anchor='end' class='colType'>d</text>  <a xlink:href='#sys_dept.update_by'><text id='ry.sys_dept.update_by' x='663' y='906'>update_by</text><title>update_by
+varchar(64) default ''
+更新者</title></a>
+<text x='747' y='903' text-anchor='end' class='colType'>t</text>  <use id='nn' x='647' y='912' xlink:href='#nn'/><a xlink:href='#sys_dept.update_time'><text id='ry.sys_dept.update_time' x='663' y='921'>update_time</text><title>update_time
+* timestamp default '0000-00-00 00:00:00'
+更新时间</title></a>
+<text x='747' y='918' text-anchor='end' class='colType'>d</text>
+<!-- == Table 'qrtz_paused_trigger_grps' == -->
+<rect class='entity' x='1260' y='683' width='165' height='75' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1260 709 L 1260 690 Q 1260 683 1267 683 L 1418 683 Q 1425 683 1425 690 L 1425 709 L1260 709 ' style='fill:url(#tbg_bfbff5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1260' y='683' width='165' height='75' rx='7' ry='7' style='fill:none;stroke:#5f5f6e'/>
+<line class='delim' x1='1260' y1='709' x2='1425' y2='709' style='stroke:#5f5f6e'/>
+<line class='delim' x1='1275' y1='709' x2='1275' y2='758' style='stroke:#5f5f6e'/>
+<line class='delim' x1='1414' y1='709' x2='1414' y2='758' style='stroke:#5f5f6e'/>
+<a xlink:href='#qrtz_paused_trigger_grps'><text x='1267' y='701'>qrtz_paused_trigger_grps</text><title>Table ry.qrtz_paused_trigger_grps</title></a>
+  <use id='nn' x='1262' y='717' xlink:href='#nn'/><a xlink:href='#qrtz_paused_trigger_grps.sched_name'><use id='pk' x='1262' y='716' xlink:href='#pk'/><title>Pk pk_qrtz_paused_trigger_grps ( sched_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_paused_trigger_grps.sched_name'><text id='ry.qrtz_paused_trigger_grps.sched_name' x='1278' y='726'>sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<text x='1422' y='723' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1262' y='732' xlink:href='#nn'/><a xlink:href='#qrtz_paused_trigger_grps.trigger_group'><use id='pk' x='1262' y='731' xlink:href='#pk'/><title>Pk pk_qrtz_paused_trigger_grps ( sched_name, trigger_group ) </title></a>
+<a xlink:href='#qrtz_paused_trigger_grps.trigger_group'><text id='ry.qrtz_paused_trigger_grps.trigger_group' x='1278' y='741'>trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<text x='1422' y='738' text-anchor='end' class='colType'>t</text>
+<!-- == Table 'qrtz_fired_triggers' == -->
+<rect class='entity' x='1035' y='668' width='135' height='240' rx='7' ry='7' style='stroke:none'/>
+<path d='M 1035 694 L 1035 675 Q 1035 668 1042 668 L 1163 668 Q 1170 668 1170 675 L 1170 694 L1035 694 ' style='fill:url(#tbg_bfbff5);stroke:1;stroke-opacity:0.1;' />
+<rect class='entity' x='1035' y='668' width='135' height='240' rx='7' ry='7' style='fill:none;stroke:#5f5f6e'/>
+<line class='delim' x1='1035' y1='694' x2='1170' y2='694' style='stroke:#5f5f6e'/>
+<line class='delim' x1='1050' y1='694' x2='1050' y2='908' style='stroke:#5f5f6e'/>
+<line class='delim' x1='1159' y1='694' x2='1159' y2='908' style='stroke:#5f5f6e'/>
+<a xlink:href='#qrtz_fired_triggers'><text x='1042' y='686'>qrtz_fired_triggers</text><title>Table ry.qrtz_fired_triggers</title></a>
+  <use id='nn' x='1037' y='702' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.sched_name'><use id='pk' x='1037' y='701' xlink:href='#pk'/><title>Pk pk_qrtz_fired_triggers ( sched_name, entry_id ) </title></a>
+<a xlink:href='#qrtz_fired_triggers.sched_name'><text id='ry.qrtz_fired_triggers.sched_name' x='1053' y='711'>sched_name</text><title>sched_name
+* varchar(120)</title></a>
+<text x='1167' y='708' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1037' y='717' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.entry_id'><use id='pk' x='1037' y='716' xlink:href='#pk'/><title>Pk pk_qrtz_fired_triggers ( sched_name, entry_id ) </title></a>
+<a xlink:href='#qrtz_fired_triggers.entry_id'><text id='ry.qrtz_fired_triggers.entry_id' x='1053' y='726'>entry_id</text><title>entry_id
+* varchar(95)</title></a>
+<text x='1167' y='723' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1037' y='732' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.trigger_name'><text id='ry.qrtz_fired_triggers.trigger_name' x='1053' y='741'>trigger_name</text><title>trigger_name
+* varchar(200)</title></a>
+<text x='1167' y='738' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1037' y='747' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.trigger_group'><text id='ry.qrtz_fired_triggers.trigger_group' x='1053' y='756'>trigger_group</text><title>trigger_group
+* varchar(200)</title></a>
+<text x='1167' y='753' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1037' y='762' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.instance_name'><text id='ry.qrtz_fired_triggers.instance_name' x='1053' y='771'>instance_name</text><title>instance_name
+* varchar(200)</title></a>
+<text x='1167' y='768' text-anchor='end' class='colType'>t</text>  <use id='nn' x='1037' y='777' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.fired_time'><text id='ry.qrtz_fired_triggers.fired_time' x='1053' y='786'>fired_time</text><title>fired_time
+* bigint</title></a>
+<text x='1167' y='783' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1037' y='792' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.sched_time'><text id='ry.qrtz_fired_triggers.sched_time' x='1053' y='801'>sched_time</text><title>sched_time
+* bigint</title></a>
+<text x='1167' y='798' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1037' y='807' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.priority'><text id='ry.qrtz_fired_triggers.priority' x='1053' y='816'>priority</text><title>priority
+* int</title></a>
+<text x='1167' y='813' text-anchor='end' class='colType'>#</text>  <use id='nn' x='1037' y='822' xlink:href='#nn'/><a xlink:href='#qrtz_fired_triggers.state'><text id='ry.qrtz_fired_triggers.state' x='1053' y='831'>state</text><title>state
+* varchar(16)</title></a>
+<text x='1167' y='828' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_fired_triggers.job_name'><text id='ry.qrtz_fired_triggers.job_name' x='1053' y='846'>job_name</text><title>job_name
+varchar(200)</title></a>
+<text x='1167' y='843' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_fired_triggers.job_group'><text id='ry.qrtz_fired_triggers.job_group' x='1053' y='861'>job_group</text><title>job_group
+varchar(200)</title></a>
+<text x='1167' y='858' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_fired_triggers.is_nonconcurrent'><text id='ry.qrtz_fired_triggers.is_nonconcurrent' x='1053' y='876'>is_nonconcurrent</text><title>is_nonconcurrent
+varchar(1)</title></a>
+<text x='1167' y='873' text-anchor='end' class='colType'>t</text>  <a xlink:href='#qrtz_fired_triggers.requests_recovery'><text id='ry.qrtz_fired_triggers.requests_recovery' x='1053' y='891'>requests_recovery</text><title>requests_recovery
+varchar(1)</title></a>
+<text x='1167' y='888' text-anchor='end' class='colType'>t</text>
+</g></svg></div>
+
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_blob_triggers' onclick='window.scrollTo(60, 540);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_blob_triggers</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_blob_triggers.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_blob_triggers.trigger_name'>trigger&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_blob_triggers.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_blob_triggers.blob_data'>blob&#95;data</a></td>
+		<td> blob   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;blob&#95;triggers</td>
+		<td> ON sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>qrtz_blob_triggers_ibfk_1</td>
+		<td > ( sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group ) ref <a href='#qrtz&#95;triggers'>qrtz&#95;triggers</a> (sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_calendars' onclick='window.scrollTo(60, 45);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_calendars</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_calendars.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_calendars.calendar_name'>calendar&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_calendars.calendar'>calendar</a></td>
+		<td> blob   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;calendars</td>
+		<td> ON sched&#95;name&#44; calendar&#95;name</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_cron_triggers' onclick='window.scrollTo(235, 540);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_cron_triggers</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_cron_triggers.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_cron_triggers.trigger_name'>trigger&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_cron_triggers.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_cron_triggers.cron_expression'>cron&#95;expression</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_cron_triggers.time_zone_id'>time&#95;zone&#95;id</a></td>
+		<td> varchar&#40; 80 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;cron&#95;triggers</td>
+		<td> ON sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>qrtz_cron_triggers_ibfk_1</td>
+		<td > ( sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group ) ref <a href='#qrtz&#95;triggers'>qrtz&#95;triggers</a> (sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_fired_triggers' onclick='window.scrollTo(835, 675);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_fired_triggers</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_fired_triggers.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_fired_triggers.entry_id'>entry&#95;id</a></td>
+		<td> varchar&#40; 95 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.trigger_name'>trigger&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.instance_name'>instance&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.fired_time'>fired&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.sched_time'>sched&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.priority'>priority</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_fired_triggers.state'>state</a></td>
+		<td> varchar&#40; 16 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_fired_triggers.job_name'>job&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_fired_triggers.job_group'>job&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_fired_triggers.is_nonconcurrent'>is&#95;nonconcurrent</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_fired_triggers.requests_recovery'>requests&#95;recovery</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;fired&#95;triggers</td>
+		<td> ON sched&#95;name&#44; entry&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_job_details' onclick='window.scrollTo(235, 195);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_job_details</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='qrtz_job_details.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='qrtz_job_details.job_name'>job&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='qrtz_job_details.job_group'>job&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_job_details.description'>description</a></td>
+		<td> varchar&#40; 250 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_job_details.job_class_name'>job&#95;class&#95;name</a></td>
+		<td> varchar&#40; 250 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_job_details.is_durable'>is&#95;durable</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_job_details.is_nonconcurrent'>is&#95;nonconcurrent</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_job_details.is_update_data'>is&#95;update&#95;data</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_job_details.requests_recovery'>requests&#95;recovery</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_job_details.job_data'>job&#95;data</a></td>
+		<td> blob   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;job&#95;details</td>
+		<td> ON sched&#95;name&#44; job&#95;name&#44; job&#95;group</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_locks' onclick='window.scrollTo(60, 60);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_locks</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_locks.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_locks.lock_name'>lock&#95;name</a></td>
+		<td> varchar&#40; 40 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;locks</td>
+		<td> ON sched&#95;name&#44; lock&#95;name</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_paused_trigger_grps' onclick='window.scrollTo(1060, 690);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_paused_trigger_grps</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_paused_trigger_grps.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_paused_trigger_grps.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;paused&#95;trigger&#95;grps</td>
+		<td> ON sched&#95;name&#44; trigger&#95;group</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_scheduler_state' onclick='window.scrollTo(60, 735);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_scheduler_state</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_scheduler_state.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='qrtz_scheduler_state.instance_name'>instance&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_scheduler_state.last_checkin_time'>last&#95;checkin&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_scheduler_state.checkin_interval'>checkin&#95;interval</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;scheduler&#95;state</td>
+		<td> ON sched&#95;name&#44; instance&#95;name</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_simple_triggers' onclick='window.scrollTo(60, 540);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_simple_triggers</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_simple_triggers.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_simple_triggers.trigger_name'>trigger&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_simple_triggers.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_simple_triggers.repeat_count'>repeat&#95;count</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_simple_triggers.repeat_interval'>repeat&#95;interval</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_simple_triggers.times_triggered'>times&#95;triggered</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;simple&#95;triggers</td>
+		<td> ON sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>qrtz_simple_triggers_ibfk_1</td>
+		<td > ( sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group ) ref <a href='#qrtz&#95;triggers'>qrtz&#95;triggers</a> (sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_simprop_triggers' onclick='window.scrollTo(60, 225);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_simprop_triggers</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_simprop_triggers.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_simprop_triggers.trigger_name'>trigger&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_simprop_triggers.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.str_prop_1'>str&#95;prop&#95;1</a></td>
+		<td> varchar&#40; 512 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.str_prop_2'>str&#95;prop&#95;2</a></td>
+		<td> varchar&#40; 512 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.str_prop_3'>str&#95;prop&#95;3</a></td>
+		<td> varchar&#40; 512 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.int_prop_1'>int&#95;prop&#95;1</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.int_prop_2'>int&#95;prop&#95;2</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.long_prop_1'>long&#95;prop&#95;1</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.long_prop_2'>long&#95;prop&#95;2</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.dec_prop_1'>dec&#95;prop&#95;1</a></td>
+		<td> decimal&#40; 13&#44; 4 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.dec_prop_2'>dec&#95;prop&#95;2</a></td>
+		<td> decimal&#40; 13&#44; 4 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.bool_prop_1'>bool&#95;prop&#95;1</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_simprop_triggers.bool_prop_2'>bool&#95;prop&#95;2</a></td>
+		<td> varchar&#40; 1 &#41;   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;simprop&#95;triggers</td>
+		<td> ON sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>qrtz_simprop_triggers_ibfk_1</td>
+		<td > ( sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group ) ref <a href='#qrtz&#95;triggers'>qrtz&#95;triggers</a> (sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='qrtz_triggers' onclick='window.scrollTo(60, 195);return false;' style='cursor:pointer;'><h4 class='card-title'>Table qrtz_triggers</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_triggers.sched_name'>sched&#95;name</a></td>
+		<td> varchar&#40; 120 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='qrtz_triggers.trigger_name'>trigger&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='qrtz_triggers.trigger_group'>trigger&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_triggers.job_name'>job&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='qrtz_triggers.job_group'>job&#95;group</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.description'>description</a></td>
+		<td> varchar&#40; 250 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.next_fire_time'>next&#95;fire&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.prev_fire_time'>prev&#95;fire&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.priority'>priority</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_triggers.trigger_state'>trigger&#95;state</a></td>
+		<td> varchar&#40; 16 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_triggers.trigger_type'>trigger&#95;type</a></td>
+		<td> varchar&#40; 8 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='qrtz_triggers.start_time'>start&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.end_time'>end&#95;time</a></td>
+		<td> bigint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.calendar_name'>calendar&#95;name</a></td>
+		<td> varchar&#40; 200 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.misfire_instr'>misfire&#95;instr</a></td>
+		<td> smallint   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='qrtz_triggers.job_data'>job&#95;data</a></td>
+		<td> blob   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;qrtz&#95;triggers</td>
+		<td> ON sched&#95;name&#44; trigger&#95;name&#44; trigger&#95;group</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>sched&#95;name</td>
+		<td> ON sched&#95;name&#44; job&#95;name&#44; job&#95;group</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>qrtz_triggers_ibfk_1</td>
+		<td > ( sched&#95;name&#44; job&#95;name&#44; job&#95;group ) ref <a href='#qrtz&#95;job&#95;details'>qrtz&#95;job&#95;details</a> (sched&#95;name&#44; job&#95;name&#44; job&#95;group) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_dept' onclick='window.scrollTo(445, 720);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_dept</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_dept.dept_id'>dept&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 部门id </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.parent_id'>parent&#95;id</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 父部门id </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.dept_name'>dept&#95;name</a></td>
+		<td> varchar&#40; 30 &#41;   DEFAULT '' </td>
+		<td> 部门名称 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.order_num'>order&#95;num</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 显示顺序 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.leader'>leader</a></td>
+		<td> varchar&#40; 20 &#41;   DEFAULT '' </td>
+		<td> 负责人 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.phone'>phone</a></td>
+		<td> varchar&#40; 20 &#41;   DEFAULT '' </td>
+		<td> 联系电话 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.email'>email</a></td>
+		<td> varchar&#40; 20 &#41;   DEFAULT '' </td>
+		<td> 邮箱 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 部门状态&#58;0正常&#44;1停用 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_dept.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dept.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_dept.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;dept</td>
+		<td> ON dept&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_dict_data' onclick='window.scrollTo(970, 45);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_dict_data</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_dict_data.dict_code'>dict&#95;code</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 字典编码 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.dict_sort'>dict&#95;sort</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 字典排序 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.dict_label'>dict&#95;label</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 字典标签 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.dict_value'>dict&#95;value</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 字典键值 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.dict_type'>dict&#95;type</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 字典类型 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 状态（0正常 1禁用） </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_dict_data.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_dict_data.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_data.remark'>remark</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 备注 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;dict&#95;data</td>
+		<td> ON dict&#95;code</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_dict_type' onclick='window.scrollTo(805, 45);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_dict_type</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_dict_type.dict_id'>dict&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 字典主键 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_type.dict_name'>dict&#95;name</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 字典名称 </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#unq'/></svg></td>
+		<td><a name='sys_dict_type.dict_type'>dict&#95;type</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 字典类型 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_type.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 状态（0正常 1禁用） </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_type.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_dict_type.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_type.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_dict_type.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_dict_type.remark'>remark</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 备注 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;dict&#95;type</td>
+		<td> ON dict&#95;id</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#unq'/></svg></td><td>dict&#95;type</td>
+		<td> ON dict&#95;type</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_job' onclick='window.scrollTo(1345, 45);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_job</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_job.job_id'>job&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 任务ID </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_job.job_name'>job&#95;name</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 任务名称 </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_job.job_group'>job&#95;group</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 任务组名 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.method_name'>method&#95;name</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 任务方法 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.params'>params</a></td>
+		<td> varchar&#40; 200 &#41;   DEFAULT '' </td>
+		<td> 方法参数 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.cron_expression'>cron&#95;expression</a></td>
+		<td> varchar&#40; 255 &#41;   DEFAULT '' </td>
+		<td> cron执行表达式 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 状态（0正常 1暂停） </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_job.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_job.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job.remark'>remark</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 备注信息 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;job</td>
+		<td> ON job&#95;id&#44; job&#95;name&#44; job&#95;group</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_job_log' onclick='window.scrollTo(1165, 45);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_job_log</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_job_log.job_log_id'>job&#95;log&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 任务日志ID </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_job_log.job_name'>job&#95;name</a></td>
+		<td> varchar&#40; 64 &#41;   </td>
+		<td> 任务名称 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_job_log.job_group'>job&#95;group</a></td>
+		<td> varchar&#40; 64 &#41;   </td>
+		<td> 任务组名 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job_log.method_name'>method&#95;name</a></td>
+		<td> varchar&#40; 500 &#41;   </td>
+		<td> 任务方法 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job_log.params'>params</a></td>
+		<td> varchar&#40; 200 &#41;   DEFAULT '' </td>
+		<td> 方法参数 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job_log.job_message'>job&#95;message</a></td>
+		<td> varchar&#40; 500 &#41;   </td>
+		<td> 日志信息 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job_log.is_exception'>is&#95;exception</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 是否异常 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_job_log.exception_info'>exception&#95;info</a></td>
+		<td> text   </td>
+		<td> 异常信息 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_job_log.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;job&#95;log</td>
+		<td> ON job&#95;log&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_logininfor' onclick='window.scrollTo(1540, 330);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_logininfor</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_logininfor.info_id'>info&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 访问ID </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_logininfor.login_name'>login&#95;name</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 登录账号 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_logininfor.ipaddr'>ipaddr</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 登录IP地址 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_logininfor.browser'>browser</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 浏览器类型 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_logininfor.os'>os</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 操作系统 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_logininfor.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 登录状态 0成功 1失败 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_logininfor.msg'>msg</a></td>
+		<td> varchar&#40; 255 &#41;   DEFAULT '' </td>
+		<td> 提示消息 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_logininfor.login_time'>login&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 访问时间 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;logininfor</td>
+		<td> ON info&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_menu' onclick='window.scrollTo(1180, 330);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_menu</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_menu.menu_id'>menu&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 菜单ID </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_menu.menu_name'>menu&#95;name</a></td>
+		<td> varchar&#40; 50 &#41;   </td>
+		<td> 菜单名称 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.parent_id'>parent&#95;id</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 父菜单ID </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.order_num'>order&#95;num</a></td>
+		<td> int   </td>
+		<td> 显示顺序 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.url'>url</a></td>
+		<td> varchar&#40; 200 &#41;   DEFAULT '' </td>
+		<td> 请求地址 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.menu_type'>menu&#95;type</a></td>
+		<td> char&#40; 1 &#41;   DEFAULT '' </td>
+		<td> 类型&#58;M目录&#44;C菜单&#44;F按钮 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.visible'>visible</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 菜单状态&#58;0显示&#44;1隐藏 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.perms'>perms</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 权限标识 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.icon'>icon</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 菜单图标 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_menu.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_menu.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_menu.remark'>remark</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 备注 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;menu</td>
+		<td> ON menu&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_oper_log' onclick='window.scrollTo(805, 285);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_oper_log</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_oper_log.oper_id'>oper&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 日志主键 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.title'>title</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 模块标题 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.action'>action</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 功能请求 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.method'>method</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 方法名称 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.channel'>channel</a></td>
+		<td> varchar&#40; 20 &#41;   DEFAULT '' </td>
+		<td> 来源渠道 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.login_name'>login&#95;name</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 登录账号 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.dept_name'>dept&#95;name</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 部门名称 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.oper_url'>oper&#95;url</a></td>
+		<td> varchar&#40; 255 &#41;   DEFAULT '' </td>
+		<td> 请求URL </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.oper_ip'>oper&#95;ip</a></td>
+		<td> varchar&#40; 30 &#41;   DEFAULT '' </td>
+		<td> 主机地址 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.oper_param'>oper&#95;param</a></td>
+		<td> varchar&#40; 255 &#41;   DEFAULT '' </td>
+		<td> 请求参数 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 操作状态 0正常 1异常 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_oper_log.error_msg'>error&#95;msg</a></td>
+		<td> varchar&#40; 2000 &#41;   DEFAULT '' </td>
+		<td> 错误消息 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_oper_log.oper_time'>oper&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 操作时间 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;oper&#95;log</td>
+		<td> ON oper&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_post' onclick='window.scrollTo(1540, 45);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_post</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_post.post_id'>post&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 岗位ID </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_post.post_code'>post&#95;code</a></td>
+		<td> varchar&#40; 64 &#41;   </td>
+		<td> 岗位编码 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_post.post_name'>post&#95;name</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td> 岗位名称 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_post.post_sort'>post&#95;sort</a></td>
+		<td> int   </td>
+		<td> 显示顺序 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_post.status'>status</a></td>
+		<td> int   </td>
+		<td> 状态（0正常 1停用） </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_post.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_post.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_post.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_post.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_post.remark'>remark</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 备注 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;post</td>
+		<td> ON post&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_role' onclick='window.scrollTo(1345, 465);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_role</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_role.role_id'>role&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 角色ID </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_role.role_name'>role&#95;name</a></td>
+		<td> varchar&#40; 30 &#41;   </td>
+		<td> 角色名称 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_role.role_key'>role&#95;key</a></td>
+		<td> varchar&#40; 100 &#41;   </td>
+		<td> 角色权限字符串 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_role.role_sort'>role&#95;sort</a></td>
+		<td> int   </td>
+		<td> 显示顺序 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_role.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 角色状态&#58;0正常&#44;1禁用 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_role.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_role.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_role.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_role.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_role.remark'>remark</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 备注 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;role</td>
+		<td> ON role&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_role_menu' onclick='window.scrollTo(1345, 330);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_role_menu</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_role_menu.role_id'>role&#95;id</a></td>
+		<td> int   </td>
+		<td> 角色ID </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_role_menu.menu_id'>menu&#95;id</a></td>
+		<td> int   </td>
+		<td> 菜单ID </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;role&#95;menu</td>
+		<td> ON role&#95;id&#44; menu&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_user' onclick='window.scrollTo(490, 90);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_user</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_user.user_id'>user&#95;id</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td> 用户ID </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.dept_id'>dept&#95;id</a></td>
+		<td> int   </td>
+		<td> 部门ID </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.login_name'>login&#95;name</a></td>
+		<td> varchar&#40; 30 &#41;   DEFAULT '' </td>
+		<td> 登录账号 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.user_name'>user&#95;name</a></td>
+		<td> varchar&#40; 30 &#41;   DEFAULT '' </td>
+		<td> 用户昵称 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.email'>email</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 用户邮箱 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.phonenumber'>phonenumber</a></td>
+		<td> varchar&#40; 20 &#41;   DEFAULT '' </td>
+		<td> 手机号码 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.password'>password</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 密码 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.salt'>salt</a></td>
+		<td> varchar&#40; 100 &#41;   DEFAULT '' </td>
+		<td> 盐加密 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.user_type'>user&#95;type</a></td>
+		<td> char&#40; 1 &#41;   DEFAULT 'N' </td>
+		<td> 类型&#58;Y默认用户&#44;N非默认用户 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.status'>status</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 帐号状态&#58;0正常&#44;1禁用 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.refuse_des'>refuse&#95;des</a></td>
+		<td> varchar&#40; 500 &#41;   DEFAULT '' </td>
+		<td> 拒绝登录描述 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.create_by'>create&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 创建者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_user.create_time'>create&#95;time</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> 创建时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user.update_by'>update&#95;by</a></td>
+		<td> varchar&#40; 64 &#41;   DEFAULT '' </td>
+		<td> 更新者 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_user.update_time'>update&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> 更新时间 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;user</td>
+		<td> ON user&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_user_online' onclick='window.scrollTo(460, 420);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_user_online</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_user_online.sessionId'>sessionId</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 用户会话id </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.login_name'>login&#95;name</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 登录账号 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.dept_name'>dept&#95;name</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 部门名称 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.ipaddr'>ipaddr</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 登录IP地址 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.browser'>browser</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 浏览器类型 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.os'>os</a></td>
+		<td> varchar&#40; 50 &#41;   DEFAULT '' </td>
+		<td> 操作系统 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.status'>status</a></td>
+		<td> varchar&#40; 10 &#41;   DEFAULT '' </td>
+		<td> 在线状态on&#95;line在线off&#95;line离线 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_user_online.start_timestsamp'>start&#95;timestsamp</a></td>
+		<td> timestamp   DEFAULT CURRENT_TIMESTAMP </td>
+		<td> session创建时间 </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='sys_user_online.last_access_time'>last&#95;access&#95;time</a></td>
+		<td> timestamp   DEFAULT '0000-00-00 00:00:00' </td>
+		<td> session最后访问时间 </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='sys_user_online.expire_time'>expire&#95;time</a></td>
+		<td> int   DEFAULT 0 </td>
+		<td> 超时时间，单位为分钟 </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;user&#95;online</td>
+		<td> ON sessionId</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_user_post' onclick='window.scrollTo(655, 420);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_user_post</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_user_post.user_id'>user&#95;id</a></td>
+		<td> varchar&#40; 64 &#41;   </td>
+		<td> 用户ID </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_user_post.post_id'>post&#95;id</a></td>
+		<td> varchar&#40; 64 &#41;   </td>
+		<td> 岗位ID </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;user&#95;post</td>
+		<td> ON user&#95;id&#44; post&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='sys_user_role' onclick='window.scrollTo(655, 285);return false;' style='cursor:pointer;'><h4 class='card-title'>Table sys_user_role</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_user_role.user_id'>user&#95;id</a></td>
+		<td> int   </td>
+		<td> 用户ID </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='sys_user_role.role_id'>role&#95;id</a></td>
+		<td> int   </td>
+		<td> 角色ID </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>pk&#95;sys&#95;user&#95;role</td>
+		<td> ON user&#95;id&#44; role&#95;id</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<p align='right'><a href='https://www.dbschema.com' style='color:#aaa'>Powered by DbSchema</a></p></body></html>

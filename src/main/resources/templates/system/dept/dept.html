@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<style type="text/css">
+.fixed-table-container{position:relative;clear:both;border:1px solid #ddd;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px}
+</style>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content">
+	    <div class="btn-group hidden-xs" id="toolbar" role="group">
+	    	<div class="form-group">
+	            <a type="button" class="btn btn-outline btn-default" onclick="$.operate.add(100)" shiro:hasPermission="system:dept:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
+			</div>
+        </div>
+        
+		<table id="bootstrap-table" data-mobile-responsive="true"></table>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script th:inline="javascript">
+		var addFlag = [[${@permissionService.hasPermi('system:dept:add')}]];
+		var editFlag = [[${@permissionService.hasPermi('system:dept:edit')}]];
+		var removeFlag = [[${@permissionService.hasPermi('system:dept:remove')}]];
+		var prefix = ctx + "system/dept"
+
+		window.onload = function() {
+			loading();
+		};
+		
+		function loading() {
+		    var options = {
+		        id: "deptId",
+		        parentId: "parentId",
+		        url: prefix + "/list",
+		        createUrl: prefix + "/add/{id}",
+		        updateUrl: prefix + "/edit/{id}",
+		        removeUrl: prefix + "/remove/{id}",
+		        modalName: "部门",
+		        columns: [{
+		            field: 'deptName',
+		            title: '部门名称',
+		        },
+		        {
+		            field: 'orderNum',
+		            title: '排序',
+		            align: "center"
+		        },
+		        {
+		            field: 'status',
+		            title: '状态',
+		            align: "center",
+		            formatter: function(item, index) {
+		                if (item.status == '0') {
+		                    return '<span class="badge badge-primary">正常</span>';
+		                } else if (item.status == '1') {
+		                    return '<span class="badge badge-danger">停用</span>';
+		                }
+		            }
+		        },
+		        {
+		            field: 'createTimeStr',
+		            title: '创建时间',
+		            align: "center"
+		        },
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(row, index) {
+		                if (row.parentId != 0) {
+		                    var actions = [];
+		                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.deptId + '\')"><i class="fa fa-edit">编辑</i></a> ');
+		                    actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="#" onclick="$.operate.add(\'' + row.deptId + '\')"><i class="fa fa-plus">新增</i></a> ');
+		                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.deptId + '\')"><i class="fa fa-remove">删除</i></a>');
+		                    return actions.join('');
+		                } else {
+		                    return "";
+		                }
+		            }
+		        }]
+		    };
+		    $.treeTable.init(options);
+		}
+		
+		function remove(id) {
+			$.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {
+				$.ajax({
+					type : 'post',
+					url: prefix + "/remove/" + id,
+					success : function(result) {
+						if (result.code == web_status.SUCCESS) {
+		                	$.modal.alertSuccess(result.msg);
+		                	loading();
+		                } else {
+		                	$.modal.alertError(result.msg);
+		                }
+					}
+				});
+			});
+		}
+	</script>
+</body>
+</html>

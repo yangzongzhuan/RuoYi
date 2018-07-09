@@ -1,0 +1,113 @@
+package ${package}.controller;
+
+import java.util.List;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import ${package}.domain.${className};
+import ${package}.service.I${className}Service;
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.framework.web.domain.AjaxResult;
+
+/**
+ * ${tableComment} 信息操作处理
+ * 
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Controller
+@RequestMapping("/${moduleName}/${classname}")
+public class ${className}Controller extends BaseController
+{
+    private String prefix = "${moduleName}/${classname}";
+	
+	@Autowired
+	private I${className}Service ${classname}Service;
+	
+	@RequiresPermissions("${moduleName}:${classname}:view")
+	@GetMapping()
+	public String ${classname}()
+	{
+	    return prefix + "/${classname}";
+	}
+	
+	/**
+	 * 查询${tableComment}列表
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:list")
+	@PostMapping("/list")
+	@ResponseBody
+	public TableDataInfo list(${className} ${classname})
+	{
+		startPage();
+        List<${className}> list = ${classname}Service.select${className}List(${classname});
+		return getDataTable(list);
+	}
+	
+	/**
+	 * 新增${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:add")
+	@Log(title = "${tableComment}", action = BusinessType.INSERT)
+	@GetMapping("/add")
+	public String add()
+	{
+	    return prefix + "/add";
+	}
+
+	/**
+	 * 修改${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:edit")
+	@Log(title = "${tableComment}", action = BusinessType.UPDATE)
+	@GetMapping("/edit/{${primaryKey.attrname}}")
+	public String edit(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname}, Model model)
+	{
+		${className} ${classname} = ${classname}Service.select${className}ById(${primaryKey.attrname});
+		model.addAttribute("${classname}", ${classname});
+	    return prefix + "/edit";
+	}
+	
+	/**
+	 * 保存${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:save")
+	@Log(title = "${tableComment}", action = BusinessType.SAVE)
+	@PostMapping("/save")
+	@ResponseBody
+	public AjaxResult save(${className} ${classname})
+	{
+		if (${classname}Service.save${className}(${classname}) > 0)
+		{
+			return success();
+		}
+		return error();
+	}
+	
+	/**
+	 * 删除${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:remove")
+	@Log(title = "${tableComment}", action = BusinessType.DELETE)
+	@PostMapping( "/remove")
+	@ResponseBody
+	public AjaxResult remove(String ids)
+	{
+		int rows = ${classname}Service.delete${className}ByIds(ids);
+		if (rows > 0)
+        {
+            return success();
+        }
+        return error();
+	}
+	
+}

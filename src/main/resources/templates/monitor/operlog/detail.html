@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	<form class="form-horizontal m-t" id="signupForm">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">操作模块：</label>
+			<div class="form-control-static" th:text="${operLog.title} + ' / ' + ${operLog.action}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">登录信息：</label>
+			<div class="form-control-static" th:text="${operLog.operName} + ' / ' + ${operLog.deptName} + ' / ' + ${operLog.operIp}+ ' / ' + ${operLog.operLocation}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">请求地址：</label>
+			<div class="form-control-static" th:text="${operLog.operUrl}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">操作方法：</label>
+			<div class="form-control-static" th:text="${operLog.method}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">请求参数：</label>
+			<div class="form-control-static" th:text="${operLog.operParam}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">状态：</label>
+			<div class="form-control-static" th:class="${operLog.status == '0' ? 'label label-primary' : 'label label-danger'}" th:text="${operLog.status == '0' ? '正常' : '异常'}">
+			</div>
+		</div>
+		<div class="form-group" th:style="'display:' + ${operLog.status == '0' ? 'none' : 'block'}">
+			<label class="col-sm-2 control-label">异常信息：</label>
+			<div class="form-control-static" th:text="${operLog.errorMsg}">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-control-static col-sm-offset-9">
+				<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
+			</div>
+		</div>
+	</form>
+    </div>
+    <div th:include="include :: footer"></div>
+</body>
+</html>
