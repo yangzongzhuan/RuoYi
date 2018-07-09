@@ -159,6 +159,7 @@ public class MenuServiceImpl implements IMenuService
             deptMap.put("id", menu.getMenuId());
             deptMap.put("pId", menu.getParentId());
             deptMap.put("name", transMenuName(menu, roleMenuList, permsFlag));
+            deptMap.put("title", menu.getMenuName());
             if (isCheck)
             {
                 deptMap.put("checked", roleMenuList.contains(menu.getMenuId() + menu.getPerms()));
