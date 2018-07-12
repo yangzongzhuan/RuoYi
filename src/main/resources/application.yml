@@ -42,7 +42,8 @@ spring:
       max-request-size: 30Mb
   devtools:
     restart:
-      enabled: true    
+      #禁用devtools模块的热部署功能
+      enabled: true
 # MyBatis
 mybatis:
     # 搜索指定包别名

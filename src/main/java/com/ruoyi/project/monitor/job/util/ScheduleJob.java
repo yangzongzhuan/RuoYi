@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import org.apache.commons.beanutils.PropertyUtils;
-import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -13,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.ScheduleConstants;
+import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.project.monitor.job.domain.Job;
 import com.ruoyi.project.monitor.job.domain.JobLog;
@@ -33,17 +32,8 @@ public class ScheduleJob extends QuartzJobBean
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException
     {
-        // Job job = (Job) context.getMergedJobDataMap().get(ScheduleConstants.JOB_PARAM_KEY);
-        JobDataMap jobDataMap = context.getMergedJobDataMap();
         Job job = new Job();
-        try
-        {
-            PropertyUtils.copyProperties(job, jobDataMap.get(ScheduleConstants.JOB_PARAM_KEY));
-        }
-        catch (Exception e)
-        {
-            log.error("copyProperties执行异常  - ：", e);
-        }
+        BeanUtils.copyBeanProp(job, context.getMergedJobDataMap().get(ScheduleConstants.JOB_PARAM_KEY));
 
         IJobLogService jobLogService = (IJobLogService) SpringUtils.getBean(IJobLogService.class);
 

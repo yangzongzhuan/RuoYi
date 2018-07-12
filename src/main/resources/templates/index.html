@@ -35,7 +35,7 @@
                          <img th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/' + ${user.avatar}" alt="image" class="img-circle" height="60" width="60"/></span>
                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                           <span class="clear"><span class="block m-t-xs"><strong class="font-bold">[[${user.userName}]]</strong></span>
-                         <span class="text-muted text-xs block"><span>[[${user.dept.deptName}]]</span> <b class="caret"></b></span> </span> </a>
+                         <span class="text-muted text-xs block"><span th:if="${not #strings.isEmpty(user.dept)}">[[${user.dept.deptName}]]</span> <b class="caret"></b></span> </span> </a>
                          <ul class="dropdown-menu animated fadeInRight m-t-xs">
                              <li><a class="menuItem" th:href="@{/system/user/profile}">个人信息</a></li>
                              <li class="divider"></li>
