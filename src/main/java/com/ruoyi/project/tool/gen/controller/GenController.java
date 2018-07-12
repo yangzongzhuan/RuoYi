@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.alibaba.fastjson.JSON;
+import com.ruoyi.common.support.Convert;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -77,8 +77,7 @@ public class GenController extends BaseController
     @ResponseBody
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException
     {
-        String[] tableNames = new String[] {};
-        tableNames = JSON.parseArray(tables).toArray(tableNames);
+        String[] tableNames = Convert.toStrArray(tables);
         byte[] data = genService.generatorCode(tableNames);
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"ruoyi.zip\"");
