@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.shiro.session.OnlineSessionFactory;
@@ -87,9 +88,18 @@ public class ShiroConfig
     @Bean
     public EhCacheManager getEhCacheManager()
     {
+        net.sf.ehcache.CacheManager cacheManager = net.sf.ehcache.CacheManager.getCacheManager("ruoyi");
         EhCacheManager em = new EhCacheManager();
-        em.setCacheManagerConfigFile("classpath:ehcache/ehcache-shiro.xml");
-        return em;
+        if (StringUtils.isNull(cacheManager))
+        {
+            em.setCacheManagerConfigFile("classpath:ehcache/ehcache-shiro.xml");
+            return em;
+        }
+        else
+        {
+            em.setCacheManager(cacheManager);
+            return em;
+        }
     }
 
     /**
