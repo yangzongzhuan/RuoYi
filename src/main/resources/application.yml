@@ -36,10 +36,12 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   profiles: 
     active: druid
-  http:
-    multipart:
-      max-file-size: 30Mb
-      max-request-size: 30Mb
+  #文件上传
+  servlet:
+     multipart:
+       max-file-size:  30MB
+       max-request-size:  30MB
+
   devtools:
     restart:
       #禁用devtools模块的热部署功能
