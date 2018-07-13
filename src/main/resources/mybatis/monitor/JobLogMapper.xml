@@ -32,6 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="methodName != null and methodName != ''">
 				AND method_name like concat('%', #{methodName}, '%')
 			</if>
+			<if test="reqParams != null and reqParams.beginTime != ''"><!-- 开始时间检索 -->
+				and date_format(create_time,'%y%m%d') &gt;= date_format(#{reqParams.beginTime},'%y%m%d')
+			</if>
+			<if test="reqParams != null and reqParams.endTime != ''"><!-- 结束时间检索 -->
+				and date_format(create_time,'%y%m%d') &lt;= date_format(#{reqParams.endTime},'%y%m%d')
+			</if>
 		</where>
 	</select>
 	

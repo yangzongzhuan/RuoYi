@@ -12,16 +12,22 @@
 					<div class="select-list gd">
 						<ul>
 							<li>
-								任务名称：<input type="text" name="jobName"/>
+								<label>任务名称：</label><input type="text" name="jobName"/>
 							</li>
 							<li>
-								方法名称：<input type="text" name="methodName"/>
+								<label>方法名称：</label><input type="text" name="methodName"/>
 							</li>
 							<li>
-								执行状态：<select name="status" th:with="type=${@dictService.selectDictData('sys_common_status')}">
+								<label>执行状态：</label><select name="status" th:with="type=${@dictService.selectDictData('sys_common_status')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
+							</li>
+							<li class="time">
+								<label>操作时间： </label>
+								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="reqParams[beginTime]"/>
+								<span>-</span>
+								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="reqParams[endTime]"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -112,6 +118,12 @@
 		        }]
 		    };
 		    $.table.init(options);
+		});
+		
+		layui.use('laydate', function() {
+		    var laydate = layui.laydate;
+		    laydate.render({ elem: '#startTime', theme: 'molv' });
+		    laydate.render({ elem: '#endTime', theme: 'molv' });
 		});
 	</script>
 </body>

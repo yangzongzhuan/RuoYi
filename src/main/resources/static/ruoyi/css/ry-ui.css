@@ -201,6 +201,11 @@ label.error {
 }
 
 /** 表单查询条件 */
+
+label{
+    font-weight: normal;
+}
+
 .container-div{
 	padding:20px 45px;
 	height:100%;
@@ -321,3 +326,4 @@ label.error {
 .order-table .table>thead:first-child>tr:first-child>th{
 	color:#333;
 }
+

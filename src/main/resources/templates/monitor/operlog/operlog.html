@@ -12,16 +12,22 @@
 					<div class="select-list gd">
 						<ul>
 							<li>
-								系统模块：<input type="text" name="title"/>
+								<label>系统模块： </label><input type="text" name="title"/>
 							</li>
 							<li>
-								操作人员：<input type="text" name="operName"/>
+								<label>操作人员： </label><input type="text" name="operName"/>
 							</li>
 							<li>
-								操作类型：<select name="action" th:with="type=${@dictService.selectDictData('sys_oper_type')}">
+								<label>操作类型： </label><select name="action" th:with="type=${@dictService.selectDictData('sys_oper_type')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
+							</li>
+							<li class="time">
+								<label>操作时间： </label>
+								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="reqParams[beginTime]"/>
+								<span>-</span>
+								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="reqParams[endTime]"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -147,6 +153,12 @@
 		    var url = prefix + '/detail/' + id;
 		    $.modal.open("操作日志详细", url);
 		}
+		
+		layui.use('laydate', function() {
+		    var laydate = layui.laydate;
+		    laydate.render({ elem: '#startTime', theme: 'molv' });
+		    laydate.render({ elem: '#endTime', theme: 'molv' });
+		});
 	</script>
 </body>
 </html>
