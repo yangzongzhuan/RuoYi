@@ -13,31 +13,31 @@ public class Logininfor extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
     /** ID */
-    @Excel(name = "序号", column = "A")
+    @Excel(name = "序号")
     private Integer infoId;
     /** 用户账号 */
-    @Excel(name = "用户账号", column = "B")
+    @Excel(name = "用户账号")
     private String loginName;
     /** 登录状态 0成功 1失败 */
-    @Excel(name = "登录状态", column = "C")
+    @Excel(name = "登录状态")
     private String status;
     /** 登录IP地址 */
-    @Excel(name = "登录地址", column = "D")
+    @Excel(name = "登录地址")
     private String ipaddr;
     /** 登录地点 */
-    @Excel(name = "登录地点", column = "E")
+    @Excel(name = "登录地点")
     private String loginLocation;
     /** 浏览器类型 */
-    @Excel(name = "浏览器", column = "F")
+    @Excel(name = "浏览器")
     private String browser;
     /** 操作系统 */
-    @Excel(name = "操作系统 ", column = "G")
+    @Excel(name = "操作系统 ")
     private String os;
     /** 提示消息 */
-    @Excel(name = "提示消息", column = "H")
+    @Excel(name = "提示消息")
     private String msg;
     /** 访问时间 */
-    @Excel(name = "访问时间", column = "I")
+    @Excel(name = "访问时间")
     private Date loginTime;
 
     public Integer getInfoId()

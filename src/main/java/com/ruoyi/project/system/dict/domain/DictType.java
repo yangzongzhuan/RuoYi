@@ -13,19 +13,19 @@ public class DictType extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 字典主键 */
-    @Excel(name = "字典主键", column = "A")
+    @Excel(name = "字典主键")
     private Long dictId;
 
     /** 字典名称 */
-    @Excel(name = "字典名称", column = "B")
+    @Excel(name = "字典名称")
     private String dictName;
 
     /** 字典类型 */
-    @Excel(name = "字典类型 ", column = "C")
+    @Excel(name = "字典类型 ")
     private String dictType;
 
     /** 状态（0正常 1停用） */
-    @Excel(name = "状态", column = "D")
+    @Excel(name = "状态")
     private String status;
 
     public Long getDictId()

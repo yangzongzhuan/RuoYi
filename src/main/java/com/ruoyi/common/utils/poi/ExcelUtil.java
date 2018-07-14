@@ -73,13 +73,12 @@ public class ExcelUtil<T>
             // 有数据时才处理
             Field[] allFields = clazz.getDeclaredFields(); // 得到类的所有field.
             Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>(); // 定义一个map用于存放列的序号和field.
-            for (Field field : allFields)
+            for (int col = 0; col < allFields.length; col++)
             {
+                Field field = allFields[col];
                 // 将有注解的field存放到map中.
                 if (field.isAnnotationPresent(Excel.class))
                 {
-                    Excel attr = field.getAnnotation(Excel.class);
-                    int col = getExcelCol(attr.column());// 获得列号
                     field.setAccessible(true);// 设置类的私有字段属性可访问.
                     fieldsMap.put(col, field);
                 }
@@ -215,8 +214,7 @@ public class ExcelUtil<T>
             {
                 Field field = fields.get(i);
                 Excel attr = field.getAnnotation(Excel.class);
-                int col = getExcelCol(attr.column()); // 获得列号
-                cell = row.createCell(col); // 创建列
+                cell = row.createCell(i); // 创建列
                 cell.setCellType(HSSFCell.CELL_TYPE_STRING); // 设置列中写入内容为String类型
                 HSSFCellStyle cellStyle = workbook.createCellStyle();
                 cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -247,12 +245,12 @@ public class ExcelUtil<T>
                 // 如果设置了提示信息则鼠标放上去提示.
                 if (!attr.prompt().trim().equals(""))
                 {
-                    setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, col, col); // 这里默认设了2-101列提示.
+                    setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, i, i); // 这里默认设了2-101列提示.
                 }
                 // 如果设置了combo属性则本列只能选择不能输入
                 if (attr.combo().length > 0)
                 {
-                    setHSSFValidation(sheet, attr.combo(), 1, 100, col, col); // 这里默认设了2-101列只能选择不能输入.
+                    setHSSFValidation(sheet, attr.combo(), 1, 100, i, i); // 这里默认设了2-101列只能选择不能输入.
                 }
             }
 
@@ -276,12 +274,14 @@ public class ExcelUtil<T>
                         // 根据Excel中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
                         if (attr.isExport())
                         {
-                            cell = row.createCell(getExcelCol(attr.column()));// 创建cell
+                            cell = row.createCell(j);// 创建cell
                             cell.setCellStyle(cs);
                             try
                             {
                                 if (String.valueOf(field.get(vo)).length() > 10)
+                                {
                                     throw new Exception("长度超过10位就不用转数字了");
+                                }
                                 // 如果可以转成数字则导出为数字类型
                                 BigDecimal bc = new BigDecimal(String.valueOf(field.get(vo)));
                                 cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
@@ -329,18 +329,18 @@ public class ExcelUtil<T>
      * 
      * @param col
      */
-    public static int getExcelCol(String col)
-    {
-        col = col.toUpperCase();
-        // 从-1开始计算,字母重1开始运算。这种总数下来算数正好相同。
-        int count = -1;
-        char[] cs = col.toCharArray();
-        for (int i = 0; i < cs.length; i++)
-        {
-            count += (cs[i] - 64) * Math.pow(26, cs.length - 1 - i);
-        }
-        return count;
-    }
+//    public static int getExcelCol(String col)
+//    {
+//        col = col.toUpperCase();
+//        // 从-1开始计算,字母重1开始运算。这种总数下来算数正好相同。
+//        int count = -1;
+//        char[] cs = col.toCharArray();
+//        for (int i = 0; i < cs.length; i++)
+//        {
+//            count += (cs[i] - 64) * Math.pow(26, cs.length - 1 - i);
+//        }
+//        return count;
+//    }
 
     /**
      * 设置单元格上提示

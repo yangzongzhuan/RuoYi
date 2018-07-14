@@ -13,61 +13,61 @@ import com.ruoyi.framework.web.domain.BaseEntity;
 public class OperLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
-    
+
     /** 日志主键 */
-    @Excel(name = "操作序号", column = "A")
+    @Excel(name = "操作序号")
     private Integer operId;
-    
+
     /** 操作模块 */
-    @Excel(name = "操作模块", column = "B")
+    @Excel(name = "操作模块")
     private String title;
-    
+
     /** 操作类型 */
-    @Excel(name = "操作类型", column = "C")
+    @Excel(name = "操作类型")
     private String action;
-    
+
     /** 请求方法 */
-    @Excel(name = "请求方法", column = "D")
+    @Excel(name = "请求方法")
     private String method;
-    
+
     /** 来源渠道 */
-    @Excel(name = "来源渠道", column = "E")
+    @Excel(name = "来源渠道")
     private String channel;
-    
+
     /** 操作人员 */
-    @Excel(name = "操作人员", column = "F")
+    @Excel(name = "操作人员")
     private String operName;
-    
+
     /** 部门名称 */
-    @Excel(name = "部门名称", column = "G")
+    @Excel(name = "部门名称")
     private String deptName;
-    
+
     /** 请求url */
-    @Excel(name = "请求地址", column = "H")
+    @Excel(name = "请求地址")
     private String operUrl;
-    
+
     /** 操作地址 */
-    @Excel(name = "操作地址", column = "I")
+    @Excel(name = "操作地址")
     private String operIp;
-    
+
     /** 操作地点 */
-    @Excel(name = "操作地点", column = "J")
+    @Excel(name = "操作地点")
     private String operLocation;
-    
+
     /** 请求参数 */
-    @Excel(name = "请求参数", column = "K")
+    @Excel(name = "请求参数")
     private String operParam;
-    
+
     /** 状态0正常 1异常 */
-    @Excel(name = "状态", column = "L")
+    @Excel(name = "状态")
     private String status;
-    
+
     /** 错误消息 */
-    @Excel(name = "错误消息", column = "N")
+    @Excel(name = "错误消息")
     private String errorMsg;
-    
+
     /** 操作时间 */
-    @Excel(name = "操作时间", column = "M")
+    @Excel(name = "操作时间")
     private Date operTime;
 
     public Integer getOperId()

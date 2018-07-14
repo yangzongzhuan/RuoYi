@@ -15,31 +15,31 @@ public class Job extends BaseEntity implements Serializable
     private static final long serialVersionUID = 1L;
 
     /** 任务ID */
-    @Excel(name = "任务序号", column = "A")
+    @Excel(name = "任务序号")
     private Long jobId;
 
     /** 任务名称 */
-    @Excel(name = "任务名称", column = "B")
+    @Excel(name = "任务名称")
     private String jobName;
 
     /** 任务组名 */
-    @Excel(name = "任务组名", column = "C")
+    @Excel(name = "任务组名")
     private String jobGroup;
 
     /** 任务方法 */
-    @Excel(name = "任务方法", column = "D")
+    @Excel(name = "任务方法")
     private String methodName;
 
     /** 方法参数 */
-    @Excel(name = "方法参数", column = "E")
+    @Excel(name = "方法参数")
     private String params;
 
     /** cron执行表达式 */
-    @Excel(name = "执行表达式 ", column = "F")
+    @Excel(name = "执行表达式 ")
     private String cronExpression;
 
     /** 任务状态（0正常 1暂停） */
-    @Excel(name = "任务状态", column = "G")
+    @Excel(name = "任务状态")
     private String status;
 
     public Long getJobId()

@@ -15,23 +15,23 @@ public class Role extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 角色ID */
-    @Excel(name = "角色序号", column = "A")
+    @Excel(name = "角色序号")
     private Long roleId;
 
     /** 角色名称 */
-    @Excel(name = "角色名称", column = "B")
+    @Excel(name = "角色名称")
     private String roleName;
 
     /** 角色权限 */
-    @Excel(name = "角色权限", column = "C")
+    @Excel(name = "角色权限")
     private String roleKey;
 
     /** 角色排序 */
-    @Excel(name = "角色排序", column = "D")
+    @Excel(name = "角色排序")
     private String roleSort;
 
     /** 角色状态（0正常 1停用） */
-    @Excel(name = "角色状态", column = "E")
+    @Excel(name = "角色状态")
     private String status;
 
     /** 用户是否存在此角色标识 默认不存在 */

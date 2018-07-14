@@ -20,11 +20,6 @@ public @interface Excel
     public abstract String name();
 
     /**
-     * 配置列的名称
-     */
-    public abstract String column();
-
-    /**
      * 提示信息
      */
     public abstract String prompt() default "";

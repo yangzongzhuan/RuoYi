@@ -13,25 +13,24 @@ public class Config extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 参数主键 */
-    @Excel(name = "参数主键", column = "A")
+    @Excel(name = "参数主键")
     private Integer configId;
-    
+
     /** 参数名称 */
-    @Excel(name = "参数名称", column = "B")
+    @Excel(name = "参数名称")
     private String configName;
-    
+
     /** 参数键名 */
-    @Excel(name = "参数键名", column = "C")
+    @Excel(name = "参数键名")
     private String configKey;
-    
+
     /** 参数键值 */
-    @Excel(name = "参数键值", column = "D")
+    @Excel(name = "参数键值")
     private String configValue;
-    
+
     /** 系统内置（Y是 N否） */
-    @Excel(name = "系统内置", column = "E")
+    @Excel(name = "系统内置")
     private String configType;
-    
 
     public Integer getConfigId()
     {
