@@ -27,7 +27,7 @@ public class Menu extends BaseEntity
     /** 类型:0目录,1菜单,2按钮 */
     private String menuType;
     /** 菜单状态:0显示,1隐藏 */
-    private int visible;
+    private Integer visible;
     /** 权限字符串 */
     private String perms;
     /** 菜单图标 */
@@ -105,12 +105,12 @@ public class Menu extends BaseEntity
         this.menuType = menuType;
     }
 
-    public int getVisible()
+    public Integer getVisible()
     {
         return visible;
     }
 
-    public void setVisible(int visible)
+    public void setVisible(Integer visible)
     {
         this.visible = visible;
     }

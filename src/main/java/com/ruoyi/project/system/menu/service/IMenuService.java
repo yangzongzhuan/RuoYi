@@ -24,6 +24,13 @@ public interface IMenuService
     public List<Menu> selectMenusByUserId(Long userId);
 
     /**
+     * 查询系统菜单列表
+     * 
+     * @return 菜单列表
+     */
+    public List<Menu> selectMenuList(Menu menu);
+
+    /**
      * 查询菜单集合
      * 
      * @return 所有菜单信息

@@ -28,6 +28,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectDeptVo"/>
 	</select>
 	
+	<select id="selectDeptList" parameterType="Dept" resultMap="DeptResult">
+        <include refid="selectDeptVo"/>
+        <where>
+			<if test="deptName != null and deptName != ''">
+				AND dept_name like concat('%', #{deptName}, '%')
+			</if>
+			<if test="status != null and status != ''">
+				AND status = #{status}
+			</if>
+		</where>
+    </select>
+	
 	<select id="checkDeptExistUser" parameterType="Long" resultType="int">
 		select count(*) from sys_user where dept_id = #{deptId}
 	</select>

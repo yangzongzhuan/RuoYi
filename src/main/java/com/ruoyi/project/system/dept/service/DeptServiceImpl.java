@@ -24,9 +24,20 @@ public class DeptServiceImpl implements IDeptService
     private DeptMapper deptMapper;
 
     /**
-     * 查询部门管理集合
+     * 查询部门管理数据
      * 
-     * @return 所有部门信息
+     * @return 部门信息集合
+     */
+    @Override
+    public List<Dept> selectDeptList(Dept dept)
+    {
+        return deptMapper.selectDeptList(dept);
+    }
+
+    /**
+     * 查询部门所有数据
+     * 
+     * @return 部门信息集合
      */
     @Override
     public List<Dept> selectDeptAll()

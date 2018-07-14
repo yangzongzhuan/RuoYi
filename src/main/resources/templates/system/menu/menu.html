@@ -2,21 +2,42 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<style type="text/css">
-.fixed-table-container{position:relative;clear:both;border:1px solid #ddd;border-radius:4px;-webkit-border-radius:4px;-moz-border-radius:4px}
-</style>
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
-	    <div class="btn-group hidden-xs" id="toolbar" role="group">
-	    	<div class="form-group">
-	            <a type="button" class="btn btn-outline btn-default" onclick="$.operate.add(0)" shiro:hasPermission="system:menu:add">
+
+    <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-info">
+				<form id="operlog-form">
+					<div class="select-list gd">
+						<ul>
+							<li>
+								菜单名称：<input type="text" name="menuName"/>
+							</li>
+							<li>
+								菜单状态：<select name="visible" th:with="type=${@dictService.selectDictData('sys_show_hide')}">
+									<option value="">所有</option>
+									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+								</select>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+                
+            <div class="btn-group hidden-xs" id="toolbar" role="group">
+		        <a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add(0)" shiro:hasPermission="system:menu:add">
                     <i class="fa fa-plus"></i> 新增
                 </a>
-			</div>
-        </div>
-        
-	    <table id="bootstrap-table" data-mobile-responsive="true"></table>
+	        </div>
+       		 <div class="col-sm-12 select-info order-table">
+	            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+	        </div>
+	    </div>
 	</div>
+	
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
 		var addFlag = [[${@permissionService.hasPermi('system:menu:add')}]];

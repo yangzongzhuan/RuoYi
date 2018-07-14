@@ -51,6 +51,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by m.parent_id, m.order_num
 	</select>
 	
+	<select id="selectMenuList" parameterType="Menu" resultMap="MenuResult">
+        <include refid="selectMenuVo"/>
+        <where>
+			<if test="menuName != null and menuName != ''">
+				AND menu_name like concat('%', #{menuName}, '%')
+			</if>
+			<if test="visible != null and visible != ''">
+				AND visible = #{visible}
+			</if>
+		</where>
+    </select>
+	
 	<select id="selectMenuAll" resultMap="MenuResult">
 		<include refid="selectMenuVo"/>
 	</select>

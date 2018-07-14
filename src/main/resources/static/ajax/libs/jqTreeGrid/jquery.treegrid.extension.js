@@ -22,7 +22,7 @@
         }
         // 工具条在外层包装一下div，样式用的bootstrap-table的
         if(options.toolbar){
-            var _tool_div = $("<div class='fixed-table-toolbar' style='display:none;'></div>");
+            var _tool_div = $("<div class='fixed-table-toolbar'></div>");
             var _tool_left_div = $("<div class='bs-bars pull-left'></div>");
             _tool_left_div.append($(options.toolbar));
             _tool_div.append(_tool_left_div);
@@ -249,7 +249,7 @@
         expandAll : true, // 是否全部展开
         striped : false, // 是否各行渐变色
         columns : [],
-        toolbar: null,//顶部工具条
+        toolbar: '#toolbar',//顶部工具条
         height: 0,
         expanderExpandedClass : 'glyphicon glyphicon-chevron-down',// 展开的按钮的图标
         expanderCollapsedClass : 'glyphicon glyphicon-chevron-right'// 缩起的按钮的图标

@@ -44,9 +44,9 @@ public class MenuController extends BaseController
     @RequiresPermissions("system:menu:list")
     @GetMapping("/list")
     @ResponseBody
-    public List<Menu> list()
+    public List<Menu> list(Menu menu)
     {
-        List<Menu> menuList = menuService.selectMenuAll();
+        List<Menu> menuList = menuService.selectMenuList(menu);
         return menuList;
     }
 

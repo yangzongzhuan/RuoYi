@@ -100,10 +100,11 @@
         // 表格树封装处理
         treeTable: {
             _option: {},
+            _treeTable: {},
             // 初始化表格
             init: function(options) {
                 $.table._option = options;
-                $('#bootstrap-table').bootstrapTreeTable({
+                var treeTable = $('#bootstrap-table').bootstrapTreeTable({
         		    code : options.id,             // 用于设置父子关系
         	        parentCode : options.parentId, // 用于设置父子关系
         	    	type: 'get',                   // 请求方式（*）
@@ -115,7 +116,20 @@
         			expandAll : $.common.visible(options.expandAll), // 是否全部展开
         	        columns: options.columns
         	    });
-            }
+                $.treeTable._treeTable = treeTable;
+            },
+            // 条件查询
+            search: function(form) {
+            	var params = {};
+            	$.each($("#" + form).serializeArray(), function(i, field) {
+            		params[field.name] = field.value;
+		        });
+            	$.treeTable._treeTable.bootstrapTreeTable('refresh', params);
+            },
+            // 刷新
+            refresh: function() {
+            	$.treeTable._treeTable.bootstrapTreeTable('refresh');
+            },
         },
         // 表单封装处理
     	form: {

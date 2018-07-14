@@ -42,9 +42,9 @@ public class DeptController extends BaseController
     @RequiresPermissions("system:dept:list")
     @GetMapping("/list")
     @ResponseBody
-    public List<Dept> list()
+    public List<Dept> list(Dept dept)
     {
-        List<Dept> deptList = deptService.selectDeptAll();
+        List<Dept> deptList = deptService.selectDeptList(dept);
         return deptList;
     }
 

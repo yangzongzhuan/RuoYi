@@ -55,6 +55,17 @@ public class MenuServiceImpl implements IMenuService
      * @return 所有菜单信息
      */
     @Override
+    public List<Menu> selectMenuList(Menu menu)
+    {
+        return menuMapper.selectMenuList(menu);
+    }
+
+    /**
+     * 查询菜单集合
+     * 
+     * @return 所有菜单信息
+     */
+    @Override
     public List<Menu> selectMenuAll()
     {
         return menuMapper.selectMenuAll();
