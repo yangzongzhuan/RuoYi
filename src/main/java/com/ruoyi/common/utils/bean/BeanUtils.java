@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.ruoyi.project.system.dept.domain.Dept;
-import com.ruoyi.project.system.user.domain.User;
-
 /**
  * Bean 工具类
  * 
@@ -121,21 +118,5 @@ public class BeanUtils
     public static boolean isMethodPropEquals(String m1, String m2)
     {
         return m1.substring(BEAN_METHOD_PROP_INDEX).equals(m2.substring(BEAN_METHOD_PROP_INDEX));
-    }
-
-    public static void main(String[] args)
-    {
-        User user = new User();
-
-        User zhen = new User();
-        zhen.setUserName("测试名称");
-        Dept dept = new Dept();
-        dept.setDeptId(11L);
-        dept.setDeptName("测试部门");
-        zhen.setDept(dept);
-
-        BeanUtils.copyBeanProp(user, zhen);
-
-        System.out.println(user.getDept().getDeptName());
     }
 }
