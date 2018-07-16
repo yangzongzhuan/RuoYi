@@ -56,6 +56,11 @@ public class BaseEntity implements Serializable
         this.createBy = createBy;
     }
 
+    public Date getCreateTime()
+    {
+        return createTime;
+    }
+
     public String getCreateTimeStr()
     {
         return createTime != null ? DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, createTime) : "";
@@ -79,6 +84,11 @@ public class BaseEntity implements Serializable
     public void setUpdateBy(String updateBy)
     {
         this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime()
+    {
+        return updateTime;
     }
 
     public String getUpdateTimeStr()

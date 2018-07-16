@@ -107,12 +107,4 @@ public interface UserMapper
      * @return 结果
      */
     public User checkEmailUnique(String email);
-
-    /**
-     * 批量添加用户
-     * 
-     * @param userList
-     * @return
-     */
-    public int batchAddUser(List<User> userList);
 }
