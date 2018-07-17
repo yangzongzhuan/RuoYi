@@ -39,6 +39,7 @@ public class CommonMap
         javaTypeMap.put("text", "String");
         javaTypeMap.put("mediumtext", "String");
         javaTypeMap.put("longtext", "String");
+		javaTypeMap.put("time", "Date");
         javaTypeMap.put("date", "Date");
         javaTypeMap.put("datetime", "Date");
         javaTypeMap.put("timestamp", "Date");
