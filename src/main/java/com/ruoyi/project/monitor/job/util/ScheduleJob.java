@@ -41,7 +41,7 @@ public class ScheduleJob extends QuartzJobBean
         jobLog.setJobName(job.getJobName());
         jobLog.setJobGroup(job.getJobGroup());
         jobLog.setMethodName(job.getMethodName());
-        jobLog.setParams(job.getParams());
+        jobLog.setMethodParams(job.getMethodParams());
         jobLog.setCreateTime(new Date());
 
         long startTime = System.currentTimeMillis();
@@ -50,7 +50,7 @@ public class ScheduleJob extends QuartzJobBean
         {
             // 执行任务
             log.info("任务开始执行 - 名称：{} 方法：{}", job.getJobName(), job.getMethodName());
-            ScheduleRunnable task = new ScheduleRunnable(job.getJobName(), job.getMethodName(), job.getParams());
+            ScheduleRunnable task = new ScheduleRunnable(job.getJobName(), job.getMethodName(), job.getMethodParams());
             Future<?> future = service.submit(task);
             future.get();
             long times = System.currentTimeMillis() - startTime;

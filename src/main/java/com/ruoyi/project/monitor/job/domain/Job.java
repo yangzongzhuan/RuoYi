@@ -32,7 +32,7 @@ public class Job extends BaseEntity implements Serializable
 
     /** 方法参数 */
     @Excel(name = "方法参数")
-    private String params;
+    private String methodParams;
 
     /** cron执行表达式 */
     @Excel(name = "执行表达式 ")
@@ -82,14 +82,14 @@ public class Job extends BaseEntity implements Serializable
         this.methodName = methodName;
     }
 
-    public String getParams()
+    public String getMethodParams()
     {
-        return params;
+        return methodParams;
     }
 
-    public void setParams(String params)
+    public void setMethodParams(String methodParams)
     {
-        this.params = params;
+        this.methodParams = methodParams;
     }
 
     public String getCronExpression()
@@ -116,7 +116,7 @@ public class Job extends BaseEntity implements Serializable
     public String toString()
     {
         return "Job [jobId=" + jobId + ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", methodName=" + methodName
-                + ", params=" + params + ", cronExpression=" + cronExpression + ", status=" + status + "]";
+                + ", methodParams=" + methodParams + ", cronExpression=" + cronExpression + ", status=" + status + "]";
     }
 
 }

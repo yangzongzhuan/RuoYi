@@ -3,8 +3,7 @@ package com.ruoyi.framework.web.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
-
-import com.ruoyi.common.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Entity基类
@@ -22,19 +21,21 @@ public class BaseEntity implements Serializable
     private String createBy;
 
     /** 创建时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /** 更新者 */
     private String updateBy;
 
     /** 更新时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     /** 备注 */
     private String remark;
 
     /** 请求参数 */
-    private Map<String, Object> reqParams;
+    private Map<String, Object> params;
 
     public String getSearchValue()
     {
@@ -61,16 +62,6 @@ public class BaseEntity implements Serializable
         return createTime;
     }
 
-    public String getCreateTimeStr()
-    {
-        return createTime != null ? DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, createTime) : "";
-    }
-
-    public String getCreateDateTimeStr()
-    {
-        return createTime != null ? DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, createTime) : "";
-    }
-
     public void setCreateTime(Date createTime)
     {
         this.createTime = createTime;
@@ -91,16 +82,6 @@ public class BaseEntity implements Serializable
         return updateTime;
     }
 
-    public String getUpdateTimeStr()
-    {
-        return updateTime != null ? DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD, updateTime) : "";
-    }
-
-    public String getUpdateDateTimeStr()
-    {
-        return updateTime != null ? DateUtils.parseDateToStr(DateUtils.YYYY_MM_DD_HH_MM_SS, updateTime) : "";
-    }
-
     public void setUpdateTime(Date updateTime)
     {
         this.updateTime = updateTime;
@@ -116,14 +97,14 @@ public class BaseEntity implements Serializable
         this.remark = remark;
     }
 
-    public Map<String, Object> getReqParams()
+    public Map<String, Object> getParams()
     {
-        return reqParams;
+        return params;
     }
 
-    public void setReqParams(Map<String, Object> reqParams)
+    public void setParams(Map<String, Object> params)
     {
-        this.reqParams = reqParams;
+        this.params = params;
     }
 
 }

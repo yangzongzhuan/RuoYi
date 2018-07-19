@@ -46,7 +46,7 @@
 	                            <p><i class="fa fa-group"></i> [[${user.dept.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
 	                            <p><i class="fa fa-transgender"></i> [[${user.sex}]]</p>
 	                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
-	                            <p><i class="fa fa-calendar"></i> [[${user.createTimeStr}]]</p>
+	                            <p><i class="fa fa-calendar"></i> [[${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}]]</p>
 	                        </div>
 	                        <div class="clearfix"></div>
 	                    </a>

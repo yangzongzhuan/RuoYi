@@ -18,6 +18,13 @@ $(function(){
 	        radioClass: "iradio_square-green",
 	    })
 	}
+	if ($(".time").length > 0) {
+		layui.use('laydate', function() {
+		    var laydate = layui.laydate;
+		    laydate.render({ elem: '#startTime', theme: 'molv' });
+		    laydate.render({ elem: '#endTime', theme: 'molv' });
+		});
+	}
 });
 
 /** 创建选项卡 */

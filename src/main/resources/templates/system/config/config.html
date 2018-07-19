@@ -22,6 +22,12 @@
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
 							</li>
+							<li class="time">
+								<label>创建时间： </label>
+								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+								<span>-</span>
+								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
 							    <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel($('form').attr('id'))"><i class="fa fa-download"></i>&nbsp;下载</a>
@@ -94,7 +100,7 @@
                     }
                 },
                 {
-                    field: 'createDateTimeStr',
+                    field: 'createTime',
                     title: '创建时间'
                 },
                 {

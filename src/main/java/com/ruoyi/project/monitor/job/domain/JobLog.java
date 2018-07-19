@@ -30,7 +30,7 @@ public class JobLog extends BaseEntity
 
     /** 方法参数 */
     @Excel(name = "方法参数")
-    private String params;
+    private String methodParams;
 
     /** 日志信息 */
     @Excel(name = "日志信息")
@@ -84,14 +84,14 @@ public class JobLog extends BaseEntity
         this.methodName = methodName;
     }
 
-    public String getParams()
+    public String getMethodParams()
     {
-        return params;
+        return methodParams;
     }
 
-    public void setParams(String params)
+    public void setMethodParams(String methodParams)
     {
-        this.params = params;
+        this.methodParams = methodParams;
     }
 
     public String getJobMessage()
@@ -128,7 +128,7 @@ public class JobLog extends BaseEntity
     public String toString()
     {
         return "JobLog [jobLogId=" + jobLogId + ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", methodName="
-                + methodName + ", params=" + params + ", jobMessage=" + jobMessage + ", status=" + status
+                + methodName + ", methodParams=" + methodParams + ", jobMessage=" + jobMessage + ", status=" + status
                 + ", exceptionInfo=" + exceptionInfo + "]";
     }
 

@@ -16,6 +16,12 @@
 							<li>
 								表描述：<input type="text" name="tableComment"/>
 							</li>
+							<li class="time">
+								<label>创建时间： </label>
+								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+								<span>-</span>
+								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
 							</li>
@@ -50,22 +56,31 @@
 		        },
 		        {
 		            field: 'tableName',
-		            title: '表名称'
+		            title: '表名称',
+		            width: '20%',
+		            sortable: true
 		        },
 		        {
 		            field: 'tableComment',
-		            title: '表描述'
+		            title: '表描述',
+		            width: '20%',
+		            sortable: true
 		        },
 		        {
-		            field: 'createDateTimeStr',
-		            title: '创建时间'
+		            field: 'createTime',
+		            title: '创建时间',
+		            width: '20%',
+		            sortable: true
 		        },
 		        {
-		            field: 'updateDateTimeStr',
-		            title: '更新时间'
+		            field: 'updateTime',
+		            title: '更新时间',
+		            width: '20%',
+		            sortable: true
 		        },
 		        {
 		            title: '操作',
+		            width: '20%',
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		                var msg = '<a class="btn btn-primary btn-xs" href="#" onclick="genCode(\'' + row.tableName + '\')"><i class="fa fa-bug"></i>生成代码</a> ';

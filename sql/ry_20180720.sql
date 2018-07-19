@@ -146,9 +146,9 @@ create table sys_menu (
 -- 初始化-菜单信息表数据
 -- ----------------------------
 -- 一级菜单
-insert into sys_menu values('1', '系统管理', '0', '1', '#', 'M', '0', '', 'fa fa-gear',         'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统管理目录');
-insert into sys_menu values('2', '系统监控', '0', '2', '#', 'M', '0', '', 'fa fa-video-camera', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统监控目录');
-insert into sys_menu values('3', '系统工具', '0', '3', '#', 'M', '0', '', 'fa fa-bars',         'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统工具目录');
+insert into sys_menu values('1', '系统管理', '0', '1', '#', 'M', '0', '#', 'fa fa-gear',         'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统管理目录');
+insert into sys_menu values('2', '系统监控', '0', '2', '#', 'M', '0', '#', 'fa fa-video-camera', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统监控目录');
+insert into sys_menu values('3', '系统工具', '0', '3', '#', 'M', '0', '#', 'fa fa-bars',         'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统工具目录');
 -- 二级菜单
 insert into sys_menu values('100',  '用户管理', '1', '1', '/system/user',        'C', '0', 'system:user:view',         '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '用户管理菜单');
 insert into sys_menu values('101',  '角色管理', '1', '2', '/system/role',        'C', '0', 'system:role:view',         '#', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '角色管理菜单');
@@ -538,7 +538,7 @@ create table sys_job (
   job_name            varchar(64)   default ''                 comment '任务名称',
   job_group           varchar(64)   default ''                 comment '任务组名',
   method_name         varchar(500)  default ''                 comment '任务方法',
-  params              varchar(200)  default ''                 comment '方法参数',
+  method_params       varchar(200)  default ''                 comment '方法参数',
   cron_expression     varchar(255)  default ''                 comment 'cron执行表达式',
   status              char(1)       default '0'                comment '状态（0正常 1暂停）',
   create_by           varchar(64)   default ''                 comment '创建者',
@@ -562,7 +562,7 @@ create table sys_job_log (
   job_name            varchar(64)   not null                   comment '任务名称',
   job_group           varchar(64)   not null                   comment '任务组名',
   method_name         varchar(500)                             comment '任务方法',
-  params              varchar(200)  default ''                 comment '方法参数',
+  method_params       varchar(200)  default ''                 comment '方法参数',
   job_message         varchar(500)                             comment '日志信息',
   status              char(1)       default '0'                comment '执行状态（0正常 1失败）',
   exception_info      text                                     comment '异常信息',

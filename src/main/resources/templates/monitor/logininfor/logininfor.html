@@ -25,9 +25,9 @@
 							</li>
 							<li class="time">
 								<label>登录时间： </label>
-								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="reqParams[beginTime]"/>
+								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
 								<span>-</span>
-								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="reqParams[endTime]"/>
+								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -72,7 +72,8 @@
 		        },
 		        {
 		            field: 'loginName',
-		            title: '登录名称'
+		            title: '登录名称',
+		            sortable: true
 		        },
 		        {
 		            field: 'ipaddr',
@@ -108,16 +109,11 @@
 		        },
 		        {
 		            field: 'loginTime',
-		            title: '登录时间'
+		            title: '登录时间',
+		            sortable: true
 		        }]
 		    };
 		    $.table.init(options);
-		});
-		
-		layui.use('laydate', function() {
-		    var laydate = layui.laydate;
-		    laydate.render({ elem: '#startTime', theme: 'molv' });
-		    laydate.render({ elem: '#endTime', theme: 'molv' });
 		});
 	</script>
 </body>

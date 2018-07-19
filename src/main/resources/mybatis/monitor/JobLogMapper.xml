@@ -9,15 +9,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="jobName"        column="job_name"        />
 		<result property="jobGroup"       column="job_group"       />
 		<result property="methodName"     column="method_name"     />
-		<result property="params"         column="params"          />
+		<result property="methodParams"   column="method_params"   />
 		<result property="jobMessage"     column="job_message"     />
-		<result property="status"         column="status"    />
+		<result property="status"         column="status"          />
 		<result property="exceptionInfo"  column="exception_info"  />
 		<result property="createTime"     column="create_time"     />
 	</resultMap>
 	
 	<sql id="selectJobLogVo">
-        select job_log_id, job_name, job_group, method_name, params, job_message, status, exception_info, create_time  from sys_job_log
+        select job_log_id, job_name, job_group, method_name, method_params, job_message, status, exception_info, create_time  from sys_job_log
     </sql>
 	
 	<select id="selectJobLogList" parameterType="JobLog" resultMap="JobLogResult">
@@ -32,11 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="methodName != null and methodName != ''">
 				AND method_name like concat('%', #{methodName}, '%')
 			</if>
-			<if test="reqParams != null and reqParams.beginTime != ''"><!-- 开始时间检索 -->
-				and date_format(create_time,'%y%m%d') &gt;= date_format(#{reqParams.beginTime},'%y%m%d')
+			<if test="params != null and params.beginTime != ''"><!-- 开始时间检索 -->
+				and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 			</if>
-			<if test="reqParams != null and reqParams.endTime != ''"><!-- 结束时间检索 -->
-				and date_format(create_time,'%y%m%d') &lt;= date_format(#{reqParams.endTime},'%y%m%d')
+			<if test="params != null and params.endTime != ''"><!-- 结束时间检索 -->
+				and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
 		</where>
 	</select>
@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="jobName != null and jobName != ''">job_name,</if>
  			<if test="jobGroup != null and jobGroup != ''">job_group,</if>
  			<if test="methodName != null and methodName != ''">method_name,</if>
- 			<if test="params != null and params != ''">params,</if>
+ 			<if test="methodParams != null and methodParams != ''">method_params,</if>
  			<if test="jobMessage != null and jobMessage != ''">job_message,</if>
  			<if test="status != null and status != ''">status,</if>
  			<if test="exceptionInfo != null and exceptionInfo != ''">exception_info,</if>
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="jobName != null and jobName != ''">#{jobName},</if>
  			<if test="jobGroup != null and jobGroup != ''">#{jobGroup},</if>
  			<if test="methodName != null and methodName != ''">#{methodName},</if>
- 			<if test="params != null and params != ''">#{params},</if>
+ 			<if test="methodParams != null and methodParams != ''">#{methodParams},</if>
  			<if test="jobMessage != null and jobMessage != ''">#{jobMessage},</if>
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="exceptionInfo != null and exceptionInfo != ''">#{exceptionInfo},</if>

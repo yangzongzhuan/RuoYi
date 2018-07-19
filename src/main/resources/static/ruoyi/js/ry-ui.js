@@ -145,7 +145,7 @@
         	    });
         	    return checkeds;
             },
-            // 获取选中复选框项
+            // 获取选中下拉框项
             selectSelects: function(name) {
             	var selects = "";
         	    $('#' + name + ' option:selected').each(function (i) {

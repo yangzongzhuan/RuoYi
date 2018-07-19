@@ -25,9 +25,9 @@
 							</li>
 							<li class="time">
 								<label>执行时间： </label>
-								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="reqParams[beginTime]"/>
+								<input type="text" class="layui-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
 								<span>-</span>
-								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="reqParams[endTime]"/>
+								<input type="text" class="layui-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search($('form').attr('id'))"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -73,18 +73,20 @@
 		        },
 		        {
 		            field: 'jobName',
-		            title: '任务名称'
+		            title: '任务名称',
+		            sortable: true
 		        },
 		        {
 		            field: 'jobGroup',
-		            title: '任务组名'
+		            title: '任务组名',
+		            sortable: true
 		        },
 		        {
 		            field: 'methodName',
 		            title: '方法名称'
 		        },
 		        {
-		            field: 'params',
+		            field: 'methodParams',
 		            title: '方法参数'
 		        },
 		        {
@@ -104,8 +106,9 @@
 		            }
 		        },
 		        {
-		            field: 'createDateTimeStr',
-		            title: '创建时间'
+		            field: 'createTime',
+		            title: '创建时间',
+		            sortable: true
 		        },
 		        {
 		            title: '操作',
@@ -118,12 +121,6 @@
 		        }]
 		    };
 		    $.table.init(options);
-		});
-		
-		layui.use('laydate', function() {
-		    var laydate = layui.laydate;
-		    laydate.render({ elem: '#startTime', theme: 'molv' });
-		    laydate.render({ elem: '#endTime', theme: 'molv' });
 		});
 	</script>
 </body>
