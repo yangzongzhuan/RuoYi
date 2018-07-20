@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<link href="/ajax/libs/iCheck/custom.css" th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-job-edit" th:object="${job}">
@@ -27,13 +28,21 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">方法参数：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="params" id="params" th:field="*{params}"/>
+					<input class="form-control" type="text" name="methodParams" id="methodParams" th:field="*{methodParams}"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">cron表达式：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="cronExpression" id="cronExpression" th:field="*{cronExpression}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">执行策略：</label>
+				<div class="col-sm-8">
+					<label class="checkbox-inline i-checks"> <input type="radio" th:field="*{misfirePolicy}" name="misfirePolicy" value="1" /> 继续执行 </label> 
+					<label class="checkbox-inline i-checks"> <input type="radio" th:field="*{misfirePolicy}" name="misfirePolicy" value="2" /> 一次执行 </label> 
+					<label class="checkbox-inline i-checks"> <input type="radio" th:field="*{misfirePolicy}" name="misfirePolicy" value="3" /> 放弃执行 </label>
 				</div>
 			</div>
 			<div class="form-group">
@@ -60,6 +69,7 @@
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
+	<script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 	<script type="text/javascript">
 		var prefix = ctx + "monitor/job"
 	

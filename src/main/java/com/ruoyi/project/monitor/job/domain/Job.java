@@ -2,6 +2,7 @@ package com.ruoyi.project.monitor.job.domain;
 
 import java.io.Serializable;
 
+import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
@@ -37,6 +38,10 @@ public class Job extends BaseEntity implements Serializable
     /** cron执行表达式 */
     @Excel(name = "执行表达式 ")
     private String cronExpression;
+
+    /** cron计划策略 */
+    @Excel(name = "计划策略 ")
+    private String misfirePolicy = ScheduleConstants.MISFIRE_DEFAULT;
 
     /** 任务状态（0正常 1暂停） */
     @Excel(name = "任务状态")
@@ -100,6 +105,16 @@ public class Job extends BaseEntity implements Serializable
     public void setCronExpression(String cronExpression)
     {
         this.cronExpression = cronExpression;
+    }
+
+    public String getMisfirePolicy()
+    {
+        return misfirePolicy;
+    }
+
+    public void setMisfirePolicy(String misfirePolicy)
+    {
+        this.misfirePolicy = misfirePolicy;
     }
 
     public String getStatus()

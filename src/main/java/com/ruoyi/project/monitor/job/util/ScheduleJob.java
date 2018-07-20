@@ -33,7 +33,7 @@ public class ScheduleJob extends QuartzJobBean
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException
     {
         Job job = new Job();
-        BeanUtils.copyBeanProp(job, context.getMergedJobDataMap().get(ScheduleConstants.JOB_PARAM_KEY));
+        BeanUtils.copyBeanProp(job, context.getMergedJobDataMap().get(ScheduleConstants.TASK_PROPERTIES));
 
         IJobLogService jobLogService = (IJobLogService) SpringUtils.getBean(IJobLogService.class);
 

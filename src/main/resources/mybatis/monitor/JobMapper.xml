@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="methodName"     column="method_name"     />
 		<result property="methodParams"   column="method_params"   />
 		<result property="cronExpression" column="cron_expression" />
+		<result property="misfirePolicy"  column="misfire_policy"  />
 		<result property="status"         column="status"          />
 		<result property="createBy"       column="create_by"       />
 		<result property="createTime"     column="create_time"     />
@@ -20,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectJobVo">
-        select job_id, job_name, job_group, method_name, method_params, cron_expression, status, create_by, create_time, remark from sys_job
+        select job_id, job_name, job_group, method_name, method_params, cron_expression, misfire_policy, status, create_by, create_time, remark from sys_job
     </sql>
 	
 	<select id="selectJobList" parameterType="Job" resultMap="JobResult">
@@ -66,6 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="methodName != null and methodName != ''">method_name = #{methodName},</if>
  			<if test="methodParams != null and methodParams != ''">method_params = #{methodParams},</if>
  			<if test="cronExpression != null and cronExpression != ''">cron_expression = #{cronExpression},</if>
+ 			<if test="misfirePolicy != null and misfirePolicy != ''">misfire_policy = #{misfirePolicy},</if>
  			<if test="status !=null">status = #{status},</if>
  			<if test="remark != null and remark != ''">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
@@ -83,6 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="methodName != null and methodName != ''">method_name,</if>
  			<if test="methodParams != null and methodParams != ''">method_params,</if>
  			<if test="cronExpression != null and cronExpression != ''">cron_expression,</if>
+ 			<if test="misfirePolicy != null and misfirePolicy != ''">misfire_policy,</if>
  			<if test="status != null and status != ''">status,</if>
  			<if test="remark != null and remark != ''">remark,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
@@ -94,6 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="methodName != null and methodName != ''">#{methodName},</if>
  			<if test="methodParams != null and methodParams != ''">#{method_params},</if>
  			<if test="cronExpression != null and cronExpression != ''">#{cronExpression},</if>
+ 			<if test="misfirePolicy != null and misfirePolicy != ''">#{misfirePolicy},</if>
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
