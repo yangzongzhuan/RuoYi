@@ -44,7 +44,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">部门状态：</label>
-				<div class="col-sm-8" th:with="type=${@dictService.selectDictData('sys_normal_disable')}">
+				<div class="col-sm-8" th:with="type=${@dict.getType('sys_normal_disable')}">
 					<div th:each="dict : ${type}" th:class="${dict['cssClass']}">
 						<input type="radio" th:id="${dict['dictCode']}" name="status" th:value="${dict['dictValue']}" th:checked="${dict['isDefault'] == 'Y' ? true : false}">
 						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
@@ -94,7 +94,7 @@
 		        }
 		    },
 			submitHandler:function(form){
-				$.operate.save(prefix + "/save", $('#form-dept-add').serialize());
+				$.operate.save(prefix + "/add", $('#form-dept-add').serialize());
 			}
 		});
 	

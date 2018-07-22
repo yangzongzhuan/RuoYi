@@ -20,14 +20,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select config_id, config_name, config_key, config_value, config_type, create_by, create_time, update_by, update_time, remark from sys_config
     </sql>
     
-    <select id="selectConfigById" parameterType="Integer" resultMap="ConfigResult">
-        <include refid="selectConfigVo"/>
-        where config_id = #{configId}
-    </select>
+    <!-- 查询条件 -->
+	<sql id="sqlwhereSearch">
+		<where>
+			<if test="configId !=null">
+				and config_id = #{configId}
+			</if>
+			<if test="configKey !=null and configKey != ''">
+				and config_key = #{configKey}
+			</if>
+		</where>
+	</sql>
     
-    <select id="selectConfigByKey" parameterType="String" resultMap="ConfigResult">
+    <select id="selectConfig" parameterType="Config" resultMap="ConfigResult">
         <include refid="selectConfigVo"/>
-        where config_key = #{configKey}
+        <include refid="sqlwhereSearch"/>
     </select>
     
     <select id="selectConfigList" parameterType="Config" resultMap="ConfigResult">
@@ -49,6 +56,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
 		</where>
+    </select>
+    
+    <select id="checkConfigKeyUnique" parameterType="String" resultMap="ConfigResult">
+        <include refid="selectConfigVo"/>
+        where config_key = #{configKey}
     </select>
     
     <insert id="insertConfig" parameterType="Config">
@@ -84,10 +96,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where config_id = #{configId}
     </update>
-	
-    <delete id="deleteConfigById" parameterType="Integer">
-        delete from sys_config where config_id = #{value}
-    </delete>
 	
     <delete id="deleteConfigByIds" parameterType="String">
         delete from sys_config where config_id in 

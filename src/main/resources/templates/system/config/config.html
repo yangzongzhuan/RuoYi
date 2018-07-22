@@ -17,7 +17,7 @@
 								参数键名：<input type="text" name="configKey"/>
 							</li>
 							<li>
-								系统内置：<select name="configType" th:with="type=${@dictService.selectDictData('sys_yes_no')}">
+								系统内置：<select name="configType" th:with="type=${@dict.getType('sys_yes_no')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
@@ -52,8 +52,9 @@
 	</div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var editFlag = [[${@permissionService.hasPermi('system:config:edit')}]];
-        var removeFlag = [[${@permissionService.hasPermi('system:config:remove')}]];
+        var editFlag = [[${@permission.hasPermi('system:config:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('system:config:remove')}]];
+        var datas = [[${@dict.getType('sys_yes_no')}]];
         var prefix = ctx + "system/config"
 
         $(function() {
@@ -92,11 +93,7 @@
                     title: '系统内置',
                     align: 'center',
                     formatter: function(value, row, index) {
-                        if (value == 'Y') {
-                            return '<span class="badge badge-primary">是</span>';
-                        } else if (value == 'N') {
-                            return '<span class="badge badge-danger">否</span>';
-                        }
+                    	return $.table.selectDictLabel(datas, value);
                     }
                 },
                 {

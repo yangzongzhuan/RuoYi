@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +35,7 @@ public class ConfigController extends BaseController
 
     @RequiresPermissions("system:config:view")
     @GetMapping()
-    public String index()
+    public String config()
     {
         return prefix + "/config";
     }
@@ -52,7 +52,6 @@ public class ConfigController extends BaseController
         List<Config> list = configService.selectConfigList(config);
         return getDataTable(list);
     }
-    
 
     @Log(title = "参数管理", action = BusinessType.EXPORT)
     @PostMapping("/export")
@@ -74,8 +73,6 @@ public class ConfigController extends BaseController
     /**
      * 新增参数配置
      */
-    @RequiresPermissions("system:config:add")
-    @Log(title = "参数管理", action = BusinessType.INSERT)
     @GetMapping("/add")
     public String add()
     {
@@ -83,32 +80,37 @@ public class ConfigController extends BaseController
     }
 
     /**
+     * 新增保存参数配置
+     */
+    @RequiresPermissions("system:config:add")
+    @Log(title = "参数管理", action = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Config config)
+    {
+        return toAjax(configService.insertConfig(config));
+    }
+
+    /**
      * 修改参数配置
      */
-    @RequiresPermissions("system:config:edit")
-    @Log(title = "参数管理", action = BusinessType.UPDATE)
     @GetMapping("/edit/{configId}")
-    public String edit(@PathVariable("configId") Integer configId, Model model)
+    public String edit(@PathVariable("configId") Long configId, ModelMap mmap)
     {
-        Config config = configService.selectConfigById(configId);
-        model.addAttribute("config", config);
+        mmap.addAttribute("config", configService.selectConfigById(configId));
         return prefix + "/edit";
     }
 
     /**
-     * 保存参数配置
+     * 修改保存参数配置
      */
-    @RequiresPermissions("system:config:save")
-    @Log(title = "参数管理", action = BusinessType.SAVE)
-    @PostMapping("/save")
+    @RequiresPermissions("system:config:edit")
+    @Log(title = "参数管理", action = BusinessType.UPDATE)
+    @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult save(Config config)
+    public AjaxResult editSave(Config config)
     {
-        if (configService.saveConfig(config) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(configService.updateConfig(config));
     }
 
     /**
@@ -120,11 +122,7 @@ public class ConfigController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        if (configService.deleteConfigByIds(ids) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(configService.deleteConfigByIds(ids));
     }
 
     /**

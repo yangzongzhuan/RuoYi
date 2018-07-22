@@ -12,7 +12,7 @@ import com.ruoyi.project.monitor.logininfor.mapper.LogininforMapper;
  * 
  * @author ruoyi
  */
-@Service("logininforService")
+@Service
 public class LogininforServiceImpl implements ILogininforService
 {
 

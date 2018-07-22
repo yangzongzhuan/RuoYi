@@ -16,7 +16,7 @@ public interface INoticeService
      * @param noticeId 公告ID
      * @return 公告信息
      */
-    public Notice selectNoticeById(Integer noticeId);
+    public Notice selectNoticeById(Long noticeId);
 
     /**
      * 查询公告列表
@@ -41,14 +41,6 @@ public interface INoticeService
      * @return 结果
      */
     public int updateNotice(Notice notice);
-
-    /**
-     * 保存公告
-     * 
-     * @param notice 公告信息
-     * @return 结果
-     */
-    public int saveNotice(Notice notice);
 
     /**
      * 删除公告信息

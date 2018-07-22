@@ -12,7 +12,7 @@ public class Notice extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 公告ID */
-    private Integer noticeId;
+    private Long noticeId;
     /** 公告标题 */
     private String noticeTitle;
     /** 公告类型（1通知 2公告） */
@@ -22,14 +22,14 @@ public class Notice extends BaseEntity
     /** 公告状态（0正常 1关闭） */
     private String status;
 
-    public void setNoticeId(Integer noticeId)
-    {
-        this.noticeId = noticeId;
-    }
-
-    public Integer getNoticeId()
+    public Long getNoticeId()
     {
         return noticeId;
+    }
+
+    public void setNoticeId(Long noticeId)
+    {
+        this.noticeId = noticeId;
     }
 
     public void setNoticeTitle(String noticeTitle)

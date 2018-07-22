@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,8 +75,7 @@ public class PostController extends BaseController
     {
         try
         {
-            postService.deletePostByIds(ids);
-            return success();
+            return toAjax(postService.deletePostByIds(ids));
         }
         catch (Exception e)
         {
@@ -87,41 +86,44 @@ public class PostController extends BaseController
     /**
      * 新增岗位
      */
-    @Log(title = "岗位管理", action = BusinessType.INSERT)
-    @RequiresPermissions("system:post:add")
     @GetMapping("/add")
-    public String add(Model model)
+    public String add()
     {
         return prefix + "/add";
     }
 
     /**
+     * 新增保存岗位
+     */
+    @RequiresPermissions("system:post:add")
+    @Log(title = "岗位管理", action = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Post post)
+    {
+        return toAjax(postService.insertPost(post));
+    }
+
+    /**
      * 修改岗位
      */
-    @Log(title = "岗位管理", action = BusinessType.UPDATE)
-    @RequiresPermissions("system:post:edit")
     @GetMapping("/edit/{postId}")
-    public String edit(@PathVariable("postId") Long postId, Model model)
+    public String edit(@PathVariable("postId") Long postId, ModelMap mmap)
     {
-        Post post = postService.selectPostById(postId);
-        model.addAttribute("post", post);
+        mmap.put("post", postService.selectPostById(postId));
         return prefix + "/edit";
     }
 
     /**
-     * 保存岗位
+     * 修改保存岗位
      */
-    @Log(title = "岗位管理", action = BusinessType.SAVE)
-    @RequiresPermissions("system:post:save")
-    @PostMapping("/save")
+    @RequiresPermissions("system:post:edit")
+    @Log(title = "岗位管理", action = BusinessType.UPDATE)
+    @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult save(Post post)
+    public AjaxResult editSave(Post post)
     {
-        if (postService.savePost(post) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(postService.updatePost(post));
     }
 
 }

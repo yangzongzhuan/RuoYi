@@ -71,15 +71,6 @@ public class JobLogController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        try
-        {
-            jobLogService.deleteJobLogByIds(ids);
-            return success();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return error(e.getMessage());
-        }
+        return toAjax(jobLogService.deleteJobLogByIds(ids));
     }
 }

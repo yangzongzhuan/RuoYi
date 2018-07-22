@@ -187,7 +187,6 @@ $(function() {
     });
 
     function menuItem() {
-    	$.modal.loading("数据加载中，请稍后...");
         // 获取标识数据
         var dataUrl = $(this).attr('href'),
         dataIndex = $(this).data('index'),
@@ -221,12 +220,17 @@ $(function() {
             // 添加选项卡对应的iframe
             var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
             $('.mainContent').find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
-
+            
+            $.modal.loading("数据加载中，请稍后...");
+            
+            $('.mainContent iframe:visible').load(function () {
+            	$.modal.closeLoading();
+            });
+            
             // 添加选项卡
             $('.menuTabs .page-tabs-content').append(str);
             scrollToTab($('.menuTab.active'));
         }
-        $.modal.closeLoading();
         return false;
     }
 

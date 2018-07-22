@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,45 +49,47 @@ public class DeptController extends BaseController
     }
 
     /**
-     * 修改
+     * 新增部门
      */
-    @Log(title = "部门管理", action = BusinessType.UPDATE)
-    @RequiresPermissions("system:dept:edit")
-    @GetMapping("/edit/{deptId}")
-    public String edit(@PathVariable("deptId") Long deptId, Model model)
+    @GetMapping("/add/{parentId}")
+    public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
     {
-        Dept dept = deptService.selectDeptById(deptId);
-        model.addAttribute("dept", dept);
-        return prefix + "/edit";
+        mmap.put("dept", deptService.selectDeptById(parentId));
+        return prefix + "/add";
     }
 
     /**
-     * 新增
+     * 新增保存部门
      */
     @Log(title = "部门管理", action = BusinessType.INSERT)
     @RequiresPermissions("system:dept:add")
-    @GetMapping("/add/{parentId}")
-    public String add(@PathVariable("parentId") Long parentId, Model model)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Dept dept)
     {
-        Dept dept = deptService.selectDeptById(parentId);
-        model.addAttribute("dept", dept);
-        return prefix + "/add";
+        return toAjax(deptService.insertDept(dept));
+    }
+
+    /**
+     * 修改
+     */
+    @GetMapping("/edit/{deptId}")
+    public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap)
+    {
+        mmap.put("dept", deptService.selectDeptById(deptId));
+        return prefix + "/edit";
     }
 
     /**
      * 保存
      */
-    @Log(title = "部门管理", action = BusinessType.SAVE)
-    @RequiresPermissions("system:dept:save")
-    @PostMapping("/save")
+    @Log(title = "部门管理", action = BusinessType.UPDATE)
+    @RequiresPermissions("system:dept:edit")
+    @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult save(Dept dept)
+    public AjaxResult editSave(Dept dept)
     {
-        if (deptService.saveDept(dept) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(deptService.updateDept(dept));
     }
 
     /**
@@ -107,11 +109,7 @@ public class DeptController extends BaseController
         {
             return error(1, "部门存在用户,不允许删除");
         }
-        if (deptService.deleteDeptById(deptId) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(deptService.deleteDeptById(deptId));
     }
 
     /**
@@ -133,9 +131,9 @@ public class DeptController extends BaseController
      * 选择部门树
      */
     @GetMapping("/selectDeptTree/{deptId}")
-    public String selectDeptTree(@PathVariable("deptId") Long deptId, Model model)
+    public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
-        model.addAttribute("treeName", deptService.selectDeptById(deptId).getDeptName());
+        mmap.put("treeName", deptService.selectDeptById(deptId).getDeptName());
         return prefix + "/tree";
     }
 

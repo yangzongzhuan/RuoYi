@@ -12,7 +12,7 @@ import com.ruoyi.project.monitor.job.mapper.JobLogMapper;
  * 
  * @author ruoyi
  */
-@Service("jobLogService")
+@Service
 public class JobLogServiceImpl implements IJobLogService
 {
 

@@ -14,7 +14,7 @@
 								部门名称：<input type="text" name="deptName"/>
 							</li>
 							<li>
-								部门状态：<select name="status" th:with="type=${@dictService.selectDictData('sys_normal_disable')}">
+								部门状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
@@ -39,9 +39,10 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
-		var addFlag = [[${@permissionService.hasPermi('system:dept:add')}]];
-		var editFlag = [[${@permissionService.hasPermi('system:dept:edit')}]];
-		var removeFlag = [[${@permissionService.hasPermi('system:dept:remove')}]];
+		var addFlag = [[${@permission.hasPermi('system:dept:add')}]];
+		var editFlag = [[${@permission.hasPermi('system:dept:edit')}]];
+		var removeFlag = [[${@permission.hasPermi('system:dept:remove')}]];
+		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/dept"
 
 		window.onload = function() {
@@ -71,11 +72,7 @@
 		            title: '状态',
 		            align: "center",
 		            formatter: function(item, index) {
-		                if (item.status == '0') {
-		                    return '<span class="badge badge-primary">正常</span>';
-		                } else if (item.status == '1') {
-		                    return '<span class="badge badge-danger">停用</span>';
-		                }
+		            	return $.table.selectDictLabel(datas, item.status);
 		            }
 		        },
 		        {

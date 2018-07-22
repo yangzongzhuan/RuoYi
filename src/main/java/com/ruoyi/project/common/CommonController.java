@@ -2,12 +2,15 @@ package com.ruoyi.project.common;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CommonController
 {
+    private static final Logger log = LoggerFactory.getLogger(CommonController.class);
+
     @RequestMapping("common/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request)
     {
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
+        InputStream inputStream = null;
+        OutputStream os = null;
         try
         {
             String filePath = ResourceUtils.getURL("classpath:").getPath() + "static/file/" + fileName;
@@ -32,16 +39,14 @@ public class CommonController
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;fileName=" + setFileDownloadHeader(request, realFileName));
             File file = new File(filePath);
-            InputStream inputStream = new FileInputStream(file);
-            OutputStream os = response.getOutputStream();
+            inputStream = new FileInputStream(file);
+            os = response.getOutputStream();
             byte[] b = new byte[1024];
             int length;
             while ((length = inputStream.read(b)) > 0)
             {
                 os.write(b, 0, length);
             }
-            os.close();
-            inputStream.close();
             if (delete && file.exists())
             {
                 file.delete();
@@ -49,7 +54,19 @@ public class CommonController
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            log.error("下载文件失败", e);
+        }
+        finally
+        {
+            try
+            {
+                os.close();
+                inputStream.close();
+            }
+            catch (IOException e)
+            {
+                log.error("close close fail ", e);
+            }
         }
     }
 

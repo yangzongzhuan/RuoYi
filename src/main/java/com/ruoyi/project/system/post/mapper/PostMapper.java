@@ -43,14 +43,6 @@ public interface PostMapper
     public Post selectPostById(Long postId);
 
     /**
-     * 通过岗位ID删除岗位信息
-     * 
-     * @param postId 岗位ID
-     * @return 结果
-     */
-    public int deletePostById(Long postId);
-
-    /**
      * 批量删除岗位信息
      * 
      * @param ids 需要删除的数据ID

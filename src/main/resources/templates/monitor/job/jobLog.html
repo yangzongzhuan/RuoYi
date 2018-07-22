@@ -18,7 +18,7 @@
 								<label>方法名称：</label><input type="text" name="methodName"/>
 							</li>
 							<li>
-								<label>执行状态：</label><select name="status" th:with="type=${@dictService.selectDictData('sys_common_status')}">
+								<label>执行状态：</label><select name="status" th:with="type=${@dict.getType('sys_common_status')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
@@ -51,7 +51,8 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
-		var removeFlag = [[${@permissionService.hasPermi('monitor:job:remove')}]];
+		var removeFlag = [[${@permission.hasPermi('monitor:job:remove')}]];
+		var datas = [[${@dict.getType('sys_job_status')}]];
 		var prefix = ctx + "monitor/jobLog"
 
 		$(function() {
@@ -98,11 +99,7 @@
 		            title: '状态',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		                if (value == 0) {
-		                    return '<span class="badge badge-primary">正常</span>';
-		                } else if (value == 1) {
-		                    return '<span class="badge badge-danger">失败</span>';
-		                }
+		            	return $.table.selectDictLabel(datas, value);
 		            }
 		        },
 		        {

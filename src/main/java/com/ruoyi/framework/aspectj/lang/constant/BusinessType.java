@@ -14,20 +14,16 @@ public class BusinessType
     public static final String INSERT = "1";
     /** 修改 */
     public static final String UPDATE = "2";
-    /** 保存 */
-    public static final String SAVE = "3";
     /** 删除 */
-    public static final String DELETE = "4";
+    public static final String DELETE = "3";
     /** 授权 */
-    public static final String GRANT = "5";
+    public static final String GRANT = "4";
     /** 导出 */
-    public static final String EXPORT = "6";
+    public static final String EXPORT = "5";
     /** 导入 */
-    public static final String IMPORT = "7";
+    public static final String IMPORT = "6";
     /** 强退 */
-    public static final String FORCE = "8";
-    /** 禁止访问 */
-    public static final String FORBID = "9";
+    public static final String FORCE = "7";
     /** 生成代码 */
-    public static final String GENCODE = "10";
+    public static final String GENCODE = "8";
 }

@@ -4,19 +4,19 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.project.system.notice.domain.Notice;
-import com.ruoyi.project.system.notice.service.INoticeService;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.framework.web.domain.AjaxResult;
+import com.ruoyi.framework.web.page.TableDataInfo;
+import com.ruoyi.project.system.notice.domain.Notice;
+import com.ruoyi.project.system.notice.service.INoticeService;
 
 /**
  * 公告 信息操作处理
@@ -55,8 +55,6 @@ public class NoticeController extends BaseController
     /**
      * 新增公告
      */
-    @RequiresPermissions("system:notice:add")
-    @Log(title = "通知公告", action = BusinessType.INSERT)
     @GetMapping("/add")
     public String add()
     {
@@ -64,32 +62,37 @@ public class NoticeController extends BaseController
     }
 
     /**
+     * 新增保存公告
+     */
+    @RequiresPermissions("system:notice:add")
+    @Log(title = "通知公告", action = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Notice notice)
+    {
+        return toAjax(noticeService.insertNotice(notice));
+    }
+
+    /**
      * 修改公告
      */
-    @RequiresPermissions("system:notice:edit")
-    @Log(title = "通知公告", action = BusinessType.UPDATE)
     @GetMapping("/edit/{noticeId}")
-    public String edit(@PathVariable("noticeId") Integer noticeId, Model model)
+    public String edit(@PathVariable("noticeId") Long noticeId, ModelMap mmap)
     {
-        Notice notice = noticeService.selectNoticeById(noticeId);
-        model.addAttribute("notice", notice);
+        mmap.put("notice", noticeService.selectNoticeById(noticeId));
         return prefix + "/edit";
     }
 
     /**
-     * 保存公告
+     * 修改保存公告
      */
-    @RequiresPermissions("system:notice:save")
-    @Log(title = "通知公告", action = BusinessType.SAVE)
-    @PostMapping("/save")
+    @RequiresPermissions("system:notice:edit")
+    @Log(title = "通知公告", action = BusinessType.UPDATE)
+    @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult save(Notice notice)
+    public AjaxResult editSave(Notice notice)
     {
-        if (noticeService.saveNotice(notice) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(noticeService.updateNotice(notice));
     }
 
     /**
@@ -101,12 +104,7 @@ public class NoticeController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        int rows = noticeService.deleteNoticeByIds(ids);
-        if (rows > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(noticeService.deleteNoticeByIds(ids));
     }
 
 }

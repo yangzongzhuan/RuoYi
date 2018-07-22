@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.config.domain.Config;
 import com.ruoyi.project.system.config.mapper.ConfigMapper;
 
@@ -27,9 +28,11 @@ public class ConfigServiceImpl implements IConfigService
      * @return 参数配置信息
      */
     @Override
-    public Config selectConfigById(Integer configId)
+    public Config selectConfigById(Long configId)
     {
-        return configMapper.selectConfigById(configId);
+        Config config = new Config();
+        config.setConfigId(configId);
+        return configMapper.selectConfig(config);
     }
 
     /**
@@ -41,8 +44,10 @@ public class ConfigServiceImpl implements IConfigService
     @Override
     public String selectConfigByKey(String configKey)
     {
-        Config config = configMapper.selectConfigByKey(configKey);
-        return StringUtils.isNotNull(config) ? config.getConfigValue() : "";
+        Config config = new Config();
+        config.setConfigKey(configKey);
+        Config retConfig = configMapper.selectConfig(config);
+        return StringUtils.isNotNull(retConfig) ? retConfig.getConfigValue() : "";
     }
 
     /**
@@ -66,6 +71,7 @@ public class ConfigServiceImpl implements IConfigService
     @Override
     public int insertConfig(Config config)
     {
+        config.setCreateBy(ShiroUtils.getLoginName());
         return configMapper.insertConfig(config);
     }
 
@@ -78,41 +84,8 @@ public class ConfigServiceImpl implements IConfigService
     @Override
     public int updateConfig(Config config)
     {
+        config.setUpdateBy(ShiroUtils.getLoginName());
         return configMapper.updateConfig(config);
-    }
-
-    /**
-     * 保存参数配置
-     * 
-     * @param config 参数配置信息
-     * @return 结果
-     */
-    @Override
-    public int saveConfig(Config config)
-    {
-        Integer configId = config.getConfigId();
-        int rows = 0;
-        if (StringUtils.isNotNull(configId))
-        {
-            rows = configMapper.updateConfig(config);
-        }
-        else
-        {
-            rows = configMapper.insertConfig(config);
-        }
-        return rows;
-    }
-
-    /**
-     * 删除参数配置信息
-     * 
-     * @param configId 参数配置ID
-     * @return 结果
-     */
-    @Override
-    public int deleteConfigById(Integer configId)
-    {
-        return configMapper.deleteConfigById(configId);
     }
 
     /**
@@ -136,14 +109,9 @@ public class ConfigServiceImpl implements IConfigService
     @Override
     public String checkConfigKeyUnique(Config config)
     {
-        if (config.getConfigId() == null)
-        {
-            config.setConfigId(-1);
-        }
-        Integer configId = config.getConfigId();
-        Config info = configMapper.selectConfigByKey(config.getConfigKey());
-        if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getConfigId())
-                && info.getConfigId().intValue() != configId.intValue())
+        Long configId = StringUtils.isNull(config.getConfigId()) ? -1L : config.getConfigId();
+        Config info = configMapper.checkConfigKeyUnique(config.getConfigKey());
+        if (StringUtils.isNotNull(info) && info.getConfigId().longValue() != configId.longValue())
         {
             return UserConstants.CONFIG_KEY_NOT_UNIQUE;
         }

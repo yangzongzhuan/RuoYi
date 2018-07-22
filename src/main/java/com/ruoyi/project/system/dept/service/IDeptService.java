@@ -58,12 +58,20 @@ public interface IDeptService
     public int deleteDeptById(Long deptId);
 
     /**
-     * 保存部门信息
+     * 新增保存部门信息
      * 
      * @param dept 部门信息
      * @return 结果
      */
-    public int saveDept(Dept dept);
+    public int insertDept(Dept dept);
+
+    /**
+     * 修改保存部门信息
+     * 
+     * @param dept 部门信息
+     * @return 结果
+     */
+    public int updateDept(Dept dept);
 
     /**
      * 根据部门ID查询信息

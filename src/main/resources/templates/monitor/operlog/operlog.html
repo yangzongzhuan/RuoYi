@@ -18,7 +18,7 @@
 								<label>操作人员： </label><input type="text" name="operName"/>
 							</li>
 							<li>
-								<label>操作类型： </label><select name="action" th:with="type=${@dictService.selectDictData('sys_oper_type')}">
+								<label>操作类型： </label><select name="action" th:with="type=${@dict.getType('sys_oper_type')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
@@ -52,7 +52,8 @@
 	
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
-		var detailFlag = [[${@permissionService.hasPermi('monitor:operlog:detail')}]];
+		var detailFlag = [[${@permission.hasPermi('monitor:operlog:detail')}]];
+		var datas = [[${@dict.getType('sys_oper_type')}]];
 		var prefix = ctx + "monitor/operlog"
 
 		$(function() {
@@ -80,27 +81,7 @@
 		            title: '操作类型',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		                if (value == 1) {
-		                    return '<span class="badge badge-primary">新增</span>';
-		                } else if (value == 2) {
-		                    return '<span class="badge badge-primary">修改</span>';
-		                } else if (value == 3) {
-		                    return '<span class="badge badge-warning">保存</span>';
-		                } else if (value == 4) {
-		                    return '<span class="badge badge-danger">删除</span>';
-		                } else if (value == 5) {
-		                    return '<span class="badge badge-primary">授权</span>';
-		                } else if (value == 6) {
-		                    return '<span class="badge badge-warning">导出</span>';
-		                } else if (value == 7) {
-		                    return '<span class="badge badge-warning">导入</span>';
-		                } else if (value == 8) {
-		                    return '<span class="badge badge-danger">强退</span>';
-		                } else if (value == 9) {
-		                    return '<span class="badge badge-danger">禁止访问</span>';
-		                } else if (value == 10) {
-		                    return '<span class="badge badge-warning">生成代码</span>';
-		                }
+		            	return $.table.selectDictLabel(datas, value);
 		            }
 		        },
 		        {

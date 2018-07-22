@@ -1,17 +1,13 @@
 package com.ruoyi.project.monitor.job.service;
 
 import java.util.List;
-
 import javax.annotation.PostConstruct;
-
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.support.Convert;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.monitor.job.domain.Job;
 import com.ruoyi.project.monitor.job.mapper.JobMapper;
@@ -22,7 +18,7 @@ import com.ruoyi.project.monitor.job.util.ScheduleUtils;
  * 
  * @author ruoyi
  */
-@Service("jobService")
+@Service
 public class JobServiceImpl implements IJobService
 {
     @Autowired
@@ -166,7 +162,7 @@ public class JobServiceImpl implements IJobService
         }
         return rows;
     }
-    
+
     /**
      * 立即运行任务
      * 
@@ -184,7 +180,7 @@ public class JobServiceImpl implements IJobService
      * @param job 调度信息 调度信息
      */
     @Override
-    public int addJobCron(Job job)
+    public int insertJobCron(Job job)
     {
         job.setCreateBy(ShiroUtils.getLoginName());
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
@@ -204,31 +200,11 @@ public class JobServiceImpl implements IJobService
     @Override
     public int updateJobCron(Job job)
     {
+        job.setUpdateBy(ShiroUtils.getLoginName());
         int rows = jobMapper.updateJob(job);
         if (rows > 0)
         {
             ScheduleUtils.updateScheduleJob(scheduler, job);
-        }
-        return rows;
-    }
-
-    /**
-     * 保存任务的时间表达式
-     * 
-     * @param job 调度信息
-     */
-    @Override
-    public int saveJobCron(Job job)
-    {
-        Long jobId = job.getJobId();
-        int rows = 0;
-        if (StringUtils.isNotNull(jobId))
-        {
-            rows = updateJobCron(job);
-        }
-        else
-        {
-            rows = addJobCron(job);
         }
         return rows;
     }

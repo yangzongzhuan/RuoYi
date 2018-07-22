@@ -12,7 +12,7 @@ import com.ruoyi.project.monitor.operlog.mapper.OperLogMapper;
  * 
  * @author ruoyi
  */
-@Service("operLogService")
+@Service
 public class OperLogServiceImpl implements IOperLogService
 {
     @Autowired

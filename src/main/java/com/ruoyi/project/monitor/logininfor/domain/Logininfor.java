@@ -14,7 +14,7 @@ public class Logininfor extends BaseEntity
     private static final long serialVersionUID = 1L;
     /** ID */
     @Excel(name = "序号")
-    private Integer infoId;
+    private Long infoId;
     /** 用户账号 */
     @Excel(name = "用户账号")
     private String loginName;
@@ -40,12 +40,12 @@ public class Logininfor extends BaseEntity
     @Excel(name = "访问时间")
     private Date loginTime;
 
-    public Integer getInfoId()
+    public Long getInfoId()
     {
         return infoId;
     }
 
-    public void setInfoId(Integer infoId)
+    public void setInfoId(Long infoId)
     {
         this.infoId = infoId;
     }

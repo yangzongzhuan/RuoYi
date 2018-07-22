@@ -17,7 +17,7 @@ public interface IConfigService
      * @param configId 参数配置ID
      * @return 参数配置信息
      */
-    public Config selectConfigById(Integer configId);
+    public Config selectConfigById(Long configId);
 
     /**
      * 根据键名查询参数配置信息
@@ -50,22 +50,6 @@ public interface IConfigService
      * @return 结果
      */
     public int updateConfig(Config config);
-
-    /**
-     * 保存参数配置
-     * 
-     * @param config 参数配置信息
-     * @return 结果
-     */
-    public int saveConfig(Config config);
-
-    /**
-     * 删除参数配置信息
-     * 
-     * @param configId 参数配置ID
-     * @return 结果
-     */
-    public int deleteConfigById(Integer configId);
 
     /**
      * 批量删除参数配置信息

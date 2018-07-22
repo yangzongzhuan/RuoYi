@@ -15,7 +15,7 @@ import com.ruoyi.project.monitor.online.mapper.UserOnlineMapper;
  * 
  * @author ruoyi
  */
-@Service("userOnlineService")
+@Service
 public class UserOnlineServiceImpl implements IUserOnlineService
 {
     @Autowired

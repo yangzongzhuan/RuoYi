@@ -12,14 +12,17 @@ import org.junit.Test;
  * @since 07/22/2018
  */
 
-public class AddressUtilsTest {
+public class AddressUtilsTest
+{
 
     @Before
-    public void before() throws Exception {
+    public void before() throws Exception
+    {
     }
 
     @After
-    public void after() throws Exception {
+    public void after() throws Exception
+    {
     }
 
     /**
@@ -27,11 +30,11 @@ public class AddressUtilsTest {
      * <p>
      */
     @Test
-    public void testGetRealAddressByIP() throws Exception {
-        //TODO: Test goes here...
+    public void testGetRealAddressByIP() throws Exception
+    {
+        // TODO: Test goes here...
         String ipAddress = AddressUtils.getRealAddressByIP("121.8.250.1");
         System.out.println(ipAddress);
     }
 
-
-} 
+}

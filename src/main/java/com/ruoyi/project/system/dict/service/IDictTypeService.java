@@ -17,7 +17,7 @@ public interface IDictTypeService
      * @return 字典类型集合信息
      */
     public List<DictType> selectDictTypeList(DictType dictType);
-    
+
     /**
      * 根据所有字典类型
      * 
@@ -32,7 +32,7 @@ public interface IDictTypeService
      * @return 字典类型
      */
     public DictType selectDictTypeById(Long dictId);
-    
+
     /**
      * 通过字典ID删除字典信息
      * 
@@ -41,22 +41,29 @@ public interface IDictTypeService
      */
     public int deleteDictTypeById(Long dictId);
 
-
     /**
      * 批量删除字典类型
      * 
      * @param ids 需要删除的数据
      * @return 结果
      */
-    public int deleteDictTypeByIds(String ids)  throws Exception;
+    public int deleteDictTypeByIds(String ids) throws Exception;
 
     /**
-     * 保存字典类型信息
+     * 新增保存字典类型信息
      * 
      * @param dictType 字典类型信息
      * @return 结果
      */
-    public int saveDictType(DictType dictType);
+    public int insertDictType(DictType dictType);
+
+    /**
+     * 修改保存字典类型信息
+     * 
+     * @param dictType 字典类型信息
+     * @return 结果
+     */
+    public int updateDictType(DictType dictType);
 
     /**
      * 校验字典类型称是否唯一

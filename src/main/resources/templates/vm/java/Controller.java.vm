@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,41 +56,45 @@ public class ${className}Controller extends BaseController
 	/**
 	 * 新增${tableComment}
 	 */
-	@RequiresPermissions("${moduleName}:${classname}:add")
-	@Log(title = "${tableComment}", action = BusinessType.INSERT)
 	@GetMapping("/add")
 	public String add()
 	{
 	    return prefix + "/add";
 	}
+	
+	/**
+	 * 新增保存${tableComment}
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:add")
+	@Log(title = "${tableComment}", action = BusinessType.INSERT)
+	@PostMapping("/add")
+	@ResponseBody
+	public AjaxResult addSave(${className} ${classname})
+	{		
+		return toAjax(${classname}Service.insert${className}(${classname}));
+	}
 
 	/**
 	 * 修改${tableComment}
 	 */
-	@RequiresPermissions("${moduleName}:${classname}:edit")
-	@Log(title = "${tableComment}", action = BusinessType.UPDATE)
 	@GetMapping("/edit/{${primaryKey.attrname}}")
-	public String edit(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname}, Model model)
+	public String edit(@PathVariable("${primaryKey.attrname}") ${primaryKey.attrType} ${primaryKey.attrname}, ModelMap mmap)
 	{
 		${className} ${classname} = ${classname}Service.select${className}ById(${primaryKey.attrname});
-		model.addAttribute("${classname}", ${classname});
+		mmap.put("${classname}", ${classname});
 	    return prefix + "/edit";
 	}
 	
 	/**
-	 * 保存${tableComment}
+	 * 修改保存${tableComment}
 	 */
-	@RequiresPermissions("${moduleName}:${classname}:save")
-	@Log(title = "${tableComment}", action = BusinessType.SAVE)
-	@PostMapping("/save")
+	@RequiresPermissions("${moduleName}:${classname}:edit")
+	@Log(title = "${tableComment}", action = BusinessType.UPDATE)
+	@PostMapping("/edit")
 	@ResponseBody
-	public AjaxResult save(${className} ${classname})
-	{
-		if (${classname}Service.save${className}(${classname}) > 0)
-		{
-			return success();
-		}
-		return error();
+	public AjaxResult editSave(${className} ${classname})
+	{		
+		return toAjax(${classname}Service.update${className}(${classname}));
 	}
 	
 	/**
@@ -101,13 +105,8 @@ public class ${className}Controller extends BaseController
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
-	{
-		int rows = ${classname}Service.delete${className}ByIds(ids);
-		if (rows > 0)
-        {
-            return success();
-        }
-        return error();
+	{		
+		return toAjax(${classname}Service.delete${className}ByIds(ids));
 	}
 	
 }

@@ -41,7 +41,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">性别：</label>
 				<div class="col-sm-8">
-					<select id="sex" class="form-control m-b" th:with="type=${@dictService.selectDictData('sys_user_sex')}">
+					<select id="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
 	                    <option th:each="dict : ${type}" th:text="${dict['dictLabel']}" th:value="${dict['dictValue']}" th:field="*{sex}"></option>
 	                </select>
 				</div>
@@ -165,7 +165,7 @@
         	$.ajax({
         		cache : true,
         		type : "POST",
-        		url : ctx + "system/user/save",
+        		url : ctx + "system/user/edit",
         		data : {
         			"userId": userId,
         			"deptId": deptId,

@@ -43,7 +43,7 @@
 								手机号码：<input type="text" name="phonenumber"/>
 							</li>
 							<li>
-								用户状态：<select name="status" th:with="type=${@dictService.selectDictData('sys_normal_disable')}">
+								用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
@@ -81,9 +81,10 @@
 	<script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
 	<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 	<script th:inline="javascript">
-		var editFlag = [[${@permissionService.hasPermi('system:user:edit')}]];
-		var removeFlag = [[${@permissionService.hasPermi('system:user:remove')}]];
-		var resetPwdFlag = [[${@permissionService.hasPermi('system:user:resetPwd')}]];
+		var editFlag = [[${@permission.hasPermi('system:user:edit')}]];
+		var removeFlag = [[${@permission.hasPermi('system:user:remove')}]];
+		var resetPwdFlag = [[${@permission.hasPermi('system:user:resetPwd')}]];
+		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/user"
 
 		$(document).ready(function(){
@@ -138,11 +139,7 @@
 		            title: '状态',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		                if (value == '0') {
-		                    return '<span class="badge badge-primary">正常</span>';
-		                } else if (value == '1') {
-		                    return '<span class="badge badge-danger">停用</span>';
-		                }
+		            	return $.table.selectDictLabel(datas, value);
 		            }
 		        },
 		        {

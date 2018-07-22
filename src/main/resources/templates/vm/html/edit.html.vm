@@ -34,7 +34,7 @@
 				},
 			},
 			submitHandler: function(form) {
-				$.operate.save(prefix + "/save", $('#form-${classname}-edit').serialize());
+				$.operate.save(prefix + "/edit", $('#form-${classname}-edit').serialize());
 			}
 		});
 	</script>

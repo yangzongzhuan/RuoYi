@@ -95,6 +95,17 @@
             	return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
         	        return row[$.table._option.columns[1].field];
         	    });
+            },
+            // 回显数据字典
+            selectDictLabel: function(_datas, _value) {
+            	var actions = [];
+                $.each(_datas, function(index, dict) {
+                    if (dict.dictValue == _value) {
+                    	actions.push("<span class='badge badge-" + dict.listClass + "'>" + dict.dictLabel + "</span>");
+                        return false;
+                    }
+                });
+                return actions.join('');
             }
         },
         // 表格树封装处理

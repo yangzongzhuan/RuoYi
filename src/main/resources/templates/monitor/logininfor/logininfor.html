@@ -18,7 +18,7 @@
 								<label>登录名称：</label><input type="text" name="loginName"/>
 							</li>
 							<li>
-								<label>登录状态：</label><select name="status" th:with="type=${@dictService.selectDictData('sys_common_status')}">
+								<label>登录状态：</label><select name="status" th:with="type=${@dict.getType('sys_common_status')}">
 									<option value="">所有</option>
 									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
 								</select>
@@ -51,7 +51,8 @@
 	</div>
 	
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript">
+	<script th:inline="javascript">
+	    var datas = [[${@dict.getType('sys_common_status')}]];
 		var prefix = ctx + "monitor/logininfor"
 	
 		$(function() {
@@ -96,11 +97,7 @@
 		            title: '登录状态',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		                if (value == 0) {
-		                    return '<span class="badge badge-primary">成功</span>';
-		                } else if (value == 1) {
-		                    return '<span class="badge badge-danger">失败</span>';
-		                }
+		            	return $.table.selectDictLabel(datas, value);
 		            }
 		        },
 		        {

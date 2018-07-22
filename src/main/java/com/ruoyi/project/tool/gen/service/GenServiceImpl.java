@@ -28,7 +28,7 @@ import com.ruoyi.project.tool.gen.util.VelocityInitializer;
  * 
  * @author ruoyi
  */
-@Service("genService")
+@Service
 public class GenServiceImpl implements IGenService
 {
     @Autowired

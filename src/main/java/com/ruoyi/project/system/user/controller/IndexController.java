@@ -3,7 +3,7 @@ package com.ruoyi.project.system.user.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -27,23 +27,23 @@ public class IndexController extends BaseController
 
     // 系统首页
     @GetMapping("/index")
-    public String index(Model model)
+    public String index(ModelMap mmap)
     {
         // 取身份信息
         User user = getUser();
         // 根据用户id取出菜单
         List<Menu> menus = menuService.selectMenusByUserId(user.getUserId());
-        model.addAttribute("menus", menus);
-        model.addAttribute("user", user);
-        model.addAttribute("copyrightYear", ruoYiConfig.getCopyrightYear());
+        mmap.put("menus", menus);
+        mmap.put("user", user);
+        mmap.put("copyrightYear", ruoYiConfig.getCopyrightYear());
         return "index";
     }
 
     // 系统介绍
     @GetMapping("/system/main")
-    public String main(Model model)
+    public String main(ModelMap mmap)
     {
-        model.addAttribute("version", ruoYiConfig.getVersion());
+        mmap.put("version", ruoYiConfig.getVersion());
         return "main";
     }
 

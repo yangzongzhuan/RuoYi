@@ -16,7 +16,7 @@ public class OperLog extends BaseEntity
 
     /** 日志主键 */
     @Excel(name = "操作序号")
-    private Integer operId;
+    private Long operId;
 
     /** 操作模块 */
     @Excel(name = "操作模块")
@@ -70,12 +70,12 @@ public class OperLog extends BaseEntity
     @Excel(name = "操作时间")
     private Date operTime;
 
-    public Integer getOperId()
+    public Long getOperId()
     {
         return operId;
     }
 
-    public void setOperId(Integer operId)
+    public void setOperId(Long operId)
     {
         this.operId = operId;
     }

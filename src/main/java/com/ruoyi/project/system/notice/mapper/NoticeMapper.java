@@ -16,7 +16,7 @@ public interface NoticeMapper
      * @param noticeId 公告ID
      * @return 公告信息
      */
-    public Notice selectNoticeById(Integer noticeId);
+    public Notice selectNoticeById(Long noticeId);
 
     /**
      * 查询公告列表

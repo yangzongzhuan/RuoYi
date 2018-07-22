@@ -10,22 +10,13 @@ import java.util.List;
  */
 public interface ConfigMapper
 {
-
     /**
      * 查询参数配置信息
      * 
-     * @param configId 参数配置ID
+     * @param configId 参数配置信息
      * @return 参数配置信息
      */
-    public Config selectConfigById(Integer configId);
-    
-    /**
-     * 根据键名查询参数配置信息
-     * 
-     * @param configKey 参数键名
-     * @return 参数配置信息
-     */
-    public Config selectConfigByKey(String configKey);
+    public Config selectConfig(Config config);
 
     /**
      * 查询参数配置列表
@@ -34,6 +25,14 @@ public interface ConfigMapper
      * @return 参数配置集合
      */
     public List<Config> selectConfigList(Config config);
+
+    /**
+     * 根据键名查询参数配置信息
+     * 
+     * @param configKey 参数键名
+     * @return 参数配置信息
+     */
+    public Config checkConfigKeyUnique(String configKey);
 
     /**
      * 新增参数配置
@@ -50,14 +49,6 @@ public interface ConfigMapper
      * @return 结果
      */
     public int updateConfig(Config config);
-
-    /**
-     * 删除参数配置
-     * 
-     * @param configId 参数配置ID
-     * @return 结果
-     */
-    public int deleteConfigById(Integer configId);
 
     /**
      * 批量删除参数配置

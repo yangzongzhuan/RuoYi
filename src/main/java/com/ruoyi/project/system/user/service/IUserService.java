@@ -64,7 +64,7 @@ public interface IUserService
      * 
      * @param ids 需要删除的数据ID
      */
-    public void deleteUserByIds(String ids) throws Exception;
+    public int deleteUserByIds(String ids) throws Exception;
 
     /**
      * 保存用户信息
@@ -72,15 +72,23 @@ public interface IUserService
      * @param user 用户信息
      * @return 结果
      */
-    public int saveUser(User user);
+    public int insertUser(User user);
 
     /**
-     * 修改用户信息
+     * 保存用户信息
      * 
      * @param user 用户信息
      * @return 结果
      */
     public int updateUser(User user);
+
+    /**
+     * 修改用户详细信息
+     * 
+     * @param user 用户信息
+     * @return 结果
+     */
+    public int updateUserInfo(User user);
 
     /**
      * 修改用户密码信息

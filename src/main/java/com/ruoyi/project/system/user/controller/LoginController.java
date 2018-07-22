@@ -7,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +25,7 @@ public class LoginController extends BaseController
 {
 
     @GetMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response, Model model)
+    public String login(HttpServletRequest request, HttpServletResponse response)
     {
         // 如果是Ajax请求，返回Json字符串。
         if (ServletUtils.isAjaxRequest((HttpServletRequest) request))

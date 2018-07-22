@@ -100,12 +100,20 @@ public interface IMenuService
     public int selectCountRoleMenuByMenuId(Long menuId);
 
     /**
-     * 保存菜单信息
+     * 新增保存菜单信息
      * 
      * @param menu 菜单信息
      * @return 结果
      */
-    public int saveMenu(Menu menu);
+    public int insertMenu(Menu menu);
+
+    /**
+     * 修改保存菜单信息
+     * 
+     * @param menu 菜单信息
+     * @return 结果
+     */
+    public int updateMenu(Menu menu);
 
     /**
      * 校验菜单名称是否唯一

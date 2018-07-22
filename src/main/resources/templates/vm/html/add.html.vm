@@ -33,7 +33,7 @@
 				},
 			},
 			submitHandler: function(form) {
-				$.operate.save(prefix + "/save", $('#form-${classname}-add').serialize());
+				$.operate.save(prefix + "/add", $('#form-${classname}-add').serialize());
 			}
 		});
 	</script>

@@ -122,7 +122,7 @@ public class LoginService
     {
         user.setLoginIp(ShiroUtils.getIp());
         user.setLoginDate(DateUtils.getNowDate());
-        userService.updateUser(user);
+        userService.updateUserInfo(user);
     }
 
 }

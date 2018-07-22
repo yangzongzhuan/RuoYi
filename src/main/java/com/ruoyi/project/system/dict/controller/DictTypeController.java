@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,23 +68,8 @@ public class DictTypeController extends BaseController
     }
 
     /**
-     * 修改字典类型
-     */
-    @Log(title = "字典类型", action = BusinessType.UPDATE)
-    @RequiresPermissions("system:dict:edit")
-    @GetMapping("/edit/{dictId}")
-    public String edit(@PathVariable("dictId") Long dictId, Model model)
-    {
-        DictType dict = dictTypeService.selectDictTypeById(dictId);
-        model.addAttribute("dict", dict);
-        return prefix + "/edit";
-    }
-
-    /**
      * 新增字典类型
      */
-    @Log(title = "字典类型", action = BusinessType.INSERT)
-    @RequiresPermissions("system:dict:add")
     @GetMapping("/add")
     public String add()
     {
@@ -92,19 +77,37 @@ public class DictTypeController extends BaseController
     }
 
     /**
-     * 保存字典类型
+     * 新增保存字典类型
      */
-    @Log(title = "字典类型", action = BusinessType.SAVE)
-    @RequiresPermissions("system:dict:save")
-    @PostMapping("/save")
+    @Log(title = "字典类型", action = BusinessType.INSERT)
+    @RequiresPermissions("system:dict:add")
+    @PostMapping("/add")
     @ResponseBody
-    public AjaxResult save(DictType dict)
+    public AjaxResult addSave(DictType dict)
     {
-        if (dictTypeService.saveDictType(dict) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(dictTypeService.insertDictType(dict));
+    }
+
+    /**
+     * 修改字典类型
+     */
+    @GetMapping("/edit/{dictId}")
+    public String edit(@PathVariable("dictId") Long dictId, ModelMap mmap)
+    {
+        mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存字典类型
+     */
+    @Log(title = "字典类型", action = BusinessType.UPDATE)
+    @RequiresPermissions("system:dict:edit")
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(DictType dict)
+    {
+        return toAjax(dictTypeService.updateDictType(dict));
     }
 
     @Log(title = "字典类型", action = BusinessType.DELETE)
@@ -115,8 +118,7 @@ public class DictTypeController extends BaseController
     {
         try
         {
-            dictTypeService.deleteDictTypeByIds(ids);
-            return success();
+            return toAjax(dictTypeService.deleteDictTypeByIds(ids));
         }
         catch (Exception e)
         {
@@ -129,12 +131,10 @@ public class DictTypeController extends BaseController
      */
     @RequiresPermissions("system:dict:list")
     @GetMapping("/detail/{dictId}")
-    public String detail(@PathVariable("dictId") Long dictId, Model model)
+    public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap)
     {
-        DictType dict = dictTypeService.selectDictTypeById(dictId);
-        List<DictType> dictTypeList = dictTypeService.selectDictTypeAll();
-        model.addAttribute("dict", dict);
-        model.addAttribute("dictList", dictTypeList);
+        mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
+        mmap.put("dictList", dictTypeService.selectDictTypeAll());
         return "system/dict/data/data";
     }
 

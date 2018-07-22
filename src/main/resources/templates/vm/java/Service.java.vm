@@ -42,16 +42,7 @@ public interface I${className}Service
      * @return 结果
      */
 	public int update${className}(${className} ${classname});
-	
-	/**
-     * 保存${tableComment}
-     * 
-     * @param ${classname} ${tableComment}信息
-     * @return 结果
-     */
-	public int save${className}(${className} ${classname});
-	
-	
+		
 	/**
      * 删除${tableComment}信息
      * 

@@ -14,7 +14,7 @@ public class Config extends BaseEntity
 
     /** 参数主键 */
     @Excel(name = "参数主键")
-    private Integer configId;
+    private Long configId;
 
     /** 参数名称 */
     @Excel(name = "参数名称")
@@ -32,12 +32,12 @@ public class Config extends BaseEntity
     @Excel(name = "系统内置")
     private String configType;
 
-    public Integer getConfigId()
+    public Long getConfigId()
     {
         return configId;
     }
 
-    public void setConfigId(Integer configId)
+    public void setConfigId(Long configId)
     {
         this.configId = configId;
     }

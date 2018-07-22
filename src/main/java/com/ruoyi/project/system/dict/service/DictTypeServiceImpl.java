@@ -16,7 +16,7 @@ import com.ruoyi.project.system.dict.mapper.DictTypeMapper;
  * 
  * @author ruoyi
  */
-@Service("dictTypeService")
+@Service
 public class DictTypeServiceImpl implements IDictTypeService
 {
     @Autowired
@@ -95,25 +95,29 @@ public class DictTypeServiceImpl implements IDictTypeService
     }
 
     /**
-     * 保存字典类型信息
+     * 新增保存字典类型信息
      * 
      * @param dictType 字典类型信息
      * @return 结果
      */
     @Override
-    public int saveDictType(DictType dictType)
+    public int insertDictType(DictType dictType)
     {
-        Long dictId = dictType.getDictId();
-        if (StringUtils.isNotNull(dictId))
-        {
-            dictType.setUpdateBy(ShiroUtils.getLoginName());
-            return dictTypeMapper.updateDictType(dictType);
-        }
-        else
-        {
-            dictType.setCreateBy(ShiroUtils.getLoginName());
-            return dictTypeMapper.insertDictType(dictType);
-        }
+        dictType.setCreateBy(ShiroUtils.getLoginName());
+        return dictTypeMapper.insertDictType(dictType);
+    }
+
+    /**
+     * 修改保存字典类型信息
+     * 
+     * @param dictType 字典类型信息
+     * @return 结果
+     */
+    @Override
+    public int updateDictType(DictType dictType)
+    {
+        dictType.setUpdateBy(ShiroUtils.getLoginName());
+        return dictTypeMapper.updateDictType(dictType);
     }
 
     /**
@@ -125,11 +129,7 @@ public class DictTypeServiceImpl implements IDictTypeService
     @Override
     public String checkDictTypeUnique(DictType dict)
     {
-        if (dict.getDictId() == null)
-        {
-            dict.setDictId(-1L);
-        }
-        Long dictId = dict.getDictId();
+        Long dictId = StringUtils.isNull(dict.getDictId()) ? -1L : dict.getDictId();
         DictType dictType = dictTypeMapper.checkDictTypeUnique(dict.getDictType());
         if (StringUtils.isNotNull(dictType) && dictType.getDictId() != dictId)
         {

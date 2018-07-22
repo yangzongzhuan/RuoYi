@@ -71,11 +71,6 @@ public class LogininforController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        int rows = logininforService.deleteLogininforByIds(ids);
-        if (rows > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(logininforService.deleteLogininforByIds(ids));
     }
 }

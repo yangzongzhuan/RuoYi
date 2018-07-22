@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -94,13 +94,9 @@ public class JobController extends BaseController
     @ResponseBody
     public AjaxResult changeStatus(Job job)
     {
-        if (jobService.changeStatus(job) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(jobService.changeStatus(job));
     }
-    
+
     /**
      * 任务调度立即执行一次
      */
@@ -110,50 +106,49 @@ public class JobController extends BaseController
     @ResponseBody
     public AjaxResult run(Job job)
     {
-        if (jobService.run(job) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(jobService.run(job));
     }
 
     /**
      * 新增调度
      */
-    @Log(title = "定时任务", action = BusinessType.INSERT)
-    @RequiresPermissions("monitor:job:add")
     @GetMapping("/add")
-    public String add(Model model)
+    public String add()
     {
         return prefix + "/add";
     }
 
     /**
+     * 新增保存调度
+     */
+    @Log(title = "定时任务", action = BusinessType.INSERT)
+    @RequiresPermissions("monitor:job:add")
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Job job)
+    {
+        return toAjax(jobService.insertJobCron(job));
+    }
+
+    /**
      * 修改调度
      */
-    @Log(title = "定时任务", action = BusinessType.UPDATE)
-    @RequiresPermissions("monitor:job:edit")
     @GetMapping("/edit/{jobId}")
-    public String edit(@PathVariable("jobId") Long jobId, Model model)
+    public String edit(@PathVariable("jobId") Long jobId, ModelMap mmap)
     {
-        Job job = jobService.selectJobById(jobId);
-        model.addAttribute("job", job);
+        mmap.put("job", jobService.selectJobById(jobId));
         return prefix + "/edit";
     }
 
     /**
-     * 保存调度
+     * 修改保存调度
      */
-    @Log(title = "定时任务", action = BusinessType.SAVE)
-    @RequiresPermissions("monitor:job:save")
-    @PostMapping("/save")
+    @Log(title = "定时任务", action = BusinessType.UPDATE)
+    @RequiresPermissions("monitor:job:edit")
+    @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult save(Job job)
+    public AjaxResult editSave(Job job)
     {
-        if (jobService.saveJobCron(job) > 0)
-        {
-            return success();
-        }
-        return error();
+        return toAjax(jobService.updateJobCron(job));
     }
 }

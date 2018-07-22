@@ -3,7 +3,6 @@ package com.ruoyi.project.system.notice.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.notice.mapper.NoticeMapper;
 import com.ruoyi.project.system.notice.domain.Notice;
@@ -29,7 +28,7 @@ public class NoticeServiceImpl implements INoticeService
      * @return 公告信息
      */
     @Override
-    public Notice selectNoticeById(Integer noticeId)
+    public Notice selectNoticeById(Long noticeId)
     {
         return noticeMapper.selectNoticeById(noticeId);
     }
@@ -55,6 +54,7 @@ public class NoticeServiceImpl implements INoticeService
     @Override
     public int insertNotice(Notice notice)
     {
+        notice.setCreateBy(ShiroUtils.getLoginName());
         return noticeMapper.insertNotice(notice);
     }
 
@@ -67,33 +67,8 @@ public class NoticeServiceImpl implements INoticeService
     @Override
     public int updateNotice(Notice notice)
     {
+        notice.setUpdateBy(ShiroUtils.getLoginName());
         return noticeMapper.updateNotice(notice);
-    }
-
-    /**
-     * 保存公告
-     * 
-     * @param notice 公告信息
-     * @return 结果
-     */
-    @Override
-    public int saveNotice(Notice notice)
-    {
-        Integer noticeId = notice.getNoticeId();
-        int rows = 0;
-        if (StringUtils.isNotNull(noticeId))
-        {
-            notice.setUpdateBy(ShiroUtils.getLoginName());
-            // 修改公告
-            rows = noticeMapper.updateNotice(notice);
-        }
-        else
-        {
-            notice.setCreateBy(ShiroUtils.getLoginName());
-            // 新增公告
-            rows = noticeMapper.insertNotice(notice);
-        }
-        return rows;
     }
 
     /**

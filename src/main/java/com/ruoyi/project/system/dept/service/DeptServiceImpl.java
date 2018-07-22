@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
@@ -17,7 +17,7 @@ import com.ruoyi.project.system.dept.mapper.DeptMapper;
  * 
  * @author ruoyi
  */
-@Repository("deptService")
+@Service
 public class DeptServiceImpl implements IDeptService
 {
     @Autowired
@@ -111,24 +111,29 @@ public class DeptServiceImpl implements IDeptService
     }
 
     /**
-     * 保存部门信息
+     * 新增保存部门信息
      * 
      * @param dept 部门信息
      * @return 结果
      */
     @Override
-    public int saveDept(Dept dept)
+    public int insertDept(Dept dept)
     {
-        if (StringUtils.isNotNull(dept.getDeptId()))
-        {
-            dept.setUpdateBy(ShiroUtils.getLoginName());
-            return deptMapper.updateDept(dept);
-        }
-        else
-        {
-            dept.setCreateBy(ShiroUtils.getLoginName());
-            return deptMapper.insertDept(dept);
-        }
+        dept.setCreateBy(ShiroUtils.getLoginName());
+        return deptMapper.insertDept(dept);
+    }
+
+    /**
+     * 修改保存部门信息
+     * 
+     * @param dept 部门信息
+     * @return 结果
+     */
+    @Override
+    public int updateDept(Dept dept)
+    {
+        dept.setUpdateBy(ShiroUtils.getLoginName());
+        return deptMapper.updateDept(dept);
     }
 
     /**
@@ -152,14 +157,9 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public String checkDeptNameUnique(Dept dept)
     {
-        if (dept.getDeptId() == null)
-        {
-            dept.setDeptId(-1L);
-        }
-        Long deptId = dept.getDeptId();
+        Long deptId = StringUtils.isNull(dept.getDeptId()) ? -1L : dept.getDeptId();
         Dept info = deptMapper.checkDeptNameUnique(dept.getDeptName());
-        if (StringUtils.isNotNull(info) && StringUtils.isNotNull(info.getDeptId())
-                && info.getDeptId().longValue() != deptId.longValue())
+        if (StringUtils.isNotNull(info) && info.getDeptId().longValue() != deptId.longValue())
         {
             return UserConstants.DEPT_NAME_NOT_UNIQUE;
         }
