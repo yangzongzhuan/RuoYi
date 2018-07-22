@@ -1,6 +1,7 @@
 package com.ruoyi.project.system.dept.service;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * DeptServiceImpl Tester.
@@ -44,6 +48,7 @@ public class DeptServiceImplTest {
     @Test
     public void testSelectDeptAll() throws Exception {
         //TODO: Test goes here...
+        Assert.assertEquals(deptService.selectDeptAll().size(), 10);
     }
 
     /**
@@ -52,6 +57,9 @@ public class DeptServiceImplTest {
     @Test
     public void testSelectDeptTree() throws Exception {
         //TODO: Test goes here...
+        List<Map<String, Object>> trees = deptService.selectDeptTree();
+        trees.stream()
+                .forEach(tree -> System.out.println(tree));
     }
 
     /**
@@ -60,6 +68,7 @@ public class DeptServiceImplTest {
     @Test
     public void testSelectDeptCount() throws Exception {
         //TODO: Test goes here...
+        Assert.assertEquals(10, deptService.selectDeptCount(0L));
     }
 
     /**
@@ -92,6 +101,7 @@ public class DeptServiceImplTest {
     @Test
     public void testSelectDeptById() throws Exception {
         //TODO: Test goes here...
+        Assert.assertNotNull("若依集团不存在", deptService.selectDeptById(100L));
     }
 
     /**
