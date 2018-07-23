@@ -103,8 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>
- 		where 1=1
- 		<if test="deptId != null and deptId  != ''">and dept_id = #{deptId}</if>
+ 		where dept_id = #{deptId}
 	</update>
 
 	<delete id="deleteDeptById" parameterType="Long">

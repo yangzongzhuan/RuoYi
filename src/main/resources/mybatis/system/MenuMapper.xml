@@ -102,8 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>
- 		where 1=1
- 		<if test="menuId != null and menuId  != ''">and menu_id = #{menuId}</if>
+ 		where menu_id = #{menuId}
 	</update>
  	
  	<insert id="insertMenu" parameterType="Menu">

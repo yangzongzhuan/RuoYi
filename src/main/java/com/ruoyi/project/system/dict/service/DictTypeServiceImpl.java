@@ -117,6 +117,8 @@ public class DictTypeServiceImpl implements IDictTypeService
     public int updateDictType(DictType dictType)
     {
         dictType.setUpdateBy(ShiroUtils.getLoginName());
+        DictType oldDict = dictTypeMapper.selectDictTypeById(dictType.getDictId());
+        dictDataMapper.updateDictDataType(oldDict.getDictType(), dictType.getDictType());
         return dictTypeMapper.updateDictType(dictType);
     }
 

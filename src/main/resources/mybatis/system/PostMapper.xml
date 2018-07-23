@@ -71,8 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>
- 		where 1=1
- 		<if test="postId != null">and post_id = #{postId}</if>
+ 		where post_id = #{postId}
 	</update>
  	
  	<insert id="insertPost" parameterType="Post" useGeneratedKeys="true" keyProperty="postId">

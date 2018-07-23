@@ -129,8 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="remark != null and remark != ''">remark = #{remark},</if>
  			update_time = sysdate()
  		</set>
- 		where 1=1
- 		<if test="userId != null and userId  != ''">and user_id = #{userId}</if>
+ 		where user_id = #{userId}
 	</update>
  	
  	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">

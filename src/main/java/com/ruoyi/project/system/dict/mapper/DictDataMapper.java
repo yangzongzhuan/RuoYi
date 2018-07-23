@@ -87,4 +87,13 @@ public interface DictDataMapper
      */
     public int updateDictData(DictData dictData);
 
+    /**
+     * 同步修改字典类型
+     * 
+     * @param oldDictType 旧字典类型
+     * @param newDictType 新旧字典类型
+     * @return 结果
+     */
+    public int updateDictDataType(@Param("oldDictType") String oldDictType, @Param("newDictType") String newDictType);
+
 }

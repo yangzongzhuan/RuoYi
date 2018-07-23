@@ -84,8 +84,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>
- 		where 1=1
- 		<if test="dictCode != null and dictCode  != ''">and dict_code = #{dictCode}</if>
+ 		where dict_code = #{dictCode}
+	</update>
+	
+	<update id="updateDictDataType" parameterType="String">
+ 		update sys_dict_data set dict_type = #{newDictType} where dict_type = #{oldDictType}
 	</update>
  	
  	<insert id="insertDictData" parameterType="DictData">
