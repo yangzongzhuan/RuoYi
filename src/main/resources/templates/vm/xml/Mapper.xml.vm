@@ -45,16 +45,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
 	 
     <update id="update${className}" parameterType="${className}">
-        update ${tableName} 
-        <set>
-#foreach($column in $columns)
-#if($column.columnName != $primaryKey.columnName)
-            <if test="$column.attrname != null and $column.attrname != ''">$column.columnName = #{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
-#end
-#end
-        </set>
-        where ${primaryKey.columnName} = #{${primaryKey.attrname}}
+        update ${tableName}
+        <trim prefix="SET" suffixOverrides=",">
+    #foreach($column in $columns)
+        #if($column.columnName != $primaryKey.columnName)
+            <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">
+                      $column.columnName = #{$column.attrname},
+                    </if>
+        #end
+    #end
+        </trim>
+            where ${primaryKey.columnName} = #{${primaryKey.attrname}}
     </update>
+
+
 	
 	<delete id="delete${className}ById" parameterType="${primaryKey.attrType}">
         delete from ${tableName} where ${primaryKey.columnName} = #{${primaryKey.attrname}}
