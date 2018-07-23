@@ -209,7 +209,7 @@ public class UserServiceImpl implements IUserService
     {
         user.randomSalt();
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
-        return updateUser(user);
+        return updateUserInfo(user);
     }
 
     /**
