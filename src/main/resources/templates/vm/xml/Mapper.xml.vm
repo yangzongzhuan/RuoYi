@@ -29,19 +29,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
         
     <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$primaryKey.attrname"#end>
-        insert into ${tableName} (
+        insert into ${tableName}
+		<trim prefix="(" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null and $column.attrname != '' ">$column.columnName#if($velocityCount != $columns.size()), #end</if>
+			<if test="$column.attrname != null and $column.attrname != '' ">$column.columnName,</if>
 #end
 #end
-        )values(
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname}#if($velocityCount != $columns.size()), #end</if>
+			<if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname},</if>
 #end			
 #end
-		)
+         </trim>
     </insert>
 	 
     <update id="update${className}" parameterType="${className}">
