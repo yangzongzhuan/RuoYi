@@ -45,11 +45,7 @@
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/dept"
 
-		window.onload = function() {
-			loading();
-		};
-		
-		function loading() {
+		$(function() {
 		    var options = {
 		        id: "deptId",
 		        parentId: "parentId",
@@ -97,7 +93,7 @@
 		        }]
 		    };
 		    $.treeTable.init(options);
-		}
+		});
 		
 		function remove(id) {
 			$.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {
@@ -115,7 +111,6 @@
 				});
 			});
 		}
-		
 	</script>
 </body>
 </html>

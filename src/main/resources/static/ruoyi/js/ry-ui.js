@@ -23,7 +23,7 @@
                     sortStable: true,                                   // 设置为 true 将获得稳定的排序
                     sortName: _sortName,                                // 排序列名称
                     sortOrder: _sortOrder,                              // 排序方式  asc 或者 desc
-                    pagination: true,                                   // 是否显示分页（*）
+                    pagination: $.common.visible(options.pagination),   // 是否显示分页（*）
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
                     pageSize: 10,                                       // 每页的记录行数（*） 
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）

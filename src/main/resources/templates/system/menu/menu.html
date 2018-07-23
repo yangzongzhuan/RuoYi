@@ -46,11 +46,7 @@
 		var datas = [[${@dict.getType('sys_show_hide')}]];
 		var prefix = ctx + "system/menu"
 
-		window.onload = function() {
-			loading();
-		};
-		
-		function loading() {
+		$(function() {
 		    var options = {
 		        id: "menuId",
 		        parentId: "parentId",
@@ -130,7 +126,7 @@
 		        }]
 		    };
 		    $.treeTable.init(options);
-		}
+		});
 		
 		function remove(id) {
 			$.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {
