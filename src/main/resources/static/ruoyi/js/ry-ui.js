@@ -69,12 +69,14 @@
     		},
     		// 下载
     		exportExcel: function(form) {
+    			$.modal.loading("正在导出数据，请稍后...");
     			$.post($.table._option.exportUrl, $("#" + form).serializeArray(), function(result) {
     				if (result.code == web_status.SUCCESS) {
     			        window.location.href = ctx + "common/download?fileName=" + result.msg + "&delete=" + true;
     				} else {
     					$.modal.alertError(result.msg);
     				}
+    				$.modal.closeLoading();
     			});
     		},
             // 刷新
