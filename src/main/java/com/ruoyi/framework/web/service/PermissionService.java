@@ -18,14 +18,7 @@ public class PermissionService
 
     private boolean isPermittedOperator(String permission)
     {
-        if (SecurityUtils.getSubject().isPermitted(permission))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return SecurityUtils.getSubject().isPermitted(permission);
     }
 
 }
