@@ -30,7 +30,7 @@ public class AddressUtils
         }
         catch (Exception e)
         {
-            log.error("根据IP获取所在位置----------错误消息：" + e.getMessage());
+            log.error("获取地理位置异常:", e);
         }
         return address;
     }

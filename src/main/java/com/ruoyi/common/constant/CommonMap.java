@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 通用Map数据
+ * 通用数据库映射Map数据
  * 
  * @author ruoyi
  */
@@ -39,7 +39,7 @@ public class CommonMap
         javaTypeMap.put("text", "String");
         javaTypeMap.put("mediumtext", "String");
         javaTypeMap.put("longtext", "String");
-		javaTypeMap.put("time", "Date");
+        javaTypeMap.put("time", "Date");
         javaTypeMap.put("date", "Date");
         javaTypeMap.put("datetime", "Date");
         javaTypeMap.put("timestamp", "Date");

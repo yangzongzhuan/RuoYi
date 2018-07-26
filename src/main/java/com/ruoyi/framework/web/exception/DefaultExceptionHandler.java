@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import com.ruoyi.common.exception.DemoModeException;
+import com.ruoyi.common.utils.security.PermissionUtils;
 import com.ruoyi.framework.web.domain.AjaxResult;
 
 /**
@@ -27,7 +27,7 @@ public class DefaultExceptionHandler
     public AjaxResult handleAuthorizationException(AuthorizationException e)
     {
         log.error(e.getMessage(), e);
-        return AjaxResult.error("您没有数据的权限，请联系管理员添加");
+        return AjaxResult.error(PermissionUtils.getMsg(e.getMessage()));
     }
 
     /**

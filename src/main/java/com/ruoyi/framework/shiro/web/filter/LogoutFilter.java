@@ -64,7 +64,7 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
         }
         catch (Exception e)
         {
-            log.debug("Encountered session exception during logout.  This can generally safely be ignored.", e);
+            log.error("Encountered session exception during logout.  This can generally safely be ignored.", e);
         }
         return false;
     }

@@ -304,7 +304,7 @@ public class ExcelUtil<T>
                     }
                     catch (Exception e)
                     {
-                        log.error("导出Excel失败{}", e);
+                        log.error("导出Excel失败{}", e.getMessage());
                     }
                 }
             }
@@ -319,7 +319,7 @@ public class ExcelUtil<T>
         }
         catch (Exception e)
         {
-            log.error("关闭flush失败{}", e);
+            log.error("关闭flush失败{}", e.getMessage());
             return AjaxResult.error("导出Excel失败，请联系网站管理员！");
         }
     }

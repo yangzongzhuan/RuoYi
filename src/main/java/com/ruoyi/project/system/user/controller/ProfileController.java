@@ -149,7 +149,7 @@ public class ProfileController extends BaseController
         }
         catch (Exception e)
         {
-            log.error("updateAvatar failed!", e);
+            log.error("修改头像失败！", e);
             return error(e.getMessage());
         }
     }

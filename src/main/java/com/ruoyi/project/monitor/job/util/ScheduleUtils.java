@@ -54,7 +54,7 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("getCronTrigger 异常：", e);
         }
         return null;
     }
@@ -89,11 +89,11 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("createScheduleJob 异常：", e);
         }
         catch (TaskException e)
         {
-            log.error(e.getMessage());
+            log.error("createScheduleJob 异常：", e);
         }
     }
 
@@ -129,11 +129,11 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("SchedulerException 异常：", e);
         }
         catch (TaskException e)
         {
-            log.error(e.getMessage());
+            log.error("SchedulerException 异常：", e);
         }
     }
 
@@ -154,7 +154,7 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("run 异常：", e);
         }
         return rows;
     }
@@ -170,7 +170,7 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("pauseJob 异常：", e);
         }
     }
 
@@ -185,7 +185,7 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("resumeJob 异常：", e);
         }
     }
 
@@ -200,7 +200,7 @@ public class ScheduleUtils
         }
         catch (SchedulerException e)
         {
-            log.error(e.getMessage());
+            log.error("deleteScheduleJob 异常：", e);
         }
     }
 
