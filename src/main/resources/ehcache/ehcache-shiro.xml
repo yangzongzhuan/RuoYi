@@ -23,47 +23,5 @@
            statistics="true">
     </cache>
 
-    <!-- 系统用户缓存  没必要过期 -->
-    <cache name="sys-userCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           statistics="true"/>
-
-    <!-- 系统用户授权缓存  没必要过期 -->
-    <cache name="sys-authCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           memoryStoreEvictionPolicy="LRU"
-           statistics="true"/>
-
-    <!-- 菜单缓存  没必要过期 -->
-    <cache name="sys-menuCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           statistics="true"/>
-
-
-    <!-- shiro 会话缓存 不需要序列化到磁盘 此处我们放到db中了 此处cache没必要过期 因为我们存放到db了 -->
-    <cache name="shiro-activeSessionCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           statistics="true"/>
-
 </ehcache>
 	

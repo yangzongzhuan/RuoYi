@@ -1,10 +1,5 @@
 package com.ruoyi.project.common;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.ruoyi.common.utils.FileUtils;
 
 /**
  * 通用请求处理
@@ -29,8 +25,6 @@ public class CommonController
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request)
     {
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-        InputStream inputStream = null;
-        OutputStream os = null;
         try
         {
             String filePath = ResourceUtils.getURL("classpath:").getPath() + "static/file/" + fileName;
@@ -38,35 +32,15 @@ public class CommonController
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;fileName=" + setFileDownloadHeader(request, realFileName));
-            File file = new File(filePath);
-            inputStream = new FileInputStream(file);
-            os = response.getOutputStream();
-            byte[] b = new byte[1024];
-            int length;
-            while ((length = inputStream.read(b)) > 0)
+            FileUtils.writeBytes(filePath, response.getOutputStream());
+            if (delete)
             {
-                os.write(b, 0, length);
-            }
-            if (delete && file.exists())
-            {
-                file.delete();
+                FileUtils.deleteFile(filePath);
             }
         }
         catch (Exception e)
         {
             log.error("下载文件失败", e);
-        }
-        finally
-        {
-            try
-            {
-                os.close();
-                inputStream.close();
-            }
-            catch (IOException e)
-            {
-                log.error("close close fail ", e);
-            }
         }
     }
 
