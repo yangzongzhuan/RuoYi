@@ -67,7 +67,7 @@
 		            field: 'status',
 		            title: '状态',
 		            align: "center",
-		            formatter: function(item, index) {
+		            formatter: function(value, item, index) {
 		            	return $.table.selectDictLabel(datas, item.status);
 		            }
 		        },
@@ -79,7 +79,7 @@
 		        {
 		            title: '操作',
 		            align: 'center',
-		            formatter: function(row, index) {
+		            formatter: function(value, row, index) {
 		                if (row.parentId != 0) {
 		                    var actions = [];
 		                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.deptId + '\')"><i class="fa fa-edit">编辑</i></a> ');
