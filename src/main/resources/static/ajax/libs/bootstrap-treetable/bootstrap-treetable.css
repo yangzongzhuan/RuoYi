@@ -1,7 +1,5 @@
 .bootstrap-tree-table .treetable-indent {width:16px; height: 16px; display: inline-block; position: relative;}
 .bootstrap-tree-table .treetable-expander {width:16px; height: 16px; display: inline-block; position: relative; cursor: pointer;}
-.bootstrap-tree-table .treetable-expander-expanded{background-image: url(img/collapse.png); }
-.bootstrap-tree-table .treetable-expander-collapsed{background-image: url(img/expand.png);}
 .bootstrap-tree-table .treetable-selected{background: #f5f5f5 !important;}
 .bootstrap-tree-table .treetable-table{border:0 !important;margin-bottom:0}
 .bootstrap-tree-table .treetable-table tbody {display:block;height:auto;overflow-y:auto;}
