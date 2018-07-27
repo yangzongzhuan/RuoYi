@@ -51,11 +51,12 @@
         		}; 
             },
             // 搜索
-            search: function(form) {
+            search: function(formId) {
+            	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
     		    var params = $("#bootstrap-table").bootstrapTable('getOptions');
     		    params.queryParams = function(params) {
     		        var search = {};
-    		        $.each($("#" + form).serializeArray(), function(i, field) {
+    		        $.each($("#" + currentId).serializeArray(), function(i, field) {
     		            search[field.name] = field.value;
     		        });
     		        search.pageSize = params.limit;
@@ -68,9 +69,10 @@
     		    $("#bootstrap-table").bootstrapTable('refresh', params);
     		},
     		// 下载
-    		exportExcel: function(form) {
+    		exportExcel: function(formId) {
+    			var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
     			$.modal.loading("正在导出数据，请稍后...");
-    			$.post($.table._option.exportUrl, $("#" + form).serializeArray(), function(result) {
+    			$.post($.table._option.exportUrl, $("#" + currentId).serializeArray(), function(result) {
     				if (result.code == web_status.SUCCESS) {
     			        window.location.href = ctx + "common/download?fileName=" + result.msg + "&delete=" + true;
     				} else {
@@ -132,9 +134,10 @@
                 $.treeTable._treeTable = treeTable;
             },
             // 条件查询
-            search: function(form) {
+            search: function(formId) {
+            	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	var params = {};
-            	$.each($("#" + form).serializeArray(), function(i, field) {
+            	$.each($("#" + currentId).serializeArray(), function(i, field) {
             		params[field.name] = field.value;
 		        });
             	$.treeTable._treeTable.bootstrapTreeTable('refresh', params);
