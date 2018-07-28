@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.ruoyi.common.utils.FileUtils;
+import com.ruoyi.common.utils.file.FileUtils;
 
 /**
  * 通用请求处理

@@ -1,4 +1,4 @@
-package com.ruoyi.common.utils;
+package com.ruoyi.common.utils.file;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -70,7 +70,8 @@ public class FileUtils
     }
 
     /**
-     * @Desc 删除文件
+     * 删除文件
+     * 
      * @param filePath 文件
      * @return
      */

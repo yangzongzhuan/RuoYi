@@ -97,7 +97,7 @@ public class ConfigController extends BaseController
     @GetMapping("/edit/{configId}")
     public String edit(@PathVariable("configId") Long configId, ModelMap mmap)
     {
-        mmap.addAttribute("config", configService.selectConfigById(configId));
+        mmap.put("config", configService.selectConfigById(configId));
         return prefix + "/edit";
     }
 

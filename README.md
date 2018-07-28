@@ -38,31 +38,31 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 <table>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/25b5e333768d013d45a990c152dbe4d9d6e.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/55f92435662e6a799e9daac8a74fd46a1eb.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114553_jBTY_1438828.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/e05d6184cde91f7bb74736a11727ac863fe.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/2fc14293b0c7a2a938441bb89b3edde98c1.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114830_eIHp_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114854_Y5a2_1438828.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/1ffdb33f4ae588dd77d7b29779154fd555e.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/302762bb406c43ce7680637a793b1f67820.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114920_P8qv_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114946_O3jx_1438828.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/c3eab05442a6ffe87fd63cb1d4855b11d39.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/2b6483aa20459f9bfb9911d614ef8ac3c97.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115022_1Tnm_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115051_XvMW_1438828.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/0aff434b32d6012dbf890c7f4603651c917.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/1f1f079c084d60c41ebfdd964d32b956efa.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115117_9TZ3_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115130_a5xO_1438828.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/3cc7a4a5885978c1799d874d7727cfcf7a0.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/a323d288bf509b7180b1538fe2193d325b3.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115151_EuYC_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115212_QybT_1438828.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/09cd252f86ce338745de291a78b271313be.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/10b12c7e673fee5ac3254f246354a4805b7.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0727/172807_8stz_1438828.jpg"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0727/172830_Q20u_1438828.jpg"/></td>
     </tr>
 </table>
 

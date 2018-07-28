@@ -1,4 +1,4 @@
-package com.ruoyi.common.utils;
+package com.ruoyi.common.utils.file;
 
 import java.io.File;
 import java.io.IOException;
