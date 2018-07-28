@@ -21,7 +21,7 @@
 		var _main_div = $("<div class='bootstrap-tree-table fixed-table-container'></div>");
 		target.before(_main_div);
 		_main_div.append(target);
-		target.addClass("table table-hover treetable-table table-bordered");
+		target.addClass("table table-hover treetable-table");
 		if (options.striped) {
 			target.addClass('table-striped');
 		}
@@ -102,7 +102,7 @@
 					} 
 					tr.append(td);
 				}else{
-					var td = $('<td title="'+item[column.field]+'" name="'+column.field+'" style="'+((column.width)?('width:'+column.width):'')+'"></td>');
+					var td = $('<td title="'+item[column.field]+'" name="'+column.field+'" style="text-align:'+column.align+';'+((column.width)?('width:'+column.width):'')+'"></td>');
 					// 增加formatter渲染
 					if (column.formatter) {
 						td.html(column.formatter.call(this, item[column.field], item, index));
@@ -135,11 +135,11 @@
 			$.each(options.columns, function(i, item) {
 				var th = null;
 				// 判断有没有选择列
-				if(i==0&&item.field=='selectItem'){
+				if(i==0 && item.field=='selectItem'){
 					hasSelectItem = true;
-					th = $('<th style="width:36px"></th>');
+					th = $('<th style="text-align:'+item.valign+';width:36px"></th>');
 				}else{
-					th = $('<th style="'+((item.width)?('width:'+item.width):'')+'"></th>');
+					th = $('<th style="text-align:'+item.valign+';padding:10px;'+((item.width)?('width:'+item.width):'')+'"></th>');
 				}
 				th.text(item.title);
 				thr.append(th);
@@ -296,7 +296,7 @@
 				target.load();
 			}
 		},
-	// 组件的其他方法也可以进行类似封装........
+	    // 组件的其他方法也可以进行类似封装........
 	};
 
 	$.fn.bootstrapTreeTable.defaults = {
@@ -313,7 +313,7 @@
         expandFirst : true, // 是否默认第一级展开--expandAll为false时生效
 		striped : false, // 是否各行渐变色
 		columns : [],
-        toolbar: null,//顶部工具条
+        toolbar: '#toolbar',//顶部工具条
         height: 0,
 		expanderExpandedClass : 'glyphicon glyphicon-chevron-down',// 展开的按钮的图标
 		expanderCollapsedClass : 'glyphicon glyphicon-chevron-right'// 缩起的按钮的图标
