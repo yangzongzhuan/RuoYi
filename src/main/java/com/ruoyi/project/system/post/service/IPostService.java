@@ -45,6 +45,8 @@ public interface IPostService
      * 批量删除岗位信息
      * 
      * @param ids 需要删除的数据ID
+     * @return 结果
+     * @throws Exception 异常
      */
     public int deletePostByIds(String ids) throws Exception;
 

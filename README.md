@@ -60,10 +60,6 @@ http://webapplayers.com/inspinia_admin-v2.7.1
         <td><img src="https://static.oschina.net/uploads/space/2018/0728/115151_EuYC_1438828.png"/></td>
         <td><img src="https://static.oschina.net/uploads/space/2018/0728/115212_QybT_1438828.png"/></td>
     </tr>
-	<tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0727/172807_8stz_1438828.jpg"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0727/172830_Q20u_1438828.jpg"/></td>
-    </tr>
 </table>
 
 

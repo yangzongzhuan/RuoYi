@@ -29,6 +29,7 @@ public interface DeptMapper
     /**
      * 查询部门管理数据
      * 
+     * @param dept 部门信息
      * @return 部门信息集合
      */
     public List<Dept> selectDeptList(Dept dept);

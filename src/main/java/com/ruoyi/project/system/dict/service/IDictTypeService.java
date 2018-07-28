@@ -46,6 +46,7 @@ public interface IDictTypeService
      * 
      * @param ids 需要删除的数据
      * @return 结果
+     * @throws Exception 异常
      */
     public int deleteDictTypeByIds(String ids) throws Exception;
 

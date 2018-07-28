@@ -16,16 +16,24 @@ import com.ruoyi.framework.config.RuoYiConfig;
 public class FileUploadUtils
 {
 
-    // 默认大小 50M
+    /**
+     * 默认大小 50M
+     */
     public static final long DEFAULT_MAX_SIZE = 52428800;
 
-    // 默认上传的地址
+    /**
+     * 默认上传的地址
+     */
     private static String defaultBaseDir = RuoYiConfig.getProfile();
 
-    // 默认的文件名最大长度
+    /**
+     * 默认的文件名最大长度
+     */
     public static final int DEFAULT_FILE_NAME_LENGTH = 200;
 
-    // 默认文件类型jpg
+    /**
+     * 默认文件类型jpg
+     */
     public static final String IMAGE_JPG_EXTENSION = ".jpg";
 
     private static int counter = 0;

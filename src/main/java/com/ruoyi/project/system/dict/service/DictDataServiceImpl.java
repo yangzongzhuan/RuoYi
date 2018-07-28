@@ -50,6 +50,7 @@ public class DictDataServiceImpl implements IDictDataService
      * @param dictValue 字典键值
      * @return 字典标签
      */
+    @Override
     public String selectDictLabel(String dictType, String dictValue)
     {
         return dictDataMapper.selectDictLabel(dictType, dictValue);

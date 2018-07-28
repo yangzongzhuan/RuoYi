@@ -2,9 +2,7 @@ package com.ruoyi.framework.config;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import javax.servlet.Filter;
-
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -13,12 +11,10 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
-import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
@@ -29,7 +25,6 @@ import com.ruoyi.framework.shiro.web.filter.online.OnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.framework.shiro.web.session.SpringSessionValidationScheduler;
-
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
 /**
@@ -334,17 +329,6 @@ public class ShiroConfig
         cookieRememberMeManager.setCookie(rememberMeCookie());
         cookieRememberMeManager.setCipherKey(Base64.decode("fCq+/xW488hMTCD+cmJ3aQ=="));
         return cookieRememberMeManager;
-    }
-
-    /**
-     * 开启Shiro代理
-     */
-    @Bean
-    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator()
-    {
-        DefaultAdvisorAutoProxyCreator proxyCreator = new DefaultAdvisorAutoProxyCreator();
-        proxyCreator.setProxyTargetClass(true);
-        return proxyCreator;
     }
 
     /**

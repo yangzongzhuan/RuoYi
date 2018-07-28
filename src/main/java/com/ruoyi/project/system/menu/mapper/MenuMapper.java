@@ -34,10 +34,11 @@ public interface MenuMapper
      * @return 菜单列表
      */
     public List<String> selectMenuTree(Long roleId);
-    
+
     /**
      * 查询系统菜单列表
      * 
+     * @param menu 菜单信息
      * @return 菜单列表
      */
     public List<Menu> selectMenuList(Menu menu);
@@ -64,7 +65,7 @@ public interface MenuMapper
      * @return 菜单信息
      */
     public Menu selectMenuById(Long menuId);
-    
+
     /**
      * 查询菜单数量
      * 
@@ -80,7 +81,7 @@ public interface MenuMapper
      * @return 结果
      */
     public int insertMenu(Menu menu);
-    
+
     /**
      * 修改菜单信息
      * 
@@ -88,7 +89,7 @@ public interface MenuMapper
      * @return 结果
      */
     public int updateMenu(Menu menu);
-    
+
     /**
      * 校验菜单名称是否唯一
      * 

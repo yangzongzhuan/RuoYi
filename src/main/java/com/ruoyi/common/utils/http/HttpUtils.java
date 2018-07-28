@@ -1,7 +1,6 @@
 package com.ruoyi.common.utils.http;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -165,7 +164,6 @@ public class HttpUtils
         return result.toString();
     }
 
-    @SuppressWarnings("deprecation")
     public static String sendSSLPost(String url, String param)
     {
         StringBuilder result = new StringBuilder();
@@ -189,11 +187,10 @@ public class HttpUtils
             conn.setHostnameVerifier(new TrustAnyHostnameVerifier());
             conn.connect();
             InputStream is = conn.getInputStream();
-            DataInputStream indata = new DataInputStream(is);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String ret = "";
-            while (ret != null)
+            while ((ret = br.readLine()) != null)
             {
-                ret = indata.readLine();
                 if (ret != null && !ret.trim().equals(""))
                 {
                     result.append(new String(ret.getBytes("ISO-8859-1"), "utf-8"));
@@ -201,7 +198,7 @@ public class HttpUtils
             }
             log.info("recv - {}", result);
             conn.disconnect();
-            indata.close();
+            br.close();
         }
         catch (ConnectException e)
         {

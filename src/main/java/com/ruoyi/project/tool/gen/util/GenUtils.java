@@ -19,13 +19,13 @@ import com.ruoyi.project.tool.gen.domain.TableInfo;
 public class GenUtils
 {
     /** 项目空间路径 */
-    private static final String projectPath = "main/java/com/ruoyi/project";
+    private static final String PROJECT_PATH = "main/java/com/ruoyi/project";
 
     /** mybatis空间路径 */
-    private static final String myBatisPath = "main/resources/mybatis";
+    private static final String MYBATIS_PATH = "main/resources/mybatis";
 
     /** html空间路径 */
-    private static final String templatesPath = "main/resources/templates";
+    private static final String TEMPLATES_PATH = "main/resources/templates";
 
     /**
      * 设置列信息
@@ -119,9 +119,9 @@ public class GenUtils
         String classname = table.getClassname();
         // 大写类名
         String className = table.getClassName();
-        String javaPath = projectPath + "/" + moduleName + "/";
-        String mybatisPath = myBatisPath + "/" + moduleName + "/" + className;
-        String htmlPath = templatesPath + "/" + moduleName + "/" + classname;
+        String javaPath = PROJECT_PATH + "/" + moduleName + "/";
+        String mybatisPath = MYBATIS_PATH + "/" + moduleName + "/" + className;
+        String htmlPath = TEMPLATES_PATH + "/" + moduleName + "/" + classname;
 
         if (StringUtils.isNotEmpty(classname))
         {

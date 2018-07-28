@@ -31,6 +31,8 @@ import org.apache.poi.ss.util.CellRangeAddressList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
+
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.framework.web.domain.AjaxResult;
@@ -58,28 +60,32 @@ public class ExcelUtil<T>
 
         Workbook workbook = WorkbookFactory.create(input);
         Sheet sheet = workbook.getSheet(sheetName);
-        if (!sheetName.trim().equals(""))
+        if (StringUtils.isNotEmpty(sheetName))
         {
-            sheet = workbook.getSheet(sheetName); // 如果指定sheet名,则取指定sheet中的内容.
+            // 如果指定sheet名,则取指定sheet中的内容.
+            sheet = workbook.getSheet(sheetName);
         }
         if (sheet == null)
         {
-            sheet = workbook.getSheetAt(0); // 如果传入的sheet名不存在则默认指向第1个sheet.
+            // 如果传入的sheet名不存在则默认指向第1个sheet.
+            sheet = workbook.getSheetAt(0);
         }
         int rows = sheet.getPhysicalNumberOfRows();
 
         if (rows > 0)
         {
-            // 有数据时才处理
-            Field[] allFields = clazz.getDeclaredFields(); // 得到类的所有field.
-            Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>(); // 定义一个map用于存放列的序号和field.
+            // 有数据时才处理 得到类的所有field.
+            Field[] allFields = clazz.getDeclaredFields();
+            // 定义一个map用于存放列的序号和field.
+            Map<Integer, Field> fieldsMap = new HashMap<Integer, Field>();
             for (int col = 0; col < allFields.length; col++)
             {
                 Field field = allFields[col];
                 // 将有注解的field存放到map中.
                 if (field.isAnnotationPresent(Excel.class))
                 {
-                    field.setAccessible(true);// 设置类的私有字段属性可访问.
+                    // 设置类的私有字段属性可访问.
+                    field.setAccessible(true);
                     fieldsMap.put(col, field);
                 }
             }
@@ -104,13 +110,15 @@ public class ExcelUtil<T>
                     }
 
                     String c = cell.getStringCellValue();
-                    if (c.equals(""))
+                    if (StringUtils.isEmpty(c))
                     {
                         continue;
                     }
 
-                    entity = (entity == null ? clazz.newInstance() : entity);// 如果不存在实例则新建.
-                    Field field = fieldsMap.get(j);// 从map中得到对应列的field.
+                    // 如果不存在实例则新建.
+                    entity = (entity == null ? clazz.newInstance() : entity);
+                    // 从map中得到对应列的field.
+                    Field field = fieldsMap.get(j);
                     // 取得类型,并根据对象类型设置值.
                     Class<?> fieldType = field.getType();
                     if (String.class == fieldType)
@@ -179,7 +187,8 @@ public class ExcelUtil<T>
      */
     public AjaxResult exportExcel(List<T> list, String sheetName)
     {
-        Field[] allFields = clazz.getDeclaredFields();// 得到所有定义字段
+        // 得到所有定义字段
+        Field[] allFields = clazz.getDeclaredFields();
         List<Field> fields = new ArrayList<Field>();
         // 得到所有field并存放到一个list中.
         for (Field field : allFields)
@@ -190,32 +199,39 @@ public class ExcelUtil<T>
             }
         }
 
-        HSSFWorkbook workbook = new HSSFWorkbook();// 产生工作薄对象
+        // 产生工作薄对象
+        HSSFWorkbook workbook = new HSSFWorkbook();
         // excel2003中每个sheet中最多有65536行
         int sheetSize = 65536;
-        double sheetNo = Math.ceil(list.size() / sheetSize);// 取出一共有多少个sheet.
+        // 取出一共有多少个sheet.
+        double sheetNo = Math.ceil(list.size() / sheetSize);
         for (int index = 0; index <= sheetNo; index++)
         {
-            HSSFSheet sheet = workbook.createSheet();// 产生工作表对象
+            // 产生工作表对象
+            HSSFSheet sheet = workbook.createSheet();
             if (sheetNo == 0)
             {
                 workbook.setSheetName(index, sheetName);
             }
             else
             {
-                workbook.setSheetName(index, sheetName + index);// 设置工作表的名称.
+                // 设置工作表的名称.
+                workbook.setSheetName(index, sheetName + index);
             }
             HSSFRow row;
             HSSFCell cell; // 产生单元格
 
-            row = sheet.createRow(0); // 产生一行
+            // 产生一行
+            row = sheet.createRow(0);
             // 写入各个字段的列头名称
             for (int i = 0; i < fields.size(); i++)
             {
                 Field field = fields.get(i);
                 Excel attr = field.getAnnotation(Excel.class);
-                cell = row.createCell(i); // 创建列
-                cell.setCellType(HSSFCell.CELL_TYPE_STRING); // 设置列中写入内容为String类型
+                // 创建列
+                cell = row.createCell(i);
+                // 设置列中写入内容为String类型
+                cell.setCellType(HSSFCell.CELL_TYPE_STRING);
                 HSSFCellStyle cellStyle = workbook.createCellStyle();
                 cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
                 cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
@@ -230,8 +246,10 @@ public class ExcelUtil<T>
                 else
                 {
                     HSSFFont font = workbook.createFont();
-                    font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD); // 粗体显示
-                    cellStyle.setFont(font); // 选择需要用到的字体格式
+                    // 粗体显示
+                    font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+                    // 选择需要用到的字体格式
+                    cellStyle.setFont(font);
                     cellStyle.setFillForegroundColor(HSSFColor.LIGHT_YELLOW.index);
                     // 设置列宽
                     sheet.setColumnWidth(i, 3766);
@@ -240,17 +258,20 @@ public class ExcelUtil<T>
                 cellStyle.setWrapText(true);
                 cell.setCellStyle(cellStyle);
 
-                cell.setCellValue(attr.name());// 写入列名
+                // 写入列名
+                cell.setCellValue(attr.name());
 
                 // 如果设置了提示信息则鼠标放上去提示.
-                if (!attr.prompt().trim().equals(""))
+                if (StringUtils.isNotEmpty(attr.prompt()))
                 {
-                    setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, i, i); // 这里默认设了2-101列提示.
+                    // 这里默认设了2-101列提示.
+                    setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, i, i);
                 }
                 // 如果设置了combo属性则本列只能选择不能输入
                 if (attr.combo().length > 0)
                 {
-                    setHSSFValidation(sheet, attr.combo(), 1, 100, i, i); // 这里默认设了2-101列只能选择不能输入.
+                    // 这里默认设了2-101列只能选择不能输入.
+                    setHSSFValidation(sheet, attr.combo(), 1, 100, i, i);
                 }
             }
 
@@ -263,18 +284,22 @@ public class ExcelUtil<T>
             for (int i = startNo; i < endNo; i++)
             {
                 row = sheet.createRow(i + 1 - startNo);
-                T vo = (T) list.get(i); // 得到导出对象.
+                // 得到导出对象.
+                T vo = (T) list.get(i);
                 for (int j = 0; j < fields.size(); j++)
                 {
-                    Field field = fields.get(j); // 获得field.
-                    field.setAccessible(true); // 设置实体类私有属性可访问
+                    // 获得field.
+                    Field field = fields.get(j);
+                    // 设置实体类私有属性可访问
+                    field.setAccessible(true);
                     Excel attr = field.getAnnotation(Excel.class);
                     try
                     {
                         // 根据Excel中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
                         if (attr.isExport())
                         {
-                            cell = row.createCell(j);// 创建cell
+                            // 创建cell
+                            cell = row.createCell(j);
                             cell.setCellStyle(cs);
                             try
                             {
@@ -292,11 +317,13 @@ public class ExcelUtil<T>
                                 cell.setCellType(HSSFCell.CELL_TYPE_STRING);
                                 if (vo == null)
                                 {
-                                    cell.setCellValue(""); // 如果数据存在就填入,不存在填入空格.
+                                    // 如果数据存在就填入,不存在填入空格.
+                                    cell.setCellValue("");
                                 }
                                 else
                                 {
-                                    cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));// 如果数据存在就填入,不存在填入空格.
+                                    // 如果数据存在就填入,不存在填入空格.
+                                    cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
                                 }
 
                             }
@@ -329,18 +356,18 @@ public class ExcelUtil<T>
      * 
      * @param col
      */
-//    public static int getExcelCol(String col)
-//    {
-//        col = col.toUpperCase();
-//        // 从-1开始计算,字母重1开始运算。这种总数下来算数正好相同。
-//        int count = -1;
-//        char[] cs = col.toCharArray();
-//        for (int i = 0; i < cs.length; i++)
-//        {
-//            count += (cs[i] - 64) * Math.pow(26, cs.length - 1 - i);
-//        }
-//        return count;
-//    }
+    // public static int getExcelCol(String col)
+    // {
+    // col = col.toUpperCase();
+    // // 从-1开始计算,字母重1开始运算。这种总数下来算数正好相同。
+    // int count = -1;
+    // char[] cs = col.toCharArray();
+    // for (int i = 0; i < cs.length; i++)
+    // {
+    // count += (cs[i] - 64) * Math.pow(26, cs.length - 1 - i);
+    // }
+    // return count;
+    // }
 
     /**
      * 设置单元格上提示
@@ -362,9 +389,9 @@ public class ExcelUtil<T>
         // 四个参数分别是：起始行、终止行、起始列、终止列
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
         // 数据有效性对象
-        HSSFDataValidation data_validation_view = new HSSFDataValidation(regions, constraint);
-        data_validation_view.createPromptBox(promptTitle, promptContent);
-        sheet.addValidationData(data_validation_view);
+        HSSFDataValidation dataValidationView = new HSSFDataValidation(regions, constraint);
+        dataValidationView.createPromptBox(promptTitle, promptContent);
+        sheet.addValidationData(dataValidationView);
         return sheet;
     }
 
@@ -387,8 +414,8 @@ public class ExcelUtil<T>
         // 设置数据有效性加载在哪个单元格上,四个参数分别是：起始行、终止行、起始列、终止列
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
         // 数据有效性对象
-        HSSFDataValidation data_validation_list = new HSSFDataValidation(regions, constraint);
-        sheet.addValidationData(data_validation_list);
+        HSSFDataValidation dataValidationList = new HSSFDataValidation(regions, constraint);
+        sheet.addValidationData(dataValidationList);
         return sheet;
     }
 
