@@ -49,6 +49,12 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-3 control-label">数据权限</label>
+				<div class="col-sm-8">
+					<div id="deptTrees" class="ztree"></div>
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="form-control-static col-sm-offset-9">
 					<button type="submit" class="btn btn-primary">提交</button>
 					<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
@@ -76,6 +82,24 @@
 				menuTrees = $.fn.zTree.init($("#menuTrees"), setting, data); //.expandAll(true);
 			}, null, null, "正在加载，请稍后...");
 		};loadTree();
+
+        // 权限树结构初始化加载
+        var deptsetting = {
+            check:{enable:true,nocheckInherit:true,chkboxType:{"Y":"ps","N":"ps"}},
+            view:{selectedMulti:false,nameIsHTML: true},
+            data:{simpleData:{enable:true},key:{title:"title"}},
+            callback:{
+                beforeClick: function (treeId, treeNode, clickFlag) {
+                    var deptTrees = $.fn.zTree.getZTreeObj(treeId);
+                    deptTrees.checkNode(treeNode, !treeNode.checked, true, true);
+                    return false;
+                }
+            }
+        }, deptTrees, loadTree = function(){
+            $.get(ctx + "system/dept/treeData", function(data) {
+                deptTrees = $.fn.zTree.init($("#deptTrees"), deptsetting, data); //.expandAll(true);
+            }, null, null, "正在加载，请稍后...");
+        };loadTree();
 	
 		$("#form-role-add").validate({
 			rules:{
@@ -115,17 +139,29 @@
 		});
 	
 		function selectCheckeds() {
-		    var menuIds = "";
-		    var treeNodes = menuTrees.getCheckedNodes(true);
-		    for (var i = 0; i < treeNodes.length; i++) {
-		        if (0 == i) {
-		        	menuIds = treeNodes[i].id;
-		        } else {
-		        	menuIds += ("," + treeNodes[i].id);
-		        }
-		    }
-		    return menuIds;
-		}
+            var menuIds = "";
+            var treeNodes = menuTrees.getCheckedNodes(true);
+            for (var i = 0; i < treeNodes.length; i++) {
+                if (0 == i) {
+                    menuIds = treeNodes[i].id;
+                } else {
+                    menuIds += ("," + treeNodes[i].id);
+                }
+            }
+            return menuIds;
+        }
+        function selectDeptCheckeds() {
+            var deptIds = "";
+            var treeNodes = deptTrees.getCheckedNodes(true);
+            for (var i = 0; i < treeNodes.length; i++) {
+                if (0 == i) {
+                    deptIds = treeNodes[i].id;
+                } else {
+                    deptIds += ("," + treeNodes[i].id);
+                }
+            }
+            return deptIds;
+        }
 	
 		function add() {
 			var roleName = $("input[name='roleName']").val();
@@ -134,6 +170,7 @@
 			var status = $("input[name='status']").is(':checked') == true ? 0 : 1;
 			var remark = $("input[name='remark']").val();
 			var menuIds = selectCheckeds();
+			var deptIds = selectDeptCheckeds();
 			$.ajax({
 				cache : true,
 				type : "POST",
@@ -144,7 +181,8 @@
 					"roleSort": roleSort,
 					"status": status,
 					"remark": remark,
-					"menuIds": menuIds
+					"menuIds": menuIds,
+					"deptIds":deptIds
 				},
 				async : false,
 				error : function(request) {

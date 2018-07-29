@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.ruoyi.project.system.role.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
@@ -55,8 +57,42 @@ public class DeptServiceImpl implements IDeptService
     {
         List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
         List<Dept> deptList = deptMapper.selectDeptAll();
+        trees=getTrees(deptList,false,null);
+        return trees;
+    }
 
-        for (Dept dept : deptList)
+
+    /**
+     * 根据角色ID查询部门（数据权限）
+     *
+     * @param role 角色对象
+     * @return 部门列表（数据权限）
+     */
+    @Override
+    public List<Map<String, Object>> roleDeptTreeData(Role role) {
+        Long roleId=role.getRoleId();
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        List<Dept> deptList=deptMapper.selectDeptAll();
+        if(StringUtils.isNotNull(roleId)){
+            List<String> roleDeptList=deptMapper.selectRoleDeptTree(roleId);
+             trees=getTrees(deptList,true,roleDeptList);
+        }else {
+            trees=getTrees(deptList,false,null);
+        }
+        return trees;
+    }
+    /**
+     * 对象转菜单树
+     *
+     * @param menuList 菜单列表
+     * @param isCheck 是否需要选中
+     * @param roleDeptList 角色已存在菜单列表
+     * @return
+     */
+    public List<Map<String, Object>> getTrees(List<Dept> menuList, boolean isCheck, List<String> roleDeptList){
+
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        for (Dept dept : menuList)
         {
             if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
             {
@@ -65,12 +101,19 @@ public class DeptServiceImpl implements IDeptService
                 deptMap.put("pId", dept.getParentId());
                 deptMap.put("name", dept.getDeptName());
                 deptMap.put("title", dept.getDeptName());
+                if (isCheck)
+                {
+                    deptMap.put("checked", roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
+                }
+                else
+                {
+                    deptMap.put("checked", false);
+                }
                 trees.add(deptMap);
             }
         }
         return trees;
     }
-
     /**
      * 查询部门人数
      * 

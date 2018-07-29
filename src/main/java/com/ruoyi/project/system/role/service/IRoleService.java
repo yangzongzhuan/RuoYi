@@ -1,8 +1,9 @@
 package com.ruoyi.project.system.role.service;
 
+import com.ruoyi.project.system.role.domain.Role;
+
 import java.util.List;
 import java.util.Set;
-import com.ruoyi.project.system.role.domain.Role;
 
 /**
  * 角色业务层

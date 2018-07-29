@@ -118,8 +118,7 @@ public class MenuServiceImpl implements IMenuService
 
     /**
      * 查询所有菜单
-     * 
-     * @param role 角色对象
+     *
      * @return 菜单列表
      */
     @Override

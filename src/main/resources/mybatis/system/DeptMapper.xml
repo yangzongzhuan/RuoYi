@@ -24,6 +24,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select t.dept_id, t.parent_id, t.dept_name, t.order_num, t.leader, t.phone, t.email, t.status, t.create_by, t.create_time from sys_dept t
     </sql>
 
+	<select id="selectRoleDeptTree" parameterType="Long" resultType="String">
+		select concat(d.dept_id, d.dept_name) as dept_name
+		from sys_dept d
+			left join sys_role_dept rd on d.dept_id = rd.dept_id
+		where rd.role_id = #{roleId}
+		order by d.parent_id, d.order_num
+	</select>
+
 	<select id="selectDeptAll" resultMap="DeptResult">
 		<include refid="selectDeptVo"/>
 	</select>
