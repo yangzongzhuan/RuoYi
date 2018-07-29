@@ -186,7 +186,7 @@ public class RoleServiceImpl implements IRoleService
     /**
      * 新增角色菜单信息
      * 
-     * @param user 角色对象
+     * @param role 角色对象
      */
     public int insertRoleMenu(Role role)
     {

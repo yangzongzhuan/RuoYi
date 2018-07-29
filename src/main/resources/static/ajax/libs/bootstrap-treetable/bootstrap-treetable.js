@@ -80,9 +80,9 @@
         	if(options.expandAll){
             	tr.css("display","table");
             	_icon = options.expanderExpandedClass;
-        	}else if(options.expandFirst&&lv<=2){
+        	}else if(options.expandFirst&&lv<=1){
             	tr.css("display","table");
-            	_icon=(lv==1)?options.expanderExpandedClass:options.expanderCollapsedClass;
+            	_icon=(lv==0)?options.expanderExpandedClass:options.expanderCollapsedClass;
         	}else{
             	tr.css("display","none");
             	_icon = options.expanderCollapsedClass;
