@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.ruoyi.project.system.role.domain.RoleDept;
-import com.ruoyi.project.system.role.mapper.RoleDeptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
@@ -37,9 +34,6 @@ public class RoleServiceImpl implements IRoleService
 
     @Autowired
     private UserRoleMapper userRoleMapper;
-
-    @Autowired
-    private RoleDeptMapper roleDeptMapper;
 
     /**
      * 根据条件分页查询角色数据
@@ -168,14 +162,12 @@ public class RoleServiceImpl implements IRoleService
         // 新增角色信息
         roleMapper.insertRole(role);
         ShiroUtils.clearCachedAuthorizationInfo();
-        //新增角色和部门信息（数据权限）
-        insertRoleDept(role);
         return insertRoleMenu(role);
     }
 
     /**
      * 修改保存角色信息
-     *
+     * 
      * @param role 角色信息
      * @return 结果
      */
@@ -188,15 +180,13 @@ public class RoleServiceImpl implements IRoleService
         // 删除角色与菜单关联
         roleMenuMapper.deleteRoleMenuByRoleId(role.getRoleId());
         ShiroUtils.clearCachedAuthorizationInfo();
-        //新增角色和部门信息（数据权限）
-        insertRoleDept(role);
         return insertRoleMenu(role);
     }
 
     /**
      * 新增角色菜单信息
      * 
-     * @param role 角色对象
+     * @param user 角色对象
      */
     public int insertRoleMenu(Role role)
     {
@@ -217,27 +207,6 @@ public class RoleServiceImpl implements IRoleService
         return rows;
     }
 
-    /**
-     * 新增角色部门信息(数据权限)
-     *
-     * @param role 角色对象
-     */
-    public void  insertRoleDept(Role role)
-    {
-        // 新增角色与部门（数据权限）管理
-        List<RoleDept> list = new ArrayList<RoleDept>();
-        for (Long deptId : role.getDeptIds())
-        {
-            RoleDept rd = new RoleDept();
-            rd.setRoleId(role.getRoleId());
-            rd.setDeptId(deptId);
-            list.add(rd);
-        }
-        if (list.size() > 0)
-        {
-            roleDeptMapper.batchRoleDept(list);
-        }
-    }
     /**
      * 校验角色名称是否唯一
      * 

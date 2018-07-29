@@ -2,8 +2,6 @@ package com.ruoyi.project.system.dept.controller;
 
 import java.util.List;
 import java.util.Map;
-
-import com.ruoyi.project.system.role.domain.Role;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -147,16 +145,6 @@ public class DeptController extends BaseController
     public List<Map<String, Object>> treeData()
     {
         List<Map<String, Object>> tree = deptService.selectDeptTree();
-        return tree;
-    }
-
-    /**
-     * 加载角色部门（数据权限）列表树
-     */
-    @GetMapping("/roleDeptTreeData")
-    @ResponseBody
-    public List<Map<String, Object>> deptTreeData(Role role){
-        List<Map<String, Object>> tree = deptService.roleDeptTreeData(role);
         return tree;
     }
 }

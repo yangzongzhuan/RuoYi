@@ -577,13 +577,3 @@ create table sys_notice (
 -- ----------------------------
 insert into sys_notice values('1', '温馨提醒：2018-07-01 若依新版本发布啦', '2', '新版本内容', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '管理员');
 insert into sys_notice values('2', '维护通知：2018-07-01 若依系统凌晨维护', '1', '维护内容',   '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '管理员');
-
--- ----------------------------
--- 18、角色和部门关联表  角色1-N部门（用于数据权限）
--- ----------------------------
-drop table if exists sys_role_dept;
-create table sys_role_dept (
-  role_id 	int(11) not null comment '角色ID',
-  dept_id 	int(11) not null comment '部门ID',
-  primary key(role_id, dept_id)
-) engine=innodb default charset=utf8 comment = '角色和部门关联表，用于数据权限';

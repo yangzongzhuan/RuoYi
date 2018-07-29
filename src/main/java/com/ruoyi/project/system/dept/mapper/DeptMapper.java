@@ -80,12 +80,4 @@ public interface DeptMapper
      * @return 结果
      */
     public Dept checkDeptNameUnique(String deptName);
-
-    /**
-     * 根据角色ID查询菜单
-     *
-     * @param roleId 角色ID
-     * @return 菜单列表
-     */
-    public List<String> selectRoleDeptTree(Long roleId);
 }

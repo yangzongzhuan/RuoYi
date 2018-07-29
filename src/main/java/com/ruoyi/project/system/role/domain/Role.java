@@ -1,9 +1,9 @@
 package com.ruoyi.project.system.role.domain;
 
+import java.util.Arrays;
+
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
-
-import java.util.Arrays;
 
 /**
  * 角色对象 sys_role
@@ -38,8 +38,6 @@ public class Role extends BaseEntity
     private boolean flag = false;
     /** 菜单组 */
     private Long[] menuIds;
-    /** 部门组（数据权限） */
-    private Long[] deptIds;
 
     public Long getRoleId()
     {
@@ -111,19 +109,11 @@ public class Role extends BaseEntity
         this.menuIds = menuIds;
     }
 
-    public Long[] getDeptIds() {
-        return deptIds;
-    }
-
-    public void setDeptIds(Long[] deptIds) {
-        this.deptIds = deptIds;
-    }
-
     @Override
     public String toString()
     {
         return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleKey=" + roleKey + ", roleSort=" + roleSort
-                + ", status=" + status + ", flag=" + flag + ", menuIds=" + Arrays.toString(menuIds) + ", deptIds=" + Arrays.toString(deptIds)+ "]";
+                + ", status=" + status + ", flag=" + flag + ", menuIds=" + Arrays.toString(menuIds) + "]";
     }
 
 }

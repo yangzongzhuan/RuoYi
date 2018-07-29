@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.ruoyi.project.system.dept.domain.Dept;
-import com.ruoyi.project.system.role.domain.Role;
 
 /**
  * 部门管理 服务层
@@ -34,14 +33,6 @@ public interface IDeptService
      * @return 所有部门信息
      */
     public List<Map<String, Object>> selectDeptTree();
-
-    /**
-     * 根据角色ID查询菜单
-     *
-     * @param role 角色对象
-     * @return 菜单列表
-     */
-    public List<Map<String, Object>> roleDeptTreeData(Role role);
 
     /**
      * 查询部门人数
