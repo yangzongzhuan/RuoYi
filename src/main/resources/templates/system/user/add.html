@@ -76,7 +76,7 @@
 				<label class="col-sm-3 control-label">角色：</label>
 				<div class="col-sm-8">
 					<label th:each="role:${roles}" class="checkbox-inline i-checks">
-						<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}">
+						<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}">
 					</label>
 				</div>
 			</div>
