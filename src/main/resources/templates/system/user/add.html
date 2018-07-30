@@ -67,7 +67,7 @@
 				<label class="col-sm-3 control-label">岗位：</label>
 				<div class="col-sm-8">
 					<select id="post" name="post" class="form-control select2-hidden-accessible" multiple="">
-						<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}"></option>
+						<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:disabled="${post.status == '1'}"></option>
 					</select>
 					
 				</div>
