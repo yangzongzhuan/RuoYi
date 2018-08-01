@@ -201,13 +201,28 @@ label.error {
 }
 
 /** 表单查询条件 */
+ul {
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+li {
+	list-style: none;
+}
+
+.layui-input {
+	display: block;
+	width: 100%;
+	padding-left: 10px;
+}
 
 label{
     font-weight: normal;
 }
 
 .container-div{
-	padding:20px 45px;
+	padding:10px 35px;
 	height:100%;
 }
 
