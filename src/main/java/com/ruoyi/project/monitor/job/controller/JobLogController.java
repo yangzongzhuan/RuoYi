@@ -49,6 +49,7 @@ public class JobLogController extends BaseController
     }
 
     @Log(title = "调度日志", action = BusinessType.EXPORT)
+    @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(JobLog jobLog) throws Exception

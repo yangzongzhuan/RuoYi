@@ -51,6 +51,7 @@ public class PostController extends BaseController
     }
 
     @Log(title = "岗位管理", action = BusinessType.EXPORT)
+    @RequiresPermissions("system:post:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Post post) throws Exception

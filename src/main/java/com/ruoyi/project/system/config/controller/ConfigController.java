@@ -54,6 +54,7 @@ public class ConfigController extends BaseController
     }
 
     @Log(title = "参数管理", action = BusinessType.EXPORT)
+    @RequiresPermissions("system:config:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Config config) throws Exception

@@ -36,7 +36,8 @@
         			showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
         			showExport: $.common.visible(options.showExport),   // 是否支持导出文件
                     queryParams: $.table._params,                       // 传递参数（*）
-                    columns: options.columns                            // 显示列信息（*）
+                    columns: options.columns,                           // 显示列信息（*）
+                    responseHandler: $.table.responseHandler            // 回调函数
                 });
             },
             // 查询条件
@@ -49,6 +50,15 @@
         			orderByColumn:  params.sort,
         			isAsc:          params.order
         		}; 
+            },
+            // 请求获取数据后处理回调函数
+            responseHandler: function(res) {
+                if (res.code == 0) {
+                    return { rows: res.rows, total: res.total };
+                } else {
+                	$.modal.alertWarning(res.msg);
+                	return { rows: [], total: 0 };
+                }
             },
             // 搜索
             search: function(formId) {

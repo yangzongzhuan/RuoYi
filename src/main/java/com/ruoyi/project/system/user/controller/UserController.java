@@ -61,6 +61,7 @@ public class UserController extends BaseController
     }
 
     @Log(title = "用户管理", action = BusinessType.EXPORT)
+    @RequiresPermissions("system:user:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(User user) throws Exception

@@ -51,6 +51,7 @@ public class DictTypeController extends BaseController
     }
 
     @Log(title = "字典类型", action = BusinessType.EXPORT)
+    @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(DictType dictType) throws Exception

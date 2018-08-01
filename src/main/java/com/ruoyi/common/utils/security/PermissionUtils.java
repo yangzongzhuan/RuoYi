@@ -33,6 +33,10 @@ public class PermissionUtils
         {
             msg = MessageUtils.message("no.delete.permission", permission);
         }
+        else if (StringUtils.endsWithIgnoreCase(permission, PermissionConstants.EXPORT_PERMISSION))
+        {
+            msg = MessageUtils.message("no.export.permission", permission);
+        }
         else if (StringUtils.endsWithAny(permission, new String[] { PermissionConstants.VIEW_PERMISSION, PermissionConstants.LIST_PERMISSION }))
         {
             msg = MessageUtils.message("no.view.permission", permission);

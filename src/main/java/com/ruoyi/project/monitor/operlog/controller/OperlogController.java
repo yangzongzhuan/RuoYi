@@ -51,6 +51,7 @@ public class OperlogController extends BaseController
     }
 
     @Log(title = "操作日志", action = BusinessType.EXPORT)
+    @RequiresPermissions("monitor:operlog:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(OperLog operLog) throws Exception

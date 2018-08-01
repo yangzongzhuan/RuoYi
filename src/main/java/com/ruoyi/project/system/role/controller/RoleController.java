@@ -53,6 +53,7 @@ public class RoleController extends BaseController
     }
 
     @Log(title = "角色管理", action = BusinessType.EXPORT)
+    @RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Role role) throws Exception

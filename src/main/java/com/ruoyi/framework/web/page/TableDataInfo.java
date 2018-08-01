@@ -15,6 +15,8 @@ public class TableDataInfo implements Serializable
     private long total;
     /** 列表数据 */
     private List<?> rows;
+    /** 消息状态码 */
+    private int code;
 
     /**
      * 表格数据对象
@@ -55,4 +57,13 @@ public class TableDataInfo implements Serializable
         this.rows = rows;
     }
 
+    public int getCode()
+    {
+        return code;
+    }
+
+    public void setCode(int code)
+    {
+        this.code = code;
+    }
 }

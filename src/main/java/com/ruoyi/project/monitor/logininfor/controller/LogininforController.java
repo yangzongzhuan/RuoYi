@@ -49,6 +49,7 @@ public class LogininforController extends BaseController
     }
 
     @Log(title = "登陆日志", action = BusinessType.EXPORT)
+    @RequiresPermissions("monitor:logininfor:export")
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(Logininfor logininfor) throws Exception
