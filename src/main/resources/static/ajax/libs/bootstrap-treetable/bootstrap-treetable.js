@@ -105,6 +105,7 @@
 					var td = $('<td title="'+item[column.field]+'" name="'+column.field+'" style="text-align:'+column.align+';'+((column.width)?('width:'+column.width):'')+'"></td>');
 					// 增加formatter渲染
 					if (column.formatter) {
+						td = $('<td style="text-align:'+column.align+';'+((column.width)?('width:'+column.width):'')+'"></td>');
 						td.html(column.formatter.call(this, item[column.field], item, index));
 					} else {
 						td.text(item[column.field]);
@@ -137,9 +138,9 @@
 				// 判断有没有选择列
 				if(i==0 && item.field=='selectItem'){
 					hasSelectItem = true;
-					th = $('<th style="text-align:'+item.valign+';width:36px"></th>');
+					th = $('<th style="width:36px"></th>');
 				}else{
-					th = $('<th style="text-align:'+item.valign+';padding:10px;'+((item.width)?('width:'+item.width):'')+'"></th>');
+					th = $('<th style="'+((item.width)?('width:'+item.width):'')+'"></th>');
 				}
 				th.text(item.title);
 				thr.append(th);
@@ -308,7 +309,7 @@
 		type : "GET", // 请求数据的ajax类型
 		url : null, // 请求数据的ajax的url
 		ajaxParams : {}, // 请求数据的ajax的data属性
-		expandColumn : 1,// 在哪一列上面显示展开按钮
+		expandColumn : 0,// 在哪一列上面显示展开按钮
 		expandAll : false, // 是否全部展开
         expandFirst : true, // 是否默认第一级展开--expandAll为false时生效
 		striped : false, // 是否各行渐变色
