@@ -224,6 +224,24 @@ public class RoleServiceImpl implements IRoleService
         }
         return UserConstants.ROLE_NAME_UNIQUE;
     }
+    
+    /**
+     * 校验角色权限是否唯一
+     * 
+     * @param role 角色信息
+     * @return 结果
+     */
+    @Override
+    public String checkRoleKeyUnique(Role role)
+    {
+        Long roleId = StringUtils.isNull(role.getRoleId()) ? -1L : role.getRoleId();
+        Role info = roleMapper.checkRoleKeyUnique(role.getRoleKey());
+        if (StringUtils.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue())
+        {
+            return UserConstants.ROLE_KEY_NOT_UNIQUE;
+        }
+        return UserConstants.ROLE_KEY_UNIQUE;
+    }
 
     /**
      * 通过角色ID查询角色使用数量

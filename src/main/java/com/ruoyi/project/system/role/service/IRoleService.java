@@ -91,6 +91,14 @@ public interface IRoleService
      * @return 结果
      */
     public String checkRoleNameUnique(Role role);
+    
+    /**
+     * 校验角色权限是否唯一
+     * 
+     * @param role 角色信息
+     * @return 结果
+     */
+    public String checkRoleKeyUnique(Role role);
 
     /**
      * 通过角色ID查询角色使用数量

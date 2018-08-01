@@ -102,6 +102,23 @@
 				},
 				roleKey:{
 					required:true,
+					remote: {
+		                url: ctx + "system/role/checkRoleKeyUnique",
+		                type: "post",
+		                dataType: "json",
+		                data: {
+							"roleId": function() {
+							    return $("input[name='roleId']").val();
+							},
+							"roleKey": function() {
+							    return $("input[name='roleKey']").val();
+							}
+		                },
+		                dataFilter: function(data, type) {
+		                    if (data == "0") return true;
+		                    else return false;
+		                }
+		            }
 				},
 				roleSort:{
 					required:true,
@@ -110,7 +127,10 @@
 			},
 			messages: {
 		        "roleName": {
-		            remote: "角色已经存在"
+		            remote: "角色名称已经存在"
+		        },
+		        "roleKey": {
+		            remote: "角色权限已经存在"
 		        }
 		    },
 			submitHandler:function(form){

@@ -64,6 +64,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where role_name=#{roleName}
 	</select>
 	
+	<select id="checkRoleKeyUnique" parameterType="String" resultMap="RoleResult">
+		<include refid="selectRoleVo"/>
+		 where role_key=#{roleKey}
+	</select>
+	
 	<delete id="deleteRoleById" parameterType="Long">
  		delete from sys_role where role_id = #{roleId}
  	</delete>

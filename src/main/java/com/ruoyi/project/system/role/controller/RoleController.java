@@ -146,6 +146,21 @@ public class RoleController extends BaseController
         }
         return uniqueFlag;
     }
+    
+    /**
+     * 校验角色权限
+     */
+    @PostMapping("/checkRoleKeyUnique")
+    @ResponseBody
+    public String checkRoleKeyUnique(Role role)
+    {
+        String uniqueFlag = "0";
+        if (role != null)
+        {
+            uniqueFlag = roleService.checkRoleKeyUnique(role);
+        }
+        return uniqueFlag;
+    }
 
     /**
      * 选择菜单树
