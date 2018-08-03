@@ -6,6 +6,7 @@ import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.project.monitor.online.domain.UserOnline;
 import com.ruoyi.project.monitor.online.mapper.UserOnlineMapper;
@@ -46,7 +47,7 @@ public class UserOnlineServiceImpl implements IUserOnlineService
     public void deleteOnlineById(String sessionId)
     {
         UserOnline userOnline = selectOnlineById(sessionId);
-        if (userOnline != null)
+        if (StringUtils.isNotNull(userOnline))
         {
             userOnlineDao.deleteOnlineById(sessionId);
         }
@@ -64,7 +65,7 @@ public class UserOnlineServiceImpl implements IUserOnlineService
         for (String sessionId : sessions)
         {
             UserOnline userOnline = selectOnlineById(sessionId);
-            if (userOnline != null)
+            if (StringUtils.isNotNull(userOnline))
             {
                 userOnlineDao.deleteOnlineById(sessionId);
             }

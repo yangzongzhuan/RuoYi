@@ -177,7 +177,7 @@ public class UserController extends BaseController
     public String checkLoginNameUnique(User user)
     {
         String uniqueFlag = "0";
-        if (user != null)
+        if (StringUtils.isNotNull(user))
         {
             uniqueFlag = userService.checkLoginNameUnique(user.getLoginName());
         }
@@ -192,7 +192,7 @@ public class UserController extends BaseController
     public String checkPhoneUnique(User user)
     {
         String uniqueFlag = "0";
-        if (user != null)
+        if (StringUtils.isNotNull(user))
         {
             uniqueFlag = userService.checkPhoneUnique(user);
         }
@@ -207,7 +207,7 @@ public class UserController extends BaseController
     public String checkEmailUnique(User user)
     {
         String uniqueFlag = "0";
-        if (user != null)
+        if (StringUtils.isNotNull(user))
         {
             uniqueFlag = userService.checkEmailUnique(user);
         }

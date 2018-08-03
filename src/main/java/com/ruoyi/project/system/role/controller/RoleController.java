@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
@@ -140,7 +141,7 @@ public class RoleController extends BaseController
     public String checkRoleNameUnique(Role role)
     {
         String uniqueFlag = "0";
-        if (role != null)
+        if (StringUtils.isNotNull(role))
         {
             uniqueFlag = roleService.checkRoleNameUnique(role);
         }
@@ -155,7 +156,7 @@ public class RoleController extends BaseController
     public String checkRoleKeyUnique(Role role)
     {
         String uniqueFlag = "0";
-        if (role != null)
+        if (StringUtils.isNotNull(role))
         {
             uniqueFlag = roleService.checkRoleKeyUnique(role);
         }

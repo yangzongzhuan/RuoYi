@@ -28,7 +28,7 @@ public class LoginController extends BaseController
     public String login(HttpServletRequest request, HttpServletResponse response)
     {
         // 如果是Ajax请求，返回Json字符串。
-        if (ServletUtils.isAjaxRequest((HttpServletRequest) request))
+        if (ServletUtils.isAjaxRequest(request))
         {
             return ServletUtils.renderString(response, "{\"code\":\"1\",\"msg\":\"未登录或登录超时。请重新登录\"}");
         }

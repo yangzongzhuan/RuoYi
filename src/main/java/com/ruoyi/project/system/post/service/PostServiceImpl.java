@@ -61,7 +61,7 @@ public class PostServiceImpl implements IPostService
         {
             for (Post userRole : userPosts)
             {
-                if (post.getPostId() == userRole.getPostId())
+                if (post.getPostId().longValue() == userRole.getPostId().longValue())
                 {
                     post.setFlag(true);
                     break;
