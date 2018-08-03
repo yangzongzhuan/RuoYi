@@ -7,6 +7,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
 
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.project.system.user.domain.User;
@@ -36,8 +37,13 @@ public class ShiroUtils
 
     public static User getUser()
     {
-        User user = new User();
-        BeanUtils.copyBeanProp(user, getSubjct().getPrincipal());
+        User user = null;
+        Object obj = getSubjct().getPrincipal();
+        if (StringUtils.isNotNull(obj))
+        {
+            user = new User();
+            BeanUtils.copyBeanProp(user, obj);
+        }
         return user;
     }
 
