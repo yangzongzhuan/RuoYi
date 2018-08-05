@@ -12,7 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Ds;
-import com.ruoyi.framework.datasource.DataSourceContextHolder;
+import com.ruoyi.framework.datasource.DynamicDataSourceContextHolder;
 
 /**
  * 多数据源处理
@@ -27,12 +27,12 @@ public class DsAspect
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Pointcut("@annotation(com.ruoyi.framework.aspectj.lang.annotation.Ds)")
-    public void dataSourcePointCut()
+    public void dsPointCut()
     {
 
     }
 
-    @Around("dataSourcePointCut()")
+    @Around("dsPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable
     {
         MethodSignature signature = (MethodSignature) point.getSignature();
@@ -44,7 +44,7 @@ public class DsAspect
             Ds dataSource = method.getAnnotation(Ds.class);
             if (StringUtils.isNotNull(dataSource) && StringUtils.isNotEmpty(dataSource.name()))
             {
-                DataSourceContextHolder.setDB(dataSource.name());
+                DynamicDataSourceContextHolder.setDB(dataSource.name());
             }
         }
 
@@ -54,7 +54,7 @@ public class DsAspect
         }
         finally
         {
-            DataSourceContextHolder.clearDB();
+            DynamicDataSourceContextHolder.clearDB();
         }
     }
 }

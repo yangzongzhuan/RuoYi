@@ -69,7 +69,7 @@ public interface PostMapper
     /**
      * 校验岗位名称
      * 
-     * @param post 岗位信息
+     * @param postName 岗位名称
      * @return 结果
      */
     public Post checkPostNameUnique(String postName);
@@ -77,7 +77,7 @@ public interface PostMapper
     /**
      * 校验岗位编码
      * 
-     * @param post 岗位信息
+     * @param postCode 岗位编码
      * @return 结果
      */
     public Post checkPostCodeUnique(String postCode);
