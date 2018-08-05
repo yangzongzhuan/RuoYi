@@ -6,15 +6,15 @@
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-post-add">
 			<div class="form-group">
-				<label class="col-sm-3 control-label ">岗位编码：</label>
-				<div class="col-sm-8">
-					<input class="form-control" type="text" name="postCode" id="postCode"/>
-				</div>
-			</div>
-			<div class="form-group">
 				<label class="col-sm-3 control-label">岗位名称：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="postName" id="postName">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">岗位编码：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="postCode" id="postCode"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -52,17 +52,53 @@
 	
 		$("#form-post-add").validate({
 			rules:{
-				postCode:{
-					required:true,
-				},
 				postName:{
 					required:true,
+					remote: {
+		                url: ctx + "system/post/checkPostNameUnique",
+		                type: "post",
+		                dataType: "json",
+		                data: {
+		                	"postName" : function() {
+		                        return $.trim($("#postName").val());
+		                    }
+		                },
+		                dataFilter: function(data, type) {
+		                    if (data == "0") return true;
+		                    else return false;
+		                }
+		            }
+				},
+				postCode:{
+					required:true,
+					remote: {
+		                url: ctx + "system/post/checkPostCodeUnique",
+		                type: "post",
+		                dataType: "json",
+		                data: {
+		                	"postCode" : function() {
+		                        return $.trim($("#postCode").val());
+		                    }
+		                },
+		                dataFilter: function(data, type) {
+		                    if (data == "0") return true;
+		                    else return false;
+		                }
+		            }
 				},
 				postSort:{
 					required:true,
 					digits:true
 				},
 			},
+			messages: {
+		        "postCode": {
+		            remote: "岗位编码已经存在"
+		        },
+		        "postName": {
+		            remote: "岗位名称已经存在"
+		        }
+		    },
 			submitHandler:function(form){
 				$.operate.save(prefix + "/add", $('#form-post-add').serialize());
 			}

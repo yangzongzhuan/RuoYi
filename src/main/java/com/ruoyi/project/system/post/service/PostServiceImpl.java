@@ -3,7 +3,9 @@ package com.ruoyi.project.system.post.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.support.Convert;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.system.post.domain.Post;
 import com.ruoyi.project.system.post.mapper.PostMapper;
@@ -140,6 +142,42 @@ public class PostServiceImpl implements IPostService
     public int countUserPostById(Long postId)
     {
         return userPostMapper.countUserPostById(postId);
+    }
+
+    /**
+     * 校验岗位名称是否唯一
+     * 
+     * @param post 岗位信息
+     * @return 结果
+     */
+    @Override
+    public String checkPostNameUnique(Post post)
+    {
+        Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
+        Post info = postMapper.checkPostNameUnique(post.getPostName());
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
+        {
+            return UserConstants.POST_NAME_NOT_UNIQUE;
+        }
+        return UserConstants.POST_NAME_UNIQUE;
+    }
+
+    /**
+     * 校验岗位编码是否唯一
+     * 
+     * @param post 岗位信息
+     * @return 结果
+     */
+    @Override
+    public String checkPostCodeUnique(Post post)
+    {
+        Long postId = StringUtils.isNull(post.getPostId()) ? -1L : post.getPostId();
+        Post info = postMapper.checkPostCodeUnique(post.getPostCode());
+        if (StringUtils.isNotNull(info) && info.getPostId().longValue() != postId.longValue())
+        {
+            return UserConstants.POST_CODE_NOT_UNIQUE;
+        }
+        return UserConstants.POST_CODE_UNIQUE;
     }
 
 }

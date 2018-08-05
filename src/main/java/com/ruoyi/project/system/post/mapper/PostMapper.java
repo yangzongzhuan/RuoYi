@@ -66,4 +66,20 @@ public interface PostMapper
      */
     public int insertPost(Post post);
 
+    /**
+     * 校验岗位名称
+     * 
+     * @param post 岗位信息
+     * @return 结果
+     */
+    public Post checkPostNameUnique(String postName);
+
+    /**
+     * 校验岗位编码
+     * 
+     * @param post 岗位信息
+     * @return 结果
+     */
+    public Post checkPostCodeUnique(String postCode);
+
 }

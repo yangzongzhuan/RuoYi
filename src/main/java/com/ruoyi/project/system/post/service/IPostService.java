@@ -73,4 +73,20 @@ public interface IPostService
      * @return 结果
      */
     public int countUserPostById(Long postId);
+
+    /**
+     * 校验岗位名称
+     * 
+     * @param post 岗位信息
+     * @return 结果
+     */
+    public String checkPostNameUnique(Post post);
+
+    /**
+     * 校验岗位编码
+     * 
+     * @param post 岗位信息
+     * @return 结果
+     */
+    public String checkPostCodeUnique(Post post);
 }
