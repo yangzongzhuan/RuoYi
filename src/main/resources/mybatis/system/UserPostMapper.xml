@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="countUserPostById" resultType="Integer">
-	    select count(*) from sys_user_post where post_id=#{postId}  
+	    select count(1) from sys_user_post where post_id=#{postId}  
 	</select>
 	
 	<delete id="deleteUserPost" parameterType="Long">

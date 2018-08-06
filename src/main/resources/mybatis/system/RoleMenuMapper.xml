@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="selectCountRoleMenuByMenuId" resultType="Integer">
-	    select count(*) from sys_role_menu where menu_id=#{menuId}  
+	    select count(1) from sys_role_menu where menu_id=#{menuId}  
 	</select>
 	
 	<delete id="deleteRoleMenu" parameterType="Long">

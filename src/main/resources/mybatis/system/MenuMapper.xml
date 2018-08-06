@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectCountMenuByParentId" resultType="Integer">
-	    select count(*) from sys_menu where parent_id=#{menuId}  
+	    select count(1) from sys_menu where parent_id=#{menuId}  
 	</select>
 	
 	<select id="checkMenuNameUnique" parameterType="String" resultMap="MenuResult">

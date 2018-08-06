@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectLogininforList" parameterType="Logininfor" resultMap="LogininforResult">
-		select * from sys_logininfor
+		select info_id,login_name,ipaddr,login_location,browser,os,status,msg,login_time from sys_logininfor
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
 				AND ipaddr like concat('%', #{ipaddr}, '%')

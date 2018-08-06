@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="checkLoginNameUnique" parameterType="String" resultType="int">
-		select count(*) from sys_user where login_name=#{loginName}
+		select count(1) from sys_user where login_name=#{loginName}
 	</select>
 	
 	<select id="checkPhoneUnique" parameterType="String" resultMap="UserResult">

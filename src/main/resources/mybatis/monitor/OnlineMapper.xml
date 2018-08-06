@@ -26,9 +26,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status"            column="status"            />
 	</resultMap>
 	
-	<select id="selectOnlineById" parameterType="String" resultMap="UserOnlineResult">
-		select  *
+	<sql id="selectOnlineVo">
+       select  sessionId,login_name,dept_name,ipaddr,login_location,browser,os,status,status,start_timestsamp,last_access_time,expire_time
 		from sys_user_online
+    </sql>
+    
+	<select id="selectOnlineById" parameterType="String" resultMap="UserOnlineResult">
+		<include refid="selectOnlineVo"/>
 		where sessionid = #{sessionid}
 	</select>
 
@@ -42,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</delete>
  	
  	<select id="selectUserOnlineList" parameterType="UserOnline" resultMap="UserOnlineResult">
-		select * from sys_user_online
+		<include refid="selectOnlineVo"/>
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
 				AND ipaddr like concat('%', #{ipaddr}, '%')
@@ -54,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectOnlineByExpired" parameterType="String" resultMap="UserOnlineResult">
-		SELECT * FROM sys_user_online o 
+		<include refid="selectOnlineVo"/> o 
 		WHERE o.last_access_time <![CDATA[ <= ]]> #{lastAccessTime} ORDER BY o.last_access_time ASC
 	</select>
 

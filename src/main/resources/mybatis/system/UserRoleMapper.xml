@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="countUserRoleByRoleId" resultType="Integer">
-	    select count(*) from sys_user_role where role_id=#{roleId}  
+	    select count(1) from sys_user_role where role_id=#{roleId}  
 	</select>
 	
 	<delete id="deleteUserRole" parameterType="Long">
