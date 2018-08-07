@@ -263,12 +263,7 @@ public class ShiroConfig
         shiroFilterFactoryBean.setFilters(filters);
 
         // 所有请求需要认证
-        filterChainDefinitionMap.put("/**", "user");
-        // 系统请求记录当前会话
-        filterChainDefinitionMap.put("/main", "onlineSession,syncOnlineSession");
-        filterChainDefinitionMap.put("/system/**", "onlineSession,syncOnlineSession");
-        filterChainDefinitionMap.put("/monitor/**", "onlineSession,syncOnlineSession");
-        filterChainDefinitionMap.put("/tool/**", "onlineSession,syncOnlineSession");
+        filterChainDefinitionMap.put("/**", "user,onlineSession,syncOnlineSession");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;

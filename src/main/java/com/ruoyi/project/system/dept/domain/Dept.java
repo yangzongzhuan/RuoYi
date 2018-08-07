@@ -14,6 +14,8 @@ public class Dept extends BaseEntity
     private Long deptId;
     /** 父部门ID */
     private Long parentId;
+    /** 祖级列表 */
+    private String ancestors;
     /** 部门名称 */
     private String deptName;
     /** 显示顺序 */
@@ -47,6 +49,16 @@ public class Dept extends BaseEntity
     public void setParentId(Long parentId)
     {
         this.parentId = parentId;
+    }
+
+    public String getAncestors()
+    {
+        return ancestors;
+    }
+
+    public void setAncestors(String ancestors)
+    {
+        this.ancestors = ancestors;
     }
 
     public String getDeptName()
@@ -122,9 +134,9 @@ public class Dept extends BaseEntity
     @Override
     public String toString()
     {
-        return "Dept [deptId=" + deptId + ", parentId=" + parentId + ", deptName=" + deptName + ", orderNum=" + orderNum
-                + ", leader=" + leader + ", phone=" + phone + ", email=" + email + ", status=" + status
-                + ", parentName=" + parentName + "]";
+        return "Dept [deptId=" + deptId + ", parentId=" + parentId + ", ancestors=" + ancestors + ", deptName="
+                + deptName + ", orderNum=" + orderNum + ", leader=" + leader + ", phone=" + phone + ", email=" + email
+                + ", status=" + status + ", parentName=" + parentName + "]";
     }
 
 }

@@ -167,7 +167,6 @@
 			// 树结构初始化加载
 			var setting = {view:{selectedMulti:false},data:{key:{title:"title"},simpleData:{enable:true}},
 				callback:{onClick:function(event, treeId, treeNode){
-					tree.expandNode(treeNode);
 					$("#deptId").val(treeNode.id);
 					$("#parentId").val(treeNode.pId);
 					$.table.search();

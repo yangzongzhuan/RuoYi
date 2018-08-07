@@ -119,7 +119,9 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public int insertDept(Dept dept)
     {
+        Dept info = deptMapper.selectDeptById(dept.getParentId());
         dept.setCreateBy(ShiroUtils.getLoginName());
+        dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
         return deptMapper.insertDept(dept);
     }
 
@@ -132,7 +134,9 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public int updateDept(Dept dept)
     {
+        Dept info = deptMapper.selectDeptById(dept.getParentId());
         dept.setUpdateBy(ShiroUtils.getLoginName());
+        dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
         return deptMapper.updateDept(dept);
     }
 
