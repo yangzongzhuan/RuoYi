@@ -101,3 +101,12 @@ gen:
   autoRemovePre: true
   # 表前缀(类名不会包含表前缀)
   tablePrefix: sys_
+redis: 
+  host: 127.0.0.1
+  port: 6379
+  timeout: 20000
+  pool:
+      max-active: 8
+      min-idle: 0
+      max-idle: 8
+      max-wait: -1
