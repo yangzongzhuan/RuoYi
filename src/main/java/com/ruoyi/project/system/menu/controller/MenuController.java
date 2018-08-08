@@ -178,7 +178,7 @@ public class MenuController extends BaseController
     @GetMapping("/selectMenuTree/{menuId}")
     public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap)
     {
-        mmap.put("treeName", menuService.selectMenuById(menuId).getMenuName());
+        mmap.put("menu", menuService.selectMenuById(menuId));
         return prefix + "/tree";
     }
 }

@@ -8,8 +8,8 @@ body{height:auto;font-family: "Microsoft YaHei";}
 button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
 </style>
 <body class="hold-transition box box-main">
-	<input id="treeId"   name="treeId"    type="hidden"/>
-	<input id="treeName" name="treeName"  type="hidden" th:value="${treeName}"/>
+	<input id="treeId"   name="treeId"    type="hidden" th:value="${menu.menuId}"/>
+	<input id="treeName" name="treeName"  type="hidden" th:value="${menu.menuName}"/>
 	<div class="wrapper"><div class="treeShowHideButton" onclick="search();">
 		<label id="btnShow" title="显示搜索" style="display:none;">︾</label>
 		<label id="btnHide" title="隐藏搜索">︽</label>
