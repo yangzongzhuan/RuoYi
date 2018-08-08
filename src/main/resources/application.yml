@@ -10,10 +10,18 @@ ruoyi:
   profile: D:/profile/
 #开发环境配置
 server:
-  #端口
+  #服务端口
   port: 80
+  servlet:
+    # 项目contextPath
+    context-path: /
   tomcat:
-    uri-encoding: utf-8
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # tomcat最大线程数，默认为200
+    max-threads: 800
+    # Tomcat启动初始化的线程数，默认值25
+    min-spare-threads: 30
 #日志配置
 logging:
   level:
