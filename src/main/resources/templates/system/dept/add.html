@@ -100,7 +100,8 @@
 	
 		/*部门管理-新增-选择父部门树*/
 		function selectDeptTree() {
-		    var deptId = $("#treeId").val();
+			var treeId = $("#treeId").val();
+        	var deptId = treeId == null || treeId == "" ? "100" : treeId;
 			var url = prefix + "/selectDeptTree/" + deptId;
 			$.modal.open("选择部门", url, '380', '380');
 		}
