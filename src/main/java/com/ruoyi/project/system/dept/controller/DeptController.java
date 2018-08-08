@@ -134,7 +134,7 @@ public class DeptController extends BaseController
     @GetMapping("/selectDeptTree/{deptId}")
     public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
-        mmap.put("treeName", deptService.selectDeptById(deptId).getDeptName());
+        mmap.put("dept", deptService.selectDeptById(deptId));
         return prefix + "/tree";
     }
 
