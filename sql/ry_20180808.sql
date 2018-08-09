@@ -133,7 +133,7 @@ create table sys_menu (
   order_num 		int(4) 			default null 			   comment '显示顺序',
   url 				varchar(200) 	default ''				   comment '请求地址',
   menu_type 		char(1) 		default '' 			       comment '菜单类型（M目录 C菜单 F按钮）',
-  visible 			char(1) 		default 0 				   comment '菜单状态（0显示 1隐藏）',
+  visible 			char(1) 		not null 				   comment '菜单状态（0显示 1隐藏）',
   perms 			varchar(100) 	default '' 				   comment '权限标识',
   icon 				varchar(100) 	default '' 				   comment '菜单图标',
   create_by         varchar(64)     default ''                 comment '创建者',
