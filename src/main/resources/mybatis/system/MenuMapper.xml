@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="menuName != null and menuName != ''">
 				AND menu_name like concat('%', #{menuName}, '%')
 			</if>
-			<if test="visible != null and visible != ''">
+			<if test="visible != null">
 				AND visible = #{visible}
 			</if>
 		</where>
