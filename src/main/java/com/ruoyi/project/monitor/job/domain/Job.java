@@ -1,7 +1,6 @@
 package com.ruoyi.project.monitor.job.domain;
 
 import java.io.Serializable;
-
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;

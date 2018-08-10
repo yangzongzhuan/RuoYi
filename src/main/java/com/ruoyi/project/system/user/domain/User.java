@@ -3,7 +3,6 @@ package com.ruoyi.project.system.user.domain;
 import java.util.Arrays;
 import java.util.Date;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.system.dept.domain.Dept;

@@ -1,7 +1,6 @@
 package com.ruoyi.project.system.user.mapper;
 
 import com.ruoyi.project.system.user.domain.User;
-
 import java.util.List;
 
 /**

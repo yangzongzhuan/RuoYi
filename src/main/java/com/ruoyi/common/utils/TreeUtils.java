@@ -3,7 +3,6 @@ package com.ruoyi.common.utils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import com.ruoyi.project.system.menu.domain.Menu;
 
 /**

@@ -12,7 +12,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.exception.base.BaseException;
 import com.ruoyi.common.utils.StringUtils;

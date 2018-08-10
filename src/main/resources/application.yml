@@ -8,6 +8,8 @@ ruoyi:
   copyrightYear: 2018
   #头像上传路径
   profile: D:/profile/
+  # 获取ip地址开关
+  addressEnabled: false
 #开发环境配置
 server:
   #服务端口
@@ -54,7 +56,7 @@ spring:
        max-request-size:  30MB
   devtools:
     restart:
-      #禁用devtools模块的热部署功能
+      #热部署开关
       enabled: true
 # MyBatis
 mybatis:

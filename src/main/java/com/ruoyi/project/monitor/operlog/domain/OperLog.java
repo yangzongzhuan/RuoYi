@@ -1,7 +1,6 @@
 package com.ruoyi.project.monitor.operlog.domain;
 
 import java.util.Date;
-
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 

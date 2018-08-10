@@ -2,9 +2,7 @@ package com.ruoyi.common.utils;
 
 import java.util.Collection;
 import java.util.Map;
-
 import org.apache.commons.lang.text.StrBuilder;
-
 import com.ruoyi.common.support.StrFormatter;
 
 /**

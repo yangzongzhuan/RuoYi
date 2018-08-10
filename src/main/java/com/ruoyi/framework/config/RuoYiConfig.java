@@ -1,5 +1,6 @@
 package com.ruoyi.framework.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,8 @@ public class RuoYiConfig
     private String copyrightYear;
     /** 上传路径 */
     private static String profile;
+    /** 获取地址开关 */
+    private static boolean addressEnabled;
 
     public String getName()
     {
@@ -59,6 +62,16 @@ public class RuoYiConfig
     public void setProfile(String profile)
     {
         RuoYiConfig.profile = profile;
+    }
+
+    public static boolean isAddressEnabled()
+    {
+        return addressEnabled;
+    }
+
+    public void setAddressEnabled(boolean addressEnabled)
+    {
+        RuoYiConfig.addressEnabled = addressEnabled;
     }
 
 }

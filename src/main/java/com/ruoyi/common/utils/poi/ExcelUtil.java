@@ -31,7 +31,6 @@ import org.apache.poi.ss.util.CellRangeAddressList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
-
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
@@ -104,7 +103,7 @@ public class ExcelUtil<T>
                     }
                     else
                     {
-                        // 先设置Cell的类型，然后就可以把纯数字作为String类型读进来了 by zhuyangyong 20171228
+                        // 先设置Cell的类型，然后就可以把纯数字作为String类型读进来了
                         row.getCell(j).setCellType(Cell.CELL_TYPE_STRING);
                         cell = row.getCell(j);
                     }
@@ -350,24 +349,6 @@ public class ExcelUtil<T>
             return AjaxResult.error("导出Excel失败，请联系网站管理员！");
         }
     }
-
-    /**
-     * 将EXCEL中A,B,C,D,E列映射成0,1,2,3
-     * 
-     * @param col
-     */
-    // public static int getExcelCol(String col)
-    // {
-    // col = col.toUpperCase();
-    // // 从-1开始计算,字母重1开始运算。这种总数下来算数正好相同。
-    // int count = -1;
-    // char[] cs = col.toCharArray();
-    // for (int i = 0; i < cs.length; i++)
-    // {
-    // count += (cs[i] - 64) * Math.pow(26, cs.length - 1 - i);
-    // }
-    // return count;
-    // }
 
     /**
      * 设置单元格上提示

@@ -2,7 +2,6 @@ package com.ruoyi.project.tool.gen.util;
 
 import java.util.Properties;
 import org.apache.velocity.app.Velocity;
-
 import com.ruoyi.common.constant.Constants;
 
 /**

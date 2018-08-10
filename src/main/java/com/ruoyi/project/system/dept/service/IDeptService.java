@@ -2,7 +2,6 @@ package com.ruoyi.project.system.dept.service;
 
 import java.util.List;
 import java.util.Map;
-
 import com.ruoyi.project.system.dept.domain.Dept;
 
 /**
