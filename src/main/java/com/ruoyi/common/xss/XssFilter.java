@@ -14,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 防止XSS攻击的过滤器
@@ -23,23 +24,32 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter(filterName = "xssFilter", urlPatterns = "/system/*")
 public class XssFilter implements Filter
 {
-
     /**
      * 排除链接
      */
     public List<String> excludes = new ArrayList<>();
 
+    /**
+     * xss过滤开关
+     */
+    public boolean xssEbabled = false;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
-        String temp = filterConfig.getInitParameter("excludes");
-        if (temp != null)
+        String tempExcludes = filterConfig.getInitParameter("excludes");
+        String tempXssEbabled = filterConfig.getInitParameter("xssEbabled");
+        if (tempExcludes != null)
         {
-            String[] url = temp.split(",");
+            String[] url = tempExcludes.split(",");
             for (int i = 0; url != null && i < url.length; i++)
             {
                 excludes.add(url[i]);
             }
+        }
+        if (StringUtils.isNotEmpty(tempXssEbabled))
+        {
+            xssEbabled = Boolean.valueOf(tempXssEbabled);
         }
     }
 
@@ -63,6 +73,10 @@ public class XssFilter implements Filter
         if (excludes == null || excludes.isEmpty())
         {
             return false;
+        }
+        if (!xssEbabled)
+        {
+            return true;
         }
         String url = request.getServletPath();
         for (String pattern : excludes)

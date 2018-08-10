@@ -27,7 +27,8 @@ public class FilterConfig
         registration.setName("xssFilter");
         registration.setOrder(Integer.MAX_VALUE);
         Map<String, String> initParameters = Maps.newHashMap();
-        initParameters.put("excludes", "/system/notice/*");
+        initParameters.put("excludes", "/system/notice/*,/img/*,/css/*,/fonts/*,/js/*,/ajax/*,/ruoyi/*");
+        initParameters.put("xssEbabled", "false");
         registration.setInitParameters(initParameters);
         return registration;
     }
