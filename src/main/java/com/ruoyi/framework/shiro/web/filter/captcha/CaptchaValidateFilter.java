@@ -20,16 +20,16 @@ public class CaptchaValidateFilter extends AccessControlFilter
     /**
      * 是否开启验证码
      */
-    private boolean captchaEbabled = true;
+    private boolean captchaEnabled = true;
 
     /**
      * 验证码类型
      */
     private String captchaType = "math";
 
-    public void setCaptchaEbabled(boolean captchaEbabled)
+    public void setCaptchaEnabled(boolean captchaEnabled)
     {
-        this.captchaEbabled = captchaEbabled;
+        this.captchaEnabled = captchaEnabled;
     }
 
     public void setCaptchaType(String captchaType)
@@ -40,7 +40,7 @@ public class CaptchaValidateFilter extends AccessControlFilter
     @Override
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception
     {
-        request.setAttribute(ShiroConstants.CURRENT_EBABLED, captchaEbabled);
+        request.setAttribute(ShiroConstants.CURRENT_ENABLED, captchaEnabled);
         request.setAttribute(ShiroConstants.CURRENT_TYPE, captchaType);
         return super.onPreHandle(request, response, mappedValue);
     }
@@ -51,7 +51,7 @@ public class CaptchaValidateFilter extends AccessControlFilter
     {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         // 验证码禁用 或不是表单提交 允许访问
-        if (captchaEbabled == false || !"post".equals(httpServletRequest.getMethod().toLowerCase()))
+        if (captchaEnabled == false || !"post".equals(httpServletRequest.getMethod().toLowerCase()))
         {
             return true;
         }

@@ -40,6 +40,7 @@ spring:
   thymeleaf:
     mode: HTML
     encoding: utf-8
+    # 禁用缓存
     cache: false
   messages:
     #国际化资源文件路径
@@ -82,7 +83,7 @@ shiro:
     # 首页地址
     indexUrl: /index
     # 验证码开关
-    captchaEbabled: true
+    captchaEnabled: true
     # 验证码类型 math 数组计算 char 字符
     captchaType: math
   cookie:
@@ -101,6 +102,14 @@ shiro:
     dbSyncPeriod: 1
     # 相隔多久检查一次session的有效性，默认就是10分钟
     validationInterval: 10
+# 防止XSS攻击
+xss: 
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice/*
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*
 # 代码生成
 gen: 
   # 作者

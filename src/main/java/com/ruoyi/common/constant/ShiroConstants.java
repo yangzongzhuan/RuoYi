@@ -45,7 +45,7 @@ public interface ShiroConstants
     /**
      * 验证码开关
      */
-    public static final String CURRENT_EBABLED = "captchaEbabled";
+    public static final String CURRENT_ENABLED = "captchaEnabled";
 
     /**
      * 验证码开关

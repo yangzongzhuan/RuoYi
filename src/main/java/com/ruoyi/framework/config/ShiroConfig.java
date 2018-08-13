@@ -46,8 +46,8 @@ public class ShiroConfig
     private int validationInterval;
 
     // 验证码开关
-    @Value("${shiro.user.captchaEbabled}")
-    private boolean captchaEbabled;
+    @Value("${shiro.user.captchaEnabled}")
+    private boolean captchaEnabled;
 
     // 验证码类型
     @Value("${shiro.user.captchaType}")
@@ -297,7 +297,7 @@ public class ShiroConfig
     public CaptchaValidateFilter captchaValidateFilter()
     {
         CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();
-        captchaValidateFilter.setCaptchaEbabled(captchaEbabled);
+        captchaValidateFilter.setCaptchaEnabled(captchaEnabled);
         captchaValidateFilter.setCaptchaType(captchaType);
         return captchaValidateFilter;
     }

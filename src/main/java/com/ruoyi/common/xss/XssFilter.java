@@ -11,7 +11,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.ruoyi.common.utils.StringUtils;
@@ -21,7 +20,6 @@ import com.ruoyi.common.utils.StringUtils;
  * 
  * @author ruoyi
  */
-@WebFilter(filterName = "xssFilter", urlPatterns = "/system/*")
 public class XssFilter implements Filter
 {
     /**
@@ -32,14 +30,14 @@ public class XssFilter implements Filter
     /**
      * xss过滤开关
      */
-    public boolean xssEbabled = false;
+    public boolean enabled = false;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException
     {
         String tempExcludes = filterConfig.getInitParameter("excludes");
-        String tempXssEbabled = filterConfig.getInitParameter("xssEbabled");
-        if (tempExcludes != null)
+        String tempEnabled = filterConfig.getInitParameter("enabled");
+        if (StringUtils.isNotEmpty(tempExcludes))
         {
             String[] url = tempExcludes.split(",");
             for (int i = 0; url != null && i < url.length; i++)
@@ -47,9 +45,9 @@ public class XssFilter implements Filter
                 excludes.add(url[i]);
             }
         }
-        if (StringUtils.isNotEmpty(tempXssEbabled))
+        if (StringUtils.isNotEmpty(tempEnabled))
         {
-            xssEbabled = Boolean.valueOf(tempXssEbabled);
+            enabled = Boolean.valueOf(tempEnabled);
         }
     }
 
@@ -70,13 +68,13 @@ public class XssFilter implements Filter
 
     private boolean handleExcludeURL(HttpServletRequest request, HttpServletResponse response)
     {
+        if (!enabled)
+        {
+            return true;
+        }
         if (excludes == null || excludes.isEmpty())
         {
             return false;
-        }
-        if (!xssEbabled)
-        {
-            return true;
         }
         String url = request.getServletPath();
         for (String pattern : excludes)
