@@ -1,6 +1,7 @@
 package com.ruoyi.project.system.dept.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.ruoyi.project.system.dept.domain.Dept;
 
 /**
@@ -64,6 +65,14 @@ public interface DeptMapper
      * @return 结果
      */
     public int updateDept(Dept dept);
+
+    /**
+     * 修改子元素关系
+     * 
+     * @param depts 子元素
+     * @return 结果
+     */
+    public int updateDeptChildren(@Param("depts") List<Dept> depts);
 
     /**
      * 根据部门ID查询信息

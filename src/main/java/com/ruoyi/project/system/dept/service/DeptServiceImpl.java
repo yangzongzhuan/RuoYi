@@ -135,9 +135,32 @@ public class DeptServiceImpl implements IDeptService
     public int updateDept(Dept dept)
     {
         Dept info = deptMapper.selectDeptById(dept.getParentId());
+        String ancestors = info.getAncestors() + "," + dept.getParentId();
         dept.setUpdateBy(ShiroUtils.getLoginName());
-        dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
+        dept.setAncestors(ancestors);
+        updateDeptChildren(dept.getDeptId(), ancestors);
         return deptMapper.updateDept(dept);
+    }
+
+    /**
+     * 修改子元素关系
+     * 
+     * @param deptId 部门ID
+     * @param ancestors 元素列表
+     */
+    public void updateDeptChildren(Long deptId, String ancestors)
+    {
+        Dept dept = new Dept();
+        dept.setParentId(deptId);
+        List<Dept> childrens = deptMapper.selectDeptList(dept);
+        for (Dept children : childrens)
+        {
+            children.setAncestors(ancestors + "," + dept.getParentId());
+        }
+        if (childrens.size() > 0)
+        {
+            deptMapper.updateDeptChildren(childrens);
+        }
     }
 
     /**

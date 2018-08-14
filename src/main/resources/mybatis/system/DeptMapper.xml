@@ -32,6 +32,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectDeptList" parameterType="Dept" resultMap="DeptResult">
         <include refid="selectDeptVo"/>
         <where>
+            <if test="parentId != null and parentId != 0">
+				AND parent_id = #{parentId}
+			</if>
 			<if test="deptName != null and deptName != ''">
 				AND dept_name like concat('%', #{deptName}, '%')
 			</if>
@@ -109,6 +112,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		</set>
  		where dept_id = #{deptId}
 	</update>
+	
+	<update id="updateDeptChildren" parameterType="java.util.List">
+	    update sys_dept set ancestors =
+	    <foreach collection="depts" item="item" index="index"
+	        separator=" " open="case dept_id" close="end">
+	        when #{item.deptId} then #{item.ancestors}
+	    </foreach>
+	    where dept_id in
+	    <foreach collection="depts" item="item" index="index"
+	        separator="," open="(" close=")">
+	        #{item.deptId}
+	    </foreach>
+	 </update>
 
 	<delete id="deleteDeptById" parameterType="Long">
 		delete from sys_dept where dept_id = #{deptId}
