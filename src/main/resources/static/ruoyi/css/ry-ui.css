@@ -328,9 +328,11 @@ label{
 .table-striped .bootstrap-table{
 	border:0px!important;
 }
-.table-striped .table, .fixed-table-container, .table-striped .table, .table-striped .table, .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th, .table-striped .table>tfoot>tr>th, .table-striped .table>thead>tr>td, .table-striped .table>tbody>tr>td, .table-striped .table>tfoot>tr>td{
-    background-color: transparent!important;
-    border: 0px;
+
+.table-striped .table, .fixed-table-container, table, .table-striped .table, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+   border-bottom: 1px solid #ccc!important;
+   background-color: transparent!important;
+   border: 0px;
 }
 .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th{
 	border-bottom: 1px solid #ccc!important;
