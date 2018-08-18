@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
@@ -65,7 +65,7 @@ public class NoticeController extends BaseController
      * 新增保存公告
      */
     @RequiresPermissions("system:notice:add")
-    @Log(title = "通知公告", action = BusinessType.INSERT)
+    @Log(title = "通知公告", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Notice notice)
@@ -87,7 +87,7 @@ public class NoticeController extends BaseController
      * 修改保存公告
      */
     @RequiresPermissions("system:notice:edit")
-    @Log(title = "通知公告", action = BusinessType.UPDATE)
+    @Log(title = "通知公告", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Notice notice)
@@ -99,7 +99,7 @@ public class NoticeController extends BaseController
      * 删除公告
      */
     @RequiresPermissions("system:notice:remove")
-    @Log(title = "通知公告", action = BusinessType.DELETE)
+    @Log(title = "通知公告", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
@@ -50,7 +50,7 @@ public class JobController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "定时任务", action = BusinessType.EXPORT)
+    @Log(title = "定时任务", businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
@@ -68,7 +68,7 @@ public class JobController extends BaseController
         }
     }
 
-    @Log(title = "定时任务", action = BusinessType.DELETE)
+    @Log(title = "定时任务", businessType = BusinessType.DELETE)
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
@@ -89,7 +89,7 @@ public class JobController extends BaseController
     /**
      * 任务调度状态修改
      */
-    @Log(title = "定时任务", action = BusinessType.UPDATE)
+    @Log(title = "定时任务", businessType = BusinessType.UPDATE)
     @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/changeStatus")
     @ResponseBody
@@ -101,7 +101,7 @@ public class JobController extends BaseController
     /**
      * 任务调度立即执行一次
      */
-    @Log(title = "定时任务", action = BusinessType.UPDATE)
+    @Log(title = "定时任务", businessType = BusinessType.UPDATE)
     @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/run")
     @ResponseBody
@@ -122,7 +122,7 @@ public class JobController extends BaseController
     /**
      * 新增保存调度
      */
-    @Log(title = "定时任务", action = BusinessType.INSERT)
+    @Log(title = "定时任务", businessType = BusinessType.INSERT)
     @RequiresPermissions("monitor:job:add")
     @PostMapping("/add")
     @ResponseBody
@@ -144,7 +144,7 @@ public class JobController extends BaseController
     /**
      * 修改保存调度
      */
-    @Log(title = "定时任务", action = BusinessType.UPDATE)
+    @Log(title = "定时任务", businessType = BusinessType.UPDATE)
     @RequiresPermissions("monitor:job:edit")
     @PostMapping("/edit")
     @ResponseBody

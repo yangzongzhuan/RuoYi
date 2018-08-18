@@ -19,7 +19,7 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessStatus;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessStatus;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.project.monitor.operlog.domain.OperLog;
@@ -83,7 +83,7 @@ public class LogAspect
 
             // *========数据库日志=========*//
             OperLog operLog = new OperLog();
-            operLog.setStatus(BusinessStatus.SUCCESS);
+            operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
             // 请求的地址
             String ip = ShiroUtils.getIp();
             operLog.setOperIp(ip);
@@ -101,7 +101,7 @@ public class LogAspect
 
             if (e != null)
             {
-                operLog.setStatus(BusinessStatus.FAIL);
+                operLog.setStatus(BusinessStatus.FAIL.ordinal());
                 operLog.setErrorMsg(StringUtils.substring(e.getMessage(), 0, 2000));
             }
             // 设置方法名称
@@ -132,11 +132,11 @@ public class LogAspect
     public void getControllerMethodDescription(Log log, OperLog operLog) throws Exception
     {
         // 设置action动作
-        operLog.setAction(log.action());
+        operLog.setBusinessType(log.businessType().ordinal());
         // 设置标题
         operLog.setTitle(log.title());
-        // 设置channel
-        operLog.setChannel(log.channel());
+        // 设置操作人类别
+        operLog.setOperatorType(log.operatorType().ordinal());
         // 是否需要保存request，参数和值
         if (log.isSaveRequestData())
         {

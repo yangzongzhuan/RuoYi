@@ -39,13 +39,11 @@ public class DsAspect
 
         Method method = signature.getMethod();
 
-        if (method.isAnnotationPresent(Ds.class))
+        Ds dataSource = method.getAnnotation(Ds.class);
+
+        if (StringUtils.isNotNull(dataSource))
         {
-            Ds dataSource = method.getAnnotation(Ds.class);
-            if (StringUtils.isNotNull(dataSource) && StringUtils.isNotEmpty(dataSource.name()))
-            {
-                DynamicDataSourceContextHolder.setDB(dataSource.name());
-            }
+            DynamicDataSourceContextHolder.setDateSoureType(dataSource.value().name());
         }
 
         try
@@ -54,7 +52,8 @@ public class DsAspect
         }
         finally
         {
-            DynamicDataSourceContextHolder.clearDB();
+            // 销毁数据源 在执行方法之后
+            DynamicDataSourceContextHolder.clearDateSoureType();
         }
     }
 }

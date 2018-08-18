@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.service.DictService;
@@ -75,7 +75,7 @@ public class ProfileController extends BaseController
         return prefix + "/resetPwd";
     }
 
-    @Log(title = "重置密码", action = BusinessType.UPDATE)
+    @Log(title = "重置密码", businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
     public AjaxResult resetPwd(User user)
@@ -112,7 +112,7 @@ public class ProfileController extends BaseController
     /**
      * 修改用户
      */
-    @Log(title = "个人信息", action = BusinessType.UPDATE)
+    @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PostMapping("/update")
     @ResponseBody
     public AjaxResult update(User user)
@@ -128,7 +128,7 @@ public class ProfileController extends BaseController
     /**
      * 保存头像
      */
-    @Log(title = "个人信息", action = BusinessType.UPDATE)
+    @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PostMapping("/updateAvatar")
     @ResponseBody
     public AjaxResult updateAvatar(User user, @RequestParam("avatarfile") MultipartFile file)

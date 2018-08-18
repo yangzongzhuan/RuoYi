@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.tool.gen.domain.TableInfo;
@@ -55,7 +55,7 @@ public class GenController extends BaseController
      * 生成代码
      */
     @RequiresPermissions("tool:gen:code")
-    @Log(title = "代码生成", action = BusinessType.GENCODE)
+    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
     public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException
     {
@@ -72,7 +72,7 @@ public class GenController extends BaseController
      * 批量生成代码
      */
     @RequiresPermissions("tool:gen:code")
-    @Log(title = "代码生成", action = BusinessType.GENCODE)
+    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     @ResponseBody
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException

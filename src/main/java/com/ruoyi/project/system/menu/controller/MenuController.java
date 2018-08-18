@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.menu.domain.Menu;
@@ -54,7 +54,7 @@ public class MenuController extends BaseController
     /**
      * 删除菜单
      */
-    @Log(title = "菜单管理", action = BusinessType.DELETE)
+    @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:menu:remove")
     @PostMapping("/remove/{menuId}")
     @ResponseBody
@@ -95,7 +95,7 @@ public class MenuController extends BaseController
     /**
      * 新增保存菜单
      */
-    @Log(title = "菜单管理", action = BusinessType.INSERT)
+    @Log(title = "菜单管理", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
     @ResponseBody
@@ -117,7 +117,7 @@ public class MenuController extends BaseController
     /**
      * 修改保存菜单
      */
-    @Log(title = "菜单管理", action = BusinessType.UPDATE)
+    @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:menu:edit")
     @PostMapping("/edit")
     @ResponseBody

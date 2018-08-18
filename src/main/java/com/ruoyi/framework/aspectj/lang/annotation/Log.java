@@ -5,7 +5,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import com.ruoyi.framework.aspectj.lang.constant.OperatorType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.OperatorType;
 
 /**
  * 自定义操作日志记录注解
@@ -22,10 +23,10 @@ public @interface Log
     String title() default "";
 
     /** 功能 */
-    String action() default "";
+    BusinessType businessType() default BusinessType.OTHER;
 
-    /** 渠道 */
-    String channel() default OperatorType.MANAGE;
+    /** 操作人类别 */
+    OperatorType operatorType() default OperatorType.MANAGE;
 
     /** 是否保存请求的参数 */
     boolean isSaveRequestData() default true;
