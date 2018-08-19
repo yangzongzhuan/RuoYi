@@ -259,6 +259,12 @@ label{
 	color:#333;
 }
 
+@media ( max-width : 768px) {
+    .select-list {
+        display: none;
+    }
+}
+
 .select-list li{
 	float:left;
 	color:#333;
