@@ -79,6 +79,9 @@
         var prefix = ctx + "system/menu"
         $("#form-menu-add").validate({
         	rules:{
+        		menuType:{
+        			required:true,
+        		},
         		menuName:{
         			required:true,
         			remote: {

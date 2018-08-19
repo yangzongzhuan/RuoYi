@@ -136,6 +136,14 @@ label.error {
 	padding-left: 25px
 }
 
+.i-checks label.error, .check-box label.error, .radio-box label.error {
+    right:auto;
+    width:150px;
+    left:210px;
+    top:-1px;
+    max-width: none;
+}
+
 /** 遮罩层 */
 .loaderbox {
   display: inline-block;
