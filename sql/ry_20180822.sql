@@ -524,7 +524,7 @@ create table sys_user_online (
   browser  		    varchar(50)  default '' 			 	comment '浏览器类型',
   os      		    varchar(50)  default '' 			 	comment '操作系统',
   status      	    varchar(10)  default '' 			 	comment '在线状态on_line在线off_line离线',
-  start_timestsamp 	datetime                                comment 'session创建时间',
+  start_timestamp 	datetime                                comment 'session创建时间',
   last_access_time  datetime                                comment 'session最后访问时间',
   expire_time 	    int(5) 		 default 0 			 	    comment '超时时间，单位为分钟',
   primary key (sessionId)

@@ -9,7 +9,7 @@ ruoyi:
   #头像上传路径
   profile: D:/profile/
   # 获取ip地址开关
-  addressEnabled: true
+  addressEnabled: false
 #开发环境配置
 server:
   #服务端口
