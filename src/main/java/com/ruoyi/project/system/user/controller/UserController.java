@@ -176,12 +176,7 @@ public class UserController extends BaseController
     @ResponseBody
     public String checkLoginNameUnique(User user)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(user))
-        {
-            uniqueFlag = userService.checkLoginNameUnique(user.getLoginName());
-        }
-        return uniqueFlag;
+        return userService.checkLoginNameUnique(user.getLoginName());
     }
 
     /**
@@ -191,12 +186,7 @@ public class UserController extends BaseController
     @ResponseBody
     public String checkPhoneUnique(User user)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(user))
-        {
-            uniqueFlag = userService.checkPhoneUnique(user);
-        }
-        return uniqueFlag;
+        return userService.checkPhoneUnique(user);
     }
 
     /**
@@ -206,11 +196,6 @@ public class UserController extends BaseController
     @ResponseBody
     public String checkEmailUnique(User user)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(user))
-        {
-            uniqueFlag = userService.checkEmailUnique(user);
-        }
-        return uniqueFlag;
+        return userService.checkEmailUnique(user);
     }
 }

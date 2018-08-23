@@ -374,7 +374,7 @@
             	});
             },
             // 批量删除信息
-            batRemove: function() {
+            removeAll: function() {
         		var rows = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
         		if (rows.length == 0) {
         			$.modal.alertWarning("请至少选择一条记录");
@@ -438,6 +438,16 @@
                 	$.modal.alertError(result.msg);
                 }
             	$.modal.closeLoading();
+            }
+        },
+        // 校验封装处理
+        validate: {
+        	// 判断返回标识是否唯一 false 不存在 true 存在
+        	unique: function (value) {
+            	if (value == "0") {
+                    return true;
+                }
+                return false;
             }
         },
         // 通用方法封装处理

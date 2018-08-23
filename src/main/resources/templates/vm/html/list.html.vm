@@ -8,12 +8,12 @@
 			<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="${moduleName}:${classname}:add">
 				<i class="fa fa-plus"></i> 新增
 			</a>
-			<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="${moduleName}:${classname}:remove">
+			<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="${moduleName}:${classname}:remove">
 				<i class="fa fa-trash-o"></i> 删除
 			</a>
 		</div>
 			
-		<div class="col-sm-12 select-info table-striped">
+		<div class="col-sm-12 select-table table-striped">
 			<table id="bootstrap-table" data-mobile-responsive="true"></table>
 		</div>
     </div>

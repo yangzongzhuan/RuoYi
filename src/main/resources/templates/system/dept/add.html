@@ -44,10 +44,10 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">部门状态：</label>
-				<div class="col-sm-8" th:with="type=${@dict.getType('sys_normal_disable')}">
-					<div th:each="dict : ${type}" th:class="${dict['cssClass']}">
-						<input type="radio" th:id="${dict['dictCode']}" name="status" th:value="${dict['dictValue']}" th:checked="${dict['isDefault'] == 'Y' ? true : false}">
-						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
+				<div class="col-sm-8">
+				    <div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
+						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.isDefault == 'Y' ? true : false}">
+						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 					</div>
 				</div>
 			</div>
@@ -74,12 +74,11 @@
 		                dataType: "json",
 		                data: {
 		                	"deptName" : function() {
-		                        return $("input[name='deptName']").val();
+		                        return $.common.trim($("#deptName").val());
 		                    }
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},

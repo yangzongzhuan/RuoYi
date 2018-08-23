@@ -74,15 +74,14 @@
 		                dataType: "json",
 		                data: {
 		                	"userId": function() {
-		                        return $("input[name='userId']").val();
+		                        return $("#userId").val();
 		                    },
 		        			"email": function() {
-		                        return $("input[name='email']").val();
+		                        return $.common.trim($("#email").val());
 		                    }
 		                },
 		                dataFilter: function (data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},
@@ -95,15 +94,14 @@
 		                dataType: "json",
 		                data: {
 		                	"userId": function() {
-		                        return $("input[name='userId']").val();
+		                		return $("#userId").val();
 		                    },
 		        			"phonenumber": function() {
-		                        return $("input[name='phonenumber']").val();
+		                        return $.common.trim($("#phonenumber").val());
 		                    }
 		                },
 		                dataFilter: function (data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},

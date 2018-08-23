@@ -144,6 +144,15 @@ label.error {
     max-width: none;
 }
 
+/** 内联复选框&单选框  */
+.check-box,.radio-box {
+    display:inline-block;
+    box-sizing:border-box;
+    cursor:pointer;
+    position:relative;
+    padding-right:20px
+}
+
 /** 遮罩层 */
 .loaderbox {
   display: inline-block;
@@ -225,20 +234,20 @@ li {
 	padding-left: 10px;
 }
 
-label{
+label {
     font-weight: normal;
 }
 
-.container-div{
+.container-div {
 	padding:10px 35px;
 	height:100%;
 }
 
-.container-div .row{
+.container-div .row {
 	height: 100%;
 }
 
-.select-info{
+.select-info {
 	width:100%;
 	background: #fff;
     border-radius: 6px;
@@ -247,28 +256,25 @@ label{
     box-shadow: 1px 1px 3px rgba(0,0,0,.2);
 }
 
-.select-info{
+.select-table {
+	width:100%;
+	background: #fff;
+    border-radius: 6px;
+    margin-top:10px;
+    padding-bottom: 13px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+}
+
+.select-info {
 	position: relative;
 }
 
-.select-info .save-btn,.select-info .close-btn{
-    width: 20px;
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    cursor: pointer;
-}
-
-.select-info .save-btn{
-	right: 50px;
-}
-
-.select-info .col-sm-6 .control-label{
+.select-info .col-sm-6 .control-label {
 	color:#333;
 }
 
 @media ( max-width : 768px) {
-    .select-list {
+    .select-info {
         display: none;
     }
 }
@@ -303,17 +309,17 @@ label{
 	width:280px;
 }
 
-.select-list .time input{
+.select-list .select-time input{
 	width:133px;
 }
 
-.time label,.time span,.time input{
+.select-time label,.select-time span,.select-time input{
 	float:left;
 }
-.time label{
+.select-time label{
 	    margin-top: 5px;
 }
-.time span{
+.select-time span{
 	    display: block;
     margin: 5px 5px;
 }

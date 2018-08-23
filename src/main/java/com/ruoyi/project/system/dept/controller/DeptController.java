@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -120,12 +119,7 @@ public class DeptController extends BaseController
     @ResponseBody
     public String checkDeptNameUnique(Dept dept)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(dept))
-        {
-            uniqueFlag = deptService.checkDeptNameUnique(dept);
-        }
-        return uniqueFlag;
+        return deptService.checkDeptNameUnique(dept);
     }
 
     /**

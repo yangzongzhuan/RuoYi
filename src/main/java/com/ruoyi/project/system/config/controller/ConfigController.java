@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -134,12 +133,7 @@ public class ConfigController extends BaseController
     @ResponseBody
     public String checkConfigKeyUnique(Config config)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(config))
-        {
-            uniqueFlag = configService.checkConfigKeyUnique(config);
-        }
-        return uniqueFlag;
+        return configService.checkConfigKeyUnique(config);
     }
 
 }

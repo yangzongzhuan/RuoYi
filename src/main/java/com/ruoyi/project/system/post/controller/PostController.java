@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
@@ -135,12 +134,7 @@ public class PostController extends BaseController
     @ResponseBody
     public String checkPostNameUnique(Post post)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(post))
-        {
-            uniqueFlag = postService.checkPostNameUnique(post);
-        }
-        return uniqueFlag;
+        return postService.checkPostNameUnique(post);
     }
 
     /**
@@ -150,12 +144,7 @@ public class PostController extends BaseController
     @ResponseBody
     public String checkPostCodeUnique(Post post)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(post))
-        {
-            uniqueFlag = postService.checkPostCodeUnique(post);
-        }
-        return uniqueFlag;
+        return postService.checkPostCodeUnique(post);
     }
 
 }

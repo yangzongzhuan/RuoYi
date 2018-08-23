@@ -18,7 +18,13 @@ $(function(){
 	        radioClass: "iradio_square-green",
 	    })
 	}
-	if ($(".time").length > 0) {
+	if ($(".radio-box").length > 0) {
+	    $(".radio-box").iCheck({
+	        checkboxClass: "icheckbox_square-green",
+	        radioClass: "iradio_square-green",
+	    })
+	}
+	if ($(".select-time").length > 0) {
 		layui.use('laydate', function() {
 		    var laydate = layui.laydate;
 		    laydate.render({ elem: '#startTime', theme: 'molv' });

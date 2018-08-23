@@ -25,10 +25,10 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">岗位状态：</label>
-				<div class="col-sm-8" th:with="type=${@dict.getType('sys_normal_disable')}">
-					<div th:each="dict : ${type}" th:class="${dict['cssClass']}">
-						<input type="radio" th:id="${dict['dictCode']}" name="status" th:value="${dict['dictValue']}" th:checked="${dict['isDefault'] == 'Y' ? true : false}">
-						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
+				<div class="col-sm-8">
+				    <div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
+						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.isDefault == 'Y' ? true : false}">
+						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 					</div>
 				</div>
 			</div>
@@ -60,12 +60,11 @@
 		                dataType: "json",
 		                data: {
 		                	"postName" : function() {
-		                        return $.trim($("#postName").val());
+		                        return $.common.trim($("#postName").val());
 		                    }
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},
@@ -77,12 +76,11 @@
 		                dataType: "json",
 		                data: {
 		                	"postCode" : function() {
-		                        return $.trim($("#postCode").val());
+		                        return $.common.trim($("#postCode").val());
 		                    }
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},
