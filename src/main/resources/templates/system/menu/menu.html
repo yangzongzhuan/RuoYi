@@ -135,10 +135,10 @@
 					url: prefix + "/remove/" + id,
 					success : function(result) {
 						if (result.code == web_status.SUCCESS) {
-		                	$.modal.alertSuccess(result.msg);
+		                	$.modal.msgSuccess(result.msg);
 		                	$.treeTable.refresh();
 		                } else {
-		                	$.modal.alertError(result.msg);
+		                	$.modal.msgError(result.msg);
 		                }
 					}
 				});
