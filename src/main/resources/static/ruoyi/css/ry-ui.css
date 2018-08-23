@@ -117,7 +117,7 @@
 label.error {
 	position: absolute;
 	right: 18px;
-	top: 5px;
+	top: 7px;
 	color: #ef392b;
 	font-size: 12px
 }
@@ -140,7 +140,7 @@ label.error {
     right:auto;
     width:150px;
     left:210px;
-    top:-1px;
+    top:1px;
     max-width: none;
 }
 
@@ -150,7 +150,8 @@ label.error {
     box-sizing:border-box;
     cursor:pointer;
     position:relative;
-    padding-right:20px
+    padding-right:20px;
+    padding-top:7px;
 }
 
 /** 遮罩层 */
@@ -247,20 +248,12 @@ label {
 	height: 100%;
 }
 
-.select-info {
+.select-info,.select-table {
 	width:100%;
 	background: #fff;
     border-radius: 6px;
     margin-top:10px;
-    padding-bottom: 13px;
-    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
-}
-
-.select-table {
-	width:100%;
-	background: #fff;
-    border-radius: 6px;
-    margin-top:10px;
+    padding-top: 5px;
     padding-bottom: 13px;
     box-shadow: 1px 1px 3px rgba(0,0,0,.2);
 }
@@ -291,6 +284,7 @@ label {
 	outline: none;
 	height: 30px;
 	width:280px;
+	padding-left:5px;
 }
 .select-list li .submit-btn{
 	border:0px;
