@@ -92,14 +92,15 @@ public class AsyncFactory
     public static TimerTask recordLogininfor(final String username, final String status, final String message, final Object... args)
     {
         final UserAgent userAgent = UserAgent.parseUserAgentString(ServletUtils.getRequest().getHeader("User-Agent"));
+        final String ip = ShiroUtils.getIp();
         return new TimerTask()
         {
             @Override
             public void run()
             {
                 StringBuilder s = new StringBuilder();
-                s.append(LogUtils.getBlock(ShiroUtils.getIp()));
-                s.append(AddressUtils.getRealAddressByIP(ShiroUtils.getIp()));
+                s.append(LogUtils.getBlock(ip));
+                s.append(AddressUtils.getRealAddressByIP(ip));
                 s.append(LogUtils.getBlock(username));
                 s.append(LogUtils.getBlock(status));
                 s.append(LogUtils.getBlock(message));
@@ -112,8 +113,8 @@ public class AsyncFactory
                 // 封装对象
                 Logininfor logininfor = new Logininfor();
                 logininfor.setLoginName(username);
-                logininfor.setIpaddr(ShiroUtils.getIp());
-                logininfor.setLoginLocation(AddressUtils.getRealAddressByIP(ShiroUtils.getIp()));
+                logininfor.setIpaddr(ip);
+                logininfor.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
                 logininfor.setBrowser(browser);
                 logininfor.setOs(os);
                 logininfor.setMsg(message);

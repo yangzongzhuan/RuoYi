@@ -82,4 +82,10 @@ public class Config extends BaseEntity
         this.configType = configType;
     }
 
+    public String toString()
+    {
+        return "Config [configId=" + configId + ", configName=" + configName + ", configKey=" + configKey
+                + ", configValue=" + configValue + ", configType=" + configType + "]";
+    }
+
 }
