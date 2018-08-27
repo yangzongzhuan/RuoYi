@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
@@ -53,7 +52,7 @@ public class RoleController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "角色管理", action = BusinessType.EXPORT)
+    @Log(title = "角色管理", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
@@ -84,7 +83,7 @@ public class RoleController extends BaseController
      * 新增保存角色
      */
     @RequiresPermissions("system:role:add")
-    @Log(title = "角色管理", action = BusinessType.INSERT)
+    @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
@@ -108,7 +107,7 @@ public class RoleController extends BaseController
      * 修改保存角色
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", action = BusinessType.UPDATE)
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @Transactional(rollbackFor = Exception.class)
     @ResponseBody
@@ -118,7 +117,7 @@ public class RoleController extends BaseController
     }
 
     @RequiresPermissions("system:role:remove")
-    @Log(title = "角色管理", action = BusinessType.DELETE)
+    @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -140,12 +139,7 @@ public class RoleController extends BaseController
     @ResponseBody
     public String checkRoleNameUnique(Role role)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(role))
-        {
-            uniqueFlag = roleService.checkRoleNameUnique(role);
-        }
-        return uniqueFlag;
+        return roleService.checkRoleNameUnique(role);
     }
     
     /**
@@ -155,12 +149,7 @@ public class RoleController extends BaseController
     @ResponseBody
     public String checkRoleKeyUnique(Role role)
     {
-        String uniqueFlag = "0";
-        if (StringUtils.isNotNull(role))
-        {
-            uniqueFlag = roleService.checkRoleKeyUnique(role);
-        }
-        return uniqueFlag;
+        return roleService.checkRoleKeyUnique(role);
     }
 
     /**

@@ -7,10 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="OperLog" id="OperLogResult">
 		<id     property="operId"         column="oper_id"       />
 		<result property="title"          column="title"         />
-		<result property="action"         column="action"        />
+		<result property="businessType"   column="business_type" />
 		<result property="method"         column="method"        />
-		<result property="channel"        column="channel"       />
-		<result property="operName"       column="oper_name"    />
+		<result property="operatorType"   column="operator_type" />
+		<result property="operName"       column="oper_name"     />
 		<result property="deptName"       column="dept_name"     />
 		<result property="operUrl"        column="oper_url"      />
 		<result property="operIp"         column="oper_ip"       />
@@ -23,14 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<sql id="selectOperLogVo">
         select 
-        	oper_id, title, action, method, channel, oper_name, dept_name, oper_url, oper_ip,oper_location,oper_param,status,error_msg,oper_time
+        	oper_id, title, business_type, method, operator_type, oper_name, dept_name, oper_url, oper_ip,oper_location,oper_param,status,error_msg,oper_time
         from 
           	sys_oper_log
     </sql>
     
 	<insert id="insertOperlog" parameterType="OperLog">
-		insert into sys_oper_log(title, action, method, channel, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, status, error_msg, oper_time)
-        values (#{title}, #{action}, #{method}, #{channel}, #{operName}, #{deptName}, #{operUrl}, #{operIp}, #{operLocation}, #{operParam}, #{status}, #{errorMsg}, sysdate())
+		insert into sys_oper_log(title, business_type, method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, status, error_msg, oper_time)
+        values (#{title}, #{businessType}, #{method}, #{operatorType}, #{operName}, #{deptName}, #{operUrl}, #{operIp}, #{operLocation}, #{operParam}, #{status}, #{errorMsg}, sysdate())
 	</insert>
 	
 	<select id="selectOperLogList" parameterType="OperLog" resultMap="OperLogResult">
@@ -39,16 +39,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="title != null and title != ''">
 				AND title like concat('%', #{title}, '%')
 			</if>
-			<if test="action != null and action != ''">
-				AND action = #{action}
+			<if test="businessType != null">
+				AND business_type = #{businessType}
 			</if>
 			<if test="operName != null and operName != ''">
 				AND oper_name like concat('%', #{operName}, '%')
 			</if>
-			<if test="params != null and params.beginTime != ''"><!-- 开始时间检索 -->
+			<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
 				and date_format(oper_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 			</if>
-			<if test="params != null and params.endTime != ''"><!-- 结束时间检索 -->
+			<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
 				and date_format(oper_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 			</if>
 		</where>

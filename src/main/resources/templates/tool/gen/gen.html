@@ -16,7 +16,7 @@
 							<li>
 								表描述：<input type="text" name="tableComment"/>
 							</li>
-							<li class="time">
+							<li class="select-time">
 								<label>表时间： </label>
 								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
 								<span>-</span>
@@ -24,6 +24,7 @@
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
@@ -36,7 +37,7 @@
 			    </a>
 		    </div>
 		
-		    <div class="col-sm-12 select-info table-striped">
+		    <div class="col-sm-12 select-table table-striped">
 			    <table id="bootstrap-table" data-mobile-responsive="true"></table>
 			</div>
 		</div>

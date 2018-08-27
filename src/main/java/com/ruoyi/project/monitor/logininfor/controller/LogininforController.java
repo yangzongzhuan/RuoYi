@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
@@ -48,7 +48,7 @@ public class LogininforController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "登陆日志", action = BusinessType.EXPORT)
+    @Log(title = "登陆日志", businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:logininfor:export")
     @PostMapping("/export")
     @ResponseBody
@@ -67,7 +67,7 @@ public class LogininforController extends BaseController
     }
 
     @RequiresPermissions("monitor:logininfor:remove")
-    @Log(title = "登陆日志", action = BusinessType.DELETE)
+    @Log(title = "登陆日志", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

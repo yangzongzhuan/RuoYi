@@ -21,17 +21,17 @@ public class OperLog extends BaseEntity
     @Excel(name = "操作模块")
     private String title;
 
-    /** 操作类型 */
-    @Excel(name = "操作类型")
-    private String action;
+    /** 操作业务类型 */
+    @Excel(name = "业务类型")
+    private Integer businessType;
 
     /** 请求方法 */
     @Excel(name = "请求方法")
     private String method;
 
-    /** 来源渠道 */
-    @Excel(name = "来源渠道")
-    private String channel;
+    /** 操作人类别 */
+    @Excel(name = "操作类别")
+    private Integer operatorType;
 
     /** 操作人员 */
     @Excel(name = "操作人员")
@@ -59,7 +59,7 @@ public class OperLog extends BaseEntity
 
     /** 状态0正常 1异常 */
     @Excel(name = "状态")
-    private String status;
+    private Integer status;
 
     /** 错误消息 */
     @Excel(name = "错误消息")
@@ -89,14 +89,14 @@ public class OperLog extends BaseEntity
         this.title = title;
     }
 
-    public String getAction()
+    public Integer getBusinessType()
     {
-        return action;
+        return businessType;
     }
 
-    public void setAction(String action)
+    public void setBusinessType(Integer businessType)
     {
-        this.action = action;
+        this.businessType = businessType;
     }
 
     public String getMethod()
@@ -109,14 +109,14 @@ public class OperLog extends BaseEntity
         this.method = method;
     }
 
-    public String getChannel()
+    public Integer getOperatorType()
     {
-        return channel;
+        return operatorType;
     }
 
-    public void setChannel(String channel)
+    public void setOperatorType(Integer operatorType)
     {
-        this.channel = channel;
+        this.operatorType = operatorType;
     }
 
     public String getOperName()
@@ -179,12 +179,12 @@ public class OperLog extends BaseEntity
         this.operParam = operParam;
     }
 
-    public String getStatus()
+    public Integer getStatus()
     {
         return status;
     }
 
-    public void setStatus(String status)
+    public void setStatus(Integer status)
     {
         this.status = status;
     }
@@ -212,10 +212,10 @@ public class OperLog extends BaseEntity
     @Override
     public String toString()
     {
-        return "OperLog [operId=" + operId + ", title=" + title + ", action=" + action + ", method=" + method
-                + ", channel=" + channel + ", operName=" + operName + ", deptName=" + deptName + ", operUrl=" + operUrl
-                + ", operIp=" + operIp + ", operLocation=" + operLocation + ", operParam=" + operParam + ", status="
-                + status + ", errorMsg=" + errorMsg + ", operTime=" + operTime + "]";
+        return "OperLog [operId=" + operId + ", title=" + title + ", businessType=" + businessType + ", method="
+                + method + ", operatorType=" + operatorType + ", operName=" + operName + ", deptName=" + deptName
+                + ", operUrl=" + operUrl + ", operIp=" + operIp + ", operLocation=" + operLocation + ", operParam="
+                + operParam + ", status=" + status + ", errorMsg=" + errorMsg + ", operTime=" + operTime + "]";
     }
 
 }

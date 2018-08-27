@@ -19,22 +19,20 @@ public class AddressUtils
 
     public static String getRealAddressByIP(String ip)
     {
-        String address = "";
-        try
+        String address = "XX XX";
+        if (RuoYiConfig.isAddressEnabled())
         {
-            if (RuoYiConfig.isAddressEnabled())
+            String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
+            if (StringUtils.isEmpty(rspStr))
             {
-                address = HttpUtils.sendPost(IP_URL, "ip=" + ip);
-                JSONObject json = JSONObject.parseObject(address);
-                JSONObject object = json.getObject("data", JSONObject.class);
-                String region = object.getString("region");
-                String city = object.getString("city");
-                address = region + " " + city;
+                log.error("获取地理位置异常 {}", ip);
+                return address;
             }
-        }
-        catch (Exception e)
-        {
-            log.error("获取地理位置异常:", e);
+            JSONObject obj = JSONObject.parseObject(rspStr);
+            JSONObject data = obj.getObject("data", JSONObject.class);
+            String region = data.getString("region");
+            String city = data.getString("city");
+            address = region + " " + city;
         }
         return address;
     }

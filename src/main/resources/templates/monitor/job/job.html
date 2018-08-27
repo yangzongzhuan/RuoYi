@@ -20,7 +20,7 @@
 							<li>
 								任务状态：<select name="status" th:with="type=${@dict.getType('sys_job_status')}">
 									<option value="">所有</option>
-									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
 							<li>
@@ -36,7 +36,7 @@
 				<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="monitor:job:add">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
-				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="monitor:job:remove">
+				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:job:remove">
 		            <i class="fa fa-trash-o"></i> 删除
 		        </a>
 		        <a class="btn btn-outline btn-info btn-rounded" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
@@ -44,7 +44,7 @@
 		        </a>
 	        </div>
         
-	        <div class="col-sm-12 select-info table-striped">
+	        <div class="col-sm-12 select-table table-striped">
 			    <table id="bootstrap-table" data-mobile-responsive="true"></table>
 			</div>
 		</div>

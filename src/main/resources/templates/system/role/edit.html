@@ -88,15 +88,14 @@
 		                dataType: "json",
 		                data: {
 							"roleId": function() {
-							    return $("input[name='roleId']").val();
+							    return $("#roleId").val();
 							},
 							"roleName": function() {
-							    return $("input[name='roleName']").val();
+							    return $.common.trim($("#roleName").val());
 							}
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},
@@ -108,15 +107,14 @@
 		                dataType: "json",
 		                data: {
 							"roleId": function() {
-							    return $("input[name='roleId']").val();
+								return $("#roleId").val();
 							},
 							"roleKey": function() {
-							    return $("input[name='roleKey']").val();
+							    return $.common.trim($("#roleKey").val());
 							}
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},

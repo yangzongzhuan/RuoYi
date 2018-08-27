@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
-import com.ruoyi.framework.aspectj.lang.constant.DataSourceName;
+import com.ruoyi.framework.aspectj.lang.enums.DataSourceType;
 import com.ruoyi.framework.datasource.DynamicDataSource;
 
 /**
@@ -29,7 +29,7 @@ public class DruidConfig
 
     @Bean
     @ConfigurationProperties("spring.datasource.druid.slave")
-    @ConditionalOnProperty(prefix = "spring.datasource.druid.slave", name = "open", havingValue = "true")
+    @ConditionalOnProperty(prefix = "spring.datasource.druid.slave", name = "enabled", havingValue = "true")
     public DataSource slaveDataSource()
     {
         return DruidDataSourceBuilder.create().build();
@@ -40,8 +40,8 @@ public class DruidConfig
     public DynamicDataSource dataSource(DataSource masterDataSource, DataSource slaveDataSource)
     {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DataSourceName.MASTER, masterDataSource);
-        targetDataSources.put(DataSourceName.SLAVE, slaveDataSource);
+        targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
+        targetDataSources.put(DataSourceType.SLAVE.name(), slaveDataSource);
         return new DynamicDataSource(masterDataSource, targetDataSources);
     }
 }

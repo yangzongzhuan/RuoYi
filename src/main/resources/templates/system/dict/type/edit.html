@@ -20,17 +20,17 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">状态：</label>
-				<div class="col-sm-8" th:with="type=${@dict.getType('sys_normal_disable')}">
-					<div th:each="dict : ${type}" th:class="${dict['cssClass']}">
-						<input type="radio" th:id="${dict['dictCode']}" name="status" th:value="${dict['dictValue']}" th:field="*{status}">
-						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
+				<div class="col-sm-8">
+					<div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
+						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:field="*{status}">
+						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">备注：</label>
 				<div class="col-sm-8">
-					<input id="remark" name="remark" class="form-control" type="text" th:field="*{remark}">
+					<textarea id="remark" name="remark" class="form-control">[[*{remark}]]</textarea>
 				</div>
 			</div>
 			
@@ -60,15 +60,14 @@
 		                dataType: "json",
 		                data: {
 		                	dictId : function() {
-		                        return $.trim($("#dictId").val());
+		                        return $("#dictId").val();
 		                    },
 		                	dictType : function() {
-		                        return $.trim($("#dictType").val());
+		                		return $.common.trim($("#dictType").val());
 		                    }
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},

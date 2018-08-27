@@ -4,7 +4,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import com.ruoyi.framework.aspectj.lang.constant.DataSourceName;
+
+import com.ruoyi.framework.aspectj.lang.enums.DataSourceType;
 
 /**
  * 自定义多数据源切换注解
@@ -16,7 +17,7 @@ import com.ruoyi.framework.aspectj.lang.constant.DataSourceName;
 public @interface Ds
 {
     /**
-     * 切换数据源值
+     * 切换数据源名称
      */
-    String name() default DataSourceName.MASTER;
+    public DataSourceType value() default DataSourceType.MASTER;
 }

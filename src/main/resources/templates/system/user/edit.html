@@ -42,7 +42,7 @@
 				<label class="col-sm-3 control-label">性别：</label>
 				<div class="col-sm-8">
 					<select id="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
-	                    <option th:each="dict : ${type}" th:text="${dict['dictLabel']}" th:value="${dict['dictValue']}" th:field="*{sex}"></option>
+	                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sex}"></option>
 	                </select>
 				</div>
 			</div>
@@ -105,15 +105,14 @@
                         dataType: "json",
                         data: {
                         	"userId": function() {
-                                return $("input[name='userId']").val();
+                                return $("#userId").val();
                             },
                 			"email": function() {
-                                return $("input[name='email']").val();
+                                return $.common.trim($("#email").val());
                             }
                         },
                         dataFilter: function (data, type) {
-                            if (data == "0") return true;
-                            else return false;
+                        	return $.validate.unique(data);
                         }
                     }
         		},
@@ -126,15 +125,14 @@
                         dataType: "json",
                         data: {
                         	"userId": function() {
-                                return $("input[name='userId']").val();
+                        		return $("#userId").val();
                             },
                 			"phonenumber": function() {
-                                return $("input[name='phonenumber']").val();
+                                return $.common.trim($("#phonenumber").val());
                             }
                         },
                         dataFilter: function (data, type) {
-                            if (data == "0") return true;
-                            else return false;
+                        	return $.validate.unique(data);
                         }
                     }
         		},

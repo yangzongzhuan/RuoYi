@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import ${package}.domain.${className};
 import ${package}.service.I${className}Service;
 import com.ruoyi.framework.web.controller.BaseController;
@@ -66,7 +66,7 @@ public class ${className}Controller extends BaseController
 	 * 新增保存${tableComment}
 	 */
 	@RequiresPermissions("${moduleName}:${classname}:add")
-	@Log(title = "${tableComment}", action = BusinessType.INSERT)
+	@Log(title = "${tableComment}", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
 	public AjaxResult addSave(${className} ${classname})
@@ -89,7 +89,7 @@ public class ${className}Controller extends BaseController
 	 * 修改保存${tableComment}
 	 */
 	@RequiresPermissions("${moduleName}:${classname}:edit")
-	@Log(title = "${tableComment}", action = BusinessType.UPDATE)
+	@Log(title = "${tableComment}", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
 	public AjaxResult editSave(${className} ${classname})
@@ -101,7 +101,7 @@ public class ${className}Controller extends BaseController
 	 * 删除${tableComment}
 	 */
 	@RequiresPermissions("${moduleName}:${classname}:remove")
-	@Log(title = "${tableComment}", action = BusinessType.DELETE)
+	@Log(title = "${tableComment}", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)

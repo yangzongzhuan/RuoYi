@@ -2,6 +2,7 @@ package com.ruoyi.common.utils.poi;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
@@ -53,22 +54,46 @@ public class ExcelUtil<T>
         this.clazz = clazz;
     }
 
+    /**
+     * 对excel表单默认第一个索引名转换成list
+     * 
+     * @param input 输入流
+     * @return 转换后集合
+     */
+    public List<T> importExcel(InputStream input) throws Exception
+    {
+        return importExcel(StringUtils.EMPTY, input);
+    }
+
+    /**
+     * 对excel表单指定表格索引名转换成list
+     * 
+     * @param sheetName 表格索引名
+     * @param input 输入流
+     * @return 转换后集合
+     */
     public List<T> importExcel(String sheetName, InputStream input) throws Exception
     {
         List<T> list = new ArrayList<T>();
 
         Workbook workbook = WorkbookFactory.create(input);
-        Sheet sheet = workbook.getSheet(sheetName);
+        Sheet sheet = null;
         if (StringUtils.isNotEmpty(sheetName))
         {
             // 如果指定sheet名,则取指定sheet中的内容.
             sheet = workbook.getSheet(sheetName);
         }
-        if (sheet == null)
+        else
         {
             // 如果传入的sheet名不存在则默认指向第1个sheet.
             sheet = workbook.getSheetAt(0);
         }
+
+        if (sheet == null)
+        {
+            throw new IOException("文件sheet不存在");
+        }
+
         int rows = sheet.getPhysicalNumberOfRows();
 
         if (rows > 0)
@@ -117,7 +142,7 @@ public class ExcelUtil<T>
                     // 如果不存在实例则新建.
                     entity = (entity == null ? clazz.newInstance() : entity);
                     // 从map中得到对应列的field.
-                    Field field = fieldsMap.get(j);
+                    Field field = fieldsMap.get(j + 1);
                     // 取得类型,并根据对象类型设置值.
                     Class<?> fieldType = field.getType();
                     if (String.class == fieldType)

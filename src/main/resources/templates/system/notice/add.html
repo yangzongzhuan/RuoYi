@@ -17,7 +17,7 @@
 				<label class="col-sm-3 control-label">公告类型：</label>
 				<div class="col-sm-8">
 					<select name="noticeType" class="form-control m-b" th:with="type=${@dict.getType('sys_notice_type')}">
-	                    <option th:each="dict : ${type}" th:text="${dict['dictLabel']}" th:value="${dict['dictValue']}"></option>
+	                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 	                </select>
 				</div>
 			</div>
@@ -30,10 +30,10 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">公告状态：</label>
-				<div class="col-sm-8" th:with="type=${@dict.getType('sys_notice_status')}">
-					<div th:each="dict : ${type}" th:class="${dict['cssClass']}">
-						<input type="radio" th:id="${dict['dictCode']}" name="status" th:value="${dict['dictValue']}" th:checked="${dict['isDefault'] == 'Y' ? true : false}">
-						<label th:for="${dict['dictCode']}" th:text="${dict['dictLabel']}"></label>
+				<div class="col-sm-8">
+				    <div class="radio-box" th:each="dict : ${@dict.getType('sys_notice_status')}">
+						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.isDefault == 'Y' ? true : false}">
+						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 					</div>
 				</div>
 			</div>

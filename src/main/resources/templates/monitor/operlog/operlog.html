@@ -18,12 +18,12 @@
 								<label>操作人员： </label><input type="text" name="operName"/>
 							</li>
 							<li>
-								<label>操作类型： </label><select name="action" th:with="type=${@dict.getType('sys_oper_type')}">
+								<label>操作类型： </label><select name="businessType" th:with="type=${@dict.getType('sys_oper_type')}">
 									<option value="">所有</option>
-									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
-							<li class="time">
+							<li class="select-time">
 								<label>操作时间： </label>
 								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
 								<span>-</span>
@@ -39,12 +39,12 @@
 			</div>
 			
 			<div class="btn-group hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="monitor:logininfor:remove">
+				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:logininfor:remove">
 		            <i class="fa fa-trash-o"></i> 删除
 		        </a>
 	        </div>
 	        
-			<div class="col-sm-12 select-info table-striped">
+			<div class="col-sm-12 select-table table-striped">
 				<table id="bootstrap-table" data-mobile-responsive="true"></table>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 		            title: '系统模块'
 		        },
 		        {
-		            field: 'action',
+		            field: 'businessType',
 		            title: '操作类型',
 		            align: 'center',
 		            formatter: function(value, row, index) {

@@ -87,12 +87,11 @@
 		                dataType: "json",
 		                data: {
 		                	"roleName" : function() {
-		                        return $.trim($("#roleName").val());
+		                		return $.common.trim($("#roleName").val());
 		                    }
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},
@@ -104,12 +103,11 @@
 		                dataType: "json",
 		                data: {
 		                	"roleName" : function() {
-		                        return $.trim($("#roleName").val());
+		                        return $.common.trim($("#roleName").val());
 		                    }
 		                },
 		                dataFilter: function(data, type) {
-		                    if (data == "0") return true;
-		                    else return false;
+		                	return $.validate.unique(data);
 		                }
 		            }
 				},

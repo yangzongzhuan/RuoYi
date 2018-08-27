@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.page.TableDataInfo;
@@ -50,7 +50,7 @@ public class DictDataController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "字典数据", action = BusinessType.EXPORT)
+    @Log(title = "字典数据", businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
@@ -81,7 +81,7 @@ public class DictDataController extends BaseController
     /**
      * 新增保存字典类型
      */
-    @Log(title = "字典数据", action = BusinessType.INSERT)
+    @Log(title = "字典数据", businessType = BusinessType.INSERT)
     @RequiresPermissions("system:dict:add")
     @PostMapping("/add")
     @ResponseBody
@@ -103,7 +103,7 @@ public class DictDataController extends BaseController
     /**
      * 修改保存字典类型
      */
-    @Log(title = "字典数据", action = BusinessType.UPDATE)
+    @Log(title = "字典数据", businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:dict:edit")
     @PostMapping("/edit")
     @ResponseBody
@@ -112,7 +112,7 @@ public class DictDataController extends BaseController
         return toAjax(dictDataService.updateDictData(dict));
     }
 
-    @Log(title = "字典数据", action = BusinessType.DELETE)
+    @Log(title = "字典数据", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dict:remove")
     @PostMapping("/remove")
     @ResponseBody

@@ -16,11 +16,12 @@
 							<li>
 								菜单状态：<select name="visible" th:with="type=${@dict.getType('sys_show_hide')}">
 									<option value="">所有</option>
-									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
@@ -32,7 +33,7 @@
                     <i class="fa fa-plus"></i> 新增
                 </a>
 	        </div>
-       		 <div class="col-sm-12 select-info table-striped">
+       		 <div class="col-sm-12 select-table table-striped">
 	            <table id="bootstrap-table" data-mobile-responsive="true"></table>
 	        </div>
 	    </div>
@@ -135,10 +136,10 @@
 					url: prefix + "/remove/" + id,
 					success : function(result) {
 						if (result.code == web_status.SUCCESS) {
-		                	$.modal.alertSuccess(result.msg);
+		                	$.modal.msgSuccess(result.msg);
 		                	$.treeTable.refresh();
 		                } else {
-		                	$.modal.alertError(result.msg);
+		                	$.modal.msgError(result.msg);
 		                }
 					}
 				});

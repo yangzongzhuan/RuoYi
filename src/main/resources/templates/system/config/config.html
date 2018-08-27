@@ -19,10 +19,10 @@
 							<li>
 								系统内置：<select name="configType" th:with="type=${@dict.getType('sys_yes_no')}">
 									<option value="">所有</option>
-									<option th:each="e : ${type}" th:text="${e['dictLabel']}" th:value="${e['dictValue']}"></option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
-							<li class="time">
+							<li class="select-time">
 								<label>创建时间： </label>
 								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
 								<span>-</span>
@@ -41,11 +41,11 @@
 		        <a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="system:config:add">
 		            <i class="fa fa-plus"></i> 新增
 		        </a>
-		        <a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.batRemove()" shiro:hasPermission="system:config:remove">
+		        <a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="system:config:remove">
 		            <i class="fa fa-trash-o"></i> 删除
 		        </a>
 	        </div>
-	        <div class="col-sm-12 select-info table-striped">
+	        <div class="col-sm-12 select-table table-striped">
 	            <table id="bootstrap-table" data-mobile-responsive="true"></table>
 	        </div>
 	    </div>

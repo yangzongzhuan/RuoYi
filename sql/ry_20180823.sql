@@ -130,12 +130,12 @@ create table sys_menu (
   menu_id 			int(11) 		not null auto_increment    comment '菜单ID',
   menu_name 		varchar(50) 	not null 				   comment '菜单名称',
   parent_id 		int(11) 		default 0 			       comment '父菜单ID',
-  order_num 		int(4) 			default null 			   comment '显示顺序',
-  url 				varchar(200) 	default ''				   comment '请求地址',
+  order_num 		int(4) 			default 0 			       comment '显示顺序',
+  url 				varchar(200) 	default '#'				   comment '请求地址',
   menu_type 		char(1) 		default '' 			       comment '菜单类型（M目录 C菜单 F按钮）',
-  visible 			char(1) 		not null 				   comment '菜单状态（0显示 1隐藏）',
+  visible 			char(1) 		default 0 				   comment '菜单状态（0显示 1隐藏）',
   perms 			varchar(100) 	default '' 				   comment '权限标识',
-  icon 				varchar(100) 	default '' 				   comment '菜单图标',
+  icon 				varchar(100) 	default '#' 			   comment '菜单图标',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
@@ -374,16 +374,16 @@ drop table if exists sys_oper_log;
 create table sys_oper_log (
   oper_id 			int(11) 		not null auto_increment    comment '日志主键',
   title             varchar(50)     default ''                 comment '模块标题',
-  action            varchar(100)    default ''                 comment '功能请求',
+  business_type     int(2)          default 0                  comment '业务类型（0其它 1新增 2修改 3删除）',
   method            varchar(100)    default ''                 comment '方法名称',
-  channel           varchar(20)     default ''                 comment '来源渠道（manage后台用户 mobile手机端用户 other其它）',
+  operator_type     int(1)          default 0                  comment '操作类别（0其它 1后台用户 2手机端用户）',
   oper_name 	    varchar(50)     default '' 		 	 	   comment '操作人员',
   dept_name 		varchar(50)     default '' 		 	 	   comment '部门名称',
   oper_url 		    varchar(255) 	default '' 				   comment '请求URL',
   oper_ip 			varchar(30) 	default '' 				   comment '主机地址',
   oper_location     varchar(255)    default ''                 comment '操作地点',
   oper_param 		varchar(255) 	default '' 				   comment '请求参数',
-  status 			char(1) 		default '0'				   comment '操作状态（0正常 1异常）',
+  status 			int(1) 		    default 0				   comment '操作状态（0正常 1异常）',
   error_msg 		varchar(2000) 	default '' 				   comment '错误消息',
   oper_time 		datetime                                   comment '操作时间',
   primary key (oper_id)
@@ -431,8 +431,8 @@ create table sys_dict_data
 	dict_label       varchar(100)    default ''                 comment '字典标签',
 	dict_value       varchar(100)    default ''                 comment '字典键值',
 	dict_type        varchar(100)    default ''                 comment '字典类型',
-	css_class        varchar(500)    default ''                 comment '样式属性',
-	list_class       varchar(500)    default ''                 comment '回显样式',
+	css_class        varchar(500)    default ''                 comment '样式属性（其他样式扩展）',
+	list_class       varchar(500)    default ''                 comment '表格回显样式',
 	is_default       char(1)         default 'N'                comment '是否默认（Y是 N否）',
     status 			 char(1) 		 default '0'			    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',
@@ -444,31 +444,31 @@ create table sys_dict_data
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典数据表';
 
 
-insert into sys_dict_data values(1,  1,  '男',       '0',  'sys_user_sex',        '',                                 '',        'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '性别男');
-insert into sys_dict_data values(2,  2,  '女',       '1',  'sys_user_sex',        '',                                 '',        'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '性别女');
-insert into sys_dict_data values(3,  3,  '未知',     '2',  'sys_user_sex',        '',                                 '',        'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '性别未知');
-insert into sys_dict_data values(4,  1,  '显示',     '0',  'sys_show_hide',       'radio radio-info radio-inline',    'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '显示菜单');
-insert into sys_dict_data values(5,  2,  '隐藏',     '1',  'sys_show_hide',       'radio radio-danger radio-inline',  'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '隐藏菜单');
-insert into sys_dict_data values(6,  1,  '正常',     '0',  'sys_normal_disable',  'radio radio-info radio-inline',    'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
-insert into sys_dict_data values(7,  2,  '停用',     '1',  'sys_normal_disable',  'radio radio-danger radio-inline',  'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '停用状态');
-insert into sys_dict_data values(8,  1,  '正常',     '0',  'sys_job_status',      'radio radio-info radio-inline',    'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
-insert into sys_dict_data values(9,  2,  '暂停',     '1',  'sys_job_status',      'radio radio-danger radio-inline',  'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '停用状态');
-insert into sys_dict_data values(10, 1,  '是',       'Y',  'sys_yes_no',          'radio radio-info radio-inline',    'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统默认是');
-insert into sys_dict_data values(11, 2,  '否',       'N',  'sys_yes_no',          'radio radio-danger radio-inline',  'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统默认否');
-insert into sys_dict_data values(12, 1,  '通知',     '1',  'sys_notice_type',     '',                                 'warning', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '通知');
-insert into sys_dict_data values(13, 2,  '公告',     '2',  'sys_notice_type',     '',                                 'success', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '公告');
-insert into sys_dict_data values(14, 1,  '正常',     '0',  'sys_notice_status',   'radio radio-info radio-inline',    'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
-insert into sys_dict_data values(15, 2,  '关闭',     '1',  'sys_notice_status',   'radio radio-danger radio-inline',  'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '关闭状态');
-insert into sys_dict_data values(16, 1,  '新增',     '1',  'sys_oper_type',        '',                                'info',    'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(17, 2,  '修改',     '2',  'sys_oper_type',        '',                                'info',    'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(18, 3,  '删除',     '3',  'sys_oper_type',        '',                                'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(19, 4,  '授权',     '4',  'sys_oper_type',        '',                                'primary', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(20, 5,  '导出',     '5',  'sys_oper_type',        '',                                'warning', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(21, 6,  '导入',     '6',  'sys_oper_type',        '',                                'warning', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(22, 7,  '强退',     '7',  'sys_oper_type',        '',                                'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(23, 8,  '生成代码', '8',  'sys_oper_type',        '',                                'warning', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
-insert into sys_dict_data values(24, 1,  '成功',     '0',  'sys_common_status',    '',                                'primary', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
-insert into sys_dict_data values(25, 2,  '失败',     '1',  'sys_common_status',    '',                                'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '停用状态');
+insert into sys_dict_data values(1,  1,  '男',       '0',  'sys_user_sex',        '',   '',        'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '性别男');
+insert into sys_dict_data values(2,  2,  '女',       '1',  'sys_user_sex',        '',   '',        'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '性别女');
+insert into sys_dict_data values(3,  3,  '未知',     '2',  'sys_user_sex',        '',   '',        'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '性别未知');
+insert into sys_dict_data values(4,  1,  '显示',     '0',  'sys_show_hide',       '',   'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '显示菜单');
+insert into sys_dict_data values(5,  2,  '隐藏',     '1',  'sys_show_hide',       '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '隐藏菜单');
+insert into sys_dict_data values(6,  1,  '正常',     '0',  'sys_normal_disable',  '',   'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
+insert into sys_dict_data values(7,  2,  '停用',     '1',  'sys_normal_disable',  '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '停用状态');
+insert into sys_dict_data values(8,  1,  '正常',     '0',  'sys_job_status',      '',   'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
+insert into sys_dict_data values(9,  2,  '暂停',     '1',  'sys_job_status',      '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '停用状态');
+insert into sys_dict_data values(10, 1,  '是',       'Y',  'sys_yes_no',          '',   'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统默认是');
+insert into sys_dict_data values(11, 2,  '否',       'N',  'sys_yes_no',          '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '系统默认否');
+insert into sys_dict_data values(12, 1,  '通知',     '1',  'sys_notice_type',     '',   'warning', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '通知');
+insert into sys_dict_data values(13, 2,  '公告',     '2',  'sys_notice_type',     '',   'success', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '公告');
+insert into sys_dict_data values(14, 1,  '正常',     '0',  'sys_notice_status',   '',   'primary', 'Y', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
+insert into sys_dict_data values(15, 2,  '关闭',     '1',  'sys_notice_status',   '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '关闭状态');
+insert into sys_dict_data values(16, 1,  '新增',     '1',  'sys_oper_type',       '',   'info',    'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(17, 2,  '修改',     '2',  'sys_oper_type',       '',   'info',    'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(18, 3,  '删除',     '3',  'sys_oper_type',       '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(19, 4,  '授权',     '4',  'sys_oper_type',       '',   'primary', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(20, 5,  '导出',     '5',  'sys_oper_type',       '',   'warning', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(21, 6,  '导入',     '6',  'sys_oper_type',       '',   'warning', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(22, 7,  '强退',     '7',  'sys_oper_type',       '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(23, 8,  '生成代码', '8',  'sys_oper_type',       '',   'warning', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '新增操作');
+insert into sys_dict_data values(24, 1,  '成功',     '0',  'sys_common_status',   '',   'primary', 'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '正常状态');
+insert into sys_dict_data values(25, 2,  '失败',     '1',  'sys_common_status',   '',   'danger',  'N', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '停用状态');
 
 
 -- ----------------------------
@@ -524,7 +524,7 @@ create table sys_user_online (
   browser  		    varchar(50)  default '' 			 	comment '浏览器类型',
   os      		    varchar(50)  default '' 			 	comment '操作系统',
   status      	    varchar(10)  default '' 			 	comment '在线状态on_line在线off_line离线',
-  start_timestsamp 	datetime                                comment 'session创建时间',
+  start_timestamp 	datetime                                comment 'session创建时间',
   last_access_time  datetime                                comment 'session最后访问时间',
   expire_time 	    int(5) 		 default 0 			 	    comment '超时时间，单位为分钟',
   primary key (sessionId)

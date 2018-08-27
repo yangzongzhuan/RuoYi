@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.constant.BusinessType;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
@@ -55,7 +55,7 @@ public class UserOnlineController extends BaseController
     }
 
     @RequiresPermissions("monitor:online:batchForceLogout")
-    @Log(title = "在线用户", action = BusinessType.FORCE)
+    @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @PostMapping("/batchForceLogout")
     @ResponseBody
     public AjaxResult batchForceLogout(@RequestParam("ids[]") String[] ids)
@@ -84,7 +84,7 @@ public class UserOnlineController extends BaseController
     }
 
     @RequiresPermissions("monitor:online:forceLogout")
-    @Log(title = "在线用户", action = BusinessType.FORCE)
+    @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @PostMapping("/forceLogout")
     @ResponseBody
     public AjaxResult forceLogout(String sessionId)

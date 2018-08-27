@@ -117,7 +117,7 @@
 label.error {
 	position: absolute;
 	right: 18px;
-	top: 5px;
+	top: 7px;
 	color: #ef392b;
 	font-size: 12px
 }
@@ -134,6 +134,24 @@ label.error {
 	font-size: 12px;
 	vertical-align: middle;
 	padding-left: 25px
+}
+
+.i-checks label.error, .check-box label.error, .radio-box label.error {
+    right:auto;
+    width:150px;
+    left:210px;
+    top:1px;
+    max-width: none;
+}
+
+/** 内联复选框&单选框  */
+.check-box,.radio-box {
+    display:inline-block;
+    box-sizing:border-box;
+    cursor:pointer;
+    position:relative;
+    padding-right:20px;
+    padding-top:7px;
 }
 
 /** 遮罩层 */
@@ -217,46 +235,41 @@ li {
 	padding-left: 10px;
 }
 
-label{
+label {
     font-weight: normal;
 }
 
-.container-div{
+.container-div {
 	padding:10px 35px;
 	height:100%;
 }
 
-.container-div .row{
+.container-div .row {
 	height: 100%;
 }
 
-.select-info{
+.select-info,.select-table {
 	width:100%;
 	background: #fff;
     border-radius: 6px;
     margin-top:10px;
+    padding-top: 5px;
     padding-bottom: 13px;
     box-shadow: 1px 1px 3px rgba(0,0,0,.2);
 }
 
-.select-info{
+.select-info {
 	position: relative;
 }
 
-.select-info .save-btn,.select-info .close-btn{
-    width: 20px;
-    position: absolute;
-    right: 20px;
-    top: 15px;
-    cursor: pointer;
-}
-
-.select-info .save-btn{
-	right: 50px;
-}
-
-.select-info .col-sm-6 .control-label{
+.select-info .col-sm-6 .control-label {
 	color:#333;
+}
+
+@media ( max-width : 768px) {
+    .select-info {
+        display: none;
+    }
 }
 
 .select-list li{
@@ -271,6 +284,7 @@ label{
 	outline: none;
 	height: 30px;
 	width:280px;
+	padding-left:5px;
 }
 .select-list li .submit-btn{
 	border:0px;
@@ -289,17 +303,17 @@ label{
 	width:280px;
 }
 
-.select-list .time input{
+.select-list .select-time input{
 	width:133px;
 }
 
-.time label,.time span,.time input{
+.select-time label,.select-time span,.select-time input{
 	float:left;
 }
-.time label{
+.select-time label{
 	    margin-top: 5px;
 }
-.time span{
+.select-time span{
 	    display: block;
     margin: 5px 5px;
 }
@@ -328,9 +342,10 @@ label{
 .table-striped .bootstrap-table{
 	border:0px!important;
 }
-.table-striped .table, .fixed-table-container, .table-striped .table, .table-striped .table, .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th, .table-striped .table>tfoot>tr>th, .table-striped .table>thead>tr>td, .table-striped .table>tbody>tr>td, .table-striped .table>tfoot>tr>td{
-    background-color: transparent!important;
-    border: 0px;
+.table-striped .table, .fixed-table-container, table, .table-striped .table, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+   border-bottom: 1px solid #e7eaec!important;
+   background-color: transparent!important;
+   border: 0px;
 }
 .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th{
 	border-bottom: 1px solid #ccc!important;

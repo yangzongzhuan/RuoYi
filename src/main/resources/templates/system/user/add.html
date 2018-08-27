@@ -47,7 +47,7 @@
 				<label class="col-sm-3 control-label">性别：</label>
 				<div class="col-sm-8">
 					<select id="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
-	                    <option th:each="dict : ${type}" th:text="${dict['dictLabel']}" th:value="${dict['dictValue']}"></option>
+	                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 	                </select>
 				</div>
 			</div>
@@ -105,12 +105,11 @@
                         dataType: "json",
                         data: {
                         	name : function() {
-                                return $.trim($("#loginName").val());
+                                return $.common.trim($("#loginName").val());
                             }
                         },
                         dataFilter: function(data, type) {
-                            if (data == "0") return true;
-                            else return false;
+                        	return $.validate.unique(data);
                         }
                     }
         		},
@@ -134,12 +133,11 @@
                         dataType: "json",
                         data: {
                             name: function () {
-                                return $.trim($("#email").val());
+                                return $.common.trim($("#email").val());
                             }
                         },
                         dataFilter: function (data, type) {
-                            if (data == "0") return true;
-                            else return false;
+                        	return $.validate.unique(data);
                         }
                     }
         		},
@@ -152,12 +150,11 @@
                         dataType: "json",
                         data: {
                             name: function () {
-                                return $.trim($("#phonenumber").val());
+                                return $.common.trim($("#phonenumber").val());
                             }
                         },
                         dataFilter: function (data, type) {
-                            if (data == "0") return true;
-                            else return false;
+                        	return $.validate.unique(data);
                         }
                     }
         		},
