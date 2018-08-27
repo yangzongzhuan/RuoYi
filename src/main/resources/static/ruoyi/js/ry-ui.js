@@ -302,7 +302,8 @@
             		shade: 0.3,
             		title: title,
             		content: url,
-            		shadeClose: true // fix,点击阴影部分关闭窗口,常用.
+            	    // 弹层外区域关闭
+            		shadeClose: true
             	});
             },
             // 弹出层全屏
@@ -332,7 +333,9 @@
             		maxmin: true,
             		shade: 0.3,
             		title: title,
-            		content: url
+            		content: url,
+            		// 弹层外区域关闭
+            		shadeClose: true
             	});
                 layer.full(index);
             },
