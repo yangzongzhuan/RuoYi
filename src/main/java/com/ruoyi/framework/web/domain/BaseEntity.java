@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.common.collect.Maps;
 
 /**
  * Entity基类
@@ -99,6 +100,10 @@ public class BaseEntity implements Serializable
 
     public Map<String, Object> getParams()
     {
+        if (params == null)
+        {
+            params = Maps.newHashMap();
+        }
         return params;
     }
 
@@ -106,5 +111,4 @@ public class BaseEntity implements Serializable
     {
         this.params = params;
     }
-
 }
