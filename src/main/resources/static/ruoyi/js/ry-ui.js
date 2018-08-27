@@ -296,7 +296,8 @@
             		maxmin: true,
             		shade: 0.3,
             		title: title,
-            		content: url
+            		content: url,
+            		shadeClose: true // fix,点击阴影部分关闭窗口,常用.
             	});
             },
             // 弹出层全屏
