@@ -10,6 +10,8 @@ http://www.zi-han.net/theme/hplus
 
 http://webapplayers.com/inspinia_admin-v2.7.1 
 
+阿里云优惠活动（2CPU 4GRAM 1M带宽 40G高效云盘）：https://promotion.aliyun.com/ntms/act/vm/aliyun-group/buy.html?group=BphATfDhsQ
+
 ## 内置功能
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
