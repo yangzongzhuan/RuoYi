@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.framework.datascope.DataScopeUtils;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.dept.mapper.DeptMapper;
+import com.ruoyi.project.system.role.domain.Role;
 
 /**
  * 部门管理 服务实现
@@ -31,18 +33,8 @@ public class DeptServiceImpl implements IDeptService
     @Override
     public List<Dept> selectDeptList(Dept dept)
     {
+        dept.getParams().put("dataScope", DataScopeUtils.dataScopeFilter("d"));
         return deptMapper.selectDeptList(dept);
-    }
-
-    /**
-     * 查询部门所有数据
-     * 
-     * @return 部门信息集合
-     */
-    @Override
-    public List<Dept> selectDeptAll()
-    {
-        return deptMapper.selectDeptAll();
     }
 
     /**
@@ -54,8 +46,47 @@ public class DeptServiceImpl implements IDeptService
     public List<Map<String, Object>> selectDeptTree()
     {
         List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
-        List<Dept> deptList = deptMapper.selectDeptAll();
+        List<Dept> deptList = selectDeptList(new Dept());
+        trees = getTrees(deptList, false, null);
+        return trees;
+    }
 
+    /**
+     * 根据角色ID查询部门（数据权限）
+     *
+     * @param role 角色对象
+     * @return 部门列表（数据权限）
+     */
+    @Override
+    public List<Map<String, Object>> roleDeptTreeData(Role role)
+    {
+        Long roleId = role.getRoleId();
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        List<Dept> deptList = selectDeptList(new Dept());
+        if (StringUtils.isNotNull(roleId))
+        {
+            List<String> roleDeptList = deptMapper.selectRoleDeptTree(roleId);
+            trees = getTrees(deptList, true, roleDeptList);
+        }
+        else
+        {
+            trees = getTrees(deptList, false, null);
+        }
+        return trees;
+    }
+
+    /**
+     * 对象转部门树
+     *
+     * @param menuList 部门列表
+     * @param isCheck 是否需要选中
+     * @param roleDeptList 角色已存在菜单列表
+     * @return
+     */
+    public List<Map<String, Object>> getTrees(List<Dept> deptList, boolean isCheck, List<String> roleDeptList)
+    {
+
+        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
         for (Dept dept : deptList)
         {
             if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
@@ -65,6 +96,14 @@ public class DeptServiceImpl implements IDeptService
                 deptMap.put("pId", dept.getParentId());
                 deptMap.put("name", dept.getDeptName());
                 deptMap.put("title", dept.getDeptName());
+                if (isCheck)
+                {
+                    deptMap.put("checked", roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
+                }
+                else
+                {
+                    deptMap.put("checked", false);
+                }
                 trees.add(deptMap);
             }
         }
@@ -185,7 +224,7 @@ public class DeptServiceImpl implements IDeptService
     public String checkDeptNameUnique(Dept dept)
     {
         Long deptId = StringUtils.isNull(dept.getDeptId()) ? -1L : dept.getDeptId();
-        Dept info = deptMapper.checkDeptNameUnique(dept.getDeptName());
+        Dept info = deptMapper.checkDeptNameUnique(dept.getDeptName(), dept.getParentId());
         if (StringUtils.isNotNull(info) && info.getDeptId().longValue() != deptId.longValue())
         {
             return UserConstants.DEPT_NAME_NOT_UNIQUE;

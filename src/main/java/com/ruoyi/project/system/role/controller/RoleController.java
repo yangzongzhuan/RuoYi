@@ -116,6 +116,29 @@ public class RoleController extends BaseController
         return toAjax(roleService.updateRole(role));
     }
 
+    /**
+     * 新增数据权限
+     */
+    @GetMapping("/rule/{roleId}")
+    public String rule(@PathVariable("roleId") Long roleId, ModelMap mmap)
+    {
+        mmap.put("role", roleService.selectRoleById(roleId));
+        return prefix + "/rule";
+    }
+
+    /**
+     * 修改保存数据权限
+     */
+    @RequiresPermissions("system:role:edit")
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @PostMapping("/rule")
+    @Transactional(rollbackFor = Exception.class)
+    @ResponseBody
+    public AjaxResult ruleSave(Role role)
+    {
+        return toAjax(roleService.updateRule(role));
+    }
+
     @RequiresPermissions("system:role:remove")
     @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
@@ -141,7 +164,7 @@ public class RoleController extends BaseController
     {
         return roleService.checkRoleNameUnique(role);
     }
-    
+
     /**
      * 校验角色权限
      */

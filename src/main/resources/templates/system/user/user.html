@@ -3,8 +3,8 @@
 	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/jquery-layout/jquery.layout-latest.css" th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
-<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 
 <body class="gray-bg">
 	<div class="ui-layout-west">
@@ -15,10 +15,10 @@
 						<i class="fa icon-grid"></i> 组织机构
 					</div>
 					<div class="box-tools pull-right">
-					    <a type="button" class="btn btn-box-tool menuItem" href="#" onclick="dept()" title="管理机构"><i class="fa fa-edit"></i></a>
+					    <a type="button" class="btn btn-box-tool menuItem" href="#" onclick="dept()" title="管理部门"><i class="fa fa-edit"></i></a>
 						<button type="button" class="btn btn-box-tool" id="btnExpand" title="展开" style="display:none;"><i class="fa fa-chevron-up"></i></button>
 						<button type="button" class="btn btn-box-tool" id="btnCollapse" title="折叠"><i class="fa fa-chevron-down"></i></button>
-						<button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新机构"><i class="fa fa-refresh"></i></button>
+						<button type="button" class="btn btn-box-tool" id="btnRefresh" title="刷新部门"><i class="fa fa-refresh"></i></button>
 					</div>
 				</div>
 				<div class="ui-layout-content">
@@ -87,10 +87,10 @@
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/user"
 
-		$(document).ready(function(){
+		$(function() {
 			$('body').layout({ west__size: 185 });
 			queryUserList();
-			queryDeptTreeDaTa();
+			queryDeptTree();
 		});
 
 		function queryUserList() {
@@ -161,46 +161,39 @@
 		    };
 		    $.table.init(options);
 		}
-
-		function queryDeptTreeDaTa()
+		
+		function queryDeptTree()
 		{
-			// 树结构初始化加载
-			var setting = {view:{selectedMulti:false},data:{key:{title:"title"},simpleData:{enable:true}},
-				callback:{onClick:function(event, treeId, treeNode){
-					$("#deptId").val(treeNode.id);
-					$("#parentId").val(treeNode.pId);
-					$.table.search();
-				}}
-			}, tree, loadTree = function(){
-				$.get(ctx + "system/dept/treeData", function(data) {
-				    tree = $.fn.zTree.init($("#tree"), setting, data); //.expandAll(true);
-				    // 展开第一级节点
-				    var nodes = tree.getNodesByParam("level", 0);
-				    for (var i = 0; i < nodes.length; i++) {
-				        tree.expandNode(nodes[i], true, false, false);
-				    }
-				    // 展开第二级节点
-				    nodes = tree.getNodesByParam("level", 1);
-				    for (var i = 0; i < nodes.length; i++) {
-				        tree.expandNode(nodes[i], true, false, false);
-				    }
-				}, null, null, "正在加载，请稍后...");
-			};loadTree();
+			var url = ctx + "system/dept/treeData";
+			var options = {
+		        url: url,
+		        expandLevel: 2,
+		        onClick : zOnClick
+		    };
+			$.tree.init(options);
 			
-			$('#btnExpand').click(function() {
-				tree.expandAll(true);
-			    $(this).hide();
-			    $('#btnCollapse').show();
-			});
-			$('#btnCollapse').click(function() {
-				tree.expandAll(false);
-			    $(this).hide();
-			    $('#btnExpand').show();
-			});
-			$('#btnRefresh').click(function() {
-			    loadTree();
-			});
+			function zOnClick(event, treeId, treeNode) {
+				$("#deptId").val(treeNode.id);
+				$("#parentId").val(treeNode.pId);
+				$.table.search();
+			}
 		}
+		
+		$('#btnExpand').click(function() {
+			$._tree.expandAll(true);
+		    $(this).hide();
+		    $('#btnCollapse').show();
+		});
+		
+		$('#btnCollapse').click(function() {
+			$._tree.expandAll(false);
+		    $(this).hide();
+		    $('#btnExpand').show();
+		});
+		
+		$('#btnRefresh').click(function() {
+			queryDeptTree();
+		});
 
 		/*用户管理-部门*/
 		function dept() {

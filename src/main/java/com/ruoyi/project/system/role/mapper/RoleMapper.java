@@ -28,13 +28,6 @@ public interface RoleMapper
     public List<Role> selectRolesByUserId(Long userId);
 
     /**
-     * 查询角色列表
-     * 
-     * @return 角色列表
-     */
-    public List<Role> selectRolesAll();
-
-    /**
      * 通过角色ID查询角色
      * 
      * @param roleId 角色ID

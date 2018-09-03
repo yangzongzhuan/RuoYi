@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css" th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-role-edit" th:object="${role}">
@@ -60,23 +60,16 @@
 	<div th:include="include::footer"></div>
 	<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 	<script type="text/javascript">
-		// 树结构初始化加载
-		var setting = {
-			check:{enable:true,nocheckInherit:true,chkboxType:{"Y":"ps","N":"ps"}},
-			view:{selectedMulti:false,nameIsHTML: true},
-			data:{simpleData:{enable:true},key:{title:"title"}},
-			callback:{
-				beforeClick: function (treeId, treeNode, clickFlag) {
-					var menuTrees = $.fn.zTree.getZTreeObj(treeId);
-					menuTrees.checkNode(treeNode, !treeNode.checked, true, true);
-					return false;
-				}
-			}
-		}, menuTrees, loadTree = function(){
-			$.get(ctx + "system/menu/roleMenuTreeData?roleId=" + $("#roleId").val(), function(data) {
-				menuTrees = $.fn.zTree.init($("#menuTrees"), setting, data); //.expandAll(true);
-			}, null, null, "正在加载，请稍后...");
-		};loadTree();
+	     $(function() {
+			var url = ctx + "system/menu/roleMenuTreeData?roleId=" + $("#roleId").val();
+			var options = {
+				id: "menuTrees",
+		        url: url,
+		        check: { enable: true, nocheckInherit: true, chkboxType: { "Y": "ps", "N": "ps" } },
+		        expandLevel: 0
+		    };
+			$.tree.init(options);
+		});
 	
 		$("#form-role-edit").validate({
 			rules:{
@@ -135,20 +128,7 @@
 				edit();
 			}
 		});
-	
-		function selectCheckeds() {
-		    var menuIds = "";
-		    var treeNodes = menuTrees.getCheckedNodes(true);
-		    for (var i = 0; i < treeNodes.length; i++) {
-		        if (0 == i) {
-		        	menuIds = treeNodes[i].id;
-		        } else {
-		        	menuIds += ("," + treeNodes[i].id);
-		        }
-		    }
-		    return menuIds;
-		}
-	
+
 		function edit() {
 			var roleId = $("input[name='roleId']").val();
 			var roleName = $("input[name='roleName']").val();
@@ -156,7 +136,7 @@
 			var roleSort = $("input[name='roleSort']").val();
 			var status = $("input[name='status']").is(':checked') == true ? 0 : 1;
 			var remark = $("input[name='remark']").val();
-			var menuIds = selectCheckeds();
+			var menuIds = $.tree.getCheckedNodes();
 			$.ajax({
 				cache : true,
 				type : "POST",

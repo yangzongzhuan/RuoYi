@@ -12,6 +12,7 @@ create table sys_dept (
   phone             varchar(11)     default ''                 comment '联系电话',
   email             varchar(50)     default ''                 comment '邮箱',
   status 			char(1) 		default '0' 			   comment '部门状态（0正常 1停用）',
+  del_flag			char(1) 		default '0' 			   comment '删除标志（0代表存在 2代表删除）',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 	    datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
@@ -22,17 +23,16 @@ create table sys_dept (
 -- ----------------------------
 -- 初始化-部门表数据
 -- ----------------------------
-insert into sys_dept values(100,  0,   '0',         '若依集团', 0, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(101,  100, '0,100',     '研发部门', 1, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(102,  100, '0,100',     '市场部门', 2, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(103,  100, '0,100',     '测试部门', 3, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(104,  100, '0,100',     '财务部门', 4, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(105,  100, '0,100',     '运维部门', 5, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(106,  101, '0,100,101', '研发一部', 1, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(107,  101, '0,100,101', '研发二部', 2, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(108,  102, '0,100,102', '市场一部', 1, '若依', '15888888888', 'ry@qq.com', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-insert into sys_dept values(109,  102, '0,100,102', '市场二部', 2, '若依', '15888888888', 'ry@qq.com', '1', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
-
+insert into sys_dept values(100,  0,   '0',          '若依科技',   0, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(101,  100, '0,100',      '深圳总公司', 1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(102,  100, '0,100',      '长沙分公司', 2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(103,  101, '0,100,101',  '研发部门',   1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(104,  101, '0,100,101',  '市场部门',   2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(105,  101, '0,100,101',  '测试部门',   3, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(106,  101, '0,100,101',  '财务部门',   4, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(107,  101, '0,100,101',  '运维部门',   5, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(108,  102, '0,100,102',  '市场部门',   1, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
+insert into sys_dept values(109,  102, '0,100,102',  '财务部门',   2, '若依', '15888888888', 'ry@qq.com', '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00');
 
 -- ----------------------------
 -- 2、用户信息表
@@ -65,8 +65,8 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  106, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2018-03-16 11-33-00', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '管理员');
-insert into sys_user values(2,  108, 'ry',    '若依', '00', 'ry@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11-33-00', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '测试员');
+insert into sys_user values(1,  103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2018-03-16 11-33-00', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '管理员');
+insert into sys_user values(2,  105, 'ry',    '若依', '00', 'ry@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2018-03-16 11-33-00', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '测试员');
 
 
 -- ----------------------------
@@ -106,7 +106,9 @@ create table sys_role (
   role_name 		varchar(30) 	not null 				   comment '角色名称',
   role_key 		    varchar(100) 	not null 				   comment '角色权限字符串',
   role_sort         int(4)          not null                   comment '显示顺序',
+  data_scope        char(1) 	    default '1'				   comment '数据范围（1：全部数据权限 2：自定数据权限）',
   status 			char(1) 		not null 			       comment '角色状态（0正常 1停用）',
+  del_flag			char(1) 		default '0' 			   comment '删除标志（0代表存在 2代表删除）',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
@@ -118,8 +120,8 @@ create table sys_role (
 -- ----------------------------
 -- 初始化-角色信息表数据
 -- ----------------------------
-insert into sys_role values('1', '管理员',   'admin',  1,  '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '管理员');
-insert into sys_role values('2', '普通角色', 'common', 2,  '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '普通角色');
+insert into sys_role values('1', '管理员',   'admin',  1, 1, '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '管理员');
+insert into sys_role values('2', '普通角色', 'common', 2, 2, '0', '0', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '普通角色');
 
 
 -- ----------------------------
@@ -271,86 +273,103 @@ create table sys_role_menu (
 -- ----------------------------
 -- 初始化-角色和菜单关联表数据
 -- ----------------------------
-insert into sys_role_menu values ('1', '1');
-insert into sys_role_menu values ('1', '2');
-insert into sys_role_menu values ('1', '3');
-insert into sys_role_menu values ('1', '100');
-insert into sys_role_menu values ('1', '101');
-insert into sys_role_menu values ('1', '102');
-insert into sys_role_menu values ('1', '103');
-insert into sys_role_menu values ('1', '104');
-insert into sys_role_menu values ('1', '105');
-insert into sys_role_menu values ('1', '106');
-insert into sys_role_menu values ('1', '107');
-insert into sys_role_menu values ('1', '108');
-insert into sys_role_menu values ('1', '109');
-insert into sys_role_menu values ('1', '110');
-insert into sys_role_menu values ('1', '111');
-insert into sys_role_menu values ('1', '112');
-insert into sys_role_menu values ('1', '113');
-insert into sys_role_menu values ('1', '114');
-insert into sys_role_menu values ('1', '500');
-insert into sys_role_menu values ('1', '501');
-insert into sys_role_menu values ('1', '1000');
-insert into sys_role_menu values ('1', '1001');
-insert into sys_role_menu values ('1', '1002');
-insert into sys_role_menu values ('1', '1003');
-insert into sys_role_menu values ('1', '1004');
-insert into sys_role_menu values ('1', '1005');
-insert into sys_role_menu values ('1', '1006');
-insert into sys_role_menu values ('1', '1007');
-insert into sys_role_menu values ('1', '1008');
-insert into sys_role_menu values ('1', '1009');
-insert into sys_role_menu values ('1', '1010');
-insert into sys_role_menu values ('1', '1011');
-insert into sys_role_menu values ('1', '1012');
-insert into sys_role_menu values ('1', '1013');
-insert into sys_role_menu values ('1', '1014');
-insert into sys_role_menu values ('1', '1015');
-insert into sys_role_menu values ('1', '1016');
-insert into sys_role_menu values ('1', '1017');
-insert into sys_role_menu values ('1', '1018');
-insert into sys_role_menu values ('1', '1019');
-insert into sys_role_menu values ('1', '1020');
-insert into sys_role_menu values ('1', '1021');
-insert into sys_role_menu values ('1', '1022');
-insert into sys_role_menu values ('1', '1023');
-insert into sys_role_menu values ('1', '1024');
-insert into sys_role_menu values ('1', '1025');
-insert into sys_role_menu values ('1', '1026');
-insert into sys_role_menu values ('1', '1027');
-insert into sys_role_menu values ('1', '1028');
-insert into sys_role_menu values ('1', '1029');
-insert into sys_role_menu values ('1', '1030');
-insert into sys_role_menu values ('1', '1031');
-insert into sys_role_menu values ('1', '1032');
-insert into sys_role_menu values ('1', '1033');
-insert into sys_role_menu values ('1', '1034');
-insert into sys_role_menu values ('1', '1035');
-insert into sys_role_menu values ('1', '1036');
-insert into sys_role_menu values ('1', '1037');
-insert into sys_role_menu values ('1', '1038');
-insert into sys_role_menu values ('1', '1039');
-insert into sys_role_menu values ('1', '1040');
-insert into sys_role_menu values ('1', '1041');
-insert into sys_role_menu values ('1', '1042');
-insert into sys_role_menu values ('1', '1043');
-insert into sys_role_menu values ('1', '1044');
-insert into sys_role_menu values ('1', '1045');
-insert into sys_role_menu values ('1', '1046');
-insert into sys_role_menu values ('1', '1047');
-insert into sys_role_menu values ('1', '1048');
-insert into sys_role_menu values ('1', '1049');
-insert into sys_role_menu values ('1', '1050');
-insert into sys_role_menu values ('1', '1051');
-insert into sys_role_menu values ('1', '1052');
-insert into sys_role_menu values ('1', '1053');
-insert into sys_role_menu values ('1', '1054');
-insert into sys_role_menu values ('1', '1055');
+insert into sys_role_menu values ('2', '1');
+insert into sys_role_menu values ('2', '2');
+insert into sys_role_menu values ('2', '3');
+insert into sys_role_menu values ('2', '100');
+insert into sys_role_menu values ('2', '101');
+insert into sys_role_menu values ('2', '102');
+insert into sys_role_menu values ('2', '103');
+insert into sys_role_menu values ('2', '104');
+insert into sys_role_menu values ('2', '105');
+insert into sys_role_menu values ('2', '106');
+insert into sys_role_menu values ('2', '107');
+insert into sys_role_menu values ('2', '108');
+insert into sys_role_menu values ('2', '109');
+insert into sys_role_menu values ('2', '110');
+insert into sys_role_menu values ('2', '111');
+insert into sys_role_menu values ('2', '112');
+insert into sys_role_menu values ('2', '113');
+insert into sys_role_menu values ('2', '114');
+insert into sys_role_menu values ('2', '500');
+insert into sys_role_menu values ('2', '501');
+insert into sys_role_menu values ('2', '1000');
+insert into sys_role_menu values ('2', '1001');
+insert into sys_role_menu values ('2', '1002');
+insert into sys_role_menu values ('2', '1003');
+insert into sys_role_menu values ('2', '1004');
+insert into sys_role_menu values ('2', '1005');
+insert into sys_role_menu values ('2', '1006');
+insert into sys_role_menu values ('2', '1007');
+insert into sys_role_menu values ('2', '1008');
+insert into sys_role_menu values ('2', '1009');
+insert into sys_role_menu values ('2', '1010');
+insert into sys_role_menu values ('2', '1011');
+insert into sys_role_menu values ('2', '1012');
+insert into sys_role_menu values ('2', '1013');
+insert into sys_role_menu values ('2', '1014');
+insert into sys_role_menu values ('2', '1015');
+insert into sys_role_menu values ('2', '1016');
+insert into sys_role_menu values ('2', '1017');
+insert into sys_role_menu values ('2', '1018');
+insert into sys_role_menu values ('2', '1019');
+insert into sys_role_menu values ('2', '1020');
+insert into sys_role_menu values ('2', '1021');
+insert into sys_role_menu values ('2', '1022');
+insert into sys_role_menu values ('2', '1023');
+insert into sys_role_menu values ('2', '1024');
+insert into sys_role_menu values ('2', '1025');
+insert into sys_role_menu values ('2', '1026');
+insert into sys_role_menu values ('2', '1027');
+insert into sys_role_menu values ('2', '1028');
+insert into sys_role_menu values ('2', '1029');
+insert into sys_role_menu values ('2', '1030');
+insert into sys_role_menu values ('2', '1031');
+insert into sys_role_menu values ('2', '1032');
+insert into sys_role_menu values ('2', '1033');
+insert into sys_role_menu values ('2', '1034');
+insert into sys_role_menu values ('2', '1035');
+insert into sys_role_menu values ('2', '1036');
+insert into sys_role_menu values ('2', '1037');
+insert into sys_role_menu values ('2', '1038');
+insert into sys_role_menu values ('2', '1039');
+insert into sys_role_menu values ('2', '1040');
+insert into sys_role_menu values ('2', '1041');
+insert into sys_role_menu values ('2', '1042');
+insert into sys_role_menu values ('2', '1043');
+insert into sys_role_menu values ('2', '1044');
+insert into sys_role_menu values ('2', '1045');
+insert into sys_role_menu values ('2', '1046');
+insert into sys_role_menu values ('2', '1047');
+insert into sys_role_menu values ('2', '1048');
+insert into sys_role_menu values ('2', '1049');
+insert into sys_role_menu values ('2', '1050');
+insert into sys_role_menu values ('2', '1051');
+insert into sys_role_menu values ('2', '1052');
+insert into sys_role_menu values ('2', '1053');
+insert into sys_role_menu values ('2', '1054');
+insert into sys_role_menu values ('2', '1055');
 
 
 -- ----------------------------
--- 8、用户与岗位关联表  用户1-N岗位
+-- 8、角色和部门关联表  角色1-N部门
+-- ----------------------------
+drop table if exists sys_role_dept;
+create table sys_role_dept (
+  role_id 	int(11) not null comment '角色ID',
+  dept_id 	int(11) not null comment '部门ID',
+  primary key(role_id, dept_id)
+) engine=innodb default charset=utf8 comment = '角色和部门关联表';
+
+-- ----------------------------
+-- 初始化-角色和部门关联表数据
+-- ----------------------------
+insert into sys_role_dept values ('2', '100');
+insert into sys_role_dept values ('2', '101');
+insert into sys_role_dept values ('2', '105');
+
+-- ----------------------------
+-- 9、用户与岗位关联表  用户1-N岗位
 -- ----------------------------
 drop table if exists sys_user_post;
 create table sys_user_post
@@ -368,7 +387,7 @@ insert into sys_user_post values ('2', '2');
 
 
 -- ----------------------------
--- 9、操作日志记录
+-- 10、操作日志记录
 -- ----------------------------
 drop table if exists sys_oper_log;
 create table sys_oper_log (
@@ -391,7 +410,7 @@ create table sys_oper_log (
 
 
 -- ----------------------------
--- 10、字典类型表
+-- 11、字典类型表
 -- ----------------------------
 drop table if exists sys_dict_type;
 create table sys_dict_type
@@ -421,7 +440,7 @@ insert into sys_dict_type values(9,  '系统状态', 'sys_common_status',   '0',
 
 
 -- ----------------------------
--- 11、字典数据表
+-- 12、字典数据表
 -- ----------------------------
 drop table if exists sys_dict_data;
 create table sys_dict_data
@@ -472,7 +491,7 @@ insert into sys_dict_data values(25, 2,  '失败',     '1',  'sys_common_status'
 
 
 -- ----------------------------
--- 12、参数配置表
+-- 13、参数配置表
 -- ----------------------------
 drop table if exists sys_config;
 create table sys_config (
@@ -494,7 +513,7 @@ insert into sys_config values(2, '用户管理-账号初始密码',     'sys.use
 
 
 -- ----------------------------
--- 13、系统访问记录
+-- 14、系统访问记录
 -- ----------------------------
 drop table if exists sys_logininfor;
 create table sys_logininfor (
@@ -512,7 +531,7 @@ create table sys_logininfor (
 
 
 -- ----------------------------
--- 14、在线用户记录
+-- 15、在线用户记录
 -- ----------------------------
 drop table if exists sys_user_online;
 create table sys_user_online (
@@ -532,7 +551,7 @@ create table sys_user_online (
 
 
 -- ----------------------------
--- 15、定时任务调度表
+-- 16、定时任务调度表
 -- ----------------------------
 drop table if exists sys_job;
 create table sys_job (
@@ -557,7 +576,7 @@ insert into sys_job values(2, 'ryTask', '系统默认（有参）', 'ryParams', 
 
 
 -- ----------------------------
--- 16、定时任务调度日志表
+-- 17、定时任务调度日志表
 -- ----------------------------
 drop table if exists sys_job_log;
 create table sys_job_log (
@@ -575,7 +594,7 @@ create table sys_job_log (
 
 
 -- ----------------------------
--- 17、通知公告表
+-- 18、通知公告表
 -- ----------------------------
 drop table if exists sys_notice;
 create table sys_notice (

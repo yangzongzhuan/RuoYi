@@ -8,16 +8,16 @@
 
 http://www.zi-han.net/theme/hplus
 
-http://webapplayers.com/inspinia_admin-v2.7.1 
+http://webapplayers.com/inspinia_admin-v2.7.1
 
 阿里云优惠活动（2CPU 4GRAM 1M带宽 40G高效云盘）：https://promotion.aliyun.com/ntms/act/vm/aliyun-group/buy.html?group=BphATfDhsQ
 
-云产品通用代金券，可叠加官网常规优惠使用：https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof
+云产品通用1000元代金券，可叠加官网常规优惠使用 ：https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof
 
 ## 内置功能
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
-2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现。
+2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
 3.  岗位管理：配置系统用户所属担任职务。
 4.  菜单管理：配置系统菜单，操作权限，按钮权限标识等。
 5.  角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
@@ -42,27 +42,27 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 <table>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/25b5e333768d013d45a990c152dbe4d9d6e.jpg"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114553_jBTY_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132411_4c5I_1438828.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114830_eIHp_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114854_Y5a2_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132436_rRBh_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132442_umjM_1438828.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114920_P8qv_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/114946_O3jx_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132449_OtY8_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132454_4Evz_1438828.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115022_1Tnm_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115051_XvMW_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132520_Zzkj_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132539_5bJe_1438828.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115117_9TZ3_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115130_a5xO_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132548_ne4U_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132557_Fab4_1438828.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115151_EuYC_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0728/115212_QybT_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132617_MLmV_1438828.png"/></td>
+        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132626_3iBs_1438828.png"/></td>
     </tr>
 </table>
 

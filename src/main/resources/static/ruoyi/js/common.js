@@ -3,8 +3,8 @@
  * Copyright (c) 2018 ruoyi 
  */
 
-$(function(){
-	// 复选框事件绑定
+$(function() {
+	// select2复选框事件绑定
 	if ($.fn.select2 !== undefined) {
 		$("select.form-control:not(.noselect2)").each(function () {
 			$(this).select2().on("change", function () {
@@ -12,24 +12,40 @@ $(function(){
 			})
 		})
 	}
-	if ($(".i-checks").length > 0) {
-	    $(".i-checks").iCheck({
-	        checkboxClass: "icheckbox_square-green",
-	        radioClass: "iradio_square-green",
+	// checkbox 事件绑定
+	if ($(".check-box").length > 0) {
+	    $(".check-box").iCheck({
+	    	checkboxClass: 'icheckbox-blue',
+			radioClass: 'iradio-blue',
 	    })
 	}
+	// radio 事件绑定
 	if ($(".radio-box").length > 0) {
 	    $(".radio-box").iCheck({
-	        checkboxClass: "icheckbox_square-green",
-	        radioClass: "iradio_square-green",
+	    	checkboxClass: 'icheckbox-blue',
+			radioClass: 'iradio-blue',
 	    })
 	}
+	// laydate 时间控件绑定
 	if ($(".select-time").length > 0) {
 		layui.use('laydate', function() {
 		    var laydate = layui.laydate;
 		    laydate.render({ elem: '#startTime', theme: 'molv' });
 		    laydate.render({ elem: '#endTime', theme: 'molv' });
 		});
+	}
+	// tree 关键字搜索绑定
+	if ($("#keyword").length > 0) {
+		$("#keyword").bind("focus", function focusKey(e) {
+		    if ($("#keyword").hasClass("empty")) {
+		        $("#keyword").removeClass("empty");
+		    }
+		}).bind("blur", function blurKey(e) {
+		    if ($("#keyword").val() === "") {
+		        $("#keyword").addClass("empty");
+		    }
+		    $.tree.searchNode(e);
+		}).bind("input propertychange", $.tree.searchNode);
 	}
 });
 

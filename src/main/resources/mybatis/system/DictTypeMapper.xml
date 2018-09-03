@@ -16,7 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectDictTypeVo">
-        select dict_id, dict_name, dict_type, status, create_by, create_time, remark from sys_dict_type
+        select dict_id, dict_name, dict_type, status, create_by, create_time, remark 
+		from sys_dict_type
     </sql>
 
 	<select id="selectDictTypeList" parameterType="DictType" resultMap="DictTypeResult">

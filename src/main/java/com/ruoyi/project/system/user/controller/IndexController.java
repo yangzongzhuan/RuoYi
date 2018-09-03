@@ -32,7 +32,7 @@ public class IndexController extends BaseController
         // 取身份信息
         User user = getUser();
         // 根据用户id取出菜单
-        List<Menu> menus = menuService.selectMenusByUserId(user.getUserId());
+        List<Menu> menus = menuService.selectMenusByUser(user);
         mmap.put("menus", menus);
         mmap.put("user", user);
         mmap.put("copyrightYear", ruoYiConfig.getCopyrightYear());

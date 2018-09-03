@@ -36,13 +36,6 @@ public interface DeptMapper
     public List<Dept> selectDeptList(Dept dept);
 
     /**
-     * 查询部门所有数据
-     * 
-     * @return 部门信息集合
-     */
-    public List<Dept> selectDeptAll();
-
-    /**
      * 删除部门管理信息
      * 
      * @param deptId 部门ID
@@ -86,7 +79,16 @@ public interface DeptMapper
      * 校验部门名称是否唯一
      * 
      * @param deptName 部门名称
+     * @param parentId 父部门ID
      * @return 结果
      */
-    public Dept checkDeptNameUnique(String deptName);
+    public Dept checkDeptNameUnique(@Param("deptName") String deptName, @Param("parentId") Long parentId);
+
+    /**
+     * 根据角色ID查询部门
+     *
+     * @param roleId 角色ID
+     * @return 部门列表
+     */
+    public List<String> selectRoleDeptTree(Long roleId);
 }

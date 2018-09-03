@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectJobVo">
-        select job_id, job_name, job_group, method_name, method_params, cron_expression, misfire_policy, status, create_by, create_time, remark from sys_job
+        select job_id, job_name, job_group, method_name, method_params, cron_expression, misfire_policy, status, create_by, create_time, remark 
+		from sys_job
     </sql>
 	
 	<select id="selectJobList" parameterType="Job" resultMap="JobResult">

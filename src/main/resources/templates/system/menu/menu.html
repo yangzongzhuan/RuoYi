@@ -62,7 +62,7 @@
 		            field: 'menuName',
 		            width: '20%',
 		            formatter: function(value, row, index) {
-		                if (row.icon == null || row == "") {
+		                if ($.common.isEmpty(row.icon)) {
 		                    return row.menuName;
 		                } else {
 		                    return '<i class="' + row.icon + '"></i> <span class="nav-label">' + row.menuName + '</span>';

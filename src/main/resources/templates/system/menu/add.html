@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/iCheck/custom.css" th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-menu-add">
@@ -16,9 +15,9 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">菜单类型：</label>
 				<div class="col-sm-8">
-					<label class="checkbox-inline i-checks"> <input type="radio" name="menuType" value="M" /> 目录 </label> 
-					<label class="checkbox-inline i-checks"> <input type="radio" name="menuType" value="C" /> 菜单 </label> 
-					<label class="checkbox-inline i-checks"> <input type="radio" name="menuType" value="F" /> 按钮 </label>
+					<label class="radio-box"> <input type="radio" name="menuType" value="M" /> 目录 </label> 
+					<label class="radio-box"> <input type="radio" name="menuType" value="C" /> 菜单 </label> 
+					<label class="radio-box"> <input type="radio" name="menuType" value="F" /> 按钮 </label>
 				</div>
 			</div>
 			<div class="form-group">
@@ -74,7 +73,6 @@
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
-	<script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 	 <script>
         var prefix = ctx + "system/menu"
         $("#form-menu-add").validate({
@@ -89,6 +87,9 @@
                         type: "post",
                         dataType: "json",
                         data: {
+                        	"parentId": function() {
+		                		return $("input[name='parentId']").val();
+		                    },
                         	"menuName" : function() {
                                 return $.common.trim($("#menuName").val());
                             }
@@ -146,16 +147,25 @@
 
         /*菜单管理-新增-选择菜单树*/
         function selectMenuTree() {
-        	var menuId = $("#treeId").val();
-        	if(menuId > 0) {
-        		var url = prefix + "/selectMenuTree/" + menuId;
-        		$.modal.open("选择菜单", url, '380', '380');
-        	}
-        	else {
-                var url = prefix + "/selectMenuTree/1";
-                $.modal.open("选择菜单", url, '380', '380');
-            }
-        }
+        	var treeId = $("#treeId").val();
+        	var menuId = treeId > 0 ? treeId : 1;
+        	var url = prefix + "/selectMenuTree/" + menuId;
+			var options = {
+				title: '菜单选择',
+				width: "380",
+				height: "380",
+				url: url,
+				callBack: doSubmit
+			};
+			$.modal.openOptions(options);
+		}
+		
+		function doSubmit(index, layero){
+			var body = layer.getChildFrame('body', index);
+   			$("#treeId").val(body.find('#treeId').val());
+   			$("#treeName").val(body.find('#treeName').val());
+   			layer.close(index);
+		}
     </script>
 </body>
 </html>

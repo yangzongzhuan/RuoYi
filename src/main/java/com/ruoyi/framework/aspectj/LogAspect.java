@@ -11,8 +11,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.utils.ServletUtils;
@@ -32,7 +30,6 @@ import com.ruoyi.project.system.user.domain.User;
  */
 @Aspect
 @Component
-@EnableAsync
 public class LogAspect
 {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
@@ -66,7 +63,6 @@ public class LogAspect
         handleLog(joinPoint, e);
     }
 
-    @Async
     protected void handleLog(final JoinPoint joinPoint, final Exception e)
     {
         try

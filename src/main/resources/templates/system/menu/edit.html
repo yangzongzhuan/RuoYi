@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/iCheck/custom.css" th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-menu-edit" th:object="${menu}">
@@ -17,9 +16,9 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">菜单类型：</label>
 				<div class="col-sm-8">
-					<label class="checkbox-inline i-checks"> <input type="radio" th:field="*{menuType}" name="menuType" value="M" /> 目录 </label> 
-					<label class="checkbox-inline i-checks"> <input type="radio" th:field="*{menuType}" name="menuType" value="C" /> 菜单 </label> 
-					<label class="checkbox-inline i-checks"> <input type="radio" th:field="*{menuType}" name="menuType" value="F" /> 按钮 </label>
+					<label class="radio-box"> <input type="radio" th:field="*{menuType}" name="menuType" value="M" /> 目录 </label> 
+					<label class="radio-box"> <input type="radio" th:field="*{menuType}" name="menuType" value="C" /> 菜单 </label> 
+					<label class="radio-box"> <input type="radio" th:field="*{menuType}" name="menuType" value="F" /> 按钮 </label>
 				</div>
 			</div>
 			<div class="form-group">
@@ -75,11 +74,10 @@
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
-	<script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 	 <script>
         var prefix = ctx + "system/menu"
 
-        $(document).ready(function() {
+        $(function() {
             var menuType = $('input[name="menuType"]:checked').val();
             menuVisible(menuType);
         });
@@ -99,6 +97,9 @@
                         	"menuId": function() {
                                 return $("#menuId").val();
                             },
+                            "parentId": function() {
+		                		return $("input[name='parentId']").val();
+		                    },
                 			"menuName": function() {
                                 return $.common.trim($("#menuName").val());
                             }
@@ -171,6 +172,31 @@
         		$.modal.alertError("主菜单不能选择");
         	}
         }
+        
+        function selectMenuTree() {
+        	var menuId = $("#treeId").val();
+        	if(menuId > 0) {
+        		var url = prefix + "/selectMenuTree/" + menuId;
+        		var options = {
+       				title: '菜单选择',
+       				width: "380",
+       				height: "380",
+       				url: url,
+       				callBack: doSubmit
+       			};
+       			$.modal.openOptions(options);
+        	}
+        	else {
+        		$.modal.alertError("主菜单不能选择");
+        	}
+		}
+		
+		function doSubmit(index, layero){
+			var body = layer.getChildFrame('body', index);
+   			$("#treeId").val(body.find('#treeId').val());
+   			$("#treeName").val(body.find('#treeName').val());
+   			layer.close(index);
+		}
     </script>
 </body>
 </html>

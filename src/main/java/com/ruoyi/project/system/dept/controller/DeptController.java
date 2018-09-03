@@ -2,6 +2,7 @@ package com.ruoyi.project.system.dept.controller;
 
 import java.util.List;
 import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.dept.service.IDeptService;
+import com.ruoyi.project.system.role.domain.Role;
 
 /**
  * 部门信息
@@ -140,6 +143,17 @@ public class DeptController extends BaseController
     public List<Map<String, Object>> treeData()
     {
         List<Map<String, Object>> tree = deptService.selectDeptTree();
+        return tree;
+    }
+
+    /**
+     * 加载角色部门（数据权限）列表树
+     */
+    @GetMapping("/roleDeptTreeData")
+    @ResponseBody
+    public List<Map<String, Object>> deptTreeData(Role role)
+    {
+        List<Map<String, Object>> tree = deptService.roleDeptTreeData(role);
         return tree;
     }
 }

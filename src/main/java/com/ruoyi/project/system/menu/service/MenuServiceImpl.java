@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +20,7 @@ import com.ruoyi.project.system.menu.domain.Menu;
 import com.ruoyi.project.system.menu.mapper.MenuMapper;
 import com.ruoyi.project.system.role.domain.Role;
 import com.ruoyi.project.system.role.mapper.RoleMenuMapper;
+import com.ruoyi.project.system.user.domain.User;
 
 /**
  * 菜单 业务层处理
@@ -37,15 +39,24 @@ public class MenuServiceImpl implements IMenuService
     private RoleMenuMapper roleMenuMapper;
 
     /**
-     * 根据用户ID查询菜单
+     * 根据用户查询菜单
      * 
-     * @param userId 用户ID
+     * @param userId 用户信息
      * @return 菜单列表
      */
     @Override
-    public List<Menu> selectMenusByUserId(Long userId)
+    public List<Menu> selectMenusByUser(User user)
     {
-        List<Menu> menus = menuMapper.selectMenusByUserId(userId);
+        List<Menu> menus = new LinkedList<Menu>();
+        // 管理员显示所有菜单信息
+        if (user.isAdmin())
+        {
+            menus = menuMapper.selectMenuNormalAll();
+        }
+        else
+        {
+            menus = menuMapper.selectMenusByUserId(user.getUserId());
+        }
         return TreeUtils.getChildPerms(menus, 0);
     }
 
@@ -281,7 +292,7 @@ public class MenuServiceImpl implements IMenuService
     public String checkMenuNameUnique(Menu menu)
     {
         Long menuId = StringUtils.isNull(menu.getMenuId()) ? -1L : menu.getMenuId();
-        Menu info = menuMapper.checkMenuNameUnique(menu.getMenuName());
+        Menu info = menuMapper.checkMenuNameUnique(menu.getMenuName(), menu.getParentId());
         if (StringUtils.isNotNull(info) && info.getMenuId().longValue() != menuId.longValue())
         {
             return UserConstants.MENU_NAME_NOT_UNIQUE;

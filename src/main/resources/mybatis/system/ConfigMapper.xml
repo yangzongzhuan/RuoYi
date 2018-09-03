@@ -17,7 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
     
     <sql id="selectConfigVo">
-        select config_id, config_name, config_key, config_value, config_type, create_by, create_time, update_by, update_time, remark from sys_config
+        select config_id, config_name, config_key, config_value, config_type, create_by, create_time, update_by, update_time, remark 
+		from sys_config
     </sql>
     
     <!-- 查询条件 -->

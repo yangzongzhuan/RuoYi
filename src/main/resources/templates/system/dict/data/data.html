@@ -121,7 +121,12 @@
 		
 		function queryParams(params) {
 			return {
-				dictType:       $("#dictType").val()
+				dictType:       $("#dictType").val(),
+				pageSize:       params.limit,
+    			pageNum:        params.offset / params.limit + 1,
+    			searchValue:    params.search,
+    			orderByColumn:  params.sort,
+    			isAsc:          params.order
 			};
 		}
 	</script>

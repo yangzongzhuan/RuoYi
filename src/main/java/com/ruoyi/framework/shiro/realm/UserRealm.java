@@ -1,5 +1,8 @@
 package com.ruoyi.framework.shiro.realm;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -17,6 +20,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.ruoyi.common.exception.user.CaptchaException;
 import com.ruoyi.common.exception.user.RoleBlockedException;
 import com.ruoyi.common.exception.user.UserBlockedException;
@@ -53,12 +57,27 @@ public class UserRealm extends AuthorizingRealm
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0)
     {
-        Long userId = ShiroUtils.getUserId();
+        User user = ShiroUtils.getUser();
+        // 角色列表
+        Set<String> roles = new HashSet<String>();
+        // 功能列表
+        Set<String> menus = new HashSet<String>();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        // 角色加入AuthorizationInfo认证对象
-        info.setRoles(roleService.selectRoleKeys(userId));
-        // 权限加入AuthorizationInfo认证对象
-        info.setStringPermissions(menuService.selectPermsByUserId(userId));
+        // 管理员拥有所有权限
+        if (user.isAdmin())
+        {
+            info.addRole("admin");
+            info.addStringPermission("*:*:*");
+        }
+        else
+        {
+            roles = roleService.selectRoleKeys(user.getUserId());
+            menus = menuService.selectPermsByUserId(user.getUserId());
+            // 角色加入AuthorizationInfo认证对象
+            info.setRoles(roles);
+            // 权限加入AuthorizationInfo认证对象
+            info.setStringPermissions(menus);
+        }
         return info;
     }
 

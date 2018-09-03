@@ -8,6 +8,7 @@ import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.framework.datascope.DataScopeUtils;
 import com.ruoyi.framework.shiro.service.PasswordService;
 import com.ruoyi.project.system.post.domain.Post;
 import com.ruoyi.project.system.post.mapper.PostMapper;
@@ -56,6 +57,8 @@ public class UserServiceImpl implements IUserService
     @Override
     public List<User> selectUserList(User user)
     {
+        // 生成数据权限过滤条件
+        user.getParams().put("dataScope", DataScopeUtils.dataScopeFilter());
         return userMapper.selectUserList(user);
     }
 

@@ -1,6 +1,7 @@
 package com.ruoyi.project.system.menu.mapper;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import com.ruoyi.project.system.menu.domain.Menu;
 
 /**
@@ -11,6 +12,20 @@ import com.ruoyi.project.system.menu.domain.Menu;
 public interface MenuMapper
 {
 
+    /**
+     * 查询系统所有菜单（含按钮）
+     * 
+     * @return 菜单列表
+     */
+    public List<Menu> selectMenuAll();
+    
+    /**
+     * 查询系统正常显示菜单（不含按钮）
+     * 
+     * @return 菜单列表
+     */
+    public List<Menu> selectMenuNormalAll();
+    
     /**
      * 根据用户ID查询菜单
      * 
@@ -42,13 +57,6 @@ public interface MenuMapper
      * @return 菜单列表
      */
     public List<Menu> selectMenuList(Menu menu);
-
-    /**
-     * 查询系统所有菜单
-     * 
-     * @return 菜单列表
-     */
-    public List<Menu> selectMenuAll();
 
     /**
      * 删除菜单管理信息
@@ -94,8 +102,9 @@ public interface MenuMapper
      * 校验菜单名称是否唯一
      * 
      * @param menuName 菜单名称
+     * @param parentId 父菜单ID
      * @return 结果
      */
-    public Menu checkMenuNameUnique(String menuName);
+    public Menu checkMenuNameUnique(@Param("menuName") String menuName, @Param("parentId") Long parentId);
 
 }

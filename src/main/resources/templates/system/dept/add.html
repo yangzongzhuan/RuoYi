@@ -15,7 +15,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">部门名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="deptName">
+					<input class="form-control" type="text" name="deptName" id="deptName">
 				</div>
 			</div>
 			<div class="form-group">
@@ -73,6 +73,9 @@
 		                type: "post",
 		                dataType: "json",
 		                data: {
+		                	"parentId": function() {
+		                		return $("input[name='parentId']").val();
+		                    },
 		                	"deptName" : function() {
 		                        return $.common.trim($("#deptName").val());
 		                    }
@@ -105,9 +108,21 @@
 	
 		/*部门管理-新增-选择父部门树*/
 		function selectDeptTree() {
-			var deptId = $("#treeId").val();
-			var url = prefix + "/selectDeptTree/" + deptId;
-			$.modal.open("选择部门", url, '380', '380');
+			var options = {
+				title: '部门选择',
+				width: "380",
+				height: "380",
+				url: prefix + "/selectDeptTree/" + $("#treeId").val(),
+				callBack: doSubmit
+			};
+			$.modal.openOptions(options);
+		}
+		
+		function doSubmit(index, layero){
+			var body = layer.getChildFrame('body', index);
+   			$("#treeId").val(body.find('#treeId').val());
+   			$("#treeName").val(body.find('#treeName').val());
+   			layer.close(index);
 		}
 	</script>
 </body>

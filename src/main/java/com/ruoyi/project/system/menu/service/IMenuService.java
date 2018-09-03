@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import com.ruoyi.project.system.menu.domain.Menu;
 import com.ruoyi.project.system.role.domain.Role;
+import com.ruoyi.project.system.user.domain.User;
 
 /**
  * 菜单 业务层
@@ -17,10 +18,10 @@ public interface IMenuService
     /**
      * 根据用户ID查询菜单
      * 
-     * @param userId 用户ID
+     * @param user 用户信息
      * @return 菜单列表
      */
-    public List<Menu> selectMenusByUserId(Long userId);
+    public List<Menu> selectMenusByUser(User user);
 
     /**
      * 查询系统菜单列表

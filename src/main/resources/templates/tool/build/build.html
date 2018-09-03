@@ -2,8 +2,8 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/ajax/libs/iCheck/custom.css" th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
-<link href="/ajax/libs/datapicker/datepicker3.css" th:href="@{/ajax/libs/datapicker/datepicker3.css}" rel="stylesheet"/>
+<link th:href="@{/ruoyi/css/ry-ui.min.css}" rel="stylesheet"/>
+<link th:href="@{/ajax/libs/datapicker/datepicker3.css}" rel="stylesheet"/>
 <style>
     .droppable-active{background-color:#ffe!important}.tools a{cursor:pointer;font-size:80%}.form-body .col-md-6,.form-body .col-md-12{min-height:400px}.draggable{cursor:move}
 </style>
@@ -80,19 +80,19 @@
                                 </label>
 
                                 <div class="col-sm-9">
-                                    <label class="radio-inline i-checks"><input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">选项1</label>
-                                    <label class="radio-inline i-checks"><input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">选项2</label>
+                                    <label class="radio-box"><input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">选项1</label>
+                                    <label class="radio-box"><input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">选项2</label>
                                 </div>
                             </div>
                             <div class="form-group draggable">
                                 <label class="col-sm-3 control-label">复选框：</label>
 
                                 <div class="col-sm-9">
-                                    <label class="checkbox-inline i-checks">
+                                    <label class="check-box">
                                         <input type="checkbox" value="option1" id="inlineCheckbox1">选项1</label>
-                                    <label class="checkbox-inline i-checks">
+                                    <label class="check-box">
                                         <input type="checkbox" value="option2" id="inlineCheckbox2">选项2</label>
-                                    <label class="checkbox-inline i-checks">
+                                    <label class="check-box">
                                         <input type="checkbox" value="option3" id="inlineCheckbox3">选项3</label>
                                 </div>
                             </div>

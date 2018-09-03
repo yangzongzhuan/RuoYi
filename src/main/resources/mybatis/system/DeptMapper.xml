@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="phone"      column="phone"       />
 		<result property="email"      column="email"       />
 		<result property="status"     column="status"      />
+		<result property="delFlag"    column="del_flag"    />
 		<result property="parentName" column="parent_name" />
 		<result property="createBy"   column="create_by"   />
 		<result property="createTime" column="create_time" />
@@ -22,26 +23,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectDeptVo">
-        select t.dept_id, t.parent_id, t.ancestors, t.dept_name, t.order_num, t.leader, t.phone, t.email, t.status, t.create_by, t.create_time from sys_dept t
+        select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status, d.del_flag, d.create_by, d.create_time 
+        from sys_dept d
     </sql>
-
-	<select id="selectDeptAll" resultMap="DeptResult">
-		<include refid="selectDeptVo"/>
+    
+	<select id="selectRoleDeptTree" parameterType="Long" resultType="String">
+		select concat(d.dept_id, d.dept_name) as dept_name
+		from sys_dept d
+			left join sys_role_dept rd on d.dept_id = rd.dept_id
+		where d.del_flag = '0' and rd.role_id = #{roleId}
+		order by d.parent_id, d.order_num
 	</select>
 	
 	<select id="selectDeptList" parameterType="Dept" resultMap="DeptResult">
         <include refid="selectDeptVo"/>
-        <where>
-            <if test="parentId != null and parentId != 0">
-				AND parent_id = #{parentId}
-			</if>
-			<if test="deptName != null and deptName != ''">
-				AND dept_name like concat('%', #{deptName}, '%')
-			</if>
-			<if test="status != null and status != ''">
-				AND status = #{status}
-			</if>
-		</where>
+        where d.del_flag = '0'
+        <if test="parentId != null and parentId != 0">
+			AND parent_id = #{parentId}
+		</if>
+		<if test="deptName != null and deptName != ''">
+			AND dept_name like concat('%', #{deptName}, '%')
+		</if>
+		<if test="status != null and status != ''">
+			AND status = #{status}
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
     </select>
 	
 	<select id="checkDeptExistUser" parameterType="Long" resultType="int">
@@ -50,22 +57,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectDeptCount" parameterType="Dept" resultType="int">
 		select count(1) from sys_dept
-		<where>
-			<if test="deptId != null and deptId != 0"> and dept_id = #{deptId} </if>
-			<if test="parentId != null and parentId != 0"> and parent_id = #{parentId} </if>
-		</where>
+		where del_flag = '0'
+		<if test="deptId != null and deptId != 0"> and dept_id = #{deptId} </if>
+		<if test="parentId != null and parentId != 0"> and parent_id = #{parentId} </if>
 	</select>
 	
-	<select id="checkDeptNameUnique" parameterType="String" resultMap="DeptResult">
+	<select id="checkDeptNameUnique" resultMap="DeptResult">
 	    <include refid="selectDeptVo"/>
-		where dept_name=#{deptName}
+		where dept_name=#{deptName} and parent_id = #{parentId}
 	</select>
 
 	<select id="selectDeptById" parameterType="Long" resultMap="DeptResult">
-		select t.dept_id, t.parent_id, t.ancestors, t.dept_name, t.order_num, t.leader, t.phone, t.email, t.status,
-			(select dept_name from sys_dept where dept_id = t.parent_id) parent_name
-		from sys_dept t
-		where dept_id = #{deptId}
+		select d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.phone, d.email, d.status,
+			(select dept_name from sys_dept where dept_id = d.parent_id) parent_name
+		from sys_dept d
+		where d.dept_id = #{deptId}
 	</select>
 	
 	<insert id="insertDept" parameterType="Dept">
@@ -127,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 </update>
 
 	<delete id="deleteDeptById" parameterType="Long">
-		delete from sys_dept where dept_id = #{deptId}
+		update sys_dept set del_flag = '2' where dept_id = #{deptId}
 	</delete>
 
 </mapper> 

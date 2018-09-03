@@ -2,10 +2,12 @@ package com.ruoyi.project.system.user.domain;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.system.dept.domain.Dept;
+import com.ruoyi.project.system.role.domain.Role;
 
 /**
  * 用户对象 sys_user
@@ -72,6 +74,9 @@ public class User extends BaseEntity
 
     /** 部门对象 */
     private Dept dept;
+
+    /** 角色集合 */
+    private List<Role> roles;
 
     /** 角色组 */
     private Long[] roleIds;
@@ -260,6 +265,16 @@ public class User extends BaseEntity
         this.dept = dept;
     }
 
+    public List<Role> getRoles()
+    {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles)
+    {
+        this.roles = roles;
+    }
+
     public Long[] getRoleIds()
     {
         return roleIds;
@@ -287,7 +302,8 @@ public class User extends BaseEntity
                 + ", userName=" + userName + ", email=" + email + ", phonenumber=" + phonenumber + ", sex=" + sex
                 + ", avatar=" + avatar + ", password=" + password + ", salt=" + salt + ", status=" + status
                 + ", delFlag=" + delFlag + ", loginIp=" + loginIp + ", loginDate=" + loginDate + ", dept=" + dept
-                + ", roleIds=" + Arrays.toString(roleIds) + ", postIds=" + Arrays.toString(postIds) + "]";
+                + ", roles=" + roles + ", roleIds=" + Arrays.toString(roleIds) + ", postIds=" + Arrays.toString(postIds)
+                + "]";
     }
 
 }

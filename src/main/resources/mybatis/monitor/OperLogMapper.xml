@@ -22,10 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<sql id="selectOperLogVo">
-        select 
-        	oper_id, title, business_type, method, operator_type, oper_name, dept_name, oper_url, oper_ip,oper_location,oper_param,status,error_msg,oper_time
-        from 
-          	sys_oper_log
+        select oper_id, title, business_type, method, operator_type, oper_name, dept_name, oper_url, oper_ip, oper_location, oper_param, status, error_msg, oper_time
+        from sys_oper_log
     </sql>
     
 	<insert id="insertOperlog" parameterType="OperLog">

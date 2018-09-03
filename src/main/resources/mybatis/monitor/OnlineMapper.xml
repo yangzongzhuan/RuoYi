@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectOnlineVo">
-       select  sessionId,login_name,dept_name,ipaddr,login_location,browser,os,status,status,start_timestamp,last_access_time,expire_time
-		from sys_user_online
+       select sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, status, start_timestamp, last_access_time, expire_time 
+	   from sys_user_online
     </sql>
     
 	<select id="selectOnlineById" parameterType="String" resultMap="UserOnlineResult">
