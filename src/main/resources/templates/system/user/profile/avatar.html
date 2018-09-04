@@ -26,10 +26,11 @@
 <script th:src="@{/ajax/libs/cropbox/cropbox.js}"></script>
 <script type="text/javascript">
 $(window).load(function() {
+	var avatar = '[[${user.avatar}]]';
     var options = {
         thumbBox: '.thumbBox',
         spinner: '.spinner',
-        imgSrc: '/img/profile.jpg'
+        imgSrc: $.common.isEmpty(avatar) ? '/img/profile.jpg' : '/profile/' + avatar
     }
     var cropper = $('.imageBox').cropbox(options);
     $('#avatar').on('change',
