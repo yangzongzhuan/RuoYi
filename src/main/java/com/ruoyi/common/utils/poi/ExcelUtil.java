@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import org.apache.poi.hssf.usermodel.DVConstraint;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -21,17 +22,21 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
+
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
@@ -98,6 +103,8 @@ public class ExcelUtil<T>
 
         if (rows > 0)
         {
+            // 默认序号
+            int serialNum = 0;
             // 有数据时才处理 得到类的所有field.
             Field[] allFields = clazz.getDeclaredFields();
             // 定义一个map用于存放列的序号和field.
@@ -110,14 +117,14 @@ public class ExcelUtil<T>
                 {
                     // 设置类的私有字段属性可访问.
                     field.setAccessible(true);
-                    fieldsMap.put(col, field);
+                    fieldsMap.put(++serialNum, field);
                 }
             }
             for (int i = 1; i < rows; i++)
             {
                 // 从第2行开始取数据,默认第一行是表头.
                 Row row = sheet.getRow(i);
-                int cellNum = sheet.getRow(0).getPhysicalNumberOfCells();
+                int cellNum = serialNum;
                 T entity = null;
                 for (int j = 0; j < cellNum; j++)
                 {
@@ -129,7 +136,7 @@ public class ExcelUtil<T>
                     else
                     {
                         // 先设置Cell的类型，然后就可以把纯数字作为String类型读进来了
-                        row.getCell(j).setCellType(Cell.CELL_TYPE_STRING);
+                        row.getCell(j).setCellType(CellType.STRING);
                         cell = row.getCell(j);
                     }
 
@@ -178,7 +185,7 @@ public class ExcelUtil<T>
                     }
                     else if (java.util.Date.class == fieldType)
                     {
-                        if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+                        if (cell.getCellTypeEnum() == CellType.NUMERIC)
                         {
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                             cell.setCellValue(sdf.format(cell.getNumericCellValue()));
@@ -211,167 +218,194 @@ public class ExcelUtil<T>
      */
     public AjaxResult exportExcel(List<T> list, String sheetName)
     {
-        // 得到所有定义字段
-        Field[] allFields = clazz.getDeclaredFields();
-        List<Field> fields = new ArrayList<Field>();
-        // 得到所有field并存放到一个list中.
-        for (Field field : allFields)
-        {
-            if (field.isAnnotationPresent(Excel.class))
-            {
-                fields.add(field);
-            }
-        }
+        OutputStream out = null;
+        HSSFWorkbook workbook = null;
 
-        // 产生工作薄对象
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        // excel2003中每个sheet中最多有65536行
-        int sheetSize = 65536;
-        // 取出一共有多少个sheet.
-        double sheetNo = Math.ceil(list.size() / sheetSize);
-        for (int index = 0; index <= sheetNo; index++)
+        try
         {
-            // 产生工作表对象
-            HSSFSheet sheet = workbook.createSheet();
-            if (sheetNo == 0)
+            // 得到所有定义字段
+            Field[] allFields = clazz.getDeclaredFields();
+            List<Field> fields = new ArrayList<Field>();
+            // 得到所有field并存放到一个list中.
+            for (Field field : allFields)
             {
-                workbook.setSheetName(index, sheetName);
-            }
-            else
-            {
-                // 设置工作表的名称.
-                workbook.setSheetName(index, sheetName + index);
-            }
-            HSSFRow row;
-            HSSFCell cell; // 产生单元格
-
-            // 产生一行
-            row = sheet.createRow(0);
-            // 写入各个字段的列头名称
-            for (int i = 0; i < fields.size(); i++)
-            {
-                Field field = fields.get(i);
-                Excel attr = field.getAnnotation(Excel.class);
-                // 创建列
-                cell = row.createCell(i);
-                // 设置列中写入内容为String类型
-                cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                HSSFCellStyle cellStyle = workbook.createCellStyle();
-                cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-                cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-                if (attr.name().indexOf("注：") >= 0)
+                if (field.isAnnotationPresent(Excel.class))
                 {
-                    HSSFFont font = workbook.createFont();
-                    font.setColor(HSSFFont.COLOR_RED);
-                    cellStyle.setFont(font);
-                    cellStyle.setFillForegroundColor(HSSFColor.LIGHT_YELLOW.index);
-                    sheet.setColumnWidth(i, 6000);
+                    fields.add(field);
+                }
+            }
+
+            // 产生工作薄对象
+            workbook = new HSSFWorkbook();
+            // excel2003中每个sheet中最多有65536行
+            int sheetSize = 65536;
+            // 取出一共有多少个sheet.
+            double sheetNo = Math.ceil(list.size() / sheetSize);
+            for (int index = 0; index <= sheetNo; index++)
+            {
+                // 产生工作表对象
+                HSSFSheet sheet = workbook.createSheet();
+                if (sheetNo == 0)
+                {
+                    workbook.setSheetName(index, sheetName);
                 }
                 else
                 {
-                    HSSFFont font = workbook.createFont();
-                    // 粗体显示
-                    font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-                    // 选择需要用到的字体格式
-                    cellStyle.setFont(font);
-                    cellStyle.setFillForegroundColor(HSSFColor.LIGHT_YELLOW.index);
-                    // 设置列宽
-                    sheet.setColumnWidth(i, 3766);
+                    // 设置工作表的名称.
+                    workbook.setSheetName(index, sheetName + index);
                 }
-                cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-                cellStyle.setWrapText(true);
-                cell.setCellStyle(cellStyle);
+                HSSFRow row;
+                HSSFCell cell; // 产生单元格
 
-                // 写入列名
-                cell.setCellValue(attr.name());
-
-                // 如果设置了提示信息则鼠标放上去提示.
-                if (StringUtils.isNotEmpty(attr.prompt()))
+                // 产生一行
+                row = sheet.createRow(0);
+                // 写入各个字段的列头名称
+                for (int i = 0; i < fields.size(); i++)
                 {
-                    // 这里默认设了2-101列提示.
-                    setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, i, i);
-                }
-                // 如果设置了combo属性则本列只能选择不能输入
-                if (attr.combo().length > 0)
-                {
-                    // 这里默认设了2-101列只能选择不能输入.
-                    setHSSFValidation(sheet, attr.combo(), 1, 100, i, i);
-                }
-            }
-
-            int startNo = index * sheetSize;
-            int endNo = Math.min(startNo + sheetSize, list.size());
-            // 写入各条记录,每条记录对应excel表中的一行
-            HSSFCellStyle cs = workbook.createCellStyle();
-            cs.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-            cs.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-            for (int i = startNo; i < endNo; i++)
-            {
-                row = sheet.createRow(i + 1 - startNo);
-                // 得到导出对象.
-                T vo = (T) list.get(i);
-                for (int j = 0; j < fields.size(); j++)
-                {
-                    // 获得field.
-                    Field field = fields.get(j);
-                    // 设置实体类私有属性可访问
-                    field.setAccessible(true);
+                    Field field = fields.get(i);
                     Excel attr = field.getAnnotation(Excel.class);
-                    try
+                    // 创建列
+                    cell = row.createCell(i);
+                    // 设置列中写入内容为String类型
+                    cell.setCellType(CellType.STRING);
+                    HSSFCellStyle cellStyle = workbook.createCellStyle();
+                    cellStyle.setAlignment(HorizontalAlignment.CENTER);
+                    cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+                    if (attr.name().indexOf("注：") >= 0)
                     {
-                        // 根据Excel中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
-                        if (attr.isExport())
-                        {
-                            // 创建cell
-                            cell = row.createCell(j);
-                            cell.setCellStyle(cs);
-                            try
-                            {
-                                if (String.valueOf(field.get(vo)).length() > 10)
-                                {
-                                    throw new Exception("长度超过10位就不用转数字了");
-                                }
-                                // 如果可以转成数字则导出为数字类型
-                                BigDecimal bc = new BigDecimal(String.valueOf(field.get(vo)));
-                                cell.setCellType(HSSFCell.CELL_TYPE_NUMERIC);
-                                cell.setCellValue(bc.doubleValue());
-                            }
-                            catch (Exception e)
-                            {
-                                cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-                                if (vo == null)
-                                {
-                                    // 如果数据存在就填入,不存在填入空格.
-                                    cell.setCellValue("");
-                                }
-                                else
-                                {
-                                    // 如果数据存在就填入,不存在填入空格.
-                                    cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
-                                }
+                        HSSFFont font = workbook.createFont();
+                        font.setColor(HSSFFont.COLOR_RED);
+                        cellStyle.setFont(font);
+                        cellStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+                        sheet.setColumnWidth(i, 6000);
+                    }
+                    else
+                    {
+                        HSSFFont font = workbook.createFont();
+                        // 粗体显示
+                        font.setBold(true);
+                        // 选择需要用到的字体格式
+                        cellStyle.setFont(font);
+                        cellStyle.setFillForegroundColor(HSSFColorPredefined.LIGHT_YELLOW.getIndex());
+                        // 设置列宽
+                        sheet.setColumnWidth(i, 3766);
+                    }
+                    cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+                    cellStyle.setWrapText(true);
+                    cell.setCellStyle(cellStyle);
 
+                    // 写入列名
+                    cell.setCellValue(attr.name());
+
+                    // 如果设置了提示信息则鼠标放上去提示.
+                    if (StringUtils.isNotEmpty(attr.prompt()))
+                    {
+                        // 这里默认设了2-101列提示.
+                        setHSSFPrompt(sheet, "", attr.prompt(), 1, 100, i, i);
+                    }
+                    // 如果设置了combo属性则本列只能选择不能输入
+                    if (attr.combo().length > 0)
+                    {
+                        // 这里默认设了2-101列只能选择不能输入.
+                        setHSSFValidation(sheet, attr.combo(), 1, 100, i, i);
+                    }
+                }
+
+                int startNo = index * sheetSize;
+                int endNo = Math.min(startNo + sheetSize, list.size());
+                // 写入各条记录,每条记录对应excel表中的一行
+                HSSFCellStyle cs = workbook.createCellStyle();
+                cs.setAlignment(HorizontalAlignment.CENTER);
+                cs.setVerticalAlignment(VerticalAlignment.CENTER);
+                for (int i = startNo; i < endNo; i++)
+                {
+                    row = sheet.createRow(i + 1 - startNo);
+                    // 得到导出对象.
+                    T vo = (T) list.get(i);
+                    for (int j = 0; j < fields.size(); j++)
+                    {
+                        // 获得field.
+                        Field field = fields.get(j);
+                        // 设置实体类私有属性可访问
+                        field.setAccessible(true);
+                        Excel attr = field.getAnnotation(Excel.class);
+                        try
+                        {
+                            // 根据Excel中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
+                            if (attr.isExport())
+                            {
+                                // 创建cell
+                                cell = row.createCell(j);
+                                cell.setCellStyle(cs);
+                                try
+                                {
+                                    if (String.valueOf(field.get(vo)).length() > 10)
+                                    {
+                                        throw new Exception("长度超过10位就不用转数字了");
+                                    }
+                                    // 如果可以转成数字则导出为数字类型
+                                    BigDecimal bc = new BigDecimal(String.valueOf(field.get(vo)));
+                                    cell.setCellType(CellType.NUMERIC);
+                                    cell.setCellValue(bc.doubleValue());
+                                }
+                                catch (Exception e)
+                                {
+                                    cell.setCellType(CellType.STRING);
+                                    if (vo == null)
+                                    {
+                                        // 如果数据存在就填入,不存在填入空格.
+                                        cell.setCellValue("");
+                                    }
+                                    else
+                                    {
+                                        // 如果数据存在就填入,不存在填入空格.
+                                        cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
+                                    }
+
+                                }
                             }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        log.error("导出Excel失败{}", e.getMessage());
+                        catch (Exception e)
+                        {
+                            log.error("导出Excel失败{}", e.getMessage());
+                        }
                     }
                 }
             }
-        }
-        try
-        {
             String filename = encodingFilename(sheetName);
-            OutputStream out = new FileOutputStream(getfile() + filename);
+            out = new FileOutputStream(getfile() + filename);
             workbook.write(out);
-            out.close();
             return AjaxResult.success(filename);
         }
         catch (Exception e)
         {
-            log.error("关闭flush失败{}", e.getMessage());
+            log.error("导出Excel异常{}", e.getMessage());
             return AjaxResult.error("导出Excel失败，请联系网站管理员！");
+        }
+        finally
+        {
+            if (workbook != null)
+            {
+                try
+                {
+                    workbook.close();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
+            if (out != null)
+            {
+                try
+                {
+                    out.close();
+                }
+                catch (IOException e1)
+                {
+                    e1.printStackTrace();
+                }
+            }
         }
     }
 
