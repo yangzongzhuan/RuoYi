@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import org.apache.poi.hssf.usermodel.DVConstraint;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -36,7 +35,6 @@ import org.apache.poi.ss.util.CellRangeAddressList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
-
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
@@ -49,7 +47,6 @@ import com.ruoyi.framework.web.domain.AjaxResult;
  */
 public class ExcelUtil<T>
 {
-
     private static final Logger log = LoggerFactory.getLogger(OnlineWebSessionManager.class);
 
     public Class<T> clazz;

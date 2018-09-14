@@ -69,4 +69,4 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 
 ## 若依交流群
 
-QQ群： [![加入QQ群](https://img.shields.io/badge/QQ群-1389287-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=4a9a52f5d9d9c65a8ea67859170ba835d95fc50ec74a2a722293e60e036b5016) 或 [![加入QQ群](https://img.shields.io/badge/QQ群-1389287-blue.svg)](https://jq.qq.com/?_wv=1027&k=5HBAaYN)，推荐点击按钮入群，当然如果无法成功操作，请自行搜索群号`1389287`进行添加
+QQ群： [![加入QQ群](https://img.shields.io/badge/已满-1389287-blue.svg)](https://jq.qq.com/?_wv=1027&k=5HBAaYN)  [![加入QQ群](https://img.shields.io/badge/QQ群-1679294-blue.svg)](https://jq.qq.com/?_wv=1027&k=5cHeRVW) 点击按钮入群。
