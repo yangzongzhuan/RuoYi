@@ -7,7 +7,7 @@ ruoyi:
   # 版权年份
   copyrightYear: 2018
   # 文件上传路径
-  profile: D:/profile
+  profile: D:/profile/
   # 获取ip地址开关
   addressEnabled: false
 

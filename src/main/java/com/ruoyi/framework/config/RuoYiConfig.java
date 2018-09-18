@@ -75,12 +75,12 @@ public class RuoYiConfig
 
     public static String getAvatarPath()
     {
-        return profile + "/avatar/";
+        return profile + "avatar/";
     }
 
     public static String getDownloadPath()
     {
-        return profile + "/download/";
+        return profile + "download/";
     }
 
 }
