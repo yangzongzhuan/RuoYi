@@ -52,18 +52,11 @@ public class LogininforController extends BaseController
     @RequiresPermissions("monitor:logininfor:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Logininfor logininfor) throws Exception
+    public AjaxResult export(Logininfor logininfor)
     {
-        try
-        {
-            List<Logininfor> list = logininforService.selectLogininforList(logininfor);
-            ExcelUtil<Logininfor> util = new ExcelUtil<Logininfor>(Logininfor.class);
-            return util.exportExcel(list, "logininfor");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<Logininfor> list = logininforService.selectLogininforList(logininfor);
+        ExcelUtil<Logininfor> util = new ExcelUtil<Logininfor>(Logininfor.class);
+        return util.exportExcel(list, "logininfor");
     }
 
     @RequiresPermissions("monitor:logininfor:remove")

@@ -52,18 +52,11 @@ public class JobLogController extends BaseController
     @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(JobLog jobLog) throws Exception
+    public AjaxResult export(JobLog jobLog)
     {
-        try
-        {
-            List<JobLog> list = jobLogService.selectJobLogList(jobLog);
-            ExcelUtil<JobLog> util = new ExcelUtil<JobLog>(JobLog.class);
-            return util.exportExcel(list, "jobLog");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<JobLog> list = jobLogService.selectJobLogList(jobLog);
+        ExcelUtil<JobLog> util = new ExcelUtil<JobLog>(JobLog.class);
+        return util.exportExcel(list, "jobLog");
     }
 
     @Log(title = "调度日志", businessType = BusinessType.DELETE)

@@ -35,7 +35,7 @@
                     <div class="contact-box">
 	                        <div class="col-sm-4">
 	                            <div class="text-center">
-	                                <img alt="image" class="img-circle m-t-xs img-responsive" th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/' + ${user.avatar}">
+	                                <img alt="image" class="img-circle m-t-xs img-responsive" th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/avatar/' + ${user.avatar}">
 	                                <div class="m-t-xs font-bold">[[${user.loginIp}]]</div>
 	                            </div>
 	                        </div>
@@ -43,7 +43,7 @@
 	                            <h3><strong>[[${user.loginName}]]</strong></h3>
 	                            <p><i class="fa fa-user"></i> [[${user.userName}]] / [[${#strings.defaultString(roleGroup,'无角色')}]]
 	                            <p><i class="fa fa-phone"></i> [[${user.phonenumber}]]</p>
-	                            <p><i class="fa fa-group"></i> [[${user.dept.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
+	                            <p><i class="fa fa-group"></i> [[${user.dept?.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
 	                            <p><i class="fa fa-transgender"></i> 性别：[[${user.sex}]]</p>
 	                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
 	                            <p><i class="fa fa-calendar"></i> [[${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}]]</p>

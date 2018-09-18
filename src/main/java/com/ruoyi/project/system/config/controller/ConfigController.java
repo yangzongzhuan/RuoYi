@@ -57,18 +57,11 @@ public class ConfigController extends BaseController
     @RequiresPermissions("system:config:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Config config) throws Exception
+    public AjaxResult export(Config config)
     {
-        try
-        {
-            List<Config> list = configService.selectConfigList(config);
-            ExcelUtil<Config> util = new ExcelUtil<Config>(Config.class);
-            return util.exportExcel(list, "config");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<Config> list = configService.selectConfigList(config);
+        ExcelUtil<Config> util = new ExcelUtil<Config>(Config.class);
+        return util.exportExcel(list, "config");
     }
 
     /**

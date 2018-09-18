@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.service.DictService;
@@ -137,7 +138,7 @@ public class ProfileController extends BaseController
         {
             if (!file.isEmpty())
             {
-                String avatar = FileUploadUtils.upload(file);
+                String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
                 user.setAvatar(avatar);
                 if (userService.updateUserInfo(user) > 0)
                 {

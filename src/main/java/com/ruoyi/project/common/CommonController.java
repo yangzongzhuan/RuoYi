@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ruoyi.common.utils.file.FileUtils;
+import com.ruoyi.framework.config.RuoYiConfig;
 
 /**
  * 通用请求处理
@@ -27,7 +27,7 @@ public class CommonController
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
         try
         {
-            String filePath = ResourceUtils.getURL("classpath:").getPath() + "static/file/" + fileName;
+            String filePath = RuoYiConfig.getDownloadPath() + fileName;
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");

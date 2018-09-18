@@ -64,18 +64,11 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(User user) throws Exception
+    public AjaxResult export(User user)
     {
-        try
-        {
-            List<User> list = userService.selectUserList(user);
-            ExcelUtil<User> util = new ExcelUtil<User>(User.class);
-            return util.exportExcel(list, "user");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<User> list = userService.selectUserList(user);
+        ExcelUtil<User> util = new ExcelUtil<User>(User.class);
+        return util.exportExcel(list, "user");
     }
 
     /**

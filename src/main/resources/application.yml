@@ -1,18 +1,19 @@
 # 项目相关配置
 ruoyi:
-  #名称
+  # 名称
   name: RuoYi
-  #版本
+  # 版本
   version: 2.4.0
-  #版权年份
+  # 版权年份
   copyrightYear: 2018
-  #头像上传路径
-  profile: D:/profile/
+  # 文件上传路径
+  profile: D:/profile
   # 获取ip地址开关
   addressEnabled: false
-#开发环境配置
+
+# 开发环境配置
 server:
-  #服务端口
+  # 服务端口
   port: 80
   servlet:
     # 项目contextPath
@@ -24,41 +25,48 @@ server:
     max-threads: 800
     # Tomcat启动初始化的线程数，默认值25
     min-spare-threads: 30
-#日志配置
+ 
+# 日志配置
 logging:
   level:
     com.ruoyi: debug
     org.springframework: WARN
     org.spring.springboot.dao: debug
-#用户配置
+
+# 用户配置
 user:
   password:
-    #密码错误{maxRetryCount}次锁定10分钟
+    # 密码错误{maxRetryCount}次锁定10分钟
     maxRetryCount: 5
-#Spring配置
+
+# Spring配置
 spring:
+  # 模板引擎
   thymeleaf:
     mode: HTML
     encoding: utf-8
     # 禁用缓存
     cache: false
+  # 资源信息
   messages:
-    #国际化资源文件路径
+    # 国际化资源文件路径
     basename: i18n/messages
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   profiles: 
     active: druid
-  #文件上传
+  # 文件上传
   servlet:
      multipart:
        max-file-size:  30MB
        max-request-size:  30MB
+  # 服务模块
   devtools:
     restart:
-      #热部署开关
+      # 热部署开关
       enabled: true
+
 # MyBatis
 mybatis:
     # 搜索指定包别名
@@ -67,12 +75,14 @@ mybatis:
     mapperLocations: classpath:mybatis/**/*Mapper.xml
     # 加载全局的配置文件
     configLocation: classpath:mybatis/mybatis-config.xml
-# PageHelper
+
+# PageHelper分页插件
 pagehelper: 
   helperDialect: mysql
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql 
+
 # Shiro
 shiro:
   user:
@@ -102,6 +112,7 @@ shiro:
     dbSyncPeriod: 1
     # 相隔多久检查一次session的有效性，默认就是10分钟
     validationInterval: 10
+
 # 防止XSS攻击
 xss: 
   # 过滤开关
@@ -110,6 +121,7 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
 # 代码生成
 gen: 
   # 作者

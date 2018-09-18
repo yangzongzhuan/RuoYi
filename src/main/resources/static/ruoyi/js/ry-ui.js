@@ -398,6 +398,11 @@
             post: function(url, data) {
             	$.operate.submit(url, "post", "json", data);
             },
+            // 详细信息
+            detail: function(id) {
+            	var url = $.common.isEmpty(id) ? $.table._option.detailUrl : $.table._option.detailUrl.replace("{id}", id);
+                $.modal.open($.table._option.modalName + "详细", url);
+            },
             // 删除信息
             remove: function(id) {
             	$.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {

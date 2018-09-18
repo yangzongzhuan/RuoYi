@@ -54,18 +54,11 @@ public class DictDataController extends BaseController
     @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(DictData dictData) throws Exception
+    public AjaxResult export(DictData dictData)
     {
-        try
-        {
-            List<DictData> list = dictDataService.selectDictDataList(dictData);
-            ExcelUtil<DictData> util = new ExcelUtil<DictData>(DictData.class);
-            return util.exportExcel(list, "dictData");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<DictData> list = dictDataService.selectDictDataList(dictData);
+        ExcelUtil<DictData> util = new ExcelUtil<DictData>(DictData.class);
+        return util.exportExcel(list, "dictData");
     }
 
     /**

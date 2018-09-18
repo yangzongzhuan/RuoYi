@@ -1,6 +1,6 @@
 package com.ruoyi.common.utils.poi;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,9 +34,9 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.ResourceUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
+import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.framework.web.domain.AjaxResult;
 
@@ -211,13 +211,14 @@ public class ExcelUtil<T>
     /**
      * 对list数据源将其里面的数据导入到excel表单
      * 
+     * @param list 导出数据集合
      * @param sheetName 工作表的名称
+     * @return 结果
      */
     public AjaxResult exportExcel(List<T> list, String sheetName)
     {
         OutputStream out = null;
         HSSFWorkbook workbook = null;
-
         try
         {
             // 得到所有定义字段
@@ -370,7 +371,7 @@ public class ExcelUtil<T>
                 }
             }
             String filename = encodingFilename(sheetName);
-            out = new FileOutputStream(getfile() + filename);
+            out = new FileOutputStream(getAbsoluteFile(filename));
             workbook.write(out);
             return AjaxResult.success(filename);
         }
@@ -465,9 +466,20 @@ public class ExcelUtil<T>
         return filename;
     }
 
-    public String getfile() throws FileNotFoundException
+    /**
+     * 获取下载路径
+     * 
+     * @param filename 文件名称
+     */
+    public String getAbsoluteFile(String filename)
     {
-        return ResourceUtils.getURL("classpath:").getPath() + "static/file/";
+        String downloadPath = RuoYiConfig.getDownloadPath() + filename;
+        File desc = new File(downloadPath);
+        if (!desc.getParentFile().exists())
+        {
+            desc.getParentFile().mkdirs();
+        }
+        return downloadPath;
     }
 
 }

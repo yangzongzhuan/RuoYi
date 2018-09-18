@@ -56,18 +56,11 @@ public class RoleController extends BaseController
     @RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Role role) throws Exception
+    public AjaxResult export(Role role)
     {
-        try
-        {
-            List<Role> list = roleService.selectRoleList(role);
-            ExcelUtil<Role> util = new ExcelUtil<Role>(Role.class);
-            return util.exportExcel(list, "role");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<Role> list = roleService.selectRoleList(role);
+        ExcelUtil<Role> util = new ExcelUtil<Role>(Role.class);
+        return util.exportExcel(list, "role");
     }
 
     /**

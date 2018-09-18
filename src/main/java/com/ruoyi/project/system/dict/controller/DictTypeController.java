@@ -54,18 +54,12 @@ public class DictTypeController extends BaseController
     @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(DictType dictType) throws Exception
+    public AjaxResult export(DictType dictType)
     {
-        try
-        {
-            List<DictType> list = dictTypeService.selectDictTypeList(dictType);
-            ExcelUtil<DictType> util = new ExcelUtil<DictType>(DictType.class);
-            return util.exportExcel(list, "dictType");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+
+        List<DictType> list = dictTypeService.selectDictTypeList(dictType);
+        ExcelUtil<DictType> util = new ExcelUtil<DictType>(DictType.class);
+        return util.exportExcel(list, "dictType");
     }
 
     /**

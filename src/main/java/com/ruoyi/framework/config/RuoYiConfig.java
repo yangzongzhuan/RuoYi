@@ -73,4 +73,14 @@ public class RuoYiConfig
         RuoYiConfig.addressEnabled = addressEnabled;
     }
 
+    public static String getAvatarPath()
+    {
+        return profile + "/avatar/";
+    }
+
+    public static String getDownloadPath()
+    {
+        return profile + "/download/";
+    }
+
 }

@@ -54,18 +54,11 @@ public class PostController extends BaseController
     @RequiresPermissions("system:post:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Post post) throws Exception
+    public AjaxResult export(Post post)
     {
-        try
-        {
-            List<Post> list = postService.selectPostList(post);
-            ExcelUtil<Post> util = new ExcelUtil<Post>(Post.class);
-            return util.exportExcel(list, "post");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<Post> list = postService.selectPostList(post);
+        ExcelUtil<Post> util = new ExcelUtil<Post>(Post.class);
+        return util.exportExcel(list, "post");
     }
 
     @RequiresPermissions("system:post:remove")

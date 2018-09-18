@@ -54,18 +54,11 @@ public class OperlogController extends BaseController
     @RequiresPermissions("monitor:operlog:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(OperLog operLog) throws Exception
+    public AjaxResult export(OperLog operLog)
     {
-        try
-        {
-            List<OperLog> list = operLogService.selectOperLogList(operLog);
-            ExcelUtil<OperLog> util = new ExcelUtil<OperLog>(OperLog.class);
-            return util.exportExcel(list, "operLog");
-        }
-        catch (Exception e)
-        {
-            return error("导出Excel失败，请联系网站管理员！");
-        }
+        List<OperLog> list = operLogService.selectOperLogList(operLog);
+        ExcelUtil<OperLog> util = new ExcelUtil<OperLog>(OperLog.class);
+        return util.exportExcel(list, "operLog");
     }
 
     @RequiresPermissions("monitor:operlog:remove")
