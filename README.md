@@ -35,7 +35,7 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 ## 在线体验
 > admin/admin123
 
-地址：http://www.ruoyi.club
+地址：http://www.ruoyi.vip
 
 ## 演示图
 
