@@ -32,7 +32,7 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                         <img th:src="(${user.avatar} == '') ? '/img/profile.jpg' : '/profile/avatar/' + ${user.avatar}" alt="image" class="img-circle" height="60" width="60"/></span>
+                         <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}" alt="image" class="img-circle" height="60" width="60"/></span>
                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                           <span class="clear"><span class="block m-t-xs"><strong class="font-bold" th:text="${user.userName}">用户</strong></span>
                          <span class="text-muted text-xs block"><span th:text="${user.dept?.deptName}">部门</span> <b class="caret"></b></span> </span> </a>
