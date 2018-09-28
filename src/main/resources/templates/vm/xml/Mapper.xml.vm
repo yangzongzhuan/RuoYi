@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="select${className}Vo"/>
         <where>  
 #foreach($column in $columns)
-            <if test="$column.attrname != null and $column.attrname.trim() != ''"> and $column.columnName = #{$column.attrname}</if>
+            <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname.trim() != '' #end"> and $column.columnName = #{$column.attrname}</if>
  #end
         </where>
     </select>
@@ -33,14 +33,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null and $column.attrname != '' ">$column.columnName,</if>
+			<if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">$column.columnName,</if>
 #end
 #end
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null and $column.attrname != ''">#{$column.attrname},</if>
+			<if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">#{$column.attrname},</if>
 #end			
 #end
          </trim>
