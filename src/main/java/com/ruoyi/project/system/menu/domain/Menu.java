@@ -5,7 +5,7 @@ import java.util.List;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 角色对象 sys_menu
+ * 菜单权限表 sys_menu
  * 
  * @author ruoyi
  */

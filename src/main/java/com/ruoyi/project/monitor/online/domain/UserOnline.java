@@ -25,7 +25,7 @@ public class UserOnline extends BaseEntity
     private String ipaddr;
 
     /** 登录地址 */
-    private String longinLocation;
+    private String loginLocation;
 
     /** 浏览器类型 */
     private String browser;
@@ -88,14 +88,14 @@ public class UserOnline extends BaseEntity
         this.ipaddr = ipaddr;
     }
 
-    public String getLonginLocation()
+    public String getLoginLocation()
     {
-        return longinLocation;
+        return loginLocation;
     }
 
-    public void setLonginLocation(String longinLocation)
+    public void setLoginLocation(String loginLocation)
     {
-        this.longinLocation = longinLocation;
+        this.loginLocation = loginLocation;
     }
 
     public String getBrowser()

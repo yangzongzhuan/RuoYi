@@ -37,7 +37,6 @@ import org.slf4j.LoggerFactory;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.config.RuoYiConfig;
-import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.framework.web.domain.AjaxResult;
 
 /**
@@ -47,7 +46,7 @@ import com.ruoyi.framework.web.domain.AjaxResult;
  */
 public class ExcelUtil<T>
 {
-    private static final Logger log = LoggerFactory.getLogger(OnlineWebSessionManager.class);
+    private static final Logger log = LoggerFactory.getLogger(ExcelUtil.class);
 
     public Class<T> clazz;
 
