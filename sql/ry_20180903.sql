@@ -374,8 +374,8 @@ insert into sys_role_dept values ('2', '105');
 drop table if exists sys_user_post;
 create table sys_user_post
 (
-	user_id varchar(64) not null comment '用户ID',
-	post_id varchar(64) not null comment '岗位ID',
+	user_id int(11) not null comment '用户ID',
+	post_id int(11) not null comment '岗位ID',
 	primary key (user_id, post_id)
 ) engine=innodb default charset=utf8 comment = '用户与岗位关联表';
 
@@ -450,8 +450,8 @@ create table sys_dict_data
 	dict_label       varchar(100)    default ''                 comment '字典标签',
 	dict_value       varchar(100)    default ''                 comment '字典键值',
 	dict_type        varchar(100)    default ''                 comment '字典类型',
-	css_class        varchar(500)    default ''                 comment '样式属性（其他样式扩展）',
-	list_class       varchar(500)    default ''                 comment '表格回显样式',
+	css_class        varchar(100)    default ''                 comment '样式属性（其他样式扩展）',
+	list_class       varchar(100)    default ''                 comment '表格回显样式',
 	is_default       char(1)         default 'N'                comment '是否默认（Y是 N否）',
     status 			 char(1) 		 default '0'			    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',

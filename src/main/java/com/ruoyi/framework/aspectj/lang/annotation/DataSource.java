@@ -14,7 +14,7 @@ import com.ruoyi.framework.aspectj.lang.enums.DataSourceType;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Ds
+public @interface DataSource
 {
     /**
      * 切换数据源名称

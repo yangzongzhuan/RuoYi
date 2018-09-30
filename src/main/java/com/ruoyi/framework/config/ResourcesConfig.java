@@ -32,7 +32,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
-        /** 头像上传路径 */
+        /** 文件上传路径 */
         registry.addResourceHandler("/profile/**").addResourceLocations("file:" + RuoYiConfig.getProfile());
 
         /** swagger配置 */

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.framework.datascope.DataScopeUtils;
+import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
 import com.ruoyi.project.system.dept.domain.Dept;
 import com.ruoyi.project.system.dept.mapper.DeptMapper;
 import com.ruoyi.project.system.role.domain.Role;
@@ -31,9 +31,9 @@ public class DeptServiceImpl implements IDeptService
      * @return 部门信息集合
      */
     @Override
+    @DataScope(tableAlias = "d")
     public List<Dept> selectDeptList(Dept dept)
     {
-        dept.getParams().put("dataScope", DataScopeUtils.dataScopeFilter("d"));
         return deptMapper.selectDeptList(dept);
     }
 

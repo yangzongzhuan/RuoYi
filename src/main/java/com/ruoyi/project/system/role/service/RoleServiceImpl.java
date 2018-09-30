@@ -11,7 +11,7 @@ import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.ShiroUtils;
-import com.ruoyi.framework.datascope.DataScopeUtils;
+import com.ruoyi.framework.aspectj.lang.annotation.DataScope;
 import com.ruoyi.project.system.role.domain.Role;
 import com.ruoyi.project.system.role.domain.RoleDept;
 import com.ruoyi.project.system.role.domain.RoleMenu;
@@ -48,9 +48,9 @@ public class RoleServiceImpl implements IRoleService
      * @return 角色数据集合信息
      */
     @Override
+    @DataScope(tableAlias = "u")
     public List<Role> selectRoleList(Role role)
     {
-        role.getParams().put("dataScope", DataScopeUtils.dataScopeFilter());
         return roleMapper.selectRoleList(role);
     }
 

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.framework.aspectj.lang.annotation.Ds;
+import com.ruoyi.framework.aspectj.lang.annotation.DataSource;
 import com.ruoyi.framework.datasource.DynamicDataSourceContextHolder;
 
 /**
@@ -22,11 +22,11 @@ import com.ruoyi.framework.datasource.DynamicDataSourceContextHolder;
 @Aspect
 @Order(1)
 @Component
-public class DsAspect
+public class DataSourceAspect
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.ruoyi.framework.aspectj.lang.annotation.Ds)")
+    @Pointcut("@annotation(com.ruoyi.framework.aspectj.lang.annotation.DataSource)")
     public void dsPointCut()
     {
 
@@ -39,7 +39,7 @@ public class DsAspect
 
         Method method = signature.getMethod();
 
-        Ds dataSource = method.getAnnotation(Ds.class);
+        DataSource dataSource = method.getAnnotation(DataSource.class);
 
         if (StringUtils.isNotNull(dataSource))
         {
