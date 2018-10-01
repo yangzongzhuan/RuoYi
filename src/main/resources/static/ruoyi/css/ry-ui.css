@@ -311,7 +311,7 @@ label {
 	height: 100%;
 }
 
-.select-info,.select-table {
+.search-collapse,.select-table {
 	width: 100%;
 	background: #fff;
 	border-radius: 6px;
@@ -321,16 +321,16 @@ label {
 	box-shadow: 1px 1px 3px rgba(0,0,0,.2);
 }
 
-.select-info {
+.search-collapse {
 	position: relative;
 }
 
-.select-info .col-sm-6 .control-label {
+.search-collapse .col-sm-6 .control-label {
 	color: #333;
 }
 
 @media ( max-width : 768px) {
-	.select-info {
+	.search-collapse {
 		display: none;
 	}
 }

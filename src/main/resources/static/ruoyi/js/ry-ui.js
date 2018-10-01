@@ -33,6 +33,7 @@
         	        toolbar: '#toolbar',                                // 指定工作栏
                     sidePagination: "server",                           // 启用服务端分页 
                     search: $.common.visible(options.search),           // 是否显示搜索框功能
+                    showSearch: $.common.visible(options.showSearch),   // 是否显示检索信息
                     showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
         			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
         			showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
