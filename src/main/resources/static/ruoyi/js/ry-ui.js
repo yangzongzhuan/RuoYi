@@ -304,8 +304,16 @@
             		shade: 0.3,
             		title: title,
             		content: url,
+            		btn: ['确定', '关闭'],
             	    // 弹层外区域关闭
-            		shadeClose: true
+            		shadeClose: true,
+            		yes: function(index, layero) {
+            	        var iframeWin = layero.find('iframe')[0];
+            	        iframeWin.contentWindow.submitHandler();
+            	    },
+            	    cancel: function(index) {
+            	        return true;
+            	    }
             	});
             },
             // 弹出层指定参数选项
@@ -401,8 +409,23 @@
             },
             // 详细信息
             detail: function(id) {
-            	var url = $.common.isEmpty(id) ? $.table._option.detailUrl : $.table._option.detailUrl.replace("{id}", id);
-                $.modal.open($.table._option.modalName + "详细", url);
+            	var _url = $.common.isEmpty(id) ? $.table._option.detailUrl : $.table._option.detailUrl.replace("{id}", id);
+            	layer.open({
+            		type: 2,
+            		area: ['800px', ($(window).height() - 50) + 'px'],
+            		fix: false,
+            		//不固定
+            		maxmin: true,
+            		shade: 0.3,
+            		title: $.table._option.modalName + "详细",
+            		content: _url,
+            		btn: ['<i class="fa fa-close"></i> 关闭'],
+            	    // 弹层外区域关闭
+            		shadeClose: true,
+            	    cancel: function(index) {
+            	        return true;
+            	    }
+            	});
             },
             // 删除信息
             remove: function(id) {
@@ -494,6 +517,13 @@
                     return true;
                 }
                 return false;
+            },
+            // 表单验证
+            form: function (id) {
+            	if ($.common.isEmpty(id)) {
+                    return false;
+                }
+                return $(id).validate().form();
             }
         },
         // 树插件封装处理

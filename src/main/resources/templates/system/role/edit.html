@@ -49,12 +49,6 @@
 					<div id="menuTrees" class="ztree"></div>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="form-control-static col-sm-offset-9">
-					<button type="submit" class="btn btn-primary">提交</button>
-					<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
-				</div>
-			</div>
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
@@ -123,10 +117,7 @@
 		        "roleKey": {
 		            remote: "角色权限已经存在"
 		        }
-		    },
-			submitHandler:function(form){
-				edit();
-			}
+		    }
 		});
 
 		function edit() {
@@ -159,6 +150,12 @@
 				}
 			});
 		}
+		
+		function submitHandler() {
+	        if ($.validate.form("#form-role-edit")) {
+	        	edit();
+	        }
+	    }
 	</script>
 </body>
 </html>

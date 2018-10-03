@@ -31,12 +31,6 @@
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="form-control-static col-sm-offset-9">
-					<button type="submit" class="btn btn-primary">提交</button>
-					<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
-				</div>
-			</div>
 		</form>
 	</div>
 	<div th:include="include :: footer"></div>
@@ -82,11 +76,14 @@
 	                equalTo: "两次密码输入不一致"
 	            }
 
-	        },
-			submitHandler:function(form){
-				$.operate.save(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
-			}
+	        }
 		});
+		
+		function submitHandler() {
+	        if ($.validate.form("#form-user-resetPwd")) {
+	        	$.operate.save(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
+	        }
+	    }
 	</script>
 </body>
 

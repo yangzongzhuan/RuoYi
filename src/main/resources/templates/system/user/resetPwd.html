@@ -18,12 +18,6 @@
 					<input class="form-control" type="password" name="password" id="password" th:value="${@config.getKey('sys.user.initPassword')}">
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="form-control-static col-sm-offset-9">
-					<button type="submit" class="btn btn-primary">提交</button>
-					<button onclick="$.modal.close()" class="btn btn-danger" type="button">关闭</button>
-				</div>
-			</div>
 		</form>
 	</div>
 	<div th:include="include :: footer"></div>
@@ -35,11 +29,14 @@
 					minlength: 5,
 					maxlength: 20
 				},
-			},
-			submitHandler:function(form){
-				$.operate.save(ctx + "system/user/resetPwd", $('#form-user-resetPwd').serialize());
 			}
 		});
+		
+		function submitHandler() {
+	        if ($.validate.form("#form-user-resetPwd")) {
+	        	$.operate.save(ctx + "system/user/resetPwd", $('#form-user-resetPwd').serialize());
+	        }
+	    }
 	</script>
 </body>
 
