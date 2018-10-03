@@ -48,5 +48,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			#{infoId}
         </foreach> 
  	</delete>
+ 	
+ 	<update id="cleanLogininfor">
+        truncate table sys_logininfor
+    </update>
 
 </mapper> 

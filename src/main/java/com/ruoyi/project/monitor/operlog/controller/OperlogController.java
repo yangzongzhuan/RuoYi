@@ -76,4 +76,14 @@ public class OperlogController extends BaseController
         mmap.put("operLog", operLogService.selectOperLogById(deptId));
         return prefix + "/detail";
     }
+    
+    @Log(title = "操作日志", businessType = BusinessType.CLEAN)
+    @RequiresPermissions("monitor:operlog:remove")
+    @PostMapping("/clean")
+    @ResponseBody
+    public AjaxResult clean()
+    {
+        operLogService.cleanOperLog();
+        return success();
+    }
 }

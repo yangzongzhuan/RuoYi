@@ -50,5 +50,10 @@ public interface JobLogMapper
      * @return 结果
      */
     public int deleteJobLogById(Long jobId);
+    
+    /**
+     * 清空任务日志
+     */
+    public void cleanJobLog();
 
 }

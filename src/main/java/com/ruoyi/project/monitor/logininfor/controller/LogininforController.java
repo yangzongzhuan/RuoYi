@@ -67,4 +67,14 @@ public class LogininforController extends BaseController
     {
         return toAjax(logininforService.deleteLogininforByIds(ids));
     }
+    
+    @RequiresPermissions("monitor:logininfor:remove")
+    @Log(title = "登陆日志", businessType = BusinessType.CLEAN)
+    @PostMapping("/clean")
+    @ResponseBody
+    public AjaxResult clean()
+    {
+        logininforService.cleanLogininfor();
+        return success();
+    }
 }

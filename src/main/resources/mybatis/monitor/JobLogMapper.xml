@@ -62,6 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach> 
  	</delete>
  	
+ 	<update id="cleanJobLog">
+        truncate table sys_job_log
+    </update>
+ 	
  	<insert id="insertJobLog" parameterType="JobLog">
  		insert into sys_job_log(
  			<if test="jobLogId != null and jobLogId != 0">job_log_id,</if>

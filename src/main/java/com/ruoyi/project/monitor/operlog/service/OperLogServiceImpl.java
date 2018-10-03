@@ -64,4 +64,13 @@ public class OperLogServiceImpl implements IOperLogService
     {
         return operLogMapper.selectOperLogById(operId);
     }
+    
+    /**
+     * 清空操作日志
+     */
+    @Override
+    public void cleanOperLog()
+    {
+        operLogMapper.cleanOperLog();
+    }
 }

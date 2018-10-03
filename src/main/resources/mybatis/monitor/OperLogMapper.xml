@@ -63,5 +63,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectOperLogVo"/>
 		where oper_id = #{operId}
 	</select>
+	
+	<update id="cleanOperLog">
+        truncate table sys_oper_log
+    </update>
 
 </mapper> 

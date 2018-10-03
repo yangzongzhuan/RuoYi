@@ -67,4 +67,14 @@ public class JobLogController extends BaseController
     {
         return toAjax(jobLogService.deleteJobLogByIds(ids));
     }
+    
+    @Log(title = "调度日志", businessType = BusinessType.CLEAN)
+    @RequiresPermissions("monitor:job:remove")
+    @PostMapping("/clean")
+    @ResponseBody
+    public AjaxResult clean()
+    {
+        jobLogService.cleanJobLog();
+        return success();
+    }
 }

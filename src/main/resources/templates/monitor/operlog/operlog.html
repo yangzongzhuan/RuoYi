@@ -38,10 +38,13 @@
 				</form>
 			</div>
 			
-			<div class="btn-group hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:logininfor:remove">
-		            <i class="fa fa-trash-o"></i> 删除
+			<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:logininfor:remove">
+		            <i class="fa fa-remove"></i> 删除
 		        </a>
+		        <a class="btn btn-danger" onclick="$.operate.clean()" shiro:hasPermission="monitor:logininfor:remove">
+	                <i class="fa fa-trash"></i> 清空
+	            </a>
 	        </div>
 	        
 			<div class="col-sm-12 select-table table-striped">
@@ -59,12 +62,13 @@
 		$(function() {
 		    var options = {
 		        url: prefix + "/list",
+		        cleanUrl: prefix + "/clean",
 		        detailUrl: prefix + "/detail/{id}",
 		        removeUrl: prefix + "/remove",
 		        exportUrl: prefix + "/export",
 		        sortName: "operTime",
 		        sortOrder: "desc",
-		        modalName: "日志",
+		        modalName: "操作日志",
 		        search: false,
 		        showExport: false,
 		        columns: [{

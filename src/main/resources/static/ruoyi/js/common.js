@@ -81,6 +81,11 @@ $(function() {
 		    $.tree.searchNode(e);
 		}).bind("input propertychange", $.tree.searchNode);
 	}
+	// 复选框后按钮样式状态变更
+	$("#bootstrap-table").on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function () {
+		var ids = $("#bootstrap-table").bootstrapTable("getSelections");
+		$('#toolbar .btn-del').toggleClass('disabled', !ids.length);
+    });
 });
 
 /** 创建选项卡 */

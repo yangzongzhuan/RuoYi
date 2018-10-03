@@ -32,4 +32,9 @@ public interface LogininforMapper
      * @return
      */
     public int deleteLogininforByIds(String[] ids);
+    
+    /**
+     * 清空系统登录日志
+     */
+    public int cleanLogininfor();
 }

@@ -76,5 +76,14 @@ public class JobLogServiceImpl implements IJobLogService
     {
         return jobLogMapper.deleteJobLogById(jobId);
     }
+    
+    /**
+     * 清空任务日志
+     */
+    @Override
+    public void cleanJobLog()
+    {
+        jobLogMapper.cleanJobLog();
+    }
 
 }

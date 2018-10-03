@@ -38,12 +38,12 @@
 				</form>
 			</div>
 		
-			<div class="btn-group hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="system:role:add">
-	                <i class="fa fa-plus"></i> 新增
+			<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-primary" onclick="$.operate.add()" shiro:hasPermission="system:role:add">
+	                <i class="fa fa-plus"></i> 添加
 	            </a>
-				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="system:role:remove">
-		            <i class="fa fa-trash-o"></i> 删除
+				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:role:remove">
+		            <i class="fa fa-remove"></i> 删除
 		        </a>
 	        </div>
 	        

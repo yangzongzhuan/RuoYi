@@ -40,4 +40,9 @@ public interface OperLogMapper
      * @return 操作日志对象
      */
     public OperLog selectOperLogById(Long operId);
+    
+    /**
+     * 清空操作日志
+     */
+    public void cleanOperLog();
 }

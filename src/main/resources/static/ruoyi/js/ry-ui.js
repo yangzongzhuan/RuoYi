@@ -425,6 +425,13 @@
         			$.operate.submit(url, "post", "json", data);
         		});
             },
+            // 清空信息
+            clean: function() {
+            	$.modal.confirm("确定清空所有" + $.table._option.modalName + "吗？", function() {
+	            	var url = $.table._option.cleanUrl;
+	            	$.operate.submit(url, "post", "json", "");
+            	});
+            },
             // 添加信息
             add: function(id) {
             	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);

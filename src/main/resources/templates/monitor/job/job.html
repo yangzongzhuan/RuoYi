@@ -32,14 +32,14 @@
 				</form>
 			</div>
 			
-			<div class="btn-group hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-outline btn-success btn-rounded" onclick="$.operate.add()" shiro:hasPermission="monitor:job:add">
-	                <i class="fa fa-plus"></i> 新增
+			<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-primary" onclick="$.operate.add()" shiro:hasPermission="monitor:job:add">
+	                <i class="fa fa-plus"></i> 添加
 	            </a>
-				<a class="btn btn-outline btn-danger btn-rounded" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:job:remove">
-		            <i class="fa fa-trash-o"></i> 删除
+				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:job:remove">
+		            <i class="fa fa-remove"></i> 删除
 		        </a>
-		        <a class="btn btn-outline btn-info btn-rounded" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
+		        <a class="btn btn-success" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
 		            <i class="fa fa-list"></i> 日志
 		        </a>
 	        </div>
