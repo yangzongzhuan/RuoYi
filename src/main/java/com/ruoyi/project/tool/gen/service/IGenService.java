@@ -33,5 +33,4 @@ public interface IGenService
      * @return 数据
      */
     public byte[] generatorCode(String[] tableNames);
-
 }

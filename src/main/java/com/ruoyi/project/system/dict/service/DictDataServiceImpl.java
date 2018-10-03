@@ -117,5 +117,4 @@ public class DictDataServiceImpl implements IDictDataService
         dictData.setUpdateBy(ShiroUtils.getLoginName());
         return dictDataMapper.updateDictData(dictData);
     }
-
 }

@@ -83,5 +83,4 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
         }
         return super.getRedirectUrl(request, response, subject);
     }
-
 }

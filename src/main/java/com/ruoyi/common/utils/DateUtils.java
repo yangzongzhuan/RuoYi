@@ -96,5 +96,4 @@ public class DateUtils
         Date now = new Date();
         return DateFormatUtils.format(now, "yyyyMMdd");
     }
-
 }

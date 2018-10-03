@@ -106,7 +106,7 @@
         });
         
         function submitHandler() {
-	        if ($.validate.form("#form-menu-add")) {
+	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/add", $('#form-menu-add').serialize());
 	        }
 	    }

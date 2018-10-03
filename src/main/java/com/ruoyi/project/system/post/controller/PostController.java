@@ -139,5 +139,4 @@ public class PostController extends BaseController
     {
         return postService.checkPostCodeUnique(post);
     }
-
 }

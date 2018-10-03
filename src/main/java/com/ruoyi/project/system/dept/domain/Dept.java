@@ -1,9 +1,11 @@
 package com.ruoyi.project.system.dept.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 部门对象 sys_dept
+ * 部门表 sys_dept
  * 
  * @author ruoyi
  */
@@ -154,11 +156,22 @@ public class Dept extends BaseEntity
     }
 
     @Override
-    public String toString()
-    {
-        return "Dept [deptId=" + deptId + ", parentId=" + parentId + ", ancestors=" + ancestors + ", deptName="
-                + deptName + ", orderNum=" + orderNum + ", leader=" + leader + ", phone=" + phone + ", email=" + email
-                + ", status=" + status + ", parentName=" + parentName + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("deptId", getDeptId())
+            .append("parentId", getParentId())
+            .append("ancestors", getAncestors())
+            .append("deptName", getDeptName())
+            .append("orderNum", getOrderNum())
+            .append("leader", getLeader())
+            .append("phone", getPhone())
+            .append("email", getEmail())
+            .append("status", getStatus())
+            .append("delFlag", getDelFlag())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .toString();
     }
-
 }

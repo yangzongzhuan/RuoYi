@@ -61,5 +61,4 @@ public class Constants
      * 排序的方向 "desc" 或者 "asc".
      */
     public static String IS_ASC = "isAsc";
-
 }

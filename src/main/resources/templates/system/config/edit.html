@@ -81,7 +81,7 @@
 	    });
 	    
 	    function submitHandler() {
-	        if ($.validate.form("#form-config-edit")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/edit", $('#form-config-edit').serialize());
 	        }
 	    }

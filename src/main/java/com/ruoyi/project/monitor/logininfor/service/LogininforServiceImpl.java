@@ -15,7 +15,6 @@ import com.ruoyi.project.monitor.logininfor.mapper.LogininforMapper;
 @Service
 public class LogininforServiceImpl implements ILogininforService
 {
-
     @Autowired
     private LogininforMapper logininforMapper;
 

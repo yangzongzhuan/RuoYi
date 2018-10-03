@@ -998,5 +998,4 @@ public class Convert
         return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$",
                 "零元整");
     }
-
 }

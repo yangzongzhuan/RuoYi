@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface IConfigService
 {
-
     /**
      * 查询参数配置信息
      * 
@@ -66,5 +65,4 @@ public interface IConfigService
      * @return 结果
      */
     public String checkConfigKeyUnique(Config config);
-
 }

@@ -1,5 +1,7 @@
 package com.ruoyi.project.monitor.job.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import java.io.Serializable;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
@@ -127,10 +129,21 @@ public class Job extends BaseEntity implements Serializable
     }
 
     @Override
-    public String toString()
-    {
-        return "Job [jobId=" + jobId + ", jobName=" + jobName + ", jobGroup=" + jobGroup + ", methodName=" + methodName
-                + ", methodParams=" + methodParams + ", cronExpression=" + cronExpression + ", status=" + status + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("jobId", getJobId())
+            .append("jobName", getJobName())
+            .append("jobGroup", getJobGroup())
+            .append("methodName", getMethodName())
+            .append("methodParams", getMethodParams())
+            .append("cronExpression", getCronExpression())
+            .append("misfirePolicy", getMisfirePolicy())
+            .append("status", getStatus())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
+            .toString();
     }
-
 }

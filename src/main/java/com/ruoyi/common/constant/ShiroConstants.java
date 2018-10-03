@@ -61,5 +61,4 @@ public interface ShiroConstants
      * 验证码错误
      */
     public static final String CAPTCHA_ERROR = "captchaError";
-
 }

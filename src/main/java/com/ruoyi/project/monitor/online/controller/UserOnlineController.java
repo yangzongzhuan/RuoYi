@@ -108,5 +108,4 @@ public class UserOnlineController extends BaseController
         userOnlineService.saveOnline(online);
         return success();
     }
-
 }

@@ -9,7 +9,6 @@ import com.ruoyi.common.utils.StringUtils;
  */
 public class StrFormatter
 {
-
     public static final String EMPTY_JSON = "{}";
     public static final char C_BACKSLASH = '\\';
     public static final char C_DELIM_START = '{';
@@ -91,5 +90,4 @@ public class StrFormatter
 
         return sbuf.toString();
     }
-
 }

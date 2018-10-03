@@ -101,7 +101,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-post-edit")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/edit", $('#form-post-edit').serialize());
 	        }
 	    }

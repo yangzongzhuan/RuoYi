@@ -23,7 +23,6 @@ import com.ruoyi.framework.web.domain.AjaxResult;
 @Controller
 public class LoginController extends BaseController
 {
-
     @GetMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response)
     {

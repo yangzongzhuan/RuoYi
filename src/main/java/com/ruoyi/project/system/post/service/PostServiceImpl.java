@@ -179,5 +179,4 @@ public class PostServiceImpl implements IPostService
         }
         return UserConstants.POST_CODE_UNIQUE;
     }
-
 }

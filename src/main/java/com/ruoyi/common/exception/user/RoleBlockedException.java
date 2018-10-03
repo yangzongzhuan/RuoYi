@@ -7,7 +7,6 @@ package com.ruoyi.common.exception.user;
  */
 public class RoleBlockedException extends UserException
 {
-
     private static final long serialVersionUID = 1L;
 
     public RoleBlockedException(String reason)

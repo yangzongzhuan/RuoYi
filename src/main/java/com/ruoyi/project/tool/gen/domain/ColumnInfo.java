@@ -84,5 +84,4 @@ public class ColumnInfo
     {
         this.attrType = attrType;
     }
-
 }

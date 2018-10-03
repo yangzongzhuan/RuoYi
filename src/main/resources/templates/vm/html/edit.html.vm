@@ -30,7 +30,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-${classname}-edit")) {
+	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/edit", $('#form-${classname}-edit').serialize());
 	        }
 	    }

@@ -10,7 +10,6 @@ import com.ruoyi.project.monitor.logininfor.domain.Logininfor;
  */
 public interface ILogininforService
 {
-
     /**
      * 新增系统登录日志
      * 

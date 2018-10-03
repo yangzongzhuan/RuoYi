@@ -28,7 +28,6 @@ import com.ruoyi.project.system.user.mapper.UserRoleMapper;
 @Service
 public class RoleServiceImpl implements IRoleService
 {
-
     @Autowired
     private RoleMapper roleMapper;
 
@@ -303,5 +302,4 @@ public class RoleServiceImpl implements IRoleService
     {
         return userRoleMapper.countUserRoleByRoleId(roleId);
     }
-
 }

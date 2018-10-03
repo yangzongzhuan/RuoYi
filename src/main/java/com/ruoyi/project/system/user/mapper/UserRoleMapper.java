@@ -10,7 +10,6 @@ import com.ruoyi.project.system.user.domain.UserRole;
  */
 public interface UserRoleMapper
 {
-
     /**
      * 通过用户ID删除用户和角色关联
      * 
@@ -42,5 +41,4 @@ public interface UserRoleMapper
      * @return 结果
      */
     public int batchUserRole(List<UserRole> userRoleList);
-
 }

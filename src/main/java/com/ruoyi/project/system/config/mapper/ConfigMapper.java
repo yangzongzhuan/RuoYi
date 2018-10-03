@@ -57,5 +57,4 @@ public interface ConfigMapper
      * @return 结果
      */
     public int deleteConfigByIds(String[] configIds);
-
 }

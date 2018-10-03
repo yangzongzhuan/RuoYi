@@ -9,7 +9,6 @@ import org.apache.commons.fileupload.FileUploadException;
  */
 public class FileNameLengthLimitExceededException extends FileUploadException
 {
-
     private static final long serialVersionUID = 1L;
     private int length;
     private int maxLength;
@@ -37,5 +36,4 @@ public class FileNameLengthLimitExceededException extends FileUploadException
     {
         return maxLength;
     }
-
 }

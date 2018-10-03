@@ -106,5 +106,4 @@ public class NoticeController extends BaseController
     {
         return toAjax(noticeService.deleteNoticeByIds(ids));
     }
-
 }

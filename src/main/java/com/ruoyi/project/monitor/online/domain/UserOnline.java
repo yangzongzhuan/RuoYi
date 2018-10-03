@@ -1,6 +1,8 @@
 package com.ruoyi.project.monitor.online.domain;
 
 import java.util.Date;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
 import com.ruoyi.project.monitor.online.domain.OnlineSession.OnlineStatus;
 
@@ -12,6 +14,7 @@ import com.ruoyi.project.monitor.online.domain.OnlineSession.OnlineStatus;
 public class UserOnline extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
+    
     /** 用户会话id */
     private String sessionId;
 
@@ -169,12 +172,19 @@ public class UserOnline extends BaseEntity
     }
 
     @Override
-    public String toString()
-    {
-        return "UserOnline [sessionId=" + sessionId + ", deptName=" + deptName + ", loginName=" + loginName
-                + ", ipaddr=" + ipaddr + ", browser=" + browser + ", os=" + os + ", startTimestamp=" + startTimestamp
-                + ", lastAccessTime=" + lastAccessTime + ", expireTime=" + expireTime + ", status=" + status
-                + ", session=" + session + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("sessionId", getSessionId())
+            .append("loginName", getLoginName())
+            .append("deptName", getDeptName())
+            .append("ipaddr", getIpaddr())
+            .append("loginLocation", getLoginLocation())
+            .append("browser", getBrowser())
+            .append("os", getOs())
+            .append("status", getStatus())
+            .append("startTimestamp", getStartTimestamp())
+            .append("lastAccessTime", getLastAccessTime())
+            .append("expireTime", getExpireTime())
+            .toString();
     }
-
 }

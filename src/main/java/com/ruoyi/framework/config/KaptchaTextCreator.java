@@ -10,7 +10,6 @@ import com.google.code.kaptcha.text.impl.DefaultTextCreator;
  */
 public class KaptchaTextCreator extends DefaultTextCreator
 {
-
     private static final String[] CNUMBERS = "0,1,2,3,4,5,6,7,8,9,10".split(",");
 
     @Override
@@ -73,5 +72,4 @@ public class KaptchaTextCreator extends DefaultTextCreator
         suChinese.append("=?@" + result);
         return suChinese.toString();
     }
-
 }

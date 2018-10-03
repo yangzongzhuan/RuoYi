@@ -33,7 +33,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-user-resetPwd")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(ctx + "system/user/resetPwd", $('#form-user-resetPwd').serialize());
 	        }
 	    }

@@ -82,7 +82,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-job-add")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/add", $('#form-job-add').serialize());
 	        }
 	    }

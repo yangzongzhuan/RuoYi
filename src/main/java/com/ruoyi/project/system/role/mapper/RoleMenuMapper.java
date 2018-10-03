@@ -10,7 +10,6 @@ import com.ruoyi.project.system.role.domain.RoleMenu;
  */
 public interface RoleMenuMapper
 {
-
     /**
      * 通过角色ID删除角色和菜单关联
      * 
@@ -42,5 +41,4 @@ public interface RoleMenuMapper
      * @return 结果
      */
     public int batchRoleMenu(List<RoleMenu> roleMenuList);
-
 }

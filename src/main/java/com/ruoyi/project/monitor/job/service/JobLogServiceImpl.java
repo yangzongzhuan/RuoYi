@@ -15,7 +15,6 @@ import com.ruoyi.project.monitor.job.mapper.JobLogMapper;
 @Service
 public class JobLogServiceImpl implements IJobLogService
 {
-
     @Autowired
     private JobLogMapper jobLogMapper;
 
@@ -85,5 +84,4 @@ public class JobLogServiceImpl implements IJobLogService
     {
         jobLogMapper.cleanJobLog();
     }
-
 }

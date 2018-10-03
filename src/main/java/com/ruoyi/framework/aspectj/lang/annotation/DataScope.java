@@ -16,6 +16,8 @@ import java.lang.annotation.Target;
 @Documented
 public @interface DataScope
 {
-    /** 表的别名 */
+    /**
+     * 表的别名
+     */
     String tableAlias() default "";
 }

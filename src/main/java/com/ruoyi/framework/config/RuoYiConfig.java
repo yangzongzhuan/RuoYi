@@ -82,5 +82,4 @@ public class RuoYiConfig
     {
         return profile + "download/";
     }
-
 }

@@ -1,11 +1,13 @@
 package com.ruoyi.project.monitor.operlog.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 操作日志记录 oper_log
+ * 操作日志记录表 oper_log
  * 
  * @author ruoyi
  */
@@ -210,12 +212,22 @@ public class OperLog extends BaseEntity
     }
 
     @Override
-    public String toString()
-    {
-        return "OperLog [operId=" + operId + ", title=" + title + ", businessType=" + businessType + ", method="
-                + method + ", operatorType=" + operatorType + ", operName=" + operName + ", deptName=" + deptName
-                + ", operUrl=" + operUrl + ", operIp=" + operIp + ", operLocation=" + operLocation + ", operParam="
-                + operParam + ", status=" + status + ", errorMsg=" + errorMsg + ", operTime=" + operTime + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("operId", getOperId())
+            .append("title", getTitle())
+            .append("businessType", getBusinessType())
+            .append("method", getMethod())
+            .append("operatorType", getOperatorType())
+            .append("operName", getOperName())
+            .append("deptName", getDeptName())
+            .append("operUrl", getOperUrl())
+            .append("operIp", getOperIp())
+            .append("operLocation", getOperLocation())
+            .append("operParam", getOperParam())
+            .append("status", getStatus())
+            .append("errorMsg", getErrorMsg())
+            .append("operTime", getOperTime())
+            .toString();
     }
-
 }

@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
  */
 public class HttpUtils
 {
-
     private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
 
     /**
@@ -246,5 +245,4 @@ public class HttpUtils
             return true;
         }
     }
-
 }

@@ -107,5 +107,4 @@ public class TableInfo extends BaseEntity
         return "TableInfo [tableName=" + tableName + ", tableComment=" + tableComment + ", primaryKey=" + primaryKey
                 + ", columns=" + columns + ", className=" + className + ", classname=" + classname + "]";
     }
-
 }

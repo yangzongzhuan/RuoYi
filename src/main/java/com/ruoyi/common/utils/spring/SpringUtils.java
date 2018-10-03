@@ -98,5 +98,4 @@ public final class SpringUtils implements BeanFactoryPostProcessor
     {
         return beanFactory.getAliases(name);
     }
-
 }

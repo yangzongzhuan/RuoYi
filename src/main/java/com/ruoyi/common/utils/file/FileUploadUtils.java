@@ -15,7 +15,6 @@ import com.ruoyi.framework.config.RuoYiConfig;
  */
 public class FileUploadUtils
 {
-
     /**
      * 默认大小 50M
      */
@@ -159,5 +158,4 @@ public class FileUploadUtils
             throw new FileSizeLimitExceededException("not allowed upload upload", size, DEFAULT_MAX_SIZE);
         }
     }
-
 }

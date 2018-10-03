@@ -10,7 +10,6 @@ import com.ruoyi.project.monitor.job.domain.JobLog;
  */
 public interface JobLogMapper
 {
-
     /**
      * 获取quartz调度器日志的计划任务
      * 
@@ -55,5 +54,4 @@ public interface JobLogMapper
      * 清空任务日志
      */
     public void cleanJobLog();
-
 }

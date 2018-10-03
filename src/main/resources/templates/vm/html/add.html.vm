@@ -29,7 +29,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-${classname}-add")) {
+	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/add", $('#form-${classname}-add').serialize());
 	        }
 	    }

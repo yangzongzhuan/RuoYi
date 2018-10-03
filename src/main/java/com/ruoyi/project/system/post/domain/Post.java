@@ -1,10 +1,12 @@
 package com.ruoyi.project.system.post.domain;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 岗位对象 sys_post
+ * 岗位表 sys_post
  * 
  * @author ruoyi
  */
@@ -96,10 +98,18 @@ public class Post extends BaseEntity
     }
 
     @Override
-    public String toString()
-    {
-        return "Post [postId=" + postId + ", postCode=" + postCode + ", postName=" + postName + ", postSort=" + postSort
-                + ", status=" + status + ", flag=" + flag + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("postId", getPostId())
+            .append("postCode", getPostCode())
+            .append("postName", getPostName())
+            .append("postSort", getPostSort())
+            .append("status", getStatus())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
+            .toString();
     }
-
 }

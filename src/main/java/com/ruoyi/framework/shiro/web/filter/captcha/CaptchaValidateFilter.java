@@ -16,7 +16,6 @@ import com.ruoyi.common.utils.security.ShiroUtils;
  */
 public class CaptchaValidateFilter extends AccessControlFilter
 {
-
     /**
      * 是否开启验证码
      */

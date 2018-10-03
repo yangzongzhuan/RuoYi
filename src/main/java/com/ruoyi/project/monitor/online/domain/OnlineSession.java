@@ -9,7 +9,6 @@ import org.apache.shiro.session.mgt.SimpleSession;
  */
 public class OnlineSession extends SimpleSession
 {
-
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
@@ -151,5 +150,4 @@ public class OnlineSession extends SimpleSession
             return info;
         }
     }
-
 }

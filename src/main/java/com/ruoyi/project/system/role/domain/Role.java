@@ -1,11 +1,12 @@
 package com.ruoyi.project.system.role.domain;
 
-import java.util.Arrays;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import com.ruoyi.framework.web.domain.BaseEntity;
 
 /**
- * 角色对象 sys_role
+ * 角色表 sys_role
  * 
  * @author ruoyi
  */
@@ -150,11 +151,20 @@ public class Role extends BaseEntity
     }
 
     @Override
-    public String toString()
-    {
-        return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleKey=" + roleKey + ", roleSort=" + roleSort
-                + ", dataScope=" + dataScope + ", status=" + status + ", flag=" + flag + ", menuIds="
-                + Arrays.toString(menuIds) + ", deptIds=" + Arrays.toString(deptIds) + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("roleId", getRoleId())
+            .append("roleName", getRoleName())
+            .append("roleKey", getRoleKey())
+            .append("roleSort", getRoleSort())
+            .append("dataScope", getDataScope())
+            .append("status", getStatus())
+            .append("delFlag", getDelFlag())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
+            .toString();
     }
-
 }

@@ -117,5 +117,4 @@ public class ConfigServiceImpl implements IConfigService
         }
         return UserConstants.CONFIG_KEY_UNIQUE;
     }
-
 }

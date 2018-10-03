@@ -24,7 +24,6 @@ import com.ruoyi.project.system.user.domain.User;
 @Component
 public class PasswordService
 {
-
     @Autowired
     private CacheManager cacheManager;
 

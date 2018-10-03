@@ -29,7 +29,6 @@ import com.ruoyi.project.system.role.service.IRoleService;
 @RequestMapping("/system/role")
 public class RoleController extends BaseController
 {
-
     private String prefix = "system/role";
 
     @Autowired
@@ -176,5 +175,4 @@ public class RoleController extends BaseController
     {
         return prefix + "/tree";
     }
-
 }

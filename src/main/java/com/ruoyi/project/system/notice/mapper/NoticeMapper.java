@@ -49,5 +49,4 @@ public interface NoticeMapper
      * @return 结果
      */
     public int deleteNoticeByIds(String[] noticeIds);
-
 }

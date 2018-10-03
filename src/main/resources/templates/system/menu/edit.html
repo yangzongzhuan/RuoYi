@@ -116,7 +116,7 @@
         });
         
         function submitHandler() {
-	        if ($.validate.form("#form-menu-edit")) {
+	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/edit", $('#form-menu-edit').serialize());
 	        }
 	    }

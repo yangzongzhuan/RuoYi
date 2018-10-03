@@ -13,7 +13,6 @@ import java.io.OutputStream;
  */
 public class FileUtils
 {
-
     /**
      * 输出指定文件的byte数组
      * 
@@ -87,5 +86,4 @@ public class FileUtils
         }
         return flag;
     }
-
 }

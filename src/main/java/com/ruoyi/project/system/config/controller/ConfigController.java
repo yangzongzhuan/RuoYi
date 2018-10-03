@@ -128,5 +128,4 @@ public class ConfigController extends BaseController
     {
         return configService.checkConfigKeyUnique(config);
     }
-
 }

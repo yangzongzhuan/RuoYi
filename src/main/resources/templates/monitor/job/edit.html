@@ -80,7 +80,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-job-edit")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/edit", $('#form-job-edit').serialize());
 	        }
 	    }

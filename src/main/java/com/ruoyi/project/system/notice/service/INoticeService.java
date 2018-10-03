@@ -49,5 +49,4 @@ public interface INoticeService
      * @return 结果
      */
     public int deleteNoticeByIds(String ids);
-
 }

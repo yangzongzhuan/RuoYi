@@ -10,7 +10,6 @@ import com.ruoyi.project.monitor.job.domain.Job;
  */
 public interface JobMapper
 {
-
     /**
      * 查询调度任务日志集合
      * 
@@ -65,5 +64,4 @@ public interface JobMapper
      * @return 结果
      */
     public int insertJob(Job job);
-
 }

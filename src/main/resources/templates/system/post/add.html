@@ -94,7 +94,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-post-add")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/add", $('#form-post-add').serialize());
 	        }
 	    }

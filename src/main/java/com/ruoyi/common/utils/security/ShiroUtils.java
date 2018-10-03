@@ -18,7 +18,6 @@ import com.ruoyi.project.system.user.domain.User;
  */
 public class ShiroUtils
 {
-
     public static Subject getSubjct()
     {
         return SecurityUtils.getSubject();

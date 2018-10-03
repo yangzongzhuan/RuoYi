@@ -10,7 +10,6 @@ import com.ruoyi.common.utils.spring.SpringUtils;
  */
 public class MessageUtils
 {
-
     /**
      * 根据消息键和参数 获取消息 委托给spring messageSource
      *
@@ -23,5 +22,4 @@ public class MessageUtils
         MessageSource messageSource = SpringUtils.getBean(MessageSource.class);
         return messageSource.getMessage(code, args, null);
     }
-
 }

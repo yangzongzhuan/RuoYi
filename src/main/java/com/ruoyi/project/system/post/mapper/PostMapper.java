@@ -10,7 +10,6 @@ import com.ruoyi.project.system.post.domain.Post;
  */
 public interface PostMapper
 {
-
     /**
      * 查询岗位数据集合
      * 
@@ -81,5 +80,4 @@ public interface PostMapper
      * @return 结果
      */
     public Post checkPostCodeUnique(String postCode);
-
 }

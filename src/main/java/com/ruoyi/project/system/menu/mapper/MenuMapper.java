@@ -11,7 +11,6 @@ import com.ruoyi.project.system.menu.domain.Menu;
  */
 public interface MenuMapper
 {
-
     /**
      * 查询系统所有菜单（含按钮）
      * 
@@ -106,5 +105,4 @@ public interface MenuMapper
      * @return 结果
      */
     public Menu checkMenuNameUnique(@Param("menuName") String menuName, @Param("parentId") Long parentId);
-
 }

@@ -519,11 +519,9 @@
                 return false;
             },
             // 表单验证
-            form: function (id) {
-            	if ($.common.isEmpty(id)) {
-                    return false;
-                }
-                return $(id).validate().form();
+            form: function (formId) {
+            	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+                return $("#" + currentId).validate().form();
             }
         },
         // 树插件封装处理

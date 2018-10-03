@@ -1,6 +1,7 @@
 package com.ruoyi.project.system.user.domain;
 
-import java.util.Arrays;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 import java.util.List;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -296,14 +297,27 @@ public class User extends BaseEntity
     }
 
     @Override
-    public String toString()
-    {
-        return "User [userId=" + userId + ", deptId=" + deptId + ", parentId=" + parentId + ", loginName=" + loginName
-                + ", userName=" + userName + ", email=" + email + ", phonenumber=" + phonenumber + ", sex=" + sex
-                + ", avatar=" + avatar + ", password=" + password + ", salt=" + salt + ", status=" + status
-                + ", delFlag=" + delFlag + ", loginIp=" + loginIp + ", loginDate=" + loginDate + ", dept=" + dept
-                + ", roles=" + roles + ", roleIds=" + Arrays.toString(roleIds) + ", postIds=" + Arrays.toString(postIds)
-                + "]";
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("userId", getUserId())
+            .append("deptId", getDeptId())
+            .append("loginName", getLoginName())
+            .append("userName", getUserName())
+            .append("email", getEmail())
+            .append("phonenumber", getPhonenumber())
+            .append("sex", getSex())
+            .append("avatar", getAvatar())
+            .append("password", getPassword())
+            .append("salt", getSalt())
+            .append("status", getStatus())
+            .append("delFlag", getDelFlag())
+            .append("loginIp", getLoginIp())
+            .append("loginDate", getLoginDate())
+            .append("createBy", getCreateBy())
+            .append("createTime", getCreateTime())
+            .append("updateBy", getUpdateBy())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
+            .toString();
     }
-
 }

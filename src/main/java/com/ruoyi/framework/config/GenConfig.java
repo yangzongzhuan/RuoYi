@@ -67,5 +67,4 @@ public class GenConfig
         return "GenConfig [getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
                 + "]";
     }
-
 }

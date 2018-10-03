@@ -22,7 +22,6 @@ import com.ruoyi.project.system.user.domain.User;
  */
 public class OnlineSessionFilter extends AccessControlFilter
 {
-
     /**
      * 强制退出后重定向的地址
      */
@@ -92,5 +91,4 @@ public class OnlineSessionFilter extends AccessControlFilter
     {
         WebUtils.issueRedirect(request, response, loginUrl);
     }
-
 }

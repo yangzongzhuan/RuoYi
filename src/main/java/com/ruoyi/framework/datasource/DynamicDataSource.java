@@ -23,5 +23,4 @@ public class DynamicDataSource extends AbstractRoutingDataSource
     {
         return DynamicDataSourceContextHolder.getDateSoureType();
     }
-
 }

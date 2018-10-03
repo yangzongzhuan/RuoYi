@@ -133,5 +133,4 @@ public class LoginService
         user.setLoginDate(DateUtils.getNowDate());
         userService.updateUserInfo(user);
     }
-
 }

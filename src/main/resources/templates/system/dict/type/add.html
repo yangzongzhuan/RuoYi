@@ -69,7 +69,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-dict-add")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/add", $('#form-dict-add').serialize());
 	        }
 	    }

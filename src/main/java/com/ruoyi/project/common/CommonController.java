@@ -70,6 +70,5 @@ public class CommonController
             filename = URLEncoder.encode(filename, "utf-8");
         }
         return filename;
-
     }
 }

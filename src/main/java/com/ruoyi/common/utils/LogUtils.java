@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public class LogUtils
 {
-
     public static final Logger ERROR_LOG = LoggerFactory.getLogger("sys-error");
     public static final Logger ACCESS_LOG = LoggerFactory.getLogger("sys-access");
 
@@ -132,5 +131,4 @@ public class LogUtils
     {
         return ERROR_LOG;
     }
-
 }

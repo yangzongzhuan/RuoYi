@@ -77,7 +77,7 @@
 	    });
 	    
 	    function submitHandler() {
-	        if ($.validate.form("#form-config-add")) {
+	        if ($.validate.form()) {
 	            $.operate.save(prefix + "/add", $('#form-config-add').serialize());
 	        }
 	    }

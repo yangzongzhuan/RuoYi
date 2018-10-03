@@ -15,7 +15,6 @@ import java.util.Properties;
 @Configuration
 public class ScheduleConfig
 {
-
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource)
     {

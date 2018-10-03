@@ -12,7 +12,6 @@ import com.ruoyi.project.system.menu.domain.Menu;
  */
 public class TreeUtils
 {
-
     /**
      * 根据父节点的ID获取所有子节点
      * 

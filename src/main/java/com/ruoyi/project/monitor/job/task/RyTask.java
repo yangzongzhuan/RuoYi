@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Component("ryTask")
 public class RyTask
 {
-
     public void ryParams(String params)
     {
         System.out.println("执行有参方法：" + params);
@@ -20,5 +19,4 @@ public class RyTask
     {
         System.out.println("执行无参方法");
     }
-
 }

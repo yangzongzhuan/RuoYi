@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface IUserService
 {
-
     /**
      * 根据条件分页查询用户对象
      * 

@@ -10,7 +10,6 @@ import com.ruoyi.project.system.dict.domain.DictData;
  */
 public interface IDictDataService
 {
-
     /**
      * 根据条件分页查询字典数据
      * 
@@ -75,5 +74,4 @@ public interface IDictDataService
      * @return 结果
      */
     public int updateDictData(DictData dictData);
-
 }

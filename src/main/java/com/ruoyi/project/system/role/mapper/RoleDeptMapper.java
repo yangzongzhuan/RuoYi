@@ -10,7 +10,6 @@ import com.ruoyi.project.system.role.domain.RoleDept;
  */
 public interface RoleDeptMapper
 {
-
     /**
      * 通过角色ID删除角色和部门关联
      * 
@@ -42,5 +41,4 @@ public interface RoleDeptMapper
      * @return 结果
      */
     public int batchRoleDept(List<RoleDept> roleDeptList);
-
 }

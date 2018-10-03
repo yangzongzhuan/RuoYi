@@ -14,7 +14,6 @@ import com.ruoyi.project.system.user.domain.User;
  */
 public interface IMenuService
 {
-
     /**
      * 根据用户ID查询菜单
      * 
@@ -123,5 +122,4 @@ public interface IMenuService
      * @return 结果
      */
     public String checkMenuNameUnique(Menu menu);
-
 }

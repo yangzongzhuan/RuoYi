@@ -97,7 +97,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-dept-add")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/add", $('#form-dept-add').serialize());
 	        }
 	    }

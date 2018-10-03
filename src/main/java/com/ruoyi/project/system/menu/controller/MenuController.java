@@ -28,7 +28,6 @@ import com.ruoyi.project.system.role.domain.Role;
 @RequestMapping("/system/menu")
 public class MenuController extends BaseController
 {
-
     private String prefix = "system/menu";
 
     @Autowired

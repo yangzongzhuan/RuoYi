@@ -10,7 +10,6 @@ import com.ruoyi.project.system.user.domain.UserPost;
  */
 public interface UserPostMapper
 {
-
     /**
      * 通过用户ID删除用户和岗位关联
      * 
@@ -42,5 +41,4 @@ public interface UserPostMapper
      * @return 结果
      */
     public int batchUserPost(List<UserPost> userPostList);
-
 }

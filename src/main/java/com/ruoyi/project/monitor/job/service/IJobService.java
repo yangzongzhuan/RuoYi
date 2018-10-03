@@ -10,7 +10,6 @@ import com.ruoyi.project.monitor.job.domain.Job;
  */
 public interface IJobService
 {
-
     /**
      * 获取quartz调度器的计划任务
      * 
@@ -90,5 +89,4 @@ public interface IJobService
      * @return 结果
      */
     public int updateJobCron(Job job);
-
 }

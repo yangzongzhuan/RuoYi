@@ -11,7 +11,6 @@ import com.ruoyi.project.system.role.domain.Role;
  */
 public interface IRoleService
 {
-
     /**
      * 根据条件分页查询角色数据
      * 
@@ -115,5 +114,4 @@ public interface IRoleService
      * @return 结果
      */
     public int countUserRoleByRoleId(Long roleId);
-
 }

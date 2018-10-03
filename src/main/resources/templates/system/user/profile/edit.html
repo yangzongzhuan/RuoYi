@@ -111,7 +111,7 @@
 		});
 		
 		function submitHandler() {
-	        if ($.validate.form("#form-user-edit")) {
+	        if ($.validate.form()) {
 	        	$.operate.save(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
 	        }
 	    }
