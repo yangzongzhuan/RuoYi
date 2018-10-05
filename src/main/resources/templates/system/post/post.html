@@ -25,7 +25,7 @@
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-							    <a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()" shiro:hasPermission="system:post:export"><i class="fa fa-download"></i>&nbsp;导出</a>
+							    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
@@ -33,11 +33,17 @@
 			</div>
 			
 			<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-primary" onclick="$.operate.add()" shiro:hasPermission="system:post:add">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:post:add">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:post:edit">
+		            <i class="fa fa-edit"></i> 修改
+		        </a>
 				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:post:remove">
 		            <i class="fa fa-remove"></i> 删除
+		        </a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:post:export">
+		            <i class="fa fa-download"></i> 导出
 		        </a>
 	        </div>
 	        

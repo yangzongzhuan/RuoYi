@@ -85,7 +85,18 @@ $(function() {
 	$("#bootstrap-table").on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function () {
 		var ids = $("#bootstrap-table").bootstrapTable("getSelections");
 		$('#toolbar .btn-del').toggleClass('disabled', !ids.length);
+		$('#toolbar .btn-edit').toggleClass('disabled', ids.length!=1);;
     });
+	// tree表格树 展开/折叠
+	var expandFlag = false;
+	$("#expandAllBtn").click(function() {
+	    if (expandFlag) {
+	        $('#bootstrap-table').bootstrapTreeTable('expandAll');
+	    } else {
+	        $('#bootstrap-table').bootstrapTreeTable('collapseAll');
+	    }
+	    expandFlag = expandFlag ? false: true;
+	})
 });
 
 /** 创建选项卡 */

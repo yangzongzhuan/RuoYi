@@ -32,8 +32,11 @@
 			</div>
 			
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-		        <a class="btn btn-primary" onclick="$.operate.addFull()" shiro:hasPermission="system:notice:add">
+		        <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="system:notice:add">
 		            <i class="fa fa-plus"></i> 新增
+		        </a>
+		        <a class="btn btn-primary btn-edit disabled" onclick="$.operate.editFull()" shiro:hasPermission="system:notice:edit">
+		            <i class="fa fa-edit"></i> 修改
 		        </a>
 		        <a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:notice:remove">
 		            <i class="fa fa-remove"></i> 删除

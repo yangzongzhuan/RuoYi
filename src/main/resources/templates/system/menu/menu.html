@@ -29,8 +29,14 @@
 			</div>
                 
             <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-		        <a class="btn btn-primary" onclick="$.operate.add(0)" shiro:hasPermission="system:menu:add">
-                    <i class="fa fa-plus"></i> 添加
+		        <a class="btn btn-success" onclick="$.operate.add(0)" shiro:hasPermission="system:menu:add">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
+                <a class="btn btn-primary" onclick="$.operate.editTree()" shiro:hasPermission="system:menu:edit">
+		            <i class="fa fa-edit"></i> 修改
+		        </a>
+                <a class="btn btn-info" id="expandAllBtn">
+                    <i class="fa fa-exchange"></i> 展开/折叠
                 </a>
 	        </div>
        		 <div class="col-sm-12 select-table table-striped">
@@ -58,6 +64,10 @@
 		        removeUrl: prefix + "/remove/{id}",
 		        modalName: "菜单",
 		        columns: [{
+                    field: 'selectItem', 
+                    radio: true
+                 },
+                 {
 		            title: '菜单名称',
 		            field: 'menuName',
 		            width: '20%',
@@ -73,19 +83,19 @@
 		            field: 'orderNum',
 		            title: '排序',
 		            width: '10%',
-		            align: "center"
+		            align: "left"
 		        },
 		        {
 		            field: 'url',
 		            title: '请求地址',
 		            width: '15%',
-		            align: "center"
+		            align: "left"
 		        },
 		        {
 		            title: '类型',
 		            field: 'menuType',
 		            width: '10%',
-		            align: "center",
+		            align: "left",
 		            formatter: function(value, item, index) {
 		                if (item.menuType == 'M') {
 		                    return '<span class="label label-success">目录</span>';
@@ -102,7 +112,7 @@
 		            field: 'visible',
 		            title: '可见',
 		            width: '10%',
-		            align: "center",
+		            align: "left",
 		            formatter: function(value, row, index) {
 		            	return $.table.selectDictLabel(datas, row.visible);
 		            }
@@ -111,12 +121,12 @@
 		            field: 'perms',
 		            title: '权限标识',
 		            width: '15%',
-		            align: "center",
+		            align: "left",
 		        },
 		        {
 		            title: '操作',
 		            width: '20%',
-		            align: "center",
+		            align: "left",
 		            formatter: function(value, row, index) {
 		                var actions = [];
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.menuId + '\')"><i class="fa fa-edit"></i>编辑</a> ');

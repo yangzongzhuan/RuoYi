@@ -132,14 +132,15 @@
             init: function(options) {
                 $.table._option = options;
                 var treeTable = $('#bootstrap-table').bootstrapTreeTable({
-        		    code : options.id,             // 用于设置父子关系
-        	        parentCode : options.parentId, // 用于设置父子关系
+                	id : options.id,               // 用于设置父子关系
+        		    parentId : options.parentId,   // 用于设置父子关系
         	    	type: 'get',                   // 请求方式（*）
         	        url: options.url,              // 请求后台的URL（*）
         	        ajaxParams : {},               // 请求数据的ajax的data属性
-        			expandColumn : '0',            // 在哪一列上面显示展开按钮
+        			expandColumn : '1',            // 在哪一列上面显示展开按钮
         			striped : false,               // 是否各行渐变色
         			bordered : true,               // 是否显示边框
+        			toolbar: '#toolbar',           // 指定工作栏
         			expandAll : $.common.visible(options.expandAll), // 是否全部展开
         	        columns: options.columns
         	    });
@@ -462,8 +463,24 @@
             },
             // 修改信息
             edit: function(id) {
-            	var url = $.table._option.updateUrl.replace("{id}", id);
+            	var url = "/404.html";
+            	if ($.common.isNotEmpty(id)) {
+            	    url = $.table._option.updateUrl.replace("{id}", id);
+            	} else {
+            	    var id = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
+            	    url = $.table._option.updateUrl.replace("{id}", id);
+            	}
             	$.modal.open("修改" + $.table._option.modalName, url);
+            },
+            // 工具栏表格树修改
+            editTree: function() {
+            	var row = $('#bootstrap-table').bootstrapTreeTable('getSelections')[0];
+        		if ($.common.isEmpty(row)) {
+        			$.modal.alertWarning("请至少选择一条记录");
+        			return;
+        		}
+                var url = $.table._option.updateUrl.replace("{id}", row[$.table._option.id]);
+                $.modal.open("修改" + $.table._option.modalName, url);
             },
             // 添加信息 全屏
             addFull: function(id) {
@@ -472,7 +489,13 @@
             },
             // 修改信息 全屏
             editFull: function(id) {
-            	var url = $.table._option.updateUrl.replace("{id}", id);
+            	var url = "/404.html";
+            	if ($.common.isNotEmpty(id)) {
+            	    url = $.table._option.updateUrl.replace("{id}", id);
+            	} else {
+            	    var row = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
+            	    url = $.table._option.updateUrl.replace("{id}", row);
+            	}
             	$.modal.openFull("修改" + $.table._option.modalName, url);
             },
             // 保存信息
