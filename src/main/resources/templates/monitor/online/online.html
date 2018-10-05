@@ -40,7 +40,7 @@
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
 		var forceFlag = [[${@permission.hasPermi('monitor:online:forceLogout')}]];
-		var prefix = ctx + "monitor/online"
+		var prefix = ctx + "monitor/online";
 
 		$(function() {
 		    var options = {

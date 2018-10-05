@@ -56,7 +56,7 @@
 	<script th:inline="javascript">
 		var removeFlag = [[${@permission.hasPermi('monitor:job:remove')}]];
 		var datas = [[${@dict.getType('sys_job_status')}]];
-		var prefix = ctx + "monitor/jobLog"
+		var prefix = ctx + "monitor/jobLog";
 
 		$(function() {
 		    var options = {

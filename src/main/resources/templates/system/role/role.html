@@ -63,7 +63,7 @@
 		var editFlag = [[${@permission.hasPermi('system:role:edit')}]];
 		var removeFlag = [[${@permission.hasPermi('system:role:remove')}]];
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
-		var prefix = ctx + "system/role"
+		var prefix = ctx + "system/role";
 		
 
 		$(function() {
@@ -118,7 +118,7 @@
 		            formatter: function(value, row, index) {
 		                var actions = [];
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.roleId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-		                actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '" href="#" onclick="rule(\'' + row.roleId + '\')"><i class="fa fa-check-square-o"></i>权限</a> ');
+		                actions.push('<a class="btn btn-primary btn-xs ' + editFlag + '" href="#" onclick="rule(\'' + row.roleId + '\')"><i class="fa fa-check-square-o"></i>数据权限</a> ');
 		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.roleId + '\')"><i class="fa fa-remove"></i>删除</a>');
 		                return actions.join('');
 		            }

@@ -652,7 +652,7 @@
         ajaxParams: {},          // 请求数据的ajax的data属性
         expandColumn: 0,         // 在哪一列上面显示展开按钮
         expandAll: false,        // 是否全部展开
-        expandFirst: false,       // 是否默认第一级展开--expandAll为false时生效
+        expandFirst: true,       // 是否默认第一级展开--expandAll为false时生效
         striped: false,          // 是否各行渐变色
         bordered: true,          // 是否显示边框
         hover: true,             // 是否鼠标悬停

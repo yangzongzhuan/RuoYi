@@ -56,7 +56,7 @@
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
 	    var datas = [[${@dict.getType('sys_common_status')}]];
-		var prefix = ctx + "monitor/logininfor"
+		var prefix = ctx + "monitor/logininfor";
 	
 		$(function() {
 		    var options = {

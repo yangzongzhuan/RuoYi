@@ -50,6 +50,8 @@
     <script th:src="@{/ajax/libs/summernote/summernote.min.js}"></script>
     <script th:src="@{/ajax/libs/summernote/summernote-zh-CN.js}"></script>
     <script type="text/javascript">
+        var prefix = ctx + "system/notice";
+    
 	    $(function() {
 		    $('.summernote').summernote({
 				height : '220px',
@@ -59,7 +61,6 @@
 		    $('#editor').code(content);
 	    });
 	    
-		var prefix = ctx + "system/notice"
 		$("#form-notice-edit").validate({
 			rules:{
 				xxxx:{
