@@ -54,14 +54,14 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-        
-		<!-- 通用工具-->
-		<dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-common</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
 		
+		<!-- swagger2-UI-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+        
 		<!-- 核心模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
@@ -69,13 +69,6 @@
             <version>${ruoyi.version}</version>
         </dependency>
 		
-		<!-- 系统模块-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-        
         <!-- 定时任务-->
         <dependency>
             <groupId>com.ruoyi</groupId>

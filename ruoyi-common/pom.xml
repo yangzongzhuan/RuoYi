@@ -64,6 +64,7 @@
 			<version>${poi.version}</version>
 		</dependency>
 		
+		<!-- yml解析器 -->
 		<dependency>
 		    <groupId>org.yaml</groupId>
 		    <artifactId>snakeyaml</artifactId>
