@@ -21,19 +21,7 @@
 	</properties>
 
     <dependencies>
-        
-		<!-- SpringBoot Web容器 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        
-		<!-- SpringBoot集成thymeleaf模板 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        
+
         <!-- spring-boot-devtools -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -54,42 +42,15 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-        
-		<!-- 通用工具-->
-		<dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-common</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-		
+
 		<!-- 核心模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-framework</artifactId>
             <version>${ruoyi.version}</version>
-        </dependency>
-		
-		<!-- 系统模块-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
-            <version>${ruoyi.version}</version>
+
         </dependency>
         
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-quartz</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-        
-        <!-- 代码生成-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-generator</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-		
     </dependencies>
 
     <build>

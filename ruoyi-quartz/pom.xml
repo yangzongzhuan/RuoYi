@@ -16,13 +16,6 @@
 	</description>
 
     <dependencies>
-   
-        <!--Spring框架基本的核心工具-->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-		</dependency>
-		
 		<!-- 定时任务 -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
@@ -34,7 +27,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<!-- 通用工具-->
         <dependency>
             <groupId>com.ruoyi</groupId>
