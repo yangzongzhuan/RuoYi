@@ -10,9 +10,9 @@ http://www.zi-han.net/theme/hplus
 
 http://webapplayers.com/inspinia_admin-v2.7.1
 
-阿里云优惠活动（2CPU 4GRAM 1M带宽 40G高效云盘）：https://promotion.aliyun.com/ntms/act/vm/aliyun-group/buy.html?group=BphATfDhsQ
+> RuoYi从3.0开始，进行模块拆分，将原先的单应用转变为多模块，如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  
 
-云产品通用1000元代金券，可叠加官网常规优惠使用 ：https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof
+> 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)
 
 ## 内置功能
 

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>若依介绍</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+</head>
+
+<body class="gray-bg">
+    <div class="row  border-bottom white-bg dashboard-header">
+        <div class="col-sm-12">
+            <blockquote class="text-warning" style="font-size:14px">
+                高性能云服务器2折起
+                <br><a target="_blank" href="https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=brki8iof">https://promotion.aliyun.com/ntms/act/qwbk.html?userCode=brki8iof</a>
+                <br>云产品通用代金券，可叠加官网常规优惠使用
+                <br><a target="_blank" href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof">https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof</a>…
+                <h4 class="text-danger">限时活动推广。</h4>
+            </blockquote>
+
+            <hr>
+        </div>
+        <div class="col-sm-3">
+            <h2>Hello,Guest</h2>
+            <small>移动设备访问请扫描以下二维码：</small>
+            <br>
+            <br>
+            <img th:src="@{/img/qr_code.png}" width="100%" style="max-width:264px;">
+            <br>
+        </div>
+        <div class="col-sm-5">
+            <h2>若依后台管理框架</h2>
+            <p>一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了若依管理系统。，她可以用于所有的Web应用程序，如<b>网站管理后台</b>，<b>网站会员中心</b>，<b>CMS</b>，<b>CRM</b>，<b>OA</b>等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。</p>
+            <p>
+                <b>当前版本：</b><span>v[[${version}]]</span>
+            </p>
+            <p>
+                <span class="label label-warning">&yen;免费开源</span>
+            </p>
+            <br>
+            <p>
+                <a class="btn btn-success btn-outline" href="https://gitee.com/y_project/RuoYi" target="_blank">
+                    <i class="fa fa-cloud"> </i> 访问码云
+                </a>
+                <a class="btn btn-white btn-bitbucket" href="http://ruoyi.vip" target="_blank">
+                    <i class="fa fa-home"></i> 访问主页
+                </a>
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h4>技术选型：</h4>
+            <ol>
+                <li>核心框架：Spring Boot。</li>
+                <li>安全框架：Apache Shiro。</li>
+                <li>模板引擎：Thymeleaf。</li>
+                <li>持久层框架：MyBatis。</li>
+				<li>定时任务:Quartz。</li>
+                <li>数据库连接池：Druid。</li>
+                <li>工具类：Fastjson。</li>
+                <li>更多……</li>
+            </ol>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>联系信息</h5>
+
+                    </div>
+                    <div class="ibox-content">
+                        <p><i class="fa fa-send-o"></i> 官网：<a href="http://www.ruoyi.vip" target="_blank">http://www.ruoyi.vip</a>
+                        </p>
+                        <p><i class="fa fa-qq"></i> QQ群：<s>满1389287</s> <a href="https://jq.qq.com/?_wv=1027&k=5cHeRVW" target="_blank">1679294</a>
+                        </p>
+                        <p><i class="fa fa-weixin"></i> 微信：<a href="javascript:;">/ *若依</a>
+                        </p>
+                        <p><i class="fa fa-credit-card"></i> 支付宝：<a href="javascript:;" class="支付宝信息">/ *若依</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>更新日志</h5>
+                    </div>
+                    <div class="ibox-content no-padding">
+                        <div class="panel-body">
+                            <div class="panel-group" id="version">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v30">v3.0.0</a><code class="pull-right">2018.10.08</code>
+								   </h5>
+								</div>
+								<div id="v30" class="panel-collapse collapse in">
+									<div class="panel-body">
+									   <ol>
+											<li>升级poi到最新版3.17</li>
+											<li>导出修改临时目录绝对路径</li>
+											<li>升级laydate升级到最新版5.0.9</li>
+											<li>升级SpringBoot到最新版本2.0.5</li>
+											<li>优化开始/结束时间校验限制</li>
+											<li>重置密码参数表中获取默认值</li>
+											<li>修复头像修改显示问题</li>
+											<li>新增数据权限过滤注解</li>
+											<li>新增表格检索折叠按钮</li>
+											<li>新增清空（登录、操作、调度）日志</li>
+											<li>固定按钮位置（提交/关闭）</li>
+											<li>部门/菜单支持（展开/折叠）</li>
+											<li>部分细节调整优化</li>
+											<li>项目采用分模块</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v24">v2.4.0</a><code class="pull-right">2018.09.03</code>
+								   </h5>
+								</div>
+								<div id="v24" class="panel-collapse collapse">
+									<div class="panel-body">
+									   <ol>
+											<li>支持部门多级查询</li>
+											<li>修复菜单状态查询无效</li>
+											<li>支持IP地址开关</li>
+											<li>支持XSS开关</li>
+											<li>记录日志异步处理</li>
+											<li>字典回显样式更改为下拉框</li>
+											<li>菜单类型必填校验</li>
+											<li>修复在线用户排序报错</li>
+											<li>增加重置按钮</li>
+											<li>支持注解导入数据</li>
+											<li>支持弹层外区域关闭</li>
+											<li>备注更换为文本区域</li>
+											<li>新增角色逻辑删除</li>
+											<li>新增部门逻辑删除</li>
+											<li>支持部门数据权限</li>
+											<li>管理员默认拥有所有授权</li>
+											<li>字典数据采用分页</li>
+											<li>部分细节调整优化</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v23">v2.3.0</a><code class="pull-right">2018.08.06</code>
+									   </h5>
+									</div>
+									<div id="v23" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+										        <li>支持表格不分页开关控制</li>
+										        <li>修改字典类型同步修改字典数据</li>
+										        <li>代码生成新增修改后缀处理</li>
+										        <li>代码生成新增实体toString</li>
+										        <li>代码生成非字符串去除!=''</li>
+												<li>导出数据前加载遮罩层</li>
+												<li>部门删除校验条件修改</li>
+												<li>搜索查询下载优化</li>
+												<li>手机打开弹出层自适应</li>
+												<li>角色岗位禁用显示置灰</li>
+												<li>角色禁用不显示菜单</li>
+												<li>新增导出权限</li>
+												<li>角色权限唯一校验</li>
+												<li>岗位名称编码唯一校验</li>
+                                                <li>TreeTable优化</li>
+                                                <li>支持多数据源</li>
+												<li>其他细节优化</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+                                <div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v22">v2.2.0</a><code class="pull-right">2018.07.23</code>
+									   </h5>
+									</div>
+									<div id="v22" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+										        <li>修复批量生成代码异常问题</li>
+										        <li>修复定时器保存失败问题</li>
+										        <li>修复热部署转换问题</li>
+												<li>支持查询菜单管理，部门管理</li>
+												<li>大多数功能支持时间查询</li>
+												<li>自定义导出注解自动匹配column</li>
+												<li>新增任务执行策略</li>
+												<li>操作详细动态显示类型</li>
+												<li>支持动态回显字典数据</li>
+												<li>后台代码优化调整</li>
+												<li>其他细节优化</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+                                <div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v21">v2.1.0</a><code class="pull-right">2018.07.10</code>
+									   </h5>
+									</div>
+									<div id="v21" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+										        <li>新增登陆超时提醒</li>
+										        <li>修复定时器热部署转换问题</li>
+										        <li>修复登录验证码校验无效问题</li>
+												<li>定时任务新增立即执行一次</li>
+												<li>存在字典数据不允许删除字典</li>
+												<li>字典数据支持按名称查询</li>
+												<li>代码生成增加日志注解&表格优化</li>
+												<li>修复用户逻辑删除后能登录问题</li>
+												<li>表格支持多字段动态排序</li>
+												<li>支持三级菜单显示</li>
+												<li>新增ry.sh启动程序脚本</li>
+												<li>其他细节优化</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+                            	<div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v20">v2.0.0</a><code class="pull-right">2018.07.02</code>
+									   </h5>
+									</div>
+									<div id="v20" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+										        <li>升级SpringBoot到最新版本2.0.3</li>
+										        <li>新增公告管理</li>
+												<li>表单校验示提体验优化</li>
+												<li>前端通用方法封装调整</li>
+												<li>前端去除js文件，合并到html</li>
+												<li>操作加载遮罩层</li>
+												<li>支持全屏模式操作</li>
+												<li>支持注解导出数据</li>
+												<li>系统支持多查询&下载</li>
+												<li>系统样式调整</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+                                <div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v16">v1.1.6</a><code class="pull-right">2018.06.04</code>
+									   </h5>
+									</div>
+									<div id="v16" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+												<li>新增用户列表部门列</li>
+												<li>新增登录地点</li>
+												<li>新增swagger</li>
+												<li>修复排序数字校验</li>
+												<li>优化头像上传文件类型限定为图片</li>
+												<li>新增XSS过滤</li>
+												<li>新增热部署提高开发效率</li>
+												<li>修复treegrid居中无效</li>
+												<li>角色多条件查询</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+                            	<div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v15">v1.1.5</a><code class="pull-right">2018.05.28</code>
+									   </h5>
+									</div>
+									<div id="v15" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+												<li>优化登录失败刷新验证码</li>
+												<li>新增用户登陆地址时间</li>
+												<li>修复ajax超时退出问题</li>
+												<li>新增html调用数据字典(若依首创)</li>
+												<li>调整系统部分样式</li>
+												<li>新增用户逻辑删除</li>
+												<li>新增管理员不允许删除修改</li>
+												<li>升级bootstrapTable到最新版本1.12.1</li>
+												<li>升级layer到最新版本3.1.1</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							    <div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v14">v1.1.4</a><code class="pull-right">2018.05.20</code>
+									   </h5>
+									</div>
+									<div id="v14" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+												<li>新增参数管理</li>
+												<li>修复头像上传bug</li>
+												<li>手机邮箱唯一校验</li>
+												<li>支持手机邮箱登录</li>
+												<li>代码生成优化</li>
+												<li>支持模糊查询</li>
+												<li>支持切换主题皮肤</li>
+												<li>修改权限即时生效</li>
+												<li>修复页签Tab关闭问题</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+									   <h5 class="panel-title">
+										   <a data-toggle="collapse" data-parent="#version" href="#v13">v1.1.3</a><code class="pull-right">2018.05.14</code>
+									   </h5>
+									</div>
+									<div id="v13" class="panel-collapse collapse">
+										<div class="panel-body">
+										   <ol>
+												<li>新增验证码（数组计算、字符验证）</li>
+												<li>新增cookie记住我</li>
+												<li>新增头像上传</li>
+												<li>用户名密码长度限制</li>
+												<li>通用字段提取</li>
+												<li>支持自定义条件查询</li>
+												<li>部门名称必填、时间格式调整</li>
+												<li>其他细节优化</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v12">v1.1.2</a><code class="pull-right">2018.05.07</code>
+										</h5>
+                                    </div>
+                                    <div id="v12" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增个人信息修改</li>
+												<li>菜单存在子菜单不允许删除</li>
+												<li>菜单分配角色不允许删除</li>
+												<li>角色分配人员不允许删除</li>
+												<li>岗位使用后不允许删除</li>
+												<li>保证用户的数据完整性加入事物</li>
+												<li>新增环境使用手册、数据建模</li>
+												<li>Thymeleaf升级到3.0</li>
+												<li>支持非ROOT部署</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v11">v1.1.1</a><code class="pull-right">2018.04.23</code>
+										</h5>
+                                    </div>
+                                    <div id="v11" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增表单构建器</li>
+												<li>代码生成优化</li>
+												<li>支持新增主部门</li>
+												<li>支持选择上级部门、上级菜单</li>
+												<li>新增字典管理单条删除</li>
+												<li>优化一些其他细节</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v10">v1.1.0</a><code class="pull-right">2018.04.20</code>
+										</h5>
+                                    </div>
+                                    <div id="v10" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>支持密码盐</li>
+												<li>支持新增主目录</li>
+												<li>支持批量生成代码</li>
+												<li>支持表格导出(csv、txt、doc、excel)</li>
+												<li>自动适应宽高模式窗体</li>
+												<li>重复校验(角色名、菜单名、部门名)</li>
+												<li>优化一些其他细节</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v09">v1.0.9</a><code class="pull-right">2018.04.14</code>
+										</h5>
+                                    </div>
+                                    <div id="v09" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增代码生成(生成包括 java、html、js、xml、sql)</li>
+												<li>新增按钮权限控制隐藏(若依首创)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v08">v1.0.8</a><code class="pull-right">2018.04.08</code>
+										</h5>
+                                    </div>
+                                    <div id="v08" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增定时任务(新增、修改、删除、查询、启动/暂停)</li>
+												<li>新增调度日志(查询、删除)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            	<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v07">v1.0.7</a><code class="pull-right">2018.04.04</code>
+										</h5>
+                                    </div>
+                                    <div id="v07" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增岗位管理(新增、修改、删除、查询)</li>
+												<li>优化用户管理，菜单管理部分细节</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v06">v1.0.6</a><code class="pull-right">2018.03.15</code>
+										</h5>
+                                    </div>
+                                    <div id="v06" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增字典管理(新增、删除、修改、查询、数据选择)</li>
+												<li>新增用户密码重置</li>
+												<li>优化一些其他细节</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v05">v1.0.5</a><code class="pull-right">2018.03.12</code>
+										</h5>
+                                    </div>
+                                    <div id="v05" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增菜单管理(新增、删除、修改、查询、图标选择)</li>
+												<li>部门管理优化(添加责任人、联系电话、邮箱、修改者)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v04">v1.0.4</a><code class="pull-right">2018.03.11</code>
+										</h5>
+                                    </div>
+                                    <div id="v04" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增角色管理(新增、删除、修改、查询、菜单选择)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v03">v1.0.3</a><code class="pull-right">2018.03.08</code>
+										</h5>
+                                    </div>
+                                    <div id="v03" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增用户管理(新增、删除、修改、查询、部门选择)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            	<div class="panel panel-default">
+									<div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v02">v1.0.2</a><code class="pull-right">2018.03.04</code>
+										</h5>
+                                    </div>
+                                    <div id="v02" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增部门管理 (新增、删除、修改、查询)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+											<a data-toggle="collapse" data-parent="#version" href="#v01">v1.0.1</a><code class="pull-right">2018.03.03</code>
+										</h5>
+                                    </div>
+                                    <div id="v01" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                            	<li>新增在线用户 (批量强退、单条强退、查询)</li>
+                                                <li>新增登录日志 (批量删除、查询)</li>
+												<li>新增操作日志 (批量删除、查询、详细)</li>
+												<li>新增数据监控 (监控DB池连接和SQL的执行)</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#version" href="#v00">v1.0.0</a><code class="pull-right">2018.03.01</code>
+                                        </h4>
+                                    </div>
+                                    <div id="v00" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ol>
+                                                <li>若依管理系统正式发布。</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>捐赠</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="alert alert-warning">
+                            	请作者喝杯咖啡。
+                        </div>
+                        <p id="pay-qrcode">
+                            <a href="javascript:;"><img th:src="@{/img/pay.png}" width="100%" alt="请使用手机支付宝或者微信扫码支付">
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

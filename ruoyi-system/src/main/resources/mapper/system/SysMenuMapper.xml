@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysMenuMapper">
+
+	<resultMap type="SysMenu" id="SysMenuResult">
+		<id     property="menuId"         column="menu_id"        />
+		<result property="menuName"       column="menu_name"      />
+		<result property="parentName"     column="parent_name"    />
+		<result property="parentId"       column="parent_id"      />
+		<result property="orderNum"       column="order_num"      />
+		<result property="url"            column="url"            />
+		<result property="menuType"       column="menu_type"      />
+		<result property="visible"        column="visible"        />
+		<result property="perms"          column="perms"          />
+		<result property="icon"           column="icon"           />
+		<result property="createBy"       column="create_by"      />
+		<result property="createTime"     column="create_time"    />
+		<result property="updateTime"     column="update_time"    />
+		<result property="updateBy"       column="update_by"      />
+		<result property="remark"         column="remark"         />
+	</resultMap>
+	
+	<sql id="selectMenuVo">
+        select menu_id, menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time 
+		from sys_menu
+    </sql>
+    
+    <select id="selectMenusByUserId" parameterType="Long" resultMap="SysMenuResult">
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms , m.menu_type, m.icon, m.order_num, m.create_time
+		from sys_menu m
+			 left join sys_role_menu rm on m.menu_id = rm.menu_id
+			 left join sys_user_role ur on rm.role_id = ur.role_id
+			 LEFT JOIN sys_role ro on ur.role_id = ro.role_id
+		where ur.user_id = #{userId} and m.menu_type in ('M', 'C') and m.visible = 0  AND ro.status = 0
+		order by m.order_num
+	</select>
+
+	<select id="selectMenuNormalAll" resultMap="SysMenuResult">
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms , m.menu_type, m.icon, m.order_num, m.create_time
+		from sys_menu m
+		where m.menu_type in ('M', 'C') and m.visible = 0
+		order by m.order_num
+	</select>
+	
+	<select id="selectMenuAll" resultMap="SysMenuResult">
+		<include refid="selectMenuVo"/>
+	</select>
+	
+	<select id="selectPermsByUserId" parameterType="Long" resultType="String">
+		select distinct m.perms
+		from sys_menu m
+			 left join sys_role_menu rm on m.menu_id = rm.menu_id
+			 left join sys_user_role ur on rm.role_id = ur.role_id
+		where ur.user_id = #{userId}
+	</select>
+	
+	<select id="selectMenuTree" parameterType="Long" resultType="String">
+		select concat(m.menu_id, m.perms) as perms
+		from sys_menu m
+			left join sys_role_menu rm on m.menu_id = rm.menu_id
+		where rm.role_id = #{roleId}
+		order by m.parent_id, m.order_num
+	</select>
+	
+	<select id="selectMenuList" parameterType="SysMenu" resultMap="SysMenuResult">
+        <include refid="selectMenuVo"/>
+        <where>
+			<if test="menuName != null and menuName != ''">
+				AND menu_name like concat('%', #{menuName}, '%')
+			</if>
+			<if test="visible != null and visible != ''">
+				AND visible = #{visible}
+			</if>
+		</where>
+    </select>
+	
+	<delete id="deleteMenuById" parameterType="Long">
+	    delete from sys_menu where menu_id = #{menuId} or parent_id = #{menuId}
+	</delete>
+	
+	<select id="selectMenuById" parameterType="Long" resultMap="SysMenuResult">
+		SELECT t.menu_id, t.parent_id, t.menu_name, t.order_num, t.url, t.menu_type, t.visible, t.perms, t.icon, t.remark,
+			(SELECT menu_name FROM sys_menu WHERE menu_id = t.parent_id) parent_name
+		FROM sys_menu t
+		where t.menu_id = #{menuId}
+	</select>
+	
+	<select id="selectCountMenuByParentId" resultType="Integer">
+	    select count(1) from sys_menu where parent_id=#{menuId}  
+	</select>
+	
+	<select id="checkMenuNameUnique" parameterType="SysMenu" resultMap="SysMenuResult">
+		<include refid="selectMenuVo"/>
+		where menu_name=#{menuName} and parent_id = #{parentId}
+	</select>
+	
+	<update id="updateMenu" parameterType="SysMenu">
+ 		update sys_menu
+ 		<set>
+ 			<if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
+ 			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
+ 			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+ 			<if test="url != null and url != ''">url = #{url},</if>
+ 			<if test="menuType != null and menuType != ''">menu_type = #{menuType},</if>
+ 			<if test="visible != null">visible = #{visible},</if>
+ 			<if test="perms !=null and perms != ''">perms = #{perms},</if>
+ 			<if test="icon !=null and icon != ''">icon = #{icon},</if>
+ 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where menu_id = #{menuId}
+	</update>
+ 	
+ 	<insert id="insertMenu" parameterType="SysMenu">
+ 		insert into sys_menu(
+ 			<if test="menuId != null and menuId != 0">menu_id,</if>
+ 			<if test="parentId != null and parentId != 0">parent_id,</if>
+ 			<if test="menuName != null and menuName != ''">menu_name,</if>
+ 			<if test="orderNum != null and orderNum != ''">order_num,</if>
+ 			<if test="url != null and url != ''">url,</if>
+ 			<if test="menuType != null and menuType != ''">menu_type,</if>
+ 			<if test="visible != null">visible,</if>
+ 			<if test="perms !=null and perms != ''">perms,</if>
+ 			<if test="icon != null and icon != ''">icon,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+ 			create_time
+ 		)values(
+ 			<if test="menuId != null and menuId != 0">#{menuId},</if>
+ 			<if test="parentId != null and parentId != 0">#{parentId},</if>
+ 			<if test="menuName != null and menuName != ''">#{menuName},</if>
+ 			<if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+ 			<if test="url != null and url != ''">#{url},</if>
+ 			<if test="menuType != null and menuType != ''">#{menuType},</if>
+ 			<if test="visible != null">#{visible},</if>
+ 			<if test="perms !=null and perms != ''">#{perms},</if>
+ 			<if test="icon != null and icon != ''">#{icon},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+ 			sysdate()
+ 		)
+	</insert>
+	
+</mapper> 
