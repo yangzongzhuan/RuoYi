@@ -173,9 +173,12 @@ public class SysDeptServiceImpl implements ISysDeptService
     public int updateDept(SysDept dept)
     {
         SysDept info = deptMapper.selectDeptById(dept.getParentId());
-        String ancestors = info.getAncestors() + "," + dept.getParentId();
-        dept.setAncestors(ancestors);
-        updateDeptChildren(dept.getDeptId(), ancestors);
+        if (StringUtils.isNotNull(info))
+        {
+            String ancestors = info.getAncestors() + "," + dept.getParentId();
+            dept.setAncestors(ancestors);
+            updateDeptChildren(dept.getDeptId(), ancestors);
+        }
         return deptMapper.updateDept(dept);
     }
 

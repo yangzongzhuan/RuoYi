@@ -31,7 +31,7 @@
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-								<a class="btn btn-success btn-rounded btn-sm" onclick="$.table.exportExcel()" shiro:hasPermission="monitor:logininfor:export"><i class="fa fa-download"></i>&nbsp;导出</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
@@ -45,6 +45,9 @@
 		        <a class="btn btn-danger" onclick="$.operate.clean()" shiro:hasPermission="monitor:logininfor:remove">
 	                <i class="fa fa-trash"></i> 清空
 	            </a>
+	            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="monitor:logininfor:export">
+		            <i class="fa fa-download"></i> 导出
+		        </a>
 	        </div>
         
 	        <div class="col-sm-12 select-table table-striped">

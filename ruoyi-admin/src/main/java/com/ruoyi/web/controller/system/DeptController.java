@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
@@ -79,7 +80,12 @@ public class DeptController extends BaseController
     @GetMapping("/edit/{deptId}")
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
-        mmap.put("dept", deptService.selectDeptById(deptId));
+        SysDept dept = deptService.selectDeptById(deptId);
+        if (StringUtils.isNotNull(dept) && 100L == deptId)
+        {
+            dept.setParentName("无");
+        }
+        mmap.put("dept", dept);
         return prefix + "/edit";
     }
 

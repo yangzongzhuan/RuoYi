@@ -164,8 +164,7 @@
         	if(menuId > 0) {
         		var url = prefix + "/selectMenuTree/" + menuId;
         		$.modal.open("选择菜单", url, '380', '380');
-        	}
-        	else {
+        	} else {
         		$.modal.alertError("主菜单不能选择");
         	}
         }
@@ -177,13 +176,11 @@
         		var options = {
        				title: '菜单选择',
        				width: "380",
-       				height: "380",
        				url: url,
        				callBack: doSubmit
        			};
        			$.modal.openOptions(options);
-        	}
-        	else {
+        	} else {
         		$.modal.alertError("主菜单不能选择");
         	}
 		}
