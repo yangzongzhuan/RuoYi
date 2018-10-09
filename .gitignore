@@ -27,7 +27,7 @@ target/
 
 ### NetBeans ###
 nbproject/private/
-build/
+build/*
 nbbuild/
 dist/
 nbdist/
@@ -37,3 +37,7 @@ nbdist/
 # Others
 *.log
 *.xml.versionsBackup
+
+!*/build/*.java
+!*/build/*.html
+!*/build/*.xml
