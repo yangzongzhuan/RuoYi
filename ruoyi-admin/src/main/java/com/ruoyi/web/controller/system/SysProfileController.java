@@ -30,9 +30,9 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/user/profile")
-public class ProfileController extends BaseController
+public class SysProfileController extends BaseController
 {
-    private static final Logger log = LoggerFactory.getLogger(ProfileController.class);
+    private static final Logger log = LoggerFactory.getLogger(SysProfileController.class);
 
     private String prefix = "system/user/profile";
 

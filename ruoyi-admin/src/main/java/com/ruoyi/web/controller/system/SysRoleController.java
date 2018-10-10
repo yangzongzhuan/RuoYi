@@ -28,7 +28,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/role")
-public class RoleController extends BaseController
+public class SysRoleController extends BaseController
 {
     private String prefix = "system/role";
 

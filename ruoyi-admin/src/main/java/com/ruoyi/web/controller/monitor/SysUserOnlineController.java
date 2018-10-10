@@ -28,7 +28,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/monitor/online")
-public class UserOnlineController extends BaseController
+public class SysUserOnlineController extends BaseController
 {
     private String prefix = "monitor/online";
 

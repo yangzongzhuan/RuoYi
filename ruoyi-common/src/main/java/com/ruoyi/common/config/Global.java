@@ -102,8 +102,7 @@ public class Global
      */
     public static Boolean isAddressEnabled()
     {
-        String value = getConfig("ruoyi.addressEnabled");
-        return Boolean.TRUE.equals(value);
+        return Boolean.valueOf(getConfig("ruoyi.addressEnabled"));
     }
 
     /**

@@ -468,6 +468,10 @@
             	    url = $.table._option.updateUrl.replace("{id}", id);
             	} else {
             	    var id = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
+            	    if (id.length == 0) {
+            			$.modal.alertWarning("请至少选择一条记录");
+            			return;
+            		}
             	    url = $.table._option.updateUrl.replace("{id}", id);
             	}
             	$.modal.open("修改" + $.table._option.modalName, url);
@@ -475,7 +479,7 @@
             // 工具栏表格树修改
             editTree: function() {
             	var row = $('#bootstrap-table').bootstrapTreeTable('getSelections')[0];
-        		if ($.common.isEmpty(row)) {
+            	if ($.common.isEmpty(row)) {
         			$.modal.alertWarning("请至少选择一条记录");
         			return;
         		}

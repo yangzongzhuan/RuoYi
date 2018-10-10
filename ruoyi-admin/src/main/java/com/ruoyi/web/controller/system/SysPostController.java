@@ -27,7 +27,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/post")
-public class PostController extends BaseController
+public class SysPostController extends BaseController
 {
     private String prefix = "system/post";
 

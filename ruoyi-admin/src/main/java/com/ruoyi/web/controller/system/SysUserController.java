@@ -32,7 +32,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/user")
-public class UserController extends BaseController
+public class SysUserController extends BaseController
 {
     private String prefix = "system/user";
 

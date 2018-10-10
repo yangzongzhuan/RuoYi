@@ -23,7 +23,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/captcha")
-public class CaptchaController extends BaseController
+public class SysCaptchaController extends BaseController
 {
     @Resource(name = "captchaProducer")
     private Producer captchaProducer;

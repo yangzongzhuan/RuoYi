@@ -26,7 +26,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/notice")
-public class NoticeController extends BaseController
+public class SysNoticeController extends BaseController
 {
     private String prefix = "system/notice";
 

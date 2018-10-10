@@ -27,7 +27,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/monitor/job")
-public class JobController extends BaseController
+public class SysJobController extends BaseController
 {
     private String prefix = "monitor/job";
 

@@ -28,7 +28,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/dept")
-public class DeptController extends BaseController
+public class SysDeptController extends BaseController
 {
     private String prefix = "system/dept";
 

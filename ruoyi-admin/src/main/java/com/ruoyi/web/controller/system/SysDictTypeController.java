@@ -27,7 +27,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/dict")
-public class DictTypeController extends BaseController
+public class SysDictTypeController extends BaseController
 {
     private String prefix = "system/dict/type";
 

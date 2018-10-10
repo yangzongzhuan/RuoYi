@@ -27,7 +27,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/menu")
-public class MenuController extends BaseController
+public class SysMenuController extends BaseController
 {
     private String prefix = "system/menu";
 

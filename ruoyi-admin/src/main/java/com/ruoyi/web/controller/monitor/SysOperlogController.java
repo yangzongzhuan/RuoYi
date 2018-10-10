@@ -26,7 +26,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/monitor/operlog")
-public class OperlogController extends BaseController
+public class SysOperlogController extends BaseController
 {
     private String prefix = "monitor/operlog";
 

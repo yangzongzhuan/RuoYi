@@ -24,7 +24,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/monitor/logininfor")
-public class LogininforController extends BaseController
+public class SysLogininforController extends BaseController
 {
     private String prefix = "monitor/logininfor";
 

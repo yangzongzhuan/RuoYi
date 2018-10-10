@@ -17,7 +17,7 @@ import com.ruoyi.web.core.base.BaseController;
  * @author ruoyi
  */
 @Controller
-public class IndexController extends BaseController
+public class SysIndexController extends BaseController
 {
     @Autowired
     private ISysMenuService menuService;

@@ -27,7 +27,7 @@ import com.ruoyi.web.core.base.BaseController;
  */
 @Controller
 @RequestMapping("/system/config")
-public class ConfigController extends BaseController
+public class SysConfigController extends BaseController
 {
     private String prefix = "system/config";
 

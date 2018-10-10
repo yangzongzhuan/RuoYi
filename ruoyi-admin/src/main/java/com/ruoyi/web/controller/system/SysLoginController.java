@@ -21,7 +21,7 @@ import com.ruoyi.web.core.base.BaseController;
  * @author ruoyi
  */
 @Controller
-public class LoginController extends BaseController
+public class SysLoginController extends BaseController
 {
     @GetMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response)

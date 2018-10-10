@@ -20,7 +20,7 @@ import com.ruoyi.generator.domain.TableInfo;
 public class GenUtils
 {
     /** 项目空间路径 */
-    private static final String PROJECT_PATH = "main/java/com/ruoyi/project";
+    private static final String PROJECT_PATH = "main/java/com/ruoyi";
 
     /** mybatis空间路径 */
     private static final String MYBATIS_PATH = "main/resources/mybatis";
@@ -71,7 +71,7 @@ public class GenUtils
         velocityContext.put("classname", table.getClassname());
         velocityContext.put("moduleName", GenUtils.getModuleName(packageName));
         velocityContext.put("columns", table.getColumns());
-        velocityContext.put("package", packageName + "." + table.getClassname());
+        velocityContext.put("package", packageName);
         velocityContext.put("author", Global.getAuthor());
         velocityContext.put("datetime", DateUtils.getDate());
         return velocityContext;
@@ -85,16 +85,16 @@ public class GenUtils
     public static List<String> getTemplates()
     {
         List<String> templates = new ArrayList<String>();
-        templates.add("templates/vm/java/domain.java.vm");
-        templates.add("templates/vm/java/Mapper.java.vm");
-        templates.add("templates/vm/java/Service.java.vm");
-        templates.add("templates/vm/java/ServiceImpl.java.vm");
-        templates.add("templates/vm/java/Controller.java.vm");
-        templates.add("templates/vm/xml/Mapper.xml.vm");
-        templates.add("templates/vm/html/list.html.vm");
-        templates.add("templates/vm/html/add.html.vm");
-        templates.add("templates/vm/html/edit.html.vm");
-        templates.add("templates/vm/sql/sql.vm");
+        templates.add("vm/java/domain.java.vm");
+        templates.add("vm/java/Mapper.java.vm");
+        templates.add("vm/java/Service.java.vm");
+        templates.add("vm/java/ServiceImpl.java.vm");
+        templates.add("vm/java/Controller.java.vm");
+        templates.add("vm/xml/Mapper.xml.vm");
+        templates.add("vm/html/list.html.vm");
+        templates.add("vm/html/add.html.vm");
+        templates.add("vm/html/edit.html.vm");
+        templates.add("vm/sql/sql.vm");
         return templates;
     }
 
@@ -126,11 +126,6 @@ public class GenUtils
         String javaPath = PROJECT_PATH + "/" + moduleName + "/";
         String mybatisPath = MYBATIS_PATH + "/" + moduleName + "/" + className;
         String htmlPath = TEMPLATES_PATH + "/" + moduleName + "/" + classname;
-
-        if (StringUtils.isNotEmpty(classname))
-        {
-            javaPath += classname.replace(".", "/") + "/";
-        }
 
         if (template.contains("domain.java.vm"))
         {
@@ -229,6 +224,6 @@ public class GenUtils
     {
         System.out.println(StringUtils.convertToCamelCase("user_name"));
         System.out.println(replaceKeyword("岗位信息表"));
-        System.out.println(getModuleName("com.ruoyi.project.system"));
+        System.out.println(getModuleName("com.ruoyi.system"));
     }
 }
