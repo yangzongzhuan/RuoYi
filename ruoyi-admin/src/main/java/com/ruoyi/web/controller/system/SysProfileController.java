@@ -17,7 +17,9 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.framework.shiro.service.PasswordService;
 import com.ruoyi.framework.util.FileUploadUtils;
+import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysDictDataService;
 import com.ruoyi.system.service.ISysUserService;
@@ -38,6 +40,9 @@ public class SysProfileController extends BaseController
 
     @Autowired
     private ISysUserService userService;
+    
+    @Autowired
+    private PasswordService passwordService;
 
     @Autowired
     private ISysDictDataService dictDataService;
@@ -81,6 +86,8 @@ public class SysProfileController extends BaseController
     @ResponseBody
     public AjaxResult resetPwd(SysUser user)
     {
+        user.setSalt(ShiroUtils.randomSalt());
+        user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         int rows = userService.resetUserPwd(user);
         if (rows > 0)
         {
