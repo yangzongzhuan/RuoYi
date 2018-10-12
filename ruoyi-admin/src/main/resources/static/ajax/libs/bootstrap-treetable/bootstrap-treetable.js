@@ -240,32 +240,32 @@
                 item.isShow = false;
                 // 这里兼容几种常见Root节点写法
                 // 默认的几种判断
-                var _defaultRootFlag = item[options.parentId] == '0' ||
-                    item[options.parentId] == 0 ||
-                    item[options.parentId] == null ||
-                    item[options.parentId] == '';
-                if (!item[options.parentId] || (_root ? (item[options.parentId] == options.rootIdValue) : _defaultRootFlag)) {
+                var _defaultRootFlag = item[options.parentCode] == '0' ||
+                    item[options.parentCode] == 0 ||
+                    item[options.parentCode] == null ||
+                    item[options.parentCode] == '';
+                if (!item[options.parentCode] || (_root ? (item[options.parentCode] == options.rootIdValue) : _defaultRootFlag)) {
                     if (!target.data_list["_root_"]) {
                         target.data_list["_root_"] = [];
                     }
-                    if (!target.data_obj["id_" + item[options.id]]) {
+                    if (!target.data_obj["id_" + item[options.code]]) {
                         target.data_list["_root_"].push(item);
                     }
                 } else {
-                    if (!target.data_list["_n_" + item[options.parentId]]) {
-                        target.data_list["_n_" + item[options.parentId]] = [];
+                    if (!target.data_list["_n_" + item[options.parentCode]]) {
+                        target.data_list["_n_" + item[options.parentCode]] = [];
                     }
-                    if (!target.data_obj["id_" + item[options.id]]) {
-                        target.data_list["_n_" + item[options.parentId]].push(item);
+                    if (!target.data_obj["id_" + item[options.code]]) {
+                        target.data_list["_n_" + item[options.parentCode]].push(item);
                     }
                 }
-                target.data_obj["id_" + item[options.id]] = item;
+                target.data_obj["id_" + item[options.code]] = item;
             });
         }
         // 递归获取子节点并且设置子节点
         var recursionNode = function(parentNode, lv, row_id, p_id) {
             var $tbody = target.find("tbody");
-            var _ls = target.data_list["_n_" + parentNode[options.id]];
+            var _ls = target.data_list["_n_" + parentNode[options.code]];
             var $tr = renderRow(parentNode, _ls ? true : false, lv, row_id, p_id);
             $tbody.append($tr);
             if (_ls) {
@@ -307,11 +307,11 @@
                     target.hasSelectItem = true;
                     var $td = $('<td style="text-align:center;width:36px"></td>');
                     if (column.radio) {
-                        var _ipt = $('<input name="select_item" type="radio" value="' + item[options.id] + '"></input>');
+                        var _ipt = $('<input name="select_item" type="radio" value="' + item[options.code] + '"></input>');
                         $td.append(_ipt);
                     }
                     if (column.checkbox) {
-                        var _ipt = $('<input name="select_item" type="checkbox" value="' + item[options.id] + '"></input>');
+                        var _ipt = $('<input name="select_item" type="checkbox" value="' + item[options.code] + '"></input>');
                         $td.append(_ipt);
                     }
                     $tr.append($td);
@@ -441,9 +441,9 @@
         target.appendData = function(data) {
             // 下边的操作主要是为了查询时让一些没有根节点的节点显示
             $.each(data, function(i, item) {
-                var _data = target.data_obj["id_" + item[options.id]];
-                var _p_data = target.data_obj["id_" + item[options.parentId]];
-                var _c_list = target.data_list["_n_" + item[options.parentId]];
+                var _data = target.data_obj["id_" + item[options.code]];
+                var _p_data = target.data_obj["id_" + item[options.parentCode]];
+                var _c_list = target.data_list["_n_" + item[options.parentCode]];
                 var row_id = ""; //行id
                 var p_id = ""; //父行id
                 var _lv = 1; //如果没有父就是1默认显示
@@ -643,26 +643,26 @@
     };
 
     $.fn.bootstrapTreeTable.defaults = {
-        id: 'id',                // 选取记录返回的值,用于设置父子关系
-        parentId: 'parentId',    // 用于设置父子关系
-        rootIdValue: null,       // 设置根节点id值----可指定根节点，默认为null,"",0,"0"
-        data: null,              // 构造table的数据集合
-        type: "GET",             // 请求数据的ajax类型
-        url: null,               // 请求数据的ajax的url
-        ajaxParams: {},          // 请求数据的ajax的data属性
-        expandColumn: 0,         // 在哪一列上面显示展开按钮
-        expandAll: false,        // 是否全部展开
-        expandFirst: true,       // 是否默认第一级展开--expandAll为false时生效
-        striped: false,          // 是否各行渐变色
-        bordered: true,          // 是否显示边框
-        hover: true,             // 是否鼠标悬停
-        condensed: false,        // 是否紧缩表格
-        columns: [],             // 列
-        toolbar: null,           // 顶部工具条
-        height: 0,               // 表格高度
-        showTitle: true,         // 是否采用title属性显示字段内容（被formatter格式化的字段不会显示）
-        showColumns: true,       // 是否显示内容列下拉框
-        showRefresh: true,       // 是否显示刷新按钮
+        code: 'code',              // 选取记录返回的值,用于设置父子关系
+        parentCode: 'parentCode',  // 用于设置父子关系
+        rootIdValue: null,         // 设置根节点id值----可指定根节点，默认为null,"",0,"0"
+        data: null,                // 构造table的数据集合
+        type: "GET",               // 请求数据的ajax类型
+        url: null,                 // 请求数据的ajax的url
+        ajaxParams: {},            // 请求数据的ajax的data属性
+        expandColumn: 0,           // 在哪一列上面显示展开按钮
+        expandAll: false,          // 是否全部展开
+        expandFirst: true,         // 是否默认第一级展开--expandAll为false时生效
+        striped: false,            // 是否各行渐变色
+        bordered: true,            // 是否显示边框
+        hover: true,               // 是否鼠标悬停
+        condensed: false,          // 是否紧缩表格
+        columns: [],               // 列
+        toolbar: null,             // 顶部工具条
+        height: 0,                 // 表格高度
+        showTitle: true,           // 是否采用title属性显示字段内容（被formatter格式化的字段不会显示）
+        showColumns: true,         // 是否显示内容列下拉框
+        showRefresh: true,         // 是否显示刷新按钮
         expanderExpandedClass: 'glyphicon glyphicon-chevron-down', // 展开的按钮的图标
         expanderCollapsedClass: 'glyphicon glyphicon-chevron-right' // 缩起的按钮的图标
 

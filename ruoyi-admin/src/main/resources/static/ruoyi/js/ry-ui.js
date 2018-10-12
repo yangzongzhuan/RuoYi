@@ -16,12 +16,13 @@
                 $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
                 _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
+                _striped = $.common.isEmpty(options.striped) ? false : options.striped;
                 $('#bootstrap-table').bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
                     method: 'post',                                     // 请求方式（*）
                     cache: false,                                       // 是否使用缓存
-                    striped: $.common.visible(options.striped),          // 是否显示行间隔色
+                    striped: _striped,                                  // 是否显示行间隔色
                     sortable: true,                                     // 是否启用排序
                     sortStable: true,                                   // 设置为 true 将获得稳定的排序
                     sortName: _sortName,                                // 排序列名称
@@ -132,17 +133,22 @@
             // 初始化表格
             init: function(options) {
                 $.table._option = options;
+                _striped = $.common.isEmpty(options.striped) ? false : options.striped;
+                _expandColumn = $.common.isEmpty(options.expandColumn) ? '1' : options.expandColumn;
                 var treeTable = $('#bootstrap-table').bootstrapTreeTable({
-                	id : options.id,               // 用于设置父子关系
-        		    parentId : options.parentId,   // 用于设置父子关系
-        	    	type: 'get',                   // 请求方式（*）
-        	        url: options.url,              // 请求后台的URL（*）
-        	        ajaxParams : {},               // 请求数据的ajax的data属性
-        			expandColumn : '1',            // 在哪一列上面显示展开按钮
-        			striped : false,               // 是否各行渐变色
-        			bordered : true,               // 是否显示边框
-        			toolbar: '#toolbar',           // 指定工作栏
-        			expandAll : $.common.visible(options.expandAll), // 是否全部展开
+                	code: options.code,                                 // 用于设置父子关系
+        		    parentCode: options.parentCode,                     // 用于设置父子关系
+        	    	type: 'get',                                        // 请求方式（*）
+        	        url: options.url,                                   // 请求后台的URL（*）
+        	        ajaxParams: {},                                     // 请求数据的ajax的data属性
+        			expandColumn: _expandColumn,                        // 在哪一列上面显示展开按钮
+        			striped: _striped,                                  // 是否显示行间隔色
+        			bordered: true,                                     // 是否显示边框
+        			toolbar: '#toolbar',                                // 指定工作栏
+        			showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
+        			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
+        			expandAll: $.common.visible(options.expandAll),     // 是否全部展开
+        			expandFirst: $.common.visible(options.expandFirst), // 是否默认第一级展开--expandAll为false时生效
         	        columns: options.columns
         	    });
                 $._treeTable = treeTable;
@@ -439,7 +445,7 @@
             },
             // 批量删除信息
             removeAll: function() {
-        		var rows = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
+        		var rows = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
         		if (rows.length == 0) {
         			$.modal.alertWarning("请至少选择一条记录");
         			return;
@@ -468,7 +474,7 @@
             	if ($.common.isNotEmpty(id)) {
             	    url = $.table._option.updateUrl.replace("{id}", id);
             	} else {
-            	    var id = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
+            	    var id = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
             	    if (id.length == 0) {
             			$.modal.alertWarning("请至少选择一条记录");
             			return;
@@ -484,7 +490,7 @@
         			$.modal.alertWarning("请至少选择一条记录");
         			return;
         		}
-                var url = $.table._option.updateUrl.replace("{id}", row[$.table._option.id]);
+                var url = $.table._option.updateUrl.replace("{id}", row[$.table._option.uniqueId]);
                 $.modal.open("修改" + $.table._option.modalName, url);
             },
             // 添加信息 全屏
@@ -498,7 +504,7 @@
             	if ($.common.isNotEmpty(id)) {
             	    url = $.table._option.updateUrl.replace("{id}", id);
             	} else {
-            	    var row = $.common.isEmpty($.table._option.id) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.id);
+            	    var row = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
             	    url = $.table._option.updateUrl.replace("{id}", row);
             	}
             	$.modal.openFull("修改" + $.table._option.modalName, url);
