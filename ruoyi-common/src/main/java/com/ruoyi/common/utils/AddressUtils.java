@@ -20,7 +20,7 @@ public class AddressUtils
 
     public static String getRealAddressByIP(String ip)
     {
-        String address = "XX XX";
+        String address = "address disabled";
         if (Global.isAddressEnabled())
         {
             String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
