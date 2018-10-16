@@ -1,8 +1,10 @@
 package com.ruoyi.framework.manager.factory;
 
+import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.AddressUtils;
-import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.framework.util.LogUtils;
 import com.ruoyi.framework.util.ServletUtils;
@@ -15,10 +17,6 @@ import com.ruoyi.system.service.ISysOperLogService;
 import com.ruoyi.system.service.impl.SysLogininforServiceImpl;
 import com.ruoyi.system.service.impl.SysUserOnlineServiceImpl;
 import eu.bitwalker.useragentutils.UserAgent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.TimerTask;
 
 /**
  * 异步工厂（产生任务用）
@@ -74,12 +72,8 @@ public class AsyncFactory
             @Override
             public void run()
             {
-                if (IpUtils.internalIp(operLog.getOperIp())) {
-                    operLog.setOperLocation("内网IP");
-                } else {
-                    // 远程查询操作地点
-                    operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
-                }
+                // 远程查询操作地点
+                operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
                 SpringUtils.getBean(ISysOperLogService.class).insertOperlog(operLog);
             }
         };

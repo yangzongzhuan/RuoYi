@@ -20,7 +20,13 @@ public class AddressUtils
 
     public static String getRealAddressByIP(String ip)
     {
-        String address = "address disabled";
+        String address = "XX XX";
+
+        // 内网不查询
+        if (IpUtils.internalIp(ip))
+        {
+            return "内网IP";
+        }
         if (Global.isAddressEnabled())
         {
             String rspStr = HttpUtils.sendPost(IP_URL, "ip=" + ip);
