@@ -77,16 +77,16 @@
                 </executions>
             </plugin>
             <plugin>   
-                  <groupId>org.apache.maven.plugins</groupId>   
-                  <artifactId>maven-war-plugin</artifactId>   
-                  <version>3.0.0</version>   
-                  <configuration>
-                      <failOnMissingWebXml>false</failOnMissingWebXml>
-                      <warName>${artifactId}</warName>
-                  </configuration>   
+                <groupId>org.apache.maven.plugins</groupId>   
+                <artifactId>maven-war-plugin</artifactId>   
+                <version>3.0.0</version>   
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warName>${artifactId}</warName>
+                </configuration>   
 		   </plugin>   
         </plugins>
-        <finalName>ruoyi-${ruoyi.version}</finalName>
+        <finalName>${artifactId}</finalName>
     </build>
 	
 </project>
