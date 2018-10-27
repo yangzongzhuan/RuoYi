@@ -74,11 +74,26 @@
 				},
 				cronExpression:{
 					required:true,
+					remote: {
+	                    url: prefix + "/checkCronExpressionIsValid",
+	                    type: "post",
+	                    dataType: "json",
+	                    data: {
+	                        "cronExpression": function() {
+	                            return $.common.trim($("#cronExpression").val());
+	                        }
+	                    },
+	                    dataFilter: function(data, type) {
+	                    	return data;
+	                    }
+	                }
 				},
 			},
-			submitHandler:function(form){
-				$.operate.save(prefix + "/add", $('#form-job-add').serialize());
-			}
+			messages: {
+	            "cronExpression": {
+	                remote: "表达式不正确"
+	            }
+	        }
 		});
 		
 		function submitHandler() {

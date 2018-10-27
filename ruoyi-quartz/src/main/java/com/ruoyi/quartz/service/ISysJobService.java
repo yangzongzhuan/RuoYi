@@ -89,4 +89,12 @@ public interface ISysJobService
      * @return 结果
      */
     public int updateJobCron(SysJob job);
+    
+    /**
+     * 校验cron表达式是否有效
+     * 
+     * @param cronExpression 表达式
+     * @return 结果
+     */
+    public boolean checkCronExpressionIsValid(String cronExpression);
 }
