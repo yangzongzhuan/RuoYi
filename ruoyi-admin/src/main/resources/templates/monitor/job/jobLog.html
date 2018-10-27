@@ -58,7 +58,7 @@
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
 		var removeFlag = [[${@permission.hasPermi('monitor:job:remove')}]];
-		var datas = [[${@dict.getType('sys_job_status')}]];
+		var datas = [[${@dict.getType('sys_common_status')}]];
 		var prefix = ctx + "monitor/jobLog";
 
 		$(function() {
