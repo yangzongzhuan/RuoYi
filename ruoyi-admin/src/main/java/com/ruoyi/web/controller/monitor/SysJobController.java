@@ -149,4 +149,14 @@ public class SysJobController extends BaseController
         job.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(jobService.updateJobCron(job));
     }
+    
+    /**
+     * 校验cron表达式是否有效
+     */
+    @PostMapping("/checkCronExpressionIsValid")
+    @ResponseBody
+    public boolean checkCronExpressionIsValid(SysJob job)
+    {
+        return jobService.checkCronExpressionIsValid(job.getCronExpression());
+    }
 }

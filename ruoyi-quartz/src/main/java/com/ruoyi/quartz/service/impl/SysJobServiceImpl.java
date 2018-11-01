@@ -11,6 +11,7 @@ import com.ruoyi.common.support.Convert;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.mapper.SysJobMapper;
 import com.ruoyi.quartz.service.ISysJobService;
+import com.ruoyi.quartz.util.CronUtils;
 import com.ruoyi.quartz.util.ScheduleUtils;
 
 /**
@@ -204,4 +205,15 @@ public class SysJobServiceImpl implements ISysJobService
         }
         return rows;
     }
+    
+    /**
+     * 校验cron表达式是否有效
+     * 
+     * @param cronExpression 表达式
+     * @return 结果
+     */
+    public boolean checkCronExpressionIsValid(String cronExpression)
+    {
+        return CronUtils.isValid(cronExpression);
+    }   
 }
