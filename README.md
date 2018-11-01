@@ -14,6 +14,8 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 
 > 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)
 
+> 阿里云双11活动1折团 ：[点我拼团](https://m.aliyun.com/act/team1111/#/share?params=N.a4QehSDJLC.brki8iof)
+
 ## 内置功能
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
