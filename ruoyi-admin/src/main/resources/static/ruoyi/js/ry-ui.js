@@ -10,7 +10,7 @@
     	table: {
             _option: {},
             _params: {},
-            // 初始化表格
+            // 初始化表格参数
             init: function(options) {
                 $.table._option = options;
                 $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
@@ -65,7 +65,7 @@
                 	return { rows: [], total: 0 };
                 }
             },
-            // 搜索
+            // 搜索-默认第一个form
             search: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
     		    var params = $("#bootstrap-table").bootstrapTable('getOptions');
@@ -83,7 +83,7 @@
     		    }
     		    $("#bootstrap-table").bootstrapTable('refresh', params);
     		},
-    		// 下载
+    		// 下载-默认第一个form
     		exportExcel: function(formId) {
     			var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
     			$.modal.loading("正在导出数据，请稍后...");
@@ -96,20 +96,20 @@
     				$.modal.closeLoading();
     			});
     		},
-            // 刷新
+            // 刷新表格
             refresh: function() {
                 $("#bootstrap-table").bootstrapTable('refresh', {
                     url: $.table._option.url,
                     silent: true
                 });
             },
-            // 查询选中列值
+            // 查询表格指定列值
             selectColumns: function(column) {
             	return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
         	        return row[column];
         	    });
             },
-            // 查询选中首列值
+            // 查询表格首列值
             selectFirstColumns: function() {
             	return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
         	        return row[$.table._option.columns[1].field];
