@@ -19,7 +19,7 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.system.domain.SysUserOnline;
 import com.ruoyi.system.service.impl.SysUserOnlineServiceImpl;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 在线用户监控

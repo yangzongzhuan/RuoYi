@@ -15,7 +15,7 @@ import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.quartz.domain.SysJobLog;
 import com.ruoyi.quartz.service.ISysJobLogService;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 调度日志操作处理

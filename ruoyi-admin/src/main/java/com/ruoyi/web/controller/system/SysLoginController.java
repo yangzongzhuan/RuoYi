@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ServletUtils;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 登录验证
