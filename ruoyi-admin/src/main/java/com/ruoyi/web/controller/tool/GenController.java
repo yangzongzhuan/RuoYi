@@ -18,7 +18,7 @@ import com.ruoyi.common.support.Convert;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.generator.domain.TableInfo;
 import com.ruoyi.generator.service.IGenService;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 代码生成 操作处理

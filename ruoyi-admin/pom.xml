@@ -14,11 +14,7 @@
 	<description>
 	    web服务入口
 	</description>
-	
-	<properties>
-	    <pagehelper.boot.version>1.2.5</pagehelper.boot.version>
-		<swagger.version>2.7.0</swagger.version>
-	</properties>
+
 
     <dependencies>
 
@@ -27,13 +23,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional> <!-- 表示依赖不会传递 -->
-		</dependency>
-        
-        <!-- pagehelper 分页插件 -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>${pagehelper.boot.version}</version>
 		</dependency>
 
 		<!-- swagger2-->
