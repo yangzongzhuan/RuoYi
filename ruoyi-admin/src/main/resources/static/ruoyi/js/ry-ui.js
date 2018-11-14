@@ -416,22 +416,32 @@
             	$.operate.submit(url, "post", "json", data);
             },
             // 详细信息
-            detail: function(id) {
+            detail: function(id, width, height) {
             	var _url = $.common.isEmpty(id) ? $.table._option.detailUrl : $.table._option.detailUrl.replace("{id}", id);
+                var _width = $.common.isEmpty(width) ? "800" : width; 
+                var _height = $.common.isEmpty(height) ? ($(window).height() - 50) : height;
+            	//如果是移动端，就使用自适应大小弹窗
+            	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+            	    _width = 'auto';
+            	    _height = 'auto';
+            	}
             	layer.open({
             		type: 2,
-            		area: ['800px', ($(window).height() - 50) + 'px'],
+            		area: [_width + 'px', _height + 'px'],
             		fix: false,
             		//不固定
             		maxmin: true,
             		shade: 0.3,
             		title: $.table._option.modalName + "详细",
             		content: _url,
-            		btn: ['<i class="fa fa-close"></i> 关闭'],
+            		btn: '关闭',
             	    // 弹层外区域关闭
             		shadeClose: true,
-            	    cancel: function(index) {
-            	        return true;
+            		success: function(layer) {
+            			layer[0].childNodes[3].childNodes[0].attributes[0].value='layui-layer-btn1';
+            		},
+            		btn1: function(index) {
+            			layer.close(index);
             	    }
             	});
             },
