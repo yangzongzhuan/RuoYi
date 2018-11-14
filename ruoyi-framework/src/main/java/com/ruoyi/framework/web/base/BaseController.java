@@ -12,7 +12,6 @@ import com.ruoyi.framework.web.page.TableSupport;
 import com.ruoyi.system.domain.SysUser;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
 import java.util.List;
