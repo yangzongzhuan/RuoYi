@@ -402,6 +402,12 @@ $(function() {
         $('.page-tabs-content').find('.active').trigger("dblclick");
     });
     
+    // 关闭全屏
+    $('#ax_close_max').click(function(){
+    	$('#content-main').toggleClass('max');
+    	$('#ax_close_max').hide();
+    })
+    
     // 双击选项卡全屏显示
     function activeTabMax() {
         $('#content-main').toggleClass('max');
