@@ -18,6 +18,7 @@
     <link th:href="@{/ruoyi/css/ry-ui.css?v=3.0.0}" rel="stylesheet"/>
     <style type="text/css">
         .nav > li:hover .dropdown-menu {display: block;}
+        #content-main.max { height: calc(100% - 110px); overflow: hidden; width: 100%; height: 100%; left: 0px; position: absolute; top: 0px; z-index: 9998; margin: 0; }
     </style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden" th:classappend="${@config.getKey('sys.index.skinName')}">
@@ -115,6 +116,7 @@
                      <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
                      <li><a class="tabCloseOther" href="javascript:void();">关闭其他</a></li>
 					 <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
+					 <li><a class="tabMaxCurrent" href="javascript:void();">全屏显示</a></li>
                 </ul>
             </div>
             <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>

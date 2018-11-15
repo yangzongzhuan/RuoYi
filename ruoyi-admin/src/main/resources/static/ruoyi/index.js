@@ -370,7 +370,8 @@ $(function() {
     // 刷新按钮
     $('.tabReload').on('click', refreshTab);
 
-    $('.menuTabs').on('dblclick', '.menuTab', refreshTab);
+    // 双击选项卡全屏显示
+    $('.menuTabs').on('dblclick', '.menuTab', activeTabMax);
 
     // 左移按扭
     $('.tabLeft').on('click', scrollTabLeft);
@@ -396,4 +397,21 @@ $(function() {
         $('.page-tabs-content').css("margin-left", "0");
     });
     
+    // tab全屏显示
+    $('.tabMaxCurrent').on('click', function () {
+        $('.page-tabs-content').find('.active').trigger("dblclick");
+    });
+    
+    // 双击选项卡全屏显示
+    function activeTabMax() {
+        $('#content-main').toggleClass('max');
+        $('#ax_close_max').show();
+    }
+    
+    $(window).keydown(function(event) {
+        if (event.keyCode == 27) {
+            $('#content-main').removeClass('max');
+            $('#ax_close_max').hide();
+        }
+    });
 });
