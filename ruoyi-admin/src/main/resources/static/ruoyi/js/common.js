@@ -138,13 +138,15 @@ function createMenuItem(dataUrl, menuName) {
     return false;
 }
 
-/** 设置全局ajax超时处理 */
+/** 设置全局ajax处理 */
 $.ajaxSetup({
     complete: function(XMLHttpRequest, textStatus) {
-        if (textStatus == "parsererror") {
-        	$.modal.confirm("登陆超时！请重新登陆！", function() {
-        		window.location.href = ctx + "login";
-        	})
+        if (textStatus == 'timeout') {
+            $.modal.alertWarning("服务器超时，请稍后再试！");
+            $.modal.closeLoading();
+        } else if (textStatus == "parsererror") {
+            $.modal.alertWarning("服务器错误，请联系管理员！");
+            $.modal.closeLoading();
         }
     }
-}); 
+});
