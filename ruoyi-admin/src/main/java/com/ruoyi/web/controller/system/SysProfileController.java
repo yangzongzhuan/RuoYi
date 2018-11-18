@@ -17,7 +17,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.framework.shiro.service.PasswordService;
+import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.FileUploadUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
@@ -42,7 +42,7 @@ public class SysProfileController extends BaseController
     private ISysUserService userService;
     
     @Autowired
-    private PasswordService passwordService;
+    private SysPasswordService passwordService;
 
     @Autowired
     private ISysDictDataService dictDataService;
@@ -53,7 +53,7 @@ public class SysProfileController extends BaseController
     @GetMapping()
     public String profile(ModelMap mmap)
     {
-        SysUser user = getUser();
+        SysUser user = getSysUser();
         user.setSex(dictDataService.selectDictLabel("sys_user_sex", user.getSex()));
         mmap.put("user", user);
         mmap.put("roleGroup", userService.selectUserRoleGroup(user.getUserId()));
@@ -65,7 +65,7 @@ public class SysProfileController extends BaseController
     @ResponseBody
     public boolean checkPassword(String password)
     {
-        SysUser user = getUser();
+        SysUser user = getSysUser();
         String encrypt = new Md5Hash(user.getLoginName() + password + user.getSalt()).toHex().toString();
         if (user.getPassword().equals(encrypt))
         {
@@ -91,7 +91,7 @@ public class SysProfileController extends BaseController
         int rows = userService.resetUserPwd(user);
         if (rows > 0)
         {
-            setUser(userService.selectUserById(user.getUserId()));
+            setSysUser(userService.selectUserById(user.getUserId()));
             return success();
         }
         return error();
@@ -127,7 +127,7 @@ public class SysProfileController extends BaseController
     {
         if (userService.updateUserInfo(user) > 0)
         {
-            setUser(userService.selectUserById(user.getUserId()));
+            setSysUser(userService.selectUserById(user.getUserId()));
             return success();
         }
         return error();
@@ -149,7 +149,7 @@ public class SysProfileController extends BaseController
                 user.setAvatar(avatar);
                 if (userService.updateUserInfo(user) > 0)
                 {
-                    setUser(userService.selectUserById(user.getUserId()));
+                    setSysUser(userService.selectUserById(user.getUserId()));
                     return success();
                 }
             }

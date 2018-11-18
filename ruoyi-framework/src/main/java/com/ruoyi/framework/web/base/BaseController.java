@@ -1,5 +1,10 @@
 package com.ruoyi.framework.web.base;
 
+import java.beans.PropertyEditorSupport;
+import java.util.Date;
+import java.util.List;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruoyi.common.base.AjaxResult;
@@ -10,11 +15,6 @@ import com.ruoyi.framework.web.page.PageDomain;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.framework.web.page.TableSupport;
 import com.ruoyi.system.domain.SysUser;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import java.beans.PropertyEditorSupport;
-import java.util.Date;
-import java.util.List;
 
 /**
  * web层通用数据处理
@@ -127,23 +127,23 @@ public class BaseController
         return StringUtils.format("redirect:{}", url);
     }
 
-    public SysUser getUser()
+    public SysUser getSysUser()
     {
-        return ShiroUtils.getUser();
+        return (SysUser) ShiroUtils.getSession().getAttribute("sysUser");
     }
 
-    public void setUser(SysUser user)
+    public void setSysUser(SysUser user)
     {
-        ShiroUtils.setUser(user);
+        ShiroUtils.setSysUser(user);
     }
 
     public Long getUserId()
     {
-        return getUser().getUserId();
+        return getSysUser().getUserId();
     }
 
     public String getLoginName()
     {
-        return getUser().getLoginName();
+        return getSysUser().getLoginName();
     }
 }

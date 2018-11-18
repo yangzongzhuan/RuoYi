@@ -19,7 +19,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.ruoyi.framework.shiro.service.LoginService;
+import com.ruoyi.framework.shiro.service.SysLoginService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.exception.user.CaptchaException;
 import com.ruoyi.framework.web.exception.user.RoleBlockedException;
@@ -47,7 +47,7 @@ public class UserRealm extends AuthorizingRealm
     private ISysRoleService roleService;
 
     @Autowired
-    private LoginService loginService;
+    private SysLoginService loginService;
 
     /**
      * 授权
@@ -127,7 +127,8 @@ public class UserRealm extends AuthorizingRealm
             log.info("对用户[" + username + "]进行登录验证..验证未通过{}", e.getMessage());
             throw new AuthenticationException(e.getMessage(), e);
         }
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, password, getName());
+        ShiroUtils.getSession().setAttribute("sysUser", user);
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getLoginName(), password, getName());
         return info;
     }
 

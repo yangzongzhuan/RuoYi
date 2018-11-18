@@ -27,7 +27,7 @@ public class SysIndexController extends BaseController
     public String index(ModelMap mmap)
     {
         // 取身份信息
-        SysUser user = getUser();
+        SysUser user = getSysUser();
         // 根据用户id取出菜单
         List<SysMenu> menus = menuService.selectMenusByUser(user);
         mmap.put("menus", menus);

@@ -27,10 +27,10 @@ import com.ruoyi.system.service.ISysUserService;
  * @author ruoyi
  */
 @Component
-public class LoginService
+public class SysLoginService
 {
     @Autowired
-    private PasswordService passwordService;
+    private SysPasswordService passwordService;
 
     @Autowired
     private ISysUserService userService;

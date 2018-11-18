@@ -22,7 +22,7 @@ import com.ruoyi.system.domain.SysUser;
  * @author ruoyi
  */
 @Component
-public class PasswordService
+public class SysPasswordService
 {
     @Autowired
     private CacheManager cacheManager;
@@ -84,7 +84,7 @@ public class PasswordService
 
     public static void main(String[] args)
     {
-        System.out.println(new PasswordService().encryptPassword("admin", "admin123", "111111"));
-        System.out.println(new PasswordService().encryptPassword("ry", "admin123", "222222"));
+        System.out.println(new SysPasswordService().encryptPassword("admin", "admin123", "111111"));
+        System.out.println(new SysPasswordService().encryptPassword("ry", "admin123", "222222"));
     }
 }
