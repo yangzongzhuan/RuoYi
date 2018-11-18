@@ -32,7 +32,7 @@ public class ShiroUtils
         getSubjct().logout();
     }
 
-    public static SysUser getUser()
+    public static SysUser getSysUser()
     {
         SysUser user = null;
         Object obj = getSession().getAttribute("sysUser");
@@ -58,12 +58,12 @@ public class ShiroUtils
 
     public static Long getUserId()
     {
-        return getUser().getUserId().longValue();
+        return getSysUser().getUserId().longValue();
     }
 
     public static String getLoginName()
     {
-        return getUser().getLoginName();
+        return getSysUser().getLoginName();
     }
 
     public static String getIp()
