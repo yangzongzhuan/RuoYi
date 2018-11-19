@@ -212,6 +212,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param cronExpression 表达式
      * @return 结果
      */
+    @Override
     public boolean checkCronExpressionIsValid(String cronExpression)
     {
         return CronUtils.isValid(cronExpression);
