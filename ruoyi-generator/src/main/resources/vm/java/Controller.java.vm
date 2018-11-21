@@ -1,4 +1,4 @@
-package ${package}.web.controller;
+package ${basePackage}.web.controller.${moduleName};
 
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -17,6 +17,7 @@ import ${package}.service.I${className}Service;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.utils.ExcelUtil;
 
 /**
  * ${tableComment} 信息操作处理
@@ -52,6 +53,20 @@ public class ${className}Controller extends BaseController
         List<${className}> list = ${classname}Service.select${className}List(${classname});
 		return getDataTable(list);
 	}
+	
+	
+	/**
+	 * 导出${tableComment}列表
+	 */
+	@RequiresPermissions("${moduleName}:${classname}:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(${className} ${classname})
+    {
+    	List<${className}> list = ${classname}Service.select${className}List(${classname});
+        ExcelUtil<${className}> util = new ExcelUtil<${className}>(${className}.class);
+        return util.exportExcel(list, "${classname}");
+    }
 	
 	/**
 	 * 新增${tableComment}

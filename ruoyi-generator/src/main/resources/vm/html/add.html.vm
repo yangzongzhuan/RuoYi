@@ -7,12 +7,33 @@
         <form class="form-horizontal m" id="form-${classname}-add">
 #foreach($column in $columns)
 #if($column.columnName != $primaryKey.columnName)
+#if(!${column.configInfo})
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">${column.columnComment}：</label>
 				<div class="col-sm-8">
 					<input id="${column.attrname}" name="${column.attrname}" class="form-control" type="text">
 				</div>
 			</div>
+#else
+#if(${column.configInfo.type} == "dict")
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">${column.columnComment}：</label>
+				<div class="col-sm-8">
+					<select name="${column.attrname}" class="form-control m-b" th:with="type=${@dict.getType('${column.configInfo.value}')}">
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
+				</div>
+			</div>
+#elseif(${column.configInfo.type} == "date")
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">${column.columnComment}：</label>
+				<div class="col-sm-8">
+					<input id="${column.attrname}" name="${column.attrname}" class="form-control time-input" type="text">
+				</div>
+			</div>
+#elseif(${column.configInfo.type} == "fk")
+#end
+#end
 #end
 #end
 		</form>

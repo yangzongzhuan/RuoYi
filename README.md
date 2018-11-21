@@ -2,19 +2,15 @@
 
 
 2018年度最受欢迎中国开源软件评选  
-请给若依/RuoYi 投票，谢谢支持。  
+请给若依/RuoYi 投票，谢谢大家。  
 https://www.oschina.net/project/top_cn_2018?sort=1
 
 
 一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适的。于是利用空闲休息时间开始自己写了一套后台系统。如此有了若依。她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
 
-性别男，若依是女儿的名字。
+寓意：你若不离不弃，我必生死相依
 
 若依基于hplus和inspinia两套后台系统模板开发。有需要可自行到群内下载。
-
-http://www.zi-han.net/theme/hplus
-
-http://webapplayers.com/inspinia_admin-v2.7.1
 
 > RuoYi从3.0开始，进行模块拆分，将原先的单应用转变为多模块，如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  
 
@@ -41,7 +37,9 @@ http://webapplayers.com/inspinia_admin-v2.7.1
 ## 在线体验
 > admin/admin123
 
-地址：http://www.ruoyi.vip
+演示地址：http://ruoyi.vip  
+
+文档地址：http://doc.ruoyi.vip
 
 ## 演示图
 

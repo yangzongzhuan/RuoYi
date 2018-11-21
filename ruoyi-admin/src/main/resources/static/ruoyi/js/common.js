@@ -68,6 +68,22 @@ $(function() {
 		    });
 		});
 	}
+	// laydate time-input 时间控件绑定
+	if ($(".time-input").length > 0) {
+	    layui.use('laydate', function() {
+	        var laydate = layui.laydate;
+	        var times = $(".time-input");
+	        for (var i = 0; i < times.length; i++) {
+	            var time = times[i];
+	            laydate.render({
+	                elem: time,
+	                theme: 'molv',
+	                trigger: 'click',
+	                done: function(value, date) {}
+	            });
+	        }
+	    });
+	}
 	// tree 关键字搜索绑定
 	if ($("#keyword").length > 0) {
 		$("#keyword").bind("focus", function focusKey(e) {

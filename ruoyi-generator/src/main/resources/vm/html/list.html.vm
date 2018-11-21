@@ -3,23 +3,68 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
-    <div class="container-div">
-		<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-			<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="${moduleName}:${classname}:add">
-				<i class="fa fa-plus"></i> 添加
-			</a>
-			<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="${moduleName}:${classname}:edit">
-	            <i class="fa fa-edit"></i> 修改
-	        </a>
-			<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="${moduleName}:${classname}:remove">
-				<i class="fa fa-remove"></i> 删除
-			</a>
-		</div>
+    
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="formId">
+					<div class="select-list">
+						<ul>
+#foreach($column in $columns)
+#if($column.columnName != $primaryKey.columnName)
+#if(!${column.configInfo})
+							<li>
+								${column.columnComment}：<input type="text" name="${column.attrname}"/>
+							</li>
+
+#else
+#if(${column.configInfo.type} == "dict")
+							<li>
+								${column.columnComment}：<select name="${column.attrname}" th:with="type=${@dict.getType('${column.configInfo.value}')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
+							</li>
+#elseif(${column.configInfo.type} == "date")
+							<li class="select-time">
+								<label>${column.columnComment}： </label>
+								<input type="text" class="time-input" id="start${column.attrName}" placeholder="开始" name="params[begin${column.attrName}]"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="end${column.attrName}" placeholder="结束" name="params[end${column.attrName}]"/>
+							</li>
+#elseif(${column.configInfo.type} == "fk")					
+#end
+#end
+#end
+#end
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
 			
-		<div class="col-sm-12 select-table table-striped">
-			<table id="bootstrap-table" data-mobile-responsive="true"></table>
+	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="${moduleName}:${classname}:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="${moduleName}:${classname}:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="${moduleName}:${classname}:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="${moduleName}:${classname}:export">
+						<i class="fa fa-download"></i> 导出
+				 </a>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
 		</div>
-    </div>
+	</div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('${moduleName}:${classname}:edit')}]];
@@ -32,15 +77,39 @@
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
+				exportUrl: prefix + "/export",
                 modalName: "${tableComment}",
+				search: false,
+		        showExport: true,
                 columns: [{
 		            checkbox: true
 		        },
 #foreach($column in $columns)
+#if($column.columnName == $primaryKey.columnName)
 				{
 					field : '${column.attrname}', 
-					title : '${column.columnComment}' 
+					title : '${column.columnComment}',
+					visible: false
 				},
+#elseif($column.columnName != $primaryKey.columnName)
+#if(${column.configInfo} && ${column.configInfo.type} == 'dict')
+				{
+					field : '${column.attrname}', 
+					title : '${column.columnComment}',
+					sortable: true,
+					formatter: function(value, row, index) {
+						var datas = [[${@dict.getType('${column.configInfo.value}')}]];
+		            	return $.table.selectDictLabel(datas, value);
+		            }
+				},
+#else
+				{
+					field : '${column.attrname}', 
+					title : '${column.columnComment}',
+					sortable: true
+				},
+#end
+#end				
 #end
 		        {
 		            title: '操作',
