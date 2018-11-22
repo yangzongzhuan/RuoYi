@@ -10,7 +10,7 @@ import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.impl.SysUserOnlineServiceImpl;
+import com.ruoyi.system.service.ISysUserOnlineService;
 
 /**
  * 针对自定义的ShiroSession的db操作
@@ -31,7 +31,7 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
     private static final String LAST_SYNC_DB_TIMESTAMP = OnlineSessionDAO.class.getName() + "LAST_SYNC_DB_TIMESTAMP";
 
     @Autowired
-    private SysUserOnlineServiceImpl onlineService;
+    private ISysUserOnlineService onlineService;
 
     public OnlineSessionDAO()
     {

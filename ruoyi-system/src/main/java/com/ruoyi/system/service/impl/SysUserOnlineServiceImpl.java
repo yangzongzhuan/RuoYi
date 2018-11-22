@@ -3,7 +3,7 @@ package com.ruoyi.system.service.impl;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysUserOnline;
@@ -15,7 +15,7 @@ import com.ruoyi.system.service.ISysUserOnlineService;
  * 
  * @author ruoyi
  */
-@Component
+@Service
 public class SysUserOnlineServiceImpl implements ISysUserOnlineService
 {
     @Autowired

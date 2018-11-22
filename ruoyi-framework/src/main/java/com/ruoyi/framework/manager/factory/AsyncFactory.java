@@ -14,8 +14,8 @@ import com.ruoyi.system.domain.SysLogininfor;
 import com.ruoyi.system.domain.SysOperLog;
 import com.ruoyi.system.domain.SysUserOnline;
 import com.ruoyi.system.service.ISysOperLogService;
+import com.ruoyi.system.service.ISysUserOnlineService;
 import com.ruoyi.system.service.impl.SysLogininforServiceImpl;
-import com.ruoyi.system.service.impl.SysUserOnlineServiceImpl;
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**
@@ -53,7 +53,7 @@ public class AsyncFactory
                 online.setBrowser(session.getBrowser());
                 online.setOs(session.getOs());
                 online.setStatus(session.getStatus());
-                SpringUtils.getBean(SysUserOnlineServiceImpl.class).saveOnline(online);
+                SpringUtils.getBean(ISysUserOnlineService.class).saveOnline(online);
 
             }
         };
