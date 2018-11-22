@@ -8,6 +8,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysUserOnline;
 import com.ruoyi.system.mapper.SysUserOnlineMapper;
+import com.ruoyi.system.service.ISysUserOnlineService;
 
 /**
  * 在线用户 服务层处理
@@ -15,7 +16,7 @@ import com.ruoyi.system.mapper.SysUserOnlineMapper;
  * @author ruoyi
  */
 @Component
-public class SysUserOnlineServiceImpl
+public class SysUserOnlineServiceImpl implements ISysUserOnlineService
 {
     @Autowired
     private SysUserOnlineMapper userOnlineDao;
