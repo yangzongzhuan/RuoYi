@@ -82,9 +82,4 @@ public class SysPasswordService
         return new Md5Hash(username + password + salt).toHex().toString();
     }
 
-    public static void main(String[] args)
-    {
-        System.out.println(new SysPasswordService().encryptPassword("admin", "admin123", "111111"));
-        System.out.println(new SysPasswordService().encryptPassword("ry", "admin123", "222222"));
-    }
 }
