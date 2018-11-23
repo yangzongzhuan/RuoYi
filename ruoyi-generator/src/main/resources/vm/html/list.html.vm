@@ -70,6 +70,11 @@
         var editFlag = [[${@permission.hasPermi('${moduleName}:${classname}:edit')}]];
         var removeFlag = [[${@permission.hasPermi('${moduleName}:${classname}:remove')}]];
         var prefix = ctx + "${moduleName}/${classname}";
+#foreach($column in $columns)
+#if(${column.configInfo} && ${column.configInfo.type} == 'dict')
+        var datas = [[${@dict.getType('${column.configInfo.value}')}]];
+#end
+#end
 
         $(function() {
             var options = {
@@ -98,7 +103,6 @@
 					title : '${column.columnComment}',
 					sortable: true,
 					formatter: function(value, row, index) {
-						var datas = [[${@dict.getType('${column.configInfo.value}')}]];
 		            	return $.table.selectDictLabel(datas, value);
 		            }
 				},
