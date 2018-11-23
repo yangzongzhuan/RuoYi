@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +37,6 @@ import org.slf4j.LoggerFactory;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.config.Global;
-import com.ruoyi.common.utils.StringUtils;
 
 /**
  * Excel相关处理
@@ -334,31 +333,28 @@ public class ExcelUtil<T>
                                 // 创建cell
                                 cell = row.createCell(j);
                                 cell.setCellStyle(cs);
-                                try
+                                if (vo == null)
                                 {
-                                    if (String.valueOf(field.get(vo)).length() > 10)
-                                    {
-                                        throw new Exception("长度超过10位就不用转数字了");
-                                    }
-                                    // 如果可以转成数字则导出为数字类型
-                                    BigDecimal bc = new BigDecimal(String.valueOf(field.get(vo)));
-                                    cell.setCellType(CellType.NUMERIC);
-                                    cell.setCellValue(bc.doubleValue());
+                                    // 如果数据存在就填入,不存在填入空格.
+                                    cell.setCellValue("");
+                                    continue;
                                 }
-                                catch (Exception e)
+
+                                String dateFormat = attr.dateFormat();
+                                String readConverterExp = attr.readConverterExp();
+                                if (StringUtils.isNotEmpty(dateFormat))
+                                {
+                                    cell.setCellValue(DateUtils.parseDateToStr(dateFormat, (Date) field.get(vo)));
+                                }
+                                else if (StringUtils.isNotEmpty(readConverterExp))
+                                {
+                                    cell.setCellValue(convertByExp(String.valueOf(field.get(vo)), readConverterExp));
+                                }
+                                else
                                 {
                                     cell.setCellType(CellType.STRING);
-                                    if (vo == null)
-                                    {
-                                        // 如果数据存在就填入,不存在填入空格.
-                                        cell.setCellValue("");
-                                    }
-                                    else
-                                    {
-                                        // 如果数据存在就填入,不存在填入空格.
-                                        cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
-                                    }
-
+                                    // 如果数据存在就填入,不存在填入空格.
+                                    cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
                                 }
                             }
                         }
@@ -454,6 +450,35 @@ public class ExcelUtil<T>
         HSSFDataValidation dataValidationList = new HSSFDataValidation(regions, constraint);
         sheet.addValidationData(dataValidationList);
         return sheet;
+    }
+    
+    /**
+     * 解析导出值 0=男,1=女,2=未知
+     * 
+     * @param propertyValue 参数值
+     * @param converterExp 翻译注解
+     * @return 解析后值
+     * @throws Exception
+     */
+    public static String convertByExp(String propertyValue, String converterExp) throws Exception
+    {
+        try
+        {
+            String[] convertSource = converterExp.split(",");
+            for (String item : convertSource)
+            {
+                String[] itemArray = item.split("=");
+                if (itemArray[0].equals(propertyValue))
+                {
+                    return itemArray[1];
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return propertyValue;
     }
 
     /**

@@ -18,6 +18,16 @@ public @interface Excel
      * 导出到Excel中的名字.
      */
     public abstract String name();
+    
+    /**
+     * 日期格式, 如: yyyy-MM-dd
+     */
+    public abstract String dateFormat() default "";
+
+    /**
+     * 读取内容转表达式 (如: 0=男,1=女,2=未知)
+     */
+    public abstract String readConverterExp() default "";
 
     /**
      * 提示信息

@@ -43,7 +43,7 @@ public class SysUser extends BaseEntity
     private String phonenumber;
 
     /** 用户性别 */
-    @Excel(name = "用户性别")
+    @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
     private String sex;
 
     /** 用户头像 */
@@ -56,7 +56,7 @@ public class SysUser extends BaseEntity
     private String salt;
 
     /** 帐号状态（0正常 1停用） */
-    @Excel(name = "帐号状态")
+    @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
     /** 删除标志（0代表存在 2代表删除） */
@@ -67,7 +67,7 @@ public class SysUser extends BaseEntity
     private String loginIp;
 
     /** 最后登陆时间 */
-    @Excel(name = "最后登陆时间")
+    @Excel(name = "最后登陆时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date loginDate;
 
     /** 部门对象 */

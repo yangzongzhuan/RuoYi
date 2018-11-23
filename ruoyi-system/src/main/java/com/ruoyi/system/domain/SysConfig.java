@@ -31,7 +31,7 @@ public class SysConfig extends BaseEntity
     private String configValue;
 
     /** 系统内置（Y是 N否） */
-    @Excel(name = "系统内置")
+    @Excel(name = "系统内置", readConverterExp = "Y=是,N=否")
     private String configType;
 
     public Long getConfigId()

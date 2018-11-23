@@ -42,11 +42,11 @@ public class SysDictData extends BaseEntity
     private String listClass;
 
     /** 是否默认（Y是 N否） */
-    @Excel(name = "是否默认")
+    @Excel(name = "是否默认", readConverterExp = "Y=是,N=否")
     private String isDefault;
 
     /** 状态（0正常 1停用） */
-    @Excel(name = "状态")
+    @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
     public Long getDictCode()
