@@ -67,7 +67,7 @@ public class SysUser extends BaseEntity
     private String loginIp;
 
     /** 最后登陆时间 */
-    @Excel(name = "最后登陆时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "最后登陆时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date loginDate;
 
     /** 部门对象 */

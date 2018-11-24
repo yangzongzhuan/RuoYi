@@ -68,7 +68,7 @@ public class SysOperLog extends BaseEntity
     private String errorMsg;
 
     /** 操作时间 */
-    @Excel(name = "操作时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date operTime;
 
     public Long getOperId()

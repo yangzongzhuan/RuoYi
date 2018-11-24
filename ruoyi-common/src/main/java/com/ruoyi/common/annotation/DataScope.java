@@ -19,5 +19,5 @@ public @interface DataScope
     /**
      * 表的别名
      */
-    String tableAlias() default "";
+    public String tableAlias() default "";
 }

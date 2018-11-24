@@ -284,7 +284,8 @@ public class ExcelUtil<T>
                         cellStyle.setFont(font);
                         cellStyle.setFillForegroundColor(HSSFColorPredefined.LIGHT_YELLOW.getIndex());
                         // 设置列宽
-                        sheet.setColumnWidth(i, 3766);
+                        sheet.setColumnWidth(i, (int) ((attr.width() + 0.72) * 256));
+                        row.setHeight((short) (attr.height() * 20));
                     }
                     cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
                     cellStyle.setWrapText(true);
@@ -327,6 +328,8 @@ public class ExcelUtil<T>
                         Excel attr = field.getAnnotation(Excel.class);
                         try
                         {
+                            // 设置行高
+                            row.setHeight((short) (attr.height() * 20));
                             // 根据Excel中设置情况决定是否导出,有些情况需要保持为空,希望用户填写这一列.
                             if (attr.isExport())
                             {
@@ -354,7 +357,7 @@ public class ExcelUtil<T>
                                 {
                                     cell.setCellType(CellType.STRING);
                                     // 如果数据存在就填入,不存在填入空格.
-                                    cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
+                                    cell.setCellValue(StringUtils.isNull(field.get(vo)) ? attr.defaultValue() : field.get(vo) + attr.suffix());
                                 }
                             }
                         }

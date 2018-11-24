@@ -17,30 +17,50 @@ public @interface Excel
     /**
      * 导出到Excel中的名字.
      */
-    public abstract String name();
-    
+    public String name();
+
     /**
      * 日期格式, 如: yyyy-MM-dd
      */
-    public abstract String dateFormat() default "";
+    public String dateFormat() default "";
 
     /**
      * 读取内容转表达式 (如: 0=男,1=女,2=未知)
      */
-    public abstract String readConverterExp() default "";
+    public String readConverterExp() default "";
+
+    /**
+     * 导出时在excel中每个列的高度 单位为字符
+     */
+    public double height() default 14;
+
+    /**
+     * 导出时在excel中每个列的宽 单位为字符
+     */
+    public double width() default 20;
+
+    /**
+     * 文字后缀,如% 90 变成90%
+     */
+    public String suffix() default "";
+
+    /**
+     * 当值为空时,字段的默认值
+     */
+    public String defaultValue() default "";
 
     /**
      * 提示信息
      */
-    public abstract String prompt() default "";
+    public String prompt() default "";
 
     /**
      * 设置只能选择不能输入的列内容.
      */
-    public abstract String[] combo() default {};
+    public String[] combo() default {};
 
     /**
      * 是否导出数据,应对需求:有时我们需要导出一份模板,这是标题需要但内容需要用户手工填写.
      */
-    public abstract boolean isExport() default true;
+    public boolean isExport() default true;
 }
