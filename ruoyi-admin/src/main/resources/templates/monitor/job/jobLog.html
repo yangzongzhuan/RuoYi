@@ -57,7 +57,7 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
-		var removeFlag = [[${@permission.hasPermi('monitor:job:remove')}]];
+		var detailFlag = [[${@permission.hasPermi('monitor:job:detail')}]];
 		var datas = [[${@dict.getType('sys_common_status')}]];
 		var prefix = ctx + "monitor/jobLog";
 
@@ -65,6 +65,7 @@
 		    var options = {
 		        url: prefix + "/list",
 		        cleanUrl: prefix + "/clean",
+		        detailUrl: prefix + "/detail/{id}",
 		        removeUrl: prefix + "/remove",
 		        exportUrl: prefix + "/export",
 		        sortName: "createTime",
@@ -119,7 +120,7 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		                var actions = [];
-		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.jobLogId + '\')"><i class="fa fa-remove"></i>删除</a>');
+		                actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="#" onclick="$.operate.detail(\'' + row.jobLogId + '\')"><i class="fa fa-search"></i>详细</a>');
 		                return actions.join('');
 		            }
 		        }]
