@@ -99,7 +99,6 @@
             // 刷新表格
             refresh: function() {
                 $("#bootstrap-table").bootstrapTable('refresh', {
-                    url: $.table._option.url,
                     silent: true
                 });
             },
@@ -135,7 +134,7 @@
                 $.table._option = options;
                 _striped = $.common.isEmpty(options.striped) ? false : options.striped;
                 _expandColumn = $.common.isEmpty(options.expandColumn) ? '1' : options.expandColumn;
-                var treeTable = $('#bootstrap-table').bootstrapTreeTable({
+                var treeTable = $('#bootstrap-tree-table').bootstrapTreeTable({
                 	code: options.code,                                 // 用于设置父子关系
         		    parentCode: options.parentCode,                     // 用于设置父子关系
         	    	type: 'get',                                        // 请求方式（*）
@@ -528,7 +527,7 @@
         	        dataType: "json",
         	        data: data,
         	        success: function(result) {
-        	        	$.operate.saveSuccess(result);
+        	        	$.operate.successCallback(result);
         	        }
         	    };
         	    $.ajax(config)
@@ -543,7 +542,7 @@
                 }
             	$.modal.closeLoading();
             },
-            // 保存结果提示msg
+            // 成功结果提示msg（父窗体全局更新）
             saveSuccess: function (result) {
             	if (result.code == web_status.SUCCESS) {
             		$.modal.msgReload("保存成功,正在刷新数据请稍后……", modal_status.SUCCESS);
@@ -551,6 +550,25 @@
                 	$.modal.alertError(result.msg);
                 }
             	$.modal.closeLoading();
+            },
+            // 成功回调执行事件（父窗体静默更新）
+            successCallback: function(result) {
+                if (result.code == web_status.SUCCESS) {
+                    if (window.parent.$("#bootstrap-table").length > 0) {
+                        $.modal.close();
+                        window.parent.$.modal.msgSuccess(result.msg);
+                        window.parent.$.table.refresh();
+                    } else if (window.parent.$("#bootstrap-tree-table").length > 0) {
+                        $.modal.close();
+                        window.parent.$.modal.msgSuccess(result.msg);
+                        window.parent.$.treeTable.refresh();
+                    } else {
+                        $.modal.msgReload("保存成功,正在刷新数据请稍后……", modal_status.SUCCESS);
+                    }
+                } else {
+                    $.modal.alertError(result.msg);
+                }
+                $.modal.closeLoading();
             }
         },
         // 校验封装处理
