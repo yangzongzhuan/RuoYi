@@ -107,9 +107,9 @@ $(function() {
 	var expandFlag = false;
 	$("#expandAllBtn").click(function() {
 	    if (expandFlag) {
-	        $('#bootstrap-table').bootstrapTreeTable('expandAll');
+	        $('#bootstrap-tree-table').bootstrapTreeTable('expandAll');
 	    } else {
-	        $('#bootstrap-table').bootstrapTreeTable('collapseAll');
+	        $('#bootstrap-tree-table').bootstrapTreeTable('collapseAll');
 	    }
 	    expandFlag = expandFlag ? false: true;
 	})
