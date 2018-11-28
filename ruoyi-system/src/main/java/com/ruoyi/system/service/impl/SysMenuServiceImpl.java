@@ -41,7 +41,7 @@ public class SysMenuServiceImpl implements ISysMenuService
     /**
      * 根据用户查询菜单
      * 
-     * @param userId 用户信息
+     * @param user 用户信息
      * @return 菜单列表
      */
     @Override
@@ -232,7 +232,7 @@ public class SysMenuServiceImpl implements ISysMenuService
     /**
      * 查询子菜单数量
      * 
-     * @param menuId 菜单ID
+     * @param parentId 父级菜单ID
      * @return 结果
      */
     @Override
@@ -299,7 +299,7 @@ public class SysMenuServiceImpl implements ISysMenuService
      * 根据父节点的ID获取所有子节点
      * 
      * @param list 分类表
-     * @param typeId 传入的父节点ID
+     * @param parentId 传入的父节点ID
      * @return String
      */
     public List<SysMenu> getChildPerms(List<SysMenu> list, int parentId)
@@ -322,7 +322,7 @@ public class SysMenuServiceImpl implements ISysMenuService
      * 递归列表
      * 
      * @param list
-     * @param SysMenu
+     * @param t
      */
     private void recursionFn(List<SysMenu> list, SysMenu t)
     {
