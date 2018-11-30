@@ -494,7 +494,7 @@
             },
             // 工具栏表格树修改
             editTree: function() {
-            	var row = $('#bootstrap-table').bootstrapTreeTable('getSelections')[0];
+            	var row = $('#bootstrap-tree-table').bootstrapTreeTable('getSelections')[0];
             	if ($.common.isEmpty(row)) {
         			$.modal.alertWarning("请至少选择一条记录");
         			return;
