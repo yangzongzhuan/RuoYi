@@ -149,7 +149,7 @@ public class SysDeptController extends BaseController
     @ResponseBody
     public List<Map<String, Object>> treeData()
     {
-        List<Map<String, Object>> tree = deptService.selectDeptTree();
+        List<Map<String, Object>> tree = deptService.selectDeptTree(new SysDept());
         return tree;
     }
 

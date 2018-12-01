@@ -744,6 +744,17 @@
     		    }
         		return true;
         	},
+        	// 不允许最后层级节点选择
+        	notAllowLastLevel: function(_tree) {
+    		    var nodes = _tree.getSelectedNodes();
+    		    for (var i = 0; i < nodes.length; i++) {
+    		    	if (nodes[i].level == nodes.length + 1) {
+    		    		$.modal.msgError("不能选择最后层级节点（" + nodes[i].name + "）");
+    		            return false;
+    		        }
+    		    }
+        		return true;
+        	},
         	// 隐藏/显示搜索栏
         	toggleSearch: function() {
         		$('#search').slideToggle(200);

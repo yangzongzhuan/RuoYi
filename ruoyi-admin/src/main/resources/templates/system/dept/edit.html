@@ -123,10 +123,13 @@
 		}
 		
 		function doSubmit(index, layero){
-   			var body = layer.getChildFrame('body', index);
-   			$("#treeId").val(body.find('#treeId').val());
-   			$("#treeName").val(body.find('#treeName').val());
-   			layer.close(index);
+			var tree = layero.find("iframe")[0].contentWindow.$._tree;
+			if ($.tree.notAllowLastLevel(tree)) {
+	   			var body = layer.getChildFrame('body', index);
+	   			$("#treeId").val(body.find('#treeId').val());
+	   			$("#treeName").val(body.find('#treeName').val());
+	   			layer.close(index);
+			}
 		}
 	</script>
 </body>
