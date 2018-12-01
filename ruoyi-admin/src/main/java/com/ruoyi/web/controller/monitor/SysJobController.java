@@ -80,6 +80,15 @@ public class SysJobController extends BaseController
         }
     }
 
+    @RequiresPermissions("monitor:job:detail")
+    @GetMapping("/detail/{jobId}")
+    public String detail(@PathVariable("jobId") Long jobId, ModelMap mmap)
+    {
+        mmap.put("name", "job");
+        mmap.put("job", jobService.selectJobById(jobId));
+        return prefix + "/detail";
+    }
+
     /**
      * 任务调度状态修改
      */

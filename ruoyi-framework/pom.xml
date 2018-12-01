@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ruoyi</artifactId>
         <groupId>com.ruoyi</groupId>
-        <version>3.0</version>
+        <version>3.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 	
@@ -110,13 +110,29 @@
             <artifactId>ruoyi-generator</artifactId>
             <version>${ruoyi.version}</version>
         </dependency>
-
-
+        
 		<!-- pagehelper 分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>${pagehelper.boot.version}</version>
+		</dependency>
+		
+		<!-- 获取系统信息 -->
+		<dependency>
+			<groupId>com.github.oshi</groupId>
+			<artifactId>oshi-core</artifactId>
+			<version>${oshi.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna-platform</artifactId>
 		</dependency>
 
     </dependencies>

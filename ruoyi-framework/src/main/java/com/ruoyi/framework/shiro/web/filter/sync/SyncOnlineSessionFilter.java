@@ -20,14 +20,9 @@ public class SyncOnlineSessionFilter extends PathMatchingFilter
 
     /**
      * 同步会话数据到DB 一次请求最多同步一次 防止过多处理 需要放到Shiro过滤器之前
-     *
-     * @param request
-     * @param response
-     * @return
-     * @throws Exception
      */
     @Override
-    protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception
+    protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception
     {
         OnlineSession session = (OnlineSession) request.getAttribute(ShiroConstants.ONLINE_SESSION);
         // 如果session stop了 也不同步

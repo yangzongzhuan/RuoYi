@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import com.ruoyi.quartz.service.ISysJobLogService;
  * @author ruoyi
  *
  */
+@DisallowConcurrentExecution
 public class ScheduleJob extends QuartzJobBean
 {
     private static final Logger log = LoggerFactory.getLogger(ScheduleJob.class);

@@ -69,15 +69,16 @@ public class SysJobLogController extends BaseController
     {
         return toAjax(jobLogService.deleteJobLogByIds(ids));
     }
-    
+
     @RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobLogId}")
     public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap)
     {
+        mmap.put("name", "jobLog");
         mmap.put("jobLog", jobLogService.selectJobLogById(jobLogId));
         return prefix + "/detail";
     }
-    
+
     @Log(title = "调度日志", businessType = BusinessType.CLEAN)
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/clean")

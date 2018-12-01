@@ -17,6 +17,7 @@
                 _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
                 _striped = $.common.isEmpty(options.striped) ? false : options.striped;
+                _escape = $.common.isEmpty(options.escape) ? false : options.escape;
                 $('#bootstrap-table').bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
@@ -31,9 +32,10 @@
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
                     pageSize: 10,                                       // 每页的记录行数（*） 
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）
+                    escape: _escape,                                    // 转义HTML字符串
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
         	        toolbar: '#toolbar',                                // 指定工作栏
-                    sidePagination: "server",                           // 启用服务端分页 
+                    sidePagination: "server",                           // 启用服务端分页
                     search: $.common.visible(options.search),           // 是否显示搜索框功能
                     showSearch: $.common.visible(options.showSearch),   // 是否显示检索信息
                     showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
@@ -124,6 +126,14 @@
                     }
                 });
                 return actions.join('');
+            },
+            // 显示表格指定列
+            showColumn: function(column) {
+                $("#bootstrap-table").bootstrapTable('showColumn', column);
+            },
+            // 隐藏表格指定列
+            hideColumn: function(column) {
+            	$("#bootstrap-table").bootstrapTable('hideColumn', column);
             }
         },
         // 表格树封装处理
@@ -780,6 +790,14 @@
             // 指定随机数返回
             random: function (min, max) {
                 return Math.floor((Math.random() * max) + min);
+            },
+            startWith: function(value, start) {
+                var reg = new RegExp("^" + start);
+                return reg.test(value)
+            },
+            endWith: function(value, end) {
+                var reg = new RegExp(end + "$");
+                return reg.test(value)
             }
         }
     });

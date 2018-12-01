@@ -42,11 +42,11 @@
 				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="monitor:job:remove">
 		            <i class="fa fa-remove"></i> 删除
 		        </a>
-		        <a class="btn btn-success" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
-		            <i class="fa fa-list"></i> 日志
-		        </a>
 		         <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="monitor:job:export">
 		            <i class="fa fa-download"></i> 导出
+		        </a>
+		        <a class="btn btn-info" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:list">
+		            <i class="fa fa-list"></i> 日志
 		        </a>
 	        </div>
         
@@ -57,6 +57,7 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script th:inline="javascript">
+        var detailFlag = [[${@permission.hasPermi('monitor:job:detail')}]];
 		var editFlag = [[${@permission.hasPermi('monitor:job:edit')}]];
 		var removeFlag = [[${@permission.hasPermi('monitor:job:remove')}]];
 		var statusFlag = [[${@permission.hasPermi('monitor:job:changeStatus')}]];
@@ -66,6 +67,7 @@
 		$(function() {
 		    var options = {
 		        url: prefix + "/list",
+		        detailUrl: prefix + "/detail/{id}",
 		        createUrl: prefix + "/add",
 		        updateUrl: prefix + "/edit/{id}",
 		        removeUrl: prefix + "/remove",
@@ -124,8 +126,7 @@
 		                var actions = [];
 		                actions.push(statusTools(row));
 		                actions.push('<a class="btn btn-primary btn-xs ' + statusFlag + '" href="#" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行</a> ');
-		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a>');
+		                actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="#" onclick="$.operate.detail(\'' + row.jobId + '\')"><i class="fa fa-search"></i>详细</a> ');
 		                return actions.join('');
 		            }
 		        }]
@@ -137,7 +138,7 @@
 		    if (row.status == 1) {
 		        return '<a class="btn btn-info btn-xs ' + statusFlag + '" href="#" onclick="start(\'' + row.jobId + '\')"><i class="fa fa-play"></i>启用</a> ';
 		    } else {
-		    	return '<a class="btn btn-warning btn-xs ' + statusFlag + '" href="#" onclick="stop(\'' + row.jobId + '\')"><i class="fa fa-pause"></i>暂停</a> ';
+		    	return '<a class="btn btn-danger btn-xs ' + statusFlag + '" href="#" onclick="stop(\'' + row.jobId + '\')"><i class="fa fa-pause"></i>暂停</a> ';
 		    }
 		}
 		
