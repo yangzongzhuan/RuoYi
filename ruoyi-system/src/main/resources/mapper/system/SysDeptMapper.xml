@@ -49,6 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
+		order by d.order_num
     </select>
 	
 	<select id="checkDeptExistUser" parameterType="Long" resultType="int">
