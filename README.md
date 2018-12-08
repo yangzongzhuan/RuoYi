@@ -10,6 +10,8 @@
 
 > 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)
 
+> 阿里云双12活动低至2折 ：[点我购买](https://m.aliyun.com/act/team1212?params=N.DTB4ZxQhX0#/)
+
 ## 内置功能
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
@@ -29,7 +31,8 @@
 15. 在线构建器：拖动表单元素生成相应的HTML代码。
 16. 连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 ## 在线体验
-> admin/admin123
+> admin/admin123  
+> 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
 
 演示地址：http://ruoyi.vip  
 
