@@ -28,6 +28,9 @@ import oshi.util.Util;
  */
 public class Server
 {
+    
+    private static final int OSHI_WAIT_SECOND = 1000;
+    
     /**
      * CPU相关信息
      */
@@ -126,7 +129,7 @@ public class Server
     {
         // CPU信息
         long[] prevTicks = processor.getSystemCpuLoadTicks();
-        Util.sleep(500);
+        Util.sleep(OSHI_WAIT_SECOND);
         long[] ticks = processor.getSystemCpuLoadTicks();
         long nice = ticks[TickType.NICE.getIndex()] - prevTicks[TickType.NICE.getIndex()];
         long irq = ticks[TickType.IRQ.getIndex()] - prevTicks[TickType.IRQ.getIndex()];
