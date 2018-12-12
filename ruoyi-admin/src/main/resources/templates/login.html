@@ -11,7 +11,6 @@
     <link href="../static/css/font-awesome.min.css" th:href="@{css/font-awesome.min.css}" rel="stylesheet"/>
     <link href="../static/css/style.css" th:href="@{css/style.css}" rel="stylesheet"/>
     <link href="../static/css/login.min.css" th:href="@{css/login.min.css}" rel="stylesheet"/>
-    <link href="../static/ajax/libs/iCheck/custom.css" th:href="@{/ajax/libs/iCheck/custom.css}" rel="stylesheet"/>
     <link href="../static/ruoyi/css/ry-ui.css" th:href="@{/ruoyi/css/ry-ui.css?v=3.1.0}" rel="stylesheet"/>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
@@ -60,7 +59,9 @@
 							</a>
 						</div>
 					</div>
-                    <input class="i-checks" type="checkbox" name="rememberme" />&nbsp;&nbsp;记住我
+                    <div class="checkbox-custom">
+				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
+				    </div>
                     <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>
                 </form>
             </div>
@@ -80,7 +81,6 @@
 <script src="../static/ajax/libs/validate/jquery.validate.min.js" th:src="@{/ajax/libs/validate/jquery.validate.min.js}"></script>
 <script src="../static/ajax/libs/validate/messages_zh.min.js" th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
 <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script src="../static/ajax/libs/iCheck/icheck.min.js" th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script src="http://tajs.qq.com/stats?sId=62048022"></script>
 <script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=3.1.0}"></script>
