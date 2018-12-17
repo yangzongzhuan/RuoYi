@@ -83,7 +83,7 @@ public class OnlineSessionFilter extends AccessControlFilter
             subject.logout();
         }
         saveRequestAndRedirectToLogin(request, response);
-        return true;
+        return false;
     }
 
     // 跳转到登录页

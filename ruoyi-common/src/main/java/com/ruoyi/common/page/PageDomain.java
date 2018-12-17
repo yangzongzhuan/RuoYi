@@ -1,4 +1,4 @@
-package com.ruoyi.framework.web.page;
+package com.ruoyi.common.page;
 
 import com.ruoyi.common.utils.StringUtils;
 

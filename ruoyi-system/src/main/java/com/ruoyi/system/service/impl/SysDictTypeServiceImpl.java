@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysDictType;
@@ -79,7 +80,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
      * @return 结果
      */
     @Override
-    public int deleteDictTypeByIds(String ids) throws Exception
+    public int deleteDictTypeByIds(String ids) throws BusinessException
     {
         Long[] dictIds = Convert.toLongArray(ids);
         for (Long dictId : dictIds)
@@ -87,7 +88,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
             SysDictType dictType = selectDictTypeById(dictId);
             if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0)
             {
-                throw new Exception(String.format("%1$s已分配,不能删除", dictType.getDictName()));
+                throw new BusinessException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
             }
         }
 

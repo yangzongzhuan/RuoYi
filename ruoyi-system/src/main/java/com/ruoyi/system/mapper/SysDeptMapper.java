@@ -91,4 +91,11 @@ public interface SysDeptMapper
      * @return 部门列表
      */
     public List<String> selectRoleDeptTree(Long roleId);
+
+    /**
+     * 修改所在部门的父级部门状态
+     * 
+     * @param dept 部门
+     */
+    public void updateDeptStatus(SysDept dept);
 }

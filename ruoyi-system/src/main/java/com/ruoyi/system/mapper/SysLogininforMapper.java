@@ -29,12 +29,14 @@ public interface SysLogininforMapper
      * 批量删除系统登录日志
      * 
      * @param ids 需要删除的数据
-     * @return
+     * @return 结果
      */
     public int deleteLogininforByIds(String[] ids);
 
     /**
      * 清空系统登录日志
+     * 
+     * @return 结果
      */
     public int cleanLogininfor();
 }

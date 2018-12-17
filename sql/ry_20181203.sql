@@ -588,7 +588,7 @@ create table sys_job_log (
   job_name            varchar(64)   not null                   comment '任务名称',
   job_group           varchar(64)   not null                   comment '任务组名',
   method_name         varchar(500)                             comment '任务方法',
-  method_params       varchar(200)  default ''                 comment '方法参数',
+  method_params       varchar(50)   default null               comment '方法参数',
   job_message         varchar(500)                             comment '日志信息',
   status              char(1)       default '0'                comment '执行状态（0正常 1失败）',
   exception_info      varchar(2000) default ''                 comment '异常信息',

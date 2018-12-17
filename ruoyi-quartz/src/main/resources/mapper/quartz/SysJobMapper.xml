@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="jobName != null and jobName != ''">job_name = #{jobName},</if>
  			<if test="jobGroup != null and jobGroup != ''">job_group = #{jobGroup},</if>
  			<if test="methodName != null and methodName != ''">method_name = #{methodName},</if>
- 			method_params = #{methodParams},
+ 			<if test="methodParams != null">method_params = #{methodParams},</if>
  			<if test="cronExpression != null and cronExpression != ''">cron_expression = #{cronExpression},</if>
  			<if test="misfirePolicy != null and misfirePolicy != ''">misfire_policy = #{misfirePolicy},</if>
  			<if test="status !=null">status = #{status},</if>

@@ -7,6 +7,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.exception.DemoModeException;
 import com.ruoyi.framework.util.PermissionUtils;
 
@@ -19,7 +20,7 @@ import com.ruoyi.framework.util.PermissionUtils;
 public class DefaultExceptionHandler
 {
     private static final Logger log = LoggerFactory.getLogger(DefaultExceptionHandler.class);
-    
+
     /**
      * 权限校验失败
      */
@@ -59,7 +60,17 @@ public class DefaultExceptionHandler
         log.error(e.getMessage(), e);
         return AjaxResult.error("服务器错误，请联系管理员");
     }
-    
+
+    /**
+     * 业务异常
+     */
+    @ExceptionHandler(BusinessException.class)
+    public AjaxResult businessException(BusinessException e)
+    {
+        log.error(e.getMessage(), e);
+        return AjaxResult.error(e.getMessage());
+    }
+
     /**
      * 演示模式异常
      */
