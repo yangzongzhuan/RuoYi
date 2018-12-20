@@ -18,5 +18,5 @@ public @interface DataSource
     /**
      * 切换数据源名称
      */
-    public String value() default "MASTER";
+    public DataSourceType value() default DataSourceType.MASTER;
 }

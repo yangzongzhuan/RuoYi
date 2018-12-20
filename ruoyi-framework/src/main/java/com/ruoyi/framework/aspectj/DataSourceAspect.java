@@ -43,7 +43,7 @@ public class DataSourceAspect
 
         if (StringUtils.isNotNull(dataSource))
         {
-            DynamicDataSourceContextHolder.setDateSoureType(dataSource.value());
+            DynamicDataSourceContextHolder.setDateSoureType(dataSource.value().name());
         }
 
         try
