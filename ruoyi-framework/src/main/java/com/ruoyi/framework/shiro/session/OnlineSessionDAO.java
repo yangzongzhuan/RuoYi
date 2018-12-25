@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
-import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.ISysUserOnlineService;
+import com.ruoyi.framework.shiro.service.SysShiroService;
 
 /**
  * 针对自定义的ShiroSession的db操作
@@ -31,7 +30,7 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
     private static final String LAST_SYNC_DB_TIMESTAMP = OnlineSessionDAO.class.getName() + "LAST_SYNC_DB_TIMESTAMP";
 
     @Autowired
-    private ISysUserOnlineService onlineService;
+    private SysShiroService sysShiroService;
 
     public OnlineSessionDAO()
     {
@@ -52,12 +51,7 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
     @Override
     protected Session doReadSession(Serializable sessionId)
     {
-        SysUserOnline userOnline = onlineService.selectOnlineById(String.valueOf(sessionId));
-        if (userOnline == null)
-        {
-            return null;
-        }
-        return super.doReadSession(sessionId);
+        return sysShiroService.getSession(sessionId);
     }
 
     /**
@@ -109,6 +103,6 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
             return;
         }
         onlineSession.setStatus(OnlineStatus.off_line);
-        onlineService.deleteOnlineById(String.valueOf(onlineSession.getId()));
+        sysShiroService.deleteSession(onlineSession);
     }
 }
