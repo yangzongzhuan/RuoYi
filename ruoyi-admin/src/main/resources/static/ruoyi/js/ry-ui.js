@@ -424,6 +424,10 @@
             post: function(url, data) {
             	$.operate.submit(url, "post", "json", data);
             },
+            // get请求传输
+            get: function(url) {
+            	$.operate.submit(url, "get", "json", "");
+            },
             // 详细信息
             detail: function(id, width, height) {
             	var _url = $.common.isEmpty(id) ? $.table._option.detailUrl : $.table._option.detailUrl.replace("{id}", id);

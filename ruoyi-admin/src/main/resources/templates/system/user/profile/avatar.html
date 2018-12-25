@@ -39,7 +39,7 @@ $(window).load(function() {
             options.imgSrc = e.target.result;
             //根据MIME判断上传的文件是不是图片类型
             if((options.imgSrc).indexOf("image/")==-1){
-                parent.layer.alert("文件格式错误，请上传图片类型,如：JPG,JEPG，PNG后缀的文件。", {icon: 2,title:"系统提示"});
+                $.modal.alertWarning("文件格式错误，请上传图片类型,如：JPG,JEPG，PNG后缀的文件。");
             } else {
                 cropper = $('.imageBox').cropbox(options);
             }
