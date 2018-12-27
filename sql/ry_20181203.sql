@@ -563,7 +563,7 @@ create table sys_job (
   job_name            varchar(64)   default ''                 comment '任务名称',
   job_group           varchar(64)   default ''                 comment '任务组名',
   method_name         varchar(500)  default ''                 comment '任务方法',
-  method_params       varchar(200)  default ''                 comment '方法参数',
+  method_params       varchar(50)   default null               comment '方法参数',
   cron_expression     varchar(255)  default ''                 comment 'cron执行表达式',
   misfire_policy      varchar(20)   default '3'                comment '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
   status              char(1)       default '0'                comment '状态（0正常 1暂停）',
