@@ -40,4 +40,10 @@ public class AsyncManager
     {
         executor.schedule(task, OPERATE_DELAY_TIME, TimeUnit.MILLISECONDS);
     }
+
+    public void shutdown(long timeout, TimeUnit unit) throws Exception
+    {
+        executor.shutdown();
+        executor.awaitTermination(timeout,unit);
+    }
 }

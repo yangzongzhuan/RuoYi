@@ -134,6 +134,14 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
             log.debug("Stopping Spring Scheduler session validation job...");
         }
 
+        if(this.enabled){
+            executorService.shutdown();
+            try {
+                executorService.awaitTermination(10,TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(),e);
+            }
+        }
         this.enabled = false;
     }
 }
