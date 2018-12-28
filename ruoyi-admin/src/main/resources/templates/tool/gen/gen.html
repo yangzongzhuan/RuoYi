@@ -56,6 +56,13 @@
 		            checkbox: true
 		        },
 		        {
+                    title: "序号",
+                    align: "center",
+                    formatter: function (value, row, index) {
+                 	    return $.table.serialNumber(index);
+                    }
+                },
+		        {
 		            field: 'tableName',
 		            title: '表名称',
 		            width: '20%',

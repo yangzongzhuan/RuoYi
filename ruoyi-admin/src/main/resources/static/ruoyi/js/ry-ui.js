@@ -67,6 +67,13 @@
                 	return { rows: [], total: 0 };
                 }
             },
+            // 序列号生成
+            serialNumber: function (index) {
+				var table = $('#bootstrap-table').bootstrapTable('getOptions');
+				var pageSize = table.pageSize;
+				var pageNumber = table.pageNumber;
+				return pageSize * (pageNumber - 1) + index + 1;
+			},
             // 搜索-默认第一个form
             search: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
