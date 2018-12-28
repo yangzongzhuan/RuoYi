@@ -17,32 +17,44 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2018/12/28
  */
 @Component
-public class ApplicationShutdownBean {
+public class ApplicationShutdownBean
+{
     private static final Logger logger = LoggerFactory.getLogger("sys-user");
 
     @Autowired(required = false)
     private SpringSessionValidationScheduler springSessionValidationScheduler;
 
     @PreDestroy
-    public void destroy(){
+    public void destroy()
+    {
         shutdownSpringSessionValidationScheduler();
         shutdownAsyncManager();
     }
 
-    private void shutdownSpringSessionValidationScheduler(){
+    private void shutdownSpringSessionValidationScheduler()
+    {
         if(springSessionValidationScheduler != null && springSessionValidationScheduler.isEnabled())
-        try {
-            logger.info("关闭会话验证任务");
-            springSessionValidationScheduler.disableSessionValidation();
-        } catch (Exception e) {
-            logger.error(e.getMessage(),e);
+        {
+            try
+            {
+                logger.info("关闭会话验证任务");
+                springSessionValidationScheduler.disableSessionValidation();
+            }
+            catch (Exception e)
+            {
+                logger.error(e.getMessage(),e);
+            }
         }
     }
-    private void shutdownAsyncManager(){
-        try {
+    private void shutdownAsyncManager()
+    {
+        try
+        {
             logger.info("关闭后台任务线程池");
             AsyncManager.me().shutdown(10, TimeUnit.SECONDS);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             logger.error(e.getMessage(),e);
         }
     }
