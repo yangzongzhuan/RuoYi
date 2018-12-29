@@ -13,7 +13,7 @@ public class PermissionUtils
     /**
      * 权限错误消息提醒
      * 
-     * @param errorMsg 错误信息
+     * @param permissionsStr 错误信息
      * @return
      */
     public static String getMsg(String permissionsStr)
