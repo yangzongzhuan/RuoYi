@@ -8,6 +8,7 @@ import org.apache.shiro.session.mgt.SessionValidationScheduler;
 import org.apache.shiro.session.mgt.ValidatingSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.ruoyi.common.utils.Threads;
 
 /**
  * 自定义任务调度器完成
@@ -136,15 +137,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
 
         if (this.enabled)
         {
-            executorService.shutdown();
-            try
-            {
-                executorService.awaitTermination(10, TimeUnit.SECONDS);
-            }
-            catch (InterruptedException e)
-            {
-                log.error(e.getMessage(), e);
-            }
+            Threads.shutdownAndAwaitTermination(executorService);
         }
         this.enabled = false;
     }

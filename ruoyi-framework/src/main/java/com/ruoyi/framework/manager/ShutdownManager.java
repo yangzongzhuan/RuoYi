@@ -6,13 +6,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PreDestroy;
-import java.util.concurrent.TimeUnit;
 
 /**
- * ShutdownManager 类
+ * 确保应用退出时能关闭后台线程
  *
- * @Auther: cj
- * @Date: 2018/12/28
+ * @author cj
  */
 @Component
 public class ShutdownManager
@@ -29,13 +27,16 @@ public class ShutdownManager
         shutdownAsyncManager();
     }
 
+    /**
+     * 停止Seesion会话检查
+     */
     private void shutdownSpringSessionValidationScheduler()
     {
         if (springSessionValidationScheduler != null && springSessionValidationScheduler.isEnabled())
         {
             try
             {
-                logger.info("关闭会话验证任务");
+                logger.info("====关闭会话验证任务====");
                 springSessionValidationScheduler.disableSessionValidation();
             }
             catch (Exception e)
@@ -45,12 +46,15 @@ public class ShutdownManager
         }
     }
 
+    /**
+     * 停止异步执行任务
+     */
     private void shutdownAsyncManager()
     {
         try
         {
-            logger.info("关闭后台任务线程池");
-            AsyncManager.me().shutdown(10, TimeUnit.SECONDS);
+            logger.info("====关闭后台任务任务线程池====");
+            AsyncManager.me().shutdown();
         }
         catch (Exception e)
         {

@@ -3,6 +3,7 @@ package com.ruoyi.framework.manager;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import com.ruoyi.common.utils.Threads;
 
 /**
  * 异步任务管理器
@@ -41,9 +42,11 @@ public class AsyncManager
         executor.schedule(task, OPERATE_DELAY_TIME, TimeUnit.MILLISECONDS);
     }
 
-    public void shutdown(long timeout, TimeUnit unit) throws Exception
+    /**
+     * 停止任务线程池
+     */
+    public void shutdown()
     {
-        executor.shutdown();
-        executor.awaitTermination(timeout, unit);
+        Threads.shutdownAndAwaitTermination(executor);
     }
 }

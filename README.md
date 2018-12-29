@@ -8,9 +8,7 @@
 
 > RuoYi从3.0开始，进行模块拆分，将原先的单应用转变为多模块，如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  
 
-> 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)
-
-> 阿里云双12活动低至2折 ：[点我购买](https://m.aliyun.com/act/team1212?params=N.DTB4ZxQhX0#/)
+> 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)  
 
 ## 内置功能
 
