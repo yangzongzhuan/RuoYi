@@ -116,7 +116,7 @@ public class SysJobServiceImpl implements ISysJobService
     @Override
     public int deleteJob(SysJob job)
     {
-        int rows = jobMapper.deleteJobById(job);
+        int rows = jobMapper.deleteJobById(job.getJobId());
         if (rows > 0)
         {
             ScheduleUtils.deleteScheduleJob(scheduler, job.getJobId());

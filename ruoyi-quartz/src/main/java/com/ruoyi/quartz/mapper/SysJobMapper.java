@@ -39,7 +39,7 @@ public interface SysJobMapper
      * @param jobId 调度ID
      * @return 结果
      */
-    public int deleteJobById(SysJob job);
+    public int deleteJobById(Long jobId);
 
     /**
      * 批量删除调度任务信息

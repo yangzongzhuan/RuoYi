@@ -121,8 +121,8 @@ public class LogAspect
     /**
      * 获取注解中对方法的描述信息 用于Controller层注解
      * 
-     * @param joinPoint 切点
-     * @return 方法描述
+     * @param log 日志
+     * @param operLog 操作日志
      * @throws Exception
      */
     public void getControllerMethodDescription(Log log, SysOperLog operLog) throws Exception

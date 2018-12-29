@@ -73,9 +73,9 @@ public class DataScopeAspect
 
     /**
      * 数据范围过滤
-     * 
-     * @param da 部门表别名
-     * @return 标准连接条件对象
+     * @param joinPoint 切点
+     * @param user 用户
+     * @param alias 别名
      */
     public static void dataScopeFilter(JoinPoint joinPoint, SysUser user, String alias)
     {
