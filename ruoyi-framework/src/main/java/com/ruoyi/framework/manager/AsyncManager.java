@@ -44,6 +44,6 @@ public class AsyncManager
     public void shutdown(long timeout, TimeUnit unit) throws Exception
     {
         executor.shutdown();
-        executor.awaitTermination(timeout,unit);
+        executor.awaitTermination(timeout, unit);
     }
 }

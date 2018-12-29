@@ -33,7 +33,7 @@ public class ApplicationShutdownBean
 
     private void shutdownSpringSessionValidationScheduler()
     {
-        if(springSessionValidationScheduler != null && springSessionValidationScheduler.isEnabled())
+        if (springSessionValidationScheduler != null && springSessionValidationScheduler.isEnabled())
         {
             try
             {
@@ -42,10 +42,11 @@ public class ApplicationShutdownBean
             }
             catch (Exception e)
             {
-                logger.error(e.getMessage(),e);
+                logger.error(e.getMessage(), e);
             }
         }
     }
+
     private void shutdownAsyncManager()
     {
         try
@@ -55,7 +56,7 @@ public class ApplicationShutdownBean
         }
         catch (Exception e)
         {
-            logger.error(e.getMessage(),e);
+            logger.error(e.getMessage(), e);
         }
     }
 }
