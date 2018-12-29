@@ -1,23 +1,21 @@
-package com.ruoyi.framework.config;
+package com.ruoyi.framework.manager;
 
-import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.shiro.web.session.SpringSessionValidationScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PreDestroy;
 import java.util.concurrent.TimeUnit;
 
 /**
- * AsyncManagerShutdownBean 类
+ * ShutdownManager 类
  *
  * @Auther: cj
  * @Date: 2018/12/28
  */
 @Component
-public class ApplicationShutdownBean
+public class ShutdownManager
 {
     private static final Logger logger = LoggerFactory.getLogger("sys-user");
 
