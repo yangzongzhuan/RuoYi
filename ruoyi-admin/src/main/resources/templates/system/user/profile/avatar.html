@@ -4,7 +4,6 @@
 <title>用户头像修改</title>
 <link th:href="@{/ajax/libs/cropbox/cropbox.css}" rel="stylesheet"/>
 <body class="white-bg">
-    <input name="userId" id="userId" type="hidden"  th:value="${user.userId}" />
     <div class="container"> 
         <div class="imageBox"> 
 	        <div class="thumbBox"></div> 
@@ -68,7 +67,6 @@ function submitHandler() {
     var img = cropper.getBlob();
     var formdata = new FormData();
     formdata.append("avatarfile", img);
-    formdata.append("userId", $("#userId").val());
     $.ajax({
         url: ctx + "system/user/profile/updateAvatar",
         data: formdata,

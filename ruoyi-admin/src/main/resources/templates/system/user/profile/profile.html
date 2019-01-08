@@ -58,20 +58,19 @@
     
     <div th:include="include::footer"></div>
     <script>
-        var userId = [[${user.userId}]];
 	    /*用户信息-修改*/
 	    function edit() {
-	        var url = ctx + "system/user/profile/edit/" + userId;
+	        var url = ctx + 'system/user/profile/edit';
 	        $.modal.open("修改用户", url);
 	    }
 	    /*用户管理-重置密码*/
 	    function resetPwd() {
-	        var url = ctx + 'system/user/profile/resetPwd/' + userId;
+	        var url = ctx + 'system/user/profile/resetPwd';
 	        $.modal.open("重置密码", url, '800', '500');
 	    }
 	    /*用户管理-头像*/
 	    function avatar() {
-	        var url = ctx + 'system/user/profile/avatar/' + userId;
+	        var url = ctx + 'system/user/profile/avatar';
 	        $.modal.open("修改头像", url);
 	    }
 	</script>
