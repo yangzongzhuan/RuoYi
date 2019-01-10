@@ -18,7 +18,7 @@ import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.impl.SysUserOnlineServiceImpl;
+import com.ruoyi.system.service.ISysUserOnlineService;
 import com.ruoyi.framework.web.base.BaseController;
 
 /**
@@ -33,7 +33,7 @@ public class SysUserOnlineController extends BaseController
     private String prefix = "monitor/online";
 
     @Autowired
-    private SysUserOnlineServiceImpl userOnlineService;
+    private ISysUserOnlineService userOnlineService;
 
     @Autowired
     private OnlineSessionDAO onlineSessionDAO;
