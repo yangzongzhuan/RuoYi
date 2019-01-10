@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
@@ -19,11 +20,11 @@ import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 用户信息
@@ -73,7 +74,28 @@ public class SysUserController extends BaseController
     {
         List<SysUser> list = userService.selectUserList(user);
         ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
-        return util.exportExcel(list, "user");
+        return util.exportExcel(list, "用户数据");
+    }
+
+    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
+    @RequiresPermissions("system:user:import")
+    @PostMapping("/importData")
+    @ResponseBody
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
+    {
+        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        List<SysUser> userList = util.importExcel(file.getInputStream());
+        String message = userService.importUser(userList, updateSupport);
+        return AjaxResult.success(message);
+    }
+
+    @RequiresPermissions("system:user:view")
+    @GetMapping("/importTemplate")
+    @ResponseBody
+    public AjaxResult importTemplate()
+    {
+        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        return util.importTemplateExcel("用户数据");
     }
 
     /**

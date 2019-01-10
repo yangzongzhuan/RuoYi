@@ -244,6 +244,10 @@ public class SysUser extends BaseEntity
 
     public SysDept getDept()
     {
+        if (dept == null)
+        {
+            dept = new SysDept();
+        }
         return dept;
     }
 
@@ -304,6 +308,7 @@ public class SysUser extends BaseEntity
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())
             .append("remark", getRemark())
+            .append("dept", getDept())
             .toString();
     }
 }

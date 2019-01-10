@@ -3,7 +3,42 @@
  * Copyright (c) 2018 ruoyi
  */
 
-/** 用户管理 样式布局 */
+/** 基础通用 **/
+.pt5 {
+	padding-top: 5px;
+}
+.pr5 {
+	padding-right: 5px;
+}
+.pb5 {
+	padding-bottom: 5px;
+}
+.mt10 {
+	margin-top: 10px;
+}
+.mr10 {
+	margin-right: 10px;
+}
+.mb10 {
+	margin-bottom: 10px;
+}
+.ml0 {
+	margin-left: 10px;
+}
+.mt20 {
+	margin-top: 20px;
+}
+.mr20 {
+	margin-right: 20px;
+}
+.mb20 {
+	margin-bottom: 20px;
+}
+.ml20 {
+	margin-left: 20px;
+}
+
+/** 用户管理 样式布局 **/
 .box {
 	position: relative;
 	border-radius: 3px;
@@ -91,7 +126,7 @@
 	margin: 5px 0 5px -25px
 }
 
-/** select2 样式修改 */
+/** select2 样式修改 **/
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
 	background-color: #1AB394;
 	border-color: #1AB394;
@@ -112,7 +147,7 @@
 	padding-right: 10px
 }
 
-/** 表单验证 样式布局 */
+/** 表单验证 样式布局 **/
 label.error {
 	position: absolute;
 	right: 18px;
@@ -143,7 +178,7 @@ label.error {
 	max-width: none;
 }
 
-/** 复选框&单选框  */
+/** 复选框&单选框  **/
 .check-box,.radio-box {
 	display: inline-block;
 	box-sizing: border-box;
@@ -160,7 +195,7 @@ label.error {
 	left: 0
 }
 
-/* iCheck */
+/** iCheck **/
 .icheckbox-blue,.iradio-blue {
 	display: block;
 	margin: 0;
@@ -214,7 +249,7 @@ label.error {
 	background-position: -180px 0
 }
 
-/** 遮罩层 */
+/** 遮罩层 **/
 .loaderbox {
 	display: inline-block;
 	min-width: 125px;
@@ -281,7 +316,7 @@ label.error {
 	}
 }
 
-/** 表单查询条件 */
+/** 表单查询条件 **/
 ul {
 	margin: 0;
 	padding: 0;
@@ -409,7 +444,7 @@ label {
 	cursor: pointer;
 }
 
-/** 表格查询数据 */
+/** 表格查询数据 **/
 .table-striped {
 	min-height: 75%;
 }
@@ -437,7 +472,7 @@ label {
 	border: 1px solid #ddd!important
 }
 
-/** 首页样式 */
+/** 首页样式 **/
 .ax_close_max {
 	position: fixed;
 	top: 5px;

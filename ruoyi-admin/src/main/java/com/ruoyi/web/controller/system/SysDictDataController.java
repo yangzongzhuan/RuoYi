@@ -59,7 +59,7 @@ public class SysDictDataController extends BaseController
     {
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
         ExcelUtil<SysDictData> util = new ExcelUtil<SysDictData>(SysDictData.class);
-        return util.exportExcel(list, "dictData");
+        return util.exportExcel(list, "字典数据");
     }
 
     /**
