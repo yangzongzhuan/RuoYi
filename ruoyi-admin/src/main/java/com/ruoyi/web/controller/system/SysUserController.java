@@ -22,7 +22,6 @@ import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
@@ -47,9 +46,6 @@ public class SysUserController extends BaseController
     @Autowired
     private ISysPostService postService;
     
-    @Autowired
-    private ISysConfigService configService;
-
     @Autowired
     private SysPasswordService passwordService;
 
@@ -90,8 +86,7 @@ public class SysUserController extends BaseController
         ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
         List<SysUser> userList = util.importExcel(file.getInputStream());
         String operName = getSysUser().getLoginName();
-        String password = configService.selectConfigByKey("sys.user.initPassword");
-        String message = userService.importUser(userList, updateSupport, operName, password);
+        String message = userService.importUser(userList, updateSupport, operName);
         return AjaxResult.success(message);
     }
 
