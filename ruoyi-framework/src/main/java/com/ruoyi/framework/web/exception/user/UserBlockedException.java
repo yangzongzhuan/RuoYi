@@ -9,8 +9,8 @@ public class UserBlockedException extends UserException
 {
     private static final long serialVersionUID = 1L;
 
-    public UserBlockedException(String reason)
+    public UserBlockedException()
     {
-        super("user.blocked", new Object[] { reason });
+        super("user.blocked", null);
     }
 }

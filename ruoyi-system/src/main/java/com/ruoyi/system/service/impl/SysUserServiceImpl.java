@@ -10,6 +10,7 @@ import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.support.Convert;
+import com.ruoyi.common.utils.Md5Utils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysPost;
 import com.ruoyi.system.domain.SysRole;
@@ -363,9 +364,11 @@ public class SysUserServiceImpl implements ISysUserService
      * 
      * @param userList 用户数据列表
      * @param isUpdateSupport 是否更新支持，如果已存在，则进行更新数据
+     * @param operName 操作用户
+     * @param password 初始密码
      * @return 结果
      */
-    public String importUser(List<SysUser> userList, Boolean isUpdateSupport)
+    public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName, String password)
     {
         if (StringUtils.isNull(userList) || userList.size() == 0)
         {
@@ -383,12 +386,15 @@ public class SysUserServiceImpl implements ISysUserService
                 SysUser u = userMapper.selectUserByLoginName(user.getLoginName());
                 if (StringUtils.isNull(u))
                 {
+                    user.setPassword(Md5Utils.hash(user.getLoginName() + password));
+                    user.setCreateBy(operName);
                     this.insertUser(user);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、账号 " + user.getLoginName() + " 导入成功");
                 }
                 else if (isUpdateSupport)
                 {
+                    user.setUpdateBy(operName);
                     this.updateUser(user);
                     successNum++;
                     successMsg.append("<br/>" + successNum + "、账号 " + user.getLoginName() + " 更新成功");

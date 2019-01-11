@@ -9,8 +9,8 @@ public class RoleBlockedException extends UserException
 {
     private static final long serialVersionUID = 1L;
 
-    public RoleBlockedException(String reason)
+    public RoleBlockedException()
     {
-        super("role.blocked", new Object[] { reason });
+        super("role.blocked", null);
     }
 }
