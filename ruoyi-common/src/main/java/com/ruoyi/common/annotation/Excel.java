@@ -70,13 +70,13 @@ public @interface Excel
     public String targetAttr() default "";
 
     /**
-     * 字段类型（ 1：仅导出；2：仅导入）
+     * 字段类型（0：导出导入；1：仅导出；2：仅导入）
      */
-    Type type() default Type.EXPORT;
+    Type type() default Type.ALL;
 
     public enum Type
     {
-        EXPORT(1), IMPORT(2);
+        ALL(0), EXPORT(1), IMPORT(2);
         private final int value;
 
         Type(int value)
