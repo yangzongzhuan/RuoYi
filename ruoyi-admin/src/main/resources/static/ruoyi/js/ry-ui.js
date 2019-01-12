@@ -515,7 +515,7 @@
             	    _width = 'auto';
             	    _height = 'auto';
             	}
-            	layer.open({
+            	top.layer.open({
             		type: 2,
             		area: [_width + 'px', _height + 'px'],
             		fix: false,
@@ -524,15 +524,12 @@
             		shade: 0.3,
             		title: $.table._option.modalName + "详细",
             		content: _url,
-            		btn: '关闭',
+            		btn: ['关闭'],
             	    // 弹层外区域关闭
             		shadeClose: true,
-            		success: function(layer) {
-            			layer[0].childNodes[3].childNodes[0].attributes[0].value='layui-layer-btn1';
-            		},
-            		btn1: function(index) {
-            			layer.close(index);
-            	    }
+            		cancel: function(index){
+            			return true;
+         	        }
             	});
             },
             // 删除信息
