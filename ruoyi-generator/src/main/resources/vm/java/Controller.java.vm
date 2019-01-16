@@ -17,7 +17,7 @@ import ${package}.service.I${className}Service;
 import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.common.base.AjaxResult;
-import com.ruoyi.common.utils.ExcelUtil;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
  * ${tableComment} 信息操作处理
