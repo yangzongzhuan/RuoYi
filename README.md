@@ -26,8 +26,9 @@
 12. 定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。
 13. 代码生成：前后端代码的生成（java、html、xml、sql)支持CRUD下载 。
 14. 系统接口：根据业务代码自动生成相关的api接口文档。
-15. 在线构建器：拖动表单元素生成相应的HTML代码。
-16. 连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
+15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
+16. 在线构建器：拖动表单元素生成相应的HTML代码。
+17. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 ## 在线体验
 > admin/admin123  
 > 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
@@ -41,27 +42,27 @@
 <table>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/25b5e333768d013d45a990c152dbe4d9d6e.jpg"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194326_GBIJ_1438828.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/dfadf4d864242745486aa0167110dfcbeb8.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194443_Qyuq_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194501_U7gT_1438828.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/2e1ed87df9b476ed73ed650df20cf009b78.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/91bef110740ba9e36ff00804f8748a787fb.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194525_PApp_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194535_3EM0_1438828.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/9a2851988f4e7433c9322154534865f57d7.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/396293f80b1e8cce8671f56c296bee78a3a.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194612_kJ4F_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194623_YEXO_1438828.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/787b3b06430a403655b48b9bcd1fa829555.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/a51820009836276b778bc89d4d0e217e26d.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/0902/132548_ne4U_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194643_MsxF_1438828.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/5fb138478adeda6825e206d21f67ecd0625.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/fa2f027a10707a4eb4fc47d5ea1c3d2b772.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194658_40L4_1438828.png"/></td>
-        <td><img src="https://static.oschina.net/uploads/space/2018/1005/194712_2ma3_1438828.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/a714056081523b7dfa782cda866e8be4adc.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/ab4b5797dfb2bc68c4974ad5458bd5f5bcf.jpg"/></td>
     </tr>
 </table>
 
