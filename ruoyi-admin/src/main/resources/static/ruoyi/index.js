@@ -1,6 +1,12 @@
 /**
- * 菜单处理
+ * 首页方法封装处理
+ * Copyright (c) 2019 ruoyi
  */
+layer.config({
+    extend: 'moon/style.css',
+    skin: 'layer-ext-moon'
+});
+
 $(function() {
     // MetsiMenu
     $('#side-menu').metisMenu();
@@ -45,6 +51,7 @@ function() {
     if ($(this).width() < 769) {
         $('body').addClass('mini-navbar');
         $('.navbar-static-side').fadeIn();
+        $(".sidebar-collapse .logo").addClass("hide");
     }
 });
 
@@ -55,12 +62,14 @@ function NavToggle() {
 function SmoothlyMenu() {
     if (!$('body').hasClass('mini-navbar')) {
         $('#side-menu').hide();
+        $(".sidebar-collapse .logo").removeClass("hide");
         setTimeout(function() {
             $('#side-menu').fadeIn(500);
         },
         100);
     } else if ($('body').hasClass('fixed-sidebar')) {
         $('#side-menu').hide();
+        $(".sidebar-collapse .logo").addClass("hide");
         setTimeout(function() {
             $('#side-menu').fadeIn(500);
         },

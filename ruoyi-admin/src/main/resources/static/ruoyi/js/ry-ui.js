@@ -1,6 +1,6 @@
 /**
  * 通用js方法封装处理
- * Copyright (c) 2018 ruoyi
+ * Copyright (c) 2019 ruoyi
  */
 (function ($) {
     $.extend({
@@ -18,6 +18,7 @@
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
                 _striped = $.common.isEmpty(options.striped) ? false : options.striped;
                 _escape = $.common.isEmpty(options.escape) ? false : options.escape;
+                _showFooter = $.common.isEmpty(options.showFooter) ? false : options.showFooter;
                 $('#bootstrap-table').bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
@@ -33,6 +34,7 @@
                     pageSize: 10,                                       // 每页的记录行数（*） 
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）
                     escape: _escape,                                    // 转义HTML字符串
+                    showFooter: _showFooter,                            // 是否显示表尾
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
         	        toolbar: '#toolbar',                                // 指定工作栏
                     sidePagination: "server",                           // 启用服务端分页
@@ -121,7 +123,7 @@
             	$.form.reset(currentId);
             	layer.open({
             		type: 1,
-            		area: ['400px'],
+            		area: ['400px', '230px'],
             		fix: false,
             		//不固定
             		maxmin: true,
@@ -138,12 +140,11 @@
             				return false;
             			}
             			var index = layer.load(2, {shade: false});
-            			var url = prefix + "/importData";
             			var formData = new FormData();
             			formData.append("file", $('#file')[0].files[0]);
             			formData.append("updateSupport", $("input[name='updateSupport']").is(':checked'));
             			$.ajax({
-            				url: url,
+            				url: $.table._option.importUrl,
             				data: formData,
             				cache: false,
             				contentType: false,
@@ -466,6 +467,14 @@
             	});
                 layer.full(index);
             },
+            // 禁用按钮
+            disable: function() {
+	        	$("a[class*=layui-layer-btn]", window.parent.document).addClass("layer-disabled");
+            },
+            // 启用按钮
+            enable: function() {
+            	$("a[class*=layui-layer-btn]", window.parent.document).removeClass("layer-disabled");
+            },
             // 打开遮罩层
             loading: function (message) {
             	$.blockUI({ message: '<div class="loaderbox"><div class="loading-activity"></div> ' + message + '</div>' });
@@ -485,12 +494,14 @@
         operate: {
         	// 提交数据
         	submit: function(url, type, dataType, data) {
-        		$.modal.loading("正在处理中，请稍后...");
             	var config = {
         	        url: url,
         	        type: type,
         	        dataType: dataType,
         	        data: data,
+        	        beforeSend: function () {
+        	        	$.modal.loading("正在处理中，请稍后...");
+        	        },
         	        success: function(result) {
         	        	$.operate.ajaxSuccess(result);
         	        }
@@ -608,12 +619,15 @@
             },
             // 保存信息
             save: function(url, data) {
-            	$.modal.loading("正在处理中，请稍后...");
             	var config = {
         	        url: url,
         	        type: "post",
         	        dataType: "json",
         	        data: data,
+        	        beforeSend: function () {
+        	        	$.modal.loading("正在处理中，请稍后...");
+        	        	$.modal.disable();
+        	        },
         	        success: function(result) {
         	        	$.operate.successCallback(result);
         	        }
@@ -657,6 +671,7 @@
                     $.modal.alertError(result.msg);
                 }
                 $.modal.closeLoading();
+                $.modal.enable();
             }
         },
         // 校验封装处理

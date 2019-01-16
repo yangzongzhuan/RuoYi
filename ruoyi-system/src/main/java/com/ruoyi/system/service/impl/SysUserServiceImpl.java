@@ -49,7 +49,7 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     private SysUserRoleMapper userRoleMapper;
-    
+
     @Autowired
     private ISysConfigService configService;
 
@@ -371,6 +371,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @param operName 操作用户
      * @return 结果
      */
+    @Override
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName)
     {
         if (StringUtils.isNull(userList) || userList.size() == 0)
@@ -427,5 +428,21 @@ public class SysUserServiceImpl implements ISysUserService
             successMsg.insert(0, "恭喜您，数据已全部导入成功！共 " + successNum + " 条，数据如下：");
         }
         return successMsg.toString();
+    }
+
+    /**
+     * 用户状态修改
+     * 
+     * @param user 用户信息
+     * @return 结果
+     */
+    @Override
+    public int changeStatus(SysUser user)
+    {
+        if (SysUser.isAdmin(user.getUserId()))
+        {
+            throw new BusinessException("不允许修改超级管理员用户");
+        }
+        return userMapper.updateUser(user);
     }
 }

@@ -148,4 +148,12 @@ public interface ISysUserService
      * @return 结果
      */
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
+
+    /**
+     * 用户状态修改
+     * 
+     * @param user 用户信息
+     * @return 结果
+     */
+    public int changeStatus(SysUser user);
 }

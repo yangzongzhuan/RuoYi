@@ -181,4 +181,16 @@ public class SysRoleController extends BaseController
     {
         return prefix + "/tree";
     }
+
+    /**
+     * 角色状态修改
+     */
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("system:role:edit")
+    @PostMapping("/changeStatus")
+    @ResponseBody
+    public AjaxResult changeStatus(SysRole role)
+    {
+        return toAjax(roleService.changeStatus(role));
+    }
 }

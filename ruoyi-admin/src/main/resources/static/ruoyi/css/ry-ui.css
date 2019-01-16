@@ -1,6 +1,6 @@
 /**
  * 通用css样式布局处理
- * Copyright (c) 2018 ruoyi
+ * Copyright (c) 2019 ruoyi
  */
 
 /** 基础通用 **/
@@ -12,6 +12,18 @@
 }
 .pb5 {
 	padding-bottom: 5px;
+}
+.mt5 {
+	margin-top: 5px;
+}
+.mr5 {
+	margin-right: 5px;
+}
+.mb5 {
+	margin-bottom: 5px;
+}
+.ml5 {
+	margin-left: 5px;
 }
 .mt10 {
 	margin-top: 10px;
@@ -36,6 +48,14 @@
 }
 .ml20 {
 	margin-left: 20px;
+}
+
+/** 弹层组件 禁用样式 **/
+.layer-disabled {
+	border: 1px #dedede solid !important;
+	background-color: #f1f1f1 !important;
+	color: #333 !important;
+	pointer-events: none;
 }
 
 /** 用户管理 样式布局 **/
@@ -480,4 +500,36 @@ label {
 	z-index: 9999;
 	display: none;
 	color: #ccc;
+}
+.navbar-right > .user-menu > .dropdown-menu {
+	border-top-right-radius:0;
+	border-top-left-radius:0;
+	padding:1px 0 0 0;
+	border-top-width:0;
+	width:138px;
+}
+.navbar-right > .user-menu .user-image {
+	float:left;
+	width:27px;
+	height:27px;
+	border-radius:50%;
+	margin-right:8px;
+	margin-top:-3px;
+}
+@media (max-width:767px) {
+	.navbar-right > .user-menu .user-image {
+	float:none;
+	margin-right:0;
+	margin-top:-8px;
+	line-height:10px;
+}
+}.dropdown-menu > li > a > .glyphicon,.dropdown-menu > li > a > .fa,.dropdown-menu > li > a > .ion {
+	margin-right:10px;
+}
+.dropdown-menu > li > a:hover {
+	background-color:#e1e3e9;
+	color:#333;
+}
+.dropdown-menu > .divider {
+	background-color:#eee;
 }

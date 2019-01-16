@@ -514,7 +514,7 @@ create table sys_config (
 	primary key (config_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '参数配置表';
 
-insert into sys_config values(1, '主框架页-默认皮肤样式名称', 'sys.index.skinName',     'skin-default',  'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '默认 skin-default、蓝色 skin-blue、黄色 skin-yellow' );
+insert into sys_config values(1, '主框架页-默认皮肤样式名称', 'sys.index.skinName',     'skin-blue',     'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '蓝色 skin-blue、绿色 skin-green、紫色 skin-purple、红色 skin-red、黄色 skin-yellow' );
 insert into sys_config values(2, '用户管理-账号初始密码',     'sys.user.initPassword',  '123456',        'Y', 'admin', '2018-03-16 11-33-00', 'ry', '2018-03-16 11-33-00', '初始化密码 123456' );
 
 
@@ -607,7 +607,7 @@ create table sys_notice (
   notice_id 		int(4) 		    not null auto_increment    comment '公告ID',
   notice_title 		varchar(50) 	not null 				   comment '公告标题',
   notice_type 		char(1) 	    not null 			       comment '公告类型（1通知 2公告）',
-  notice_content    varchar(500)    default ''                 comment '公告内容',
+  notice_content    varchar(2000)   default ''                 comment '公告内容',
   status 			char(1) 		default '0' 			   comment '公告状态（0正常 1关闭）',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 		datetime                                   comment '创建时间',

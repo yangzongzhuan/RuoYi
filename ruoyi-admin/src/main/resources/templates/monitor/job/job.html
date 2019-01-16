@@ -107,12 +107,12 @@
 		            title: '执行表达式'
 		        },
 		        {
-		            field: 'status',
-		            title: '任务状态',
-		            align: 'center',
-		            formatter: function(value, row, index) {
-		            	return $.table.selectDictLabel(datas, value);
-		            }
+		        	visible: statusFlag == 'hidden' ? false : true,
+		        	title: '任务状态',
+		        	align: 'center',
+		        	formatter: function (value, row, index) {
+		        		return statusTools(row);
+		        	}
 		        },
 		        {
 		            field: 'createTime',
@@ -124,7 +124,6 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		                var actions = [];
-		                actions.push(statusTools(row));
 		                actions.push('<a class="btn btn-primary btn-xs ' + statusFlag + '" href="#" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行</a> ');
 		                actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="#" onclick="$.operate.detail(\'' + row.jobId + '\')"><i class="fa fa-search"></i>详细</a> ');
 		                return actions.join('');
@@ -133,37 +132,38 @@
 		    };
 		    $.table.init(options);
 		});
-
+        
+		/* 调度任务状态显示 */
 		function statusTools(row) {
 		    if (row.status == 1) {
-		        return '<a class="btn btn-info btn-xs ' + statusFlag + '" href="#" onclick="start(\'' + row.jobId + '\')"><i class="fa fa-play"></i>启用</a> ';
-		    } else {
-		    	return '<a class="btn btn-danger btn-xs ' + statusFlag + '" href="#" onclick="stop(\'' + row.jobId + '\')"><i class="fa fa-pause"></i>暂停</a> ';
-		    }
+    			return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="start(\'' + row.jobId + '\')"></i> ';
+    		} else {
+    			return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="stop(\'' + row.jobId + '\')"></i> ';
+    		}
 		}
 		
-		/*立即执行一次*/
+		/* 立即执行一次 */
 		function run(jobId) {
 			$.modal.confirm("确认要立即执行任务吗？", function() {
 				$.operate.post(prefix + "/run", { "jobId": jobId});
 		    })
 		}
 
-		/*调度任务-停用*/
+		/* 调度任务-停用 */
 		function stop(jobId) {
 			$.modal.confirm("确认要停用任务吗？", function() {
 				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "status": 1 });
 		    })
 		}
 
-		/*调度任务-启用*/
+		/* 调度任务-启用 */
 		function start(jobId) {
 			$.modal.confirm("确认要启用任务吗？", function() {
 				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "status": 0 });
 		    })
 		}
 
-		//调度日志查询
+		/* 调度日志查询 */
 		function jobLog(id) {
 			var url = ctx + 'monitor/jobLog';
 			createMenuItem(url, "调度日志");

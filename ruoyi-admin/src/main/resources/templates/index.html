@@ -15,7 +15,8 @@
     <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/animate.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
-    <link th:href="@{/ruoyi/css/ry-ui.css?v=3.1.0}" rel="stylesheet"/>
+    <link th:href="@{/css/skins.css}" rel="stylesheet"/>
+    <link th:href="@{/ruoyi/css/ry-ui.css?v=3.2.0}" rel="stylesheet"/>
     <style type="text/css">
         .nav > li:hover .dropdown-menu {display: block;}
         #content-main.max { height: calc(100% - 110px); overflow: hidden; width: 100%; height: 100%; left: 0px; position: absolute; top: 0px; z-index: 9998; margin: 0; }
@@ -31,19 +32,24 @@
         </div>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
-                         <img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}" alt="image" class="img-circle" height="60" width="60"/></span>
-                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                          <span class="clear"><span class="block m-t-xs"><strong class="font-bold" th:text="${user.userName}">用户</strong></span>
-                         <span class="text-muted text-xs block"><span th:text="${user.dept?.deptName}">部门</span> <b class="caret"></b></span> </span> </a>
-                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                             <li><a class="menuItem" th:href="@{/system/user/profile}">个人信息</a></li>
-                             <li class="divider"></li>
-                             <li><a th:href="@{logout}">退出</a></li>
-                         </ul>
-                    </div>
-                </li>
+                <li class="logo">
+				     <span class="logo-lg">RuoYi</span>
+            	</li>
+            	<li>
+            		<div class="user-panel">
+            			<a class="menuItem" title="个人中心" th:href="@{/system/user/profile}"> 
+            				<div class="hide" th:text="个人中心"></div>
+					        <div class="pull-left image">
+		                    	<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}" class="img-circle" alt="User Image">
+					        </div>
+				        </a>
+				        <div class="pull-left info">
+				          <p>[[${user.loginName}]]</p>
+				          <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+				          <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
+				        </div>
+				    </div>
+            	</li>
                  <li class="active">
                     <a href="index.html"><i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
@@ -74,20 +80,35 @@
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation"
-                 style="margin-bottom: 0">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-default " href="#" title="收起菜单">
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
                     	<i class="fa fa-bars"></i>
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-	                <li>
-	                    <span class="m-r-sm text-muted">欢迎来到若依管理后台.</span>
-	                </li>
-	                <li><a id="fullScreen"><i class="fa fa-arrows-alt"></i>全屏</a></li>
-                    <li><a th:href="@{logout}"><i class="fa fa-sign-out"></i>退出</a></li>
+	                <li><a title="全屏显示" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+                    <li class="dropdown user-menu">
+						<a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}" class="user-image">
+							<span class="hidden-xs">[[${user.userName}]]</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="mt5">
+								<a th:href="@{/system/user/profile}" class="menuItem">
+								<i class="fa fa-user"></i> 个人中心</a>
+							</li>
+							<li>
+								<a onclick="resetPwd()" class="menuItem">
+								<i class="fa fa-key"></i> 修改密码</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a th:href="@{logout}">
+								<i class="fa fa-sign-out"></i> 退出登录</a>
+							</li>
+						</ul>
+					</li>
                 </ul>
             </nav>
         </div>
@@ -137,8 +158,16 @@
 <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="http://tajs.qq.com/stats?sId=62048022"></script>
-<script th:src="@{/ruoyi/js/ry-ui.js?v=3.1.0}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=3.2.0}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script th:inline="javascript"> 
+var ctx = [[@{/}]];
+/*用户管理-重置密码*/
+function resetPwd() {
+    var url = ctx + 'system/user/profile/resetPwd';
+    $.modal.open("重置密码", url, '800', '500');
+}
+</script>
 </body>
 </html>

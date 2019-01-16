@@ -1,8 +1,7 @@
 /**
  * 通用方法封装处理
- * Copyright (c) 2018 ruoyi 
+ * Copyright (c) 2019 ruoyi 
  */
-
 $(function() {
 	// select2复选框事件绑定
 	if ($.fn.select2 !== undefined) {
@@ -190,4 +189,8 @@ $.ajaxSetup({
             $.modal.closeLoading();
         }
     }
+});
+layer.config({
+    extend: 'moon/style.css',
+    skin: 'layer-ext-moon'
 });

@@ -30,9 +30,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.annotation.Excel;
@@ -133,7 +133,7 @@ public class ExcelUtil<T>
     public List<T> importExcel(String sheetName, InputStream is) throws Exception
     {
         this.type = Type.IMPORT;
-        this.wb = new XSSFWorkbook(is);
+        this.wb = WorkbookFactory.create(is);
         List<T> list = new ArrayList<T>();
         Sheet sheet = null;
         if (StringUtils.isNotEmpty(sheetName))

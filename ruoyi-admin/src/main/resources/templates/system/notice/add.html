@@ -47,8 +47,38 @@
 
 	    $('.summernote').summernote({
 			height : '220px',
-			lang : 'zh-CN'
+			lang : 'zh-CN',
+			callbacks: {
+                onImageUpload: function (files) {
+                    sendFile(files[0], this);
+                }
+            }
 		});
+	    
+	    // 上传文件
+	    function sendFile(file, obj) {
+	        var data = new FormData();
+	        data.append("file", file);
+	        $.ajax({
+	            type: "POST",
+	            url: ctx + "common/upload",
+	            data: data,
+	            cache: false,
+	            contentType: false,
+	            processData: false,
+	            dataType: 'json',
+	            success: function(result) {
+	                if (result.code == web_status.SUCCESS) {
+	                	$(obj).summernote('editor.insertImage', result.url, result.fileName);
+					} else {
+						$.modal.alertError(result.msg);
+					}
+	            },
+	            error: function(error) {
+	                $.modal.alertWarning("图片上传失败。");
+	            }
+	        });
+	    }
 		
 		$("#form-notice-add").validate({
 			rules:{
