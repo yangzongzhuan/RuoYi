@@ -1,10 +1,8 @@
 package com.ruoyi.framework.config;
 
-import org.springframework.boot.web.context.WebServerInitializedEvent;
-import org.springframework.context.ApplicationListener;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import com.ruoyi.framework.util.ServletUtils;
 
 /**
  * 服务相关配置
@@ -13,28 +11,23 @@ import java.net.UnknownHostException;
  *
  */
 @Component
-public class ServerConfig implements ApplicationListener<WebServerInitializedEvent>
+public class ServerConfig
 {
-    private int serverPort;
-
+    /**
+     * 获取完整的请求路径，包括：域名，端口，上下文访问路径
+     * 
+     * @return 服务地址
+     */
     public String getUrl()
     {
-        InetAddress address = null;
-        try
-        {
-            address = InetAddress.getLocalHost();
-        }
-        catch (UnknownHostException e)
-        {
-            e.printStackTrace();
-        }
-        return "http://" + address.getHostAddress() + ":" + this.serverPort;
+        HttpServletRequest request = ServletUtils.getRequest();
+        return getDomain(request);
     }
 
-    @Override
-    public void onApplicationEvent(WebServerInitializedEvent event)
+    public static String getDomain(HttpServletRequest request)
     {
-        this.serverPort = event.getWebServer().getPort();
+        StringBuffer url = request.getRequestURL();
+        String contextPath = request.getServletContext().getContextPath();
+        return url.delete(url.length() - request.getRequestURI().length(), url.length()).append(contextPath).toString();
     }
-
 }
