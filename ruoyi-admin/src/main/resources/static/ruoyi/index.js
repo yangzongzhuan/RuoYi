@@ -124,7 +124,7 @@ $(function() {
 
     //查看左侧隐藏的选项卡
     function scrollTabLeft() {
-        var marginLeftVal = Math.abs(parseInt($('.page-tabs-content').css('margin-left')));
+        var marginLeftVal = Math.abs(parseInt($('.page-tabs-content').css('margin-left')) + 50);
         // 可视区域非tab宽度
         var tabOuterWidth = calSumWidth($(".content-tabs").children().not(".menuTabs"));
         //可视区域tab宽度
