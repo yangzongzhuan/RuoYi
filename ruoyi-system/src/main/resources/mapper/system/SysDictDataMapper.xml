@@ -77,11 +77,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="dictLabel != null and dictLabel != ''">dict_label = #{dictLabel},</if>
  			<if test="dictValue != null and dictValue != ''">dict_value = #{dictValue},</if>
  			<if test="dictType != null and dictType != ''">dict_type = #{dictType},</if>
- 			<if test="cssClass != null and cssClass != ''">css_class = #{cssClass},</if>
- 			<if test="listClass != null and listClass != ''">list_class = #{listClass},</if>
+ 			<if test="cssClass != null">css_class = #{cssClass},</if>
+ 			<if test="listClass != null">list_class = #{listClass},</if>
  			<if test="isDefault != null and isDefault != ''">is_default = #{isDefault},</if>
  			<if test="status != null">status = #{status},</if>
- 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			<if test="remark != null">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>

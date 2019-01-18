@@ -110,9 +110,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
  			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
  			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
- 			<if test="leader != null and leader != ''">leader = #{leader},</if>
- 			<if test="phone != null and phone != ''">phone = #{phone},</if>
- 			<if test="email != null and email != ''">email = #{email},</if>
+ 			<if test="leader != null">leader = #{leader},</if>
+ 			<if test="phone != null">phone = #{phone},</if>
+ 			<if test="email != null">email = #{email},</if>
  			<if test="status != null and status != ''">status = #{status},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()

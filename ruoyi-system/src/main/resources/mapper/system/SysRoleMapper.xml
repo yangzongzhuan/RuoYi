@@ -97,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="roleSort != null and roleSort != ''">role_sort = #{roleSort},</if>
  			<if test="dataScope != null and dataScope != ''">data_scope = #{dataScope},</if>
  			<if test="status != null and status != ''">status = #{status},</if>
- 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			<if test="remark != null">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>

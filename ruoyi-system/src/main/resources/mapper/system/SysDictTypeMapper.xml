@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="dictName != null and dictName != ''">dict_name = #{dictName},</if>
  			<if test="dictType != null and dictType != ''">dict_type = #{dictType},</if>
  			<if test="status != null">status = #{status},</if>
- 			<if test="remark != null and remark != ''">remark = #{remark},</if>
+ 			<if test="remark != null">remark = #{remark},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			update_time = sysdate()
  		</set>

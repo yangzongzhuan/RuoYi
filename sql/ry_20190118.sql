@@ -8,9 +8,9 @@ create table sys_dept (
   ancestors 		varchar(50)     default '' 			       comment '祖级列表',
   dept_name 		varchar(30) 	default '' 				   comment '部门名称',
   order_num 		int(4) 			default 0 			       comment '显示顺序',
-  leader            varchar(20)     default ''                 comment '负责人',
-  phone             varchar(11)     default ''                 comment '联系电话',
-  email             varchar(50)     default ''                 comment '邮箱',
+  leader            varchar(20)     default null               comment '负责人',
+  phone             varchar(11)     default null               comment '联系电话',
+  email             varchar(50)     default null               comment '邮箱',
   status 			char(1) 		default '0' 			   comment '部门状态（0正常 1停用）',
   del_flag			char(1) 		default '0' 			   comment '删除标志（0代表存在 2代表删除）',
   create_by         varchar(64)     default ''                 comment '创建者',
@@ -84,7 +84,7 @@ create table sys_post
     create_time   datetime                                   comment '创建时间',
     update_by     varchar(64) 	  default ''			     comment '更新者',
 	update_time   datetime                                   comment '更新时间',
-    remark 		  varchar(500) 	  default '' 				 comment '备注',
+    remark 		  varchar(500) 	  default null 				 comment '备注',
 	primary key (post_id)
 ) engine=innodb default charset=utf8 comment = '岗位信息表';
 
@@ -113,7 +113,7 @@ create table sys_role (
   create_time 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
   update_time 		datetime                                   comment '更新时间',
-  remark 			varchar(500) 	default '' 				   comment '备注',
+  remark 			varchar(500) 	default null 			   comment '备注',
   primary key (role_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '角色信息表';
 
@@ -136,7 +136,7 @@ create table sys_menu (
   url 				varchar(200) 	default '#'				   comment '请求地址',
   menu_type 		char(1) 		default '' 			       comment '菜单类型（M目录 C菜单 F按钮）',
   visible 			char(1) 		default 0 				   comment '菜单状态（0显示 1隐藏）',
-  perms 			varchar(100) 	default '' 				   comment '权限标识',
+  perms 			varchar(100) 	default null 			   comment '权限标识',
   icon 				varchar(100) 	default '#' 			   comment '菜单图标',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 		datetime                                   comment '创建时间',
@@ -428,7 +428,7 @@ create table sys_dict_type
     create_time      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
 	update_time      datetime                                   comment '更新时间',
-    remark 	         varchar(500) 	 default '' 				comment '备注',
+    remark 	         varchar(500) 	 default null 				comment '备注',
 	primary key (dict_id),
 	unique (dict_type)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典类型表';
@@ -455,15 +455,15 @@ create table sys_dict_data
 	dict_label       varchar(100)    default ''                 comment '字典标签',
 	dict_value       varchar(100)    default ''                 comment '字典键值',
 	dict_type        varchar(100)    default ''                 comment '字典类型',
-	css_class        varchar(100)    default ''                 comment '样式属性（其他样式扩展）',
-	list_class       varchar(100)    default ''                 comment '表格回显样式',
+	css_class        varchar(100)    default null               comment '样式属性（其他样式扩展）',
+	list_class       varchar(100)    default null               comment '表格回显样式',
 	is_default       char(1)         default 'N'                comment '是否默认（Y是 N否）',
     status 			 char(1) 		 default '0'			    comment '状态（0正常 1停用）',
     create_by        varchar(64)     default ''                 comment '创建者',
     create_time      datetime                                   comment '创建时间',
     update_by        varchar(64) 	 default ''			        comment '更新者',
 	update_time      datetime                                   comment '更新时间',
-    remark 	         varchar(500) 	 default '' 				comment '备注',
+    remark 	         varchar(500) 	 default null 				comment '备注',
 	primary key (dict_code)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '字典数据表';
 
@@ -510,7 +510,7 @@ create table sys_config (
     create_time 	   datetime                                 comment '创建时间',
     update_by          varchar(64)   default ''                 comment '更新者',
     update_time        datetime                                 comment '更新时间',
-	remark 	           varchar(500)  default '' 				comment '备注',
+	remark 	           varchar(500)  default null 				comment '备注',
 	primary key (config_id)
 ) engine=innodb auto_increment=100 default charset=utf8 comment = '参数配置表';
 
@@ -607,13 +607,13 @@ create table sys_notice (
   notice_id 		int(4) 		    not null auto_increment    comment '公告ID',
   notice_title 		varchar(50) 	not null 				   comment '公告标题',
   notice_type 		char(1) 	    not null 			       comment '公告类型（1通知 2公告）',
-  notice_content    varchar(2000)   default ''                 comment '公告内容',
+  notice_content    varchar(2000)   default null               comment '公告内容',
   status 			char(1) 		default '0' 			   comment '公告状态（0正常 1关闭）',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time 		datetime                                   comment '创建时间',
   update_by 		varchar(64) 	default ''			       comment '更新者',
   update_time 		datetime                                   comment '更新时间',
-  remark 			varchar(255) 	default '' 				   comment '备注',
+  remark 			varchar(255) 	default null 			   comment '备注',
   primary key (notice_id)
 ) engine=innodb auto_increment=10 default charset=utf8 comment = '通知公告表';
 
