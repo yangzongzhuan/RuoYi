@@ -1,9 +1,7 @@
 /**
- * @name        jQuery FullScreen Plugin
- * @author      Martin Angelov, Morten Sjøgren
- * @version     1.2
- * @url         http://tutorialzine.com/2012/02/enhance-your-website-fullscreen-api/
- * @license     MIT License
+ * 基于jQuery FullScreen修改
+ * 新增支持IE全屏显示
+ * Copyright (c) 2019 ruoyi
  */
 
 /*jshint browser: true, jquery: true */
@@ -15,6 +13,7 @@
 		var doc = document.documentElement;
 
 		return ('requestFullscreen' in doc) ||
+		        ('msRequestFullscreen' in doc) ||
 				('mozRequestFullScreen' in doc && document.mozFullScreenEnabled) ||
 				('webkitRequestFullScreen' in doc);
 	}
@@ -26,6 +25,8 @@
 			elem.mozRequestFullScreen();
 		} else if (elem.webkitRequestFullScreen) {
 			elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+		} else if (elem.msRequestFullscreen) {
+			elem.msRequestFullscreen();
 		}
 	}
 
@@ -33,6 +34,7 @@
 		return document.fullscreen ||
 				document.mozFullScreen ||
 				document.webkitIsFullScreen ||
+				document.msFullscreenElement ||
 				false;
 	}
 
@@ -43,6 +45,8 @@
 			document.mozCancelFullScreen();
 		} else if (document.webkitCancelFullScreen) {
 			document.webkitCancelFullScreen();
+		} else if (document.msExitFullscreen) {
+			document.msExitFullscreen();
 		}
 	}
 
