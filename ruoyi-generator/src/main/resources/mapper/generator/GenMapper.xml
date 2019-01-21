@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectTableColumnsByName" parameterType="String" resultMap="ColumnInfoResult">
-		select column_name, data_type, column_comment from information_schema.columns
+		select column_name, data_type, column_comment, extra from information_schema.columns
         where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
 	</select>
 

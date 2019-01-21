@@ -44,6 +44,7 @@ public class GenUtils
             String attrName = StringUtils.convertToCamelCase(column.getColumnName());
             column.setAttrName(attrName);
             column.setAttrname(StringUtils.uncapitalize(attrName));
+            column.setExtra(column.getExtra());
 
             // 列的数据类型，转换成Java类型
             String attrType = javaTypeMap.get(column.getDataType());
