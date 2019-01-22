@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap type="SysRoleDept" id="SysRoleDeptResult">
 		<result property="roleId"     column="role_id"      />
-		<result property="detpId"     column="dept_id"      />
+		<result property="deptId"     column="dept_id"      />
 	</resultMap>
 
 	<delete id="deleteRoleDeptByRoleId" parameterType="Long">
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<select id="selectCountRoleDeptByDeptId" resultType="Integer">
-	    select count(1) from sys_role_dept where dept_id=#{detpId}  
+	    select count(1) from sys_role_dept where dept_id=#{deptId}
 	</select>
 	
 	<delete id="deleteRoleDept" parameterType="Long">

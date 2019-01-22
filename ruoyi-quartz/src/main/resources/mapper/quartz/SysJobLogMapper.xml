@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
-	<select id="selectJobAll" resultMap="SysJobLogResult">
+	<select id="selectJobLogAll" resultMap="SysJobLogResult">
 		<include refid="selectJobLogVo"/>
 	</select>
 	

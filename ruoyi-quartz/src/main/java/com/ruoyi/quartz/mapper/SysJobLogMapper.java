@@ -1,7 +1,8 @@
 package com.ruoyi.quartz.mapper;
 
-import java.util.List;
 import com.ruoyi.quartz.domain.SysJobLog;
+
+import java.util.List;
 
 /**
  * 调度任务日志信息 数据层
@@ -17,6 +18,13 @@ public interface SysJobLogMapper
      * @return 调度任务日志集合
      */
     public List<SysJobLog> selectJobLogList(SysJobLog jobLog);
+
+    /**
+     * 查询所有调度任务日志
+     *
+     * @return 调度任务日志列表
+     */
+    public List<SysJobLog> selectJobLogAll();
 
     /**
      * 通过调度任务日志ID查询调度信息
