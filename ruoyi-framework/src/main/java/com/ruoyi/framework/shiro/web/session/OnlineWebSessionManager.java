@@ -14,8 +14,8 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.ShiroConstants;
+import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
-import com.ruoyi.framework.util.SpringUtils;
 import com.ruoyi.system.domain.SysUserOnline;
 import com.ruoyi.system.service.ISysUserOnlineService;
 

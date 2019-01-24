@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.spring.SpringUtils;
 
 /**
  * 执行定时任务
@@ -23,7 +24,7 @@ public class ScheduleRunnable implements Runnable
     public ScheduleRunnable(String beanName, String methodName, String params)
             throws NoSuchMethodException, SecurityException
     {
-        this.target = SpringContextUtil.getBean(beanName);
+        this.target = SpringUtils.getBean(beanName);
         this.params = params;
 
         if (StringUtils.isNotEmpty(params))

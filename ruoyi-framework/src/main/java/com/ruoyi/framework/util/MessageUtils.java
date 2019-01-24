@@ -1,6 +1,7 @@
 package com.ruoyi.framework.util;
 
 import org.springframework.context.MessageSource;
+import com.ruoyi.common.utils.spring.SpringUtils;
 
 /**
  * 获取i18n资源文件

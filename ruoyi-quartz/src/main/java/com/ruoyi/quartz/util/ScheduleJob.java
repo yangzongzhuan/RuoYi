@@ -13,6 +13,7 @@ import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.bean.BeanUtils;
+import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.domain.SysJobLog;
 import com.ruoyi.quartz.service.ISysJobLogService;
@@ -28,9 +29,9 @@ public class ScheduleJob extends QuartzJobBean
 {
     private static final Logger log = LoggerFactory.getLogger(ScheduleJob.class);
 
-    private ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) SpringContextUtil.getBean("publicThreadPool");
+    private ThreadPoolTaskExecutor executor = SpringUtils.getBean("threadPoolTaskExecutor");
 
-    private final static ISysJobLogService jobLogService = (ISysJobLogService) SpringContextUtil.getBean("sysJobLogServiceImpl");
+    private final static ISysJobLogService jobLogService = SpringUtils.getBean(ISysJobLogService.class);
 
     @Override
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException
