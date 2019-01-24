@@ -1,9 +1,10 @@
 package com.ruoyi.framework.manager;
 
 import java.util.TimerTask;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import com.ruoyi.common.utils.Threads;
+import com.ruoyi.framework.util.SpringUtils;
 
 /**
  * 异步任务管理器
@@ -20,7 +21,7 @@ public class AsyncManager
     /**
      * 异步操作任务调度线程池
      */
-    private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(5);
+    private ScheduledExecutorService executor = SpringUtils.getBean("scheduledExecutorService");
 
     /**
      * 单例模式

@@ -105,13 +105,11 @@ public class GenUtils
      */
     public static String tableToJava(String tableName)
     {
-        if (Constants.AUTO_REOMVE_PRE.equals(Global.getAutoRemovePre()))
+        String autoRemovePre = Global.getAutoRemovePre();
+        String tablePrefix = Global.getTablePrefix();
+        if (Constants.AUTO_REOMVE_PRE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix))
         {
-            tableName = tableName.substring(tableName.indexOf("_") + 1);
-        }
-        if (StringUtils.isNotEmpty(Global.getTablePrefix()))
-        {
-            tableName = tableName.replace(Global.getTablePrefix(), "");
+            tableName = tableName.replaceFirst(tablePrefix, "");
         }
         return StringUtils.convertToCamelCase(tableName);
     }
