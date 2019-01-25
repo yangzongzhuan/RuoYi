@@ -103,6 +103,14 @@
                     }
                 },
                 {
+                    field: 'remark',
+                    title: '备注',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
+                },
+                {
                     field: 'createTime',
                     title: '创建时间'
                 },

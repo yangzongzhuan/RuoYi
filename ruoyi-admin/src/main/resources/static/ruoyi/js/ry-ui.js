@@ -40,32 +40,33 @@
                     escape: _escape,                                    // 转义HTML字符串
                     showFooter: _showFooter,                            // 是否显示表尾
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
-        	        toolbar: '#toolbar',                                // 指定工作栏
+                    toolbar: '#toolbar',                                // 指定工作栏
                     sidePagination: "server",                           // 启用服务端分页
                     search: $.common.visible(options.search),           // 是否显示搜索框功能
                     showSearch: $.common.visible(options.showSearch),   // 是否显示检索信息
                     showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
-        			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
-        			showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
-        			showExport: $.common.visible(options.showExport),   // 是否支持导出文件
-        			fixedColumns: _fixedColumns,                        // 是否启用冻结列（左侧）
-        			fixedNumber: _fixedNumber,                          // 列冻结的个数（左侧）
-        			rightFixedColumns: _rightFixedColumns,              // 是否启用冻结列（右侧）
-        			rightFixedNumber: _rightFixedNumber,                // 列冻结的个数（右侧）
+                    showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
+                    showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
+                    showExport: $.common.visible(options.showExport),   // 是否支持导出文件
+                    fixedColumns: _fixedColumns,                        // 是否启用冻结列（左侧）
+                    fixedNumber: _fixedNumber,                          // 列冻结的个数（左侧）
+                    rightFixedColumns: _rightFixedColumns,              // 是否启用冻结列（右侧）
+                    rightFixedNumber: _rightFixedNumber,                // 列冻结的个数（右侧）
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
-                    responseHandler: $.table.responseHandler            // 回调函数
+                    responseHandler: $.table.responseHandler,           // 回调函数
+                    onLoadSuccess: $.table.onLoadSuccess,               // 回调函数
                 });
             },
             // 查询条件
             queryParams: function(params) {
             	return {
         			// 传递参数查询参数
-        			pageSize:       params.limit,
-        			pageNum:        params.offset / params.limit + 1,
-        			searchValue:    params.search,
-        			orderByColumn:  params.sort,
-        			isAsc:          params.order
+                    pageSize:       params.limit,
+                    pageNum:        params.offset / params.limit + 1,
+                    searchValue:    params.search,
+                    orderByColumn:  params.sort,
+                    isAsc:          params.order
         		}; 
             },
             // 请求获取数据后处理回调函数
@@ -73,9 +74,13 @@
                 if (res.code == 0) {
                     return { rows: res.rows, total: res.total };
                 } else {
-                	$.modal.alertWarning(res.msg);
-                	return { rows: [], total: 0 };
+                    $.modal.alertWarning(res.msg);
+                    return { rows: [], total: 0 };
                 }
+            },
+            // 当所有数据被加载时触发
+            onLoadSuccess: function(data) {
+            	$("[data-toggle='tooltip']").tooltip();
             },
             // 序列号生成
             serialNumber: function (index) {
@@ -84,20 +89,31 @@
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
+			// 超出指定长度浮动提示
+			tooltip: function (value, length) {
+				var _length = $.common.isEmpty(length) ? 12 : length;
+				var _text = "";
+				if (value.length > _length) {
+					_text = value.substr(0, _length);
+				} else {
+					_text = value;
+				}
+				return '<a href="#" class="tooltip-show" data-toggle="tooltip" title="' + value + '">' + _text +'</a>';
+			},
             // 搜索-默认第一个form
             search: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
     		    var params = $("#bootstrap-table").bootstrapTable('getOptions');
     		    params.queryParams = function(params) {
-    		        var search = {};
-    		        $.each($("#" + currentId).serializeArray(), function(i, field) {
-    		            search[field.name] = field.value;
-    		        });
-    		        search.pageSize = params.limit;
-    		        search.pageNum = params.offset / params.limit + 1;
-    		        search.searchValue = params.search;
-    		        search.orderByColumn = params.sort;
-    		        search.isAsc = params.order;
+                    var search = {};
+                    $.each($("#" + currentId).serializeArray(), function(i, field) {
+                        search[field.name] = field.value;
+                    });
+                    search.pageSize = params.limit;
+                    search.pageNum = params.offset / params.limit + 1;
+                    search.searchValue = params.search;
+                    search.orderByColumn = params.sort;
+                    search.isAsc = params.order;
     		        return search;
     		    }
     		    $("#bootstrap-table").bootstrapTable('refresh', params);
