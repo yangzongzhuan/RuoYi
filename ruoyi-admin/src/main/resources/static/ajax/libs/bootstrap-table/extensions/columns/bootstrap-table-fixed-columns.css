@@ -1,0 +1,27 @@
+.fixed-table-header-columns,
+.fixed-table-body-columns {
+    position: absolute;
+    background-color: #fff;
+    display: none;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.fixed-table-header-columns .table,
+.fixed-table-body-columns .table {
+    border-right: 1px solid #ddd;
+}
+
+.fixed-table-header-columns .table.table-no-bordered,
+.fixed-table-body-columns .table.table-no-bordered {
+    border-right: 1px solid transparent;
+}
+
+.fixed-table-body-columns table {
+    position: absolute;
+    animation: none;
+}
+
+.bootstrap-table .table-hover > tbody > tr.hover > td{
+    background-color: #f5f5f5;
+}

@@ -19,6 +19,8 @@
                 _striped = $.common.isEmpty(options.striped) ? false : options.striped;
                 _escape = $.common.isEmpty(options.escape) ? false : options.escape;
                 _showFooter = $.common.isEmpty(options.showFooter) ? false : options.showFooter;
+                _fixedColumns = $.common.isEmpty(options.fixedColumns) ? false : options.fixedColumns;
+                _fixedNumber = $.common.isEmpty(options.fixedNumber) ? 0 : options.fixedNumber;
                 $('#bootstrap-table').bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
@@ -44,6 +46,8 @@
         			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
         			showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
         			showExport: $.common.visible(options.showExport),   // 是否支持导出文件
+        			fixedColumns: _fixedColumns,                        // 是否启用冻结列
+        			fixedNumber: _fixedNumber,                          // 冻结列的个数
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.table.responseHandler            // 回调函数
@@ -140,6 +144,7 @@
             				return false;
             			}
             			var index = layer.load(2, {shade: false});
+            			$.modal.disable();
             			var formData = new FormData();
             			formData.append("file", $('#file')[0].files[0]);
             			formData.append("updateSupport", $("input[name='updateSupport']").is(':checked'));
@@ -157,6 +162,7 @@
             						$.table.refresh();
             					} else {
             						layer.close(index);
+            						$.modal.enable();
             						$.modal.alertError(result.msg);
             					}
             				}
@@ -469,11 +475,13 @@
             },
             // 禁用按钮
             disable: function() {
-	        	$("a[class*=layui-layer-btn]", window.parent.document).addClass("layer-disabled");
+            	var doc = window.top == window.parent ? window.document : window.parent.document;
+	        	$("a[class*=layui-layer-btn]", doc).addClass("layer-disabled");
             },
             // 启用按钮
             enable: function() {
-            	$("a[class*=layui-layer-btn]", window.parent.document).removeClass("layer-disabled");
+            	var doc = window.top == window.parent ? window.document : window.parent.document;
+            	$("a[class*=layui-layer-btn]", doc).removeClass("layer-disabled");
             },
             // 打开遮罩层
             loading: function (message) {
