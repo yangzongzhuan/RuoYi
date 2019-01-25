@@ -54,8 +54,8 @@
                     rightFixedNumber: _rightFixedNumber,                // 列冻结的个数（右侧）
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
-                    responseHandler: $.table.responseHandler,           // 回调函数
-                    onLoadSuccess: $.table.onLoadSuccess,               // 回调函数
+                    responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数
+                    onLoadSuccess: $.table.onLoadSuccess,               // 当所有数据被加载时触发处理函数
                 });
             },
             // 查询条件
@@ -89,12 +89,12 @@
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
-			// 超出指定长度浮动提示
+			// 列超出指定长度浮动提示
 			tooltip: function (value, length) {
-				var _length = $.common.isEmpty(length) ? 12 : length;
+				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
 				if (value.length > _length) {
-					_text = value.substr(0, _length);
+					_text = value.substr(0, _length) + "...";
 				} else {
 					_text = value;
 				}
