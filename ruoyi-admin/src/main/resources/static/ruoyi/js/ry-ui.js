@@ -21,6 +21,8 @@
                 _showFooter = $.common.isEmpty(options.showFooter) ? false : options.showFooter;
                 _fixedColumns = $.common.isEmpty(options.fixedColumns) ? false : options.fixedColumns;
                 _fixedNumber = $.common.isEmpty(options.fixedNumber) ? 0 : options.fixedNumber;
+                _rightFixedColumns = $.common.isEmpty(options.rightFixedColumns) ? false : options.rightFixedColumns;
+                _rightFixedNumber = $.common.isEmpty(options.rightFixedNumber) ? 0 : options.rightFixedNumber;
                 $('#bootstrap-table').bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
@@ -46,8 +48,10 @@
         			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
         			showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
         			showExport: $.common.visible(options.showExport),   // 是否支持导出文件
-        			fixedColumns: _fixedColumns,                        // 是否启用冻结列
-        			fixedNumber: _fixedNumber,                          // 冻结列的个数
+        			fixedColumns: _fixedColumns,                        // 是否启用冻结列（左侧）
+        			fixedNumber: _fixedNumber,                          // 列冻结的个数（左侧）
+        			rightFixedColumns: _rightFixedColumns,              // 是否启用冻结列（右侧）
+        			rightFixedNumber: _rightFixedNumber,                // 列冻结的个数（右侧）
                     queryParams: $.table._params,                       // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.table.responseHandler            // 回调函数
