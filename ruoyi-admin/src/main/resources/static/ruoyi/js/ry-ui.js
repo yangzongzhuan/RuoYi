@@ -16,6 +16,7 @@
                 $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
                 _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
+                _pageSize = $.common.isEmpty(options.pageSize) ? 10 : options.pageSize;
                 _striped = $.common.isEmpty(options.striped) ? false : options.striped;
                 _escape = $.common.isEmpty(options.escape) ? false : options.escape;
                 _showFooter = $.common.isEmpty(options.showFooter) ? false : options.showFooter;
@@ -35,7 +36,7 @@
                     sortOrder: _sortOrder,                              // 排序方式  asc 或者 desc
                     pagination: $.common.visible(options.pagination),   // 是否显示分页（*）
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
-                    pageSize: 10,                                       // 每页的记录行数（*） 
+                    pageSize: _pageSize,                                // 每页的记录行数（*） 
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）
                     escape: _escape,                                    // 转义HTML字符串
                     showFooter: _showFooter,                            // 是否显示表尾
@@ -563,6 +564,7 @@
             		shade: 0.3,
             		title: $.table._option.modalName + "详细",
             		content: _url,
+            		zIndex: 9999999999,
             		btn: ['关闭'],
             	    // 弹层外区域关闭
             		shadeClose: true,
