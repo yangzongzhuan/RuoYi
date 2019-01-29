@@ -22,6 +22,9 @@ import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataValidation;
+import org.apache.poi.ss.usermodel.DataValidationConstraint;
+import org.apache.poi.ss.usermodel.DataValidationHelper;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
@@ -33,6 +36,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddressList;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFDataValidation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.annotation.Excel;
@@ -499,13 +503,25 @@ public class ExcelUtil<T>
     public static Sheet setHSSFValidation(Sheet sheet, String[] textlist, int firstRow, int endRow, int firstCol,
             int endCol)
     {
+        DataValidationHelper helper = sheet.getDataValidationHelper();
         // 加载下拉列表内容
-        DVConstraint constraint = DVConstraint.createExplicitListConstraint(textlist);
+        DataValidationConstraint constraint = helper.createExplicitListConstraint(textlist);
         // 设置数据有效性加载在哪个单元格上,四个参数分别是：起始行、终止行、起始列、终止列
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
         // 数据有效性对象
-        HSSFDataValidation dataValidationList = new HSSFDataValidation(regions, constraint);
-        sheet.addValidationData(dataValidationList);
+        DataValidation dataValidation = helper.createValidation(constraint, regions);
+        // 处理Excel兼容性问题
+        if (dataValidation instanceof XSSFDataValidation)
+        {
+            dataValidation.setSuppressDropDownArrow(true);
+            dataValidation.setShowErrorBox(true);
+        }
+        else
+        {
+            dataValidation.setSuppressDropDownArrow(false);
+        }
+
+        sheet.addValidationData(dataValidation);
         return sheet;
     }
 
