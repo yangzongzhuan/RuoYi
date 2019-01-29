@@ -59,7 +59,7 @@
 							</a>
 						</div>
 					</div>
-                    <div class="checkbox-custom" th:class="${captchaEnabled==false}? 'm-t'">
+                    <div class="checkbox-custom" th:classappend="${captchaEnabled==false} ? 'm-t'">
 				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
 				    </div>
                     <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>

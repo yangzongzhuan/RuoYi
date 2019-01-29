@@ -85,20 +85,19 @@ body.signin {
 }
 }
 /*
-µÇÂ¼½çÃæcheckÑùÊ½
-*/ 
+ç™»å½•ç•Œé¢checkæ ·å¼
+*/
 .checkbox-custom {
     position: relative;
     padding: 0 15px 0 25px;
     margin-bottom: 7px;
-    margin-top: 0;
     display: inline-block;
 }
 /*
-½«³õÊ¼µÄcheckboxµÄÑùÊ½¸Ä±ä
+å°†åˆå§‹çš„checkboxçš„æ ·å¼æ”¹å˜
 */
 .checkbox-custom input[type="checkbox"] {
-    opacity: 0;/*½«³õÊ¼µÄcheckboxÒş²ØÆğÀ´*/
+    opacity: 0; /*å°†åˆå§‹çš„checkboxéšè—èµ·æ¥*/
     position: absolute;
     cursor: pointer;
     z-index: 2;
@@ -107,7 +106,7 @@ body.signin {
     left: 3px;
 }
 /*
-Éè¼ÆĞÂµÄcheckbox£¬Î»ÖÃ
+è®¾è®¡æ–°çš„checkboxï¼Œä½ç½®
 */
 .checkbox-custom label:before {
     content: '';
@@ -123,7 +122,7 @@ body.signin {
     background: #fff;
 }
 /*
-µã»÷³õÊ¼µÄcheckbox£¬½«ĞÂµÄcheckbox¹ØÁªÆğÀ´
+ç‚¹å‡»åˆå§‹çš„checkboxï¼Œå°†æ–°çš„checkboxå…³è”èµ·æ¥
 */
 .checkbox-custom input[type="checkbox"]:checked +label:after {
     position: absolute;
@@ -142,7 +141,7 @@ body.signin {
 .checkbox-custom label {
     cursor: pointer;
     line-height: 1.2;
-    font-weight: normal;/*¸Ä±äÁËremembermeµÄ×ÖÌå*/
+    font-weight: normal; /*æ”¹å˜äº†remembermeçš„å­—ä½“*/
     margin-bottom: 0;
     text-align: left;
 }
