@@ -3,6 +3,7 @@ package com.ruoyi.framework.shiro.session;
 import java.io.Serializable;
 import java.util.Date;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +53,11 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
     protected Session doReadSession(Serializable sessionId)
     {
         return sysShiroService.getSession(sessionId);
+    }
+
+    @Override
+    public void update(Session session) throws UnknownSessionException {
+        super.update(session);
     }
 
     /**
