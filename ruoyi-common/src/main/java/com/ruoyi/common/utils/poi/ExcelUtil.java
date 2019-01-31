@@ -7,8 +7,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -220,6 +222,10 @@ public class ExcelUtil<T>
                     else if ((Float.TYPE == fieldType) || (Float.class == fieldType))
                     {
                         val = Convert.toFloat(val);
+                    }
+                    else if (BigDecimal.class == fieldType)
+                    {
+                        val = Convert.toBigDecimal(val);
                     }
                     else if (Date.class == fieldType)
                     {
@@ -665,14 +671,29 @@ public class ExcelUtil<T>
     private void createExcelField()
     {
         this.fields = new ArrayList<Field>();
-        Field[] allFields = clazz.getDeclaredFields();
-        // 得到所有field并存放到一个list中.
-        for (Field field : allFields)
+        List<Field> tempFields = new ArrayList<>();
+        Class<?> tempClass = clazz;
+        tempFields.addAll(Arrays.asList(clazz.getDeclaredFields()));
+        while (tempClass != null)
+        {
+            tempClass = tempClass.getSuperclass();
+            if (tempClass != null)
+                tempFields.addAll(Arrays.asList(tempClass.getDeclaredFields()));
+        }
+        putToFields(tempFields);
+    }
+
+    /**
+     * 放到字段集合中
+     */
+    private void putToFields(List<Field> fields)
+    {
+        for (Field field : fields)
         {
             Excel attr = field.getAnnotation(Excel.class);
             if (attr != null && (attr.type() == Type.ALL || attr.type() == type))
             {
-                fields.add(field);
+                this.fields.add(field);
             }
         }
     }
