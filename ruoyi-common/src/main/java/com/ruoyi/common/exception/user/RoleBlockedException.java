@@ -1,4 +1,4 @@
-package com.ruoyi.framework.web.exception.user;
+package com.ruoyi.common.exception.user;
 
 /**
  * 角色锁定异常类

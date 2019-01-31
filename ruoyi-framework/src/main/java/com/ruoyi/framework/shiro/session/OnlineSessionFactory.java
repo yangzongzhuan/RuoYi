@@ -7,7 +7,8 @@ import org.apache.shiro.session.mgt.SessionFactory;
 import org.apache.shiro.web.session.mgt.WebSessionContext;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.IpUtils;
-import com.ruoyi.framework.util.ServletUtils;
+import com.ruoyi.common.utils.ServletUtils;
+
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**

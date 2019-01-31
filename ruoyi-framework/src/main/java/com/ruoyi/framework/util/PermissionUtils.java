@@ -2,6 +2,7 @@ package com.ruoyi.framework.util;
 
 import org.apache.commons.lang3.StringUtils;
 import com.ruoyi.common.constant.PermissionConstants;
+import com.ruoyi.common.utils.MessageUtils;
 
 /**
  * permission 工具类

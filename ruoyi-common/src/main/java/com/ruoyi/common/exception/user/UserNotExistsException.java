@@ -1,4 +1,4 @@
-package com.ruoyi.framework.web.exception.user;
+package com.ruoyi.common.exception.user;
 
 /**
  * 用户不存在异常类

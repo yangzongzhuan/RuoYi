@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.config.Global;
+import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.common.utils.file.FileUtils;
 import com.ruoyi.framework.config.ServerConfig;
-import com.ruoyi.framework.util.FileUploadUtils;
 
 /**
  * 通用请求处理

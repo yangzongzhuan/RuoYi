@@ -53,11 +53,17 @@
 
 	<dependencies>
 
-		<!--Spring框架基本的核心工具-->
+		<!-- Spring框架基本的核心工具 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
+		
+		<!-- SpringWeb模块 -->
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
 
         <!-- SpringBoot集成mybatis框架 -->
         <dependency>

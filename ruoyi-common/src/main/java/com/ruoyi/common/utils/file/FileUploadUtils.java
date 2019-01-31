@@ -1,11 +1,12 @@
-package com.ruoyi.framework.util;
+package com.ruoyi.common.utils.file;
 
 import java.io.File;
 import java.io.IOException;
-import org.apache.tomcat.util.http.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.exception.file.FileNameLengthLimitExceededException;
+import com.ruoyi.common.exception.file.FileSizeLimitExceededException;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.Md5Utils;
 
 /**
@@ -18,17 +19,17 @@ public class FileUploadUtils
     /**
      * 默认大小 50M
      */
-    public static final long DEFAULT_MAX_SIZE = 52428800;
+    public static final long DEFAULT_MAX_SIZE = 50 * 1024 * 1024;
+
+    /**
+     * 默认的文件名最大长度 100
+     */
+    public static final int DEFAULT_FILE_NAME_LENGTH = 100;
 
     /**
      * 默认上传的地址
      */
     private static String defaultBaseDir = Global.getProfile();
-
-    /**
-     * 默认的文件名最大长度
-     */
-    public static final int DEFAULT_FILE_NAME_LENGTH = 200;
 
     /**
      * 默认文件类型jpg
@@ -62,7 +63,7 @@ public class FileUploadUtils
         }
         catch (Exception e)
         {
-            throw new IOException(e);
+            throw new IOException(e.getMessage(), e);
         }
     }
 
@@ -82,7 +83,7 @@ public class FileUploadUtils
         }
         catch (Exception e)
         {
-            throw new IOException(e);
+            throw new IOException(e.getMessage(), e);
         }
     }
 
@@ -104,17 +105,23 @@ public class FileUploadUtils
         int fileNamelength = file.getOriginalFilename().length();
         if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH)
         {
-            throw new FileNameLengthLimitExceededException(file.getOriginalFilename(), fileNamelength,
-                    FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
+            throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
         }
 
         assertAllowed(file);
 
-        String fileName = encodingFilename(file.getOriginalFilename(), extension);
+        String fileName = extractFilename(file, extension);
 
         File desc = getAbsoluteFile(baseDir, baseDir + fileName);
         file.transferTo(desc);
         return fileName;
+    }
+
+    public static final String extractFilename(MultipartFile file, String extension)
+    {
+        String filename = file.getOriginalFilename();
+        filename = DateUtils.datePath() + "/" + encodingFilename(filename) + extension;
+        return filename;
     }
 
     private static final File getAbsoluteFile(String uploadDir, String filename) throws IOException
@@ -135,10 +142,10 @@ public class FileUploadUtils
     /**
      * 编码文件名
      */
-    private static final String encodingFilename(String filename, String extension)
+    private static final String encodingFilename(String filename)
     {
         filename = filename.replace("_", " ");
-        filename = Md5Utils.hash(filename + System.nanoTime() + counter++) + extension;
+        filename = Md5Utils.hash(filename + System.nanoTime() + counter++);
         return filename;
     }
 
@@ -154,7 +161,7 @@ public class FileUploadUtils
         long size = file.getSize();
         if (DEFAULT_MAX_SIZE != -1 && size > DEFAULT_MAX_SIZE)
         {
-            throw new FileSizeLimitExceededException("not allowed upload upload", size, DEFAULT_MAX_SIZE);
+            throw new FileSizeLimitExceededException(DEFAULT_MAX_SIZE / 1024 / 1024);
         }
     }
 }

@@ -15,7 +15,7 @@
     
     // 判断是否 iphone
     var isIPhone = function () {
-	    let browserName = navigator.userAgent.toLowerCase();
+	    var browserName = navigator.userAgent.toLowerCase();
 	    return /(iPhone|iPad|iPod|iOS)/i.test(browserName);
 	};
 

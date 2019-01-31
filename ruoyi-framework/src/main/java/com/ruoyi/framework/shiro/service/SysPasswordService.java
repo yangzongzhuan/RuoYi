@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
+import com.ruoyi.common.exception.user.UserPasswordRetryLimitExceedException;
+import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
-import com.ruoyi.framework.util.MessageUtils;
-import com.ruoyi.framework.web.exception.user.UserPasswordNotMatchException;
-import com.ruoyi.framework.web.exception.user.UserPasswordRetryLimitExceedException;
 import com.ruoyi.system.domain.SysUser;
 
 /**
