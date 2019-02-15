@@ -3,6 +3,7 @@
 	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<link th:href="@{/ajax/libs/jsonview/jquery.jsonview.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 	<form class="form-horizontal m-t" id="signupForm">
@@ -43,12 +44,15 @@
 	</form>
     </div>
     <div th:include="include :: footer"></div>
-    
+    <script th:src="@{/ajax/libs/jsonview/jquery.jsonview.js}"></script>
     <script th:inline="javascript">
 	    $(function() {
-	    	var text = [[${operLog.operParam}]];
-	    	var result = JSON.stringify(JSON.parse(text), null, 2);
-	    	$("#operParam").html(result);
+	    	var json = [[${operLog.operParam}]];
+	    	if ($.common.isNotEmpty(json) && json.length < 2000) {
+	    		$("#operParam").JSONView(json);
+	    	} else {
+	    		$("#operParam").text(json);
+	    	}
 	    });
     </script>
 </body>

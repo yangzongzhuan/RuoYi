@@ -151,7 +151,7 @@ public class LogAspect
     {
         Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
         String params = JSON.marshal(map);
-        operLog.setOperParam(StringUtils.substring(params, 0, 255));
+        operLog.setOperParam(StringUtils.substring(params, 0, 2000));
     }
 
     /**

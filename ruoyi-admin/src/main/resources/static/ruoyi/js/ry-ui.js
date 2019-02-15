@@ -564,7 +564,7 @@
             	    _width = 'auto';
             	    _height = 'auto';
             	}
-            	top.layer.open({
+            	layer.open({
             		type: 2,
             		area: [_width + 'px', _height + 'px'],
             		fix: false,
@@ -573,7 +573,6 @@
             		shade: 0.3,
             		title: $.table._option.modalName + "详细",
             		content: _url,
-            		zIndex: 9999999999,
             		btn: ['关闭'],
             	    // 弹层外区域关闭
             		shadeClose: true,
