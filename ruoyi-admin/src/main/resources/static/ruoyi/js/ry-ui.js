@@ -14,6 +14,7 @@
             init: function(options) {
                 $.table._option = options;
                 $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
+                _sidePagination = $.common.isEmpty(options.sidePagination) ? "server" : options.pagination;
                 _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
                 _pageSize = $.common.isEmpty(options.pageSize) ? 10 : options.pageSize;
@@ -42,7 +43,7 @@
                     showFooter: _showFooter,                            // 是否显示表尾
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
                     toolbar: '#toolbar',                                // 指定工作栏
-                    sidePagination: "server",                           // 启用服务端分页
+                    sidePagination: _sidePagination,                    // server启用服务端分页client客户端分页
                     search: $.common.visible(options.search),           // 是否显示搜索框功能
                     showSearch: $.common.visible(options.showSearch),   // 是否显示检索信息
                     showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
@@ -73,7 +74,11 @@
             // 请求获取数据后处理回调函数
             responseHandler: function(res) {
                 if (res.code == 0) {
-                    return { rows: res.rows, total: res.total };
+                    if ($.common.isNotEmpty($.table._option.sidePagination) && $.table._option.sidePagination === 'client') {
+                    	return res.rows;
+                    } else {
+                        return { rows: res.rows, total: res.total };
+                    }
                 } else {
                     $.modal.alertWarning(res.msg);
                     return { rows: [], total: 0 };
