@@ -99,10 +99,10 @@
 			tooltip: function (value, length) {
 				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
-				if (value.length > _length) {
+				if ($.common.isNotEmpty(value) && value.length > _length) {
 					_text = value.substr(0, _length) + "...";
 				} else {
-					_text = value;
+					_text = $.common.nullToStr(value);
 				}
 				return '<a href="#" class="tooltip-show" data-toggle="tooltip" title="' + value + '">' + _text +'</a>';
 			},
@@ -396,7 +396,7 @@
         	    });
             },
             // 弹出层指定宽度
-            open: function (title, url, width, height) {
+            open: function (title, url, width, height, callback) {
             	//如果是移动端，就使用自适应大小弹窗
             	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
             	    width = 'auto';
@@ -414,6 +414,12 @@
                 if ($.common.isEmpty(height)) {
                 	height = ($(window).height() - 50);
                 };
+                if ($.common.isEmpty(callback)) {
+                    callback = function(index, layero) {
+                        var iframeWin = layero.find('iframe')[0];
+                        iframeWin.contentWindow.submitHandler();
+                    }
+                }
             	layer.open({
             		type: 2,
             		area: [width + 'px', height + 'px'],
@@ -426,10 +432,7 @@
             		btn: ['确定', '关闭'],
             	    // 弹层外区域关闭
             		shadeClose: true,
-            		yes: function(index, layero) {
-            	        var iframeWin = layero.find('iframe')[0];
-            	        iframeWin.contentWindow.submitHandler();
-            	    },
+            		yes: callback,
             	    cancel: function(index) {
             	        return true;
             	    }
@@ -911,6 +914,13 @@
             // 判断一个字符串是否为非空串
             isNotEmpty: function (value) {
             	return !$.common.isEmpty(value);
+            },
+            // 空对象转字符串
+            nullToStr: function(value) {
+                if ($.common.isEmpty(value)) {
+                    return '-'
+                }
+                return value;
             },
             // 是否显示数据 为空默认为显示
             visible: function (value) {
