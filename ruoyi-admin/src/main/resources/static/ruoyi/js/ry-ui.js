@@ -99,12 +99,13 @@
 			tooltip: function (value, length) {
 				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
-				if ($.common.isNotEmpty(value) && value.length > _length) {
-					_text = value.substr(0, _length) + "...";
+				var _value = $.common.nullToStr(value);
+				if (_value.length > _length) {
+					_text = _value.substr(0, _length) + "...";
 				} else {
-					_text = $.common.nullToStr(value);
+					_text = _value;
 				}
-				return '<a href="#" class="tooltip-show" data-toggle="tooltip" title="' + value + '">' + _text +'</a>';
+				return '<a href="#" class="tooltip-show" data-toggle="tooltip" title="' + _value + '">' + _text +'</a>';
 			},
             // 搜索-默认第一个form
             search: function(formId) {
@@ -918,7 +919,7 @@
             // 空对象转字符串
             nullToStr: function(value) {
                 if ($.common.isEmpty(value)) {
-                    return '-'
+                    return "-";
                 }
                 return value;
             },
