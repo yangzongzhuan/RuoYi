@@ -74,7 +74,7 @@
             // 请求获取数据后处理回调函数
             responseHandler: function(res) {
                 if (res.code == 0) {
-                    if ($.common.isNotEmpty($.table._option.sidePagination) && $.table._option.sidePagination === 'client') {
+                    if ($.common.isNotEmpty($.table._option.sidePagination) && $.table._option.sidePagination == 'client') {
                     	return res.rows;
                     } else {
                         return { rows: res.rows, total: res.total };
@@ -503,6 +503,10 @@
             	});
                 layer.full(index);
             },
+            // 选卡页方式打开
+            openTab: function (title, url) {
+            	createMenuItem(url, title);
+            },
             // 禁用按钮
             disable: function() {
             	var doc = window.top == window.parent ? window.document : window.parent.document;
@@ -609,13 +613,21 @@
 	            	$.operate.submit(url, "post", "json", "");
             	});
             },
+            // 添加访问请求
+            addUrl: function(id) {
+            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
+                return url;
+            },
             // 添加信息
             add: function(id) {
-            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
-                $.modal.open("添加" + $.table._option.modalName, url);
+                $.modal.open("添加" + $.table._option.modalName, $.operate.addUrl(id));
             },
-            // 修改信息
-            edit: function(id) {
+            // 添加信息，以tab页展现
+            addTab: function (id) {
+                $.modal.openTab("添加" + $.table._option.modalName, $.operate.addUrl(id));
+            },
+            // 修改访问请求
+            editUrl: function(id) {
             	var url = "/404.html";
             	if ($.common.isNotEmpty(id)) {
             	    url = $.table._option.updateUrl.replace("{id}", id);
@@ -627,7 +639,15 @@
             		}
             	    url = $.table._option.updateUrl.replace("{id}", id);
             	}
-            	$.modal.open("修改" + $.table._option.modalName, url);
+                return url;
+            },
+            // 修改信息
+            edit: function(id) {
+            	$.modal.open("修改" + $.table._option.modalName, $.operate.editUrl(id));
+            },
+            // 修改信息，以tab页展现
+            editTab: function(id) {
+            	$.modal.openTab("修改" + $.table._option.modalName, $.operate.editUrl(id));
             },
             // 工具栏表格树修改
             editTree: function() {
@@ -672,6 +692,22 @@
         	    };
         	    $.ajax(config)
             },
+            // 保存选项卡信息
+            saveTab: function(url, data) {
+            	var config = {
+        	        url: url,
+        	        type: "post",
+        	        dataType: "json",
+        	        data: data,
+        	        beforeSend: function () {
+        	        	$.modal.loading("正在处理中，请稍后...");
+        	        },
+        	        success: function(result) {
+        	        	$.operate.successTabCallback(result);
+        	        }
+        	    };
+        	    $.ajax(config)
+            },
             // 保存结果弹出msg刷新table表格
             ajaxSuccess: function (result) {
             	if (result.code == web_status.SUCCESS) {
@@ -710,6 +746,25 @@
                 }
                 $.modal.closeLoading();
                 $.modal.enable();
+            },
+            // 选项卡成功回调执行事件（父窗体静默更新）
+            successTabCallback: function(result) {
+                if (result.code == web_status.SUCCESS) {
+                	var topWindow = $(window.parent.document);
+    	            var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-panel');
+    	            var $contentWindow = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
+    	            $.modal.close();
+    	            $contentWindow.$.modal.msgSuccess(result.msg);
+    	            if ($contentWindow.$("#bootstrap-table").length > 0) {
+    	        		$contentWindow.$.table.refresh();
+    	        	} else if ($contentWindow.$("#bootstrap-tree-table").length > 0) {
+    	        		$contentWindow.$.treeTable.refresh();
+                    }
+    	            closeItem();
+                } else {
+                    $.modal.alertError(result.msg);
+                }
+                $.modal.closeLoading();
             }
         },
         // 校验封装处理
@@ -780,7 +835,7 @@
         	searchNode: function() {
         		// 取得输入的关键字的值
         		var value = $.common.trim($("#keyword").val());
-        		if ($.tree._lastValue === value) {
+        		if ($.tree._lastValue == value) {
         		    return;
         		}
         		// 保存最后一次搜索名称

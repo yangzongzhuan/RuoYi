@@ -2,83 +2,132 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<body class="white-bg">
-	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
-		<form class="form-horizontal m" id="form-user-edit" th:object="${user}">
-			<input name="userId"  type="hidden"  th:field="*{userId}" />
+<body>
+    <div class="form-content">
+        <form class="form-horizontal" id="form-user-edit" th:object="${user}">
+            <input name="userId"  type="hidden"  th:field="*{userId}" />
 			<input name="deptId"  type="hidden"  th:field="*{deptId}" id="treeId"/>
-			<div class="form-group">
-				<label class="col-sm-3 control-label ">登录名称：</label>
-				<div class="col-sm-8">
-					<input class="form-control" type="text" readonly="true" th:field="*{loginName}"/>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">部门名称：</label>
-				<div class="col-sm-8">
-					<input class="form-control" type="text" name="deptName" onclick="selectDeptTree()" readonly="true" id="treeName" th:field="*{dept.deptName}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">用户名称：</label>
-				<div class="col-sm-8">
-					<input class="form-control" type="text" name="userName" id="userName" th:field="*{userName}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">邮箱：</label>
-				<div class="col-sm-8">
-					<input class="form-control" type="text" name="email" id="email" th:field="*{email}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">手机：</label>
-				<div class="col-sm-8">
-					<input class="form-control" type="text" name="phonenumber" id="phonenumber" th:field="*{phonenumber}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">性别：</label>
-				<div class="col-sm-8">
-					<select id="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
-	                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sex}"></option>
-	                </select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">状态：</label>
-				<div class="col-sm-8">
-					<div class="onoffswitch">
-                         <input type="checkbox" th:checked="${user.status == '0' ? true : false}" class="onoffswitch-checkbox" id="status" name="status">
-                         <label class="onoffswitch-label" for="status">
-                             <span class="onoffswitch-inner"></span>
-                             <span class="onoffswitch-switch"></span>
-                         </label>
-                     </div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">岗位：</label>
-				<div class="col-sm-8">
-					<select id="post" name="post" class="form-control select2-hidden-accessible" multiple="">
-						<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:selected="${post.flag}" th:disabled="${post.status == '1'}"></option>
-					</select>
-					
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-3 control-label">角色：</label>
-				<div class="col-sm-8">
-					<label th:each="role:${roles}" class="check-box">
-						<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:checked="${role.flag}" th:disabled="${role.status == '1'}">
-					</label>
-				</div>
-			</div>
-		</form>
-	</div>
+            <h4 class="form-header h4">基本信息</h4>
+            <div class="row">
+            	<div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>用户名称：</label>
+                        <div class="col-sm-8">
+                            <input name="userName" autocomplete="off" placeholder="请输入用户名称" class="form-control" type="text" maxlength="30" th:field="*{userName}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>归属部门：</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" name="deptName" onclick="selectDeptTree()" readonly="true" id="treeName" th:field="*{dept.deptName}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>手机号码：</label>
+                        <div class="col-sm-8">
+                            <input name="phonenumber" autocomplete="off" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11" th:field="*{phonenumber}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>邮箱：</label>
+                        <div class="col-sm-8">
+                            <input name="email" autocomplete="off" class="form-control email" type="text" maxlength="50" placeholder="请输入邮箱" th:field="*{email}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>登录账号：</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="text" readonly="true" th:field="*{loginName}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">用户状态：</label>
+                        <div class="col-sm-8">
+                            <div class="onoffswitch">
+		                         <input type="checkbox" th:checked="${user.status == '0' ? true : false}" class="onoffswitch-checkbox" id="status">
+		                         <label class="onoffswitch-label" for="status">
+		                             <span class="onoffswitch-inner"></span>
+		                             <span class="onoffswitch-switch"></span>
+		                         </label>
+		                     </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">岗位：</label>
+                        <div class="col-sm-8">
+                            <select id="post" class="form-control select2-hidden-accessible" multiple="">
+								<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:selected="${post.flag}" th:disabled="${post.status == '1'}"></option>
+							</select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">用户性别：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group" style="width: 100%">
+                               <select name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
+				                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sex}"></option>
+				                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">角色：</label>
+                        <div class="col-xs-10">
+                            <label th:each="role:${roles}" class="check-box">
+								<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:checked="${role.flag}" th:disabled="${role.status == '1'}">
+							</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="form-header h4">其他信息</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注：</label>
+                        <div class="col-xs-10">
+                            <textarea name="remark" autocomplete="off" maxlength="500" class="form-control" rows="3">[[*{remark}]]</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+        </div>
+    </div>
 	<div th:include="include::footer"></div>
 	<script th:src="@{/ajax/libs/select/select2.js}"></script>
 	<script>
+        var prefix = ctx + "system/user";
+        
         $("#form-user-edit").validate({
         	rules:{
         		userName:{
@@ -91,7 +140,7 @@
         			required:true,
                     email:true,
                     remote: {
-                        url: ctx + "system/user/checkEmailUnique",
+                        url: prefix + "/checkEmailUnique",
                         type: "post",
                         dataType: "json",
                         data: {
@@ -111,7 +160,7 @@
         			required:true,
         			isPhone:true,
                     remote: {
-                        url: ctx + "system/user/checkPhoneUnique",
+                        url: prefix + "/checkPhoneUnique",
                         type: "post",
                         dataType: "json",
                         data: {
@@ -135,52 +184,21 @@
         		"phonenumber":{
                 	remote: "手机号码已经存在"
         		}
-            },
-        	submitHandler:function(form){
-        		edit();
-        	}
+            }
         });
         
         function submitHandler() {
 	        if ($.validate.form()) {
-	        	edit();
+	        	var data = $("#form-user-edit").serializeArray();
+	        	var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
+	        	var roleIds = $.form.selectCheckeds("role");
+	        	var postIds = $.form.selectSelects("post");
+	        	data.push({"name": "status", "value": status});
+	        	data.push({"name": "roleIds", "value": roleIds});
+	        	data.push({"name": "postIds", "value": postIds});
+	        	$.operate.saveTab(prefix + "/edit", data);
 	        }
 	    }
-
-        function edit() {
-        	var userId = $("input[name='userId']").val();
-        	var deptId = $("input[name='deptId']").val();
-        	var userName = $("input[name='userName']").val();
-        	var email = $("input[name='email']").val();
-        	var phonenumber = $("input[name='phonenumber']").val();
-        	var sex = $("#sex option:selected").val();
-        	var status = $("input[name='status']").is(':checked') == true ? 0 : 1;
-        	var roleIds = $.form.selectCheckeds("role");
-        	var postIds = $.form.selectSelects("post");
-        	$.ajax({
-        		cache : true,
-        		type : "POST",
-        		url : ctx + "system/user/edit",
-        		data : {
-        			"userId": userId,
-        			"deptId": deptId,
-        			"userName": userName,
-        			"email": email,
-        			"phonenumber": phonenumber,
-        			"sex": sex,
-        			"status": status,
-        			"roleIds": roleIds,
-        			"postIds": postIds
-        		},
-        		async : false,
-        		error : function(request) {
-        			$.modal.alertError("系统错误");
-        		},
-        		success : function(data) {
-        			$.operate.successCallback(data);
-        		}
-        	});
-        }
 
         /*用户管理-修改-选择部门树*/
         function selectDeptTree() {

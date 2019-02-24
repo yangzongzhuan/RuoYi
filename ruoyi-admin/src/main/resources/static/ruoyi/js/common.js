@@ -123,8 +123,25 @@ var refreshItem = function(){
     target.attr('src', url).ready();
 }
 
+/** 关闭选项卡 */
+var closeItem = function(){
+	var topWindow = $(window.parent.document);
+	var panelUrl = window.frameElement.getAttribute('data-panel');
+	$('.page-tabs-content .active i', topWindow).click();
+	if($.common.isNotEmpty(panelUrl)){
+		$('.menuTab[data-id="' + panelUrl + '"]', topWindow).addClass('active').siblings('.menuTab').removeClass('active');
+		$('.mainContent .RuoYi_iframe', topWindow).each(function() {
+            if ($(this).data('id') == panelUrl) {
+                $(this).show().siblings('.RuoYi_iframe').hide();
+                return false;
+            }
+		});
+	}
+}
+
 /** 创建选项卡 */
 function createMenuItem(dataUrl, menuName) {
+	var panelUrl = window.frameElement.getAttribute('data-id');
     dataIndex = $.common.random(1,100),
     flag = true;
     if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
@@ -149,12 +166,17 @@ function createMenuItem(dataUrl, menuName) {
     });
     // 选项卡菜单不存在
     if (flag) {
-        var str = '<a href="javascript:;" class="active menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
+        var str = '<a href="javascript:;" class="active menuTab" data-id="' + dataUrl + '" data-panel="' + panelUrl + '">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
         $('.menuTab', topWindow).removeClass('active');
 
         // 添加选项卡对应的iframe
-        var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
+        var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" data-panel="' + panelUrl + '" seamless></iframe>';
         $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
+        
+        window.parent.$.modal.loading("数据加载中，请稍后...");
+        $('.mainContent iframe:visible', topWindow).load(function () {
+        	window.parent.$.modal.closeLoading();
+        });
 
         // 添加选项卡
         $('.menuTabs .page-tabs-content', topWindow).append(str);

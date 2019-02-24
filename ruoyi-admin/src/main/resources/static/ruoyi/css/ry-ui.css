@@ -533,3 +533,22 @@ label {
 .dropdown-menu > .divider {
 	background-color:#eee;
 }
+
+.form-header {
+    font-size:15px;
+	color:#6379bb;
+	border-bottom:1px solid #ddd;
+	margin:8px 10px 25px 10px;
+	padding-bottom:5px
+}
+
+.form-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 10px 15px 15px 15px;
+    border-color: #e7eaec;
+    -webkit-border-image: none;
+    -o-border-image: none;
+    border-image: none;
+    border-width: 1px 0px;
+}
