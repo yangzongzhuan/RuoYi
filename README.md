@@ -10,6 +10,8 @@
 
 > 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)  
 
+> 2019阿里云开年Hi购季 云服务器全场限时5折 ：[活动入口](https://www.aliyun.com/acts/product-section-2019/new-users?spm=5176.11533457.1089570.1.424777e3bwsfme&userCode=brki8iof) 
+
 ## 内置功能
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。

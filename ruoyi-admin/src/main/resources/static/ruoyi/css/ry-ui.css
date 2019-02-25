@@ -177,8 +177,8 @@ label.error {
 }
 
 .input-group label.error {
-	left: 255px;
 	z-index:99;
+	right: 42px
 }
 
 .Validform_error,input.error,select.error {
@@ -198,7 +198,7 @@ label.error {
 .i-checks label.error, .check-box label.error, .radio-box label.error {
 	right: auto;
 	width: 150px;
-	left: 210px;
+	left: 297px;
 	top: 1px;
 	max-width: none;
 }
@@ -490,7 +490,11 @@ label {
 }
 
 .table-striped .table>thead:first-child>tr:first-child>th {
-	color: #333;
+	font-weight: normal;
+	font-size: 13px
+}
+.table-striped table thead {
+    background-color: #eff3f8;
 }
 
 .table-bordered td,.table-bordered th {
