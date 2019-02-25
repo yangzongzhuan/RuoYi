@@ -171,9 +171,14 @@
 label.error {
 	position: absolute;
 	right: 18px;
-	top: 7px;
+	top: 10px;
 	color: #ef392b;
 	font-size: 12px
+}
+
+.input-group label.error {
+	left: 255px;
+	z-index:99;
 }
 
 .Validform_error,input.error,select.error {

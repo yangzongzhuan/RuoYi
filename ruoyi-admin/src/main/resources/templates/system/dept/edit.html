@@ -10,19 +10,22 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">上级部门：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true" th:field="*{parentName}"/>
+				    <div class="input-group">
+						<input class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true" th:field="*{parentName}">
+					    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+				    </div>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">部门名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="deptName" th:field="*{deptName}" id="deptName">
+					<input class="form-control" type="text" name="deptName" th:field="*{deptName}" id="deptName" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">显示排序：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="orderNum" th:field="*{orderNum}">
+					<input class="form-control" type="text" name="orderNum" th:field="*{orderNum}" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -61,7 +64,6 @@
 		$("#form-dept-edit").validate({
 			rules:{
 				deptName:{
-					required:true,
 					remote: {
 		                url: prefix + "/checkDeptNameUnique",
 		                type: "post",
@@ -83,7 +85,6 @@
 		            }
 				},
 				orderNum:{
-					required:true,
 					digits:true
 				},
 				email:{
@@ -97,7 +98,8 @@
 		        "deptName": {
 		            remote: "部门已经存在"
 		        }
-		    }
+		    },
+		    focusCleanup: true
 		});
 		
 		function submitHandler() {

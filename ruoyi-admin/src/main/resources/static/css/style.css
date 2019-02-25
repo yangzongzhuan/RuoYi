@@ -2318,16 +2318,6 @@ table.dataTable thead .sorting:after {
 .google-map {
     height: 300px;
 }
-/* Validation */
-label.error {
-    color: #cc5965;
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.form-control.error {
-    border: 1px dotted #cc5965;
-}
 /* ngGrid */
 .gridStyle {
     border: 1px solid #d4d4d4;

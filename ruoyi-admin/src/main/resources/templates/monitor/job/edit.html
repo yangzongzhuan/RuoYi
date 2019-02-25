@@ -9,31 +9,31 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">任务名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="jobName" id="jobName" th:field="*{jobName}"/>
+					<input class="form-control" type="text" name="jobName" id="jobName" th:field="*{jobName}" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">任务组名：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="jobGroup" id="jobGroup" th:field="*{jobGroup}"/>
+					<input class="form-control" type="text" name="jobGroup" id="jobGroup" th:field="*{jobGroup}" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">方法名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="methodName" id="methodName" th:field="*{methodName}"/>
+					<input class="form-control" type="text" name="methodName" id="methodName" th:field="*{methodName}" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">方法参数：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="methodParams" id="methodParams" th:field="*{methodParams}"/>
+					<input class="form-control" type="text" name="methodParams" id="methodParams" th:field="*{methodParams}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">cron表达式：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="cronExpression" id="cronExpression" th:field="*{cronExpression}"/>
+					<input class="form-control" type="text" name="cronExpression" id="cronExpression" th:field="*{cronExpression}" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -97,7 +97,8 @@
 	            "cronExpression": {
 	                remote: "表达式不正确"
 	            }
-	        }
+	        },
+	        focusCleanup: true
 		});
 		
 		function submitHandler() {

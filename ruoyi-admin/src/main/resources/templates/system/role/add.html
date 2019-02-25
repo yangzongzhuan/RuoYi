@@ -9,19 +9,19 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">角色名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="roleName" id="roleName"/>
+					<input class="form-control" type="text" name="roleName" id="roleName" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">权限字符：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="roleKey" id="roleKey">
+					<input class="form-control" type="text" name="roleKey" id="roleKey" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">显示顺序：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="roleSort" id="roleSort">
+					<input class="form-control" type="text" name="roleSort" id="roleSort" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -67,7 +67,6 @@
 		$("#form-role-add").validate({
 			rules:{
 				roleName:{
-					required:true,
 					remote: {
 		                url: ctx + "system/role/checkRoleNameUnique",
 		                type: "post",
@@ -83,7 +82,6 @@
 		            }
 				},
 				roleKey:{
-					required:true,
 					remote: {
 		                url: ctx + "system/role/checkRoleKeyUnique",
 		                type: "post",
@@ -99,7 +97,6 @@
 		            }
 				},
 				roleSort:{
-					required:true,
 					digits:true
 				},
 			},
@@ -110,7 +107,8 @@
 		        "roleKey": {
 		            remote: "角色权限已经存在"
 		        }
-		    }
+		    },
+		    focusCleanup: true
 		});
 		
 		function submitHandler() {

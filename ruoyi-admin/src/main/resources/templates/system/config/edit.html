@@ -9,19 +9,19 @@
             <div class="form-group">	
                 <label class="col-sm-3 control-label">参数名称：</label>
                 <div class="col-sm-8">
-                    <input id="configName" name="configName" th:field="*{configName}" class="form-control" type="text">
+                    <input id="configName" name="configName" th:field="*{configName}" class="form-control" type="text" required>
                 </div>
             </div>
             <div class="form-group">	
                 <label class="col-sm-3 control-label">参数键名：</label>
                 <div class="col-sm-8">
-                    <input id="configKey" name="configKey" th:field="*{configKey}" class="form-control" type="text">
+                    <input id="configKey" name="configKey" th:field="*{configKey}" class="form-control" type="text" required>
                 </div>
             </div>
             <div class="form-group">	
                 <label class="col-sm-3 control-label">参数键值：</label>
                 <div class="col-sm-8">
-                    <input id="configValue" name="configValue" th:field="*{configValue}" class="form-control" type="text">
+                    <input id="configValue" name="configValue" th:field="*{configValue}" class="form-control" type="text" required>
                 </div>
             </div>
 			<div class="form-group">
@@ -48,7 +48,6 @@
 	    $("#form-config-edit").validate({
 	        rules: {
 	            configKey: {
-	                required: true,
 	                remote: {
 	                    url: prefix + "/checkConfigKeyUnique",
 	                    type: "post",
@@ -66,18 +65,13 @@
 	                    }
 	                }
 	            },
-	            configName: {
-	                required: true
-	            },
-	            configValue: {
-	                required: true
-	            },
 	        },
 	        messages: {
 	            "configKey": {
 	                remote: "参数键名已经存在"
 	            }
-	        }
+	        },
+	        focusCleanup: true
 	    });
 	    
 	    function submitHandler() {

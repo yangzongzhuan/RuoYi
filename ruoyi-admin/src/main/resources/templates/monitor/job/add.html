@@ -8,31 +8,31 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">任务名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="jobName" id="jobName">
+					<input class="form-control" type="text" name="jobName" id="jobName" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">任务组名：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="jobGroup" id="jobGroup">
+					<input class="form-control" type="text" name="jobGroup" id="jobGroup" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">方法名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="methodName" id="methodName"/>
+					<input class="form-control" type="text" name="methodName" id="methodName" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">方法参数：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="methodParams" id="methodParams"/>
+					<input class="form-control" type="text" name="methodParams" id="methodParams">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label ">cron表达式：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="cronExpression" id="cronExpression"/>
+					<input class="form-control" type="text" name="cronExpression" id="cronExpression" required>
 				</div>
 			</div>
 			<div class="form-group">
@@ -66,17 +66,7 @@
 	
 		$("#form-job-add").validate({
 			rules:{
-				jobName:{
-					required:true,
-				},
-				jobGroup:{
-					required:true,
-				},
-				methodName:{
-					required:true,
-				},
 				cronExpression:{
-					required:true,
 					remote: {
 	                    url: prefix + "/checkCronExpressionIsValid",
 	                    type: "post",
@@ -96,7 +86,8 @@
 	            "cronExpression": {
 	                remote: "表达式不正确"
 	            }
-	        }
+	        },
+	        focusCleanup: true
 		});
 		
 		function submitHandler() {

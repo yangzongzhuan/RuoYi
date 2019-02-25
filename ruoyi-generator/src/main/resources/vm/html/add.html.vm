@@ -46,7 +46,8 @@
 				xxxx:{
 					required:true,
 				},
-			}
+			},
+			focusCleanup: true
 		});
 		
 		function submitHandler() {
