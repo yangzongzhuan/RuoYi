@@ -14,6 +14,7 @@
             init: function(options) {
                 $.table._option = options;
                 $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
+                _height = $.common.isEmpty(options.height) ? undefined : options.height;
                 _sidePagination = $.common.isEmpty(options.sidePagination) ? "server" : options.pagination;
                 _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
                 _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
@@ -30,6 +31,7 @@
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
                     method: 'post',                                     // 请求方式（*）
                     cache: false,                                       // 是否使用缓存
+                    height: _height,                                    // 表格的高度
                     striped: _striped,                                  // 是否显示行间隔色
                     sortable: true,                                     // 是否启用排序
                     sortStable: true,                                   // 设置为 true 将获得稳定的排序
