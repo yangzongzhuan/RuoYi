@@ -84,7 +84,6 @@
                 removeUrl: prefix + "/remove",
 				exportUrl: prefix + "/export",
                 modalName: "${tableComment}",
-				search: false,
 		        showExport: true,
                 columns: [{
 		            checkbox: true

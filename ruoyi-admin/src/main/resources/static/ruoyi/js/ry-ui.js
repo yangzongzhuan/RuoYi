@@ -9,54 +9,66 @@
     	// 表格封装处理
     	table: {
             _option: {},
-            _params: {},
             // 初始化表格参数
             init: function(options) {
+            	var defaults = {
+            		id: "bootstrap-table",
+            		type: 0, // 0 代表bootstrapTable 1代表bootstrapTreeTable
+        		    height: undefined,
+        		    sidePagination: "server",
+        		    sortName: "",
+        		    sortOrder: "asc",
+        		    pagination: true,
+        		    pageSize: 10,
+        		    toolbar: "toolbar",
+        		    striped: false,
+        		    escape: false,
+        		    showFooter: false,
+        		    search: false,
+                    showSearch: true,
+                    showRefresh: true,
+                    showColumns: true,
+                    showToggle: true,
+                    showExport: false,
+        		    fixedColumns: false,
+        		    fixedNumber: 0,
+        		    rightFixedColumns: false,
+        		    rightFixedNumber: 0,
+        		    queryParams: $.table.queryParams,
+        		};
+            	var options = $.extend(defaults, options);
                 $.table._option = options;
-                $.table._params = $.common.isEmpty(options.queryParams) ? $.table.queryParams : options.queryParams;
-                _height = $.common.isEmpty(options.height) ? undefined : options.height;
-                _sidePagination = $.common.isEmpty(options.sidePagination) ? "server" : options.pagination;
-                _sortOrder = $.common.isEmpty(options.sortOrder) ? "asc" : options.sortOrder;
-                _sortName = $.common.isEmpty(options.sortName) ? "" : options.sortName;
-                _pageSize = $.common.isEmpty(options.pageSize) ? 10 : options.pageSize;
-                _striped = $.common.isEmpty(options.striped) ? false : options.striped;
-                _escape = $.common.isEmpty(options.escape) ? false : options.escape;
-                _showFooter = $.common.isEmpty(options.showFooter) ? false : options.showFooter;
-                _fixedColumns = $.common.isEmpty(options.fixedColumns) ? false : options.fixedColumns;
-                _fixedNumber = $.common.isEmpty(options.fixedNumber) ? 0 : options.fixedNumber;
-                _rightFixedColumns = $.common.isEmpty(options.rightFixedColumns) ? false : options.rightFixedColumns;
-                _rightFixedNumber = $.common.isEmpty(options.rightFixedNumber) ? 0 : options.rightFixedNumber;
-                $('#bootstrap-table').bootstrapTable({
+                $('#' + options.id).bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
                     method: 'post',                                     // 请求方式（*）
                     cache: false,                                       // 是否使用缓存
-                    height: _height,                                    // 表格的高度
-                    striped: _striped,                                  // 是否显示行间隔色
+                    height: options.height,                             // 表格的高度
+                    striped: options.striped,                           // 是否显示行间隔色
                     sortable: true,                                     // 是否启用排序
                     sortStable: true,                                   // 设置为 true 将获得稳定的排序
-                    sortName: _sortName,                                // 排序列名称
-                    sortOrder: _sortOrder,                              // 排序方式  asc 或者 desc
-                    pagination: $.common.visible(options.pagination),   // 是否显示分页（*）
+                    sortName: options.sortName,                         // 排序列名称
+                    sortOrder: options.sortOrder,                       // 排序方式  asc 或者 desc
+                    pagination: options.pagination,                     // 是否显示分页（*）
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
-                    pageSize: _pageSize,                                // 每页的记录行数（*） 
+                    pageSize: options.pageSize,                         // 每页的记录行数（*） 
                     pageList: [10, 25, 50],                             // 可供选择的每页的行数（*）
-                    escape: _escape,                                    // 转义HTML字符串
-                    showFooter: _showFooter,                            // 是否显示表尾
+                    escape: options.escape,                             // 转义HTML字符串
+                    showFooter: options.showFooter,                     // 是否显示表尾
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
-                    toolbar: '#toolbar',                                // 指定工作栏
-                    sidePagination: _sidePagination,                    // server启用服务端分页client客户端分页
-                    search: $.common.visible(options.search),           // 是否显示搜索框功能
-                    showSearch: $.common.visible(options.showSearch),   // 是否显示检索信息
-                    showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
-                    showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
-                    showToggle: $.common.visible(options.showToggle),   // 是否显示详细视图和列表视图的切换按钮
-                    showExport: $.common.visible(options.showExport),   // 是否支持导出文件
-                    fixedColumns: _fixedColumns,                        // 是否启用冻结列（左侧）
-                    fixedNumber: _fixedNumber,                          // 列冻结的个数（左侧）
-                    rightFixedColumns: _rightFixedColumns,              // 是否启用冻结列（右侧）
-                    rightFixedNumber: _rightFixedNumber,                // 列冻结的个数（右侧）
-                    queryParams: $.table._params,                       // 传递参数（*）
+                    toolbar: '#' + options.toolbar,                     // 指定工作栏
+                    sidePagination: options.sidePagination,             // server启用服务端分页client客户端分页
+                    search: options.search,                             // 是否显示搜索框功能
+                    showSearch: options.showSearch,                     // 是否显示检索信息
+                    showRefresh: options.showRefresh,                   // 是否显示刷新按钮
+                    showColumns: options.showColumns,                   // 是否显示隐藏某列下拉框
+                    showToggle: options.showToggle,                     // 是否显示详细视图和列表视图的切换按钮
+                    showExport: options.showExport,                     // 是否支持导出文件
+                    fixedColumns: options.fixedColumns,                 // 是否启用冻结列（左侧）
+                    fixedNumber: options.fixedNumber,                   // 列冻结的个数（左侧）
+                    rightFixedColumns: options.rightFixedColumns,       // 是否启用冻结列（右侧）
+                    rightFixedNumber: options.rightFixedNumber,         // 列冻结的个数（右侧）
+                    queryParams: options.queryParams,                   // 传递参数（*）
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数
                     onLoadSuccess: $.table.onLoadSuccess,               // 当所有数据被加载时触发处理函数
@@ -88,11 +100,18 @@
             },
             // 当所有数据被加载时触发
             onLoadSuccess: function(data) {
+            	// 浮动提示框特效
             	$("[data-toggle='tooltip']").tooltip();
+            	// 触发行点击事件
+            	$("#" + $.table._option.id).on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function () {
+            		var ids = $("#" + $.table._option.id).bootstrapTable("getSelections");
+            		$('#' + $.table._option.toolbar + ' .btn-del').toggleClass('disabled', !ids.length);
+            		$('#' + $.table._option.toolbar + ' .btn-edit').toggleClass('disabled', ids.length!=1);
+            	});
             },
             // 序列号生成
             serialNumber: function (index) {
-				var table = $('#bootstrap-table').bootstrapTable('getOptions');
+				var table = $('#' + $.table._option.id).bootstrapTable('getOptions');
 				var pageSize = table.pageSize;
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
@@ -112,7 +131,7 @@
             // 搜索-默认第一个form
             search: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
-    		    var params = $("#bootstrap-table").bootstrapTable('getOptions');
+    		    var params = $("#" + $.table._option.id).bootstrapTable('getOptions');
     		    params.queryParams = function(params) {
                     var search = {};
                     $.each($("#" + currentId).serializeArray(), function(i, field) {
@@ -125,7 +144,7 @@
                     search.isAsc = params.order;
     		        return search;
     		    }
-    		    $("#bootstrap-table").bootstrapTable('refresh', params);
+    		    $("#" + $.table._option.id).bootstrapTable('refresh', params);
     		},
     		// 导出数据
     		exportExcel: function(formId) {
@@ -201,19 +220,19 @@
             },
             // 刷新表格
             refresh: function() {
-                $("#bootstrap-table").bootstrapTable('refresh', {
+                $("#" + $.table._option.id).bootstrapTable('refresh', {
                     silent: true
                 });
             },
             // 查询表格指定列值
             selectColumns: function(column) {
-            	return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
+            	return $.map($('#' + $.table._option.id).bootstrapTable('getSelections'), function (row) {
         	        return row[column];
         	    });
             },
             // 查询表格首列值
             selectFirstColumns: function() {
-            	return $.map($('#bootstrap-table').bootstrapTable('getSelections'), function (row) {
+            	return $.map($('#' + $.table._option.id).bootstrapTable('getSelections'), function (row) {
         	        return row[$.table._option.columns[1].field];
         	    });
             },
@@ -230,35 +249,48 @@
             },
             // 显示表格指定列
             showColumn: function(column) {
-                $("#bootstrap-table").bootstrapTable('showColumn', column);
+                $("#" + $.table._option.id).bootstrapTable('showColumn', column);
             },
             // 隐藏表格指定列
             hideColumn: function(column) {
-            	$("#bootstrap-table").bootstrapTable('hideColumn', column);
+            	$("#" + $.table._option.id).bootstrapTable('hideColumn', column);
             }
         },
         // 表格树封装处理
         treeTable: {
-            _option: {},
             // 初始化表格
             init: function(options) {
+            	var defaults = {
+            		id: "bootstrap-tree-table",
+                    type: 1, // 0 代表bootstrapTable 1代表bootstrapTreeTable
+        		    height: 0,
+        		    ajaxParams: {},
+        		    toolbar: "toolbar",
+        		    striped: false,
+        		    expandColumn: 1,
+        		    showRefresh: true,
+        			showColumns: true,
+        			expandAll: true,
+        			expandFirst: true
+        		};
+            	var options = $.extend(defaults, options);
                 $.table._option = options;
-                _striped = $.common.isEmpty(options.striped) ? false : options.striped;
-                _expandColumn = $.common.isEmpty(options.expandColumn) ? '1' : options.expandColumn;
-                var treeTable = $('#bootstrap-tree-table').bootstrapTreeTable({
+                var treeTable = $('#' + options.id).bootstrapTreeTable({
                 	code: options.code,                                 // 用于设置父子关系
         		    parentCode: options.parentCode,                     // 用于设置父子关系
         	    	type: 'get',                                        // 请求方式（*）
         	        url: options.url,                                   // 请求后台的URL（*）
+        	        ajaxParams: options.ajaxParams,                     // 请求数据的ajax的data属性
+        	        height: options.height,                             // 表格树的高度
         	        ajaxParams: {},                                     // 请求数据的ajax的data属性
-        			expandColumn: _expandColumn,                        // 在哪一列上面显示展开按钮
-        			striped: _striped,                                  // 是否显示行间隔色
+        			expandColumn: options.expandColumn,                 // 在哪一列上面显示展开按钮
+        			striped: options.striped,                           // 是否显示行间隔色
         			bordered: true,                                     // 是否显示边框
-        			toolbar: '#toolbar',                                // 指定工作栏
-        			showRefresh: $.common.visible(options.showRefresh), // 是否显示刷新按钮
-        			showColumns: $.common.visible(options.showColumns), // 是否显示隐藏某列下拉框
-        			expandAll: $.common.visible(options.expandAll),     // 是否全部展开
-        			expandFirst: $.common.visible(options.expandFirst), // 是否默认第一级展开--expandAll为false时生效
+        			toolbar: '#' + options.toolbar,                     // 指定工作栏
+        			showRefresh: options.showRefresh,                   // 是否显示刷新按钮
+        			showColumns: options.showColumns,                   // 是否显示隐藏某列下拉框
+        			expandAll: options.expandAll,                       // 是否全部展开
+        			expandFirst: options.expandFirst,                   // 是否默认第一级展开--expandAll为false时生效
         	        columns: options.columns
         	    });
                 $._treeTable = treeTable;
@@ -615,11 +647,6 @@
 	            	$.operate.submit(url, "post", "json", "");
             	});
             },
-            // 添加访问请求
-            addUrl: function(id) {
-            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
-                return url;
-            },
             // 添加信息
             add: function(id) {
                 $.modal.open("添加" + $.table._option.modalName, $.operate.addUrl(id));
@@ -628,7 +655,46 @@
             addTab: function (id) {
                 $.modal.openTab("添加" + $.table._option.modalName, $.operate.addUrl(id));
             },
-            // 修改访问请求
+            // 添加信息 全屏
+            addFull: function(id) {
+            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
+                $.modal.openFull("添加" + $.table._option.modalName, url);
+            },
+            // 添加访问地址
+            addUrl: function(id) {
+            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
+                return url;
+            },
+            // 修改信息
+            edit: function(id) {
+            	if($.common.isEmpty(id) && $.table._option.type == table_type.bootstrapTreeTable) {
+            		var row = $('#' + $.table._option.id).bootstrapTreeTable('getSelections')[0];
+                	if ($.common.isEmpty(row)) {
+            			$.modal.alertWarning("请至少选择一条记录");
+            			return;
+            		}
+                    var url = $.table._option.updateUrl.replace("{id}", row[$.table._option.uniqueId]);
+                    $.modal.open("修改" + $.table._option.modalName, url);
+            	} else {
+            	    $.modal.open("修改" + $.table._option.modalName, $.operate.editUrl(id));
+            	}
+            },
+            // 修改信息，以tab页展现
+            editTab: function(id) {
+            	$.modal.openTab("修改" + $.table._option.modalName, $.operate.editUrl(id));
+            },
+            // 修改信息 全屏
+            editFull: function(id) {
+            	var url = "/404.html";
+            	if ($.common.isNotEmpty(id)) {
+            	    url = $.table._option.updateUrl.replace("{id}", id);
+            	} else {
+            	    var row = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
+            	    url = $.table._option.updateUrl.replace("{id}", row);
+            	}
+            	$.modal.openFull("修改" + $.table._option.modalName, url);
+            },
+            // 修改访问地址
             editUrl: function(id) {
             	var url = "/404.html";
             	if ($.common.isNotEmpty(id)) {
@@ -642,40 +708,6 @@
             	    url = $.table._option.updateUrl.replace("{id}", id);
             	}
                 return url;
-            },
-            // 修改信息
-            edit: function(id) {
-            	$.modal.open("修改" + $.table._option.modalName, $.operate.editUrl(id));
-            },
-            // 修改信息，以tab页展现
-            editTab: function(id) {
-            	$.modal.openTab("修改" + $.table._option.modalName, $.operate.editUrl(id));
-            },
-            // 工具栏表格树修改
-            editTree: function() {
-            	var row = $('#bootstrap-tree-table').bootstrapTreeTable('getSelections')[0];
-            	if ($.common.isEmpty(row)) {
-        			$.modal.alertWarning("请至少选择一条记录");
-        			return;
-        		}
-                var url = $.table._option.updateUrl.replace("{id}", row[$.table._option.uniqueId]);
-                $.modal.open("修改" + $.table._option.modalName, url);
-            },
-            // 添加信息 全屏
-            addFull: function(id) {
-            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
-                $.modal.openFull("添加" + $.table._option.modalName, url);
-            },
-            // 修改信息 全屏
-            editFull: function(id) {
-            	var url = "/404.html";
-            	if ($.common.isNotEmpty(id)) {
-            	    url = $.table._option.updateUrl.replace("{id}", id);
-            	} else {
-            	    var row = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
-            	    url = $.table._option.updateUrl.replace("{id}", row);
-            	}
-            	$.modal.openFull("修改" + $.table._option.modalName, url);
             },
             // 保存信息
             save: function(url, data) {
@@ -732,14 +764,15 @@
             // 成功回调执行事件（父窗体静默更新）
             successCallback: function(result) {
                 if (result.code == web_status.SUCCESS) {
-                    if (window.parent.$("#bootstrap-table").length > 0) {
+                	var parent = window.parent;
+                    if (parent.$.table._option.type == table_type.bootstrapTable) {
                         $.modal.close();
-                        window.parent.$.modal.msgSuccess(result.msg);
-                        window.parent.$.table.refresh();
-                    } else if (window.parent.$("#bootstrap-tree-table").length > 0) {
+                        parent.$.modal.msgSuccess(result.msg);
+                        parent.$.table.refresh();
+                    } else if (parent.$.table._option.type == table_type.bootstrapTreeTable) {
                         $.modal.close();
-                        window.parent.$.modal.msgSuccess(result.msg);
-                        window.parent.$.treeTable.refresh();
+                        parent.$.modal.msgSuccess(result.msg);
+                        parent.$.treeTable.refresh();
                     } else {
                         $.modal.msgReload("保存成功,正在刷新数据请稍后……", modal_status.SUCCESS);
                     }
@@ -757,9 +790,9 @@
     	            var $contentWindow = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
     	            $.modal.close();
     	            $contentWindow.$.modal.msgSuccess(result.msg);
-    	            if ($contentWindow.$("#bootstrap-table").length > 0) {
+    	            if ($contentWindow.$.table._option.type == table_type.bootstrapTable) {
     	        		$contentWindow.$.table.refresh();
-    	        	} else if ($contentWindow.$("#bootstrap-tree-table").length > 0) {
+    	        	} else if ($contentWindow.$.table._option.type == table_type.bootstrapTreeTable) {
     	        		$contentWindow.$.treeTable.refresh();
                     }
     	            closeItem();
@@ -1008,6 +1041,12 @@
         }
     });
 })(jQuery);
+
+/** 表格类型 */
+table_type = {
+    bootstrapTable: 0,
+    bootstrapTreeTable: 1
+};
 
 /** 消息状态码 */
 web_status = {

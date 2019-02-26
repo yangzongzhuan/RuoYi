@@ -96,19 +96,13 @@ $(function() {
 		    $.tree.searchNode(e);
 		}).bind("input propertychange", $.tree.searchNode);
 	}
-	// 复选框后按钮样式状态变更
-	$("#bootstrap-table").on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function () {
-		var ids = $("#bootstrap-table").bootstrapTable("getSelections");
-		$('#toolbar .btn-del').toggleClass('disabled', !ids.length);
-		$('#toolbar .btn-edit').toggleClass('disabled', ids.length!=1);
-    });
 	// tree表格树 展开/折叠
 	var expandFlag = false;
 	$("#expandAllBtn").click(function() {
 	    if (expandFlag) {
-	        $('#bootstrap-tree-table').bootstrapTreeTable('expandAll');
+	        $('#' + $.table._option.id).bootstrapTreeTable('expandAll');
 	    } else {
-	        $('#bootstrap-tree-table').bootstrapTreeTable('collapseAll');
+	        $('#' + $.table._option.id).bootstrapTreeTable('collapseAll');
 	    }
 	    expandFlag = expandFlag ? false: true;
 	})
