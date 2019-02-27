@@ -282,7 +282,6 @@
         	        url: options.url,                                   // 请求后台的URL（*）
         	        ajaxParams: options.ajaxParams,                     // 请求数据的ajax的data属性
         	        height: options.height,                             // 表格树的高度
-        	        ajaxParams: {},                                     // 请求数据的ajax的data属性
         			expandColumn: options.expandColumn,                 // 在哪一列上面显示展开按钮
         			striped: options.striped,                           // 是否显示行间隔色
         			bordered: true,                                     // 是否显示边框

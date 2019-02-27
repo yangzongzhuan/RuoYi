@@ -1,6 +1,7 @@
 package com.ruoyi.common.page;
 
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.sql.SqlUtil;
 
 /**
  * 分页数据
@@ -57,7 +58,7 @@ public class PageDomain
 
     public void setOrderByColumn(String orderByColumn)
     {
-        this.orderByColumn = orderByColumn;
+        this.orderByColumn = SqlUtil.escapeSql(orderByColumn);
     }
 
     public String getIsAsc()
@@ -67,6 +68,6 @@ public class PageDomain
 
     public void setIsAsc(String isAsc)
     {
-        this.isAsc = isAsc;
+        this.isAsc = SqlUtil.escapeSql(isAsc);
     }
 }
