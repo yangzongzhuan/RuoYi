@@ -442,6 +442,15 @@ label {
 	float: left;
 }
 
+@media (max-width:767px) {
+    .select-time label,.select-time span,.select-time input {
+	    float: none;
+    }
+    .select-list .select-time input {
+	    width: 200px;
+    }
+}
+
 .select-time label {
 	margin-top: 5px;
 }
