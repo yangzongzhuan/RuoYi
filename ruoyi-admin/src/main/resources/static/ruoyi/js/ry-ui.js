@@ -128,6 +128,18 @@
 				}
 				return '<a href="#" class="tooltip-show" data-toggle="tooltip" title="' + _value + '">' + _text +'</a>';
 			},
+			// 下拉按钮切换
+			dropdownToggle: function (value) {
+				var actions = [];
+				actions.push('<div class="btn-group">');
+				actions.push('<button type="button" class="btn btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">');
+				actions.push('<i class="fa fa-cog"></i>&nbsp;<span class="fa fa-chevron-down"></span></button>');
+				actions.push('<ul class="dropdown-menu">');
+				actions.push(value.replace(/<a/g,"<li><a").replace(/<\/a>/g,"</a></li>"));
+				actions.push('</ul>');
+				actions.push('</div>');
+				return actions.join('');
+			},
             // 搜索-默认第一个form
             search: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
@@ -621,10 +633,15 @@
             // 删除信息
             remove: function(id) {
             	$.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {
-	            	var url = $.common.isEmpty(id) ? $.table._option.removeUrl : $.table._option.removeUrl.replace("{id}", id);
-	            	var data = { "ids": id };
-	            	$.operate.submit(url, "post", "json", data);
+                    var url = $.common.isEmpty(id) ? $.table._option.removeUrl : $.table._option.removeUrl.replace("{id}", id);
+                    if($.table._option.type == table_type.bootstrapTreeTable) {
+                    	$.operate.get(url);
+                    } else {
+	            	    var data = { "ids": id };
+	            	    $.operate.submit(url, "post", "json", data);
+	                }
             	});
+            	
             },
             // 批量删除信息
             removeAll: function() {
@@ -743,9 +760,12 @@
             },
             // 保存结果弹出msg刷新table表格
             ajaxSuccess: function (result) {
-            	if (result.code == web_status.SUCCESS) {
+            	if (result.code == web_status.SUCCESS && $.table._option.type == table_type.bootstrapTable) {
                 	$.modal.msgSuccess(result.msg);
             		$.table.refresh();
+                } else if (result.code == web_status.SUCCESS && $.table._option.type == table_type.bootstrapTreeTable) {
+                	$.modal.msgSuccess(result.msg);
+                	$.treeTable.refresh();
                 } else {
                 	$.modal.alertError(result.msg);
                 }

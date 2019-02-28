@@ -95,10 +95,10 @@
 		            formatter: function(value, row, index) {
 		                if (row.parentId != 0) {
 		                    var actions = [];
-		                    actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.deptId + '\')"><i class="fa fa-edit">编辑</i></a> ');
-		                    actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="#" onclick="$.operate.add(\'' + row.deptId + '\')"><i class="fa fa-plus">新增</i></a> ');
-		                    actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="remove(\'' + row.deptId + '\')"><i class="fa fa-remove">删除</i></a>');
-		                    return actions.join('');
+		                    actions.push('<a class="' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.deptId + '\')"><i class="fa fa-edit"></i>编辑</a>');
+		                    actions.push('<a class="' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.deptId + '\')"><i class="fa fa-trash"></i>删除</a>');
+		                    actions.push('<a class="' + addFlag + '" href="#" onclick="$.operate.add(\'' + row.deptId + '\')"><i class="fa fa-plus"></i>添加下级部门</a>');
+		                    return $.table.dropdownToggle(actions.join(''));
 		                } else {
 		                    return "";
 		                }
@@ -107,23 +107,6 @@
 		    };
 		    $.treeTable.init(options);
 		});
-		
-		function remove(id) {
-			$.modal.confirm("确定删除该条" + $.table._option.modalName + "信息吗？", function() {
-				$.ajax({
-					type : 'post',
-					url: prefix + "/remove/" + id,
-					success : function(result) {
-						if (result.code == web_status.SUCCESS) {
-		                	$.modal.msgSuccess(result.msg);
-		                	$.treeTable.refresh();
-		                } else {
-		                	$.modal.msgError(result.msg);
-		                }
-					}
-				});
-			});
-		}
 	</script>
 </body>
 </html>
