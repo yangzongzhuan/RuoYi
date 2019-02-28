@@ -46,7 +46,7 @@
 				</form>
 			</div>
 			
-	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+	        <div class="btn-group-sm" id="toolbar" role="group">
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="${moduleName}:${classname}:add">
 					<i class="fa fa-plus"></i> 添加
 				</a>
