@@ -103,7 +103,7 @@
             	// 浮动提示框特效
             	$("[data-toggle='tooltip']").tooltip();
             	// 触发行点击事件
-            	$("#" + $.table._option.id).on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table", function () {
+            	$("#" + $.table._option.id).on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table load-success.bs.table", function () {
             		var ids = $("#" + $.table._option.id).bootstrapTable("getSelections");
             		$('#' + $.table._option.toolbar + ' .btn-del').toggleClass('disabled', !ids.length);
             		$('#' + $.table._option.toolbar + ' .btn-edit').toggleClass('disabled', ids.length!=1);
