@@ -1,12 +1,11 @@
 package com.ruoyi.system.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.annotation.DataScope;
+import com.ruoyi.common.base.Ztree;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
@@ -47,12 +46,11 @@ public class SysDeptServiceImpl implements ISysDeptService
      */
     @Override
     @DataScope(tableAlias = "d")
-    public List<Map<String, Object>> selectDeptTree(SysDept dept)
+    public List<Ztree> selectDeptTree(SysDept dept)
     {
-        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
         List<SysDept> deptList = deptMapper.selectDeptList(dept);
-        trees = getTrees(deptList, false, null);
-        return trees;
+        List<Ztree> ztrees = initZtree(deptList);
+        return ztrees;
     }
 
     /**
@@ -62,56 +60,63 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @return 部门列表（数据权限）
      */
     @Override
-    public List<Map<String, Object>> roleDeptTreeData(SysRole role)
+    public List<Ztree> roleDeptTreeData(SysRole role)
     {
         Long roleId = role.getRoleId();
-        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        List<Ztree> ztrees = new ArrayList<Ztree>();
         List<SysDept> deptList = selectDeptList(new SysDept());
         if (StringUtils.isNotNull(roleId))
         {
             List<String> roleDeptList = deptMapper.selectRoleDeptTree(roleId);
-            trees = getTrees(deptList, true, roleDeptList);
+            ztrees = initZtree(deptList, roleDeptList);
         }
         else
         {
-            trees = getTrees(deptList, false, null);
+            ztrees = initZtree(deptList);
         }
-        return trees;
+        return ztrees;
     }
 
     /**
      * 对象转部门树
      *
      * @param deptList 部门列表
-     * @param isCheck 是否需要选中
-     * @param roleDeptList 角色已存在菜单列表
-     * @return
+     * @return 树结构列表
      */
-    public List<Map<String, Object>> getTrees(List<SysDept> deptList, boolean isCheck, List<String> roleDeptList)
+    public List<Ztree> initZtree(List<SysDept> deptList)
+    {
+        return initZtree(deptList, null);
+    }
+
+    /**
+     * 对象转部门树
+     *
+     * @param deptList 部门列表
+     * @param roleDeptList 角色已存在菜单列表
+     * @return 树结构列表
+     */
+    public List<Ztree> initZtree(List<SysDept> deptList, List<String> roleDeptList)
     {
 
-        List<Map<String, Object>> trees = new ArrayList<Map<String, Object>>();
+        List<Ztree> ztrees = new ArrayList<Ztree>();
+        boolean isCheck = StringUtils.isNotNull(roleDeptList);
         for (SysDept dept : deptList)
         {
             if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
             {
-                Map<String, Object> deptMap = new HashMap<String, Object>();
-                deptMap.put("id", dept.getDeptId());
-                deptMap.put("pId", dept.getParentId());
-                deptMap.put("name", dept.getDeptName());
-                deptMap.put("title", dept.getDeptName());
+                Ztree ztree = new Ztree();
+                ztree.setId(dept.getDeptId());
+                ztree.setpId(dept.getParentId());
+                ztree.setName(dept.getDeptName());
+                ztree.setTitle(dept.getDeptName());
                 if (isCheck)
                 {
-                    deptMap.put("checked", roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
+                    ztree.setChecked(roleDeptList.contains(dept.getDeptId() + dept.getDeptName()));
                 }
-                else
-                {
-                    deptMap.put("checked", false);
-                }
-                trees.add(deptMap);
+                ztrees.add(ztree);
             }
         }
-        return trees;
+        return ztrees;
     }
 
     /**

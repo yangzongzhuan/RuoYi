@@ -3,6 +3,7 @@ package com.ruoyi.system.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.ruoyi.common.base.Ztree;
 import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
@@ -51,14 +52,14 @@ public interface ISysMenuService
      * @param role 角色对象
      * @return 菜单列表
      */
-    public List<Map<String, Object>> roleMenuTreeData(SysRole role);
+    public List<Ztree> roleMenuTreeData(SysRole role);
 
     /**
      * 查询所有菜单信息
      * 
      * @return 菜单列表
      */
-    public List<Map<String, Object>> menuTreeData();
+    public List<Ztree> menuTreeData();
 
     /**
      * 查询系统所有权限

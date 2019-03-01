@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller.system;
 
 import java.util.List;
-import java.util.Map;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.base.Ztree;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.service.ISysMenuService;
-import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 菜单信息
@@ -154,10 +154,10 @@ public class SysMenuController extends BaseController
      */
     @GetMapping("/roleMenuTreeData")
     @ResponseBody
-    public List<Map<String, Object>> roleMenuTreeData(SysRole role)
+    public List<Ztree> roleMenuTreeData(SysRole role)
     {
-        List<Map<String, Object>> tree = menuService.roleMenuTreeData(role);
-        return tree;
+        List<Ztree> ztrees = menuService.roleMenuTreeData(role);
+        return ztrees;
     }
 
     /**
@@ -165,10 +165,10 @@ public class SysMenuController extends BaseController
      */
     @GetMapping("/menuTreeData")
     @ResponseBody
-    public List<Map<String, Object>> menuTreeData(SysRole role)
+    public List<Ztree> menuTreeData(SysRole role)
     {
-        List<Map<String, Object>> tree = menuService.menuTreeData();
-        return tree;
+        List<Ztree> ztrees = menuService.menuTreeData();
+        return ztrees;
     }
 
     /**
