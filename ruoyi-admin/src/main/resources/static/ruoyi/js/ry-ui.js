@@ -112,7 +112,6 @@
             // 表格销毁
             destroy: function (tableId) {
             	var currentId = $.common.isEmpty(tableId) ? $.table._option.id : tableId;
-            	alert(currentId);
             	$("#" + currentId).bootstrapTable('destroy');
 	        },
             // 序列号生成
