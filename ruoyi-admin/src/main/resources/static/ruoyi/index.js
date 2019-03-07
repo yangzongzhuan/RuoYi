@@ -331,8 +331,8 @@ $(function() {
                     return false;
                 }
             });
-            scrollToTab($('.menuTab.active'));
         }
+        scrollToTab($('.menuTab.active'));
         return false;
     }
 
