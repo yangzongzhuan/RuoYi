@@ -12,14 +12,14 @@ import com.ruoyi.common.exception.DemoModeException;
 import com.ruoyi.framework.util.PermissionUtils;
 
 /**
- * 自定义异常处理器
+ * 全局异常处理器
  * 
  * @author ruoyi
  */
 @RestControllerAdvice
-public class DefaultExceptionHandler
+public class GlobalExceptionHandler
 {
-    private static final Logger log = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * 权限校验失败

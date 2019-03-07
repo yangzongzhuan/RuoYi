@@ -131,7 +131,7 @@ $(function() {
         var visibleWidth = $(".content-tabs").outerWidth(true) - tabOuterWidth;
         //实际滚动宽度
         var scrollVal = 0;
-        if ($(".page-tabs-content").width() < visibleWidth) {
+        if (($(".page-tabs-content").width() + 50) < visibleWidth) {
             return false;
         } else {
             var tabElement = $(".menuTab:first");

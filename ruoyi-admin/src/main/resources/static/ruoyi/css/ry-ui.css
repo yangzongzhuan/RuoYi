@@ -556,6 +556,7 @@ label {
 	background-color:#eee;
 }
 
+/** 表单布局 **/
 .form-header {
     font-size:15px;
 	color:#6379bb;
@@ -573,4 +574,20 @@ label {
     -o-border-image: none;
     border-image: none;
     border-width: 1px 0px;
+}
+
+/** 表格跳转样式 **/
+.pageGo input {
+    height: 32px;
+    width: 50px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: center;
+    display: block;
+    float:left;
+}
+.pageGo button {
+    height: 32px;
+    display: block;
+    float:left;
 }
