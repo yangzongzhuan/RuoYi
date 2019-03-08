@@ -259,7 +259,7 @@
             selectDictLabel: function(datas, value) {
             	var actions = [];
                 $.each(datas, function(index, dict) {
-                    if (dict.dictValue == value) {
+                    if (dict.dictValue == ('' + value)) {
                     	actions.push("<span class='badge badge-" + dict.listClass + "'>" + dict.dictLabel + "</span>");
                         return false;
                     }
