@@ -6,7 +6,7 @@ ruoyi:
   version: 3.2.0
   # 版权年份
   copyrightYear: 2019
-  # 文件上传路径
+  # 文件上传
   profile: D:/profile/
   # 获取ip地址开关
   addressEnabled: true
@@ -121,14 +121,3 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
-
-# 代码生成
-gen: 
-  # 作者
-  author: ruoyi
-  # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
-  packageName: com.ruoyi.system
-  # 自动去除表前缀，默认是true
-  autoRemovePre: true
-  # 表前缀(类名不会包含表前缀)
-  tablePrefix: sys_

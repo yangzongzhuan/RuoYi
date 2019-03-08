@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.velocity.VelocityContext;
-import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.generator.config.GenConfig;
 import com.ruoyi.generator.domain.ColumnInfo;
 import com.ruoyi.generator.domain.TableInfo;
 
@@ -64,7 +64,7 @@ public class GenUtils
     {
         // java对象数据传递到模板文件vm
         VelocityContext velocityContext = new VelocityContext();
-        String packageName = Global.getPackageName();
+        String packageName = GenConfig.getPackageName();
         velocityContext.put("tableName", table.getTableName());
         velocityContext.put("tableComment", replaceKeyword(table.getTableComment()));
         velocityContext.put("primaryKey", table.getPrimaryKey());
@@ -74,7 +74,7 @@ public class GenUtils
         velocityContext.put("columns", table.getColumns());
         velocityContext.put("basePackage", getBasePackage(packageName));
         velocityContext.put("package", packageName);
-        velocityContext.put("author", Global.getAuthor());
+        velocityContext.put("author", GenConfig.getAuthor());
         velocityContext.put("datetime", DateUtils.getDate());
         return velocityContext;
     }
@@ -105,8 +105,8 @@ public class GenUtils
      */
     public static String tableToJava(String tableName)
     {
-        String autoRemovePre = Global.getAutoRemovePre();
-        String tablePrefix = Global.getTablePrefix();
+        String autoRemovePre = GenConfig.getAutoRemovePre();
+        String tablePrefix = GenConfig.getTablePrefix();
         if (Constants.AUTO_REOMVE_PRE.equals(autoRemovePre) && StringUtils.isNotEmpty(tablePrefix))
         {
             tableName = tableName.replaceFirst(tablePrefix, "");
@@ -199,7 +199,7 @@ public class GenUtils
 
     public static String getProjectPath()
     {
-        String packageName = Global.getPackageName();
+        String packageName = GenConfig.getPackageName();
         StringBuffer projectPath = new StringBuffer();
         projectPath.append("main/java/");
         projectPath.append(packageName.replace(".", "/"));

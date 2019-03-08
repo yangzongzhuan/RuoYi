@@ -15,14 +15,25 @@
 	    common通用工具
 	</description>
 
-    <properties>
-        <commons.io.version>2.5</commons.io.version>
-		<commons.fileupload.version>1.3.3</commons.fileupload.version>
-		<jsoup.version>1.11.3</jsoup.version>
-		<poi.version>3.17</poi.version>
-    </properties>
-
     <dependencies>
+		
+		<!-- Spring框架基本的核心工具 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		
+		<!-- SpringWeb模块 -->
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        
+		<!-- pagehelper 分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+		</dependency>
     
         <!--常用工具类 -->
 		<dependency>
@@ -40,34 +51,36 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>${commons.io.version}</version>
 		</dependency>
 
 		<!--文件上传工具类 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>${commons.fileupload.version}</version>
 		</dependency>
 		
 		<!-- HTML解析器 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>${jsoup.version}</version>
 		</dependency>
 		
 		<!-- excel工具 -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>${poi.version}</version>
 		</dependency>
 		
 		<!-- yml解析器 -->
 		<dependency>
 		    <groupId>org.yaml</groupId>
 		    <artifactId>snakeyaml</artifactId>
+		</dependency>
+		
+		<!-- servlet包 -->
+       <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
 		</dependency>
 		
     </dependencies>

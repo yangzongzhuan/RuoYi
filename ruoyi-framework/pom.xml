@@ -33,14 +33,12 @@
 		<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
         </dependency>
 		
 		<!--验证码 -->
 		<dependency>
 			<groupId>com.github.penggle</groupId>
 			<artifactId>kaptcha</artifactId>
-			<version>${kaptcha.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>javax.servlet-api</artifactId>
@@ -49,80 +47,40 @@
 			</exclusions>
 		</dependency>
 
-        <!-- SpringBoot集成thymeleaf模板 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-		<!--Shiro核心框架 -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-core</artifactId>
-			<version>${shiro.version}</version>
-		</dependency>
-
 		<!-- Shiro使用Srping框架 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
-			<version>${shiro.version}</version>
 		</dependency>
 
 		<!-- Shiro使用EhCache缓存框架 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-ehcache</artifactId>
-			<version>${shiro.version}</version>
 		</dependency>
-
+		
 		<!-- thymeleaf模板引擎和shiro框架的整合 -->
 		<dependency>
 			<groupId>com.github.theborakompanioni</groupId>
 			<artifactId>thymeleaf-extras-shiro</artifactId>
-			<version>${thymeleaf.extras.shiro.version}</version>
 		</dependency>
 
 		<!-- 解析客户端操作系统、浏览器等 -->
 		<dependency>
 			<groupId>eu.bitwalker</groupId>
 			<artifactId>UserAgentUtils</artifactId>
-			<version>${bitwalker.version}</version>
 		</dependency>
 
         <!-- 系统模块-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-system</artifactId>
-            <version>${ruoyi.version}</version>
         </dependency>
-        
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-quartz</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-        
-        <!-- 代码生成-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-generator</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-        
-		<!-- pagehelper 分页插件 -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>${pagehelper.boot.version}</version>
-		</dependency>
 		
 		<!-- 获取系统信息 -->
 		<dependency>
 			<groupId>com.github.oshi</groupId>
 			<artifactId>oshi-core</artifactId>
-			<version>${oshi.version}</version>
 		</dependency>
 		
 		<dependency>

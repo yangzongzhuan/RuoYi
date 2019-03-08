@@ -1,6 +1,8 @@
-package com.ruoyi.framework.config;
+package com.ruoyi.generator.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "gen")
+@PropertySource(value = { "generator.yml" })
 public class GenConfig
 {
     /** 作者 */
@@ -29,6 +32,7 @@ public class GenConfig
         return author;
     }
 
+    @Value("${author}")
     public void setAuthor(String author)
     {
         GenConfig.author = author;
@@ -39,6 +43,7 @@ public class GenConfig
         return packageName;
     }
 
+    @Value("${packageName}")
     public void setPackageName(String packageName)
     {
         GenConfig.packageName = packageName;
@@ -49,6 +54,7 @@ public class GenConfig
         return autoRemovePre;
     }
 
+    @Value("${autoRemovePre}")
     public void setAutoRemovePre(String autoRemovePre)
     {
         GenConfig.autoRemovePre = autoRemovePre;
@@ -59,6 +65,7 @@ public class GenConfig
         return tablePrefix;
     }
 
+    @Value("${tablePrefix}")
     public void setTablePrefix(String tablePrefix)
     {
         GenConfig.tablePrefix = tablePrefix;

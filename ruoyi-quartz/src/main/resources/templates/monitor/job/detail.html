@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+	
+	<form class="form-horizontal m-t" id="jobLogForm" th:if="${name == 'jobLog'}">
+	    <div class="form-group">
+			<label class="col-sm-3 control-label">日志序号：</label>
+			<div class="form-control-static" th:text="${jobLog.jobLogId}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">任务名称：</label>
+			<div class="form-control-static" th:text="${jobLog.jobName}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">任务组名：</label>
+			<div class="form-control-static" th:text="${jobLog.jobGroup}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">任务方法：</label>
+			<div class="form-control-static" th:text="${jobLog.methodName} + '(' + ${#strings.defaultString(jobLog.methodParams,'')} + ')'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">日志信息：</label>
+			<div class="form-control-static" th:text="${jobLog.jobMessage}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">执行状态：</label>
+			<div class="form-control-static" th:class="${jobLog.status == '0' ? 'label label-primary' : 'label label-danger'}" th:text="${jobLog.status == '0' ? '正常' : '失败'}">
+			</div>
+		</div>
+		<div class="form-group" th:style="'display:' + ${jobLog.status == '0' ? 'none' : 'block'}">
+			<label class="col-sm-3 control-label">异常信息：</label>
+			<div class="form-control-static" th:text="${jobLog.exceptionInfo}">
+			</div>
+		</div>
+	</form>
+	
+	<form class="form-horizontal m-t" id="jobForm" th:if="${name == 'job'}">
+	    <div class="form-group">
+			<label class="col-sm-3 control-label">任务序号：</label>
+			<div class="form-control-static" th:text="${job.jobId}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">任务名称：</label>
+			<div class="form-control-static" th:text="${job.jobName}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">任务组名：</label>
+			<div class="form-control-static" th:text="${job.jobGroup}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">任务方法：</label>
+			<div class="form-control-static" th:text="${job.methodName} + '(' + ${#strings.defaultString(job.methodParams,'')} + ')'">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">执行表达式：</label>
+			<div class="form-control-static" th:text="${job.cronExpression}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">下次执行时间：</label>
+			<div class="form-control-static" th:text="${#dates.format(job.nextValidTime, 'yyyy-MM-dd HH:mm:ss')}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">执行策略：</label>
+			<div class="form-control-static" th:if="${job.misfirePolicy == '0'}">默认策略</div>
+			<div class="form-control-static" th:if="${job.misfirePolicy == '1'}">立即执行</div>
+			<div class="form-control-static" th:if="${job.misfirePolicy == '2'}">执行一次</div>
+			<div class="form-control-static" th:if="${job.misfirePolicy == '3'}">放弃执行</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">执行状态：</label>
+			<div class="form-control-static" th:class="${job.status == '0' ? 'label label-primary' : 'label label-danger'}" th:text="${job.status == '0' ? '正常' : '暂停'}">
+			</div>
+		</div>
+	</form>
+	
+    </div>
+</body>
+</html>

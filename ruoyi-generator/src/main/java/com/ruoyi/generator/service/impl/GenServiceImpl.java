@@ -14,9 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.generator.config.GenConfig;
 import com.ruoyi.generator.domain.ColumnInfo;
 import com.ruoyi.generator.domain.TableInfo;
 import com.ruoyi.generator.mapper.GenMapper;
@@ -110,7 +110,7 @@ public class GenServiceImpl implements IGenService
 
         VelocityInitializer.initVelocity();
 
-        String packageName = Global.getPackageName();
+        String packageName = GenConfig.getPackageName();
         String moduleName = GenUtils.getModuleName(packageName);
 
         VelocityContext context = GenUtils.getVelocityContext(table);

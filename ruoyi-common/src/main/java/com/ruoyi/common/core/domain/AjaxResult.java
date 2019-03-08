@@ -1,4 +1,4 @@
-package com.ruoyi.common.base;
+package com.ruoyi.common.core.domain;
 
 import java.util.HashMap;
 

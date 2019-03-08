@@ -15,25 +15,26 @@
 	    generator代码生成
 	</description>
 	
-	<properties>
-        <velocity.version>1.7</velocity.version>
-    </properties>
-
     <dependencies>
+    
+    	<!--Shiro核心框架 -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
     
         <!--velocity代码生成使用模板 -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity</artifactId>
-            <version>${velocity.version}</version>
         </dependency>
-
+		
         <!-- 通用工具-->
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-common</artifactId>
-            <version>${ruoyi.version}</version>
         </dependency>
+
     </dependencies>
 	
 </project>

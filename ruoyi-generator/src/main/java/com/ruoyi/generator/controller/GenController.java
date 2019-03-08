@@ -1,4 +1,4 @@
-package com.ruoyi.web.controller.tool;
+package com.ruoyi.generator.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.page.TableDataInfo;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.generator.domain.TableInfo;
 import com.ruoyi.generator.service.IGenService;
-import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 代码生成 操作处理

@@ -2,8 +2,8 @@ package com.ruoyi.common.utils.poi;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.annotation.Excel.Type;
-import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.config.Global;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.reflect.ReflectUtils;
 import com.ruoyi.common.support.Convert;
