@@ -2,7 +2,7 @@ package ${package}.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.base.BaseEntity;
+import com.ruoyi.common.core.domain.BaseEntity;
 #foreach ($column in $columns)
 #if($column.attrType == 'Date')
 import java.util.Date;

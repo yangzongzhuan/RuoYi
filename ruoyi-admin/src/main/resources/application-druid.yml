@@ -34,7 +34,9 @@ spring:
             validationQuery: SELECT 1 FROM DUAL
             testWhileIdle: true
             testOnBorrow: false
-            testOnReturn: false      
+            testOnReturn: false
+            webStatFilter: 
+                enabled: true
             statViewServlet:
                 enabled: true
                 # 设置白名单，不填则允许所有访问
@@ -42,6 +44,7 @@ spring:
                 url-pattern: /monitor/druid/*
             filter:
                 stat:
+                    enabled: true
                     # 慢SQL记录
                     log-slow-sql: true
                     slow-sql-millis: 1000
