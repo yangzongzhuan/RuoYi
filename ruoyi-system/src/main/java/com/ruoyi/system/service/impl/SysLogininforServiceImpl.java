@@ -3,7 +3,7 @@ package com.ruoyi.system.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ruoyi.common.support.Convert;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.system.domain.SysLogininfor;
 import com.ruoyi.system.mapper.SysLogininforMapper;
 import com.ruoyi.system.service.ISysLogininforService;

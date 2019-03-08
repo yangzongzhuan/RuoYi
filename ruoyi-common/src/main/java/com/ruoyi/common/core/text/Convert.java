@@ -1,4 +1,4 @@
-package com.ruoyi.common.support;
+package com.ruoyi.common.core.text;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

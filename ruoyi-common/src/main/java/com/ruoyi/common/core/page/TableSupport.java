@@ -1,4 +1,4 @@
-package com.ruoyi.common.page;
+package com.ruoyi.common.core.page;
 
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.ServletUtils;

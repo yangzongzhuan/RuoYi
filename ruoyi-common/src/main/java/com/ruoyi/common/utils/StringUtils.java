@@ -2,7 +2,7 @@ package com.ruoyi.common.utils;
 
 import java.util.Collection;
 import java.util.Map;
-import com.ruoyi.common.support.StrFormatter;
+import com.ruoyi.common.core.text.StrFormatter;
 
 /**
  * 字符串工具类

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.page.TableDataInfo;
-import com.ruoyi.common.support.Convert;
 import com.ruoyi.generator.domain.TableInfo;
 import com.ruoyi.generator.service.IGenService;
 

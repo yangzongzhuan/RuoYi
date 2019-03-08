@@ -15,7 +15,7 @@ import com.ruoyi.common.enums.BusinessType;
 import ${package}.domain.${className};
 import ${package}.service.I${className}Service;
 import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.page.TableDataInfo;
+import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 

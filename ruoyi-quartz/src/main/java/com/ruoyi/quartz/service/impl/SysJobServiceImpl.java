@@ -7,7 +7,7 @@ import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.ScheduleConstants;
-import com.ruoyi.common.support.Convert;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.mapper.SysJobMapper;
 import com.ruoyi.quartz.service.ISysJobService;
