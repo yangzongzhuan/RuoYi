@@ -6,6 +6,7 @@ import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.quartz.domain.SysJob;
@@ -80,6 +81,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息
      */
     @Override
+    @Transactional
     public int pauseJob(SysJob job)
     {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
@@ -97,6 +99,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息
      */
     @Override
+    @Transactional
     public int resumeJob(SysJob job)
     {
         job.setStatus(ScheduleConstants.Status.NORMAL.getValue());
@@ -114,6 +117,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息
      */
     @Override
+    @Transactional
     public int deleteJob(SysJob job)
     {
         int rows = jobMapper.deleteJobById(job.getJobId());
@@ -131,6 +135,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @return 结果
      */
     @Override
+    @Transactional
     public void deleteJobByIds(String ids)
     {
         Long[] jobIds = Convert.toLongArray(ids);
@@ -147,6 +152,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息
      */
     @Override
+    @Transactional
     public int changeStatus(SysJob job)
     {
         int rows = 0;
@@ -168,6 +174,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息
      */
     @Override
+    @Transactional
     public int run(SysJob job)
     {
         return ScheduleUtils.run(scheduler, selectJobById(job.getJobId()));
@@ -179,6 +186,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息 调度信息
      */
     @Override
+    @Transactional
     public int insertJobCron(SysJob job)
     {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
@@ -196,6 +204,7 @@ public class SysJobServiceImpl implements ISysJobService
      * @param job 调度信息
      */
     @Override
+    @Transactional
     public int updateJobCron(SysJob job)
     {
         int rows = jobMapper.updateJob(job);
