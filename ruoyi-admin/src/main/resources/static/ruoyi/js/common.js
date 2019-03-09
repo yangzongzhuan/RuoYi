@@ -72,12 +72,18 @@ $(function() {
 	    layui.use('laydate', function() {
 	        var laydate = layui.laydate;
 	        var times = $(".time-input");
+	        // 控制控件外观
+	        var type = times.attr("data-type") || 'date';
+	        // 控制回显格式
+	        var format = times.attr("data-format") || 'yyyy-MM-dd';
 	        for (var i = 0; i < times.length; i++) {
 	            var time = times[i];
 	            laydate.render({
 	                elem: time,
 	                theme: 'molv',
 	                trigger: 'click',
+	                type: type,
+	                format: format,
 	                done: function(value, date) {}
 	            });
 	        }
