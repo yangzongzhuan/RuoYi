@@ -1,9 +1,8 @@
 package com.ruoyi.quartz.util;
 
 import java.lang.reflect.Method;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
+import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 
@@ -15,8 +14,6 @@ import com.ruoyi.common.utils.spring.SpringUtils;
  */
 public class ScheduleRunnable implements Runnable
 {
-    private static final Logger log = LoggerFactory.getLogger(ScheduleRunnable.class);
-
     private Object target;
     private Method method;
     private String params;
@@ -54,7 +51,7 @@ public class ScheduleRunnable implements Runnable
         }
         catch (Exception e)
         {
-            log.error("执行定时任务  - ：", e);
+            throw new BusinessException("执行定时任务失败", e);
         }
     }
 }

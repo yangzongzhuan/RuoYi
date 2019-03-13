@@ -31,7 +31,7 @@
                     showColumns: true,
                     showToggle: true,
                     showExport: false,
-                    clickToSelect: true,
+                    clickToSelect: false,
         		    fixedColumns: false,
         		    fixedNumber: 0,
         		    rightFixedColumns: false,
