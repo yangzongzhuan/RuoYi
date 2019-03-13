@@ -31,6 +31,7 @@
                     showColumns: true,
                     showToggle: true,
                     showExport: false,
+                    clickToSelect: true,
         		    fixedColumns: false,
         		    fixedNumber: 0,
         		    rightFixedColumns: false,
@@ -66,6 +67,7 @@
                     showColumns: options.showColumns,                   // 是否显示隐藏某列下拉框
                     showToggle: options.showToggle,                     // 是否显示详细视图和列表视图的切换按钮
                     showExport: options.showExport,                     // 是否支持导出文件
+                    clickToSelect: options.clickToSelect,				// 是否启用点击选中行
                     fixedColumns: options.fixedColumns,                 // 是否启用冻结列（左侧）
                     fixedNumber: options.fixedNumber,                   // 列冻结的个数（左侧）
                     rightFixedColumns: options.rightFixedColumns,       // 是否启用冻结列（右侧）
