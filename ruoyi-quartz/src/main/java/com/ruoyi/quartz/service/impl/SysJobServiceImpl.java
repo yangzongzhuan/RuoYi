@@ -4,11 +4,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.core.text.Convert;
+import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.mapper.SysJobMapper;
 import com.ruoyi.quartz.service.ISysJobService;
@@ -33,7 +35,7 @@ public class SysJobServiceImpl implements ISysJobService
      * 项目启动时，初始化定时器
      */
     @PostConstruct
-    public void init()
+    public void init() throws SchedulerException, TaskException
     {
         List<SysJob> jobList = jobMapper.selectJobAll();
         for (SysJob job : jobList)
@@ -82,7 +84,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int pauseJob(SysJob job)
+    public int pauseJob(SysJob job) throws SchedulerException
     {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
         int rows = jobMapper.updateJob(job);
@@ -100,7 +102,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int resumeJob(SysJob job)
+    public int resumeJob(SysJob job) throws SchedulerException
     {
         job.setStatus(ScheduleConstants.Status.NORMAL.getValue());
         int rows = jobMapper.updateJob(job);
@@ -118,7 +120,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int deleteJob(SysJob job)
+    public int deleteJob(SysJob job) throws SchedulerException
     {
         int rows = jobMapper.deleteJobById(job.getJobId());
         if (rows > 0)
@@ -136,7 +138,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public void deleteJobByIds(String ids)
+    public void deleteJobByIds(String ids) throws SchedulerException
     {
         Long[] jobIds = Convert.toLongArray(ids);
         for (Long jobId : jobIds)
@@ -153,7 +155,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int changeStatus(SysJob job)
+    public int changeStatus(SysJob job) throws SchedulerException
     {
         int rows = 0;
         String status = job.getStatus();
@@ -175,9 +177,9 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int run(SysJob job)
+    public void run(SysJob job) throws SchedulerException
     {
-        return ScheduleUtils.run(scheduler, selectJobById(job.getJobId()));
+        ScheduleUtils.run(scheduler, selectJobById(job.getJobId()));
     }
 
     /**
@@ -187,7 +189,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int insertJobCron(SysJob job)
+    public int insertJobCron(SysJob job) throws SchedulerException, TaskException
     {
         job.setStatus(ScheduleConstants.Status.PAUSE.getValue());
         int rows = jobMapper.insertJob(job);
@@ -205,7 +207,7 @@ public class SysJobServiceImpl implements ISysJobService
      */
     @Override
     @Transactional
-    public int updateJobCron(SysJob job)
+    public int updateJobCron(SysJob job) throws SchedulerException, TaskException
     {
         int rows = jobMapper.updateJob(job);
         if (rows > 0)
@@ -214,7 +216,7 @@ public class SysJobServiceImpl implements ISysJobService
         }
         return rows;
     }
-    
+
     /**
      * 校验cron表达式是否有效
      * 
@@ -225,5 +227,5 @@ public class SysJobServiceImpl implements ISysJobService
     public boolean checkCronExpressionIsValid(String cronExpression)
     {
         return CronUtils.isValid(cronExpression);
-    }   
+    }
 }

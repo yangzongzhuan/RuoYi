@@ -47,6 +47,9 @@ public class SysJob extends BaseEntity implements Serializable
     @Excel(name = "计划策略 ")
     private String misfirePolicy = ScheduleConstants.MISFIRE_DEFAULT;
 
+    /** 是否并发执行（0允许 1禁止） */
+    private String concurrent;
+
     /** 任务状态（0正常 1暂停） */
     @Excel(name = "任务状态", readConverterExp = "0=正常,1=暂停")
     private String status;
@@ -130,6 +133,16 @@ public class SysJob extends BaseEntity implements Serializable
         this.misfirePolicy = misfirePolicy;
     }
 
+    public String getConcurrent()
+    {
+        return concurrent;
+    }
+
+    public void setConcurrent(String concurrent)
+    {
+        this.concurrent = concurrent;
+    }
+
     public String getStatus()
     {
         return status;
@@ -139,7 +152,7 @@ public class SysJob extends BaseEntity implements Serializable
     {
         this.status = status;
     }
-
+    
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -151,6 +164,7 @@ public class SysJob extends BaseEntity implements Serializable
             .append("cronExpression", getCronExpression())
             .append("nextValidTime", getNextValidTime())
             .append("misfirePolicy", getMisfirePolicy())
+            .append("concurrent", getConcurrent())
             .append("status", getStatus())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())

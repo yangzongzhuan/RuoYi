@@ -122,7 +122,7 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		                var actions = [];
-		                actions.push('<a class="btn btn-primary btn-xs ' + statusFlag + '" href="#" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行</a> ');
+		                actions.push('<a class="btn btn-primary btn-xs ' + statusFlag + '" href="#" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行一次</a> ');
 		                actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="#" onclick="$.operate.detail(\'' + row.jobId + '\')"><i class="fa fa-search"></i>详细</a> ');
 		                return actions.join('');
 		            }
@@ -142,7 +142,7 @@
 		
 		/* 立即执行一次 */
 		function run(jobId) {
-			$.modal.confirm("确认要立即执行任务吗？", function() {
+			$.modal.confirm("确认要立即执行一次任务吗？", function() {
 				$.operate.post(prefix + "/run", { "jobId": jobId});
 		    })
 		}

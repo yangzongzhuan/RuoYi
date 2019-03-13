@@ -45,6 +45,13 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-3 control-label">并发执行：</label>
+				<div class="col-sm-8">
+					<label class="radio-box"> <input type="radio" th:field="*{concurrent}" name="concurrent" value="0"/> 允许 </label> 
+					<label class="radio-box"> <input type="radio" th:field="*{concurrent}" name="concurrent" value="1"/> 禁止 </label> 
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-3 control-label">状态：</label>
 				<div class="col-sm-8">
 					<div class="radio-box" th:each="dict : ${@dict.getType('sys_job_status')}">

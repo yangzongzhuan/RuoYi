@@ -1,7 +1,9 @@
 package com.ruoyi.quartz.domain;
 
+import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
@@ -45,6 +47,14 @@ public class SysJobLog extends BaseEntity
     /** 异常信息 */
     @Excel(name = "异常信息")
     private String exceptionInfo;
+
+    /** 开始时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date startTime;
+
+    /** 结束时间 */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endTime;
 
     public Long getJobLogId()
     {
@@ -125,6 +135,26 @@ public class SysJobLog extends BaseEntity
     {
         this.exceptionInfo = exceptionInfo;
     }
+    
+    public Date getStartTime()
+    {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime)
+    {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime()
+    {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime)
+    {
+        this.endTime = endTime;
+    }
 
     @Override
     public String toString() {
@@ -137,7 +167,8 @@ public class SysJobLog extends BaseEntity
             .append("jobMessage", getJobMessage())
             .append("status", getStatus())
             .append("exceptionInfo", getExceptionInfo())
-            .append("createTime", getCreateTime())
+            .append("startTime", getStartTime())
+            .append("endTime", getEndTime())
             .toString();
     }
 }

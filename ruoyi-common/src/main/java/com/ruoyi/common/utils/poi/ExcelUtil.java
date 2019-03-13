@@ -647,7 +647,9 @@ public class ExcelUtil<T>
         {
             tempClass = tempClass.getSuperclass();
             if (tempClass != null)
+            {
                 tempFields.addAll(Arrays.asList(tempClass.getDeclaredFields()));
+            }
         }
         putToFields(tempFields);
     }
