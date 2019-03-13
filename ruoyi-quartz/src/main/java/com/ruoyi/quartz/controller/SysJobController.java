@@ -123,7 +123,7 @@ public class SysJobController extends BaseController
     @RequiresPermissions("monitor:job:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysJob job) throws Exception
+    public AjaxResult addSave(SysJob job) throws SchedulerException, TaskException
     {
         return toAjax(jobService.insertJobCron(job));
     }

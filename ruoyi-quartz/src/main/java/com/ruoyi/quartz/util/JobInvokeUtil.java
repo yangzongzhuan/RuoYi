@@ -33,11 +33,6 @@ public class JobInvokeUtil
      * @param bean 目标对象
      * @param methodName 方法名称
      * @param methodParams 方法参数
-     * @throws InvocationTargetException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
      */
     private static void invokeSpringBean(Object bean, String methodName, String methodParams)
             throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException,

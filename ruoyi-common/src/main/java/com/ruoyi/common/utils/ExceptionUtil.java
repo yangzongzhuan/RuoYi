@@ -11,7 +11,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
  */
 public class ExceptionUtil
 {
-
     /**
      * 获取exception的详细错误信息。
      */
