@@ -55,25 +55,45 @@ public class ThreadPoolConfig
     protected ScheduledExecutorService scheduledExecutorService()
     {
         return new ScheduledThreadPoolExecutor(corePoolSize,
-                new BasicThreadFactory.Builder().namingPattern("schedule-pool-%d").daemon(true).build()) {
+                new BasicThreadFactory.Builder().namingPattern("schedule-pool-%d").daemon(true).build())
+        {
             @Override
-            protected void afterExecute(Runnable r, Throwable t) {
+            protected void afterExecute(Runnable r, Throwable t)
+            {
                 super.afterExecute(r, t);
-                if (t == null && r instanceof Future<?>) {
-                    try {
-                        Object result = ((Future<?>) r).get();
-                    } catch (CancellationException ce) {
-                        t = ce;
-                    } catch (ExecutionException ee) {
-                        t = ee.getCause();
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt(); // ignore/reset
-                    }
-                }
-                if(t != null) {
-                    log.error(t.getMessage());
-                }
+                printException(r, t);
             }
         };
+    }
+
+    private static void printException(Runnable r, Throwable t)
+    {
+        if (t == null && r instanceof Future<?>)
+        {
+            try
+            {
+                Future<?> future = (Future<?>) r;
+                if (future.isDone())
+                {
+                    future.get();
+                }
+            }
+            catch (CancellationException ce)
+            {
+                t = ce;
+            }
+            catch (ExecutionException ee)
+            {
+                t = ee.getCause();
+            }
+            catch (InterruptedException ie)
+            {
+                Thread.currentThread().interrupt();
+            }
+        }
+        if (t != null)
+        {
+            log.error(t.getMessage(), t);
+        }
     }
 }
