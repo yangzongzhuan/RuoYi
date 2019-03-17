@@ -23,12 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<sql id="selectMenuVo">
-        select menu_id, menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time 
+        select menu_id, menu_name, parent_id, order_num, url, menu_type, visible, ifnull(perms,'') as perms, icon, create_by, create_time 
 		from sys_menu
     </sql>
     
     <select id="selectMenusByUserId" parameterType="Long" resultMap="SysMenuResult">
-		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms , m.menu_type, m.icon, m.order_num, m.create_time
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.menu_type, m.icon, m.order_num, m.create_time
 		from sys_menu m
 			 left join sys_role_menu rm on m.menu_id = rm.menu_id
 			 left join sys_user_role ur on rm.role_id = ur.role_id
@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectMenuNormalAll" resultMap="SysMenuResult">
-		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms , m.menu_type, m.icon, m.order_num, m.create_time
+		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.menu_type, m.icon, m.order_num, m.create_time
 		from sys_menu m
 		where m.menu_type in ('M', 'C') and m.visible = 0
 		order by m.order_num
@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectMenuTree" parameterType="Long" resultType="String">
-		select concat(m.menu_id, m.perms) as perms
+		select concat(m.menu_id, ifnull(m.perms,'')) as perms
 		from sys_menu m
 			left join sys_role_menu rm on m.menu_id = rm.menu_id
 		where rm.role_id = #{roleId}
