@@ -7,7 +7,7 @@ import com.ruoyi.common.config.Global;
 import com.ruoyi.common.exception.file.FileNameLengthLimitExceededException;
 import com.ruoyi.common.exception.file.FileSizeLimitExceededException;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.common.utils.Md5Utils;
+import com.ruoyi.common.utils.security.Md5Utils;
 
 /**
  * 文件上传工具类

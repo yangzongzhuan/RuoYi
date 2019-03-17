@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.exception.DemoModeException;
 import com.ruoyi.common.utils.ServletUtils;
-import com.ruoyi.framework.util.PermissionUtils;
+import com.ruoyi.common.utils.security.PermissionUtils;
 
 /**
  * 全局异常处理器
