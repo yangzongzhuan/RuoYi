@@ -55,6 +55,7 @@
 	<div th:include="include::footer"></div>
 	<script>
 		$("#form-user-edit").validate({
+			onkeyup: false,
 			rules:{
 				userName:{
 					required:true,

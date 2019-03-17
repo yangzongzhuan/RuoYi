@@ -132,6 +132,7 @@
         var prefix = ctx + "system/user";
         
         $("#form-user-edit").validate({
+        	onkeyup: false,
         	rules:{
         		email:{
                     email:true,

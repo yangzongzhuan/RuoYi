@@ -39,6 +39,7 @@
 		var prefix = ctx + "system/dict";
 	
 		$("#form-dict-add").validate({
+			onkeyup: false,
 			rules:{
 				dictType:{
 					minlength: 5,

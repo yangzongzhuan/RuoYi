@@ -66,6 +66,7 @@
 		
 		$("#form-role-add").validate({
 			rules:{
+				onkeyup: false,
 				roleName:{
 					remote: {
 		                url: ctx + "system/role/checkRoleNameUnique",

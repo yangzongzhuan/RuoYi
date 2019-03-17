@@ -45,6 +45,7 @@
 		var prefix = ctx + "system/post";
 	    
 		$("#form-post-add").validate({
+			onkeyup: false,
 			rules:{
 				postName:{
 					remote: {
