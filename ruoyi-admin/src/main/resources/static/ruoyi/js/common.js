@@ -103,9 +103,11 @@ $(function() {
 		}).bind("input propertychange", $.tree.searchNode);
 	}
 	// tree表格树 展开/折叠
-	var expandFlag = false;
+	var expandFlag;
 	$("#expandAllBtn").click(function() {
-	    if (expandFlag) {
+		var dataExpand = $.common.isEmpty($.table._option.expandAll) ? true : $.table._option.expandAll;
+		expandFlag = $.common.isEmpty(expandFlag) ? dataExpand : expandFlag;
+	    if (!expandFlag) {
 	        $('#' + $.table._option.id).bootstrapTreeTable('expandAll');
 	    } else {
 	        $('#' + $.table._option.id).bootstrapTreeTable('collapseAll');
