@@ -43,7 +43,7 @@ public class DataSourceAspect
 
         if (StringUtils.isNotNull(dataSource))
         {
-            DynamicDataSourceContextHolder.setDateSoureType(dataSource.value().name());
+            DynamicDataSourceContextHolder.setDataSourceType(dataSource.value().name());
         }
 
         try
@@ -53,7 +53,7 @@ public class DataSourceAspect
         finally
         {
             // 销毁数据源 在执行方法之后
-            DynamicDataSourceContextHolder.clearDateSoureType();
+            DynamicDataSourceContextHolder.clearDataSourceType();
         }
     }
 }

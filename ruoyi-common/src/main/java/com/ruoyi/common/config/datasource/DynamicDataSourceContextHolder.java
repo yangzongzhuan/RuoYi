@@ -21,7 +21,7 @@ public class DynamicDataSourceContextHolder
     /**
      * 设置数据源的变量
      */
-    public static void setDateSoureType(String dsType)
+    public static void setDataSourceType(String dsType)
     {
         log.info("切换到{}数据源", dsType);
         CONTEXT_HOLDER.set(dsType);
@@ -30,7 +30,7 @@ public class DynamicDataSourceContextHolder
     /**
      * 获得数据源的变量
      */
-    public static String getDateSoureType()
+    public static String getDataSourceType()
     {
         return CONTEXT_HOLDER.get();
     }
@@ -38,7 +38,7 @@ public class DynamicDataSourceContextHolder
     /**
      * 清空数据源变量
      */
-    public static void clearDateSoureType()
+    public static void clearDataSourceType()
     {
         CONTEXT_HOLDER.remove();
     }
