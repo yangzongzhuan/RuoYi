@@ -1059,10 +1059,12 @@
             random: function (min, max) {
                 return Math.floor((Math.random() * max) + min);
             },
+            // 判断字符串是否是以start开头
             startWith: function(value, start) {
                 var reg = new RegExp("^" + start);
                 return reg.test(value)
             },
+            // 判断字符串是否是以end结尾
             endWith: function(value, end) {
                 var reg = new RegExp(end + "$");
                 return reg.test(value)

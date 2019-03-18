@@ -72,6 +72,7 @@
 		var prefix = ctx + "monitor/job";
 	
 		$("#form-job-add").validate({
+			onkeyup: false,
 			rules:{
 				cronExpression:{
 					remote: {
