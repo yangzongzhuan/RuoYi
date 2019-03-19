@@ -285,6 +285,7 @@
             		id: "bootstrap-tree-table",
                     type: 1, // 0 代表bootstrapTable 1代表bootstrapTreeTable
         		    height: 0,
+        		    rootIdValue: null,
         		    ajaxParams: {},
         		    toolbar: "toolbar",
         		    striped: false,
@@ -302,6 +303,7 @@
         	    	type: 'get',                                        // 请求方式（*）
         	        url: options.url,                                   // 请求后台的URL（*）
         	        ajaxParams: options.ajaxParams,                     // 请求数据的ajax的data属性
+        	        rootIdValue: options.rootIdValue,                   // 设置指定根节点id值
         	        height: options.height,                             // 表格树的高度
         			expandColumn: options.expandColumn,                 // 在哪一列上面显示展开按钮
         			striped: options.striped,                           // 是否显示行间隔色
