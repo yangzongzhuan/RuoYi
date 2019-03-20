@@ -47,16 +47,22 @@
 		    <artifactId>jackson-databind</artifactId>
 		</dependency>
 
-		<!--io常用工具类 -->
+		<!-- io常用工具类 -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
 
-		<!--文件上传工具类 -->
+		<!-- 文件上传工具类 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		
+		<!-- 简化反射封工具类 -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
 		</dependency>
 		
 		<!-- HTML解析器 -->

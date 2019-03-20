@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * 
  * @author ruoyi
  */
-public class BeanUtils
+public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
 {
     /** Bean方法名中属性名开始的下标 */
     private static final int BEAN_METHOD_PROP_INDEX = 3;
@@ -30,21 +30,9 @@ public class BeanUtils
      */
     public static void copyBeanProp(Object dest, Object src)
     {
-        List<Method> destSetters = getSetterMethods(dest);
-        List<Method> srcGetters = getGetterMethods(src);
         try
         {
-            for (Method setter : destSetters)
-            {
-                for (Method getter : srcGetters)
-                {
-                    if (isMethodPropEquals(setter.getName(), getter.getName())
-                            && setter.getParameterTypes()[0].equals(getter.getReturnType()))
-                    {
-                        setter.invoke(dest, getter.invoke(src));
-                    }
-                }
-            }
+            copyProperties(dest, src);
         }
         catch (Exception e)
         {
