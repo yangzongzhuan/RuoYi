@@ -6,11 +6,9 @@
 
 若依基于hplus和inspinia两套后台系统模板开发。有需要可自行到群内下载。
 
-> RuoYi从3.0开始，进行模块拆分，将原先的单应用转变为多模块，如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  
+> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需Oracle版本，请移步 [RuoYi-oracle](http://doc.ruoyi.vip/#/standard/xmkz)  `(不定时更新)`
 
-> 推荐使用阿里云部署，通用云产品代金券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)  
-
-> 2019阿里云开年Hi购季 云服务器全场限时5折 ：[活动入口](https://www.aliyun.com/acts/product-section-2019/new-users?spm=5176.11533457.1089570.1.424777e3bwsfme&userCode=brki8iof) 
+> 阿里云通用云产品1888优惠券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)&nbsp;&nbsp;&nbsp;&nbsp;腾讯云通用云产品2860优惠券 ：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;`(仅限新用户)`
 
 ## 内置功能
 
@@ -44,30 +42,34 @@
 <table>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/25b5e333768d013d45a990c152dbe4d9d6e.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/dfadf4d864242745486aa0167110dfcbeb8.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/5ac52ccc07a59f12205948c9408791f5c5b.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/2e1ed87df9b476ed73ed650df20cf009b78.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/693955d8914ee3c34ab904fa0602bc31267.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/66f8b5b24720dabe0e11ae84bd1ad4b038e.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/a46f34786bc9fc400697b6f3677be5bb3f0.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/9a2851988f4e7433c9322154534865f57d7.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/396293f80b1e8cce8671f56c296bee78a3a.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/6010201b078dbc9e1d8c09c6a3e53f4344c.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/058928ad3a6e6de67b43d62d42dbf071355.jpg"/></td>
     </tr>
+	<tr>
+        <td><img src="https://oscimg.oschina.net/oscnet/21acdcade5e306f2c5d7ae26993b4e6bd06.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/ad5ea3c4c2ea2e91d1f05f6cc384cbad2a1.jpg"/></td>
+    </tr>	 
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/787b3b06430a403655b48b9bcd1fa829555.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/a51820009836276b778bc89d4d0e217e26d.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/6ca845cca1701fbf71881efe4f341c82f99.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/e3aeb8fff585594f6e947218e14f2806ea1.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/5fb138478adeda6825e206d21f67ecd0625.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/fa2f027a10707a4eb4fc47d5ea1c3d2b772.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/197ddc2fdffc27020f8624bd7ca1a971f61.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/a2dabea752d7d70aede20908dee0b419829.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/a714056081523b7dfa782cda866e8be4adc.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/ab4b5797dfb2bc68c4974ad5458bd5f5bcf.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/c5699c5726b5aebde71a37bb5163d840bc2.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/24740d59377e826d0d8664ebad66dc84abd.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/98beb69118d9ab59aa898d5d5baad20b755.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/bbe7fe1048d29217ba73bd3ed88d6743b55.jpg"/></td>
         <td><img src="https://oscimg.oschina.net/oscnet/5f3d39a141f21f81b90536f391b8408f1fa.jpg"/></td>
     </tr>
 </table>

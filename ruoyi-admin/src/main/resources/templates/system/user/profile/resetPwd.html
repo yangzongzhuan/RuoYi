@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head>
+	<th:block th:include="include :: header('修改用户密码')" />
+</head>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-user-resetPwd">
@@ -33,7 +34,7 @@
 			</div>
 		</form>
 	</div>
-	<div th:include="include :: footer"></div>
+	<th:block th:include="include :: footer" />
 
 	<script>
 		$("#form-user-resetPwd").validate({

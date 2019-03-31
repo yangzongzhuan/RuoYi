@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head>
+    <th:block th:include="include :: select2-css" />
+	<th:block th:include="include :: header('新增用户')" />
+</head>
 <body>
     <div class="form-content">
         <form id="form-user-add" class="form-horizontal">
@@ -135,8 +137,8 @@
             <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
         </div>
     </div>
-	<div th:include="include::footer"></div>
-	<script th:src="@{/ajax/libs/select/select2.js}"></script>
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: select2-js" />
 	<script>
 	    var prefix = ctx + "system/user";
 	

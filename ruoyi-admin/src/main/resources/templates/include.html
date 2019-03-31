@@ -1,9 +1,10 @@
-<head th:fragment="header">
+<!-- 通用CSS -->
+<head th:fragment=header(title)>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title></title>
 	<meta name="keywords" content="">
 	<meta name="description" content="">
+	<title th:text="${title}"></title>
 	<link rel="shortcut icon" href="favicon.ico">
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
 	<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
@@ -13,13 +14,13 @@
 	<link th:href="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.css}" rel="stylesheet"/>
 	<link th:href="@{/css/animate.css}" rel="stylesheet"/>
 	<link th:href="@{/css/style.css}" rel="stylesheet"/>
-	<link th:href="@{/ajax/libs/select/select2.css}" rel="stylesheet"/>
 	<link th:href="@{/ruoyi/css/ry-ui.css}" rel="stylesheet"/>
 </head>
+
+<!-- 通用JS -->
 <div th:fragment="footer">
 	<script th:src="@{/js/jquery.min.js}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
-	
 	<!-- bootstrap-table 表格插件 -->
 	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js}"></script>
 	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}"></script>
@@ -37,11 +38,69 @@
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.js}"></script>
 	<!-- 遮罩层 -->
 	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-	<script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
+    <script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 	<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 	<script th:src="@{/ajax/libs/layui/layui.js}"></script>
-	<script th:src="@{/ruoyi/js/common.js?v=3.2.0}"></script>
-	<script th:src="@{/ruoyi/js/ry-ui.js?v=3.2.0}"></script>
+	<script th:src="@{/ruoyi/js/common.js?v=3.3.0}"></script>
+	<script th:src="@{/ruoyi/js/ry-ui.js?v=3.3.0}"></script>
 	<script src="http://tajs.qq.com/stats?sId=62048022"></script>
 	<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
+</div>
+
+<!-- ztree树插件 -->
+<div th:fragment="ztree-css">
+    <link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="ztree-js">
+    <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+</div>
+
+<!-- select下拉框插件 -->
+<div th:fragment="select2-css">
+    <link th:href="@{/ajax/libs/select/select2.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="select2-js">
+    <script th:src="@{/ajax/libs/select/select2.js}"></script>
+</div>
+
+<!-- datetimepicker日期和时间插件 -->
+<div th:fragment="datetimepicker-css">
+    <link th:href="@{/ajax/libs/datapicker/bootstrap-datetimepicker.min.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="datetimepicker-js">
+    <script th:src="@{/ajax/libs//datapicker/bootstrap-datetimepicker.min.js}"></script>
+</div>
+
+<!-- ui布局插件 -->
+<div th:fragment="layout-latest-css">
+    <link th:href="@{/ajax/libs/jquery-layout/jquery.layout-latest.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="layout-latest-js">
+    <script th:src="@{/ajax/libs/jquery-layout/jquery.layout-latest.js}"></script>
+</div>
+
+<!-- summernote富文本编辑器插件 -->
+<div th:fragment="summernote-css">
+    <link th:href="@{/ajax/libs/summernote/summernote.css}" rel="stylesheet"/>
+	<link th:href="@{/ajax/libs/summernote/summernote-bs3.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="summernote-js">
+    <script th:src="@{/ajax/libs/summernote/summernote.min.js}"></script>
+	<script th:src="@{/ajax/libs/summernote/summernote-zh-CN.js}"></script>
+</div>
+
+<!-- cropbox图像裁剪插件 -->
+<div th:fragment="cropbox-css">
+    <link th:href="@{/ajax/libs/cropbox/cropbox.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="cropbox-js">
+    <script th:src="@{/ajax/libs/cropbox/cropbox.js}"></script>
+</div>
+
+<!-- jsonview格式化和语法高亮JSON格式数据查看插件 -->
+<div th:fragment="jsonview-css">
+    <link th:href="@{/ajax/libs/jsonview/jquery.jsonview.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="jsonview-js">
+    <script th:src="@{/ajax/libs/jsonview/jquery.jsonview.js}"></script>
 </div>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org"
-	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg" id="test">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('服务器监控')" />
+</head>
+<body class="gray-bg">
     <div class="wrapper wrapper-content">
         <div class="col-sm-12">
             <div class="row">
@@ -234,7 +234,7 @@
         </div>
     </div>
 </body>
-<div th:include="include :: footer"></div>
+<th:block th:include="include :: footer" />
 <script>
     $(".modal").appendTo("body"), $("[data-toggle=popover]").popover(), $(".collapse-link").click(function() {
         var div_ibox = $(this).closest("div.ibox"),

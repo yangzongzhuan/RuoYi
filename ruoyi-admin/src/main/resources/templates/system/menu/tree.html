@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<head>
+	<th:block th:include="include :: header('菜单树选择')" />
+	<th:block th:include="include :: ztree-css" />
+</head>
 <style>
-body{height:auto;font-family: "Microsoft YaHei";}
-button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
+	body{height:auto;font-family: "Microsoft YaHei";}
+	button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
 </style>
 <body class="hold-transition box box-main">
 	<input id="treeId"   name="treeId"    type="hidden" th:value="${menu.menuId}"/>
@@ -24,8 +25,8 @@ button{font-family: "SimSun","Helvetica Neue",Helvetica,Arial;}
 	</div>
 	<div id="tree" class="ztree treeselect"></div>
 	</div>
-	<div th:include="include::footer"></div>
-	<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: ztree-js" />
 	<script th:inline="javascript">
 		$(function() {
 			var url = ctx + "system/menu/menuTreeData";

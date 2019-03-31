@@ -6,21 +6,21 @@
 	
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
-    <version>3.2</version>
+    <version>3.3</version>
 
     <name>ruoyi</name>
 	<url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
     
     <properties>
-	    <ruoyi.version>3.2</ruoyi.version>
+	    <ruoyi.version>3.3</ruoyi.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<shiro.version>1.4.0</shiro.version>
 		<thymeleaf.extras.shiro.version>2.0.0</thymeleaf.extras.shiro.version>
 		<mybatis.boot.version>1.3.2</mybatis.boot.version>
-		<druid.version>1.1.13</druid.version>
+		<druid.version>1.1.14</druid.version>
 		<bitwalker.version>1.19</bitwalker.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<swagger.version>2.7.0</swagger.version>
@@ -34,7 +34,7 @@
 		<velocity.version>1.7</velocity.version>
 	</properties>
 	
-	<!-- 依赖声明 -->
+    <!-- 依赖声明 -->
     <dependencyManagement>
         <dependencies>
         

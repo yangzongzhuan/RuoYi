@@ -50,6 +50,130 @@
 	margin-left: 20px;
 }
 
+.section-content {
+    min-height: 250px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px 5px 5px 5px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.ibox {
+    margin-bottom: 25px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 100%;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.list-group-striped > .list-group-item {
+	border-left: 0;
+	border-right: 0;
+	border-radius: 0;
+	padding-left: 0;
+	padding-right: 0
+}
+
+.ibox-title-gray {
+    height: 41px;
+    background-color: #f0f3f4;
+    color: #333;
+    font-weight: 700;
+    border-radius: 2px 2px 0 0;
+    padding: 13px !important;
+    border-bottom: 1px solid #eee;
+    display: block;
+    clear: both;
+}
+
+.dashboard-header h5 {
+    padding: 8px 0 0 0;
+    display: inline-block;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    float: left;
+    font-weight: 400;
+}
+
+.ibox-title-gray h5 {
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 0 7px;
+    padding: 0;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+/* 导航页签 */
+.nav-tabs-custom {
+	margin-bottom: 20px;
+	background: #fff;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+	border-radius: 3px
+}
+
+.nav-tabs-custom>.nav-tabs {
+	margin: 0;
+	border-bottom-color: #f4f4f4;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px
+}
+
+.nav-tabs-custom>.nav-tabs>li {
+	border-top: 3px solid transparent;
+	margin-bottom: -2px;
+	margin-right: 5px
+}
+
+.nav-tabs-custom>.nav-tabs>li.disabled>a {
+	color: #777
+}
+
+.nav-tabs-custom>.nav-tabs>li>a {
+	color: #444;
+	font-weight: normal;
+	border-radius: 0
+}
+
+.nav-tabs-custom>.nav-tabs>li>a,.nav-tabs-custom>.nav-tabs>li>a:hover {
+	background: transparent;
+	margin: 0
+}
+
+.nav-tabs-custom>.nav-tabs>li>a:hover {
+	color: #999
+}
+
+.nav-tabs-custom>.nav-tabs>li:not(.active)>a:hover,.nav-tabs-custom>.nav-tabs>li:not(.active)>a:focus,.nav-tabs-custom>.nav-tabs>li:not(.active)>a:active {
+	border-color: transparent
+}
+
+.nav-tabs-custom>.nav-tabs>li.active {
+	border-top-color: #1890ff
+}
+
+.nav-tabs-custom>.nav-tabs>li.active>a,.nav-tabs-custom>.nav-tabs>li.active:hover>a {
+	background-color: #fff;
+	color: #444
+}
+
+.nav-tabs-custom>.nav-tabs>li.active>a {
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-left-color: #f4f4f4;
+	border-right-color: #f4f4f4
+}
+
+.nav-tabs-custom>.tab-content {
+	background: #fff;
+	padding: 10px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px
+}
+
 /** 弹层组件 禁用样式 **/
 .layer-disabled {
 	border: 1px #dedede solid !important;

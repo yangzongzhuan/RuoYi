@@ -81,6 +81,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		${params.dataScope}
 	</select>
 	
+	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">
+	    select distinct u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.status, u.create_time
+	    from sys_user u
+			 left join sys_dept d on u.dept_id = d.dept_id
+			 left join sys_user_role ur on u.user_id = ur.user_id
+			 left join sys_role r on r.role_id = ur.role_id
+	    where u.del_flag = '0' and r.role_id = #{roleId}
+	    <if test="loginName != null and loginName != ''">
+			AND u.login_name like concat('%', #{loginName}, '%')
+		</if>
+		<if test="phonenumber != null and phonenumber != ''">
+			AND u.phonenumber like concat('%', #{phonenumber}, '%')
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+	</select>
+	
+	<select id="selectUnallocatedList" parameterType="SysUser" resultMap="SysUserResult">
+	    select distinct u.user_id, u.dept_id, u.login_name, u.user_name, u.email, u.phonenumber, u.status, u.create_time
+	    from sys_user u
+			 left join sys_dept d on u.dept_id = d.dept_id
+			 left join sys_user_role ur on u.user_id = ur.user_id
+			 left join sys_role r on r.role_id = ur.role_id
+	    where u.del_flag = '0' and (r.role_id != #{roleId} or r.role_id IS NULL)
+	    and u.user_id not in (select u.user_id from sys_user u inner join sys_user_role ur on u.user_id = ur.user_id and ur.role_id = #{roleId})
+	    <if test="loginName != null and loginName != ''">
+			AND u.login_name like concat('%', #{loginName}, '%')
+		</if>
+		<if test="phonenumber != null and phonenumber != ''">
+			AND u.phonenumber like concat('%', #{phonenumber}, '%')
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+	</select>
+	
 	<select id="selectUserByLoginName" parameterType="String" resultMap="SysUserResult">
 	    <include refid="selectUserVo"/>
 		where u.login_name = #{userName}

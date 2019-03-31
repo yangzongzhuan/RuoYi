@@ -209,7 +209,7 @@ public class GenUtils
 
     public static String replaceKeyword(String keyword)
     {
-        String keyName = keyword.replaceAll("(?:表|信息)", "");
+        String keyName = keyword.replaceAll("(?:表|信息|管理)", "");
         return keyName;
     }
 

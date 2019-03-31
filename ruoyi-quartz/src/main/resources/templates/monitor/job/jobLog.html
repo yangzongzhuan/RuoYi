@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org"
-	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('定时任务日志列表')" />
+</head>
 <body class="gray-bg">
 
 	<div class="container-div">
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 	</div>
-	<div th:include="include :: footer"></div>
+	<th:block th:include="include :: footer" />
 	<script th:inline="javascript">
 		var detailFlag = [[${@permission.hasPermi('monitor:job:detail')}]];
 		var datas = [[${@dict.getType('sys_common_status')}]];

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org"
-	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('操作日志列表')" />
+</head>
 <body class="gray-bg">
-	
 	<div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
@@ -56,7 +55,7 @@
 		</div>
 	</div>
 	
-	<div th:include="include :: footer"></div>
+	<th:block th:include="include :: footer" />
 	<script th:inline="javascript">
 		var detailFlag = [[${@permission.hasPermi('monitor:operlog:detail')}]];
 		var datas = [[${@dict.getType('sys_oper_type')}]];
@@ -74,6 +73,7 @@
 		        modalName: "操作日志",
 		        escape: true,
 		        showPageGo: true,
+		        rememberSelected: true,
 		        columns: [{
 		            checkbox: true
 		        },

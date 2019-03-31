@@ -55,10 +55,9 @@ public class SysUserServiceImpl implements ISysUserService
     private ISysConfigService configService;
 
     /**
-     * 根据条件分页查询用户对象
+     * 根据条件分页查询用户列表
      * 
      * @param user 用户信息
-     * 
      * @return 用户信息集合信息
      */
     @Override
@@ -66,6 +65,30 @@ public class SysUserServiceImpl implements ISysUserService
     public List<SysUser> selectUserList(SysUser user)
     {
         return userMapper.selectUserList(user);
+    }
+
+    /**
+     * 根据条件分页查询已分配用户角色列表
+     * 
+     * @param user 用户信息
+     * @return 用户信息集合信息
+     */
+    @DataScope(tableAlias = "u")
+    public List<SysUser> selectAllocatedList(SysUser user)
+    {
+        return userMapper.selectAllocatedList(user);
+    }
+
+    /**
+     * 根据条件分页查询未分配用户角色列表
+     * 
+     * @param user 用户信息
+     * @return 用户信息集合信息
+     */
+    @DataScope(tableAlias = "u")
+    public List<SysUser> selectUnallocatedList(SysUser user)
+    {
+        return userMapper.selectUnallocatedList(user);
     }
 
     /**

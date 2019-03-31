@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-<meta charset="utf-8">
-<title>用户头像修改</title>
-<link th:href="@{/ajax/libs/cropbox/cropbox.css}" rel="stylesheet"/>
+<head>
+	<th:block th:include="include :: header('修改用户头像')" />
+	<th:block th:include="include :: cropbox-css" />
+</head>
 <body class="white-bg">
     <div class="container"> 
         <div class="imageBox"> 
@@ -20,8 +21,8 @@
 	   </div> 
 	   <div class="cropped"></div> 
     </div>
-<div th:include="include::footer"></div>
-<script th:src="@{/ajax/libs/cropbox/cropbox.js}"></script>
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: cropbox-js" />
 <script type="text/javascript">
 var cropper;
 $(window).load(function() {
@@ -38,7 +39,7 @@ $(window).load(function() {
             options.imgSrc = e.target.result;
             //根据MIME判断上传的文件是不是图片类型
             if((options.imgSrc).indexOf("image/")==-1){
-                $.modal.alertWarning("文件格式错误，请上传图片类型,如：JPG,JPEG，PNG后缀的文件。");
+                $.modal.alertWarning("文件格式错误，请上传图片类型,如：JPG，PNG后缀的文件。");
             } else {
                 cropper = $('.imageBox').cropbox(options);
             }

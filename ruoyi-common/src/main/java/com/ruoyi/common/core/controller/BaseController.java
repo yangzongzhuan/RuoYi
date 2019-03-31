@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.AjaxResult.Type;
 import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
@@ -156,9 +157,9 @@ public class BaseController
     /**
      * 返回错误码消息
      */
-    public AjaxResult error(int code, String message)
+    public AjaxResult error(Type type, String message)
     {
-        return AjaxResult.error(code, message);
+        return new AjaxResult(type, message);
     }
 
     /**

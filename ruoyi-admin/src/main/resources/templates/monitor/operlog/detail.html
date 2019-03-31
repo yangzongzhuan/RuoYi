@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org"
-	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/jsonview/jquery.jsonview.css}" rel="stylesheet"/>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('操作日志详细')" />
+	<th:block th:include="include :: jsonview-css" />
+</head>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 	<form class="form-horizontal m-t" id="signupForm">
@@ -43,8 +43,8 @@
 		</div>
 	</form>
     </div>
-    <div th:include="include :: footer"></div>
-    <script th:src="@{/ajax/libs/jsonview/jquery.jsonview.js}"></script>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: jsonview-js" />
     <script th:inline="javascript">
 	    $(function() {
 	    	var json = [[${operLog.operParam}]];

@@ -21,7 +21,6 @@ import com.ruoyi.common.utils.file.FileUploadUtils;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.service.ISysDictDataService;
 import com.ruoyi.system.service.ISysUserService;
 
 /**
@@ -43,9 +42,6 @@ public class SysProfileController extends BaseController
     @Autowired
     private SysPasswordService passwordService;
 
-    @Autowired
-    private ISysDictDataService dictDataService;
-
     /**
      * 个人信息
      */
@@ -53,7 +49,6 @@ public class SysProfileController extends BaseController
     public String profile(ModelMap mmap)
     {
         SysUser user = ShiroUtils.getSysUser();
-        user.setSex(dictDataService.selectDictLabel("sys_user_sex", user.getSex()));
         mmap.put("user", user);
         mmap.put("roleGroup", userService.selectUserRoleGroup(user.getUserId()));
         mmap.put("postGroup", userService.selectUserPostGroup(user.getUserId()));

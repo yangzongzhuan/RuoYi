@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<head>
+	<th:block th:include="include :: header('代码生成列表')" />
+</head>
 <body class="gray-bg">
-    
     <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 search-collapse">
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 	</div>
-	<div th:include="include :: footer"></div>
+	<th:block th:include="include :: footer" />
 	<script type="text/javascript">
 		var prefix = ctx + "tool/gen";
 	

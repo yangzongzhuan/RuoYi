@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link th:href="@{/ajax/libs/jquery-ztree/3.5/css/metro/zTreeStyle.css}" rel="stylesheet"/>
+<head>
+	<th:block th:include="include :: header('角色数据权限')" />
+	<th:block th:include="include :: ztree-css" />
+</head>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-role-edit" th:object="${role}">
@@ -29,7 +30,7 @@
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 特殊情况下，设置为“自定数据权限”</span>
 				</div>
 			</div>
-			<div class="form-group" id="roleRule" th:style="'display:' + @{(*{dataScope=='1'} ? 'none' : 'block')} + ''">
+			<div class="form-group" id="authDataScope" th:style="'display:' + @{(*{dataScope=='1'} ? 'none' : 'block')} + ''">
 				<label class="col-sm-3 control-label">数据权限</label>
 				<div class="col-sm-8">
 					<div id="deptTrees" class="ztree"></div>
@@ -37,8 +38,8 @@
 			</div>
 		</form>
 	</div>
-	<div th:include="include::footer"></div>
-	<script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: ztree-js" />
 	<script type="text/javascript">
 	
 	    $(function() {
@@ -67,7 +68,7 @@
 			$.ajax({
 				cache : true,
 				type : "POST",
-				url : ctx + "system/role/rule",
+				url : ctx + "system/role/authDataScope",
 				data : {
 					"roleId": roleId,
 					"roleName": roleName,
@@ -92,10 +93,10 @@
 		
 		function dataScopeVisible(dataScope) {
 			if (dataScope == 2) {
-	    		$("#roleRule").show();
+	    		$("#authDataScope").show();
 	    	} else {
 	    		$._tree.checkAllNodes(false);
-	    		$("#roleRule").hide();
+	    		$("#authDataScope").hide();
 	    	}
 		}
 	</script>

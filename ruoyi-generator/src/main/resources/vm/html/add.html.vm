@@ -1,7 +1,8 @@
-<!DOCTYPE HTML>
-<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('新增${tableComment}')" />
+</head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-${classname}-add">
