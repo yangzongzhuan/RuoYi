@@ -23,7 +23,7 @@
         this.timeoutBodyColumns_ = 0;
         if (this.options.fixedColumns) {
             this.$fixedBody = $([
-                '<div class="fixed-table-column" style="position: absolute; background-color: #fff; border-right:1px solid #ddd;">',
+                '<div class="left-fixed-table-columns">',
                 '<table>',
                 '<thead></thead>',
                 '<tbody></tbody>',
@@ -38,10 +38,10 @@
         }
         if (this.options.rightFixedColumns) {
             this.$rightfixedBody = $([
-                '<div class="fixed-table-column" style="position: absolute;right:0px; background-color: #fff; border-right:1px solid #ddd;">',
+                '<div class="right-fixed-table-columns">',
                 '<table>',
                 '<thead></thead>',
-                '<tbody></tbody>',
+                '<tbody style="background-color: #fff;"></tbody>',
                 '</table>',
                 '</div>'].join(''));
 
