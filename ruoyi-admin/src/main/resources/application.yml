@@ -30,8 +30,7 @@ server:
 logging:
   level:
     com.ruoyi: debug
-    org.springframework: WARN
-    org.spring.springboot.dao: debug
+    org.springframework: warn
 
 # 用户配置
 user:
