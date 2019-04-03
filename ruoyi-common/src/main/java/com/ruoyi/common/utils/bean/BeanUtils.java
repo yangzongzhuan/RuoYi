@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * 
  * @author ruoyi
  */
-public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
+public class BeanUtils extends org.springframework.beans.BeanUtils
 {
     /** Bean方法名中属性名开始的下标 */
     private static final int BEAN_METHOD_PROP_INDEX = 3;
@@ -32,7 +32,7 @@ public class BeanUtils extends org.apache.commons.beanutils.BeanUtils
     {
         try
         {
-            copyProperties(dest, src);
+            copyProperties(src, dest);
         }
         catch (Exception e)
         {

@@ -59,12 +59,6 @@
 			<artifactId>commons-fileupload</artifactId>
 		</dependency>
 		
-		<!-- 简化反射封工具类 -->
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-		</dependency>
-		
 		<!-- HTML解析器 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>

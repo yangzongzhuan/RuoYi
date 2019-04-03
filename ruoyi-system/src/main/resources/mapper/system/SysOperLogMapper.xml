@@ -40,6 +40,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="businessType != null">
 				AND business_type = #{businessType}
 			</if>
+			<if test="status != null">
+				AND status = #{status}
+			</if>
 			<if test="operName != null and operName != ''">
 				AND oper_name like concat('%', #{operName}, '%')
 			</if>
