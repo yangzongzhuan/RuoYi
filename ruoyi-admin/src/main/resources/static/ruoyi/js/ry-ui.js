@@ -41,6 +41,7 @@
         		};
             	var options = $.extend(defaults, options);
                 $.table._option = options;
+                $.table.initEvent();
                 $('#' + options.id).bootstrapTable({
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
@@ -104,10 +105,8 @@
                     return { rows: [], total: 0 };
                 }
             },
-            // 当所有数据被加载时触发
-            onLoadSuccess: function(data) {
-            	// 浮动提示框特效
-            	$("[data-toggle='tooltip']").tooltip();
+            // 初始化事件
+            initEvent: function(data) {
             	// 触发行点击事件 加载成功事件
             	$("#" + $.table._option.id).on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table load-success.bs.table", function () {
             		// 工具栏按钮控制
@@ -118,12 +117,17 @@
             	// 绑定选中事件、取消事件、全部选中、全部取消
             	$("#" + $.table._option.id).on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rows) {
             		// 复选框分页保留保存选中数组
-            		var rows = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
+            		var rowIds = $.table.affectedRowIds(rows);
             		if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
             			func = $.inArray(e.type, ['check', 'check-all']) > -1 ? 'union' : 'difference';
-            			selectionIds = _[func](selectionIds, rows);
+            			selectionIds = _[func](selectionIds, rowIds);
             		}
             	});
+            },
+            // 当所有数据被加载时触发
+            onLoadSuccess: function(data) {
+            	// 浮动提示框特效
+            	$("[data-toggle='tooltip']").tooltip();
             },
             // 表格销毁
             destroy: function (tableId) {
@@ -276,6 +280,19 @@
             		rows = rows.concat(selectionIds);
             	}
             	return $.common.uniqueFn(rows);
+            },
+            // 获取当前页选中或者取消的行ID
+            affectedRowIds: function(rows) {
+            	var column = $.common.isEmpty($.table._option.uniqueId) ? $.table._option.columns[1].field : $.table._option.uniqueId;
+            	var rowIds;
+            	if ($.isArray(rows)) {
+            	    rowIds = $.map(rows, function(row) {
+            	        return row[column];
+            	    });
+            	} else {
+            	    rowIds = [rows[column]];
+            	}
+            	return rowIds;
             },
             // 查询表格首列值
             selectFirstColumns: function() {
