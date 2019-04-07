@@ -41,12 +41,12 @@ public class LogAspect
     }
 
     /**
-     * 前置通知 用于拦截操作
+     * 处理完请求后执行
      *
      * @param joinPoint 切点
      */
     @AfterReturning(pointcut = "logPointCut()")
-    public void doBefore(JoinPoint joinPoint)
+    public void doAfterReturning(JoinPoint joinPoint)
     {
         handleLog(joinPoint, null);
     }
@@ -54,11 +54,11 @@ public class LogAspect
     /**
      * 拦截异常操作
      * 
-     * @param joinPoint
-     * @param e
+     * @param joinPoint 切点
+     * @param e 异常
      */
     @AfterThrowing(value = "logPointCut()", throwing = "e")
-    public void doAfter(JoinPoint joinPoint, Exception e)
+    public void doAfterThrowing(JoinPoint joinPoint, Exception e)
     {
         handleLog(joinPoint, e);
     }

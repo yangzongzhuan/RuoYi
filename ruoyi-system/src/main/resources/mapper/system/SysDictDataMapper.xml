@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectDictDataByType" parameterType="SysDictData" resultMap="SysDictDataResult">
 		<include refid="selectDictDataVo"/>
-		where dict_type = #{dictType} order by dict_sort asc
+		where status = '0' and dict_type = #{dictType} order by dict_sort asc
 	</select>
 	
 	<select id="selectDictLabel" resultType="String">
