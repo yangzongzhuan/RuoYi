@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.domain.BaseEntity;
 #foreach ($column in $columns)
-#if($column.attrType == 'Date')
+#if($column.attrType == 'Date' && ($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark'))
 import java.util.Date;
 #break
 #end
@@ -21,11 +21,14 @@ public class ${className} extends BaseEntity
 	private static final long serialVersionUID = 1L;
 	
 #foreach ($column in $columns)
+#if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
 	/** $column.columnComment */
 	private $column.attrType $column.attrname;
 #end
+#end
 
 #foreach ($column in $columns)
+#if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
 	public void set${column.attrName}($column.attrType $column.attrname) 
 	{
 		this.$column.attrname = $column.attrname;
@@ -35,6 +38,7 @@ public class ${className} extends BaseEntity
 	{
 		return $column.attrname;
 	}
+#end
 #end
 
     public String toString() {
