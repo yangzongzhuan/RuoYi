@@ -107,7 +107,6 @@ public class ServletUtils
      */
     public static boolean isAjaxRequest(HttpServletRequest request)
     {
-
         String accept = request.getHeader("accept");
         if (accept != null && accept.indexOf("application/json") != -1)
         {
@@ -131,7 +130,6 @@ public class ServletUtils
         {
             return true;
         }
-
         return false;
     }
 }

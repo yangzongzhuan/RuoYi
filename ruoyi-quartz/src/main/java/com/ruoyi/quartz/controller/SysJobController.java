@@ -91,7 +91,7 @@ public class SysJobController extends BaseController
     @ResponseBody
     public AjaxResult changeStatus(SysJob job) throws SchedulerException
     {
-        Job newJob = jobService.selectJobById(job.getJobId());
+        SysJob newJob = jobService.selectJobById(job.getJobId());
         newJob.setStatus(job.getStatus());
         return toAjax(jobService.changeStatus(newJob));
     }
