@@ -315,7 +315,8 @@
             	var actions = [];
                 $.each(datas, function(index, dict) {
                     if (dict.dictValue == ('' + value)) {
-                    	actions.push("<span class='badge badge-" + dict.listClass + "'>" + dict.dictLabel + "</span>");
+                    	var listClass = $.common.equals("default", dict.listClass) ? "" : "badge badge-" + dict.listClass;
+                    	actions.push($.common.sprintf("<span class='%s'>%s</span>", listClass, dict.dictLabel));
                         return false;
                     }
                 });
@@ -1140,6 +1141,22 @@
                     return "";
                 }
                 return value.toString().replace(/(^\s*)|(\s*$)|\r|\n/g, "");
+            },
+            // 比较两个字符串（大小写敏感）
+            equals: function (str, that) {
+            	return str == that;
+            },
+            // 比较两个字符串（大小写不敏感）
+            equalsIgnoreCase: function (str, that) {
+            	return String(str).toUpperCase() === String(that).toUpperCase();
+            },
+            // 将字符串按指定字符分割
+            split: function (str, sep, maxLen) {
+            	if ($.common.isEmpty(str)) {
+            	    return null;
+            	}
+            	var value = String(str).split(sep);
+            	return maxLen ? value.slice(0, maxLen - 1) : value;
             },
             // 字符串格式化(%s )
             sprintf: function (str) {
