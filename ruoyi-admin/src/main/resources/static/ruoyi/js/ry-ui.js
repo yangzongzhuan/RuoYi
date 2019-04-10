@@ -98,6 +98,12 @@
                     if ($.common.isNotEmpty($.table._option.sidePagination) && $.table._option.sidePagination == 'client') {
                     	return res.rows;
                     } else {
+                    	if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
+                    		var column = $.common.isEmpty($.table._option.uniqueId) ? $.table._option.columns[1].field : $.table._option.uniqueId;
+                    		$.each(res.rows, function(i, row) {
+                                row.state = $.inArray(row[column], selectionIds) !== -1;
+                            })
+                    	}
                         return { rows: res.rows, total: res.total };
                     }
                 } else {
