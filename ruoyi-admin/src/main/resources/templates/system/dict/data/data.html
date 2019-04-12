@@ -122,14 +122,9 @@
 		});
 		
 		function queryParams(params) {
-			return {
-				dictType:       $("#dictType").val(),
-				pageSize:       params.limit,
-    			pageNum:        params.offset / params.limit + 1,
-    			searchValue:    params.search,
-    			orderByColumn:  params.sort,
-    			isAsc:          params.order
-			};
+			var search = $.table.queryParams(params);
+			search.dictType = $("#dictType").val();
+			return search;
 		}
 		
 		/*字典数据-新增字典*/

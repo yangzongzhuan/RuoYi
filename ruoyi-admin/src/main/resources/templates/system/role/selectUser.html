@@ -100,14 +100,9 @@
 		});
 		
 		function queryParams(params) {
-			return {
-				roleId:         $("#roleId").val(),
-				pageSize:       params.limit,
-    			pageNum:        params.offset / params.limit + 1,
-    			searchValue:    params.search,
-    			orderByColumn:  params.sort,
-    			isAsc:          params.order
-			};
+			var search = $.table.queryParams(params);
+			search.roleId = $("#roleId").val();
+			return search;
 		}
 		
 		/* 添加用户-选择用户-提交 */
