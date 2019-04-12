@@ -1085,7 +1085,8 @@
         	notAllowLastLevel: function(_tree) {
     		    var nodes = _tree.getSelectedNodes();
     		    for (var i = 0; i < nodes.length; i++) {
-    		    	if (nodes[i].level == nodes.length + 1) {
+                    //if (nodes[i].level == nodes.length + 1)判断是否是最后层级节点该条件判定四级组织结构时失效，如下只需判定选择的节点：isParent == false即可 modify by weidu 2019-04-10
+                    if (!nodes[i].isParent) {
     		    		$.modal.msgError("不能选择最后层级节点（" + nodes[i].name + "）");
     		            return false;
     		        }
