@@ -154,10 +154,11 @@
 				var _value = $.common.nullToStr(value);
 				if (_value.length > _length) {
 					_text = _value.substr(0, _length) + "...";
+					return $.common.sprintf("<a href='#' class='tooltip-show' data-toggle='tooltip' title='%s'>%s</a>", _value, _text);
 				} else {
 					_text = _value;
+					return _text;
 				}
-				return '<a href="#" class="tooltip-show" data-toggle="tooltip" title="' + _value + '">' + _text +'</a>';
 			},
 			// 下拉按钮切换
 			dropdownToggle: function (value) {
