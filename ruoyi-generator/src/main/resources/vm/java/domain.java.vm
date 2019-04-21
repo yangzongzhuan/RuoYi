@@ -9,6 +9,12 @@ import java.util.Date;
 #break
 #end
 #end
+#foreach ($column in $columns)
+#if($column.attrType == 'BigDecimal')
+import java.math.BigDecimal;
+#break
+#end
+#end
 
 /**
  * ${tableComment}表 ${tableName}

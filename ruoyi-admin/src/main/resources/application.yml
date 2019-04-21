@@ -13,10 +13,10 @@ ruoyi:
 
 # 开发环境配置
 server:
-  # 服务端口
+  # 服务器的HTTP端口，默认为80
   port: 80
   servlet:
-    # 项目contextPath
+    # 应用的访问路径
     context-path: /
   tomcat:
     # tomcat的URI编码

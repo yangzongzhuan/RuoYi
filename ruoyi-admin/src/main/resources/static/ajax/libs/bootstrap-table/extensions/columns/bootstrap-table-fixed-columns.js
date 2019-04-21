@@ -60,9 +60,9 @@
         }
         this.initFixedColumns();
 
-        var $ltr = this.$header.find('tr:eq(0)').clone(),
+        var $ltr = this.$header.find('tr:eq(0)').clone(true),
             $rtr = this.$header.find('tr:eq(0)').clone(),
-            $lths = $ltr.clone().find('th'),
+            $lths = $ltr.clone(true).find('th'),
             $rths = $rtr.clone().find('th');
 
         $ltr.html('');
@@ -78,7 +78,7 @@
         //左边列冻结
         if (this.options.fixedColumns) {
             for (var i = 0; i < this.options.fixedNumber; i++) {
-                $ltr.append($lths.eq(i).clone());
+                $ltr.append($lths.eq(i).clone(true));
             }
             this.$fixedHeaderColumns.html('').append($ltr);
         }
@@ -95,12 +95,12 @@
         if (this.options.fixedColumns) {
             this.$fixedBodyColumns.html('');
             this.$body.find('> tr[data-index]').each(function () {
-                var $tr = $(this).clone(),
-                    $tds = $tr.clone().find('td');
+                var $tr = $(this).clone(true),
+                    $tds = $tr.clone(true).find('td');
 
                 $tr.html('');
                 for (var i = 0; i < that.options.fixedNumber; i++) {
-                    $tr.append($tds.eq(i).clone());
+                    $tr.append($tds.eq(i).clone(true));
                 }
                 that.$fixedBodyColumns.append($tr);
             });
