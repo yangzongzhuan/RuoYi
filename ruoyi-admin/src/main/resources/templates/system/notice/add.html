@@ -8,29 +8,29 @@
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-notice-add">
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">公告标题：</label>
-				<div class="col-sm-8">
+				<label class="col-sm-2 control-label">公告标题：</label>
+				<div class="col-sm-10">
 					<input id="noticeTitle" name="noticeTitle" class="form-control" type="text" required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">公告类型：</label>
-				<div class="col-sm-8">
+				<label class="col-sm-2 control-label">公告类型：</label>
+				<div class="col-sm-10">
 					<select name="noticeType" class="form-control m-b" th:with="type=${@dict.getType('sys_notice_type')}">
 	                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 	                </select>
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">公告内容：</label>
-				<div class="col-sm-8">
+				<label class="col-sm-2 control-label">公告内容：</label>
+				<div class="col-sm-10">
 				    <input id="noticeContent" name="noticeContent" type="hidden">
 				    <div class="summernote"></div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">公告状态：</label>
-				<div class="col-sm-8">
+				<label class="col-sm-2 control-label">公告状态：</label>
+				<div class="col-sm-10">
 				    <div class="radio-box" th:each="dict : ${@dict.getType('sys_notice_status')}">
 						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.isDefault == 'Y' ? true : false}">
 						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
@@ -45,7 +45,8 @@
         var prefix = ctx + "system/notice";
 
 	    $('.summernote').summernote({
-			height : '220px',
+	    	placeholder: '请输入公告内容',
+			height : 192,
 			lang : 'zh-CN',
 			callbacks: {
                 onImageUpload: function (files) {
