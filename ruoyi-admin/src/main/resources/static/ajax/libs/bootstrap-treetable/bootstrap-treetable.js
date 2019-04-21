@@ -384,6 +384,15 @@
                         _ipt.prop('checked', true);
                         target.find("tbody").find("tr").removeClass("treetable-selected");
                         $(this).addClass("treetable-selected");
+                    } else if (_ipt.attr("type") == "checkbox") {
+                    	if (_ipt.prop('checked')) {
+                    		_ipt.prop('checked', true);
+                    		target.find("tbody").find("tr").removeClass("treetable-selected");
+                    		$(this).addClass("treetable-selected");
+                    	} else {
+                    		_ipt.prop('checked', false);
+                    		target.find("tbody").find("tr").removeClass("treetable-selected");
+                    	}
                     } else {
                         if (_ipt.prop('checked')) {
                             _ipt.prop('checked', false);

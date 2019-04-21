@@ -387,6 +387,13 @@
             refresh: function() {
             	$._treeTable.bootstrapTreeTable('refresh');
             },
+            // 查询表格树指定列值
+            selectColumns: function(column) {
+            	var rows = $.map($('#' + $.table._option.id).bootstrapTreeTable('getSelections'), function (row) {
+        	        return row[column];
+        	    });
+            	return $.common.uniqueFn(rows);
+            },
         },
         // 表单封装处理
     	form: {
