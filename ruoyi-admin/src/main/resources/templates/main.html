@@ -681,7 +681,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="alert alert-warning">
-                            	请作者喝杯咖啡。
+                            	请作者喝杯咖啡（点击图片放大）
                         </div>
                         <p id="pay-qrcode">
                             <a href="javascript:;"><img th:src="@{/img/pay.png}" width="100%" alt="请使用手机支付宝或者微信扫码支付">
@@ -695,5 +695,19 @@
     </div>
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+    <script type="text/javascript">
+	    $('#pay-qrcode').click(function(){
+	        var html=$(this).html();
+	        parent.layer.open({
+	            title: false,
+	            type: 1,
+	            closeBtn:false,
+	            shadeClose:true,
+	            area: ['600px', 'auto'],
+	            content: html
+	        });
+	    });
+    </script>
 </body>
 </html>
