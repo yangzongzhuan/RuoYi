@@ -38,7 +38,7 @@ public class GlobalExceptionHandler
         else
         {
             ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("/error/unauth");
+            modelAndView.setViewName("error/unauth");
             return modelAndView;
         }
     }
