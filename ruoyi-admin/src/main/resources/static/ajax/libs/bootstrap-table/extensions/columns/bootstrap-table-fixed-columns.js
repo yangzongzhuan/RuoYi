@@ -44,11 +44,13 @@
                 '<tbody style="background-color: #fff;"></tbody>',
                 '</table>',
                 '</div>'].join(''));
-
             this.$rightfixedBody.find('table').attr('class', this.$el.attr('class'));
             this.$rightfixedHeaderColumns = this.$rightfixedBody.find('thead');
             this.$rightfixedBodyColumns = this.$rightfixedBody.find('tbody');
             this.$tableBody.before(this.$rightfixedBody);
+            if (this.options.fixedColumns) {
+                $('.right-fixed-table-columns').attr('style','right:0px');
+            }
         }
     };
 
