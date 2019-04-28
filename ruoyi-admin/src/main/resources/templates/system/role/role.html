@@ -61,7 +61,6 @@
 	<script th:inline="javascript">
 		var editFlag = [[${@permission.hasPermi('system:role:edit')}]];
 		var removeFlag = [[${@permission.hasPermi('system:role:remove')}]];
-		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/role";
 		
 

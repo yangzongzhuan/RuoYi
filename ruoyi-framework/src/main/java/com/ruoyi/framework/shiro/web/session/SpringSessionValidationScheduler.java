@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.Threads;
 
 /**
@@ -16,6 +18,7 @@ import com.ruoyi.common.utils.Threads;
  * 
  * @author ruoyi
  */
+@Component
 public class SpringSessionValidationScheduler implements SessionValidationScheduler
 {
     private static final Logger log = LoggerFactory.getLogger(SpringSessionValidationScheduler.class);
@@ -32,36 +35,15 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
     private volatile boolean enabled = false;
 
     /**
-     * The session manager used to validate sessions.
+     * 会话验证管理器
      */
+    @Autowired
+    @Qualifier("sessionManager")
     private ValidatingSessionManager sessionManager;
 
-    /**
-     * The session validation interval in milliseconds.
-     */
-    private long sessionValidationInterval = DEFAULT_SESSION_VALIDATION_INTERVAL;
-
-    /**
-     * Default constructor.
-     */
-    public SpringSessionValidationScheduler()
-    {
-    }
-
-    /**
-     * Constructor that specifies the session manager that should be used for validating sessions.
-     *
-     * @param sessionManager the <tt>SessionManager</tt> that should be used to validate sessions.
-     */
-    public SpringSessionValidationScheduler(ValidatingSessionManager sessionManager)
-    {
-        this.sessionManager = sessionManager;
-    }
-
-    public void setSessionManager(ValidatingSessionManager sessionManager)
-    {
-        this.sessionManager = sessionManager;
-    }
+    // 相隔多久检查一次session的有效性，单位毫秒，默认就是10分钟
+    @Value("${shiro.session.validationInterval}")
+    private long sessionValidationInterval;
 
     @Override
     public boolean isEnabled()
@@ -111,7 +93,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
                         sessionManager.validateSessions();
                     }
                 }
-            }, 1000, sessionValidationInterval, TimeUnit.MILLISECONDS);
+            }, 1000, sessionValidationInterval * 60 * 1000, TimeUnit.MILLISECONDS);
 
             this.enabled = true;
 
