@@ -120,7 +120,7 @@
 			var roleName = $("input[name='roleName']").val();
 			var roleKey = $("input[name='roleKey']").val();
 			var roleSort = $("input[name='roleSort']").val();
-			var status = $("input[name='status']").is(':checked') == true ? 0 : 1;
+			var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
 			var remark = $("input[name='remark']").val();
 			var menuIds = $.tree.getCheckedNodes();
 			$.ajax({

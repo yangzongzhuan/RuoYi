@@ -468,7 +468,7 @@ label.error {
 .toggle-switch input:checked~span:after {
 	left: -webkit-calc(100% - 20px);
 	left: calc(100% - 20px);
-	background-color: #15c377
+	background-color: #33cabb
 }
  
 .toggle-switch.switch-solid span  {
@@ -478,12 +478,12 @@ label.error {
     top: -2px;
 }
 .switch-solid input:checked~span {
-	background-color: #15c377;
-	border-color: #15c377
+	background-color: #33cabb;
+	border-color: #33cabb
 }
 .switch-solid input:checked~span:after {
 	background-color: #fff;
-	color: #15c377
+	color: #33cabb
 }
 
 /** 遮罩层 **/
