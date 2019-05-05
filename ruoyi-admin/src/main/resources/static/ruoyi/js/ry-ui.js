@@ -131,6 +131,23 @@
             			selectionIds = _[func](selectionIds, rowIds);
             		}
             	});
+            	// 图片预览事件
+            	$("#" + $.table._option.id).on('click', '.img-circle', function() {
+    			    var src = $(this).attr('src');
+    			    var target = $(this).data('target');
+    			    if($.common.equals("self", target)) {
+    			    	layer.open({
+        			        title: false,
+        			        type: 1,
+        			        closeBtn: false,
+        			        shadeClose: true,
+        			        area: ['auto', 'auto'],
+        			        content: "<img src='" + src + "' />"
+        			    });
+    			    } else if ($.common.equals("blank", target)) {
+    			        window.open(src);
+    			    }
+    			});
             },
             // 当所有数据被加载时触发
             onLoadSuccess: function(data) {
@@ -173,6 +190,17 @@
 				actions.push('</ul>');
 				actions.push('</div>');
 				return actions.join('');
+			},
+			// 图片预览
+			imageView: function (value, path, target) {
+				var _path = $.common.isEmpty(path) ? '/profile/upload' : path;
+				// blank or self
+				var _target = $.common.isEmpty(target) ? 'self' : target;
+				if ($.common.isNotEmpty(value)) {
+					return $.common.sprintf("<img class='img-circle img-xs' data-target='%s' src='%s/%s'/>", _target, _path, value);
+				} else {
+					return $.common.nullToStr(value);
+				}
 			},
             // 搜索-默认第一个form
             search: function(formId) {

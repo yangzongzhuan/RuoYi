@@ -139,6 +139,12 @@ $(function() {
 	    }
 	    expandFlag = expandFlag ? false: true;
 	})
+	// 按下ESC按钮关闭弹层
+	$('body', document).on('keyup', function(e) {
+	    if (e.which === 27) {
+	        $.modal.closeAll();
+	    }
+	});
 });
 
 /** 刷新选项卡 */

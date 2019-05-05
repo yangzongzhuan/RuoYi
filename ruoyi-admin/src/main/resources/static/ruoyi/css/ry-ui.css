@@ -49,7 +49,22 @@
 .ml20 {
 	margin-left: 20px;
 }
-
+.img-xs {
+  width: 32px;
+  height: 32px;
+}
+.img-sm {
+  width: 64px;
+  height: 64px;
+}
+.img-md {
+  width: 96px;
+  height: 96px;
+}
+.img-lg {
+  width: 120px;
+  height: 120px;
+}
 .section-content {
     min-height: 250px;
     margin-right: auto;
