@@ -83,13 +83,10 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">用户状态：</label>
                         <div class="col-sm-8">
-                            <div class="onoffswitch">
-		                         <input type="checkbox" th:checked="true" class="onoffswitch-checkbox" id="status">
-		                         <label class="onoffswitch-label" for="status">
-		                             <span class="onoffswitch-inner"></span>
-		                             <span class="onoffswitch-switch"></span>
-		                         </label>
-		                     </div>
+                            <label class="toggle-switch switch-solid">
+	                            <input type="checkbox" id="status" checked>
+	                            <span></span>
+	                        </label>
                         </div>
                     </div>
                 </div>
@@ -131,6 +128,7 @@
             </div>
         </form>
     </div>
+      
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
             <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
