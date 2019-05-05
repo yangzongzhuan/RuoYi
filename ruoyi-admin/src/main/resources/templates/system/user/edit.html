@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: select2-css" />
 	<th:block th:include="include :: header('修改用户')" />
+	<th:block th:include="include :: select2-css" />
 </head>
 <body>
     <div class="form-content">
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">岗位：</label>
                         <div class="col-sm-8">
-                            <select id="post" class="form-control select2-hidden-accessible" multiple="">
+                            <select id="post" class="form-control select2-multiple" multiple>
 								<option th:each="post:${posts}" th:value="${post.postId}" th:text="${post.postName}" th:selected="${post.flag}" th:disabled="${post.status == '1'}"></option>
 							</select>
                         </div>

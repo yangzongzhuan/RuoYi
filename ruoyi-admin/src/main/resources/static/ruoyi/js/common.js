@@ -5,6 +5,7 @@
 $(function() {
 	// select2复选框事件绑定
 	if ($.fn.select2 !== undefined) {
+        $.fn.select2.defaults.set( "theme", "bootstrap" );
 		$("select.form-control:not(.noselect2)").each(function () {
 			$(this).select2().on("change", function () {
 				$(this).valid();
