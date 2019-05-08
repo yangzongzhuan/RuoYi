@@ -185,15 +185,17 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateDept(SysDept dept)
     {
-        SysDept info = deptMapper.selectDeptById(dept.getParentId());
-        if (StringUtils.isNotNull(info))
+        SysDept newParentDept = deptMapper.selectDeptById(dept.getParentId());
+        SysDept oldDept = selectDeptById(dept.getDeptId());
+        if (StringUtils.isNotNull(newParentDept) && StringUtils.isNotNull(oldDept))
         {
-            String ancestors = info.getAncestors() + "," + info.getDeptId();
-            dept.setAncestors(ancestors);
-            updateDeptChildren(dept.getDeptId(), ancestors);
+            String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getDeptId();
+            String oldAncestors = oldDept.getAncestors();
+            dept.setAncestors(newAncestors);
+            updateDeptChildren(dept.getDeptId(), newAncestors,oldAncestors);
         }
         int result = deptMapper.updateDept(dept);
         if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
@@ -219,22 +221,20 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 修改子元素关系
-     * 
-     * @param deptId 部门ID
-     * @param ancestors 元素列表
+     * @param deptId 被修改的部门ID
+     * @param newAncestors 新的父ID集合
+     * @param oldAncestors 旧的父ID集合
      */
-    public void updateDeptChildren(Long deptId, String ancestors)
+    public void updateDeptChildren(Long deptId, String newAncestors,String oldAncestors)
     {
-        SysDept dept = new SysDept();
-        dept.setParentId(deptId);
-        List<SysDept> childrens = deptMapper.selectDeptList(dept);
-        for (SysDept children : childrens)
+        List<SysDept> children = deptMapper.selectChildrenDeptById(deptId);
+        for (SysDept child : children)
         {
-            children.setAncestors(ancestors + "," + dept.getParentId());
+            child.setAncestors(child.getAncestors().replace(oldAncestors,newAncestors));
         }
-        if (childrens.size() > 0)
+        if (children.size() > 0)
         {
-            deptMapper.updateDeptChildren(childrens);
+            deptMapper.updateDeptChildren(children);
         }
     }
 

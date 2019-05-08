@@ -98,4 +98,11 @@ public interface SysDeptMapper
      * @param dept 部门
      */
     public void updateDeptStatus(SysDept dept);
+
+    /**
+     * 根据ID查询所有子部门
+     * @param id
+     * @return
+     */
+    public List<SysDept> selectChildrenDeptById(Long id);
 }
