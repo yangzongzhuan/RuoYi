@@ -83,6 +83,11 @@
                 $ltr.append($lths.eq(i).clone(true));
             }
             this.$fixedHeaderColumns.html('').append($ltr);
+            this.$selectAll = $ltr.find('[name="btSelectAll"]');
+            this.$selectAll.on('click', function () {
+            	var checked = $(this).prop('checked');
+            	$(".left-fixed-table-columns input[name=btSelectItem]").filter(':enabled').prop('checked', checked);
+            });
         }
     };
 
