@@ -209,6 +209,16 @@
             this.$body.find('> tr').each(function (i) {
                 that.$fixedBody.find('tbody tr:eq(' + i + ')').height($(this).height());
             });
+            
+        	$("#" + $.table._option.id).on("check.bs.table uncheck.bs.table", function (e, rows, $element) {
+        	    var index= $element.data('index');
+                $(this).find('.bs-checkbox').find('input[data-index="' + index + '"]').prop("checked", true);
+                var selectFixedItem = $('.left-fixed-table-columns input[name=btSelectItem]');
+                var checkAll = selectFixedItem.filter(':enabled').length &&
+                    selectFixedItem.filter(':enabled').length ===
+                	selectFixedItem.filter(':enabled').filter(':checked').length;
+                $(".left-fixed-table-columns input[name=btSelectAll]").prop('checked', checkAll);
+        	});
 
             //// events
             this.$tableBody.on('scroll', function () {
