@@ -74,6 +74,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from sys_dept d
 		where d.dept_id = #{deptId}
 	</select>
+
+	<select id="selectChildrenDeptById" parameterType="Long" resultMap="SysDeptResult">
+		select * from sys_dept
+		<where>
+			FIND_IN_SET(#{id},ancestors)
+		</where>
+	</select>
 	
 	<insert id="insertDept" parameterType="SysDept">
  		insert into sys_dept(
