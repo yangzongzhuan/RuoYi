@@ -185,7 +185,7 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @return 结果
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public int updateDept(SysDept dept)
     {
         SysDept newParentDept = deptMapper.selectDeptById(dept.getParentId());
@@ -195,7 +195,7 @@ public class SysDeptServiceImpl implements ISysDeptService
             String newAncestors = newParentDept.getAncestors() + "," + newParentDept.getDeptId();
             String oldAncestors = oldDept.getAncestors();
             dept.setAncestors(newAncestors);
-            updateDeptChildren(dept.getDeptId(), newAncestors,oldAncestors);
+            updateDeptChildren(dept.getDeptId(), newAncestors, oldAncestors);
         }
         int result = deptMapper.updateDept(dept);
         if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()))
@@ -221,16 +221,17 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 修改子元素关系
+     * 
      * @param deptId 被修改的部门ID
      * @param newAncestors 新的父ID集合
      * @param oldAncestors 旧的父ID集合
      */
-    public void updateDeptChildren(Long deptId, String newAncestors,String oldAncestors)
+    public void updateDeptChildren(Long deptId, String newAncestors, String oldAncestors)
     {
         List<SysDept> children = deptMapper.selectChildrenDeptById(deptId);
         for (SysDept child : children)
         {
-            child.setAncestors(child.getAncestors().replace(oldAncestors,newAncestors));
+            child.setAncestors(child.getAncestors().replace(oldAncestors, newAncestors));
         }
         if (children.size() > 0)
         {

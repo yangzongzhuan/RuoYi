@@ -76,10 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectChildrenDeptById" parameterType="Long" resultMap="SysDeptResult">
-		select * from sys_dept
-		<where>
-			FIND_IN_SET(#{id},ancestors)
-		</where>
+		select * from sys_dept where find_in_set(#{deptId}, ancestors)
 	</select>
 	
 	<insert id="insertDept" parameterType="SysDept">
