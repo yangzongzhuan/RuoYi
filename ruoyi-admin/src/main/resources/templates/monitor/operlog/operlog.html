@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 	<th:block th:include="include :: header('操作日志列表')" />
+	<th:block th:include="include :: bootstrap-select-css" />
 </head>
 <body class="gray-bg">
 	<div class="container-div">
@@ -16,9 +17,8 @@
 							<li>
 								<label>操作人员： </label><input type="text" name="operName"/>
 							</li>
-							<li>
-								<label>操作类型： </label><select name="businessType" th:with="type=${@dict.getType('sys_oper_type')}">
-									<option value="">所有</option>
+							<li class="select-selectpicker">
+								<label>操作类型： </label><select id="businessTypes" th:with="type=${@dict.getType('sys_oper_type')}" class="selectpicker" data-none-selected-text="请选择" multiple>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
@@ -35,8 +35,8 @@
 								<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
 							</li>
 							<li>
-								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="searchPre()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="resetPre()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
@@ -62,6 +62,7 @@
 	</div>
 	
 	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: bootstrap-select-js" />
 	<script th:inline="javascript">
 		var detailFlag = [[${@permission.hasPermi('monitor:operlog:detail')}]];
 		var datas = [[${@dict.getType('sys_oper_type')}]];
@@ -146,6 +147,17 @@
 		    };
 		    $.table.init(options);
 		});
+		
+		function searchPre() {
+		    var data = {};
+		    data.businessTypes = $.common.join($('#businessTypes').selectpicker('val'));
+		    $.table.search('operlog-form', data);
+		}
+		
+		function resetPre() {
+			$.form.reset();
+			$("#businessTypes").selectpicker('refresh');
+		}
 	</script>
 </body>
 </html>

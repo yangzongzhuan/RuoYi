@@ -27,6 +27,9 @@ public class SysOperLog extends BaseEntity
     @Excel(name = "业务类型", readConverterExp = "0=其它,1=新增,2=修改,3=删除,4=授权,5=导出,6=导入,7=强退,8=生成代码,9=清空数据")
     private Integer businessType;
 
+    /** 业务类型数组 */
+    private Integer[] businessTypes;
+
     /** 请求方法 */
     @Excel(name = "请求方法")
     private String method;
@@ -99,6 +102,16 @@ public class SysOperLog extends BaseEntity
     public void setBusinessType(Integer businessType)
     {
         this.businessType = businessType;
+    }
+
+    public Integer[] getBusinessTypes()
+    {
+        return businessTypes;
+    }
+
+    public void setBusinessTypes(Integer[] businessTypes)
+    {
+        this.businessTypes = businessTypes;
     }
 
     public String getMethod()
@@ -217,6 +230,7 @@ public class SysOperLog extends BaseEntity
             .append("operId", getOperId())
             .append("title", getTitle())
             .append("businessType", getBusinessType())
+            .append("businessTypes", getBusinessTypes())
             .append("method", getMethod())
             .append("operatorType", getOperatorType())
             .append("operName", getOperName())

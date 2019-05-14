@@ -643,7 +643,46 @@ label {
 	background: transparent;
 	outline: none;
 	height: 30px;
+    width: 200px;
+}
+
+.select-list .btn-default {
+    color: #555;
+    padding: 5px 5px;
+    border: 1px solid #ddd;
+	border-radius: 4px;
+	background: transparent;
+	outline: none;
+	height: 30px;
 	width: 200px;
+	background: white
+}
+
+.select-list .btn-default:hover,.select-list .btn-default:focus,.select-list .btn-default:active,.select-list .btn-default.active,.open .dropdown-toggle.btn-default {
+	color: #555;
+	background-color: #e4e4e4;
+	border-color: #b2b2b2
+}
+
+.select-list .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+  height: 30px;
+  width: 200px;
+}
+
+.select-list .bootstrap-select > .dropdown-toggle.bs-placeholder,
+.select-list .bootstrap-select > .dropdown-toggle.bs-placeholder:hover,
+.select-list .bootstrap-select > .dropdown-toggle.bs-placeholder:focus,
+.select-list .bootstrap-select > .dropdown-toggle.bs-placeholder:active {
+  color: inherit;
+  font-size: 13px;
+}
+
+.select-list .bootstrap-select .dropdown-toggle .caret {
+  position: inherit;
+}
+
+.select-list .select-selectpicker li {
+	float: none;
 }
 
 .select-list .select-time input {

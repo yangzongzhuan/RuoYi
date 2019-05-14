@@ -52,13 +52,21 @@
     <script th:src="@{/ajax/libs/jquery-ztree/3.5/js/jquery.ztree.all-3.5.js}"></script>
 </div>
 
-<!-- select下拉框插件 -->
+<!-- select2下拉框插件 -->
 <div th:fragment="select2-css">
     <link th:href="@{/ajax/libs/select/select2.css}" rel="stylesheet"/>
     <link th:href="@{/ajax/libs/select/select2-bootstrap.css}" rel="stylesheet"/>
 </div>
 <div th:fragment="select2-js">
     <script th:src="@{/ajax/libs/select/select2.js}"></script>
+</div>
+
+<!-- bootstrap-select下拉框插件 -->
+<div th:fragment="bootstrap-select-css">
+    <link th:href="@{/ajax/libs/bootstrap-select/bootstrap-select.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-select-js">
+    <script th:src="@{/ajax/libs/bootstrap-select/bootstrap-select.js}"></script>
 </div>
 
 <!-- datetimepicker日期和时间插件 -->

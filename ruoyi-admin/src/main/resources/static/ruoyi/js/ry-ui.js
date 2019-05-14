@@ -203,7 +203,7 @@
 				}
 			},
             // 搜索-默认第一个form
-            search: function(formId) {
+            search: function(formId, data) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
     		    var params = $("#" + $.table._option.id).bootstrapTable('getOptions');
     		    params.queryParams = function(params) {
@@ -211,6 +211,11 @@
                     $.each($("#" + currentId).serializeArray(), function(i, field) {
                         search[field.name] = field.value;
                     });
+                    if($.common.isNotEmpty(data)){
+	                    $.each(data, function(key) {
+	                        search[key] = data[key];
+	                    });
+                    }
                     search.pageSize = params.limit;
                     search.pageNum = params.offset / params.limit + 1;
                     search.searchValue = params.search;
@@ -1234,6 +1239,13 @@
                     }
                 }
                 return result;
+            },
+            // 数组中的所有元素放入一个字符串
+            join: function(array, separator) {
+            	if ($.common.isEmpty(array)) {
+            	    return null;
+            	}
+                return array.join(separator);
             }
         }
     });
