@@ -35,6 +35,11 @@ public class DataScopeAspect
     public static final String DATA_SCOPE_CUSTOM = "2";
 
     /**
+     * 部门数据权限
+     */
+    public static final String DATA_SCOPE_DEPT = "3";
+
+    /**
      * 数据权限过滤关键字
      */
     public static final String DATA_SCOPE = "dataScope";
@@ -73,6 +78,7 @@ public class DataScopeAspect
 
     /**
      * 数据范围过滤
+     * 
      * @param joinPoint 切点
      * @param user 用户
      * @param alias 别名
@@ -94,6 +100,10 @@ public class DataScopeAspect
                 sqlString.append(StringUtils.format(
                         " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", alias,
                         role.getRoleId()));
+            }
+            else if (DATA_SCOPE_DEPT.equals(dataScope))
+            {
+                sqlString.append(StringUtils.format(" OR {}.dept_id = {} ", alias, user.getDeptId()));
             }
         }
 

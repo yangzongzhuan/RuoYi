@@ -685,6 +685,20 @@ label {
 	float: none;
 }
 
+.select-list .select-selectpicker li {
+	float: none;
+}
+
+.select-list .dropdown-menu>li>a {
+    line-height: inherit;
+}
+
+.select-list .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a {
+	color: #fff;
+	text-decoration: none;
+	background-color: #12889a
+}
+
 .select-list .select-time input {
 	width: 93px;
 }

@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="businessType != null">
 				AND business_type = #{businessType}
 			</if>
-			<if test="businessTypes != null and businessTypes != ''">
+			<if test="businessTypes != null and businessTypes.length > 0">
 			    AND business_type in
 			    <foreach collection="businessTypes" item="businessType" open="(" separator="," close=")">
 		 			#{businessType}
