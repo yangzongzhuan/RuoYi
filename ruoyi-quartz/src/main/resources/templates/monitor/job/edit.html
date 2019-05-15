@@ -7,6 +7,7 @@
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-job-edit" th:object="${job}">
 			<input id="jobId" name="jobId" type="hidden" th:field="*{jobId}"/>
+			<input type="hidden" name="updateBy" th:value="${@permission.getPrincipalProperty('loginName')}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">任务名称：</label>
 				<div class="col-sm-8">

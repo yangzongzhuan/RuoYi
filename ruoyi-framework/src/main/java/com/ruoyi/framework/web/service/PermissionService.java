@@ -2,6 +2,7 @@ package com.ruoyi.framework.web.service;
 
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
+import com.ruoyi.common.utils.security.PermissionUtils;
 
 /**
  * RuoYi首创 js调用 thymeleaf 实现按钮权限可见性
@@ -43,4 +44,14 @@ public class PermissionService
         return SecurityUtils.getSubject().hasRole(role);
     }
 
+    /**
+     * 返回用户属性值
+     *
+     * @param property 属性名称
+     * @return 用户属性值
+     */
+    public Object getPrincipalProperty(String property)
+    {
+        return PermissionUtils.getPrincipalProperty(property);
+    }
 }

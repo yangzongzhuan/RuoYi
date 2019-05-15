@@ -29,6 +29,12 @@
             <artifactId>spring-web</artifactId>
         </dependency>
         
+        <!--Shiro核心框架 -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+        
 		<!-- pagehelper 分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -78,7 +84,7 @@
 		</dependency>
 		
 		<!-- servlet包 -->
-                <dependency>
+        <dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>javax.servlet-api</artifactId>
 		</dependency>

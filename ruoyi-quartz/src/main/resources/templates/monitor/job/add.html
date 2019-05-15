@@ -6,6 +6,7 @@
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-job-add">
+		    <input type="hidden" name="createBy" th:value="${@permission.getPrincipalProperty('loginName')}">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">任务名称：</label>
 				<div class="col-sm-8">
