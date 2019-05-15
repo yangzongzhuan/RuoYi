@@ -2,10 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
 	<th:block th:include="include :: header('用户个人信息')" />
-    <style type="text/css">
-    
-    
-    </style>
 </head>
 
 <body class="gray-bg" style="font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial, sans-serif !important;">
@@ -219,7 +215,6 @@
 	        	$.operate.saveModal(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
 	        }
 	    }
-	    
 	    
 	    /*用户管理-修改密码*/
 	    $("#form-user-resetPwd").validate({

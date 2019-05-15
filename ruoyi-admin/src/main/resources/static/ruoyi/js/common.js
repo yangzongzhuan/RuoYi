@@ -238,10 +238,12 @@ var log = {
 $.ajaxSetup({
     complete: function(XMLHttpRequest, textStatus) {
         if (textStatus == 'timeout') {
-            $.modal.alertWarning("服务器超时，请稍后再试！");
+        	$.modal.alertWarning("服务器超时，请稍后再试！");
+        	$.modal.enable();
             $.modal.closeLoading();
-        } else if (textStatus == "parsererror") {
-            $.modal.alertWarning("服务器错误，请联系管理员！");
+        } else if (textStatus == "parsererror" || textStatus == "error") {
+        	$.modal.alertWarning("服务器错误，请联系管理员！");
+        	$.modal.enable();
             $.modal.closeLoading();
         }
     }
