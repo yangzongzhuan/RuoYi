@@ -13,6 +13,7 @@ import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysRoleDept;
 import com.ruoyi.system.domain.SysRoleMenu;
@@ -110,7 +111,7 @@ public class SysRoleServiceImpl implements ISysRoleService
     @Override
     public List<SysRole> selectRoleAll()
     {
-        return selectRoleList(new SysRole());
+        return SpringUtils.getAopProxy(this).selectRoleList(new SysRole());
     }
 
     /**
@@ -315,6 +316,7 @@ public class SysRoleServiceImpl implements ISysRoleService
     {
         return roleMapper.updateRole(role);
     }
+
     /**
      * 取消授权用户角色
      * 
