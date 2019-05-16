@@ -646,6 +646,16 @@ label {
     width: 200px;
 }
 
+.bootstrap-select.form-control .btn-default {
+    color: inherit;
+    padding: 6px 12px;
+    border-radius: 1px;
+    border: 1px solid #e5e6e7;
+	outline: none;
+	height: 34px;
+	background: #FFFFFF none
+}
+
 .select-list .btn-default {
     color: #555;
     padding: 5px 5px;
@@ -655,7 +665,6 @@ label {
 	outline: none;
 	height: 30px;
 	width: 200px;
-	background: white
 }
 
 .select-list .btn-default:hover,.select-list .btn-default:focus,.select-list .btn-default:active,.select-list .btn-default.active,.open .dropdown-toggle.btn-default {
@@ -685,15 +694,11 @@ label {
 	float: none;
 }
 
-.select-list .select-selectpicker li {
-	float: none;
-}
-
-.select-list .dropdown-menu>li>a {
+.select-list .dropdown-menu>li>a,.bootstrap-select.form-control .dropdown-menu>li>a {
     line-height: inherit;
 }
 
-.select-list .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a {
+.select-list .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a,.bootstrap-select.form-control .dropdown-menu li>a:hover,.dropdown-menu li>a:focus,.dropdown-submenu:hover>a{
 	color: #fff;
 	text-decoration: none;
 	background-color: #12889a
