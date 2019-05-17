@@ -9,6 +9,7 @@ import com.ruoyi.common.exception.file.FileNameLengthLimitExceededException;
 import com.ruoyi.common.exception.file.FileSizeLimitExceededException;
 import com.ruoyi.common.exception.file.InvalidExtensionException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.Md5Utils;
 
 /**
@@ -33,30 +34,6 @@ public class FileUploadUtils
      */
     private static String defaultBaseDir = Global.getProfile();
 
-    public static final String[] IMAGE_EXTENSION = {
-            "bmp", "gif", "jpg", "jpeg", "png"
-    };
-
-    public static final String[] FLASH_EXTENSION = {
-            "swf", "flv"
-    };
-
-    public static final String[] MEDIA_EXTENSION = {
-            "swf", "flv", "mp3", "wav", "wma", "wmv", "mid", "avi", "mpg", "asf", "rm", "rmvb"
-    };
-    
-    public static final String[] DEFAULT_ALLOWED_EXTENSION = {
-            //图片
-            "bmp", "gif", "jpg", "jpeg", "png",
-            //word excel powerpoint
-            "doc", "docx", "xls", "xlsx", "ppt", "pptx",
-            "html", "htm", "txt",
-            //压缩文件
-            "rar", "zip", "gz", "bz2",
-            //pdf
-            "pdf"
-    };
-
     private static int counter = 0;
 
     public static void setDefaultBaseDir(String defaultBaseDir)
@@ -80,7 +57,7 @@ public class FileUploadUtils
     {
         try
         {
-            return upload(getDefaultBaseDir(), file, DEFAULT_ALLOWED_EXTENSION);
+            return upload(getDefaultBaseDir(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         }
         catch (Exception e)
         {
@@ -100,7 +77,7 @@ public class FileUploadUtils
     {
         try
         {
-            return upload(baseDir, file, DEFAULT_ALLOWED_EXTENSION);
+            return upload(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         }
         catch (Exception e)
         {
@@ -121,7 +98,8 @@ public class FileUploadUtils
      * @throws InvalidExtensionException 文件校验异常
      */
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException, InvalidExtensionException
+            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
+            InvalidExtensionException
     {
         int fileNamelength = file.getOriginalFilename().length();
         if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH)
@@ -144,7 +122,7 @@ public class FileUploadUtils
     public static final String extractFilename(MultipartFile file)
     {
         String filename = file.getOriginalFilename();
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        String extension = getExtension(file);
         filename = DateUtils.datePath() + File.separator + encodingFilename(filename) + "." + extension;
         return filename;
     }
@@ -180,7 +158,7 @@ public class FileUploadUtils
      * @param file 上传的文件
      * @return
      * @throws FileSizeLimitExceededException 如果超出最大大小
-     * @throws InvalidExtensionException 
+     * @throws InvalidExtensionException
      */
     public static final void assertAllowed(MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, InvalidExtensionException
@@ -192,20 +170,23 @@ public class FileUploadUtils
         }
 
         String filename = file.getOriginalFilename();
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension))
         {
-            if (allowedExtension == IMAGE_EXTENSION)
+            if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION)
             {
-                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
+                        filename);
             }
-            else if (allowedExtension == FLASH_EXTENSION)
+            else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION)
             {
-                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension,
+                        filename);
             }
-            else if (allowedExtension == MEDIA_EXTENSION)
+            else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION)
             {
-                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension,
+                        filename);
             }
             else
             {
@@ -233,4 +214,21 @@ public class FileUploadUtils
         }
         return false;
     }
+
+    /**
+     * 获取文件名的后缀
+     * 
+     * @param file 表单文件
+     * @return 后缀名
+     */
+    public static final String getExtension(MultipartFile file)
+    {
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        if (StringUtils.isEmpty(extension))
+        {
+            extension = MimeTypeUtils.getExtension(file.getContentType());
+        }
+        return extension;
+    }
+
 }
