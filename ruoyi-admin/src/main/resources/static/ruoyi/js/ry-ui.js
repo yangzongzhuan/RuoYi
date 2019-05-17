@@ -711,7 +711,7 @@
             	$.operate.submit(url, "post", "json", data, callback);
             },
             // get请求传输
-            get: function(url) {
+            get: function(url, callback) {
             	$.operate.submit(url, "get", "json", "", callback);
             },
             // 详细信息
