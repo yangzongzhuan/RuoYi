@@ -93,7 +93,7 @@
 	border-left: 3px solid #3c8dbc;
 }
 
-.skin-blue .nav>li.active:last-child {
+.skin-blue .nav>li.active>ul li.active:last-child {
 	border-left: none;
 }
 

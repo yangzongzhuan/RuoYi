@@ -139,7 +139,7 @@
     			    	layer.open({
         			        title: false,
         			        type: 1,
-        			        closeBtn: false,
+        			        closeBtn: true,
         			        shadeClose: true,
         			        area: ['auto', 'auto'],
         			        content: "<img src='" + src + "' />"
@@ -542,8 +542,7 @@
             	layer.confirm(content, {
         	        icon: 3,
         	        title: "系统提示",
-        	        btn: ['确认', '取消'],
-        	        btnclass: ['btn btn-primary', 'btn btn-danger'],
+        	        btn: ['确认', '取消']
         	    }, function (index) {
         	    	layer.close(index);
         	        callBack(true);
@@ -598,6 +597,7 @@
             	var _title = $.common.isEmpty(options.title) ? "系统窗口" : options.title; 
                 var _width = $.common.isEmpty(options.width) ? "800" : options.width; 
                 var _height = $.common.isEmpty(options.height) ? ($(window).height() - 50) : options.height;
+                var _btn = ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'];
                 layer.open({
                     type: 2,
             		maxmin: true,
@@ -607,7 +607,7 @@
                     area: [_width + 'px', _height + 'px'],
                     content: _url,
                     shadeClose: true,
-                    btn: ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'],
+                    btn: $.common.isEmpty(options.btn) ? _btn : options.btn,
                     yes: function (index, layero) {
                         options.callBack(index, layero)
                     }, cancel: function () {
