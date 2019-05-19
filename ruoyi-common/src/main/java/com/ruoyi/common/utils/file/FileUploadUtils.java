@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
-import com.ruoyi.common.config.Global;
 import com.ruoyi.common.exception.file.FileNameLengthLimitExceededException;
 import com.ruoyi.common.exception.file.FileSizeLimitExceededException;
 import com.ruoyi.common.exception.file.InvalidExtensionException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.Md5Utils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.security.Md5Utils;
+import com.ruoyi.framework.config.RuoYiConfig;
 
 /**
  * 文件上传工具类
@@ -32,7 +32,7 @@ public class FileUploadUtils
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = Global.getProfile();
+    private static String defaultBaseDir = RuoYiConfig.getProfile();
 
     private static int counter = 0;
 
@@ -123,7 +123,7 @@ public class FileUploadUtils
     {
         String filename = file.getOriginalFilename();
         String extension = getExtension(file);
-        filename = DateUtils.datePath() + File.separator + encodingFilename(filename) + "." + extension;
+        filename = DateUtils.datePath() + "/" + encodingFilename(filename) + "." + extension;
         return filename;
     }
 
