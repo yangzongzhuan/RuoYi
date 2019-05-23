@@ -23,7 +23,7 @@
 		<druid.version>1.1.14</druid.version>
 		<bitwalker.version>1.19</bitwalker.version>
 		<kaptcha.version>2.3.2</kaptcha.version>
-		<swagger.version>2.7.0</swagger.version>
+		<swagger.version>2.9.2</swagger.version>
 		<pagehelper.boot.version>1.2.5</pagehelper.boot.version>
 		<oshi.version>3.9.1</oshi.version>
 		<commons.io.version>2.5</commons.io.version>
