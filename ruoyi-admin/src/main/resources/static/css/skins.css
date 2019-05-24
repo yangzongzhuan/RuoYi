@@ -93,7 +93,7 @@
 	border-left: 3px solid #3c8dbc;
 }
 
-.skin-blue .nav>li.active>ul li.active:last-child {
+.skin-blue .nav>li.active>ul li.active {
 	border-left: none;
 }
 
@@ -276,7 +276,7 @@
 	border-left: 3px solid #00a65a;
 }
 
-.skin-green .nav>li.active:last-child {
+.skin-green .nav>li.active>ul li.active {
 	border-left: none;
 }
 
@@ -431,7 +431,7 @@
 	background: #293846;
 }
 
-.skin-red .nav>li.active:last-child {
+.skin-red .nav>li.active>ul li.active {
 	border-left: none;
 }
 
@@ -590,7 +590,7 @@
 	border-left: 3px solid #f39c12;
 }
 
-.skin-yellow .nav>li.active:last-child {
+.skin-yellow .nav>li.active>ul li.active {
 	border-left: none;
 }
 
@@ -750,7 +750,7 @@
 	border-left: 3px solid #605ca8;
 }
 
-.skin-purple .nav>li.active:last-child {
+.skin-purple .nav>li.active>ul li.active {
 	border-left: none;
 }
 
