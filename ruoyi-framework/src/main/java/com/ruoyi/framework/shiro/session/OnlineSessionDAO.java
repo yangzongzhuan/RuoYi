@@ -56,7 +56,8 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
     }
 
     @Override
-    public void update(Session session) throws UnknownSessionException {
+    public void update(Session session) throws UnknownSessionException
+    {
         super.update(session);
     }
 
@@ -75,6 +76,7 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
                 // 时间差不足 无需同步
                 needSync = false;
             }
+            // isGuest = true 访客
             boolean isGuest = onlineSession.getUserId() == null || onlineSession.getUserId() == 0L;
 
             // session 数据变更了 同步
@@ -88,6 +90,7 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
                 return;
             }
         }
+        // 更新上次同步数据库时间
         onlineSession.setAttribute(LAST_SYNC_DB_TIMESTAMP, onlineSession.getLastAccessTime());
         // 更新完后 重置标识
         if (onlineSession.isAttributeChanged())
