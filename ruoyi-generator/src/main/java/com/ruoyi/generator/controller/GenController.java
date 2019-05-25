@@ -60,12 +60,7 @@ public class GenController extends BaseController
     public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException
     {
         byte[] data = genService.generatorCode(tableName);
-        response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"ruoyi.zip\"");
-        response.addHeader("Content-Length", "" + data.length);
-        response.setContentType("application/octet-stream; charset=UTF-8");
-
-        IOUtils.write(data, response.getOutputStream());
+        genCode(response, data);
     }
 
     /**
@@ -79,6 +74,16 @@ public class GenController extends BaseController
     {
         String[] tableNames = Convert.toStrArray(tables);
         byte[] data = genService.generatorCode(tableNames);
+        genCode(response, data);
+    }
+
+    /**
+     * 生成zip文件
+     * @param response
+     * @param data
+     * @throws IOException
+     */
+    private void genCode(HttpServletResponse response, byte[] data) throws IOException {
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"ruoyi.zip\"");
         response.addHeader("Content-Length", "" + data.length);
