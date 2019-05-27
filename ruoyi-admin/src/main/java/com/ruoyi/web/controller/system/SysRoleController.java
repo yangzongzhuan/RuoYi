@@ -135,7 +135,13 @@ public class SysRoleController extends BaseController
     @ResponseBody
     public AjaxResult authDataScopeSave(SysRole role)
     {
-        return toAjax(roleService.authDataScope(role));
+        role.setUpdateBy(ShiroUtils.getLoginName());
+        if (roleService.authDataScope(role) > 0)
+        {
+            ShiroUtils.setSysUser(userService.selectUserById(ShiroUtils.getSysUser().getUserId()));
+            return success();
+        }
+        return error();
     }
 
     @RequiresPermissions("system:role:remove")
