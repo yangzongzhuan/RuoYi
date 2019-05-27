@@ -60,12 +60,7 @@ public class GenServiceImpl implements IGenService
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        // 查询表信息
-        TableInfo table = genMapper.selectTableByName(tableName);
-        // 查询列信息
-        List<ColumnInfo> columns = genMapper.selectTableColumnsByName(tableName);
-        // 生成代码
-        generatorCode(table, columns, zip);
+        generatorCode(tableName, zip);
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
@@ -83,22 +78,22 @@ public class GenServiceImpl implements IGenService
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         for (String tableName : tableNames)
         {
-            // 查询表信息
-            TableInfo table = genMapper.selectTableByName(tableName);
-            // 查询列信息
-            List<ColumnInfo> columns = genMapper.selectTableColumnsByName(tableName);
-            // 生成代码
-            generatorCode(table, columns, zip);
+            generatorCode(tableName, zip);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
 
     /**
-     * 生成代码
+     * 查询表信息并生成代码
      */
-    public void generatorCode(TableInfo table, List<ColumnInfo> columns, ZipOutputStream zip)
+    private void generatorCode(String tableName, ZipOutputStream zip)
     {
+        // 查询表信息
+        TableInfo table = genMapper.selectTableByName(tableName);
+        // 查询列信息
+        List<ColumnInfo> columns = genMapper.selectTableColumnsByName(tableName);
+
         // 表名转换成Java属性名
         String className = GenUtils.tableToJava(table.getTableName());
         table.setClassName(className);
