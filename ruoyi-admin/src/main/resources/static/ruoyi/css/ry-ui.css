@@ -46,8 +46,11 @@
 .mb20 {
 	margin-bottom: 20px;
 }
-.ml20 {
+.m20 {
 	margin-left: 20px;
+}
+.m50 {
+	margin-left: 50px;
 }
 .img-xs {
   width: 32px;
@@ -618,6 +621,13 @@ label {
 	margin: 5px 15px 5px 0px;
 }
 
+.select-list li p{
+	float: left;
+	width: 80px;
+	margin: 5px 15px 5px 0px;
+	text-align:right;
+}
+
 .select-list li input {
 	border: 1px solid #ddd;
 	border-radius: 4px;
@@ -746,6 +756,13 @@ label {
 	border-radius: 3px;
 	vertical-align: middle;
 	cursor: pointer;
+}
+
+.select-title{
+	color:#3d5266;
+	font-size:15px;
+	padding:10px 0px;
+	font-weight: normal;
 }
 
 /** 表格查询数据 **/

@@ -37,6 +37,11 @@ $(document).ready(function(){
 		var birth = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;
 		return this.optional(element) || (birth).test(value);
 	},"出生日期格式示例2000-01-01");
+	//校验IP地址
+	jQuery.validator.addMethod("isIp",function(value,element){
+		var ip = /^(?:(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:1[0-9][0-9]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.)){3}(?:(?:2[0-4][0-9])|(?:25[0-5])|(?:1[0-9][0-9])|(?:[1-9][0-9])|(?:[0-9]))$/;
+		return this.optional(element) || (ip).test(value);
+	},"IP地址格式示例127.0.0.1");
 	//校验新旧密码是否相同
 	jQuery.validator.addMethod("isdiff",function(){
 		var p1=$("#pwdOld").val();
