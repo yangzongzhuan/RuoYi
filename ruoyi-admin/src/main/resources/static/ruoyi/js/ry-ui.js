@@ -105,7 +105,7 @@
             // 请求获取数据后处理回调函数
             responseHandler: function(res) {
             	if (typeof $.table._option.responseHandler == "function") {
-            		options.responseHandler(res);
+            		$.table._option.responseHandler(res);
                 }
                 if (res.code == 0) {
                     if ($.common.isNotEmpty($.table._option.sidePagination) && $.table._option.sidePagination == 'client') {
