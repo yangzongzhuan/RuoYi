@@ -444,7 +444,7 @@ body.canvas-menu.mini-navbar #page-wrapper, body.canvas-menu.mini-navbar .footer
 
 body.fixed-sidebar .navbar-static-side, body.canvas-menu .navbar-static-side {
     position: fixed;
-    width: 220px;
+    width: 200px;
     z-index: 2001;
     height: 100%;
 }
@@ -3166,7 +3166,7 @@ video {
 #page-wrapper {
     padding: 0 15px;
     position: inherit;
-    margin: 0 0 0 220px;
+    margin: 0 0 0 200px;
 }
 
 .title-action {

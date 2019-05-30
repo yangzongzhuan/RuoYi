@@ -668,6 +668,10 @@
             openTab: function (title, url) {
             	createMenuItem(url, title);
             },
+            // 关闭选项卡
+            closeTab: function () {
+            	closeItem();
+            },
             // 禁用按钮
             disable: function() {
             	var doc = window.top == window.parent ? window.document : window.parent.document;
@@ -972,7 +976,7 @@
     	        	} else if ($contentWindow.$.table._option.type == table_type.bootstrapTreeTable) {
     	        		$contentWindow.$.treeTable.refresh();
                     }
-    	            closeItem();
+    	            $.modal.closeTab();
                 } else if (result.code == web_status.WARNING) {
                     $.modal.alertWarning(result.msg)
                 } else {
