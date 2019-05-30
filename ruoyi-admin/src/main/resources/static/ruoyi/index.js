@@ -242,8 +242,17 @@ $(function() {
         }
         return false;
     }
+    
+    function menuBlank() {
+    	// 新窗口打开外网以http://开头，如http://ruoyi.vip
+    	var dataUrl = $(this).attr('href');
+    	window.open(dataUrl);
+    	return false;
+    }
 
     $('.menuItem').on('click', menuItem);
+    
+    $('.menuBlank').on('click', menuBlank);
 
     // 关闭选项卡菜单
     function closeTab() {
