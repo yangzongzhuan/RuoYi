@@ -72,6 +72,7 @@
                     showToggle: options.showToggle,                     // 是否显示详细视图和列表视图的切换按钮
                     showExport: options.showExport,                     // 是否支持导出文件
                     clickToSelect: options.clickToSelect,				// 是否启用点击选中行
+                    detailView: options.detailView,                     // 是否启用显示细节视图
                     onClickRow: options.onClickRow,                     // 点击某行触发的事件
                     onDblClickRow: options.onDblClickRow,               // 双击某行触发的事件
                     onClickCell: options.onClickCell,                   // 单击某格触发的事件
@@ -87,6 +88,7 @@
                     responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数
                     onLoadSuccess: $.table.onLoadSuccess,               // 当所有数据被加载时触发处理函数
                     exportOptions: options.exportOptions,               // 前端导出忽略列索引
+                    detailFormatter: options.detailFormatter,           // 在行下面展示其他数据列表
                 });
             },
             // 查询条件
