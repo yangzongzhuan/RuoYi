@@ -40,6 +40,11 @@ public class DataScopeAspect
     public static final String DATA_SCOPE_DEPT = "3";
 
     /**
+     * 部门及以下数据权限
+     */
+    public static final String DATA_SCOPE_DEPT_AND_CHILD = "4";
+
+    /**
      * 数据权限过滤关键字
      */
     public static final String DATA_SCOPE = "dataScope";
@@ -104,6 +109,12 @@ public class DataScopeAspect
             else if (DATA_SCOPE_DEPT.equals(dataScope))
             {
                 sqlString.append(StringUtils.format(" OR {}.dept_id = {} ", alias, user.getDeptId()));
+            }
+            else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope))
+            {
+                sqlString.append(StringUtils.format(
+                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or parent_id= {} )", alias,
+                        user.getDeptId(), user.getDeptId()));
             }
         }
 

@@ -80,7 +80,6 @@ public class GlobalExceptionHandler
     public Object businessException(HttpServletRequest request, BusinessException e)
     {
         log.error(e.getMessage(), e);
-
         if (ServletUtils.isAjaxRequest(request))
         {
             return AjaxResult.error(e.getMessage());
