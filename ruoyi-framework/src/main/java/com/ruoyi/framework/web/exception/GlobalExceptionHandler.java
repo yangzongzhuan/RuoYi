@@ -77,10 +77,21 @@ public class GlobalExceptionHandler
      * 业务异常
      */
     @ExceptionHandler(BusinessException.class)
-    public AjaxResult businessException(BusinessException e)
+    public Object businessException(HttpServletRequest request, BusinessException e)
     {
         log.error(e.getMessage(), e);
-        return AjaxResult.error(e.getMessage());
+
+        if (ServletUtils.isAjaxRequest(request))
+        {
+            return AjaxResult.error(e.getMessage());
+        }
+        else
+        {
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.addObject("errorMessage", e.getMessage());
+            modelAndView.setViewName("error/business");
+            return modelAndView;
+        }
     }
 
     /**
