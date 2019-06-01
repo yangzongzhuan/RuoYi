@@ -136,8 +136,21 @@ public class ExcelUtil<T>
 
         if (rows > 0)
         {
-            // 默认序号
-            int serialNum = 0;
+
+            // 定义一个map用于存放excel列的序号和field.
+            Map<String, Integer> cellMap = new HashMap<String, Integer>();
+            //获取表头
+            Row heard = sheet.getRow(0);
+            for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++) {
+                Cell cell = heard.getCell(i);
+                if (StringUtils.isNotNull(cell != null)) {
+                    String value=this.getCellValue(heard, i).toString();
+                    cellMap.put(value, i);
+                } else {
+                    cellMap.put(null, i);
+                }
+            }
+
             // 有数据时才处理 得到类的所有field.
             Field[] allFields = clazz.getDeclaredFields();
             // 定义一个map用于存放列的序号和field.
@@ -150,23 +163,23 @@ public class ExcelUtil<T>
                 {
                     // 设置类的私有字段属性可访问.
                     field.setAccessible(true);
-                    fieldsMap.put(++serialNum, field);
+                    Integer column = cellMap.get(attr.name());
+                    fieldsMap.put(column, field);
                 }
             }
             for (int i = 1; i < rows; i++)
             {
                 // 从第2行开始取数据,默认第一行是表头.
                 Row row = sheet.getRow(i);
-                int cellNum = serialNum;
                 T entity = null;
-                for (int column = 0; column < cellNum; column++)
+                for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet())
                 {
-                    Object val = this.getCellValue(row, column);
+                    Object val = this.getCellValue(row, entry.getKey());
 
                     // 如果不存在实例则新建.
                     entity = (entity == null ? clazz.newInstance() : entity);
                     // 从map中得到对应列的field.
-                    Field field = fieldsMap.get(column + 1);
+                    Field field = fieldsMap.get(entry.getKey());
                     // 取得类型,并根据对象类型设置值.
                     Class<?> fieldType = field.getType();
                     if (String.class == fieldType)
