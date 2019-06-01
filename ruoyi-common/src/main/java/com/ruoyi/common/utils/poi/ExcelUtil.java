@@ -136,17 +136,20 @@ public class ExcelUtil<T>
 
         if (rows > 0)
         {
-
             // 定义一个map用于存放excel列的序号和field.
             Map<String, Integer> cellMap = new HashMap<String, Integer>();
-            //获取表头
+            // 获取表头
             Row heard = sheet.getRow(0);
-            for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++) {
+            for (int i = 0; i < heard.getPhysicalNumberOfCells(); i++)
+            {
                 Cell cell = heard.getCell(i);
-                if (StringUtils.isNotNull(cell != null)) {
-                    String value=this.getCellValue(heard, i).toString();
+                if (StringUtils.isNotNull(cell != null))
+                {
+                    String value = this.getCellValue(heard, i).toString();
                     cellMap.put(value, i);
-                } else {
+                }
+                else
+                {
                     cellMap.put(null, i);
                 }
             }
