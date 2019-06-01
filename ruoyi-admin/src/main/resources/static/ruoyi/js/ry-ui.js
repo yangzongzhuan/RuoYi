@@ -580,7 +580,7 @@
                 if ($.common.isEmpty(callback)) {
                     callback = function(index, layero) {
                         var iframeWin = layero.find('iframe')[0];
-                        iframeWin.contentWindow.submitHandler();
+                        iframeWin.contentWindow.submitHandler(index, layero);
                     }
                 }
             	layer.open({
@@ -658,7 +658,7 @@
             		shadeClose: true,
             		yes: function(index, layero) {
             	        var iframeWin = layero.find('iframe')[0];
-            	        iframeWin.contentWindow.submitHandler();
+            	        iframeWin.contentWindow.submitHandler(index, layero);
             	    },
             	    cancel: function(index) {
             	        return true;
