@@ -1,14 +1,12 @@
 @echo off
 echo.
-echo [Д©║Ф│╞] Ф╦┘Г░├Г■÷Ф┬░Х╥╞Е╬└Ц─┌
-echo.
-pause
+echo [пео╒] гЕюМиЗЁиб╥╬╤║ё
 echo.
 
+%~d0
 cd %~dp0
-cd..
 
+cd ..
 call mvn clean
 
-cd bin
 pause
