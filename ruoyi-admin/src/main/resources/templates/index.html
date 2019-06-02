@@ -55,7 +55,7 @@
                 </li>
                 <li th:each="menu : ${menus}">
                 	<a href="#">
-                		<i class="fa fa fa-bar-chart-o" th:class="${menu.icon}"></i>
+                		<i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
                     	<span class="nav-label" th:text="${menu.menuName}">一级菜单</span> 
                     	<span class="fa arrow"></span>
                 	</a>
@@ -86,7 +86,7 @@
                 <ul class="nav navbar-top-links navbar-right welcome-message">
 				    <li><a title="视频教程" href="http://doc.ruoyi.vip/#/standard/spjc" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
-	                <li><a title="全屏显示" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}" class="user-image">
@@ -123,17 +123,6 @@
             <button class="roll-nav roll-right tabRight">
                 <i class="fa fa-forward"></i>
             </button>
-            <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">
-                                                                          页签操作<span class="caret"></span>
-                </button>
-                <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                     <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
-                     <li><a class="tabCloseOther" href="javascript:void();">关闭其他</a></li>
-					 <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
-					 <li><a class="tabMaxCurrent" href="javascript:void();">全屏显示</a></li>
-                </ul>
-            </div>
             <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
         

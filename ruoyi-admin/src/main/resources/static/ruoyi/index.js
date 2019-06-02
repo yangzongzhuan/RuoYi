@@ -139,14 +139,14 @@ $(function() {
 
     //查看左侧隐藏的选项卡
     function scrollTabLeft() {
-        var marginLeftVal = Math.abs(parseInt($('.page-tabs-content').css('margin-left')) + 50);
+        var marginLeftVal = Math.abs(parseInt($('.page-tabs-content').css('margin-left')));
         // 可视区域非tab宽度
         var tabOuterWidth = calSumWidth($(".content-tabs").children().not(".menuTabs"));
         //可视区域tab宽度
         var visibleWidth = $(".content-tabs").outerWidth(true) - tabOuterWidth;
         //实际滚动宽度
         var scrollVal = 0;
-        if (($(".page-tabs-content").width() + 50) < visibleWidth) {
+        if (($(".page-tabs-content").width()) < visibleWidth) {
             return false;
         } else {
             var tabElement = $(".menuTab:first");
@@ -425,7 +425,7 @@ $(function() {
     
     // 全屏显示
     $('#fullScreen').on('click', function () {
-    	$('#wrapper').fullScreen();
+    	$(document).toggleFullScreen();
     });
     
     // 刷新按钮
@@ -533,7 +533,8 @@ $(function() {
                 icon: "fa-arrows-alt",
                 callback: function(key, opt) {
                 	setActiveTab(this);
-                    opt.$trigger.find('i').trigger("dblclick");
+                    var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
+                	target.fullScreen(true);
                 }
             },
             "refresh": {
