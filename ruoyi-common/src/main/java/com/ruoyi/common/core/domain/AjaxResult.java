@@ -232,9 +232,11 @@ public class AjaxResult extends HashMap<String, Object>
     }
 
     @Override
-    public String toString()
-    {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("code", getCode())
-                .append("msg", getMsg()).append("data", getData()).toString();
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("code", getCode())
+            .append("msg", getMsg())
+            .append("data", getData())
+            .toString();
     }
 }

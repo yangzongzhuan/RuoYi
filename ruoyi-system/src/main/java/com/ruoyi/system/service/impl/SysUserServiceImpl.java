@@ -293,7 +293,7 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
-     * 校验用户名称是否唯一
+     * 校验登录名称是否唯一
      * 
      * @param loginName 用户名
      * @return
