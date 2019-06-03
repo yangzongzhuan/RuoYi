@@ -1,7 +1,6 @@
 /**
- * bootstrapTreeTable
- *
- * @author swifly
+ * 基于bootstrapTreeTable/bootstrap-table-treegrid修改
+ * Copyright (c) 2019 ruoyi
  */
 (function($) {
     "use strict";
@@ -240,9 +239,11 @@
                 item.isShow = false;
                 // 这里兼容几种常见Root节点写法
                 // 默认的几种判断
+                var firstCode = (0 == index ? item[options.parentCode] : '-');
                 var _defaultRootFlag = item[options.parentCode] == '0' ||
                     item[options.parentCode] == 0 ||
                     item[options.parentCode] == null ||
+                    item[options.parentCode] == firstCode ||
                     item[options.parentCode] == '';
                 if (!item[options.parentCode] || (_root ? (item[options.parentCode] == options.rootIdValue) : _defaultRootFlag)) {
                     if (!target.data_list["_root_"]) {

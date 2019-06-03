@@ -81,7 +81,7 @@ public class Global
      */
     public static String getVersion()
     {
-        return StringUtils.nvl(getConfig("ruoyi.version"), "3.3.0");
+        return StringUtils.nvl(getConfig("ruoyi.version"), "3.4.0");
     }
 
     /**
@@ -89,7 +89,15 @@ public class Global
      */
     public static String getCopyrightYear()
     {
-        return StringUtils.nvl(getConfig("ruoyi.copyrightYear"), "2018");
+        return StringUtils.nvl(getConfig("ruoyi.copyrightYear"), "2019");
+    }
+
+    /**
+     * 实例演示开关
+     */
+    public static String isDemoEnabled()
+    {
+        return StringUtils.nvl(getConfig("ruoyi.demoEnabled"), "true");
     }
 
     /**

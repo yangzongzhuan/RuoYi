@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<th:block th:include="include :: header('弹层表格')" />
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content fadeInRight">
+	    <div class="row">
+	        <div class="col-sm-12">
+	            <div class="ibox">
+	                <div class="ibox-title">
+	                <h5>弹层框</h5>
+	                </div>
+	                <div class="ibox-content" id="test">
+	                    <p>弹出复选框表格及单选框表格（点击提交后得到数据）。 </p>
+	                    <button type="button" class="btn btn-primary" onclick="selectCheckUser()">弹出表格（复选框）</button>
+	                    <button type="button" class="btn btn-success" onclick="selectRadioUser()">弹出表格（单选框）</button>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-sm-12">
+	            <div class="ibox">
+	                <div class="ibox-title">
+	                <h5>弹层框</h5>
+	                </div>
+	                <div class="ibox-content" id="test">
+	                    <p>弹出复选框表格及单选框表格（点击提交后得到数据并回显到父窗体）。 </p>
+	                    <button type="button" class="btn btn-info" onclick="selectUsersToParent()">弹出表格（复选框）</button>
+	                    <p id="userids"> </p>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "demo/modal";
+        
+        function selectCheckUser(){
+        	$.modal.open("选择用户", prefix + "/check");
+        }
+        
+		function selectRadioUser(){
+			$.modal.open("选择用户", prefix + "/radio");
+        }
+		
+		function selectUsersToParent(){
+			$.modal.open("选择用户", prefix + "/parent");
+        }
+		
+		function selectUsers(){
+			alert(1);
+		}
+	</script>
+</body>
+</html>

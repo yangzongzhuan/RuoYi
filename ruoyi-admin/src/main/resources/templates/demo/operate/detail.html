@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('用户详细')" />
+</head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-user-edit">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用户编号：</label>
+				<div class="form-control-static" th:text="${user.userCode}"></div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label ">用户姓名：</label>
+				<div class="col-sm-8">
+				    <div class="form-control-static" th:text="${user.userName}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用户性别：</label>
+                <div class="col-sm-8">
+                    <div class="form-control-static" th:text="${@dict.getLabel('sys_user_sex', user.status)}"></div>
+                </div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用户手机：</label>
+				<div class="col-sm-8">
+				    <div class="form-control-static" th:text="${user.userPhone}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用户邮箱：</label>
+				<div class="col-sm-8">
+				    <div class="form-control-static" th:text="${user.userEmail}"></div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用户状态：</label>
+				<div class="col-sm-8">
+				    <div class="form-control-static" th:text="${@dict.getLabel('sys_normal_disable', user.status)}"></div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script type="text/javascript">
+		var prefix = ctx + "demo/operate";
+		
+		$("#form-user-add").validate({
+			onkeyup: false,
+			rules:{
+				userPhone:{
+					isPhone:true
+				},
+				userEmail:{
+					email:true
+				},
+			},
+		    focusCleanup: true
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	        	$.operate.save(prefix + "/edit", $('#form-user-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

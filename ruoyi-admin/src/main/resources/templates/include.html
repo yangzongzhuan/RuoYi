@@ -39,8 +39,8 @@
     <script th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 	<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 	<script th:src="@{/ajax/libs/layui/layui.js}"></script>
-	<script th:src="@{/ruoyi/js/common.js?v=3.3.0}"></script>
-	<script th:src="@{/ruoyi/js/ry-ui.js?v=3.3.0}"></script>
+	<script th:src="@{/ruoyi/js/common.js?v=3.4.0}"></script>
+	<script th:src="@{/ruoyi/js/ry-ui.js?v=3.4.0}"></script>
 	<script th:inline="javascript"> var ctx = [[@{/}]]; </script>
 </div>
 
@@ -103,10 +103,52 @@
     <script th:src="@{/ajax/libs/cropbox/cropbox.js}"></script>
 </div>
 
+<!-- jasny功能扩展插件 -->
+<div th:fragment="jasny-bootstrap-css">
+    <link th:href="@{/ajax/libs/jasny/jasny-bootstrap.min.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="jasny-bootstrap-js">
+    <script th:src="@{/ajax/libs/jasny/jasny-bootstrap.min.js}"></script>
+</div>
+
+<!-- fileinput文件上传插件 -->
+<div th:fragment="bootstrap-fileinput-css">
+    <link th:href="@{/ajax/libs/bootstrap-fileinput/fileinput.min.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-fileinput-js">
+    <script th:src="@{/ajax/libs/bootstrap-fileinput/fileinput.min.js}"></script>
+</div>
+
+<!-- duallistbox双列表框插件 -->
+<div th:fragment="bootstrap-duallistbox-css">
+    <link th:href="@{/ajax/libs/duallistbox/bootstrap-duallistbox.min.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="bootstrap-duallistbox-js">
+    <script th:src="@{/ajax/libs/duallistbox/bootstrap-duallistbox.min.js}"></script>
+</div>
+
+<!-- suggest搜索自动补全 -->
+<div th:fragment="bootstrap-suggest-js">
+    <script th:src="@{/ajax/libs/suggest/bootstrap-suggest.min.js}"></script>
+</div>
+
+<!-- typeahead搜索自动补全 -->
+<div th:fragment="bootstrap-typeahead-js">
+    <script th:src="@{/ajax/libs/typeahead/bootstrap3-typeahead.min.js}"></script>
+</div>
+
 <!-- jsonview格式化和语法高亮JSON格式数据查看插件 -->
 <div th:fragment="jsonview-css">
     <link th:href="@{/ajax/libs/jsonview/jquery.jsonview.css}" rel="stylesheet"/>
 </div>
 <div th:fragment="jsonview-js">
     <script th:src="@{/ajax/libs/jsonview/jquery.jsonview.js}"></script>
+</div>
+
+<!-- jquery.steps表单向导插件 -->
+<div th:fragment="jquery-steps-css">
+    <link th:href="@{/ajax/libs/staps/jquery.steps.css}" rel="stylesheet"/>
+</div>
+<div th:fragment="jquery-steps-js">
+    <script th:src="@{/ajax/libs/staps/jquery.steps.min.js}"></script>
 </div>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<th:block th:include="include :: header('日期和时间')" />
+	<th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>日期选择器 <small>https://github.com/smalot/bootstrap-datetimepicker</small></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="font-noraml">简单示例</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="datetimepicker-demo-1" placeholder="yyyy-MM-dd HH:mm">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">显示年月日</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="datetimepicker-demo-2" placeholder="yyyy-MM-dd">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">显示年月日时分秒</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="datetimepicker-demo-3" placeholder="yyyy-MM-dd HH:mm:ss">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+			                <label class="font-noraml">带清空的按钮</label>
+			                <div class="input-group date form_date">
+			                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+			                    <input class="form-control" size="16" type="text" readonly>
+			                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+			                </div>
+			            </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">日期范围选择</label>
+                            <div class="input-daterange input-group">
+                                <input type="text" class="input-sm form-control" id="datetimepicker-startTime" placeholder="yyyy-MM-dd"/>
+                                <span class="input-group-addon">到</span>
+                                <input type="text" class="input-sm form-control" id="datetimepicker-endTime" placeholder="yyyy-MM-dd"/>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="font-noraml">相关参数详细信息</label>
+                            <div><a href="http://doc.ruoyi.vip/#/standard/zjwd?id=bootstrap-datetimepicker" target="_blank">http://doc.ruoyi.vip/#/standard/zjwd?id=bootstrap-datetimepicker</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>日期选择器 <small>https://github.com/sentsin/laydate</small></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="font-noraml">简单示例</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="laydate-demo-1" placeholder="yyyy-MM-dd">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">显示年月日</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="laydate-demo-2" placeholder="yyyy-MM-dd">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">显示年月日时分秒</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="laydate-demo-3" placeholder="yyyy-MM-dd HH:mm:ss">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">单框范围选择</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control" id="laydate-demo-4" placeholder="yyyy-MM-dd - yyyy-MM-dd">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">日期范围选择</label>
+                            <div class="input-daterange input-group">
+                                <input type="text" class="input-sm form-control" id="laydate-startTime" placeholder="yyyy-MM-dd"/>
+                                <span class="input-group-addon">到</span>
+                                <input type="text" class="input-sm form-control" id="laydate-endTime" placeholder="yyyy-MM-dd"/>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="font-noraml">相关参数详细信息</label>
+                            <div><a href="http://doc.ruoyi.vip/#/standard/zjwd?id=laydate" target="_blank">http://doc.ruoyi.vip/#/standard/zjwd?id=laydate</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        $(function(){
+        	<!-- datetimepicker示例 -->
+        	$("#datetimepicker-demo-1").datetimepicker();
+        	
+        	$("#datetimepicker-demo-2").datetimepicker({
+       		    format: "yyyy-mm-dd",
+       		    minView: "month",
+       		    autoclose: true
+       		});
+        	
+        	$("#datetimepicker-demo-3").datetimepicker({
+       		    format: "yyyy-mm-dd hh:ii:ss",
+       		    autoclose: true
+       		});
+        	
+        	$('.form_date').datetimepicker({
+        		format: "yyyy-mm-dd",
+       		    minView: "month",
+       		    autoclose: true
+            });
+        	
+        	$("#datetimepicker-startTime").datetimepicker({
+        		format: 'yyyy-mm-dd',
+        		minView: "month",
+        	    todayBtn:  true,
+        	    autoclose: true,
+        		endDate : new Date(),
+        	}).on('changeDate', function(event) {
+        		event.preventDefault();
+        		event.stopPropagation();
+        		var startTime = event.date;
+        		$('#datetimepicker-endTime').datetimepicker('setStartDate', startTime);
+        	});
+        	
+        	$("#datetimepicker-endTime").datetimepicker({
+        		format: 'yyyy-mm-dd',
+        		minView: "month",
+        		todayBtn:  true,
+        		autoclose: true,
+        		endDate : new Date(),
+        	}).on('changeDate', function(event) {
+        		event.preventDefault();
+        		event.stopPropagation();
+        		var endTime = event.date;
+        		$("#datetimepicker-startTime").datetimepicker('setEndDate', endTime);
+        	});
+        	
+        	<!-- laydate示例 -->
+        	layui.use('laydate', function(){
+       		  var laydate = layui.laydate;
+       		  
+       		  laydate.render({
+       		    elem: '#laydate-demo-1'
+       		  });
+       		  
+       		  laydate.render({ 
+       		    elem: '#laydate-demo-2',
+       		    type: 'date'
+       		  });
+       		  
+       		  laydate.render({ 
+       		    elem: '#laydate-demo-3',
+       		    type: 'datetime'
+       		  });
+       		  
+       		  laydate.render({
+       		    elem: '#laydate-demo-4',
+       		    range: true
+       		  });
+       		  
+       		  var startDate = laydate.render({
+		        elem: '#laydate-startTime',
+		        max: $('#laydate-endTime').val(),
+		        theme: 'molv',
+		        trigger: 'click',
+		        done: function(value, date) {
+		            // 结束时间大于开始时间
+		            if (value !== '') {
+		                endDate.config.min.year = date.year;
+		                endDate.config.min.month = date.month - 1;
+		                endDate.config.min.date = date.date;
+		            } else {
+		                endDate.config.min.year = '';
+		                endDate.config.min.month = '';
+		                endDate.config.min.date = '';
+		            }
+		        }
+		      });
+       		
+		      var endDate = laydate.render({
+		        elem: '#laydate-endTime',
+		        min: $('#laydate-startTime').val(),
+		        theme: 'molv',
+		        trigger: 'click',
+		        done: function(value, date) {
+		            // 开始时间小于结束时间
+		            if (value !== '') {
+		                startDate.config.max.year = date.year;
+		                startDate.config.max.month = date.month - 1;
+		                startDate.config.max.date = date.date;
+		            } else {
+		                startDate.config.max.year = '';
+		                startDate.config.max.month = '';
+		                startDate.config.max.date = '';
+		            }
+		        }
+		      });
+       	   });
+        });
+    </script>
+</body>
+</html>

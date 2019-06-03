@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<th:block th:include="include :: header('文件上传')" />
+	<th:block th:include="include :: bootstrap-fileinput-css" />
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>文件上传控件 <small>https://github.com/kartik-v/bootstrap-fileinput</small></h5>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="form-group">
+                            <label class="font-noraml">简单示例</label>
+	                        <div class="file-loading">
+					            <input class="file" type="file" multiple data-min-file-count="1" data-theme="fas">
+					        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">多文件上传</label>
+	                        <div class="file-loading">
+					            <input id="fileinput-demo-1" type="file" multiple>
+					        </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="font-noraml">相关参数详细信息</label>
+                            <div><a href="http://doc.ruoyi.vip/#/standard/zjwd?id=jasny-bootstrap" target="_blank">http://doc.ruoyi.vip/#/standard/zjwd?id=jasny-bootstrap</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: bootstrap-fileinput-js" />
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#fileinput-demo-1").fileinput({
+            'theme': 'explorer-fas',
+            'uploadUrl': '#',
+            overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview: [
+                "/img/profile.jpg"
+            ]
+        });
+    });
+    </script>
+</body>
+</html>

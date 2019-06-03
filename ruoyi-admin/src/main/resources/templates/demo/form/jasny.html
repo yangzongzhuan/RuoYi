@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<th:block th:include="include :: header('功能扩展')" />
+	<th:block th:include="include :: jasny-bootstrap-css" />
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>文件上传控件 <small>https://github.com/jasny/bootstrap</small></h5>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="form-group">
+                            <label class="font-noraml">输入组示例</label>
+                            
+	                        <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+	                            <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+	                            <span class="input-group-addon btn btn-white btn-file"><span class="fileinput-new">选择文件</span><span class="fileinput-exists">更改</span><input type="file"></span>
+	                            <a href="#" class="input-group-addon btn btn-white fileinput-exists" data-dismiss="fileinput">清除</a>
+	                        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">按钮示例</label>
+                            <br/>
+	                        <div class="fileinput fileinput-new" data-provides="fileinput">
+	                            <span class="btn btn-white btn-file"><span class="fileinput-new">选择文件</span><span class="fileinput-exists">更改</span><input type="file" name="..."></span>
+	                            <span class="fileinput-filename"></span>
+	                            <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+	                        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">图片上传示例</label>
+                            <br/>
+	                        <div class="fileinput fileinput-new" data-provides="fileinput">
+					            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+					            <div>
+					                <span class="btn btn-white btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span><input type="file"></span>
+					                <a href="#" class="btn btn-white fileinput-exists" data-dismiss="fileinput">清除</a>
+					            </div>
+					        </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">图片预览示例</label>
+                            <br/>
+	                        <div class="fileinput fileinput-new" data-provides="fileinput">
+						        <div class="fileinput-new thumbnail" style="width: 140px; height: 140px;">
+						          <img th:src="@{/img/profile.jpg}">
+						        </div>
+						        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+						        <div>
+						          <span class="btn btn-white btn-file"><span class="fileinput-new">选择图片</span><span class="fileinput-exists">更改</span><input type="file"></span>
+						          <a href="#" class="btn btn-white fileinput-exists" data-dismiss="fileinput">清除</a>
+						        </div>
+						      </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="font-noraml">相关参数详细信息</label>
+                            <div><a href="http://doc.ruoyi.vip/#/standard/zjwd?id=jasny-bootstrap" target="_blank">http://doc.ruoyi.vip/#/standard/zjwd?id=jasny-bootstrap</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>固定格式文本 <small>https://github.com/jasny/bootstrap</small></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <label class="font-noraml">手机号码格式</label>
+                             <input type="text" class="form-control" data-mask="999-9999-9999" placeholder="请输入手机号码">
+                             <span class="help-block">158-8888-88888</span>
+                       	 </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">电话号码格式</label>
+                            <input type="text" class="form-control" data-mask="9999-9999999" placeholder="请输入电话号码">
+                            <span class="help-block">0730-8888888</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">日期格式</label>
+                            <input type="text" class="form-control" data-mask="9999-99-99" placeholder="请输入日期格式">
+                            <span class="help-block">yyyy-mm-dd</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">IPV4格式</label>
+                            <input type="text" class="form-control" data-mask="999.999.999.999" placeholder="请输入IP地址">
+                            <span class="help-block">192.168.100.200</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="font-noraml">税务代码格式</label>
+                            <input type="text" class="form-control" data-mask="99-9999999" placeholder="请输入税务代码">
+                            <span class="help-block">99-9999999</span>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="font-noraml">相关参数详细信息</label>
+                            <div><a href="http://doc.ruoyi.vip/#/standard/zjwd?id=jasny-bootstrap" target="_blank">http://doc.ruoyi.vip/#/standard/zjwd?id=jasny-bootstrap</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: jasny-bootstrap-js" />
+</body>
+</html>
