@@ -42,6 +42,12 @@ $(document).ready(function(){
 		var ip = /^(?:(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:1[0-9][0-9]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.)){3}(?:(?:2[0-4][0-9])|(?:25[0-5])|(?:1[0-9][0-9])|(?:[1-9][0-9])|(?:[0-9]))$/;
 		return this.optional(element) || (ip).test(value);
 	},"IP地址格式示例127.0.0.1");
+	jQuery.validator.addMethod("notEqual", function(value, element, param) {
+        return value != param;
+    }, $.validator.format("输入值不允许为{0}"));
+	jQuery.validator.addMethod("gt", function(value, element, param) {
+        return value > param;
+    }, $.validator.format("输入值必须大于{0}"));
 	//校验新旧密码是否相同
 	jQuery.validator.addMethod("isdiff",function(){
 		var p1=$("#pwdOld").val();

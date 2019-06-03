@@ -35,19 +35,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 left join sys_user_role ur on rm.role_id = ur.role_id
 			 LEFT JOIN sys_role ro on ur.role_id = ro.role_id
 		where ur.user_id = #{userId} and m.menu_type in ('M', 'C') and m.visible = 0  AND ro.status = 0
-		order by m.order_num
+		order by m.parent_id, m.order_num
 	</select>
 
 	<select id="selectMenuNormalAll" resultMap="SysMenuResult">
 		select distinct m.menu_id, m.parent_id, m.menu_name, m.url, m.perms, m.target, m.menu_type, m.icon, m.order_num, m.create_time
 		from sys_menu m
 		where m.menu_type in ('M', 'C') and m.visible = 0
-		order by m.order_num
+		order by m.parent_id, m.order_num
 	</select>
 	
 	<select id="selectMenuAll" resultMap="SysMenuResult">
 		<include refid="selectMenuVo"/>
-		order by order_num
+		order by m.parent_id, m.order_num
 	</select>
 	
 	<select id="selectPermsByUserId" parameterType="Long" resultType="String">
@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND visible = #{visible}
 			</if>
 		</where>
-		order by order_num
+		order by parent_id, order_num
     </select>
 	
 	<delete id="deleteMenuById" parameterType="Long">
