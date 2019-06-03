@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectMenuAll" resultMap="SysMenuResult">
 		<include refid="selectMenuVo"/>
-		order by m.parent_id, m.order_num
+		order by parent_id, order_num
 	</select>
 	
 	<select id="selectPermsByUserId" parameterType="Long" resultType="String">
