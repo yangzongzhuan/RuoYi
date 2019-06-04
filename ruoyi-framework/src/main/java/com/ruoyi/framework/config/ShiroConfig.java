@@ -28,6 +28,7 @@ import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.shiro.session.OnlineSessionFactory;
 import com.ruoyi.framework.shiro.web.filter.LogoutFilter;
 import com.ruoyi.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
+import com.ruoyi.framework.shiro.web.filter.kickout.KickoutSessionFilter;
 import com.ruoyi.framework.shiro.web.filter.online.OnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
@@ -47,6 +48,18 @@ public class ShiroConfig
     // Session超时时间，单位为毫秒（默认30分钟）
     @Value("${shiro.session.expireTime}")
     private int expireTime;
+
+    // 相隔多久检查一次session的有效性，单位毫秒，默认就是10分钟
+    @Value("${shiro.session.validationInterval}")
+    private int validationInterval;
+
+    // 同一个用户最大会话数
+    @Value("${shiro.session.maxSession}")
+    private int maxSession;
+
+    // 踢出之前登录的/之后登录的用户，默认踢出之前登录的用户
+    @Value("${shiro.session.kickoutAfter}")
+    private boolean kickoutAfter;
 
     // 验证码开关
     @Value("${shiro.user.captchaEnabled}")
@@ -244,16 +257,17 @@ public class ShiroConfig
         // 系统权限列表
         // filterChainDefinitionMap.putAll(SpringUtils.getBean(IMenuService.class).selectPermsAll());
 
-        Map<String, Filter> filters = new LinkedHashMap<>();
+        Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         filters.put("onlineSession", onlineSessionFilter());
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         filters.put("captchaValidate", captchaValidateFilter());
+        filters.put("kickout", kickoutSessionFilter());
         // 注销成功，则跳转到指定页面
         filters.put("logout", logoutFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         // 所有请求需要认证
-        filterChainDefinitionMap.put("/**", "user,onlineSession,syncOnlineSession");
+        filterChainDefinitionMap.put("/**", "user,kickout,onlineSession,syncOnlineSession");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return shiroFilterFactoryBean;
@@ -314,6 +328,23 @@ public class ShiroConfig
         cookieRememberMeManager.setCookie(rememberMeCookie());
         cookieRememberMeManager.setCipherKey(Base64.decode("fCq+/xW488hMTCD+cmJ3aQ=="));
         return cookieRememberMeManager;
+    }
+
+    /**
+     * 同一个用户多设备登录限制
+     */
+    public KickoutSessionFilter kickoutSessionFilter()
+    {
+        KickoutSessionFilter kickoutSessionFilter = new KickoutSessionFilter();
+        kickoutSessionFilter.setCacheManager(getEhCacheManager());
+        kickoutSessionFilter.setSessionManager(sessionManager());
+        // 同一个用户最大的会话数，默认-1无限制；比如2的意思是同一个用户允许最多同时两个人登录
+        kickoutSessionFilter.setMaxSession(maxSession);
+        // 是否踢出后来登录的，默认是false；即后者登录的用户踢出前者登录的用户；踢出顺序
+        kickoutSessionFilter.setKickoutAfter(kickoutAfter);
+        // 被踢出后重定向到的地址；
+        kickoutSessionFilter.setKickoutUrl("/login?kickout=1");
+        return kickoutSessionFilter;
     }
 
     /**
