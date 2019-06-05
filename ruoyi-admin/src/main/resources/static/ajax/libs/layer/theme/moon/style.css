@@ -18,7 +18,7 @@ body .layer-ext-moon .layui-layer-title {
 	font-size: 14px;
 	height: 42px;
 	line-height: 42px;
-    border-bottom: 1px solid #eee;
+    border: none;
 }
 
 body .layer-ext-moon .layui-layer-content .layui-layer-ico {

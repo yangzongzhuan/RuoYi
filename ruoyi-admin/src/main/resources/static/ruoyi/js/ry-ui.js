@@ -743,7 +743,7 @@
        				width: width,
        				height: height,
        				url: $.operate.detailUrl(id),
-       				skin: 'layui-layer-molv', 
+       				skin: 'layui-layer-gray', 
        				btn: ['关闭'],
        				yes: function (index, layero) {
        	                layer.close(index);
