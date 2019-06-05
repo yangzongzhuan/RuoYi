@@ -26,6 +26,8 @@ public class AsyncManager
     /**
      * 单例模式
      */
+    private AsyncManager(){}
+
     private static AsyncManager me = new AsyncManager();
 
     public static AsyncManager me()
