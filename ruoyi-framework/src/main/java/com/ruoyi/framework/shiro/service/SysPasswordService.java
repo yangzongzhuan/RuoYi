@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
 import com.ruoyi.common.exception.user.UserPasswordRetryLimitExceedException;
 import com.ruoyi.common.utils.MessageUtils;
@@ -35,7 +36,7 @@ public class SysPasswordService
     @PostConstruct
     public void init()
     {
-        loginRecordCache = cacheManager.getCache("loginRecordCache");
+        loginRecordCache = cacheManager.getCache(ShiroConstants.LOGINRECORDCACHE);
     }
 
     public void validate(SysUser user, String password)

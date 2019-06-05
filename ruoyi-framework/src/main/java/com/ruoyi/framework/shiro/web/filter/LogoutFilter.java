@@ -1,12 +1,17 @@
 package com.ruoyi.framework.shiro.web.filter;
 
+import java.io.Serializable;
+import java.util.Deque;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
@@ -27,6 +32,8 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
      * 退出后重定向的地址
      */
     private String loginUrl;
+
+    private Cache<String, Deque<Serializable>> cache;
 
     public String getLoginUrl()
     {
@@ -53,6 +60,8 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                     String loginName = user.getLoginName();
                     // 记录用户退出日志
                     AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGOUT, MessageUtils.message("user.logout.success")));
+                    // 清理缓存
+                    cache.remove(loginName);
                 }
                 // 退出登录
                 subject.logout();
@@ -82,5 +91,12 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
             return url;
         }
         return super.getRedirectUrl(request, response, subject);
+    }
+
+    // 设置Cache的key的前缀
+    public void setCacheManager(CacheManager cacheManager)
+    {
+        // 必须和ehcache缓存配置中的缓存name一致
+        this.cache = cacheManager.getCache(ShiroConstants.SYS_USERCACHE);
     }
 }

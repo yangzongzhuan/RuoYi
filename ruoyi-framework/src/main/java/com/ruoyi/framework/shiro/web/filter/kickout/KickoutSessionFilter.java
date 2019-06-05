@@ -17,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.framework.util.ShiroUtils;
@@ -108,12 +109,19 @@ public class KickoutSessionFilter extends AccessControlFilter
                 // 踢出后再更新下缓存队列
                 cache.put(loginName, deque);
 
-                // 获取被踢出的sessionId的session对象
-                Session kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
-                if (kickoutSession != null)
+                try
                 {
-                    // 设置会话的kickout属性表示踢出了
-                    kickoutSession.setAttribute("kickout", true);
+                    // 获取被踢出的sessionId的session对象
+                    Session kickoutSession = sessionManager.getSession(new DefaultSessionKey(kickoutSessionId));
+                    if (null != kickoutSession)
+                    {
+                        // 设置会话的kickout属性表示踢出了
+                        kickoutSession.setAttribute("kickout", true);
+                    }
+                }
+                catch (Exception e)
+                {
+                    // 面对异常，我们选择忽略
                 }
             }
 
@@ -173,6 +181,6 @@ public class KickoutSessionFilter extends AccessControlFilter
     public void setCacheManager(CacheManager cacheManager)
     {
         // 必须和ehcache缓存配置中的缓存name一致
-        this.cache = cacheManager.getCache("sys-userCache");
+        this.cache = cacheManager.getCache(ShiroConstants.SYS_USERCACHE);
     }
 }
