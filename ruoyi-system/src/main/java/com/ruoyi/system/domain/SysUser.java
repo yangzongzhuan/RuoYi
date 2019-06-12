@@ -1,12 +1,13 @@
 package com.ruoyi.system.domain;
 
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.annotation.Excel.Type;
-import com.ruoyi.common.core.domain.BaseEntity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excel.Type;
+import com.ruoyi.common.annotation.Excels;
+import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 用户对象 sys_user
@@ -76,7 +77,10 @@ public class SysUser extends BaseEntity
     private Date loginDate;
 
     /** 部门对象 */
-    @Excel(name = "部门名称", targetAttr = "deptName", type = Type.EXPORT)
+    @Excels({
+        @Excel(name = "部门名称", targetAttr = "deptName", type = Type.EXPORT),
+        @Excel(name = "部门负责人", targetAttr = "leader", type = Type.EXPORT)
+    })
     private SysDept dept;
 
     private List<SysRole> roles;
