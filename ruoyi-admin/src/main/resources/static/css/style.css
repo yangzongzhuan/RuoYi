@@ -3247,7 +3247,7 @@ body.body-small .footer.fixed {
 /*CONTENTTABS*/
 .content-tabs {
     position: relative;
-    height: 42px;
+    height: 39px;
     background: #fafafa;
     line-height: 40px;
 }
@@ -3255,7 +3255,7 @@ body.body-small .footer.fixed {
 .content-tabs .roll-nav, .page-tabs-list {
     position: absolute;
     width: 40px;
-    height: 40px;
+    height: 38px;
     text-align: center;
     color: #999;
     z-index: 2;
@@ -3328,7 +3328,7 @@ nav.page-tabs .page-tabs-content {
 
 .roll-right.tabReload {
     background: #fff;
-    height: 40px;
+    height: 38px;
     width: 60px;
     outline: none;
 }

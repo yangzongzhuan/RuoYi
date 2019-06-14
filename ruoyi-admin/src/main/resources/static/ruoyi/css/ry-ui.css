@@ -146,6 +146,12 @@
 	margin-right: 5px
 }
 
+.nav-tabs-custom>.nav-tabs>li.header {
+	padding-left: 5px;
+	font-size: 16px;
+	line-height: 30px;
+}
+
 .nav-tabs-custom>.nav-tabs>li.disabled>a {
 	color: #777
 }
