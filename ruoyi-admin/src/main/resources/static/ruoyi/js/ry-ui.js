@@ -271,8 +271,7 @@
             },
             // 导入数据
             importExcel: function(formId) {
-            	var currentId = $.common.isEmpty(formId) ? 'importForm' : formId;
-            	$.form.reset(currentId);
+            	var currentId = $.common.isEmpty(formId) ? 'importTpl' : formId;
             	layer.open({
             		type: 1,
             		area: ['400px', '230px'],
@@ -281,7 +280,7 @@
             		maxmin: true,
             		shade: 0.3,
             		title: '导入' + $.table._option.modalName + '数据',
-            		content: $('#' + currentId),
+            		content: $('#' + currentId).html(),
             		btn: ['<i class="fa fa-check"></i> 导入', '<i class="fa fa-remove"></i> 取消'],
             		// 弹层外区域关闭
             		shadeClose: true,
