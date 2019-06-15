@@ -3254,7 +3254,7 @@ body.body-small .footer.fixed {
 
 .content-tabs .roll-nav, .page-tabs-list {
     position: absolute;
-    width: 40px;
+    width: 30px;
     height: 38px;
     text-align: center;
     color: #999;
@@ -3285,9 +3285,9 @@ body.body-small .footer.fixed {
 }
 
 nav.page-tabs {
-    margin-left: 40px;
+    margin-left: 30px;
     width: 100000px;
-    height: 40px;
+    height: 38px;
     overflow: hidden;
 }
 

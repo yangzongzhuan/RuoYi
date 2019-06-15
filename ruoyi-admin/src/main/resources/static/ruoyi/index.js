@@ -216,6 +216,8 @@ $(function() {
         dataIndex = $(this).data('index'),
         menuName = $.trim($(this).text()),
         flag = true;
+        $(".nav ul li").removeClass("active");
+        $(this).parent("li").addClass("active");
         if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
 
         // 选项卡菜单已存在
