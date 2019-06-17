@@ -27,16 +27,18 @@ public interface ISysMenuService
      * 查询系统菜单列表
      * 
      * @param menu 菜单信息
+     * @param userId 用户ID
      * @return 菜单列表
      */
-    public List<SysMenu> selectMenuList(SysMenu menu);
+    public List<SysMenu> selectMenuList(SysMenu menu, Long userId);
 
     /**
      * 查询菜单集合
      * 
+     * @param userId 用户ID
      * @return 所有菜单信息
      */
-    public List<SysMenu> selectMenuAll();
+    public List<SysMenu> selectMenuAll(Long userId);
 
     /**
      * 根据用户ID查询权限
@@ -50,23 +52,26 @@ public interface ISysMenuService
      * 根据角色ID查询菜单
      * 
      * @param role 角色对象
+     * @param userId 用户ID
      * @return 菜单列表
      */
-    public List<Ztree> roleMenuTreeData(SysRole role);
+    public List<Ztree> roleMenuTreeData(SysRole role, Long userId);
 
     /**
      * 查询所有菜单信息
      * 
+     * @param userId 用户ID
      * @return 菜单列表
      */
-    public List<Ztree> menuTreeData();
+    public List<Ztree> menuTreeData(Long userId);
 
     /**
      * 查询系统所有权限
      * 
+     * @param userId 用户ID
      * @return 权限列表
      */
-    public Map<String, String> selectPermsAll();
+    public Map<String, String> selectPermsAll(Long userId);
 
     /**
      * 删除菜单管理信息
