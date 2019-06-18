@@ -131,9 +131,9 @@ $(function() {
 		var dataExpand = $.common.isEmpty($.table._option.expandAll) ? true : $.table._option.expandAll;
 		expandFlag = $.common.isEmpty(expandFlag) ? dataExpand : expandFlag;
 	    if (!expandFlag) {
-	        $('#' + $.table._option.id).bootstrapTreeTable('expandAll');
+	    	$.bttTable.bootstrapTreeTable('expandAll');
 	    } else {
-	        $('#' + $.table._option.id).bootstrapTreeTable('collapseAll');
+	    	$.bttTable.bootstrapTreeTable('collapseAll');
 	    }
 	    expandFlag = expandFlag ? false: true;
 	})
