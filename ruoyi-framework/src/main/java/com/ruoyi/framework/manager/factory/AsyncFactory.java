@@ -97,9 +97,10 @@ public class AsyncFactory
             @Override
             public void run()
             {
+                String address = AddressUtils.getRealAddressByIP(ip);
                 StringBuilder s = new StringBuilder();
                 s.append(LogUtils.getBlock(ip));
-                s.append(AddressUtils.getRealAddressByIP(ip));
+                s.append(address);
                 s.append(LogUtils.getBlock(username));
                 s.append(LogUtils.getBlock(status));
                 s.append(LogUtils.getBlock(message));
@@ -113,7 +114,7 @@ public class AsyncFactory
                 SysLogininfor logininfor = new SysLogininfor();
                 logininfor.setLoginName(username);
                 logininfor.setIpaddr(ip);
-                logininfor.setLoginLocation(AddressUtils.getRealAddressByIP(ip));
+                logininfor.setLoginLocation(address);
                 logininfor.setBrowser(browser);
                 logininfor.setOs(os);
                 logininfor.setMsg(message);
