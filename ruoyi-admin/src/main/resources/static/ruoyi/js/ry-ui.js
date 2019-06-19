@@ -427,7 +427,7 @@
             search: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	var params = $.common.formToJSON(currentId);
-            	$.bttTable('refresh', params);
+                $.bttTable.bootstrapTreeTable('refresh', params);
             },
             // 刷新
             refresh: function() {
