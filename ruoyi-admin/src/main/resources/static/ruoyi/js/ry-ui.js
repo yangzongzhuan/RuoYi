@@ -432,7 +432,7 @@
             },
             // 刷新
             refresh: function() {
-            	$.bttTable('refresh');
+            	$.bttTable.bootstrapTreeTable('refresh');
             },
             // 查询表格树指定列值
             selectColumns: function(column) {
