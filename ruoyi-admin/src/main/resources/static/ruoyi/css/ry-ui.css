@@ -918,3 +918,11 @@ label {
     display: block;
     float:left;
 }
+
+/** 表格拖拽样式 **/
+.reorder_rows_onDragClass td {
+    color:yellow!important;
+	background-color:#999!important;
+	text-shadow:0 0 10px black,0 0 10px black,0 0 8px black,0 0 6px black,0 0 6px black;
+	box-shadow:0 12px 14px -12px #111 inset,0 -2px 2px -1px #333 inset
+}
