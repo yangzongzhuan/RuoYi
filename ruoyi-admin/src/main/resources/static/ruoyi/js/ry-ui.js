@@ -436,7 +436,7 @@
             },
             // 查询表格树指定列值
             selectColumns: function(column) {
-            	var rows = $.map($.btTable.bootstrapTreeTable('getSelections'), function (row) {
+            	var rows = $.map($.bttTable.bootstrapTreeTable('getSelections'), function (row) {
         	        return row[column];
         	    });
             	return $.common.uniqueFn(rows);
@@ -822,7 +822,7 @@
             // 修改信息
             edit: function(id) {
             	if($.common.isEmpty(id) && $.table._option.type == table_type.bootstrapTreeTable) {
-            		var row = $.btTable.bootstrapTreeTable('getSelections')[0];
+            		var row = $.bttTable.bootstrapTreeTable('getSelections')[0];
                 	if ($.common.isEmpty(row)) {
             			$.modal.alertWarning("请至少选择一条记录");
             			return;
