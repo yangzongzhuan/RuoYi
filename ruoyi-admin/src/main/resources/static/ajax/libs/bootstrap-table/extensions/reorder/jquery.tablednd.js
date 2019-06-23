@@ -164,7 +164,7 @@ jQuery.tableDnD = {
                 // Iterate through each row, the row is bound to "this"
                 if (! $(this).hasClass("nodrag")) {
                     $(this).bind(startEvent, function(e) {
-                        if (e.target.tagName === "TD") {
+                        if (e.target.tagName === "TD" && event.target.className !== "nodrag") {
                             $.tableDnD.initialiseDrag(this, table, this, e, config);
                             return false;
                         }
