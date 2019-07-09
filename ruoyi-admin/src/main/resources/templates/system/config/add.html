@@ -28,7 +28,7 @@
 			<label class="col-sm-3 control-label">系统内置：</label>
 			<div class="col-sm-8">
 			    <div class="radio-box" th:each="dict : ${@dict.getType('sys_yes_no')}">
-					<input type="radio" th:id="${dict.dictCode}" name="configType" th:value="${dict.dictValue}" th:checked="${dict.isDefault == 'Y' ? true : false}">
+					<input type="radio" th:id="${dict.dictCode}" name="configType" th:value="${dict.dictValue}" th:checked="${dict.default}">
 					<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 				</div>
 			</div>

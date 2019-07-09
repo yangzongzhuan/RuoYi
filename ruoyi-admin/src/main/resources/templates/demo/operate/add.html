@@ -44,7 +44,7 @@
 				<label class="col-sm-3 control-label">用户状态：</label>
 				<div class="col-sm-8">
 				    <div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
-						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.isDefault == 'Y' ? true : false}">
+						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.default}">
 						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 					</div>
 				</div>

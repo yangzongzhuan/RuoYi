@@ -790,6 +790,10 @@ label {
 	border-top: 0px solid #ddd;
 }
 
+.fixed-table-container {
+	border: 0px solid #ddd;
+}
+
 .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th {
 	border-bottom: 1px solid #ccc!important;
 	border-top: 0px!important;

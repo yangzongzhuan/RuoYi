@@ -3,6 +3,7 @@ package com.ruoyi.system.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
@@ -119,6 +120,11 @@ public class SysDictData extends BaseEntity
         this.listClass = listClass;
     }
 
+    public boolean getDefault()
+    {
+        return UserConstants.YES.equals(this.isDefault) ? true : false;
+    }
+
     public String getIsDefault()
     {
         return isDefault;
@@ -138,8 +144,8 @@ public class SysDictData extends BaseEntity
     {
         this.status = status;
     }
-    
-	@Override
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("dictCode", getDictCode())
