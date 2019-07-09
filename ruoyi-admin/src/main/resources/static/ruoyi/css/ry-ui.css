@@ -780,10 +780,14 @@ label {
 	border: 0px!important;
 }
 
-.table-striped .table, .fixed-table-container, table, .table-striped .table, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+.table-striped .table, .table-striped .table, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
 	border-bottom: 1px solid #e7eaec!important;
 	background-color: transparent!important;
 	border: 0px;
+}
+
+.fixed-table-footer {
+	border-top: 0px solid #ddd;
 }
 
 .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th {
@@ -839,7 +843,7 @@ label {
 .bootstrap-tree-table .treetable-bars .tool-left{float: left;}
 .bootstrap-tree-table .treetable-bars .tool-right{float: right;}
 .bootstrap-tree-table .treetable-bars .columns li label{display: block;padding: 3px 20px;clear: both;font-weight: 400;line-height: 1.428571429;max-width: 100%;margin-bottom: 5px;cursor:pointer;}
-
+.bootstrap-tree-table .table{border-bottom: 0px solid #e7eaec!important;}
 
 /** 首页样式 **/
 .ax_close_max {
