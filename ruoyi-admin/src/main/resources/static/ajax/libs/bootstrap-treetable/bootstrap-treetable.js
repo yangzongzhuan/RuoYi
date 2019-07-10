@@ -335,13 +335,13 @@
                     }
                     // 增加formatter渲染
                     if (column.formatter) {
-                        $td.html(column.formatter.call(this, item[column.field], item, index));
+                        $td.html(column.formatter.call(this, getItemField(item, column.field), item, index));
                     } else {
                         if(options.showTitle){
                             // 只在字段没有formatter时才添加title属性
                             $td.attr("title",item[column.field]);
                         }
-                        $td.text(item[column.field]);
+                        $td.text(getItemField(item, column.field));
                     }
                     if (options.expandColumn == index) {
                         if (!isP) {
@@ -583,6 +583,19 @@
                 $input.prop("checked", '');
             }
         }
+        // ruoyi 解析数据，支持多层级访问
+        var getItemField = function (item, field) {
+            var value = item;
+
+            if (typeof field !== 'string' || item.hasOwnProperty(field)) {
+                return item[field];
+            }
+            var props = field.split('.');
+            for (var p in props) {
+                value = value && value[props[p]];
+            }
+            return value;
+        };
         // 初始化
         init();
         return target;
