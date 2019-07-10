@@ -92,7 +92,7 @@ public class ExcelUtil<T>
     /**
      * 注解列表
      */
-    private List<Field> fields;
+    private List<Object[]> fields;
 
     /**
      * 实体对象
@@ -316,24 +316,12 @@ public class ExcelUtil<T>
 
                 // 产生一行
                 Row row = sheet.createRow(0);
-                int excelsNo = 0;
+                int column = 0;
                 // 写入各个字段的列头名称
-                for (int column = 0; column < fields.size(); column++)
+                for (Object[] os : fields)
                 {
-                    Field field = fields.get(column);
-                    if (field.isAnnotationPresent(Excel.class))
-                    {
-                        Excel excel = field.getAnnotation(Excel.class);
-                        createCell(excel, row, column);
-                    }
-                    if (field.isAnnotationPresent(Excels.class))
-                    {
-                        Excels attrs = field.getAnnotation(Excels.class);
-                        Excel[] excels = attrs.value();
-                        // 写入列名
-                        Excel excel = excels[excelsNo++];
-                        createCell(excel, row, column);
-                    }
+                    Excel excel = (Excel) os[1];
+                    this.createCell(excel, row, column++);
                 }
                 if (Type.EXPORT.equals(type))
                 {
@@ -397,24 +385,14 @@ public class ExcelUtil<T>
             row = sheet.createRow(i + 1 - startNo);
             // 得到导出对象.
             T vo = (T) list.get(i);
-            int excelsNo = 0;
-            for (int column = 0; column < fields.size(); column++)
+            int column = 0;
+            for (Object[] os : fields)
             {
-                // 获得field.
-                Field field = fields.get(column);
+                Field field = (Field) os[0];
+                Excel excel = (Excel) os[1];
                 // 设置实体类私有属性可访问
                 field.setAccessible(true);
-                if (field.isAnnotationPresent(Excel.class))
-                {
-                    addCell(field.getAnnotation(Excel.class), row, vo, field, column, cs);
-                }
-                if (field.isAnnotationPresent(Excels.class))
-                {
-                    Excels attrs = field.getAnnotation(Excels.class);
-                    Excel[] excels = attrs.value();
-                    Excel excel = excels[excelsNo++];
-                    addCell(excel, row, vo, field, column, cs);
-                }
+                this.addCell(excel, row, vo, field, column++, cs);
             }
         }
     }
@@ -720,7 +698,7 @@ public class ExcelUtil<T>
      */
     private void createExcelField()
     {
-        this.fields = new ArrayList<Field>();
+        this.fields = new ArrayList<Object[]>();
         List<Field> tempFields = new ArrayList<>();
         tempFields.addAll(Arrays.asList(clazz.getSuperclass().getDeclaredFields()));
         tempFields.addAll(Arrays.asList(clazz.getDeclaredFields()));
@@ -752,7 +730,7 @@ public class ExcelUtil<T>
     {
         if (attr != null && (attr.type() == Type.ALL || attr.type() == type))
         {
-            this.fields.add(field);
+            this.fields.add(new Object[] { field, attr });
         }
     }
 
