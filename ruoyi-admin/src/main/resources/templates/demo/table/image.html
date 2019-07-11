@@ -40,7 +40,7 @@
 				{
 				    title: '图片',
 				    formatter: function(value, row, index) {
-				    	// 图片自由组合（注意：如存储在本地需要带上 '/profile/upload' + 数据库路径）
+				    	// 图片预览（注意：如存储在本地直接获取数据库路径，如有配置context-path需要使用ctx+路径）
 				    	// 如：/profile/upload/2019/08/08/3b7a839aced67397bac694d77611ce72.png
 				    	if(index % 2 == 0){
 				    		return $.table.imageView('http://demo.ruoyi.vip/img/profile.jpg');
