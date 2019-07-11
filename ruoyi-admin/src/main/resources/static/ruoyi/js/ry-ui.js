@@ -154,6 +154,8 @@
             	$.btTable.on('click', '.img-circle', function() {
     			    var src = $(this).attr('src');
     			    var target = $(this).data('target');
+    			    var height = $(this).data('height');
+    			    var width = $(this).data('width');
     			    if($.common.equals("self", target)) {
     			    	layer.open({
         			        title: false,
@@ -161,7 +163,7 @@
         			        closeBtn: true,
         			        shadeClose: true,
         			        area: ['auto', 'auto'],
-        			        content: "<img src='" + src + "' />"
+        			        content: "<img src='" + src + "' height='" + height + "' width='" + width + "'/>"
         			    });
     			    } else if ($.common.equals("blank", target)) {
     			        window.open(src);
@@ -214,12 +216,17 @@
 				return actions.join('');
 			},
 			// 图片预览
-			imageView: function (value, path, target) {
-				var _path = $.common.isEmpty(path) ? '/profile/upload' : path;
+			imageView: function (value, height, width, target) {
+				if ($.common.isEmpty(width)) {
+                	width = 'auto';
+                }
+                if ($.common.isEmpty(height)) {
+                	height = 'auto';
+                }
 				// blank or self
 				var _target = $.common.isEmpty(target) ? 'self' : target;
 				if ($.common.isNotEmpty(value)) {
-					return $.common.sprintf("<img class='img-circle img-xs' data-target='%s' src='%s/%s'/>", _target, _path, value);
+					return $.common.sprintf("<img class='img-circle img-xs' data-height='%s' data-width='%s' data-target='%s' src='%s'/>", width, height, _target, value);
 				} else {
 					return $.common.nullToStr(value);
 				}
@@ -574,16 +581,16 @@
             	}
             	if ($.common.isEmpty(title)) {
                     title = false;
-                };
+                }
                 if ($.common.isEmpty(url)) {
                     url = "/404.html";
-                };
+                }
                 if ($.common.isEmpty(width)) {
                 	width = 800;
-                };
+                }
                 if ($.common.isEmpty(height)) {
                 	height = ($(window).height() - 50);
-                };
+                }
                 if ($.common.isEmpty(callback)) {
                     callback = function(index, layero) {
                         var iframeWin = layero.find('iframe')[0];
@@ -646,16 +653,16 @@
             	}
             	if ($.common.isEmpty(title)) {
                     title = false;
-                };
+                }
                 if ($.common.isEmpty(url)) {
                     url = "/404.html";
-                };
+                }
                 if ($.common.isEmpty(width)) {
                 	width = 800;
-                };
+                }
                 if ($.common.isEmpty(height)) {
                 	height = ($(window).height() - 50);
-                };
+                }
                 var index = layer.open({
             		type: 2,
             		area: [width + 'px', height + 'px'],

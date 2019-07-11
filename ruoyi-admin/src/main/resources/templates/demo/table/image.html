@@ -40,13 +40,12 @@
 				{
 				    title: '图片',
 				    formatter: function(value, row, index) {
-				    	// 图片自由组合
-				    	// 'img/profile.jpg' - 'http://ruoyi.vip/' 变成 http://ruoyi.vip/img/profile.jpg
-				    	// 'ruoyi.png' - 'http://ruoyi.vip/' 变成 http://ruoyi.vip/ruoyi.jpg
+				    	// 图片自由组合（注意：如存储在本地需要带上 '/profile/upload' + 数据库路径）
+				    	// 如：/profile/upload/2019/08/08/3b7a839aced67397bac694d77611ce72.png
 				    	if(index % 2 == 0){
-				    		return $.table.imageView('img/profile.jpg', 'http://demo.ruoyi.vip/');
+				    		return $.table.imageView('http://demo.ruoyi.vip/img/profile.jpg');
 				    	}else {
-				    		return $.table.imageView('ruoyi.png', 'http://demo.ruoyi.vip/');
+				    		return $.table.imageView('http://demo.ruoyi.vip/ruoyi.png');
 				    	}
 				    }
 				},
