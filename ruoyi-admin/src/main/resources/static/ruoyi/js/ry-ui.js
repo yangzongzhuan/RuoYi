@@ -169,6 +169,12 @@
     			        window.open(src);
     			    }
     			});
+            	// 单击tooltip复制文本
+            	$.btTable.on('click', '.tooltip-show', function() {
+            		var input = $(this).prev();
+            		input.select();
+            		document.execCommand("copy");
+            	});
             },
             // 当所有数据被加载时触发
             onLoadSuccess: function(data) {
@@ -190,14 +196,18 @@
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
-			// 列超出指定长度浮动提示
+			// 列超出指定长度浮动提示（单击文本复制列）
 			tooltip: function (value, length) {
 				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
 				var _value = $.common.nullToStr(value);
 				if (_value.length > _length) {
 					_text = _value.substr(0, _length) + "...";
-					return $.common.sprintf("<a href='#' class='tooltip-show' data-toggle='tooltip' title='%s'>%s</a>", _value, _text);
+					_value = _value.replace(/\'/g,"’");
+					var actions = [];
+					actions.push($.common.sprintf('<input id="tooltip-show" style="opacity: 0;position: absolute;z-index:-1" type="text" value="%s"/>', _value));
+                	actions.push($.common.sprintf("<a href='###' class='tooltip-show' data-toggle='tooltip' title='%s'>%s</a>", _value, _text));
+					return actions.join('');
 				} else {
 					_text = _value;
 					return _text;
