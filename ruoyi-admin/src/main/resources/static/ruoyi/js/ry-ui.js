@@ -398,6 +398,7 @@
         		    toolbar: "toolbar",
         		    striped: false,
         		    expandColumn: 1,
+        		    showSearch: true,
         		    showRefresh: true,
         			showColumns: true,
         			expandAll: true,
@@ -417,6 +418,7 @@
         			striped: options.striped,                           // 是否显示行间隔色
         			bordered: true,                                     // 是否显示边框
         			toolbar: '#' + options.toolbar,                     // 指定工作栏
+        			showSearch: options.showSearch,                     // 是否显示检索信息
         			showRefresh: options.showRefresh,                   // 是否显示刷新按钮
         			showColumns: options.showColumns,                   // 是否显示隐藏某列下拉框
         			expandAll: options.expandAll,                       // 是否全部展开

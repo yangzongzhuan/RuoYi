@@ -70,6 +70,12 @@
             var $rightToolbar = $('<div class="btn-group tool-right">');
             $toolbar.append($rightToolbar);
             target.parent().before($toolbar);
+            // ruoyi 是否显示检索信息
+            if (options.showSearch) {
+                var $searchBtn = $('<button class="btn btn-default btn-outline" type="button" aria-label="search" title="搜索"><i class="glyphicon glyphicon-search"></i></button>');
+                $rightToolbar.append($searchBtn);
+                registerSearchBtnClickEvent($searchBtn);
+            }
             // 是否显示刷新按钮
             if (options.showRefresh) {
                 var $refreshBtn = $('<button class="btn btn-default btn-outline" type="button" aria-label="refresh" title="刷新"><i class="glyphicon glyphicon-repeat"></i></button>');
@@ -357,6 +363,12 @@
                 }
             });
             return $tr;
+        }
+        // 检索信息按钮点击事件
+        var registerSearchBtnClickEvent = function(btn) {
+            $(btn).off('click').on('click', function () {
+                $(".search-collapse").slideToggle();
+            });
         }
         // 注册刷新按钮点击事件
         var registerRefreshBtnClickEvent = function(btn) {
@@ -684,6 +696,7 @@
         toolbar: null,             // 顶部工具条
         height: 0,                 // 表格高度
         showTitle: true,           // 是否采用title属性显示字段内容（被formatter格式化的字段不会显示）
+        showSearch: true,          // 是否显示检索信息
         showColumns: true,         // 是否显示内容列下拉框
         showRefresh: true,         // 是否显示刷新按钮
         expanderExpandedClass: 'glyphicon glyphicon-chevron-down', // 展开的按钮的图标
