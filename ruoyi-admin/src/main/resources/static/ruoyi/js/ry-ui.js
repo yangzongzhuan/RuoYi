@@ -196,7 +196,7 @@
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
-			// 列超出指定长度浮动提示（单击文本复制列）
+			// 列超出指定长度浮动提示（单击文本复制）
 			tooltip: function (value, length) {
 				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
@@ -386,7 +386,7 @@
             	var actions = [];
                 $.each(datas, function(index, dict) {
                     if (dict.dictValue == ('' + value)) {
-                    	var listClass = $.common.equals("default", dict.listClass) ? "" : "badge badge-" + dict.listClass;
+                    	var listClass = $.common.equals("default", dict.listClass) || $.common.isEmpty(dict.listClass) ? "" : "badge badge-" + dict.listClass;
                     	actions.push($.common.sprintf("<span class='%s'>%s</span>", listClass, dict.dictLabel));
                         return false;
                     }

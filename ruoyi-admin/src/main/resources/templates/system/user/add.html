@@ -71,11 +71,9 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">用户性别：</label>
                         <div class="col-sm-8">
-                            <div class="input-group">
-                                <select name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
-				                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-				                </select>
-                            </div>
+                            <select name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
+				                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+				            </select>
                         </div>
                     </div>
                 </div>

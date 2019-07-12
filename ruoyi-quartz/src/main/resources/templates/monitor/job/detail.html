@@ -18,13 +18,13 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">任务组名：</label>
+			<label class="col-sm-3 control-label">任务分组：</label>
 			<div class="form-control-static" th:text="${jobLog.jobGroup}">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">任务方法：</label>
-			<div class="form-control-static" th:text="${jobLog.methodName} + '(' + ${#strings.defaultString(jobLog.methodParams,'')} + ')'">
+			<label class="col-sm-3 control-label">调用目标字符串：</label>
+			<div class="form-control-static" th:text="${jobLog.invokeTarget}">
 			</div>
 		</div>
 		<div class="form-group">
@@ -56,13 +56,13 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">任务组名：</label>
+			<label class="col-sm-3 control-label">任务分组：</label>
 			<div class="form-control-static" th:text="${job.jobGroup}">
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label">任务方法：</label>
-			<div class="form-control-static" th:text="${job.methodName} + '(' + ${#strings.defaultString(job.methodParams,'')} + ')'">
+			<label class="col-sm-3 control-label">调用目标字符串：</label>
+			<div class="form-control-static" th:text="${job.invokeTarget}">
 			</div>
 		</div>
 		<div class="form-group">

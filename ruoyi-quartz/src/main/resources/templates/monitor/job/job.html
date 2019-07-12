@@ -14,7 +14,10 @@
 								任务名称：<input type="text" name="jobName"/>
 							</li>
 							<li>
-								方法名称：<input type="text" name="methodName"/>
+								任务分组：<select name="jobGroup" th:with="type=${@dict.getType('sys_job_group')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 							<li>
 								任务状态：<select name="status" th:with="type=${@dict.getType('sys_job_status')}">
@@ -60,7 +63,7 @@
 		var editFlag = [[${@permission.hasPermi('monitor:job:edit')}]];
 		var removeFlag = [[${@permission.hasPermi('monitor:job:remove')}]];
 		var statusFlag = [[${@permission.hasPermi('monitor:job:changeStatus')}]];
-		var datas = [[${@dict.getType('sys_job_status')}]];
+		var datas = [[${@dict.getType('sys_job_group')}]];
 		var prefix = ctx + "monitor/job";
 
 		$(function() {
@@ -84,20 +87,20 @@
 		        {
 		            field: 'jobName',
 		            title: '任务名称',
-		            sortable: true
 		        },
 		        {
 		            field: 'jobGroup',
-		            title: '任务组名',
-		            sortable: true
+		            title: '任务分组',
+		            formatter: function(value, row, index) {
+		            	return $.table.selectDictLabel(datas, value);
+		            }
 		        },
 		        {
-		            field: 'methodName',
-		            title: '方法名称'
-		        },
-		        {
-		            field: 'methodParams',
-		            title: '方法参数'
+		            field: 'invokeTarget',
+		            title: '调用目标字符串',
+		            formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
 		        },
 		        {
 		            field: 'cronExpression',
@@ -121,7 +124,7 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		                var actions = [];
-		                actions.push('<a class="btn btn-primary btn-xs ' + statusFlag + '" href="javascript:void(0)" onclick="run(\'' + row.jobId + '\')"><i class="fa fa-play-circle-o"></i> 执行一次</a> ');
+		                actions.push('<a class="btn btn-primary btn-xs ' + statusFlag + '" href="javascript:void(0)" onclick="run(\'' + row.jobId + '\', \'' + row.jobGroup + '\')"><i class="fa fa-play-circle-o"></i> 执行一次</a> ');
 		                actions.push('<a class="btn btn-warning btn-xs ' + detailFlag + '" href="javascript:void(0)" onclick="$.operate.detail(\'' + row.jobId + '\')"><i class="fa fa-search"></i>详细</a> ');
 		                return actions.join('');
 		            }
@@ -133,30 +136,30 @@
 		/* 调度任务状态显示 */
 		function statusTools(row) {
 		    if (row.status == 1) {
-    			return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="start(\'' + row.jobId + '\')"></i> ';
+    			return '<i class=\"fa fa-toggle-off text-info fa-2x\" onclick="start(\'' + row.jobId + '\', \'' + row.jobGroup + '\')"></i> ';
     		} else {
-    			return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="stop(\'' + row.jobId + '\')"></i> ';
+    			return '<i class=\"fa fa-toggle-on text-info fa-2x\" onclick="stop(\'' + row.jobId + '\', \'' + row.jobGroup + '\')"></i> ';
     		}
 		}
 		
 		/* 立即执行一次 */
-		function run(jobId) {
+		function run(jobId, jobGroup) {
 			$.modal.confirm("确认要立即执行一次任务吗？", function() {
-				$.operate.post(prefix + "/run", { "jobId": jobId});
+				$.operate.post(prefix + "/run", { "jobId": jobId, "jobId": jobId, "jobGroup": jobGroup});
 		    })
 		}
 
 		/* 调度任务-停用 */
-		function stop(jobId) {
+		function stop(jobId, jobGroup) {
 			$.modal.confirm("确认要停用任务吗？", function() {
-				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "status": 1 });
+				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "jobGroup": jobGroup, "status": 1 });
 		    })
 		}
 
 		/* 调度任务-启用 */
-		function start(jobId) {
+		function start(jobId, jobGroup) {
 			$.modal.confirm("确认要启用任务吗？", function() {
-				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "status": 0 });
+				$.operate.post(prefix + "/changeStatus", { "jobId": jobId, "jobGroup": jobGroup, "status": 0 });
 		    })
 		}
 

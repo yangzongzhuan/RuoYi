@@ -77,20 +77,20 @@ public interface ISysJobService
     public void run(SysJob job) throws SchedulerException;
 
     /**
-     * 新增任务表达式
+     * 新增任务
      * 
      * @param job 调度信息
      * @return 结果
      */
-    public int insertJobCron(SysJob job) throws SchedulerException, TaskException;
+    public int insertJob(SysJob job) throws SchedulerException, TaskException;
 
     /**
-     * 更新任务的时间表达式
+     * 更新任务
      * 
      * @param job 调度信息
      * @return 结果
      */
-    public int updateJobCron(SysJob job) throws SchedulerException, TaskException;
+    public int updateJob(SysJob job) throws SchedulerException, TaskException;
 
     /**
      * 校验cron表达式是否有效

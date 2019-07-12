@@ -58,7 +58,8 @@
 	<th:block th:include="include :: footer" />
 	<script th:inline="javascript">
 		var detailFlag = [[${@permission.hasPermi('monitor:job:detail')}]];
-		var datas = [[${@dict.getType('sys_common_status')}]];
+		var statusDatas = [[${@dict.getType('sys_common_status')}]];
+		var groupDatas = [[${@dict.getType('sys_job_group')}]];
 		var prefix = ctx + "monitor/jobLog";
 
 		$(function() {
@@ -80,21 +81,21 @@
 		        },
 		        {
 		            field: 'jobName',
-		            title: '任务名称',
-		            sortable: true
+		            title: '任务名称'
 		        },
 		        {
 		            field: 'jobGroup',
-		            title: '任务组名',
-		            sortable: true
+		            title: '任务分组',
+		            formatter: function(value, row, index) {
+		            	return $.table.selectDictLabel(groupDatas, value);
+		            }
 		        },
 		        {
-		            field: 'methodName',
-		            title: '方法名称'
-		        },
-		        {
-		            field: 'methodParams',
-		            title: '方法参数'
+		            field: 'invokeTarget',
+		            title: '调用目标字符串',
+		            formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
 		        },
 		        {
 		            field: 'jobMessage',
@@ -105,7 +106,7 @@
 		            title: '状态',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		            	return $.table.selectDictLabel(datas, value);
+		            	return $.table.selectDictLabel(statusDatas, value);
 		            }
 		        },
 		        {

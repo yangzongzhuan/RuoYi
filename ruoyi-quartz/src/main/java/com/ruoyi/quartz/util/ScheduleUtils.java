@@ -4,15 +4,12 @@ import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.Job;
 import org.quartz.JobBuilder;
-import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.common.exception.job.TaskException.Code;
@@ -26,8 +23,6 @@ import com.ruoyi.quartz.domain.SysJob;
  */
 public class ScheduleUtils
 {
-    private static final Logger log = LoggerFactory.getLogger(ScheduleUtils.class);
-
     /**
      * 得到quartz任务类
      *
@@ -41,35 +36,19 @@ public class ScheduleUtils
     }
 
     /**
-     * 获取触发器key
+     * 构建任务触发对象
      */
-    public static TriggerKey getTriggerKey(Long jobId)
+    public static TriggerKey getTriggerKey(Long jobId, String jobGroup)
     {
-        return TriggerKey.triggerKey(ScheduleConstants.TASK_CLASS_NAME + jobId);
+        return TriggerKey.triggerKey(ScheduleConstants.TASK_CLASS_NAME + jobId, jobGroup);
     }
 
     /**
-     * 获取jobKey
+     * 构建任务键对象
      */
-    public static JobKey getJobKey(Long jobId)
+    public static JobKey getJobKey(Long jobId, String jobGroup)
     {
-        return JobKey.jobKey(ScheduleConstants.TASK_CLASS_NAME + jobId);
-    }
-
-    /**
-     * 获取表达式触发器
-     */
-    public static CronTrigger getCronTrigger(Scheduler scheduler, Long jobId)
-    {
-        try
-        {
-            return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
-        }
-        catch (SchedulerException e)
-        {
-            log.error("getCronTrigger 异常：", e);
-        }
-        return null;
+        return JobKey.jobKey(ScheduleConstants.TASK_CLASS_NAME + jobId, jobGroup);
     }
 
     /**
@@ -79,24 +58,26 @@ public class ScheduleUtils
     {
         Class<? extends Job> jobClass = getQuartzJobClass(job);
         // 构建job信息
-        JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(getJobKey(job.getJobId())).build();
+        Long jobId = job.getJobId();
+        String jobGroup = job.getJobGroup();
+        JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(getJobKey(jobId, jobGroup)).build();
 
         // 表达式调度构建器
         CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
         cronScheduleBuilder = handleCronScheduleMisfirePolicy(job, cronScheduleBuilder);
 
         // 按新的cronExpression表达式构建一个新的trigger
-        CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(job.getJobId()))
+        CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(getTriggerKey(jobId, jobGroup))
                 .withSchedule(cronScheduleBuilder).build();
 
         // 放入参数，运行时的方法可以获取
         jobDetail.getJobDataMap().put(ScheduleConstants.TASK_PROPERTIES, job);
 
         // 判断是否存在
-        if (scheduler.checkExists(getJobKey(job.getJobId())))
+        if (scheduler.checkExists(getJobKey(jobId, jobGroup)))
         {
             // 防止创建时存在数据问题 先移除，然后在执行创建操作
-            scheduler.deleteJob(getJobKey(job.getJobId()));
+            scheduler.deleteJob(getJobKey(jobId, jobGroup));
         }
 
         scheduler.scheduleJob(jobDetail, trigger);
@@ -104,54 +85,13 @@ public class ScheduleUtils
         // 暂停任务
         if (job.getStatus().equals(ScheduleConstants.Status.PAUSE.getValue()))
         {
-            pauseJob(scheduler, job.getJobId());
+            scheduler.pauseJob(ScheduleUtils.getJobKey(jobId, jobGroup));
         }
     }
 
     /**
-     * 更新定时任务
+     * 设置定时任务策略
      */
-    public static void updateScheduleJob(Scheduler scheduler, SysJob job) throws SchedulerException, TaskException
-    {
-        createScheduleJob(scheduler, job);
-    }
-
-    /**
-     * 立即执行任务
-     */
-    public static void run(Scheduler scheduler, SysJob job) throws SchedulerException
-    {
-        // 参数
-        JobDataMap dataMap = new JobDataMap();
-        dataMap.put(ScheduleConstants.TASK_PROPERTIES, job);
-
-        scheduler.triggerJob(getJobKey(job.getJobId()), dataMap);
-    }
-
-    /**
-     * 暂停任务
-     */
-    public static void pauseJob(Scheduler scheduler, Long jobId) throws SchedulerException
-    {
-        scheduler.pauseJob(getJobKey(jobId));
-    }
-
-    /**
-     * 恢复任务
-     */
-    public static void resumeJob(Scheduler scheduler, Long jobId) throws SchedulerException
-    {
-        scheduler.resumeJob(getJobKey(jobId));
-    }
-
-    /**
-     * 删除定时任务
-     */
-    public static void deleteScheduleJob(Scheduler scheduler, Long jobId) throws SchedulerException
-    {
-        scheduler.deleteJob(getJobKey(jobId));
-    }
-
     public static CronScheduleBuilder handleCronScheduleMisfirePolicy(SysJob job, CronScheduleBuilder cb)
             throws TaskException
     {
