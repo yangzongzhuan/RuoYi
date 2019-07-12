@@ -26,6 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="jobName != null and jobName != ''">
 				AND job_name like concat('%', #{jobName}, '%')
 			</if>
+			<if test="jobGroup != null and jobGroup != ''">
+				AND job_group = #{jobGroup}
+			</if>
 			<if test="status != null and status != ''">
 				AND status = #{status}
 			</if>

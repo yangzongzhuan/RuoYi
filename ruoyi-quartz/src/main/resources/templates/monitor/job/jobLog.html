@@ -12,13 +12,16 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								<label>任务名称：</label><input type="text" name="jobName"/>
+								任务名称：<input type="text" name="jobName"/>
 							</li>
 							<li>
-								<label>方法名称：</label><input type="text" name="methodName"/>
+								任务分组：<select name="jobGroup" th:with="type=${@dict.getType('sys_job_group')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 							<li>
-								<label>执行状态：</label><select name="status" th:with="type=${@dict.getType('sys_common_status')}">
+								执行状态：<select name="status" th:with="type=${@dict.getType('sys_common_status')}">
 									<option value="">所有</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
