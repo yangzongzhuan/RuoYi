@@ -52,6 +52,7 @@ function() {
         $('body').addClass('mini-navbar');
         $('.navbar-static-side').fadeIn();
         $(".sidebar-collapse .logo").addClass("hide");
+        $(".slimScrollDiv").css({ "overflow":"hidden" })
     }
 });
 
