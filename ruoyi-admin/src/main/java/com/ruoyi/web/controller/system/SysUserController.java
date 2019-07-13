@@ -195,7 +195,12 @@ public class SysUserController extends BaseController
     {
         user.setSalt(ShiroUtils.randomSalt());
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
-        return toAjax(userService.resetUserPwd(user));
+        if (userService.resetUserPwd(user) > 0)
+        {
+            ShiroUtils.setSysUser(userService.selectUserById(user.getUserId()));
+            return success();
+        }
+        return error();
     }
 
     @RequiresPermissions("system:user:remove")
