@@ -701,6 +701,12 @@
             openTab: function (title, url) {
             	createMenuItem(url, title);
             },
+            // 选卡页同一页签打开
+            parentTab: function (title, url) {
+            	var dataId = window.frameElement.getAttribute('data-id');
+            	createMenuItem(url, title);
+            	closeItem(dataId);
+            },
             // 关闭选项卡
             closeTab: function () {
             	closeItem();

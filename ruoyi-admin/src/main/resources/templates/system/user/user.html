@@ -210,7 +210,7 @@
 		/* 用户管理-部门 */
 		function dept() {
 			var url = ctx + "system/dept";
-			createMenuItem(url, "部门管理");
+			$.modal.openTab("部门管理", url);
 		}
 
 		/* 用户管理-重置密码 */

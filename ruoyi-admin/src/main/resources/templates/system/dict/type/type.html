@@ -130,7 +130,7 @@
 		/*字典列表-详细*/
 		function detail(dictId) {
 		    var url = prefix + '/detail/' + dictId;
-		    createMenuItem(url, "字典数据");
+		    $.modal.openTab("字典数据", url);
 		}
 	</script>
 </body>
