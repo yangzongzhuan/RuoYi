@@ -137,6 +137,15 @@ public class DemoFormController
     }
 
     /**
+     * 卡片列表
+     */
+    @GetMapping("/cards")
+    public String cards()
+    {
+        return prefix + "/cards";
+    }
+
+    /**
      * 搜索自动补全
      */
     @GetMapping("/autocomplete")
