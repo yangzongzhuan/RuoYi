@@ -17,7 +17,12 @@ import java.lang.annotation.Target;
 public @interface DataScope
 {
     /**
-     * 表的别名
+     * 部门表的别名
      */
-    public String tableAlias() default "";
+    public String deptAlias() default "";
+
+    /**
+     * 用户表的别名
+     */
+    public String userAlias() default "";
 }
