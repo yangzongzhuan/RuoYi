@@ -197,7 +197,10 @@ public class SysUserController extends BaseController
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         if (userService.resetUserPwd(user) > 0)
         {
-            ShiroUtils.setSysUser(userService.selectUserById(user.getUserId()));
+            if (ShiroUtils.getUserId() == user.getUserId())
+            {
+                ShiroUtils.setSysUser(userService.selectUserById(user.getUserId()));
+            }
             return success();
         }
         return error();
