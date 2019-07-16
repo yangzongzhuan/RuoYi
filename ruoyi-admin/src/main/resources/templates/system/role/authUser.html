@@ -30,7 +30,7 @@
 				<a class="btn btn-success" onclick="selectUser()" shiro:hasPermission="system:role:add">
 	                <i class="fa fa-plus"></i> 添加用户
 	            </a>
-				<a class="btn btn-danger btn-del disabled" onclick="cancelAuthUserAll()" shiro:hasPermission="system:role:remove">
+				<a class="btn btn-danger multiple disabled" onclick="cancelAuthUserAll()" shiro:hasPermission="system:role:remove">
 		            <i class="fa fa-remove"></i> 批量取消授权
 		        </a>
 		        <a class="btn btn-warning" onclick="closeItem()">

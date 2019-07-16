@@ -37,10 +37,10 @@
 	            <a class="btn btn-success" onclick="add()" shiro:hasPermission="system:dict:add">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
-	            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:dict:edit">
+	            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:dict:edit">
 		            <i class="fa fa-edit"></i> 修改
 		        </a>
-				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:dict:remove">
+				<a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:dict:remove">
 		            <i class="fa fa-remove"></i> 删除
 		        </a>
 		        <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:dict:export">

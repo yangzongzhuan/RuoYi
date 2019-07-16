@@ -85,8 +85,10 @@
 	                </div>
 	                <div class="ibox-content">
 	                    <p>通过调用<code>$.modal.openTab()</code>实现。 </p>
-	                    <button type="button" class="btn btn-primary" id="button-open-6">打开</button>
-	                    <button type="button" class="btn btn-warning" id="button-open-7">关闭</button>
+	                    <button type="button" class="btn btn-primary" id="button-open-6">新窗口打开</button>
+	                    <button type="button" class="btn btn-warning" id="button-open-7">关闭当前</button>
+	                    <button type="button" class="btn btn-primary" id="button-open-14">选卡页同一页签打开</button>
+	                    <button type="button" class="btn btn-warning" id="button-open-15">关闭指定</button>
 	                </div>
 	            </div>
 	        </div>
@@ -239,6 +241,15 @@
 	    
 	    $("#button-open-13").click(function(){
 	    	layer.load(0, {shade: false}); // 0代表加载的风格，支持0-2
+	    })
+	    
+	    $("#button-open-14").click(function(){
+	    	$.modal.parentTab('添加用户', prefix + "/form");
+	    })
+	    
+	    $("#button-open-15").click(function(){
+	    	// 需要关闭窗口的url
+	    	$.modal.closeTab(prefix + "/form");
 	    })
 	</script>
 </body>

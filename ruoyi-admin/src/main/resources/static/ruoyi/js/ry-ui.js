@@ -139,9 +139,10 @@
             	$.btTable.on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table load-success.bs.table", function () {
             		// 工具栏按钮控制
             		var rows = $.common.isEmpty($.table._option.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns($.table._option.uniqueId);
-            		$('#' + $.table._option.toolbar + ' .btn-del').toggleClass('disabled', !rows.length);
-            		$('#' + $.table._option.toolbar + ' .btn-edit').toggleClass('disabled', rows.length!=1);
-            		$('#' + $.table._option.toolbar + ' .btn-detail').toggleClass('disabled', rows.length!=1);
+            		// 非多个禁用
+            		$('#' + $.table._option.toolbar + ' .multiple').toggleClass('disabled', !rows.length);
+            		// 非单个禁用
+            		$('#' + $.table._option.toolbar + ' .single').toggleClass('disabled', rows.length!=1);
             	});
             	// 绑定选中事件、取消事件、全部选中、全部取消
             	$.btTable.on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rows) {
@@ -708,8 +709,8 @@
             	closeItem(dataId);
             },
             // 关闭选项卡
-            closeTab: function () {
-            	closeItem();
+            closeTab: function (dataId) {
+            	closeItem(dataId);
             },
             // 禁用按钮
             disable: function() {

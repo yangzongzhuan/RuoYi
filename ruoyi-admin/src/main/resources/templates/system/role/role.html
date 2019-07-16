@@ -41,10 +41,10 @@
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:role:add">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
-	            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:role:edit">
+	            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:role:edit">
 		            <i class="fa fa-edit"></i> 修改
 		        </a>
-				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:role:remove">
+				<a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:role:remove">
 		            <i class="fa fa-remove"></i> 删除
 		        </a>
 		        <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:role:export">

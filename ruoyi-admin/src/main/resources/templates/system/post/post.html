@@ -35,10 +35,10 @@
 				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="system:post:add">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
-				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="system:post:edit">
+				<a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="system:post:edit">
 		            <i class="fa fa-edit"></i> 修改
 		        </a>
-				<a class="btn btn-danger btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:post:remove">
+				<a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="system:post:remove">
 		            <i class="fa fa-remove"></i> 删除
 		        </a>
 				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:post:export">
