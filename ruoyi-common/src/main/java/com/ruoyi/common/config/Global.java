@@ -121,7 +121,7 @@ public class Global
      */
     public static String getAvatarPath()
     {
-        return getConfig("ruoyi.profile") + "avatar/";
+        return getProfile() + "/avatar";
     }
 
     /**
@@ -129,7 +129,7 @@ public class Global
      */
     public static String getDownloadPath()
     {
-        return getConfig("ruoyi.profile") + "download/";
+        return getProfile() + "/download";
     }
 
     /**
@@ -137,6 +137,6 @@ public class Global
      */
     public static String getUploadPath()
     {
-        return getConfig("ruoyi.profile") + "upload/";
+        return getProfile() + "/upload";
     }
 }

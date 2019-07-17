@@ -113,12 +113,7 @@ public class FileUploadUtils
 
         File desc = getAbsoluteFile(baseDir, fileName);
         file.transferTo(desc);
-        String pathFileName = baseDir + fileName;
-        if (StringUtils.contains(baseDir, ":"))
-        {
-            // windows 去除盘符
-            pathFileName = StringUtils.substringAfterLast(baseDir, ":") + fileName;
-        }
+        String pathFileName = getPathFileName(baseDir, fileName);
         return pathFileName;
     }
 
@@ -127,15 +122,15 @@ public class FileUploadUtils
      */
     public static final String extractFilename(MultipartFile file)
     {
-        String filename = file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
-        filename = DateUtils.datePath() + "/" + encodingFilename(filename) + "." + extension;
-        return filename;
+        fileName = DateUtils.datePath() + "/" + encodingFilename(fileName) + "." + extension;
+        return fileName;
     }
 
-    private static final File getAbsoluteFile(String uploadDir, String filename) throws IOException
+    private static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException
     {
-        File desc = new File(uploadDir + File.separator + filename);
+        File desc = new File(uploadDir + File.separator + fileName);
 
         if (!desc.getParentFile().exists())
         {
@@ -148,14 +143,22 @@ public class FileUploadUtils
         return desc;
     }
 
+    private static final String getPathFileName(String uploadDir, String fileName) throws IOException
+    {
+        int dirLastIndex = uploadDir.lastIndexOf("/") + 1;
+        String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
+        String pathFileName = "/profile/" + currentDir + "/" + fileName;
+        return pathFileName;
+    }
+
     /**
      * 编码文件名
      */
-    private static final String encodingFilename(String filename)
+    private static final String encodingFilename(String fileName)
     {
-        filename = filename.replace("_", " ");
-        filename = Md5Utils.hash(filename + System.nanoTime() + counter++);
-        return filename;
+        fileName = fileName.replace("_", " ");
+        fileName = Md5Utils.hash(fileName + System.nanoTime() + counter++);
+        return fileName;
     }
 
     /**
@@ -175,28 +178,28 @@ public class FileUploadUtils
             throw new FileSizeLimitExceededException(DEFAULT_MAX_SIZE / 1024 / 1024);
         }
 
-        String filename = file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension))
         {
             if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION)
             {
                 throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
-                        filename);
+                        fileName);
             }
             else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION)
             {
                 throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension,
-                        filename);
+                        fileName);
             }
             else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION)
             {
                 throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension,
-                        filename);
+                        fileName);
             }
             else
             {
-                throw new InvalidExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException(allowedExtension, extension, fileName);
             }
         }
 
