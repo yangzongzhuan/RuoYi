@@ -131,7 +131,8 @@ public class DataScopeAspect
                 }
                 else
                 {
-                    sqlString.append(StringUtils.format(" OR {}.dept_id IS NULL ", deptAlias));
+                    // 数据权限为仅本人且没有userAlias别名不查询任何数据
+                    sqlString.append(" OR 1=0 ");
                 }
             }
         }
