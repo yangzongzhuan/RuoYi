@@ -5,12 +5,14 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.Ztree;
@@ -43,7 +45,7 @@ public class SysDeptController extends BaseController
     }
 
     @RequiresPermissions("system:dept:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public List<SysDept> list(SysDept dept)
     {
@@ -68,8 +70,12 @@ public class SysDeptController extends BaseController
     @RequiresPermissions("system:dept:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysDept dept)
+    public AjaxResult addSave(@Validated SysDept dept)
     {
+        if (UserConstants.DEPT_NAME_NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept)))
+        {
+            return error("新增部门'" + dept.getDeptName() + "'失败，部门名称已存在");
+        }
         dept.setCreateBy(ShiroUtils.getLoginName());
         return toAjax(deptService.insertDept(dept));
     }
@@ -96,8 +102,12 @@ public class SysDeptController extends BaseController
     @RequiresPermissions("system:dept:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SysDept dept)
+    public AjaxResult editSave(@Validated SysDept dept)
     {
+        if (UserConstants.DEPT_NAME_NOT_UNIQUE.equals(deptService.checkDeptNameUnique(dept)))
+        {
+            return error("修改部门'" + dept.getDeptName() + "'失败，部门名称已存在");
+        }
         dept.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(deptService.updateDept(dept));
     }

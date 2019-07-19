@@ -5,12 +5,14 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.Ztree;
@@ -42,7 +44,7 @@ public class SysMenuController extends BaseController
     }
 
     @RequiresPermissions("system:menu:list")
-    @GetMapping("/list")
+    @PostMapping("/list")
     @ResponseBody
     public List<SysMenu> list(SysMenu menu)
     {
@@ -100,8 +102,12 @@ public class SysMenuController extends BaseController
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(SysMenu menu)
+    public AjaxResult addSave(@Validated SysMenu menu)
     {
+        if (UserConstants.MENU_NAME_NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu)))
+        {
+            return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
+        }
         menu.setCreateBy(ShiroUtils.getLoginName());
         ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(menuService.insertMenu(menu));
@@ -124,8 +130,12 @@ public class SysMenuController extends BaseController
     @RequiresPermissions("system:menu:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(SysMenu menu)
+    public AjaxResult editSave(@Validated SysMenu menu)
     {
+        if (UserConstants.MENU_NAME_NOT_UNIQUE.equals(menuService.checkMenuNameUnique(menu)))
+        {
+            return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
+        }
         menu.setUpdateBy(ShiroUtils.getLoginName());
         ShiroUtils.clearCachedAuthorizationInfo();
         return toAjax(menuService.updateMenu(menu));

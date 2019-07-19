@@ -1,5 +1,6 @@
 package com.ruoyi.system.domain;
 
+import javax.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -47,6 +48,8 @@ public class SysPost extends BaseEntity
         this.postId = postId;
     }
 
+    @NotBlank(message = "岗位编码不能为空")
+    @Size(min = 0, max = 64, message = "岗位编码长度不能超过64个字符")
     public String getPostCode()
     {
         return postCode;
@@ -57,6 +60,8 @@ public class SysPost extends BaseEntity
         this.postCode = postCode;
     }
 
+    @NotBlank(message = "岗位名称不能为空")
+    @Size(min = 0, max = 50, message = "岗位名称长度不能超过50个字符")
     public String getPostName()
     {
         return postName;
@@ -67,6 +72,7 @@ public class SysPost extends BaseEntity
         this.postName = postName;
     }
 
+    @NotBlank(message = "显示顺序不能为空")
     public String getPostSort()
     {
         return postSort;

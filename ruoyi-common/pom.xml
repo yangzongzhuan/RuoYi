@@ -40,6 +40,12 @@
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 		</dependency>
+		
+		<!-- 自定义验证注解 -->
+        <dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+        </dependency>
     
         <!--常用工具类 -->
 		<dependency>

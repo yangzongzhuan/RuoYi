@@ -1,5 +1,6 @@
 package com.ruoyi.system.domain;
 
+import javax.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -70,6 +71,8 @@ public class SysRole extends BaseEntity
         this.dataScope = dataScope;
     }
 
+    @NotBlank(message = "角色名称不能为空")
+    @Size(min = 0, max = 30, message = "角色名称长度不能超过30个字符")
     public String getRoleName()
     {
         return roleName;
@@ -80,6 +83,8 @@ public class SysRole extends BaseEntity
         this.roleName = roleName;
     }
 
+    @NotBlank(message = "权限字符不能为空")
+    @Size(min = 0, max = 100, message = "权限字符长度不能超过100个字符")
     public String getRoleKey()
     {
         return roleKey;
@@ -90,6 +95,7 @@ public class SysRole extends BaseEntity
         this.roleKey = roleKey;
     }
 
+    @NotBlank(message = "显示顺序不能为空")
     public String getRoleSort()
     {
         return roleSort;

@@ -2,6 +2,7 @@ package com.ruoyi.quartz.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -61,6 +62,8 @@ public class SysJob extends BaseEntity implements Serializable
         this.jobId = jobId;
     }
 
+    @NotBlank(message = "任务名称不能为空")
+    @Size(min = 0, max = 64, message = "任务名称不能超过64个字符")
     public String getJobName()
     {
         return jobName;
@@ -81,6 +84,8 @@ public class SysJob extends BaseEntity implements Serializable
         this.jobGroup = jobGroup;
     }
 
+    @NotBlank(message = "调用目标字符串不能为空")
+    @Size(min = 0, max = 1000, message = "调用目标字符串长度不能超过500个字符")
     public String getInvokeTarget()
     {
         return invokeTarget;
@@ -91,6 +96,8 @@ public class SysJob extends BaseEntity implements Serializable
         this.invokeTarget = invokeTarget;
     }
 
+    @NotBlank(message = "Cron执行表达式不能为空")
+    @Size(min = 0, max = 255, message = "Cron执行表达式不能超过255个字符")
     public String getCronExpression()
     {
         return cronExpression;

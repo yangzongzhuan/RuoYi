@@ -429,7 +429,7 @@
                 $.bttTable = $('#' + options.id).bootstrapTreeTable({
                 	code: options.code,                                 // 用于设置父子关系
         		    parentCode: options.parentCode,                     // 用于设置父子关系
-        	    	type: 'get',                                        // 请求方式（*）
+        	    	type: 'post',                                        // 请求方式（*）
         	        url: options.url,                                   // 请求后台的URL（*）
         	        ajaxParams: options.ajaxParams,                     // 请求数据的ajax的data属性
         	        rootIdValue: options.rootIdValue,                   // 设置指定根节点id值
@@ -845,7 +845,7 @@
             },
             // 添加访问地址
             addUrl: function(id) {
-            	var url = $.common.isEmpty(id) ? $.table._option.createUrl : $.table._option.createUrl.replace("{id}", id);
+            	var url = $.common.isEmpty(id) ? $.table._option.createUrl.replace("{id}", "") : $.table._option.createUrl.replace("{id}", id);
                 return url;
             },
             // 修改信息
