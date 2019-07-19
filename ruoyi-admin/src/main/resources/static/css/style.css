@@ -7066,3 +7066,8 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 	z-index: 9998;
 	margin: 0;
 }
+
+.selected{
+    background-color: #E8F7FD;
+    color: #1890ff;
+}
