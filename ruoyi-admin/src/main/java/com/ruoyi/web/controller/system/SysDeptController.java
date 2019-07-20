@@ -108,6 +108,12 @@ public class SysDeptController extends BaseController
         {
             return error("修改部门'" + dept.getDeptName() + "'失败，部门名称已存在");
         }
+
+        if(dept.getParentId().equals(dept.getDeptId()))
+        {
+            return error("修改部门'" + dept.getDeptName() + "'失败，上级部门不能是自己");
+        }
+
         dept.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(deptService.updateDept(dept));
     }
