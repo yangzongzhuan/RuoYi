@@ -816,12 +816,29 @@ label {
 }
 
 /** 表格冻结列样式 **/
-.left-fixed-table-columns{ 
+.left-fixed-table-columns, .left-fixed-body-columns {
     position: absolute;
     background-color: #fff;
     display: none;
-    border-right:1px solid #ddd;
+    box-sizing: border-box;
     overflow: hidden;
+}
+
+.left-fixed-table-columns .table, .left-fixed-body-columns .table {
+    border-right: 1px solid #ddd;
+}
+
+.left-fixed-table-columns .table.table-no-bordered, .left-fixed-body-columns .table.table-no-bordered {
+    border-right: 1px solid transparent;
+}
+
+.left-fixed-body-columns table {
+    position: absolute;
+    animation: none;
+}
+
+.bootstrap-table .table-hover > tbody > tr.hover > td {
+    background-color: #f5f5f5;
 }
 
 .right-fixed-table-columns{ 

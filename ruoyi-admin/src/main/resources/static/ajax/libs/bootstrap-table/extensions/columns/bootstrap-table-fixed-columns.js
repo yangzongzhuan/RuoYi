@@ -1,6 +1,6 @@
 /**
  * 基于bootstrap-table-fixed-columns修改
- * 支持左右列冻结
+ * 支持左右列冻结、支持固定高度
  * Copyright (c) 2019 ruoyi
  */
 (function ($) {
@@ -22,17 +22,25 @@
         this.timeoutHeaderColumns_ = 0;
         this.timeoutBodyColumns_ = 0;
         if (this.options.fixedColumns) {
-            this.$fixedBody = $([
+            this.$fixedHeader = $([
                 '<div class="left-fixed-table-columns">',
                 '<table>',
                 '<thead></thead>',
+                '</table>',
+                '</div>'].join(''));
+            
+            this.$fixedHeader.find('table').attr('class', this.$el.attr('class'));
+            this.$fixedHeaderColumns = this.$fixedHeader.find('thead');
+            this.$tableHeader.before(this.$fixedHeader);
+
+            this.$fixedBody = $([
+                '<div class="left-fixed-body-columns">',
+                '<table>',
                 '<tbody></tbody>',
                 '</table>',
                 '</div>'].join(''));
 
-
             this.$fixedBody.find('table').attr('class', this.$el.attr('class'));
-            this.$fixedHeaderColumns = this.$fixedBody.find('thead');
             this.$fixedBodyColumns = this.$fixedBody.find('tbody');
             this.$tableBody.before(this.$fixedBody);
         }
@@ -167,12 +175,11 @@
                 if (that.options.detailView && !that.options.cardView) {
                     index = i - 1;
                 }
-
-                that.$fixedBody.find('thead th[data-field="' + visibleFields[index] + '"]')
-                    .find('.fht-cell').width($this.innerWidth() - 1);
+                that.$fixedHeader.find('thead th[data-field="' + visibleFields[index] + '"]')
+                    .find('.fht-cell').width($this.innerWidth());
                 headerWidth += $this.outerWidth();
             });
-            this.$fixedBody.width(headerWidth - 1).show();
+            this.$fixedHeader.width(headerWidth + 2).show();
         }
         if (that.options.rightFixedColumns) {
             this.$body.find('tr:first-child:not(.no-records-found) > *').each(function (i) {
@@ -197,17 +204,32 @@
 
     BootstrapTable.prototype.fitBodyColumns = function () {
         var that = this,
-            top = -(parseInt(this.$el.css('margin-top')) - 2),
-            height = this.$tableBody.height() - 2;
+            top = -(parseInt(this.$el.css('margin-top'))),
+            height = this.$tableBody.height();
 
         if (that.options.fixedColumns) {
             if (!this.$body.find('> tr[data-index]').length) {
                 this.$fixedBody.hide();
                 return;
             }
+            
+            if (!this.options.height) {
+                top = this.$fixedHeader.height()- 1;
+                height = height - top;
+            }
+
+            this.$fixedBody.css({
+                width: this.$fixedHeader.width(),
+                height: height,
+                top: top + 1
+            }).show();
 
             this.$body.find('> tr').each(function (i) {
-                that.$fixedBody.find('tbody tr:eq(' + i + ')').height($(this).height());
+            	that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.5);
+                var thattds = this;
+                that.$fixedBody.find('tr:eq(' + i + ')').find('td').each(function (j) {
+                    $(this).width($($(thattds).find('td')[j]).width() + 1);
+                });
             });
             
             $.btTable.on("check.bs.table uncheck.bs.table", function (e, rows, $element) {
