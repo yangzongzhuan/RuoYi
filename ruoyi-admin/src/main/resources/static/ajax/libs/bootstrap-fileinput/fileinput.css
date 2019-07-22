@@ -102,7 +102,7 @@
     font-size: 13px;
     font-variant: small-caps;
     color: #999;
-    background: transparent url(../img/loading.gif) top left no-repeat;
+    background: transparent url(loading.gif) top left no-repeat;
 }
 
 .file-object {
@@ -397,7 +397,7 @@
 }
 
 .file-thumb-loading {
-    background: transparent url(../img/loading.gif) no-repeat scroll center center content-box !important;
+    background: transparent url(loading.gif) no-repeat scroll center center content-box !important;
 }
 
 .file-drop-zone {
@@ -527,7 +527,7 @@
 }
 
 .file-loading[dir=rtl]:before {
-    background: transparent url(../img/loading.gif) top right no-repeat;
+    background: transparent url(loading.gif) top right no-repeat;
     padding-left: 0;
     padding-right: 20px;
 }

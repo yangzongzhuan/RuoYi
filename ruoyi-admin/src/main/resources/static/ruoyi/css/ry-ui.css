@@ -672,6 +672,12 @@ label {
 	background: #FFFFFF none
 }
 
+.file-input .btn-default {
+    color: inherit;
+    background: white;
+    border: 1px solid #e7eaec;
+}
+
 .select-list .btn-default {
     color: #555;
     padding: 5px 5px;
