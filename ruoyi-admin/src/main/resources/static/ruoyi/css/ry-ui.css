@@ -957,3 +957,9 @@ label {
 	text-shadow:0 0 10px black,0 0 10px black,0 0 8px black,0 0 6px black,0 0 6px black;
 	box-shadow:0 12px 14px -12px #111 inset,0 -2px 2px -1px #333 inset
 }
+
+/** 表格选中样式 **/
+.fixed-table-container .selected {
+    background-color: #E8F7FD;
+    color: #1890ff;
+}

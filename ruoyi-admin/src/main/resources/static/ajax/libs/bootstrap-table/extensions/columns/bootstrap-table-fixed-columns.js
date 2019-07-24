@@ -94,7 +94,8 @@
             this.$selectAll = $ltr.find('[name="btSelectAll"]');
             this.$selectAll.on('click', function () {
             	var checked = $(this).prop('checked');
-            	$(".left-fixed-table-columns input[name=btSelectItem]").filter(':enabled').prop('checked', checked);
+            	$(".left-fixed-body-columns input[name=btSelectItem]").filter(':enabled').prop('checked', checked);
+            	$('.fixed-table-body input[name=btSelectItem]').closest('tr').removeClass('selected');
             });
         }
     };
@@ -235,11 +236,12 @@
             $.btTable.on("check.bs.table uncheck.bs.table", function (e, rows, $element) {
         	    var index= $element.data('index');
                 $(this).find('.bs-checkbox').find('input[data-index="' + index + '"]').prop("checked", true);
-                var selectFixedItem = $('.left-fixed-table-columns input[name=btSelectItem]');
+                var selectFixedItem = $('.left-fixed-body-columns input[name=btSelectItem]');
                 var checkAll = selectFixedItem.filter(':enabled').length &&
                     selectFixedItem.filter(':enabled').length ===
                 	selectFixedItem.filter(':enabled').filter(':checked').length;
                 $(".left-fixed-table-columns input[name=btSelectAll]").prop('checked', checkAll);
+                $('.fixed-table-body input[name=btSelectItem]').closest('tr').removeClass('selected');
         	});
 
             //// events
