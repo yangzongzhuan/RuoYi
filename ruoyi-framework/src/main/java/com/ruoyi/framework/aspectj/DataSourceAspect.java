@@ -26,7 +26,8 @@ public class DataSourceAspect
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.ruoyi.common.annotation.DataSource)")
+    @Pointcut("@annotation(com.ruoyi.common.annotation.DataSource)"
+            + "|| @within(com.ruoyi.common.annotation.DataSource)")
     public void dsPointCut()
     {
 
@@ -35,11 +36,7 @@ public class DataSourceAspect
     @Around("dsPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable
     {
-        MethodSignature signature = (MethodSignature) point.getSignature();
-
-        Method method = signature.getMethod();
-
-        DataSource dataSource = method.getAnnotation(DataSource.class);
+        DataSource dataSource = getDataSource(point);
 
         if (StringUtils.isNotNull(dataSource))
         {
@@ -54,6 +51,26 @@ public class DataSourceAspect
         {
             // 销毁数据源 在执行方法之后
             DynamicDataSourceContextHolder.clearDataSourceType();
+        }
+    }
+
+    /**
+     * 获取需要切换的数据源
+     */
+    public DataSource getDataSource(ProceedingJoinPoint point)
+    {
+        MethodSignature signature = (MethodSignature) point.getSignature();
+        Class<? extends Object> targetClass = point.getTarget().getClass();
+        DataSource targetDataSource = targetClass.getAnnotation(DataSource.class);
+        if (StringUtils.isNotNull(targetDataSource))
+        {
+            return targetDataSource;
+        }
+        else
+        {
+            Method method = signature.getMethod();
+            DataSource dataSource = method.getAnnotation(DataSource.class);
+            return dataSource;
         }
     }
 }
