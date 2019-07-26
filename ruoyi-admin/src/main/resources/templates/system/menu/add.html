@@ -146,16 +146,19 @@
                     $("#perms").parents(".form-group").hide();
                     $("#icon").parents(".form-group").show();
                     $("#target").parents(".form-group").hide();
+                    $("input[name='visible']").parents(".form-group").show();
                 } else if (menuType == "C") {
                 	$("#url").parents(".form-group").show();
                     $("#perms").parents(".form-group").show();
-                    $("#icon").parents(".form-group").hide();
+                    $("#icon").parents(".form-group").show();
                     $("#target").parents(".form-group").show();
+                    $("input[name='visible']").parents(".form-group").show();
                 } else if (menuType == "F") {
                 	$("#url").parents(".form-group").hide();
                     $("#perms").parents(".form-group").show();
                     $("#icon").parents(".form-group").hide();
                     $("#target").parents(".form-group").hide();
+                    $("input[name='visible']").parents(".form-group").hide();
                 }
         	});  
         });

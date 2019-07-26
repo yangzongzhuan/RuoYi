@@ -52,12 +52,12 @@
                     </ul>
                 </li>
                 <li th:each="menu : ${menus}">
-                	<a href="#">
+                	<a th:class="${menu.target}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
                 		<i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
                     	<span class="nav-label" th:text="${menu.menuName}">一级菜单</span> 
-                    	<span class="fa arrow"></span>
+                    	<span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
                 	</a>
-                   <ul class="nav nav-second-level collapse">
+                    <ul class="nav nav-second-level collapse">
 						<li th:each="cmenu : ${menu.children}">
 							<a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
 							<a th:if="${not #lists.isEmpty(cmenu.children)}" href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
