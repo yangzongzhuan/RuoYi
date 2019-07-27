@@ -434,7 +434,7 @@
 }
 
 .file-uploading {
-    background: url(../img/loading-sm.gif) no-repeat center bottom 10px;
+    background: url(loading-sm.gif) no-repeat center bottom 10px;
     opacity: 0.65;
 }
 
