@@ -165,6 +165,7 @@
                     data: parms ? parms : options.ajaxParams,
                     dataType: "JSON",
                     success: function(data, textStatus, jqXHR) {
+                    	data = calculateObjectValue(options, options.responseHandler, [data], data);
                         renderTable(data);
                     },
                     error: function(xhr, textStatus) {
@@ -608,6 +609,33 @@
             }
             return value;
         };
+        // ruoyi 发起对目标(target)函数的调用
+        var calculateObjectValue = function (self, name, args, defaultValue) {
+            var func = name;
+
+            if (typeof name === 'string') {
+                var names = name.split('.');
+
+                if (names.length > 1) {
+                    func = window;
+                    $.each(names, function (i, f) {
+                        func = func[f];
+                    });
+                } else {
+                    func = window[name];
+                }
+            }
+            if (typeof func === 'object') {
+                return func;
+            }
+            if (typeof func === 'function') {
+                return func.apply(self, args);
+            }
+            if (!func && typeof name === 'string' && sprintf.apply(this, [name].concat(args))) {
+                return sprintf.apply(this, [name].concat(args));
+            }
+            return defaultValue;
+        };
         // 初始化
         init();
         return target;
@@ -700,7 +728,9 @@
         showColumns: true,         // 是否显示内容列下拉框
         showRefresh: true,         // 是否显示刷新按钮
         expanderExpandedClass: 'glyphicon glyphicon-chevron-down', // 展开的按钮的图标
-        expanderCollapsedClass: 'glyphicon glyphicon-chevron-right' // 缩起的按钮的图标
-
+        expanderCollapsedClass: 'glyphicon glyphicon-chevron-right', // 缩起的按钮的图标
+        responseHandler: function(res) {
+            return false;
+        }
     };
 })(jQuery);

@@ -443,7 +443,8 @@
         			showColumns: options.showColumns,                   // 是否显示隐藏某列下拉框
         			expandAll: options.expandAll,                       // 是否全部展开
         			expandFirst: options.expandFirst,                   // 是否默认第一级展开--expandAll为false时生效
-        	        columns: options.columns
+        	        columns: options.columns,                           // 显示列信息（*）
+        	        responseHandler: $.treeTable.responseHandler        // 当所有数据被加载时触发处理函数
         	    });
             },
             // 条件查询
@@ -462,6 +463,15 @@
         	        return row[column];
         	    });
             	return $.common.uniqueFn(rows);
+            },
+            // 请求获取数据后处理回调函数，校验异常状态提醒
+            responseHandler: function(data) {
+            	if (data.code != undefined && data.code != 0) {
+            		$.modal.alertWarning(data.msg);
+            		return [];
+                } else {
+                    return data;
+                }
             },
         },
         // 表单封装处理
