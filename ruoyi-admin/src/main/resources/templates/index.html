@@ -17,7 +17,7 @@
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
     <link th:href="@{/ruoyi/css/ry-ui.css?v=3.4.0}" rel="stylesheet"/>
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden" th:classappend="${@config.getKey('sys.index.skinName')}">
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden" th:classappend="|${@config.getKey('sys.index.sideTheme')} ${@config.getKey('sys.index.skinName')}|">
 <div id="wrapper">
 
     <!--左侧导航开始-->

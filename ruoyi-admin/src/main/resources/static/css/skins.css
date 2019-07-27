@@ -848,3 +848,117 @@
 	border-bottom-right-radius: 2px;
 	border-bottom-left-radius: 0
 }
+
+/*
+ *
+ *   侧边栏主题 若依管理系统
+ *   NAME - .theme-dark/theme-light
+ *
+*/
+/** 深色主题 .theme-dark **/
+.theme-dark .user-panel>.info>p, .theme-dark .user-panel>.info, .theme-dark .user-panel>.info>a{
+	color: #fff
+}
+
+.theme-dark .nav>li.active {
+	background: #293846;
+}
+
+.theme-dark .navbar-static-side {
+	background-color: #2f4050;
+}
+
+.theme-dark .user-panel {
+	background-color: #2f4050;
+}
+
+.theme-dark .navbar-default .nav>li>a:hover,
+.theme-dark .navbar-default .nav>li>a:focus {
+	background: #293846;
+}
+
+/** 浅色主题 theme-light **/
+.theme-light .user-panel>.info>p, .theme-light .user-panel>.info, .theme-light .user-panel>.info>a{
+	color: #555
+}
+
+.theme-light .nav>li.active{
+	background: #f9fafc;
+}
+
+.theme-light .navbar-static-side {
+	background-color: #f9fafc;
+	box-shadow: 2px 0 2px 0 rgba(29,35,41,.05);
+}
+
+.theme-light .user-panel {
+	background-color: #f9fafc;
+}
+
+.theme-light .navbar-default .nav>li>a {
+	color: #777;
+}
+
+.theme-light.skin-blue .navbar-default .nav>li.active>a {
+	color: #1890ff;
+}
+
+.theme-light.skin-blue .navbar-default .nav>li.selected>a,
+.theme-light.skin-blue .navbar-default .nav>li.selected>a:focus {
+	background-color: rgb(240, 245, 255);
+	color: rgb(47, 84, 235);
+}
+
+.theme-light.skin-green .navbar-default .nav>li.active>a {
+	color: #52c41a;
+}
+
+.theme-light.skin-green .navbar-default .nav>li.selected>a,
+.theme-light.skin-green .navbar-default .nav>li.selected>a:focus {
+	background-color: rgb(246, 255, 237);
+	color: rgb(82, 196, 26);
+}
+
+.theme-light.skin-purple .navbar-default .nav>li.active>a {
+	color: rgb(114, 46, 209);
+}
+
+.theme-light.skin-purple .navbar-default .nav>li.selected>a,
+.theme-light.skin-purple .navbar-default .nav>li.selected>a:focus {
+	background-color: #f9f0ff;
+	color: #722ed1;
+}
+
+.theme-light.skin-red .navbar-default .nav>li.active>a {
+	color: rgb(245, 34, 45);
+}
+
+.theme-light.skin-red .navbar-default .nav>li.selected>a,
+.theme-light.skin-red .navbar-default .nav>li.selected>a:focus {
+	background-color: rgb(255, 241, 240);
+	color: rgb(245, 34, 45);
+}
+
+.theme-light.skin-yellow .navbar-default .nav>li.active>a {
+	color: rgb(250, 173, 20);
+}
+
+.theme-light.skin-yellow .navbar-default .nav>li.selected>a,
+.theme-light.skin-yellow .navbar-default .nav>li.selected>a:focus {
+	background-color: #fffbe6;
+	color: #faad14;
+}
+
+.theme-light .navbar-default .nav>li>a:hover,
+.theme-light .navbar-default .nav>li>a:focus {
+	background-color: rgb(240, 245, 255);
+}
+
+.fixed-sidebar.theme-light.mini-navbar .nav li:hover>a> span.nav-label {
+    background-color: #f9fafc;
+}
+
+.fixed-sidebar.theme-light.mini-navbar .nav li:hover>.nav-second-level {
+    background-color: #f9fafc;
+}
+ 
