@@ -782,7 +782,7 @@ public class ExcelUtil<T>
             Cell cell = row.getCell(column);
             if (cell != null)
             {
-                if (cell.getCellTypeEnum() == CellType.NUMERIC)
+                if (cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA)
                 {
                     val = cell.getNumericCellValue();
                     if (HSSFDateUtil.isCellDateFormatted(cell))
