@@ -6,11 +6,11 @@
 
 若依参考后台模板。有需要可自行到群内下载。
 
-> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需Oracle版本，请移步 [RuoYi-oracle](http://doc.ruoyi.vip/#/standard/xmkz)  `(不定时更新)`
+> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需其他版本，请移步 [项目扩展](http://doc.ruoyi.vip/#/standard/xmkz)  `(不定时更新)`
 
 > 阿里云通用云产品1888优惠券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)&nbsp;&nbsp;&nbsp;&nbsp;腾讯云通用云产品2860优惠券 ：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;`(仅限新用户)`
 
-> 阿里云Hi拼购 限量爆款 低至199元/年 [https://www.aliyun.com/acts/hi-group-buying?userCode=brki8iof](https://www.aliyun.com/acts/hi-group-buying?userCode=brki8iof)&nbsp;&nbsp;`(仅限新用户)`
+> 阿里云Hi拼购 限量爆款 低至199元/年 [点我进入](https://www.aliyun.com/acts/hi-group-buying?userCode=brki8iof)&nbsp;&nbsp;`(仅限新用户)`
 
 ## 内置功能
 
@@ -44,34 +44,42 @@
 <table>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/25b5e333768d013d45a990c152dbe4d9d6e.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/5ac52ccc07a59f12205948c9408791f5c5b.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/e29fd81b2d43b517f99535564af41f9d1d5.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/66f8b5b24720dabe0e11ae84bd1ad4b038e.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/a46f34786bc9fc400697b6f3677be5bb3f0.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/629f1510fb6205f773c8c284863406b694f.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/9124eda87df0e72427cd63f458b813e3363.jpg"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/6010201b078dbc9e1d8c09c6a3e53f4344c.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/058928ad3a6e6de67b43d62d42dbf071355.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/438c59467afd0097cfbe9c89db932661687.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/72a015041db6843aca7f7b273688cb346f8.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/21acdcade5e306f2c5d7ae26993b4e6bd06.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/ad5ea3c4c2ea2e91d1f05f6cc384cbad2a1.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/ecb5f1c9929f1933f733f796749b2df73d9.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/e4283d500eb10e8dd8701e7742f7facb065.jpg"/></td>
     </tr>	 
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/6ca845cca1701fbf71881efe4f341c82f99.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/e3aeb8fff585594f6e947218e14f2806ea1.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/2531dbf419a1b114e1177f8d2a120b8a9c3.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/8b740a42dddc1e5a8a150d97c5060df258b.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/197ddc2fdffc27020f8624bd7ca1a971f61.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/a2dabea752d7d70aede20908dee0b419829.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/00e642dc3515919b3760968cc496a12a849.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/f72d28a3e60413a4e1b5c7c2f45f962fd65.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/c5699c5726b5aebde71a37bb5163d840bc2.jpg"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/24740d59377e826d0d8664ebad66dc84abd.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/19222e495869a2a99fc31c5d2bd4539e1e7.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/264d25176f4e22b4b38e95fe6ce73775299.jpg"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/bbe7fe1048d29217ba73bd3ed88d6743b55.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/d85fbb59be27fb33f68bdbb6e8bc967c97b.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/bb902d2c54bad02a052e9a05e5f22a93df1.jpg"/></td>
+    </tr>
+	<tr>
+        <td><img src="https://oscimg.oschina.net/oscnet/30cda883bb9a7f74f1454314e64f949942d.jpg"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/deebaaa8d6b14a419ed5911f49e3f222a6f.jpg"/></td>
+    </tr>
+	<tr>
+        <td><img src="https://oscimg.oschina.net/oscnet/bed2b98a44e7ae820c2885329e711965c28.jpg"/></td>
         <td><img src="https://oscimg.oschina.net/oscnet/5f3d39a141f21f81b90536f391b8408f1fa.jpg"/></td>
     </tr>
 </table>
