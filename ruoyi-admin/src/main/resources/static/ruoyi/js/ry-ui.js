@@ -658,7 +658,7 @@
                     fix: false,
                     area: [_width + 'px', _height + 'px'],
                     content: _url,
-                    shadeClose: true,
+                    shadeClose: $.common.isEmpty(options.shadeClose) ? true : options.shadeClose,
                     skin: options.skin,
                     btn: $.common.isEmpty(options.btn) ? _btn : options.btn,
                     yes: options.yes,
