@@ -294,6 +294,12 @@
 	margin: 5px 0 5px -25px
 }
 
+@media ( min-width : 768px) {
+	.section-content .about {
+		padding-left: 0px
+	}
+}
+
 /** select2 样式修改 **/
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
 	background-color: #1AB394;
