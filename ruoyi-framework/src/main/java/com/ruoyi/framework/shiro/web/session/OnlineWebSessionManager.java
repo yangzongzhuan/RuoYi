@@ -14,6 +14,8 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.ShiroConstants;
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.system.domain.SysUserOnline;
@@ -27,15 +29,15 @@ import com.ruoyi.system.service.ISysUserOnlineService;
 public class OnlineWebSessionManager extends DefaultWebSessionManager
 {
     private static final Logger log = LoggerFactory.getLogger(OnlineWebSessionManager.class);
-    
+
     @Override
     public void setAttribute(SessionKey sessionKey, Object attributeKey, Object value) throws InvalidSessionException
     {
         super.setAttribute(sessionKey, attributeKey, value);
         if (value != null && needMarkAttributeChanged(attributeKey))
         {
-            OnlineSession s = (OnlineSession) doGetSession(sessionKey);
-            s.markAttributeChanged();
+            OnlineSession session = getOnlineSession(sessionKey);
+            session.markAttributeChanged();
         }
     }
 
@@ -68,11 +70,23 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager
         Object removed = super.removeAttribute(sessionKey, attributeKey);
         if (removed != null)
         {
-            OnlineSession s = (OnlineSession) doGetSession(sessionKey);
+            OnlineSession s = getOnlineSession(sessionKey);
             s.markAttributeChanged();
         }
 
         return removed;
+    }
+
+    public OnlineSession getOnlineSession(SessionKey sessionKey)
+    {
+        OnlineSession session = null;
+        Object obj = doGetSession(sessionKey);
+        if (StringUtils.isNotNull(obj))
+        {
+            session = new OnlineSession();
+            BeanUtils.copyBeanProp(session, obj);
+        }
+        return session;
     }
 
     /**
