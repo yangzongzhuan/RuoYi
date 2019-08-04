@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CellType;
@@ -29,6 +28,7 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
@@ -40,6 +40,7 @@ import org.apache.poi.xssf.usermodel.XSSFDataValidation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.annotation.Excel.Type;
 import com.ruoyi.common.annotation.Excels;
 import com.ruoyi.common.config.Global;
@@ -83,6 +84,11 @@ public class ExcelUtil<T>
      * 工作表对象
      */
     private Sheet sheet;
+
+    /**
+     * 样式列表
+     */
+    private Map<String, CellStyle> styles;
 
     /**
      * 导入导出数据列表
@@ -376,10 +382,6 @@ public class ExcelUtil<T>
     {
         int startNo = index * sheetSize;
         int endNo = Math.min(startNo + sheetSize, list.size());
-        // 写入各条记录,每条记录对应excel表中的一行
-        CellStyle cs = wb.createCellStyle();
-        cs.setAlignment(HorizontalAlignment.CENTER);
-        cs.setVerticalAlignment(VerticalAlignment.CENTER);
         for (int i = startNo; i < endNo; i++)
         {
             row = sheet.createRow(i + 1 - startNo);
@@ -392,9 +394,53 @@ public class ExcelUtil<T>
                 Excel excel = (Excel) os[1];
                 // 设置实体类私有属性可访问
                 field.setAccessible(true);
-                this.addCell(excel, row, vo, field, column++, cs);
+                this.addCell(excel, row, vo, field, column++);
             }
         }
+    }
+
+    /**
+     * 创建表格样式
+     * 
+     * @param wb 工作薄对象
+     * @return 样式列表
+     */
+    private Map<String, CellStyle> createStyles(Workbook wb)
+    {
+        // 写入各条记录,每条记录对应excel表中的一行
+        Map<String, CellStyle> styles = new HashMap<String, CellStyle>();
+        CellStyle style = wb.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setRightBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setLeftBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setBorderTop(BorderStyle.THIN);
+        style.setTopBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBottomBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        Font dataFont = wb.createFont();
+        dataFont.setFontName("Arial");
+        dataFont.setFontHeightInPoints((short) 10);
+        style.setFont(dataFont);
+        styles.put("data", style);
+
+        style = wb.createCellStyle();
+        style.cloneStyleFrom(styles.get("data"));
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+        style.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        Font headerFont = wb.createFont();
+        headerFont.setFontName("Arial");
+        headerFont.setFontHeightInPoints((short) 10);
+        headerFont.setBold(true);
+        headerFont.setColor(IndexedColors.WHITE.getIndex());
+        style.setFont(headerFont);
+        styles.put("header", style);
+
+        return styles;
     }
 
     /**
@@ -404,45 +450,49 @@ public class ExcelUtil<T>
     {
         // 创建列
         Cell cell = row.createCell(column);
-        // 设置列中写入内容为String类型
-        cell.setCellType(CellType.STRING);
-        // 写入列名
+        // 写入列信息
         cell.setCellValue(attr.name());
-        CellStyle cellStyle = createStyle(attr, row, column);
-        cell.setCellStyle(cellStyle);
+        setDataValidation(attr, row, column);
+        cell.setCellStyle(styles.get("header"));
         return cell;
+    }
+
+    /**
+     * 设置单元格信息
+     * 
+     * @param value 单元格值
+     * @param attr 注解相关
+     * @param cell 单元格信息
+     */
+    public void setCellVo(Object value, Excel attr, Cell cell)
+    {
+        if (ColumnType.STRING == attr.cellType())
+        {
+            cell.setCellType(CellType.NUMERIC);
+            cell.setCellValue(StringUtils.isNull(value) ? attr.defaultValue() : value + attr.suffix());
+        }
+        else if (ColumnType.NUMERIC == attr.cellType())
+        {
+            cell.setCellType(CellType.NUMERIC);
+            cell.setCellValue(Integer.parseInt(value + ""));
+        }
     }
 
     /**
      * 创建表格样式
      */
-    public CellStyle createStyle(Excel attr, Row row, int column)
+    public void setDataValidation(Excel attr, Row row, int column)
     {
-        CellStyle cellStyle = wb.createCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         if (attr.name().indexOf("注：") >= 0)
         {
-            Font font = wb.createFont();
-            font.setColor(HSSFFont.COLOR_RED);
-            cellStyle.setFont(font);
-            cellStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
             sheet.setColumnWidth(column, 6000);
         }
         else
         {
-            Font font = wb.createFont();
-            // 粗体显示
-            font.setBold(true);
-            // 选择需要用到的字体格式
-            cellStyle.setFont(font);
-            cellStyle.setFillForegroundColor(HSSFColorPredefined.LIGHT_YELLOW.getIndex());
             // 设置列宽
             sheet.setColumnWidth(column, (int) ((attr.width() + 0.72) * 256));
             row.setHeight((short) (attr.height() * 20));
         }
-        cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        cellStyle.setWrapText(true);
         // 如果设置了提示信息则鼠标放上去提示.
         if (StringUtils.isNotEmpty(attr.prompt()))
         {
@@ -455,13 +505,12 @@ public class ExcelUtil<T>
             // 这里默认设了2-101列只能选择不能输入.
             setXSSFValidation(sheet, attr.combo(), 1, 100, column, column);
         }
-        return cellStyle;
     }
 
     /**
      * 添加单元格
      */
-    public Cell addCell(Excel attr, Row row, T vo, Field field, int column, CellStyle cs)
+    public Cell addCell(Excel attr, Row row, T vo, Field field, int column)
     {
         Cell cell = null;
         try
@@ -473,7 +522,7 @@ public class ExcelUtil<T>
             {
                 // 创建cell
                 cell = row.createCell(column);
-                cell.setCellStyle(cs);
+                cell.setCellStyle(styles.get("data"));
 
                 // 用于读取对象中的属性
                 Object value = getTargetValue(vo, field, attr);
@@ -489,9 +538,8 @@ public class ExcelUtil<T>
                 }
                 else
                 {
-                    cell.setCellType(CellType.STRING);
-                    // 如果数据存在就填入,不存在填入空格.
-                    cell.setCellValue(StringUtils.isNull(value) ? attr.defaultValue() : value + attr.suffix());
+                    // 设置列类型
+                    setCellVo(value, attr, cell);
                 }
             }
         }
@@ -752,6 +800,7 @@ public class ExcelUtil<T>
     public void createSheet(double sheetNo, int index)
     {
         this.sheet = wb.createSheet();
+        this.styles = createStyles(wb);
         // 设置工作表的名称.
         if (sheetNo == 0)
         {

@@ -6,6 +6,7 @@ import javax.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.utils.StringUtils;
@@ -21,7 +22,7 @@ public class SysJob extends BaseEntity implements Serializable
     private static final long serialVersionUID = 1L;
 
     /** 任务ID */
-    @Excel(name = "任务序号")
+    @Excel(name = "任务序号", cellType = ColumnType.NUMERIC)
     private Long jobId;
 
     /** 任务名称 */

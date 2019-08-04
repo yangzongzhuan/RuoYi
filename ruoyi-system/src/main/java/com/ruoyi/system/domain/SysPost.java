@@ -4,6 +4,7 @@ import javax.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
@@ -16,7 +17,7 @@ public class SysPost extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 岗位序号 */
-    @Excel(name = "岗位序号")
+    @Excel(name = "岗位序号", cellType = ColumnType.NUMERIC)
     private Long postId;
 
     /** 岗位编码 */
@@ -28,7 +29,7 @@ public class SysPost extends BaseEntity
     private String postName;
 
     /** 岗位排序 */
-    @Excel(name = "岗位排序")
+    @Excel(name = "岗位排序", cellType = ColumnType.NUMERIC)
     private String postSort;
 
     /** 状态（0正常 1停用） */
