@@ -969,3 +969,19 @@ label {
     background-color: #E8F7FD;
     color: #1890ff;
 }
+
+/** 滚动条样式 **/
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 6px;
+	background-color: #999;
+}
