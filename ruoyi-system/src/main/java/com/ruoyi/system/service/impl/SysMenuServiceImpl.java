@@ -206,7 +206,7 @@ public class SysMenuServiceImpl implements ISysMenuService
             Ztree ztree = new Ztree();
             ztree.setId(menu.getMenuId());
             ztree.setpId(menu.getParentId());
-            ztree.setName(transMenuName(menu, roleMenuList, permsFlag));
+            ztree.setName(transMenuName(menu, permsFlag));
             ztree.setTitle(menu.getMenuName());
             if (isCheck)
             {
@@ -217,7 +217,7 @@ public class SysMenuServiceImpl implements ISysMenuService
         return ztrees;
     }
 
-    public String transMenuName(SysMenu menu, List<String> roleMenuList, boolean permsFlag)
+    public String transMenuName(SysMenu menu, boolean permsFlag)
     {
         StringBuffer sb = new StringBuffer();
         sb.append(menu.getMenuName());

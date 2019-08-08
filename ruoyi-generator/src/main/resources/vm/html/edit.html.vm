@@ -1,62 +1,160 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-	<th:block th:include="include :: header('修改${tableComment}')" />
+    <th:block th:include="include :: header('修改${functionName}')" />
+#foreach($column in $columns)
+#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
+    <th:block th:include="include :: datetimepicker-css" />
+#break
+#end
+#end
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-${classname}-edit" th:object="${${classname}}">
-            <input id="${primaryKey.attrname}" name="${primaryKey.attrname}" th:field="*{${primaryKey.attrname}}"  type="hidden">
+        <form class="form-horizontal m" id="form-${businessName}-edit" th:object="${${className}}">
+            <input name="${pkColumn.javaField}" th:field="*{${pkColumn.javaField}}" type="hidden">
 #foreach($column in $columns)
-#if($column.columnName != $primaryKey.columnName)
-#if(!${column.configInfo})
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">${column.columnComment}：</label>
-				<div class="col-sm-8">
-					<input id="${column.attrname}" name="${column.attrname}" th:field="*{${column.attrname}}" class="form-control" type="text">
-				</div>
-			</div>
+#if($column.edit && !$column.superColumn && !$column.pk)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
 #else
-#if(${column.configInfo.type} == "dict")
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">${column.columnComment}：</label>
-				<div class="col-sm-8">
-					<select name="${column.attrname}" class="form-control m-b" th:with="type=${@dict.getType('${column.configInfo.value}')}">
-						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{${column.attrname}}"></option>
-					</select>
-				</div>
-			</div>
-#elseif(${column.configInfo.type} == "date")
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">${column.columnComment}：</label>
-				<div class="col-sm-8">
-					<input id="${column.attrname}"  name="${column.attrname}" th:field="*{${column.attrname}}" class="form-control time-input" type="text">
-				</div>
-			</div>
-#elseif(${column.configInfo.type} == "fk")	
+#set($comment=$column.columnComment)
+#end
+#set($field=$column.javaField)
+#set($dictType=$column.dictType)
+#if("" != $treeParentCode && $column.javaField == $treeParentCode)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+#set($BusinessName=$businessName.substring(0,1).toUpperCase() + ${businessName.substring(1)})
+#set($deptId = "${className}?.deptId")
+#set($deptName = "${className}?.deptName")
+                        <input id="treeId" name="${treeParentCode}" type="hidden" th:field="*{${treeParentCode}}" />
+                        <input class="form-control" type="text" onclick="select${BusinessName}Tree()" id="treeName" readonly="true" th:field="*{parentName}"#if($column.required) required#end>
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+#elseif($column.htmlType == "input")
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <input name="${field}" th:field="*{${field}}" class="form-control" type="text"#if($column.required) required#end>
+                </div>
+            </div>
+#elseif($column.htmlType == "select" && "" != $dictType)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <select name="${field}" class="form-control m-b" th:with="type=${@dict.getType('${dictType}')}"#if($column.required) required#end>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{${field}}"></option>
+                    </select>
+                </div>
+            </div>
+#elseif($column.htmlType == "select" && $dictType)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <select name="${field}" class="form-control m-b"#if($column.required) required#end>
+                        <option value="">所有</option>
+                    </select>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+#elseif($column.htmlType == "radio" && "" != $dictType)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box" th:each="dict : ${@dict.getType('${dictType}')}">
+                        <input type="radio" th:id="${dict.dictCode}" name="${field}" th:value="${dict.dictValue}" th:field="*{${field}}"#if($column.required) required#end>
+                        <label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                    </div>
+                </div>
+            </div>
+#elseif($column.htmlType == "radio" && $dictType)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <div class="radio-box">
+                        <input type="radio" name="${field}" value=""#if($column.required) required#end>
+                        <label th:for="${field}" th:text="未知"></label>
+                    </div>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
+#elseif($column.htmlType == "datetime")
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
+                    </div>
+                </div>
+            </div>
+#elseif($column.htmlType == "textarea")
+            <div class="form-group">
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <textarea name="${field}" class="form-control"#if($column.required) required#end>[[*{${field}}]]</textarea>
+                </div>
+            </div>
 #end
 #end
 #end
-#end
-		</form>
+        </form>
     </div>
-    <div th:include="include::footer"></div>
+    <th:block th:include="include :: footer" />
+#foreach($column in $columns)
+#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
+    <th:block th:include="include :: datetimepicker-js" />
+#break
+#end
+#end
     <script type="text/javascript">
-		var prefix = ctx + "${moduleName}/${classname}";
-		$("#form-${classname}-edit").validate({
-			rules:{
-				xxxx:{
-					required:true,
-				},
-			},
-			focusCleanup: true
-		});
-		
-		function submitHandler() {
-	        if ($.validate.form()) {
-	            $.operate.save(prefix + "/edit", $('#form-${classname}-edit').serialize());
-	        }
-	    }
-	</script>
+        var prefix = ctx + "${moduleName}/${businessName}";
+        $("#form-${businessName}-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-${businessName}-edit').serialize());
+            }
+        }
+#foreach($column in $columns)
+#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "datetime")
+
+        $("input[name='$column.javaField']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+#break
+#end
+#end
+#if($table.tree)
+
+        /*${functionName}-新增-选择父部门树*/
+        function select${BusinessName}Tree() {
+            var options = {
+                title: '${functionName}选择',
+                width: "380",
+                url: prefix + "/select${BusinessName}Tree/" + $("#treeId").val(),
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+
+        function doSubmit(index, layero){
+            var body = layer.getChildFrame('body', index);
+               $("#treeId").val(body.find('#treeId').val());
+               $("#treeName").val(body.find('#treeName').val());
+               layer.close(index);
+        }
+#end
+    </script>
 </body>
 </html>

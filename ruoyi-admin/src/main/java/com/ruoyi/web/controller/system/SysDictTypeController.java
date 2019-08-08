@@ -15,6 +15,7 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.poi.ExcelUtil;
@@ -154,5 +155,28 @@ public class SysDictTypeController extends BaseController
     public String checkDictTypeUnique(SysDictType dictType)
     {
         return dictTypeService.checkDictTypeUnique(dictType);
+    }
+
+    /**
+     * 选择字典树
+     */
+    @GetMapping("/selectDictTree/{columnId}/{dictType}")
+    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType,
+            ModelMap mmap)
+    {
+        mmap.put("columnId", columnId);
+        mmap.put("dict", dictTypeService.selectDictTypeByType(dictType));
+        return prefix + "/tree";
+    }
+
+    /**
+     * 加载字典列表树
+     */
+    @GetMapping("/treeData")
+    @ResponseBody
+    public List<Ztree> treeData()
+    {
+        List<Ztree> ztrees = dictTypeService.selectDictTree(new SysDictType());
+        return ztrees;
     }
 }

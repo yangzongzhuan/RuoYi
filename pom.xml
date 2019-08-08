@@ -6,14 +6,14 @@
 	
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
-    <version>3.4</version>
+    <version>4.0.0</version>
 
     <name>ruoyi</name>
 	<url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
     
     <properties>
-	    <ruoyi.version>3.4</ruoyi.version>
+	    <ruoyi.version>4.0.0</ruoyi.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -25,6 +25,7 @@
 		<kaptcha.version>2.3.2</kaptcha.version>
 		<swagger.version>2.9.2</swagger.version>
 		<pagehelper.boot.version>1.2.5</pagehelper.boot.version>
+		<fastjson.version>1.2.47</fastjson.version>
 		<oshi.version>3.9.1</oshi.version>
 		<commons.io.version>2.5</commons.io.version>
 		<commons.fileupload.version>1.3.3</commons.fileupload.version>
@@ -167,6 +168,13 @@
 	            <artifactId>velocity</artifactId>
 	            <version>${velocity.version}</version>
 	        </dependency>
+	        
+	        <!-- 阿里JSON解析器 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
             
             <!-- 定时任务-->
 			<dependency>

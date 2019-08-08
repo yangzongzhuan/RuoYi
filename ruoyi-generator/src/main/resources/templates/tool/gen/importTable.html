@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('导入表结构')" />
+</head>
+<body class="gray-bg">
+    <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="gen-form">
+					<div class="select-list">
+						<ul>
+							<li>
+								表名称：<input type="text" name="tableName"/>
+							</li>
+							<li>
+								表描述：<input type="text" name="tableComment"/>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+		    <div class="col-sm-12 select-table table-striped">
+			    <table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script type="text/javascript">
+		var prefix = ctx + "tool/gen";
+	
+		$(function() {
+		    var options = {
+		        url: prefix + "/db/list",
+		        sortName: "createTime",
+		        sortOrder: "desc",
+		        showSearch: false,
+		        showRefresh: false,
+		        showToggle: false,
+		        showColumns: false,
+		        clickToSelect: true,
+		        columns: [{
+		            checkbox: true
+		        },
+		        {
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                 	    return $.table.serialNumber(index);
+                    }
+                },
+		        {
+		            field: 'tableName',
+		            title: '表名称',
+		            width: '20%',
+		            sortable: true
+		        },
+		        {
+		            field: 'tableComment',
+		            title: '表描述',
+		            width: '20%',
+		            sortable: true
+		        },
+		        {
+		            field: 'createTime',
+		            title: '创建时间',
+		            width: '20%',
+		            sortable: true
+		        },
+		        {
+		            field: 'updateTime',
+		            title: '更新时间',
+		            width: '20%',
+		            sortable: true
+		        }]
+		    };
+		    $.table.init(options);
+		});
+		
+		/* 导入表结构-选择表结构-提交 */
+		function submitHandler() {
+			var rows = $.table.selectColumns("tableName");
+			if (rows.length == 0) {
+       			$.modal.alertWarning("请至少选择一条记录");
+       			return;
+       		}
+			var data = {"tables": rows.join()};
+			$.operate.save(prefix + "/importTable", data);
+		}
+	</script>
+</body>
+</html>

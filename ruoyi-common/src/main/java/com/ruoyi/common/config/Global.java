@@ -81,7 +81,7 @@ public class Global
      */
     public static String getVersion()
     {
-        return StringUtils.nvl(getConfig("ruoyi.version"), "3.4.0");
+        return StringUtils.nvl(getConfig("ruoyi.version"), "4.0.0");
     }
 
     /**

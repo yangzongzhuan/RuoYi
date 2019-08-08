@@ -1,62 +1,61 @@
-package ${package}.mapper;
+package ${packageName}.mapper;
 
-import ${package}.domain.${className};
-import java.util.List;	
+import ${packageName}.domain.${ClassName};
+import java.util.List;
 
 /**
- * ${tableComment} 数据层
+ * ${functionName}Mapper接口
  * 
  * @author ${author}
  * @date ${datetime}
  */
-public interface ${className}Mapper 
+public interface ${ClassName}Mapper 
 {
-	/**
-     * 查询${tableComment}信息
+    /**
+     * 查询${functionName}
      * 
-     * @param ${primaryKey.attrname} ${tableComment}ID
-     * @return ${tableComment}信息
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return ${functionName}
      */
-	public ${className} select${className}ById(${primaryKey.attrType} ${primaryKey.attrname});
-	
-	/**
-     * 查询${tableComment}列表
+    public ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+
+    /**
+     * 查询${functionName}列表
      * 
-     * @param ${classname} ${tableComment}信息
-     * @return ${tableComment}集合
+     * @param ${className} ${functionName}
+     * @return ${functionName}集合
      */
-	public List<${className}> select${className}List(${className} ${classname});
-	
-	/**
-     * 新增${tableComment}
+    public List<${ClassName}> select${ClassName}List(${ClassName} ${className});
+
+    /**
+     * 新增${functionName}
      * 
-     * @param ${classname} ${tableComment}信息
+     * @param ${className} ${functionName}
      * @return 结果
      */
-	public int insert${className}(${className} ${classname});
-	
-	/**
-     * 修改${tableComment}
+    public int insert${ClassName}(${ClassName} ${className});
+
+    /**
+     * 修改${functionName}
      * 
-     * @param ${classname} ${tableComment}信息
+     * @param ${className} ${functionName}
      * @return 结果
      */
-	public int update${className}(${className} ${classname});
-	
-	/**
-     * 删除${tableComment}
+    public int update${ClassName}(${ClassName} ${className});
+
+    /**
+     * 删除${functionName}
      * 
-     * @param ${primaryKey.attrname} ${tableComment}ID
+     * @param ${pkColumn.javaField} ${functionName}ID
      * @return 结果
      */
-	public int delete${className}ById(${primaryKey.attrType} ${primaryKey.attrname});
-	
-	/**
-     * 批量删除${tableComment}
+    public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+
+    /**
+     * 批量删除${functionName}
      * 
-     * @param ${primaryKey.attrname}s 需要删除的数据ID
+     * @param ${pkColumn.javaField}s 需要删除的数据ID
      * @return 结果
      */
-	public int delete${className}ByIds(String[] ${primaryKey.attrname}s);
-	
+    public int delete${ClassName}ByIds(String[] ${pkColumn.javaField}s);
 }

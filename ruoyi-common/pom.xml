@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ruoyi</artifactId>
         <groupId>com.ruoyi</groupId>
-        <version>3.4</version>
+        <version>4.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 	
@@ -57,6 +57,12 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<!-- 阿里JSON解析器 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
 
 		<!-- io常用工具类 -->

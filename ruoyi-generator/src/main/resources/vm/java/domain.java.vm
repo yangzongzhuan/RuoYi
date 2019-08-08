@@ -1,56 +1,75 @@
-package ${package}.domain;
+package ${packageName}.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import com.ruoyi.common.annotation.Excel;
+#if($table.crud)
 import com.ruoyi.common.core.domain.BaseEntity;
-#foreach ($column in $columns)
-#if($column.attrType == 'Date' && ($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark'))
-import java.util.Date;
-#break
+#elseif($table.tree)
+import com.ruoyi.common.core.domain.TreeEntity;
 #end
-#end
-#foreach ($column in $columns)
-#if($column.attrType == 'BigDecimal')
-import java.math.BigDecimal;
-#break
-#end
+#foreach ($import in $importList)
+import ${import};
 #end
 
 /**
- * ${tableComment}表 ${tableName}
+ * ${functionName}对象 ${tableName}
  * 
  * @author ${author}
  * @date ${datetime}
  */
-public class ${className} extends BaseEntity
+#if($table.crud)
+#set($Entity="BaseEntity")
+#elseif($table.tree)
+#set($Entity="TreeEntity")
+#end
+public class ${ClassName} extends ${Entity}
 {
-	private static final long serialVersionUID = 1L;
-	
-#foreach ($column in $columns)
-#if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
-	/** $column.columnComment */
-	private $column.attrType $column.attrname;
-#end
-#end
+    private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
-#if($column.attrname != 'createBy' && $column.attrname != 'createTime' && $column.attrname != 'updateBy' && $column.attrname != 'updateTime' && $column.attrname != 'remark')
-	public void set${column.attrName}($column.attrType $column.attrname) 
-	{
-		this.$column.attrname = $column.attrname;
-	}
+#if(!$column.superColumn)
+    /** $column.columnComment */
+#if($column.list)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#if($parentheseIndex != -1)
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+#elseif($column.javaType == 'Date')
+    @Excel(name = "${comment}", width = 30, dateFormat = "yyyy-MM-dd")
+#else
+    @Excel(name = "${comment}")
+#end
+#end
+    private $column.javaType $column.javaField;
 
-	public $column.attrType get${column.attrName}() 
-	{
-		return $column.attrname;
-	}
+#end
+#end
+#foreach ($column in $columns)
+#if(!$column.superColumn)
+#set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+    public void set${AttrName}($column.javaType $column.javaField) 
+    {
+        this.$column.javaField = $column.javaField;
+    }
+
+    public $column.javaType get${AttrName}() 
+    {
+        return $column.javaField;
+    }
 #end
 #end
 
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 #foreach ($column in $columns)
-            .append("${column.attrname}", get${column.attrName}())
+#set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+            .append("${column.javaField}", get${AttrName}())
 #end
             .toString();
     }

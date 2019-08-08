@@ -2,70 +2,106 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${package}.mapper.${className}Mapper">
+<mapper namespace="${packageName}.mapper.${ClassName}Mapper">
     
-    <resultMap type="${className}" id="${className}Result">
+    <resultMap type="${ClassName}" id="${ClassName}Result">
 #foreach ($column in $columns)
-        <result property="${column.attrname}"    column="${column.columnName}"    />
+        <result property="${column.javaField}"    column="${column.columnName}"    />
+#end
+#if($table.tree)
+        <result property="parentName" column="parent_name" />
 #end
     </resultMap>
-	
-	<sql id="select${className}Vo">
+
+    <sql id="select${ClassName}Vo">
         select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
     </sql>
-	
-    <select id="select${className}List" parameterType="${className}" resultMap="${className}Result">
-        <include refid="select${className}Vo"/>
+
+    <select id="select${ClassName}List" parameterType="${ClassName}" resultMap="${ClassName}Result">
+        <include refid="select${ClassName}Vo"/>
         <where>  
 #foreach($column in $columns)
-            <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname.trim() != '' #end"> and $column.columnName = #{$column.attrname}</if>
- #end
+#set($queryType=$column.queryType)
+#set($javaField=$column.javaField)
+#set($javaType=$column.javaType)
+#set($columnName=$column.columnName)
+#set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
+#if($column.query)
+#if($column.queryType == "EQ")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName = #{$javaField}</if>
+#elseif($queryType == "NE")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName != #{$javaField}</if>
+#elseif(\$queryType == "GT")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &gt; #{$javaField}</if>
+#elseif(\$queryType == "GTE")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &gt;= #{$javaField}</if>
+#elseif(\$queryType == "LT")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &lt; #{$javaField}</if>
+#elseif(\$queryType == "LTE")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &lt;= #{$javaField}</if>
+#elseif($queryType == "LIKE")
+            <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName like concat('%', #{$javaField}, '%')</if>
+#elseif($queryType == "BETWEEN")
+            <if test="params.begin$AttrName != null and params.begin$AttrName != '' and params.end$AttrName != null and params.end$AttrName != ''"> and $columnName between #{params.begin$AttrName} and #{params.end$AttrName}</if>
+#end
+#end
+#end
         </where>
+#if($table.tree)
+        order by ${tree_parent_code}
+#end
     </select>
     
-    <select id="select${className}ById" parameterType="${primaryKey.attrType}" resultMap="${className}Result">
-        <include refid="select${className}Vo"/>
-        where ${primaryKey.columnName} = #{${primaryKey.attrname}}
+    <select id="select${ClassName}ById" parameterType="${pkColumn.javaType}" resultMap="${ClassName}Result">
+#if($table.crud)
+        <include refid="select${ClassName}Vo"/>
+        where ${pkColumn.columnName} = #{${pkColumn.javaField}}
+#elseif($table.tree)
+        select#foreach($column in $columns) t.$column.columnName,#end p.dept_name as parent_name
+        from ${tableName} t
+        left join ${tableName} p on p.${pkColumn.columnName} = t.${tree_parent_code}
+        where t.${pkColumn.columnName} = #{${pkColumn.javaField}}
+#end
     </select>
         
-    <insert id="insert${className}" parameterType="${className}"#if($primaryKey.extra == 'auto_increment') useGeneratedKeys="true" keyProperty="$primaryKey.attrname"#end>
+    <insert id="insert${ClassName}" parameterType="${ClassName}"#if($pkColumn.increment) useGeneratedKeys="true" keyProperty="$pkColumn.javaField"#end>
         insert into ${tableName}
-		<trim prefix="(" suffix=")" suffixOverrides=",">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
-#if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">$column.columnName,</if>
+#if($column.columnName != $pkColumn.columnName || !$pkColumn.increment)
+            <if test="$column.javaField != null #if($column.javaType == 'String' ) and $column.javaField != ''#end">$column.columnName,</if>
 #end
 #end
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
 #foreach($column in $columns)
-#if($column.columnName != $primaryKey.columnName || $primaryKey.extra != 'auto_increment')
-			<if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">#{$column.attrname},</if>
-#end			
+#if($column.columnName != $pkColumn.columnName || !$pkColumn.increment)
+            <if test="$column.javaField != null #if($column.javaType == 'String' ) and $column.javaField != ''#end">#{$column.javaField},</if>
+#end
 #end
          </trim>
     </insert>
-	 
-    <update id="update${className}" parameterType="${className}">
+
+    <update id="update${ClassName}" parameterType="${ClassName}">
         update ${tableName}
         <trim prefix="SET" suffixOverrides=",">
 #foreach($column in $columns)
-#if($column.columnName != $primaryKey.columnName)
-            <if test="$column.attrname != null #if($column.attrType == 'String' ) and $column.attrname != '' #end ">$column.columnName = #{$column.attrname},</if>
+#if($column.columnName != $pkColumn.columnName)
+            <if test="$column.javaField != null #if($column.javaType == 'String' ) and $column.javaField != ''#end">$column.columnName = #{$column.javaField},</if>
 #end
 #end
         </trim>
-        where ${primaryKey.columnName} = #{${primaryKey.attrname}}
+        where ${pkColumn.columnName} = #{${pkColumn.javaField}}
     </update>
 
-	<delete id="delete${className}ById" parameterType="${primaryKey.attrType}">
-        delete from ${tableName} where ${primaryKey.columnName} = #{${primaryKey.attrname}}
+    <delete id="delete${ClassName}ById" parameterType="${pkColumn.javaType}">
+        delete from ${tableName} where ${pkColumn.columnName} = #{${pkColumn.javaField}}
     </delete>
-	
-    <delete id="delete${className}ByIds" parameterType="String">
-        delete from ${tableName} where ${primaryKey.columnName} in 
-        <foreach item="${primaryKey.attrname}" collection="array" open="(" separator="," close=")">
-            #{${primaryKey.attrname}}
+
+    <delete id="delete${ClassName}ByIds" parameterType="String">
+        delete from ${tableName} where ${pkColumn.columnName} in 
+        <foreach item="${pkColumn.javaField}" collection="array" open="(" separator="," close=")">
+            #{${pkColumn.javaField}}
         </foreach>
     </delete>
     

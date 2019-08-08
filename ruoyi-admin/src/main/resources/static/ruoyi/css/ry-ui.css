@@ -335,6 +335,11 @@ label.error {
 	right: 42px
 }
 
+.input-group.date label.error {
+	z-index:99;
+	right: 3px
+}
+
 .Validform_error,input.error,select.error {
 	background-color: #fbe2e2;
 	border-color: #c66161;

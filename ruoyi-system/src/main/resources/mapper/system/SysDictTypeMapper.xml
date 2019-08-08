@@ -50,6 +50,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where dict_id = #{dictId}
 	</select>
 	
+	<select id="selectDictTypeByType" parameterType="String" resultMap="SysDictTypeResult">
+		<include refid="selectDictTypeVo"/>
+		where dict_type = #{dictType}
+	</select>
+	
 	<select id="checkDictTypeUnique" parameterType="String" resultMap="SysDictTypeResult">
 		<include refid="selectDictTypeVo"/>
 		where dict_type = #{dictType}

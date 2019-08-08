@@ -1,10 +1,12 @@
 package com.ruoyi.system.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.UserConstants;
+import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.StringUtils;
@@ -60,6 +62,17 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
     public SysDictType selectDictTypeById(Long dictId)
     {
         return dictTypeMapper.selectDictTypeById(dictId);
+    }
+
+    /**
+     * 根据字典类型查询信息
+     * 
+     * @param dictType 字典类型
+     * @return 字典类型
+     */
+    public SysDictType selectDictTypeByType(String dictType)
+    {
+        return dictTypeMapper.selectDictTypeByType(dictType);
     }
 
     /**
@@ -139,5 +152,37 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
             return UserConstants.DICT_TYPE_NOT_UNIQUE;
         }
         return UserConstants.DICT_TYPE_UNIQUE;
+    }
+
+    /**
+     * 查询字典类型树
+     * 
+     * @param dictType 字典类型
+     * @return 所有字典类型
+     */
+    public List<Ztree> selectDictTree(SysDictType dictType)
+    {
+        List<Ztree> ztrees = new ArrayList<Ztree>();
+        List<SysDictType> dictList = dictTypeMapper.selectDictTypeList(dictType);
+        for (SysDictType dict : dictList)
+        {
+            if (UserConstants.DICT_NORMAL.equals(dict.getStatus()))
+            {
+                Ztree ztree = new Ztree();
+                ztree.setId(dict.getDictId());
+                ztree.setName(transDictName(dict));
+                ztree.setTitle(dict.getDictType());
+                ztrees.add(ztree);
+            }
+        }
+        return ztrees;
+    }
+
+    public String transDictName(SysDictType dictType)
+    {
+        StringBuffer sb = new StringBuffer();
+        sb.append("(" + dictType.getDictName() + ")");
+        sb.append("&nbsp;&nbsp;&nbsp;" + dictType.getDictType());
+        return sb.toString();
     }
 }

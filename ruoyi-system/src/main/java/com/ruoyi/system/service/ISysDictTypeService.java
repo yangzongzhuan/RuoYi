@@ -1,6 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.system.domain.SysDictType;
 
 /**
@@ -32,6 +33,14 @@ public interface ISysDictTypeService
      * @return 字典类型
      */
     public SysDictType selectDictTypeById(Long dictId);
+
+    /**
+     * 根据字典类型查询信息
+     * 
+     * @param dictType 字典类型
+     * @return 字典类型
+     */
+    public SysDictType selectDictTypeByType(String dictType);
 
     /**
      * 通过字典ID删除字典信息
@@ -73,4 +82,12 @@ public interface ISysDictTypeService
      * @return 结果
      */
     public String checkDictTypeUnique(SysDictType dictType);
+
+    /**
+     * 查询字典类型树
+     * 
+     * @param dictType 字典类型
+     * @return 所有字典类型
+     */
+    public List<Ztree> selectDictTree(SysDictType dictType);
 }

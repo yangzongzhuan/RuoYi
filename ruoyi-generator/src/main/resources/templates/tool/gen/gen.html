@@ -32,9 +32,18 @@
 			</div>
 			
 			<div class="btn-group-sm" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="javascript:batchGenCode()" shiro:hasPermission="tool:gen:code">
-			        <i class="fa fa-download"></i> 批量生成
+			     <a class="btn btn-success multiple disabled" onclick="javascript:batchGenCode()" shiro:hasPermission="tool:gen:code">
+			        <i class="fa fa-download"></i> 生成
 			    </a>
+				<a class="btn btn-info" onclick="importTable()">
+			        <i class="fa fa-upload"></i> 导入
+			    </a>
+			    <a class="btn btn-primary single disabled" onclick="$.operate.editTab()" shiro:hasPermission="tool:gen:edit">
+		            <i class="fa fa-edit"></i> 修改
+		        </a>
+			    <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="tool:gen:remove">
+		            <i class="fa fa-remove"></i> 删除
+		        </a>
 		    </div>
 		
 		    <div class="col-sm-12 select-table table-striped">
@@ -43,17 +52,29 @@
 		</div>
 	</div>
 	<th:block th:include="include :: footer" />
-	<script type="text/javascript">
+	<script th:inline="javascript">
 		var prefix = ctx + "tool/gen";
+		var editFlag = [[${@permission.hasPermi('tool:gen:edit')}]];
+		var removeFlag = [[${@permission.hasPermi('tool:gen:remove')}]];
+		var previewFlag = [[${@permission.hasPermi('tool:gen:preview')}]];
+		var codeFlag = [[${@permission.hasPermi('tool:gen:code')}]];
 	
 		$(function() {
 		    var options = {
 		        url: prefix + "/list",
+		        updateUrl: prefix + "/edit/{id}",
+		        removeUrl: prefix + "/remove",
 		        sortName: "createTime",
 		        sortOrder: "desc",
 		        showExport: true,
+		        modalName: "生成配置",
 		        columns: [{
 		            checkbox: true
+		        },
+		        {
+		            field: 'tableId',
+		            title: '编号',
+		            visible: false
 		        },
 		        {
                     title: "序号",
@@ -64,44 +85,77 @@
 		        {
 		            field: 'tableName',
 		            title: '表名称',
-		            width: '20%',
 		            sortable: true
 		        },
 		        {
 		            field: 'tableComment',
 		            title: '表描述',
-		            width: '20%',
+		            sortable: true
+		        },
+		        {
+		            field: 'className',
+		            title: '实体类名称',
 		            sortable: true
 		        },
 		        {
 		            field: 'createTime',
 		            title: '创建时间',
-		            width: '20%',
 		            sortable: true
 		        },
 		        {
 		            field: 'updateTime',
 		            title: '更新时间',
-		            width: '20%',
 		            sortable: true
 		        },
 		        {
 		            title: '操作',
-		            width: '20%',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		                var msg = '<a class="btn btn-primary btn-xs" href="javascript:void(0)" onclick="genCode(\'' + row.tableName + '\')"><i class="fa fa-bug"></i>生成代码</a> ';
-		                return msg;
+		                var actions = [];
+		                actions.push('<a class="btn btn-info btn-xs ' + previewFlag + '" href="javascript:void(0)" onclick="preview(\'' + row.tableId + '\')"><i class="fa fa-search"></i>预览</a> ');
+		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.tableId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.tableId + '\')"><i class="fa fa-remove"></i>删除</a> ');
+		                actions.push('<a class="btn btn-primary btn-xs ' + codeFlag + '" href="javascript:void(0)" onclick="genCode(\'' + row.tableName + '\')"><i class="fa fa-bug"></i>生成代码</a> ');
+		                return actions.join('');
 		            }
 		        }]
 		    };
 		    $.table.init(options);
 		});
+		
+		// 预览代码
+		function preview(tableId) {
+			var preViewUrl = prefix + "/preview/" + tableId;
+			$.modal.loading("正在加载数据，请稍后...");
+			$.get(preViewUrl, function(result) {
+				if (result.code == web_status.SUCCESS) {
+					 var items = [];
+		                $.each(result.data, function(index, value) {
+		                	value = value.replace(/</g, "&lt;");
+		                	value = value.replace(/>/g, "&gt;");
+		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
+		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName)){
+			                    items.push({
+			                        title: templateName , content: "<pre class=\"layui-code\">" + value + "</pre>"
+			                    })
+		                    }
+		                });
+		                top.layer.tab({
+		                    area: ['90%', '90%'],
+		                    shadeClose: true,
+		                    tab: items
+		                });
+				} else {
+					$.modal.alertError(result.msg);
+				}
+				$.modal.closeLoading();
+			});
+		}
 	
 		// 生成代码
 		function genCode(tableName) {
 		    $.modal.confirm("确定要生成" + tableName + "表代码吗？", function() {
-		        location.href = prefix + "/genCode/" + tableName;
+		    	location.href = prefix + "/genCode/" + tableName;
 		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
 		    })
 		}
@@ -114,9 +168,15 @@
 		        return;
 		    }
 		    $.modal.confirm("确认要生成选中的" + rows.length + "条数据吗?", function() {
-		        location.href = prefix + "/batchGenCode?tables=" + rows;
+		    	location.href = prefix + "/batchGenCode?tables=" + rows;
 		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
 		    });
+		}
+		
+		// 导入表结构
+		function importTable() {
+			var importTableUrl = prefix + "/importTable";
+			$.modal.open("导入表结构", importTableUrl);
 		}
 	</script>
 </body>

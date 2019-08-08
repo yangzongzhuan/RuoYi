@@ -46,12 +46,12 @@
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[begin${AttrName}]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[end${AttrName}]"/>
-                            </li>
+                            </li>                
 #end
 #end
 #end
                             <li>
-                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             </li>
                         </ul>
@@ -61,25 +61,23 @@
 
             <div class="btn-group-sm" id="toolbar" role="group">
                 <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="${permissionPrefix}:add">
-                    <i class="fa fa-plus"></i> 添加
+                    <i class="fa fa-plus"></i> 新增
                 </a>
-                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="${permissionPrefix}:edit">
+                <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="${permissionPrefix}:edit">
                     <i class="fa fa-edit"></i> 修改
                 </a>
-                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="${permissionPrefix}:remove">
-                    <i class="fa fa-remove"></i> 删除
+                <a class="btn btn-info" id="expandAllBtn">
+                    <i class="fa fa-exchange"></i> 展开/折叠
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="${permissionPrefix}:export">
-                    <i class="fa fa-download"></i> 导出
-                 </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
-                <table id="bootstrap-table" data-mobile-responsive="true"></table>
+                <table id="bootstrap-tree-table"></table>
             </div>
         </div>
     </div>
     <th:block th:include="include :: footer" />
     <script th:inline="javascript">
+        var addFlag = [[${@permission.hasPermi('${permissionPrefix}:add')}]];
         var editFlag = [[${@permission.hasPermi('${permissionPrefix}:edit')}]];
         var removeFlag = [[${@permission.hasPermi('${permissionPrefix}:remove')}]];
 #foreach($column in $columns)
@@ -91,14 +89,19 @@
 
         $(function() {
             var options = {
+                code: "${treeCode}",
+                parentCode: "${treeParentCode}",
+                expandColumn: "${expandColumn}",
+                uniqueId: "${pkColumn.javaField}",
                 url: prefix + "/list",
-                createUrl: prefix + "/add",
+                createUrl: prefix + "/add/{id}",
                 updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
+                removeUrl: prefix + "/remove/{id}",
                 exportUrl: prefix + "/export",
                 modalName: "${functionName}",
                 columns: [{
-                    checkbox: true
+                    field: 'selectItem', 
+                    radio: true
                 },
 #foreach($column in $columns)
 #set($dictType=$column.dictType)
@@ -110,38 +113,37 @@
 #set($comment=$column.columnComment)
 #end
 #if($column.pk)
-                {
-                    field : '${javaField}', 
-                    title : '${comment}',
-                    visible: false
-                },
 #elseif($column.list && "" != $dictType)
                 {
                     field : '${javaField}', 
                     title : '${comment}',
+                    align: 'left',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(${javaField}Datas, value);
+                        return $.table.selectDictLabel(${javaField}Datas, value);
                     }
                 },
 #elseif($column.list && "" != $javaField)
                 {
                     field : '${javaField}', 
-                    title : '${comment}'
+                    title : '${comment}',
+                    align: 'left'
                 },
 #end                
 #end
                 {
                     title: '操作',
                     align: 'center',
+                    align: 'left',
                     formatter: function(value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.${pkColumn.javaField} + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="javascript:void(0)" onclick="$.operate.add(\'' + row.${pkColumn.javaField} + '\')"><i class="fa fa-plus"></i>新增</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.${pkColumn.javaField} + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]
             };
-            $.table.init(options);
+            $.treeTable.init(options);
         });
     </script>
 </body>

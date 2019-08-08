@@ -1,54 +1,73 @@
-package ${package}.service;
+package ${packageName}.service;
 
-import ${package}.domain.${className};
+import ${packageName}.domain.${ClassName};
 import java.util.List;
+#if($table.tree)
+import com.ruoyi.common.core.domain.Ztree;
+#end
 
 /**
- * ${tableComment} 服务层
+ * ${functionName}Service接口
  * 
  * @author ${author}
  * @date ${datetime}
  */
-public interface I${className}Service 
+public interface I${ClassName}Service 
 {
-	/**
-     * 查询${tableComment}信息
+    /**
+     * 查询${functionName}
      * 
-     * @param ${primaryKey.attrname} ${tableComment}ID
-     * @return ${tableComment}信息
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return ${functionName}
      */
-	public ${className} select${className}ById(${primaryKey.attrType} ${primaryKey.attrname});
-	
-	/**
-     * 查询${tableComment}列表
+    public ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+
+    /**
+     * 查询${functionName}列表
      * 
-     * @param ${classname} ${tableComment}信息
-     * @return ${tableComment}集合
+     * @param ${className} ${functionName}
+     * @return ${functionName}集合
      */
-	public List<${className}> select${className}List(${className} ${classname});
-	
-	/**
-     * 新增${tableComment}
+    public List<${ClassName}> select${ClassName}List(${ClassName} ${className});
+
+    /**
+     * 新增${functionName}
      * 
-     * @param ${classname} ${tableComment}信息
+     * @param ${className} ${functionName}
      * @return 结果
      */
-	public int insert${className}(${className} ${classname});
-	
-	/**
-     * 修改${tableComment}
+    public int insert${ClassName}(${ClassName} ${className});
+
+    /**
+     * 修改${functionName}
      * 
-     * @param ${classname} ${tableComment}信息
+     * @param ${className} ${functionName}
      * @return 结果
      */
-	public int update${className}(${className} ${classname});
-		
-	/**
-     * 删除${tableComment}信息
+    public int update${ClassName}(${ClassName} ${className});
+
+    /**
+     * 批量删除${functionName}
      * 
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int delete${className}ByIds(String ids);
-	
+    public int delete${ClassName}ByIds(String ids);
+
+    /**
+     * 删除${functionName}信息
+     * 
+     * @param ${pkColumn.javaField} ${functionName}ID
+     * @return 结果
+     */
+    public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+#if($table.tree)
+
+    /**
+     * 查询${functionName}树列表
+     * 
+     * @return 所有${functionName}信息
+     */
+    public List<Ztree> select${ClassName}Tree();
+#end
 }
