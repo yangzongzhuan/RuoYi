@@ -55,12 +55,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectGenTableList" parameterType="GenTable" resultMap="GenTableResult">
 		<include refid="selectGenTableVo"/>
-		<if test="tableName != null and tableName != ''">
-			AND table_name like concat('%', #{tableName}, '%')
-		</if>
-		<if test="tableComment != null and tableComment != ''">
-			AND table_comment like concat('%', #{tableComment}, '%')
-		</if>
+		<where>
+			<if test="tableName != null and tableName != ''">
+				AND table_name like concat('%', #{tableName}, '%')
+			</if>
+			<if test="tableComment != null and tableComment != ''">
+				AND table_comment like concat('%', #{tableComment}, '%')
+			</if>
+		</where>
 	</select>
 
 	<select id="selectDbTableList" parameterType="GenTable" resultMap="GenTableResult">
