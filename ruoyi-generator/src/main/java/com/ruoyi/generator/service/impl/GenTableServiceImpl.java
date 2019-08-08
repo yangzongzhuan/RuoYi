@@ -314,6 +314,10 @@ public class GenTableServiceImpl implements IGenTableService
                 break;
             }
         }
+        if (StringUtils.isNull(table.getPkColumn()))
+        {
+            table.setPkColumn(columns.get(0));
+        }
     }
 
     /**
