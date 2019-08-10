@@ -75,6 +75,10 @@ public class VelocityUtils
         {
             context.put("tree_parent_code", paramsObj.getString(GenConstants.TREE_PARENT_CODE));
         }
+        if (paramsObj.containsKey(GenConstants.TREE_NAME))
+        {
+            context.put("tree_name", paramsObj.getString(GenConstants.TREE_NAME));
+        }
     }
 
     /**

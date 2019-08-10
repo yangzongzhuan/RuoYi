@@ -31,7 +31,7 @@
     <th:block th:include="include :: ztree-js" />
     <script th:inline="javascript">
         $(function() {
-            var url = ctx + "system/${businessName}/treeData";
+            var url = ctx + "${moduleName}/${businessName}/treeData";
             var options = {
                 url: url,
                 expandLevel: 2,

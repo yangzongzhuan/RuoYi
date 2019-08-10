@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="select${ClassName}Vo"/>
         where ${pkColumn.columnName} = #{${pkColumn.javaField}}
 #elseif($table.tree)
-        select#foreach($column in $columns) t.$column.columnName,#end p.dept_name as parent_name
+        select#foreach($column in $columns) t.$column.columnName,#end p.${tree_name} as parent_name
         from ${tableName} t
         left join ${tableName} p on p.${pkColumn.columnName} = t.${tree_parent_code}
         where t.${pkColumn.columnName} = #{${pkColumn.javaField}}
