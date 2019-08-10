@@ -81,7 +81,7 @@ public class GenConstants
     public static final String TYPE_DATE = "Date";
 
     /** 模糊查询 */
-    public static final String QUERY_LIKE = "Like";
+    public static final String QUERY_LIKE = "LIKE";
 
     /** 需要 */
     public static final String REQUIRE = "1";

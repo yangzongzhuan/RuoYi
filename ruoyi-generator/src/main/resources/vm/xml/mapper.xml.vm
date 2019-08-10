@@ -31,13 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName = #{$javaField}</if>
 #elseif($queryType == "NE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName != #{$javaField}</if>
-#elseif(\$queryType == "GT")
+#elseif($queryType == "GT")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &gt; #{$javaField}</if>
-#elseif(\$queryType == "GTE")
+#elseif($queryType == "GTE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &gt;= #{$javaField}</if>
-#elseif(\$queryType == "LT")
+#elseif($queryType == "LT")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &lt; #{$javaField}</if>
-#elseif(\$queryType == "LTE")
+#elseif($queryType == "LTE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName &lt;= #{$javaField}</if>
 #elseif($queryType == "LIKE")
             <if test="$javaField != null #if($javaType == 'String' ) and $javaField.trim() != ''#end"> and $columnName like concat('%', #{$javaField}, '%')</if>
