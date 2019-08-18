@@ -5012,7 +5012,7 @@ S2.define('select2/defaults',[
         return selection.text;
       },
       theme: 'default',
-      width: 'resolve'
+      width: '100%'
     };
   };
 
