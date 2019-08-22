@@ -66,8 +66,8 @@
                 <label class="col-sm-3 control-label">${comment}：</label>
                 <div class="col-sm-8">
                     <div class="radio-box" th:each="dict : ${@dict.getType('${dictType}')}">
-                        <input type="radio" th:id="${dict.dictCode}" name="${field}" th:value="${dict.dictValue}" th:field="*{${field}}"#if($column.required) required#end>
-                        <label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                        <input type="radio" th:id="${'${field}_'+dict.dictCode}" name="${field}" th:value="${dict.dictValue}" th:field="*{${field}}"#if($column.required) required#end>
+                        <label th:for="${'${field}_'+dict.dictCode}" th:text="${dict.dictLabel}"></label>
                     </div>
                 </div>
             </div>
