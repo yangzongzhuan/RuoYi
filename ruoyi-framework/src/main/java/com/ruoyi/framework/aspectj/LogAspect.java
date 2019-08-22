@@ -104,6 +104,8 @@ public class LogAspect
             String className = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
             operLog.setMethod(className + "." + methodName + "()");
+            // 设置请求方式
+            operLog.setRequestMethod(ServletUtils.getRequest().getMethod());
             // 处理设置注解上的参数
             getControllerMethodDescription(controllerLog, operLog);
             // 保存数据库
