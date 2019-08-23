@@ -129,7 +129,7 @@ public class Global
      */
     public static String getDownloadPath()
     {
-        return getProfile() + "/download";
+        return getProfile() + "/download/";
     }
 
     /**
