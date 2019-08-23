@@ -1191,6 +1191,10 @@
         	// 不允许根父节点选择
         	notAllowParents: function(_tree) {
     		    var nodes = _tree.getSelectedNodes();
+    		    if(nodes.length == 0){
+                    $.modal.msgError("请选择节点后提交");
+                    return false;
+				}
     		    for (var i = 0; i < nodes.length; i++) {
     		        if (nodes[i].level == 0) {
     		            $.modal.msgError("不能选择根节点（" + nodes[i].name + "）");
