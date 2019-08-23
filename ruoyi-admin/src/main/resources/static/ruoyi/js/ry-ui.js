@@ -1196,7 +1196,7 @@
                     return false;
 				}
     		    for (var i = 0; i < nodes.length; i++) {
-    		        if (nodes[i].level == 0 || nodes[i].id == 100) {
+    		        if (nodes[i].level == 0) {
     		            $.modal.msgError("不能选择根节点（" + nodes[i].name + "）");
     		            return false;
     		        }
