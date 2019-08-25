@@ -3,7 +3,15 @@
 
     <!-- 磁盘缓存位置 -->
     <diskStore path="java.io.tmpdir"/>
-
+    
+    <!-- maxEntriesLocalHeap:堆内存中最大缓存对象数，0没有限制 -->
+    <!-- maxElementsInMemory： 在内存中缓存的element的最大数目。-->
+    <!-- eternal:elements是否永久有效，如果为true，timeouts将被忽略，element将永不过期 -->
+    <!-- timeToIdleSeconds:失效前的空闲秒数，当eternal为false时，这个属性才有效，0为不限制 -->
+    <!-- timeToLiveSeconds:失效前的存活秒数，创建时间到失效时间的间隔为存活时间，当eternal为false时，这个属性才有效，0为不限制 -->
+    <!-- overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到磁盘上 -->
+    <!-- statistics：是否收集统计信息。如果需要监控缓存使用情况，应该打开这个选项。默认为关闭（统计会影响性能）。设置statistics="true"开启统计 -->
+    
     <!-- 默认缓存 -->
     <defaultCache
             maxEntriesLocalHeap="1000"
@@ -22,8 +30,8 @@
            overflowToDisk="false"
            statistics="true">
     </cache>
-    
-     <!-- 系统活跃用户缓存 -->
+
+    <!-- 系统活跃用户缓存 -->
     <cache name="sys-userCache"
            maxEntriesLocalHeap="10000"
            overflowToDisk="false"
@@ -32,7 +40,18 @@
            timeToLiveSeconds="0"
            timeToIdleSeconds="0"
            statistics="true">
-     </cache>
+    </cache>
+
+    <!-- 系统会话缓存 -->
+    <cache name="shiro-activeSessionCache"
+           maxElementsInMemory="10000"
+           overflowToDisk="true"
+           eternal="true"
+           timeToLiveSeconds="0"
+           timeToIdleSeconds="0"
+           diskPersistent="true"
+           diskExpiryThreadIntervalSeconds="600">
+    </cache>
 
 </ehcache>
 	

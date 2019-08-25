@@ -109,7 +109,7 @@ shiro:
     # 设置Cookie的过期时间，天为单位
     maxAge: 30
   session:
-    # Session超时时间（默认30分钟）
+    # Session超时时间，-1代表永不过期（默认30分钟）
     expireTime: 30
     # 同步session到数据库的周期（默认1分钟）
     dbSyncPeriod: 1
