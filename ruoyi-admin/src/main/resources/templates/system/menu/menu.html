@@ -116,6 +116,9 @@
 		            width: '10%',
 		            align: "left",
 		            formatter: function(value, row, index) {
+		            	if (row.menuType == 'F') {
+		                    return '-';
+		                }
 		            	return $.table.selectDictLabel(datas, row.visible);
 		            }
 		        },
