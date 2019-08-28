@@ -19,7 +19,7 @@ public class GenUtils
      */
     public static void initTable(GenTable genTable, String operName)
     {
-        genTable.setClassName(StringUtils.convertToCamelCase(genTable.getTableName()));
+        genTable.setClassName(convertClassName(genTable.getTableName()));
         genTable.setPackageName(GenConfig.getPackageName());
         genTable.setModuleName(getModuleName(GenConfig.getPackageName()));
         genTable.setBusinessName(getBusinessName(genTable.getTableName()));
@@ -150,6 +150,23 @@ public class GenUtils
         int nameLength = tableName.length();
         String businessName = StringUtils.substring(tableName, lastIndex + 1, nameLength);
         return businessName;
+    }
+
+    /**
+     * 表名转换成Java类名
+     * 
+     * @param tableName 表名称
+     * @return 类名
+     */
+    public static String convertClassName(String tableName)
+    {
+        boolean autoRemovePre = GenConfig.getAutoRemovePre();
+        String tablePrefix = GenConfig.getTablePrefix();
+        if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix))
+        {
+            tableName = tableName.replaceFirst(tablePrefix, "");
+        }
+        return StringUtils.convertToCamelCase(tableName);
     }
 
     /**
