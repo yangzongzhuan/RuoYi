@@ -21,7 +21,7 @@ public class GenConfig
     /** 生成包路径 */
     public static String packageName;
 
-    /** 自动去除表前缀，默认是true */
+    /** 自动去除表前缀，默认是false */
     public static boolean autoRemovePre;
 
     /** 表前缀(类名不会包含表前缀) */
