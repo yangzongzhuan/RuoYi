@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import com.ruoyi.system.domain.SysUserRole;
 
 /**
- * 用户表 数据层
+ * 用户与角色关联表 数据层
  * 
  * @author ruoyi
  */
