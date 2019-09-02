@@ -574,13 +574,13 @@ label.error {
 }
 
 /** 表单查询条件 **/
-ul {
+.select-list ul {
 	margin: 0;
 	padding: 0;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-li {
+.select-list li {
 	list-style: none;
 }
 
