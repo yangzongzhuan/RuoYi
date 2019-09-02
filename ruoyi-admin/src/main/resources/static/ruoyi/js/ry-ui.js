@@ -481,7 +481,9 @@
     		reset: function(formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	$("#" + currentId)[0].reset();
-                $.btTable.bootstrapTable('refresh');
+            	if ($.table._option.type == table_type.bootstrapTable) {
+            	    $.btTable.bootstrapTable('refresh');
+            	}
             },
             // 获取选中复选框项
             selectCheckeds: function(name) {
