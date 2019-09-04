@@ -18,6 +18,9 @@ public class TreeEntity extends BaseEntity
     /** 显示顺序 */
     private Integer orderNum;
 
+    /** 祖级列表 */
+    private String ancestors;
+
     public String getParentName()
     {
         return parentName;
@@ -46,5 +49,15 @@ public class TreeEntity extends BaseEntity
     public void setOrderNum(Integer orderNum)
     {
         this.orderNum = orderNum;
+    }
+
+    public String getAncestors()
+    {
+        return ancestors;
+    }
+
+    public void setAncestors(String ancestors)
+    {
+        this.ancestors = ancestors;
     }
 }
