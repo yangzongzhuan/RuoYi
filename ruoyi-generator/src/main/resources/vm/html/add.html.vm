@@ -14,7 +14,8 @@
         <form class="form-horizontal m" id="form-${businessName}-add">
 #foreach($column in $columns)
 #set($field=$column.javaField)
-#if($column.insert && !$column.superColumn && !$column.pk)
+#if($column.insert && !$column.pk)
+#if(($column.usableColumn) || (!$column.superColumn))
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
 #if($parentheseIndex != -1)
 #set($comment=$column.columnComment.substring(0, $parentheseIndex))
@@ -99,6 +100,7 @@
                     <textarea name="${field}" class="form-control"#if($column.required) required#end></textarea>
                 </div>
             </div>
+#end
 #end
 #end
 #end
