@@ -164,7 +164,9 @@ public class GenUtils
         String tablePrefix = GenConfig.getTablePrefix();
         if (autoRemovePre && StringUtils.isNotEmpty(tablePrefix))
         {
-            tableName = tableName.replaceFirst(tablePrefix, "");
+            String[] searchList = StringUtils.split(tablePrefix, ",");
+            String[] replacementList = emptyList(searchList.length);
+            tableName = StringUtils.replaceEach(tableName, searchList, replacementList);
         }
         return StringUtils.convertToCamelCase(tableName);
     }
@@ -215,5 +217,21 @@ public class GenUtils
         {
             return 0;
         }
+    }
+
+    /**
+     * 获取空数组列表
+     * 
+     * @param length 长度
+     * @return 数组信息
+     */
+    public static String[] emptyList(int length)
+    {
+        String[] values = new String[length];
+        for (int i = 0; i < length; i++)
+        {
+            values[i] = StringUtils.EMPTY;
+        }
+        return values;
     }
 }
