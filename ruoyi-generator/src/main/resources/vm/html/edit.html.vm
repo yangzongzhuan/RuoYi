@@ -14,7 +14,8 @@
         <form class="form-horizontal m" id="form-${businessName}-edit" th:object="${${className}}">
             <input name="${pkColumn.javaField}" th:field="*{${pkColumn.javaField}}" type="hidden">
 #foreach($column in $columns)
-#if($column.edit && !$column.superColumn && !$column.pk)
+#if($column.edit && !$column.pk)
+#if(($column.usableColumn) || (!$column.superColumn))
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
 #if($parentheseIndex != -1)
 #set($comment=$column.columnComment.substring(0, $parentheseIndex))
@@ -99,6 +100,7 @@
                     <textarea name="${field}" class="form-control"#if($column.required) required#end>[[*{${field}}]]</textarea>
                 </div>
             </div>
+#end
 #end
 #end
 #end
