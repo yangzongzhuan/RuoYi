@@ -132,7 +132,6 @@
             minView: "month",
             autoclose: true
         });
-#break
 #end
 #end
 #if($table.tree)
