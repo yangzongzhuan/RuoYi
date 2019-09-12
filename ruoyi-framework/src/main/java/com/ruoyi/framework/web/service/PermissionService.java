@@ -50,7 +50,7 @@ public class PermissionService
     }
 
     /**
-     * 验证用户是否具有以下任意一个角色，无权限返回hidden用于隐藏（如需返回Boolean使用hasAnyPermissions）
+     * 验证用户是否具有以下任意一个权限，无权限返回hidden用于隐藏（如需返回Boolean使用hasAnyPermissions）
      *
      * @param permissions 以 PERMISSION_NAMES_DELIMETER 为分隔符的权限列表
      * @return 用户是否具有以下任意一个权限
@@ -61,7 +61,7 @@ public class PermissionService
     }
 
     /**
-     * 验证用户用户是否具备某角色，无权限返回hidden用于隐藏（如需返回Boolean使用isRole）
+     * 验证用户是否具备某角色，无权限返回hidden用于隐藏（如需返回Boolean使用isRole）
      * 
      * @param role 角色字符串
      * @return 用户是否具备某角色
@@ -72,7 +72,7 @@ public class PermissionService
     }
 
     /**
-     * 验证用户用户是否不具备某角色，与hasRole逻辑相反。无权限返回hidden用于隐藏（如需返回Boolean使用isLacksRole）
+     * 验证用户是否不具备某角色，与hasRole逻辑相反。无权限返回hidden用于隐藏（如需返回Boolean使用isLacksRole）
      * 
      * @param role 角色字符串
      * @return 用户是否不具备某角色
@@ -83,7 +83,7 @@ public class PermissionService
     }
 
     /**
-     * 验证用户用户是否具有以下任意一个角色，无权限返回hidden用于隐藏（如需返回Boolean使用isAnyRoles）
+     * 验证用户是否具有以下任意一个角色，无权限返回hidden用于隐藏（如需返回Boolean使用isAnyRoles）
      *
      * @param roles 以 ROLE_NAMES_DELIMETER 为分隔符的角色列表
      * @return 用户是否具有以下任意一个角色
@@ -91,6 +91,17 @@ public class PermissionService
     public String hasAnyRoles(String roles)
     {
         return isAnyRoles(roles, ROLE_DELIMETER) ? StringUtils.EMPTY : NOACCESS;
+    }
+
+    /**
+     * 验证用户是否认证通过或已记住的用户。
+     *
+     * @return 用户是否认证通过或已记住的用户
+     */
+    public boolean isUser()
+    {
+        Subject subject = SecurityUtils.getSubject();
+        return subject != null && subject.getPrincipal() != null;
     }
 
     /**
