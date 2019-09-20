@@ -799,7 +799,7 @@ label {
 
 .table-striped .table, .table-striped .table, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
 	border-bottom: 1px solid #e7eaec!important;
-	background-color: transparent!important;
+	background-color: transparent;
 	border: 0px;
 }
 
