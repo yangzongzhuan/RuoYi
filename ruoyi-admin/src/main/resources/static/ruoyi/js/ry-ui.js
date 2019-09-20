@@ -245,9 +245,9 @@
 				}
 			},
             // 搜索-默认第一个form
-            search: function(formId, data) {
+            search: function(formId, tableId, data) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
-    		    var params = $.btTable.bootstrapTable('getOptions');
+            	var params = $.common.isEmpty(tableId) ? $.btTable.bootstrapTable('getOptions') : $("#" + tableId).bootstrapTable('getOptions');
     		    params.queryParams = function(params) {
                     var search = $.common.formToJSON(currentId);
                     if($.common.isNotEmpty(data)){
@@ -262,7 +262,11 @@
                     search.isAsc = params.order;
     		        return search;
     		    }
-    		    $.btTable.bootstrapTable('refresh', params);
+    		    if($.common.isNotEmpty(tableId)){
+    				$("#" + tableId).bootstrapTable('refresh', params);
+    			} else{
+    				$.btTable.bootstrapTable('refresh', params);
+    			}
     		},
     		// 导出数据
     		exportExcel: function(formId) {
@@ -478,11 +482,15 @@
         // 表单封装处理
     	form: {
     		// 表单重置
-    		reset: function(formId) {
+    		reset: function(formId, tableId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	$("#" + currentId)[0].reset();
             	if ($.table._option.type == table_type.bootstrapTable) {
-            	    $.btTable.bootstrapTable('refresh');
+            	    if($.common.isEmpty(tableId)){
+            	    	$.btTable.bootstrapTable('refresh');
+                	} else{
+                	    $("#" + tableId).bootstrapTable('refresh');
+                	}
             	}
             },
             // 获取选中复选框项

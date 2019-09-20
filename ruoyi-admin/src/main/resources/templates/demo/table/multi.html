@@ -4,15 +4,71 @@
 	<th:block th:include="include :: header('初始多表格')" />
 </head>
 <body class="gray-bg">
-     <div class="container-div">
-		<div class="row">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="form1">
+                    <div class="select-list">
+                        <ul>
+						    <li>
+								用户名称：<input type="text" name="userName"/>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search('form1', 'bootstrap-table1')"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset('form1', 'bootstrap-table1')"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+            <div class="btn-group-sm" id="toolbar1" role="group">
+	            <a class="btn btn-success">
+	                <i class="fa fa-plus"></i> 新增
+	            </a>
+	            <a class="btn btn-primary">
+	                <i class="fa fa-edit"></i> 修改
+	            </a>
+	            <a class="btn btn-danger">
+	                <i class="fa fa-remove"></i> 删除
+	            </a>
+            </div>
 			<div class="col-sm-12 select-table table-striped">
-				<table id="bootstrap-table-1" data-mobile-responsive="true"></table>
+				<table id="bootstrap-table1" data-mobile-responsive="true"></table>
 			</div>
 		</div>
-		<div class="row">
+	</div>
+	
+	<div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="form2">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+								用户名称：<input type="text" name="userName"/>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search('form2', 'bootstrap-table2')"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset('form2', 'bootstrap-table2')"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+            <div class="btn-group-sm" id="toolbar2" role="group">
+	            <a class="btn btn-success">
+	                <i class="fa fa-plus"></i> 新增
+	            </a>
+	            <a class="btn btn-primary">
+	                <i class="fa fa-edit"></i> 修改
+	            </a>
+	            <a class="btn btn-danger">
+	                <i class="fa fa-remove"></i> 删除
+	            </a>
+            </div>
 			<div class="col-sm-12 select-table table-striped">
-				<table id="bootstrap-table-2" data-mobile-responsive="true"></table>
+				<table id="bootstrap-table2" data-mobile-responsive="true"></table>
 			</div>
 		</div>
 	</div>
@@ -23,12 +79,9 @@
 
         $(function() {
             var options = {
-            	id: "bootstrap-table-1",
+            	id: "bootstrap-table1",
+            	toolbar: "toolbar1",
                 url: prefix + "/list",
-                createUrl: prefix + "/add",
-                updateUrl: prefix + "/edit/{id}",
-                removeUrl: prefix + "/remove",
-				exportUrl: prefix + "/export",
 		        showSearch: false,
 		        showRefresh: false,
 		        showToggle: false,
@@ -73,8 +126,8 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		            	var actions = [];
-		            	actions.push('<a class="btn btn-success btn-xs" href="#"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs" href="#"><i class="fa fa-remove"></i>删除</a>');
+		            	actions.push('<a class="btn btn-success btn-xs" href="javascript:void(0)"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs" href="javascript:void(0)"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
 		            }
 		        }]
@@ -82,21 +135,16 @@
             $.table.init(options);
         });
         
-        function queryParams(params) {
-            var search = $.table.queryParams(params);
-            search.userName = '测试1';
-            return search;
-        }
         
         $(function() {
             var options = {
-            	id: "bootstrap-table-2",
+            	id: "bootstrap-table2",
+            	toolbar: "toolbar2",
                 url: prefix + "/list",
 		        showSearch: false,
 		        showRefresh: false,
 		        showToggle: false,
 		        showColumns: false,
-		        queryParams: queryParams,
                 columns: [{
 		            checkbox: true
 		        },
@@ -137,8 +185,8 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		            	var actions = [];
-		            	actions.push('<a class="btn btn-success btn-xs" href="#"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs" href="#"><i class="fa fa-remove"></i>删除</a>');
+		            	actions.push('<a class="btn btn-success btn-xs" href="javascript:void(0)"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs" href="javascript:void(0)"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
 		            }
 		        }]
