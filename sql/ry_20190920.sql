@@ -416,6 +416,7 @@ create table sys_oper_log (
   oper_ip           varchar(50)     default ''                 comment '主机地址',
   oper_location     varchar(255)    default ''                 comment '操作地点',
   oper_param        varchar(2000)   default ''                 comment '请求参数',
+  json_result       varchar(2000)   default ''                 comment '返回参数',
   status            int(1)          default 0                  comment '操作状态（0正常 1异常）',
   error_msg         varchar(2000)   default ''                 comment '错误消息',
   oper_time         datetime                                   comment '操作时间',

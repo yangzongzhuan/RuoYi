@@ -67,6 +67,10 @@ public class SysOperLog extends BaseEntity
     @Excel(name = "请求参数")
     private String operParam;
 
+    /** 返回参数 */
+    @Excel(name = "返回参数")
+    private String jsonResult;
+
     /** 操作状态（0正常 1异常） */
     @Excel(name = "状态", readConverterExp = "0=正常,1=异常")
     private Integer status;
@@ -207,6 +211,16 @@ public class SysOperLog extends BaseEntity
     public void setOperParam(String operParam)
     {
         this.operParam = operParam;
+    }
+
+    public String getJsonResult()
+    {
+        return jsonResult;
+    }
+
+    public void setJsonResult(String jsonResult)
+    {
+        this.jsonResult = jsonResult;
     }
 
     public Integer getStatus()
