@@ -106,6 +106,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
      * @param ${pkColumn.javaField} ${functionName}ID
      * @return 结果
      */
+    @Override
     public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField})
     {
         return ${className}Mapper.delete${ClassName}ById(${pkColumn.javaField});
