@@ -195,6 +195,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格行内编辑操作
+     */
+    @GetMapping("/editable")
+    public String editable()
+    {
+        return prefix + "/editable";
+    }
+
+    /**
      * 表格其他操作
      */
     @GetMapping("/other")
