@@ -52,17 +52,27 @@
 				{
 					field : 'userName', 
 					title : '用户姓名',
-					editable: true
+					editable : {
+						type : 'text',
+						title : '名称',
+						emptytext : "【名称】为空",
+						validate : function(value) {
+							if (value.length > 30) {
+								return '名称不能超过30个字符';
+							}
+							if (value.length == 0) {
+								return '名称不能为空';
+							}
+						}
+					}
 				},
 				{
 					field : 'userPhone', 
-					title : '用户手机',
-					editable: true
+					title : '用户手机'
 				},
 				{
 					field : 'userEmail', 
-					title : '用户邮箱',
-					editable: true
+					title : '用户邮箱'
 				},
 				{
 				    field : 'userBalance',
@@ -72,9 +82,17 @@
                     field: 'status',
                     title: '用户状态',
                     align: 'center',
-                    formatter: function(value, row, index) {
-                    	return $.table.selectDictLabel(datas, value);
-                    }
+                    editable : {
+						type : 'select',
+						title : '状态',
+						source : [{
+							value : 0,
+							text : "正常"
+						}, {
+							value : 1,
+							text : "停用"
+						}]
+					}
                 },
 		        {
 		            title: '操作',

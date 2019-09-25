@@ -832,6 +832,10 @@ label {
     display: inline-block
 }
 
+.editable-input .input-sm {
+	height: 32px!important;
+}
+
 /** 表格冻结列样式 **/
 .left-fixed-table-columns, .left-fixed-body-columns {
     position: absolute;
