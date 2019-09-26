@@ -155,6 +155,7 @@
             		if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
             			func = $.inArray(e.type, ['check', 'check-all']) > -1 ? 'union' : 'difference';
             			selectionIds = _[func](selectionIds, rowIds);
+                        selectionRows = _[func](selectionRows, rows,"row");
             		}
             	});
             	// 图片预览事件
@@ -365,7 +366,9 @@
         	        return row[column];
         	    });
             	if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
-            		rows = rows.concat(selectionIds);
+                    rows = $.map(selectionRows, function (row) {
+                        return row[column];
+                    });
             	}
             	return $.common.uniqueFn(rows);
             },
@@ -388,7 +391,9 @@
         	        return row[$.table._option.columns[1].field];
         	    });
             	if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
-            		rows = rows.concat(selectionIds);
+                    rows = $.map(selectionRows, function (row) {
+                        return row[$.table._option.columns[1].field];
+                    });
             	}
             	return $.common.uniqueFn(rows);
             },
