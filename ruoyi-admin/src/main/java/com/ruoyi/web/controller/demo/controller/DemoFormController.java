@@ -47,6 +47,15 @@ public class DemoFormController
     }
 
     /**
+     * 时间轴
+     */
+    @GetMapping("/timeline")
+    public String timeline()
+    {
+        return prefix + "/timeline";
+    }
+
+    /**
      * 表单校验
      */
     @GetMapping("/validate")
