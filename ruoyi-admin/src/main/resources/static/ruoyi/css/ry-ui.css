@@ -573,14 +573,14 @@ label.error {
 	}
 }
 
-/** 表单查询条件 **/
-.select-list ul {
+/** 表单查询条件  **/
+.select-list ul, .layui-layer-content ul {
 	margin: 0;
 	padding: 0;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.select-list li {
+.select-list li, .layui-layer-content li {
 	list-style: none;
 }
 
