@@ -2,8 +2,7 @@ package com.ruoyi.common.xss;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import com.ruoyi.common.utils.html.EscapeUtil;
 
 /**
  * XSS过滤处理
@@ -31,7 +30,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper
             for (int i = 0; i < length; i++)
             {
                 // 防xss攻击和过滤前后空格
-                escapseValues[i] = Jsoup.clean(values[i], Whitelist.relaxed()).trim();
+                escapseValues[i] = EscapeUtil.clean(values[i]).trim();
             }
             return escapseValues;
         }
