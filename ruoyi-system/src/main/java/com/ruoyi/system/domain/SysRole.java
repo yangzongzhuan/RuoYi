@@ -52,6 +52,16 @@ public class SysRole extends BaseEntity
     /** 部门组（数据权限） */
     private Long[] deptIds;
 
+    public SysRole()
+    {
+
+    }
+
+    public SysRole(Long roleId)
+    {
+        this.roleId = roleId;
+    }
+
     public Long getRoleId()
     {
         return roleId;
@@ -60,6 +70,16 @@ public class SysRole extends BaseEntity
     public void setRoleId(Long roleId)
     {
         this.roleId = roleId;
+    }
+
+    public boolean isAdmin()
+    {
+        return isAdmin(this.roleId);
+    }
+
+    public static boolean isAdmin(Long roleId)
+    {
+        return roleId != null && 1L == roleId;
     }
 
     public String getDataScope()

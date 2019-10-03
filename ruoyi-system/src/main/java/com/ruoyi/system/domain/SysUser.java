@@ -93,6 +93,16 @@ public class SysUser extends BaseEntity
     /** 岗位组 */
     private Long[] postIds;
 
+    public SysUser()
+    {
+
+    }
+
+    public SysUser(Long userId)
+    {
+        this.userId = userId;
+    }
+
     public Long getUserId()
     {
         return userId;

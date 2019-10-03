@@ -109,6 +109,13 @@ public interface ISysRoleService
     public String checkRoleKeyUnique(SysRole role);
 
     /**
+     * 校验角色是否允许操作
+     * 
+     * @param role 角色信息
+     */
+    public void checkRoleAllowed(SysRole role);
+
+    /**
      * 通过角色ID查询角色使用数量
      * 
      * @param roleId 角色ID
@@ -123,6 +130,7 @@ public interface ISysRoleService
      * @return 结果
      */
     public int changeStatus(SysRole role);
+
     /**
      * 取消授权用户角色
      * 
@@ -139,7 +147,7 @@ public interface ISysRoleService
      * @return 结果
      */
     public int deleteAuthUsers(Long roleId, String userIds);
-    
+
     /**
      * 批量选择授权用户角色
      * 
