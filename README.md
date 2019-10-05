@@ -6,7 +6,7 @@
 
 若依参考后台模板。有需要可自行到群内下载。
 
-> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需其他版本，请移步 [项目扩展](http://doc.ruoyi.vip/#/standard/xmkz)  `(不定时更新)`
+> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需其他版本，请移步 [项目扩展](http://doc.ruoyi.vip/ruoyi/document/xmkz.html)  `(不定时更新)`
 
 > 阿里云通用云产品1888优惠券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)&nbsp;&nbsp;&nbsp;&nbsp;腾讯云通用云产品2860优惠券 ：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;`(仅限新用户)`
 
