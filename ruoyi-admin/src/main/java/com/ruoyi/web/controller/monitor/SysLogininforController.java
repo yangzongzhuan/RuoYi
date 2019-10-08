@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.monitor;
 
 import java.util.List;
+
+import com.ruoyi.framework.shiro.service.SysPasswordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ public class SysLogininforController extends BaseController
 
     @Autowired
     private ISysLogininforService logininforService;
+
+    @Autowired
+    private SysPasswordService passwordService;
 
     @RequiresPermissions("monitor:logininfor:view")
     @GetMapping()
@@ -75,6 +80,16 @@ public class SysLogininforController extends BaseController
     public AjaxResult clean()
     {
         logininforService.cleanLogininfor();
+        return success();
+    }
+
+    @RequiresPermissions("monitor:logininfor:unlock")
+    @Log(title = "账户解锁", businessType = BusinessType.OTHER)
+    @PostMapping("/unlock")
+    @ResponseBody
+    public AjaxResult unlock(String loginName)
+    {
+        passwordService.unlock(loginName);
         return success();
     }
 }
