@@ -19,7 +19,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import com.ruoyi.common.exception.user.CaptchaException;
 import com.ruoyi.common.exception.user.RoleBlockedException;
 import com.ruoyi.common.exception.user.UserBlockedException;

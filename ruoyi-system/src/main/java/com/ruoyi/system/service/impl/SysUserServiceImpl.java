@@ -167,10 +167,7 @@ public class SysUserServiceImpl implements ISysUserService
         Long[] userIds = Convert.toLongArray(ids);
         for (Long userId : userIds)
         {
-            if (SysUser.isAdmin(userId))
-            {
-                throw new BusinessException("不允许删除超级管理员用户");
-            }
+            checkUserAllowed(new SysUser(userId));
         }
         return userMapper.deleteUserByIds(userIds);
     }
@@ -346,6 +343,19 @@ public class SysUserServiceImpl implements ISysUserService
     }
 
     /**
+     * 校验用户是否允许操作
+     * 
+     * @param user 用户信息
+     */
+    public void checkUserAllowed(SysUser user)
+    {
+        if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())
+        {
+            throw new BusinessException("不允许操作超级管理员用户");
+        }
+    }
+
+    /**
      * 查询用户所属角色组
      * 
      * @param userId 用户ID
@@ -465,10 +475,6 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public int changeStatus(SysUser user)
     {
-        if (SysUser.isAdmin(user.getUserId()))
-        {
-            throw new BusinessException("不允许修改超级管理员用户");
-        }
         return userMapper.updateUser(user);
     }
 }

@@ -139,6 +139,16 @@
             },
             // 初始化事件
             initEvent: function(data) {
+            	// 绑定选中事件、取消事件、全部选中、全部取消
+            	$.btTable.on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rows) {
+            		// 复选框分页保留保存选中数组
+            		var rowIds = $.table.affectedRowIds(rows);
+            		if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
+            			func = $.inArray(e.type, ['check', 'check-all']) > -1 ? 'union' : 'difference';
+            			selectionIds = _[func](selectionIds, rowIds);
+            			selectionRows = _[func](selectionRows, rows);
+            		}
+            	});
             	// 触发行点击事件 加载成功事件
             	$.btTable.on("check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table load-success.bs.table", function () {
             		// 工具栏按钮控制
@@ -147,15 +157,6 @@
             		$('#' + $.table._option.toolbar + ' .multiple').toggleClass('disabled', !rows.length);
             		// 非单个禁用
             		$('#' + $.table._option.toolbar + ' .single').toggleClass('disabled', rows.length!=1);
-            	});
-            	// 绑定选中事件、取消事件、全部选中、全部取消
-            	$.btTable.on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rows) {
-            		// 复选框分页保留保存选中数组
-            		var rowIds = $.table.affectedRowIds(rows);
-            		if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
-            			func = $.inArray(e.type, ['check', 'check-all']) > -1 ? 'union' : 'difference';
-            			selectionIds = _[func](selectionIds, rowIds);
-            		}
             	});
             	// 图片预览事件
             	$.btTable.on('click', '.img-circle', function() {
@@ -365,7 +366,9 @@
         	        return row[column];
         	    });
             	if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
-            		rows = rows.concat(selectionIds);
+            		rows = $.map(selectionRows, function (row) {
+                        return row[column];
+                    });
             	}
             	return $.common.uniqueFn(rows);
             },
@@ -388,7 +391,9 @@
         	        return row[$.table._option.columns[1].field];
         	    });
             	if ($.common.isNotEmpty($.table._option.rememberSelected) && $.table._option.rememberSelected) {
-            		rows = rows.concat(selectionIds);
+            		rows = $.map(selectionRows, function (row) {
+                        return row[$.table._option.columns[1].field];
+                    });
             	}
             	return $.common.uniqueFn(rows);
             },
@@ -1348,7 +1353,11 @@
             formToJSON: function(formId) {
             	 var json = {};
                  $.each($("#" + formId).serializeArray(), function(i, field) {
-                	 json[field.name] = field.value;
+                 	 if(json[field.name]) {
+                         json[field.name] += ("," + field.value);
+					 } else {
+                         json[field.name] = field.value;
+                     }
                  });
             	return json;
             }

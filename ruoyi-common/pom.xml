@@ -77,12 +77,6 @@
 			<artifactId>commons-fileupload</artifactId>
 		</dependency>
 		
-		<!-- HTML解析器 -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-		</dependency>
-		
 		<!-- excel工具 -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>

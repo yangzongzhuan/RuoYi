@@ -121,6 +121,7 @@ public class SysRoleController extends BaseController
     @ResponseBody
     public AjaxResult editSave(@Validated SysRole role)
     {
+        roleService.checkRoleAllowed(role);
         if (UserConstants.ROLE_NAME_NOT_UNIQUE.equals(roleService.checkRoleNameUnique(role)))
         {
             return error("修改角色'" + role.getRoleName() + "'失败，角色名称已存在");
@@ -153,6 +154,7 @@ public class SysRoleController extends BaseController
     @ResponseBody
     public AjaxResult authDataScopeSave(SysRole role)
     {
+        roleService.checkRoleAllowed(role);
         role.setUpdateBy(ShiroUtils.getLoginName());
         if (roleService.authDataScope(role) > 0)
         {
@@ -216,6 +218,7 @@ public class SysRoleController extends BaseController
     @ResponseBody
     public AjaxResult changeStatus(SysRole role)
     {
+        roleService.checkRoleAllowed(role);
         return toAjax(roleService.changeStatus(role));
     }
 

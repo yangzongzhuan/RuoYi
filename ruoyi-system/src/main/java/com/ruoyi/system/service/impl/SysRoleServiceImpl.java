@@ -150,6 +150,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         Long[] roleIds = Convert.toLongArray(ids);
         for (Long roleId : roleIds)
         {
+            checkRoleAllowed(new SysRole(roleId));
             SysRole role = selectRoleById(roleId);
             if (countUserRoleByRoleId(roleId) > 0)
             {
@@ -291,6 +292,19 @@ public class SysRoleServiceImpl implements ISysRoleService
             return UserConstants.ROLE_KEY_NOT_UNIQUE;
         }
         return UserConstants.ROLE_KEY_UNIQUE;
+    }
+
+    /**
+     * 校验角色是否允许操作
+     * 
+     * @param role 角色信息
+     */
+    public void checkRoleAllowed(SysRole role)
+    {
+        if (StringUtils.isNotNull(role.getRoleId()) && role.isAdmin())
+        {
+            throw new BusinessException("不允许操作超级管理员角色");
+        }
     }
 
     /**

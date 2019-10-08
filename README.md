@@ -6,7 +6,7 @@
 
 若依参考后台模板。有需要可自行到群内下载。
 
-> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需其他版本，请移步 [项目扩展](http://doc.ruoyi.vip/#/standard/xmkz)  `(不定时更新)`
+> 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需其他版本，请移步 [项目扩展](http://doc.ruoyi.vip/ruoyi/document/xmkz.html)  `(不定时更新)`
 
 > 阿里云通用云产品1888优惠券 ：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=brki8iof)&nbsp;&nbsp;&nbsp;&nbsp;腾讯云通用云产品2860优惠券 ：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;`(仅限新用户)`
 
@@ -26,7 +26,7 @@
 10. 登录日志：系统登录日志记录查询包含登录异常。
 11. 在线用户：当前系统中活跃用户状态监控。
 12. 定时任务：在线（添加、修改、删除)任务调度包含执行结果日志。
-13. 代码生成：前后端代码的生成（java、html、xml、sql)支持CRUD下载 。
+13. 代码生成：前后端代码的生成（java、html、xml、sql）支持CRUD下载 。
 14. 系统接口：根据业务代码自动生成相关的api接口文档。
 15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
 16. 在线构建器：拖动表单元素生成相应的HTML代码。
