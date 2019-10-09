@@ -34,7 +34,7 @@ public class SysJobLogServiceImpl implements ISysJobLogService
     /**
      * 通过调度任务日志ID查询调度信息
      * 
-     * @param jobId 调度任务日志ID
+     * @param jobLogId 调度任务日志ID
      * @return 调度任务日志对象信息
      */
     @Override
