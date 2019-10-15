@@ -28,7 +28,7 @@ public class ${ClassName} extends ${Entity}
     private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
-#if(!$column.superColumn)
+#if(!$table.isSuperColumn($column.javaField))
     /** $column.columnComment */
 #if($column.list)
 #set($parentheseIndex=$column.columnComment.indexOf("（"))
@@ -50,7 +50,7 @@ public class ${ClassName} extends ${Entity}
 #end
 #end
 #foreach ($column in $columns)
-#if(!$column.superColumn)
+#if(!$table.isSuperColumn($column.javaField))
 #set($AttrName=$column.javaField.substring(0,1).toUpperCase() + ${column.javaField.substring(1)})
     public void set${AttrName}($column.javaType $column.javaField) 
     {
