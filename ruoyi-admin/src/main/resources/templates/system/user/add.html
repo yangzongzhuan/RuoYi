@@ -149,7 +149,7 @@
                         type: "post",
                         dataType: "json",
                         data: {
-                        	name : function() {
+                        	"loginName": function() {
                                 return $.common.trim($("#loginName").val());
                             }
                         },
@@ -169,7 +169,7 @@
                         type: "post",
                         dataType: "json",
                         data: {
-                            name: function () {
+                            "email": function () {
                                 return $.common.trim($("#email").val());
                             }
                         },
@@ -185,7 +185,7 @@
                         type: "post",
                         dataType: "json",
                         data: {
-                            name: function () {
+                            "phonenumber": function () {
                                 return $.common.trim($("#phonenumber").val());
                             }
                         },
