@@ -17,7 +17,7 @@
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
     <link th:href="@{/ruoyi/css/ry-ui.css?v=4.0.0}" rel="stylesheet"/>
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden" th:classappend="|${@config.getKey('sys.index.sideTheme')} ${@config.getKey('sys.index.skinName')}|">
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
 
     <!--左侧导航开始-->
@@ -187,8 +187,12 @@
 								<i class="fa fa-user"></i> 个人中心</a>
 							</li>
 							<li>
-								<a onclick="resetPwd()" class="menuItem">
+								<a onclick="resetPwd()">
 								<i class="fa fa-key"></i> 修改密码</a>
+							</li>
+							<li>
+								<a onclick="switchSkin()">
+								<i class="fa fa-dashboard"></i> 切换主题</a>
 							</li>
 							<li class="divider"></li>
 							<li>
@@ -236,14 +240,37 @@
 <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
+<script th:src="@{/ruoyi/js/common.js?v=4.0.0}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
-<script th:inline="javascript"> 
+<script th:inline="javascript">
 var ctx = [[@{/}]];
-/*用户管理-重置密码*/
+var skin = storage.get("skin");
+// 本地主题优先，未设置取系统配置
+if($.common.isNotEmpty(skin)){
+	$("body").addClass(skin.split('|')[0]);
+	$("body").addClass(skin.split('|')[1]);
+} else {
+	var sideTheme = [[${@config.getKey('sys.index.sideTheme')}]];
+	var skinName = [[${@config.getKey('sys.index.skinName')}]];
+	$("body").addClass(sideTheme);
+	$("body").addClass(skinName);
+}
+
+/* 用户管理-重置密码 */
 function resetPwd() {
     var url = ctx + 'system/user/profile/resetPwd';
     $.modal.open("重置密码", url, '800', '500');
+}
+/* 切换主题 */
+function switchSkin() {
+    layer.open({
+		type : 2,
+		shadeClose : true,
+		title : "切换主题",
+		area : ["530px", "386px"],
+		content : [ctx + "system/switchSkin", 'no']
+	})
 }
 </script>
 </body>

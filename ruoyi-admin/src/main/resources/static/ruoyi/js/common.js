@@ -3,6 +3,15 @@
  * Copyright (c) 2019 ruoyi 
  */
 $(function() {
+	
+	//  layer扩展皮肤
+	if (window.layer !== undefined) {
+		layer.config({
+		    extend: 'moon/style.css',
+		    skin: 'layer-ext-moon'
+		});
+	}
+	
 	// select2复选框事件绑定
 	if ($.fn.select2 !== undefined) {
         $.fn.select2.defaults.set( "theme", "bootstrap" );
@@ -225,17 +234,33 @@ function createMenuItem(dataUrl, menuName) {
 
 //日志打印封装处理
 var log = {
-    log: function (msg) {
-    	console.log(msg);
+    log: function(msg) {
+        console.log(msg);
     },
     info: function(msg) {
-    	console.info(msg);
+        console.info(msg);
     },
     warn: function(msg) {
-    	console.warn(msg);
+        console.warn(msg);
     },
     error: function(msg) {
-    	console.error(msg);
+        console.error(msg);
+    }
+};
+
+//本地缓存处理
+var storage = {
+    set: function(key, value) {
+        window.localStorage.setItem(key, value);
+    },
+    get: function(key) {
+        return window.localStorage.getItem(key);
+    },
+    remove: function(key) {
+        window.localStorage.removeItem(key);
+    },
+    clear: function() {
+        window.localStorage.clear();
     }
 };
 
@@ -252,8 +277,4 @@ $.ajaxSetup({
             $.modal.closeLoading();
         }
     }
-});
-layer.config({
-    extend: 'moon/style.css',
-    skin: 'layer-ext-moon'
 });
