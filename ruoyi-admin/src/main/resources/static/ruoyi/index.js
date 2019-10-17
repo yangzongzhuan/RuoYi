@@ -219,6 +219,7 @@ $(function() {
         flag = true;
         $(".nav ul li, .nav li").removeClass("selected");
         $(this).parent("li").addClass("selected");
+        setIframeUrl($(this).attr("href"));
         if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
 
         // 选项卡菜单已存在
@@ -469,12 +470,25 @@ $(function() {
         $('#ax_close_max').show();
     }
     
+    // 设置锚点
+    function setIframeUrl(href) {
+        var nowUrl = window.location.href;
+        var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
+        window.location.href = newUrl + "#" + href;
+    }
+    
     $(window).keydown(function(event) {
         if (event.keyCode == 27) {
             $('#content-main').removeClass('max');
             $('#ax_close_max').hide();
         }
     });
+    
+    window.onhashchange = function() {
+        var hash = location.hash;
+        var url = hash.substring(1, hash.length);
+        $('a[href$="' + url + '"]').click();
+    };
     
     // 右键菜单实现
     $.contextMenu({

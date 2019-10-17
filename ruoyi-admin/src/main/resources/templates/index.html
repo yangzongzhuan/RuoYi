@@ -27,9 +27,11 @@
         </div>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
-                <li class="logo">
-				     <span class="logo-lg">RuoYi</span>
-            	</li>
+                <a th:href="@{/index}">
+                  <li class="logo">
+				    <span class="logo-lg" >RuoYi</span> 
+            	  </li>
+            	</a>
             	<li>
             		<div class="user-panel">
             			<a class="menuItem" title="个人中心" th:href="@{/system/user/profile}"> 
@@ -45,7 +47,7 @@
 				        </div>
 				    </div>
             	</li>
-                 <li class="active">
+                 <li>
                     <a href="index.html"><i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li class="active"><a class="menuItem" th:href="@{/system/main}">了解若依</a></li>
@@ -272,6 +274,15 @@ function switchSkin() {
 		content : [ctx + "system/switchSkin", 'no']
 	})
 }
+
+$(function() {
+    var hash = location.hash;
+    if (hash !== '') {
+        var url = hash.substring(1, hash.length);
+        $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+        $('a[href$="' + url + '"]').click();
+    }
+});
 </script>
 </body>
 </html>
