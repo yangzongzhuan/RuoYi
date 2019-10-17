@@ -799,10 +799,17 @@
             // 详细信息
             detail: function(id, width, height) {
             	var _url = $.operate.detailUrl(id);
+            	var _width = $.common.isEmpty(width) ? "800" : width; 
+                var _height = $.common.isEmpty(height) ? ($(window).height() - 50) : height;
+            	//如果是移动端，就使用自适应大小弹窗
+            	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+            	    _width = 'auto';
+            	    _height = 'auto';
+            	}
             	var options = {
        				title: $.table._option.modalName + "详细",
-       				width: width,
-       				height: height,
+       				width: _width,
+       				height: _height,
        				url: $.operate.detailUrl(id),
        				skin: 'layui-layer-gray', 
        				btn: ['关闭'],
@@ -1072,6 +1079,11 @@
             form: function (formId) {
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 return $("#" + currentId).validate().form();
+            },
+            // 重置表单验证（清除提示信息）
+            reset: function (formId) {
+            	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+                return $("#" + currentId).validate().resetForm();
             }
         },
         // 树插件封装处理
