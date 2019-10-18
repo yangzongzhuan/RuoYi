@@ -82,11 +82,17 @@
                 },
                 {
                     field: 'configName',
-                    title: '参数名称'
+                    title: '参数名称',
+                    formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
                 },
                 {
                     field: 'configKey',
-                    title: '参数键名'
+                    title: '参数键名',
+                    formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
                 },
                 {
                     field: 'configValue',
@@ -105,7 +111,7 @@
                     title: '备注',
                     align: 'center',
                     formatter: function(value, row, index) {
-                    	return $.table.tooltip(value);
+                    	return $.table.tooltip(value, 10, 1);
                     }
                 },
                 {

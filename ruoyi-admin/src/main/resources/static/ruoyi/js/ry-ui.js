@@ -177,11 +177,21 @@
     			        window.open(src);
     			    }
     			});
-            	// 单击tooltip复制文本
+            	// 单击tooltip事件
             	$.btTable.on('click', '.tooltip-show', function() {
+            		var target = $(this).data('target');
             		var input = $(this).prev();
-            		input.select();
-            		document.execCommand("copy");
+            		if ($.common.equals("0", target)) {
+            		    input.select();
+            		    document.execCommand("copy");
+            		} else if ($.common.equals("1", target)) {
+            			parent.layer.alert(input.val(), {
+                	        title: "信息内容",
+                	        shadeClose: true,
+                	        btn: ['确认'],
+                	        btnclass: ['btn btn-primary'],
+                	    });
+            		}
             	});
             },
             // 当所有数据被加载时触发
@@ -204,17 +214,18 @@
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
-			// 列超出指定长度浮动提示（单击文本复制）
-			tooltip: function (value, length) {
+			// 列超出指定长度浮动提示（target=0单击文本复制，不弹窗，target=1弹窗打开）
+			tooltip: function (value, length, target) {
 				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
 				var _value = $.common.nullToStr(value);
+				var _target = $.common.isEmpty(target) ? '0' : target;
 				if (_value.length > _length) {
 					_text = _value.substr(0, _length) + "...";
 					_value = _value.replace(/\'/g,"’");
 					var actions = [];
 					actions.push($.common.sprintf('<input id="tooltip-show" style="opacity: 0;position: absolute;z-index:-1" type="text" value="%s"/>', _value));
-                	actions.push($.common.sprintf("<a href='###' class='tooltip-show' data-toggle='tooltip' title='%s'>%s</a>", _value, _text));
+                	actions.push($.common.sprintf("<a href='###' class='tooltip-show' data-toggle='tooltip' data-target='%s' title='%s'>%s</a>", _target, _value, _text));
 					return actions.join('');
 				} else {
 					_text = _value;
