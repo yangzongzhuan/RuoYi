@@ -181,10 +181,10 @@
             	$.btTable.on('click', '.tooltip-show', function() {
             		var target = $(this).data('target');
             		var input = $(this).prev();
-            		if ($.common.equals("0", target)) {
+            		if ($.common.equals("copy", target)) {
             		    input.select();
             		    document.execCommand("copy");
-            		} else if ($.common.equals("1", target)) {
+            		} else if ($.common.equals("open", target)) {
             			parent.layer.alert(input.val(), {
                 	        title: "信息内容",
                 	        shadeClose: true,
@@ -214,12 +214,12 @@
 				var pageNumber = table.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
-			// 列超出指定长度浮动提示（target=0单击文本复制，不弹窗，target=1弹窗打开）
+			// 列超出指定长度浮动提示 target（copy单击复制文本 open弹窗打开文本）
 			tooltip: function (value, length, target) {
 				var _length = $.common.isEmpty(length) ? 20 : length;
 				var _text = "";
 				var _value = $.common.nullToStr(value);
-				var _target = $.common.isEmpty(target) ? '0' : target;
+				var _target = $.common.isEmpty(target) ? 'copy' : target;
 				if (_value.length > _length) {
 					_text = _value.substr(0, _length) + "...";
 					_value = _value.replace(/\'/g,"’");
