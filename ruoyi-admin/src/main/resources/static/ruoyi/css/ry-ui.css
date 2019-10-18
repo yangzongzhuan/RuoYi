@@ -737,6 +737,20 @@ label {
 	background-color: #12889a
 }
 
+.select-list .select2-container--bootstrap {
+	width: 200px!important;
+	display: inline-block;
+}
+
+.select-list .select2-container--bootstrap .select2-selection {
+	border-radius: 6px;
+}
+
+.select-list .select2-container--bootstrap .select2-selection--single {
+	height: 30px!important;
+	padding: 5px 10px;
+}
+
 .select-list .select-time input {
 	width: 93px;
 }
