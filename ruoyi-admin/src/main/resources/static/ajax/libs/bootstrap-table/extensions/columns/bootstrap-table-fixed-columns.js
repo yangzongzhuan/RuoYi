@@ -233,7 +233,7 @@
                 });
             });
             
-            $.btTable.on("check.bs.table uncheck.bs.table", function (e, rows, $element) {
+            $("#" + table.options.id).on("check.bs.table uncheck.bs.table", function (e, rows, $element) {
         	    var index= $element.data('index');
                 $(this).find('.bs-checkbox').find('input[data-index="' + index + '"]').prop("checked", true);
                 var selectFixedItem = $('.left-fixed-body-columns input[name=btSelectItem]');

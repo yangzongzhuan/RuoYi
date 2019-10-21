@@ -22,13 +22,16 @@
 				</form>
 			</div>
             <div class="btn-group-sm" id="toolbar1" role="group">
-	            <a class="btn btn-success">
+                <a class="btn btn-success" onclick="options1()">
+	                <i class="fa fa-search"></i> options
+	            </a>
+	            <a class="btn btn-success" onclick="$.operate.add()">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
-	            <a class="btn btn-primary">
+	            <a class="btn btn-primary single disabled" onclick="$.operate.edit()">
 	                <i class="fa fa-edit"></i> 修改
 	            </a>
-	            <a class="btn btn-danger">
+	            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
 	                <i class="fa fa-remove"></i> 删除
 	            </a>
             </div>
@@ -57,13 +60,16 @@
 			</div>
 			
             <div class="btn-group-sm" id="toolbar2" role="group">
-	            <a class="btn btn-success">
+                <a class="btn btn-success" onclick="options2()">
+	                <i class="fa fa-search"></i> options
+	            </a>
+	            <a class="btn btn-success" onclick="$.operate.add()">
 	                <i class="fa fa-plus"></i> 新增
 	            </a>
-	            <a class="btn btn-primary">
+	            <a class="btn btn-primary single disabled" onclick="$.operate.edit()">
 	                <i class="fa fa-edit"></i> 修改
 	            </a>
-	            <a class="btn btn-danger">
+	            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
 	                <i class="fa fa-remove"></i> 删除
 	            </a>
             </div>
@@ -74,7 +80,7 @@
 	</div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var prefix = ctx + "demo/table";
+        var prefix = ctx + "demo/operate";
         var datas = [[${@dict.getType('sys_normal_disable')}]];
 
         $(function() {
@@ -82,10 +88,10 @@
             	id: "bootstrap-table1",
             	toolbar: "toolbar1",
                 url: prefix + "/list",
-		        showSearch: false,
-		        showRefresh: false,
-		        showToggle: false,
-		        showColumns: false,
+                createUrl: prefix + "/add",
+                removeUrl: prefix + "/remove",
+                updateUrl: prefix + "/edit/{id}",
+		        modalName: "用户",
                 columns: [{
 		            checkbox: true
 		        },
@@ -126,8 +132,8 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		            	var actions = [];
-		            	actions.push('<a class="btn btn-success btn-xs" href="javascript:void(0)"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs" href="javascript:void(0)"><i class="fa fa-remove"></i>删除</a>');
+		            	actions.push('<a class="btn btn-success btn-xs" href="###" onclick="$.operate.edit(\'' + row.userId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs" href="###" onclick="$.operate.remove(\'' + row.userId + '\')"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
 		            }
 		        }]
@@ -141,10 +147,10 @@
             	id: "bootstrap-table2",
             	toolbar: "toolbar2",
                 url: prefix + "/list",
-		        showSearch: false,
-		        showRefresh: false,
-		        showToggle: false,
-		        showColumns: false,
+                createUrl: prefix + "/add",
+                removeUrl: prefix + "/remove",
+                updateUrl: prefix + "/edit/{id}",
+		        modalName: "用户",
                 columns: [{
 		            checkbox: true
 		        },
@@ -185,14 +191,32 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		            	var actions = [];
-		            	actions.push('<a class="btn btn-success btn-xs" href="javascript:void(0)"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs" href="javascript:void(0)"><i class="fa fa-remove"></i>删除</a>');
+		            	actions.push('<a class="btn btn-success btn-xs" href="###" onclick="$.operate.edit(\'' + row.userId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		            	actions.push('<a class="btn btn-danger btn-xs" href="###" onclick="$.operate.remove(\'' + row.userId + '\')"><i class="fa fa-remove"></i>删除</a>');
 						return actions.join('');
 		            }
 		        }]
             };
             $.table.init(options);
         });
+        
+        function options1() {
+        	var temp = "";
+        	var obj = table.config['bootstrap-table1'];
+        	for (var i in obj) {
+        	    temp += i + ":" + obj[i] + "<br/>";
+        	}
+        	$.modal.alert(temp);
+        }
+        
+        function options2() {
+        	var temp = "";
+        	var obj = table.config['bootstrap-table2'];
+        	for (var i in obj) {
+        	    temp += i + ":" + obj[i] + "<br/>";
+        	}
+        	$.modal.alert(temp);
+        }
     </script>
 </body>
 </html>

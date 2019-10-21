@@ -103,6 +103,17 @@ public class DemoOperateController extends BaseController
                 }
             }
         }
+        else if (StringUtils.isNotEmpty(userModel.getUserName()))
+        {
+            userList.clear();
+            for (Map.Entry<Integer, UserOperateModel> entry : users.entrySet())
+            {
+                if (entry.getValue().getUserName().equals(userModel.getUserName()))
+                {
+                    userList.add(entry.getValue());
+                }
+            }
+        }
         PageDomain pageDomain = TableSupport.buildPageRequest();
         if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize())
         {

@@ -88,7 +88,7 @@
         /* 新增表格行 */
         function insertRow(){
         	var randomId = 100 + ~~(Math.random() * 100)
-        	$.btTable.bootstrapTable('insertRow', {
+        	$("#" + table.options.id).bootstrapTable('insertRow', {
         		index: 0, // 你想插入到哪，0表示第一行
                 row: {
                 	userId: randomId,
@@ -108,7 +108,7 @@
     			$.modal.alertWarning("请至少选择一条记录");
     			return;
     		}
-        	$.btTable.bootstrapTable('remove', {
+        	$("#" + table.options.id).bootstrapTable('remove', {
         	    field: 'userId',
         	    values: ids
         	})
@@ -116,18 +116,18 @@
         
         /* 删除行ID值为1的数据 */
         function removeRowByUniqueId(){
-        	$.btTable.bootstrapTable('removeByUniqueId', 1)
+        	$("#" + table.options.id).bootstrapTable('removeByUniqueId', 1)
         }
         
         /* 删除所有表格行 */
         function removeRowAll(){
-        	$.btTable.bootstrapTable('removeAll')
+        	$("#" + table.options.id).bootstrapTable('removeAll')
         }
         
         /* 修改表格行 */
         function updateRow(){
         	var randomId = 100 + ~~(Math.random() * 100)
-        	$.btTable.bootstrapTable('updateRow', {
+        	$("#" + table.options.id).bootstrapTable('updateRow', {
         		index: 0, // 你想修改哪行，0表示第一行
                 row: {
                 	userId: randomId,
@@ -143,7 +143,7 @@
         /* 修改行ID值为1的数据 */
         function updateRowByUniqueId(){
         	var randomId = 100 + ~~(Math.random() * 100)
-        	$.btTable.bootstrapTable('updateByUniqueId', {
+        	$("#" + table.options.id).bootstrapTable('updateByUniqueId', {
         		id: 1,
                 row: {
                 	userId: randomId,
@@ -158,19 +158,19 @@
         
         /* 查询表格所有数据值 */
         function getData(){
-        	var data = $.btTable.bootstrapTable('getData');
+        	var data = $("#" + table.options.id).bootstrapTable('getData');
             alert(JSON.stringify(data))
         }
         
         /* 查询行ID值为1的数据 */
         function getRowByUniqueId(){
-        	var data = $.btTable.bootstrapTable('getRowByUniqueId', 1);
+        	var data = $("#" + table.options.id).bootstrapTable('getRowByUniqueId', 1);
             alert(JSON.stringify(data))
         }
         
         /* 查询表格选择行数据值 */
         function getSelections(){
-        	var data = $.btTable.bootstrapTable('getSelections');
+        	var data = $("#" + table.options.id).bootstrapTable('getSelections');
         	alert(JSON.stringify(data))
         }
     </script>

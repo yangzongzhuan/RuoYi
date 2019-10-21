@@ -137,7 +137,7 @@ $(function() {
 	// tree表格树 展开/折叠
 	var expandFlag;
 	$("#expandAllBtn").click(function() {
-		var dataExpand = $.common.isEmpty($.table._option.expandAll) ? true : $.table._option.expandAll;
+		var dataExpand = $.common.isEmpty(table.options.expandAll) ? true : table.options.expandAll;
 		expandFlag = $.common.isEmpty(expandFlag) ? dataExpand : expandFlag;
 	    if (!expandFlag) {
 	    	$.bttTable.bootstrapTreeTable('expandAll');

@@ -114,13 +114,13 @@
         
         /* 查询表格所有数据值 */
         function getData(){
-        	var data = $.btTable.bootstrapTable('getData');
+        	var data = $("#" + table.options.id).bootstrapTable('getData');
             alert(JSON.stringify(data))
         }
         
         /* 查询表格选择行数据值 */
         function getSelections(){
-        	var data = $.btTable.bootstrapTable('getSelections');
+        	var data = $("#" + table.options.id).bootstrapTable('getSelections');
         	alert(JSON.stringify(data))
         }
     </script>
