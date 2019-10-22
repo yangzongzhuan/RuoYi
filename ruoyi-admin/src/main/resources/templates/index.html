@@ -15,7 +15,7 @@
     <link th:href="@{/css/animate.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
-    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.0.0}" rel="stylesheet"/>
+    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.1.0}" rel="stylesheet"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
@@ -241,8 +241,8 @@
 <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
 <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script th:src="@{/ruoyi/js/ry-ui.js?v=4.0.0}"></script>
-<script th:src="@{/ruoyi/js/common.js?v=4.0.0}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.1.0}"></script>
+<script th:src="@{/ruoyi/js/common.js?v=4.1.0}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:inline="javascript">
@@ -275,12 +275,17 @@ function switchSkin() {
 	})
 }
 
+// 排除非左侧菜单链接
+var excludesUrl = ["/system/user/profile"];
+
 $(function() {
     var hash = location.hash;
     if (hash !== '') {
         var url = hash.substring(1, hash.length);
-        $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
         $('a[href$="' + url + '"]').click();
+        if($.inArray(url, excludesUrl)){
+            $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+        }
     }
 });
 </script>
