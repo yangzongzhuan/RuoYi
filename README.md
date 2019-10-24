@@ -4,7 +4,7 @@
 
 性别男，若依是给还没有出生女儿取的名字（寓意：你若不离不弃，我必生死相依）
 
-若依参考后台模板。有需要可自行到群内下载。
+> 阿里云服务器86元/年，双11冰点底价，错过再等1年 ：[点我进入](https://www.aliyun.com/1111/2019/group-buying-share?ptCode=79B1148C588D554F3E87264DB80E6C90647C88CF896EF535&userCode=brki8iof&share_source=copy_link)
 
 > 如需单应用，请移步 [RuoYi-fast](https://gitee.com/y_project/RuoYi-fast)  `(保持同步更新)`，如需其他版本，请移步 [项目扩展](http://doc.ruoyi.vip/ruoyi/document/xmkz.html)  `(不定时更新)`
 
