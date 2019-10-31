@@ -571,7 +571,6 @@ $(function() {
                 	setActiveTab(this);
                 	var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
                 	var url = target.attr('src');
-                    target.attr('src', url).ready();
                     $.modal.loading("数据加载中，请稍后...");
                     target.attr('src', url).load(function () {
                     	$.modal.closeLoading();
