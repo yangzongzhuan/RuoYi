@@ -2,7 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 	<th:block th:include="include :: header('代码生成列表')" />
-	<th:block th:include="include :: select2-css" />
 </head>
 <body class="gray-bg">
     <div class="container-div">
@@ -12,16 +11,10 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								表名称：<select name="tableName" class="form-control">
-									<option value="">所有</option>
-									<option th:each="table : ${genTables}" th:text="${table.tableName}" th:value="${table.tableName}"></option>
-								</select>
+								表名称：<input type="text" name="tableName"/>
 							</li>
 							<li>
-								表描述：<select name="tableComment" class="form-control">
-									<option value="">所有</option>
-									<option th:each="table : ${genTables}" th:text="${table.tableComment}" th:value="${table.tableComment}"></option>
-								</select>
+								表描述：<input type="text" name="tableComment"/>
 							</li>
 							<li class="select-time">
 								<label>表时间： </label>
@@ -31,7 +24,7 @@
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-								<a class="btn btn-warning btn-rounded btn-sm" onclick="resetPre()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
@@ -59,7 +52,6 @@
 		</div>
 	</div>
 	<th:block th:include="include :: footer" />
-	<th:block th:include="include :: select2-js" />
 	<script th:inline="javascript">
 		var prefix = ctx + "tool/gen";
 		var editFlag = [[${@permission.hasPermi('tool:gen:edit')}]];
@@ -185,12 +177,6 @@
 		function importTable() {
 			var importTableUrl = prefix + "/importTable";
 			$.modal.open("导入表结构", importTableUrl);
-		}
-		
-		function resetPre() {
-			$.form.reset();
-			$("select[name='tableName']").val(null).trigger("change");
-			$("select[name='tableComment']").val(null).trigger("change");
 		}
 	</script>
 </body>

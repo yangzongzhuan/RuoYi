@@ -46,9 +46,8 @@ public class GenController extends BaseController
 
     @RequiresPermissions("tool:gen:view")
     @GetMapping()
-    public String gen(ModelMap mmap)
+    public String gen()
     {
-        mmap.put("genTables", genTableService.selectGenTableList(new GenTable()));
         return prefix + "/gen";
     }
 
@@ -98,9 +97,8 @@ public class GenController extends BaseController
      */
     @RequiresPermissions("tool:gen:list")
     @GetMapping("/importTable")
-    public String importTable(ModelMap mmap)
+    public String importTable()
     {
-        mmap.put("dbTables", genTableService.selectDbTableList(new GenTable()));
         return prefix + "/importTable";
     }
 
