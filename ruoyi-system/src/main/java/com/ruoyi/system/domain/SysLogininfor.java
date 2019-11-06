@@ -41,7 +41,7 @@ public class SysLogininfor extends BaseEntity
     private String browser;
 
     /** 操作系统 */
-    @Excel(name = "操作系统 ")
+    @Excel(name = "操作系统")
     private String os;
 
     /** 提示消息 */

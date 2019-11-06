@@ -5,7 +5,7 @@
  *
 */
 /** 蓝色主题 skin-blue **/
-.skin-blue .navbar {
+.navbar, .skin-blue .navbar {
 	background-color: #3c8dbc
 }
 
