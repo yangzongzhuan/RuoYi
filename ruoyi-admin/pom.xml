@@ -80,6 +80,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.1.1.RELEASE</version>
                 <configuration>
 					<fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
 				</configuration>
@@ -97,11 +98,11 @@
                 <version>3.0.0</version>   
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <warName>${artifactId}</warName>
+                    <warName>${project.artifactId}</warName>
                 </configuration>   
 		   </plugin>   
         </plugins>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
     </build>
 	
 </project>
