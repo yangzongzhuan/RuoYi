@@ -72,6 +72,7 @@ var table = {
             	table.config[options.id] = options;
                 $.table.initEvent();
                 $('#' + options.id).bootstrapTable({
+                	id: options.id,
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
                     method: 'post',                                     // 请求方式（*）
