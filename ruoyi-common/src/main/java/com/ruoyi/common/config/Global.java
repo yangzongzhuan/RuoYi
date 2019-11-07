@@ -1,119 +1,93 @@
 package com.ruoyi.common.config;
 
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.YamlUtil;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * 全局配置类
  * 
  * @author ruoyi
  */
+@Component
+@ConfigurationProperties(prefix = "ruoyi")
 public class Global
 {
-    private static final Logger log = LoggerFactory.getLogger(Global.class);
+    /** 项目名称 */
+    private static String name;
 
-    private static String NAME = "application.yml";
+    /** 版本 */
+    private static String version;
 
-    /**
-     * 当前对象实例
-     */
-    private static Global global;
+    /** 版权年份 */
+    private static String copyrightYear;
 
-    /**
-     * 保存全局属性值
-     */
-    private static Map<String, String> map = new HashMap<String, String>();
+    /** 实例演示开关 */
+    private static boolean demoEnabled;
 
-    private Global()
-    {
-    }
+    /** 上传路径 */
+    private static String profile;
 
-    /**
-     * 静态工厂方法
-     */
-    public static synchronized Global getInstance()
-    {
-        if (global == null)
-        {
-            global = new Global();
-        }
-        return global;
-    }
+    /** 获取地址开关 */
+    private static boolean addressEnabled;
 
-    /**
-     * 获取配置
-     */
-    public static String getConfig(String key)
-    {
-        String value = map.get(key);
-        if (value == null)
-        {
-            Map<?, ?> yamlMap = null;
-            try
-            {
-                yamlMap = YamlUtil.loadYaml(NAME);
-                value = String.valueOf(YamlUtil.getProperty(yamlMap, key));
-                map.put(key, value != null ? value : StringUtils.EMPTY);
-            }
-            catch (FileNotFoundException e)
-            {
-                log.error("获取全局配置异常 {}", key);
-            }
-        }
-        return value;
-    }
-
-    /**
-     * 获取项目名称
-     */
     public static String getName()
     {
-        return StringUtils.nvl(getConfig("ruoyi.name"), "RuoYi");
+        return name;
     }
 
-    /**
-     * 获取项目版本
-     */
+    public void setName(String name)
+    {
+        Global.name = name;
+    }
+
     public static String getVersion()
     {
-        return StringUtils.nvl(getConfig("ruoyi.version"), "4.1.0");
+        return version;
     }
 
-    /**
-     * 获取版权年份
-     */
+    public void setVersion(String version)
+    {
+        Global.version = version;
+    }
+
     public static String getCopyrightYear()
     {
-        return StringUtils.nvl(getConfig("ruoyi.copyrightYear"), "2019");
+        return copyrightYear;
     }
 
-    /**
-     * 实例演示开关
-     */
-    public static String isDemoEnabled()
+    public void setCopyrightYear(String copyrightYear)
     {
-        return StringUtils.nvl(getConfig("ruoyi.demoEnabled"), "true");
+        Global.copyrightYear = copyrightYear;
     }
 
-    /**
-     * 获取ip地址开关
-     */
-    public static Boolean isAddressEnabled()
+    public static boolean isDemoEnabled()
     {
-        return Boolean.valueOf(getConfig("ruoyi.addressEnabled"));
+        return demoEnabled;
     }
 
-    /**
-     * 获取文件上传路径
-     */
+    public void setDemoEnabled(boolean demoEnabled)
+    {
+        Global.demoEnabled = demoEnabled;
+    }
+
     public static String getProfile()
     {
-        return getConfig("ruoyi.profile");
+        return profile;
+    }
+
+    public void setProfile(String profile)
+    {
+        Global.profile = profile;
+    }
+
+    public static boolean isAddressEnabled()
+    {
+        return addressEnabled;
+    }
+
+    public void setAddressEnabled(boolean addressEnabled)
+    {
+        Global.addressEnabled = addressEnabled;
     }
 
     /**
