@@ -4614,7 +4614,7 @@ S2.define('select2/i18n/en',[],function () {
       return '载入更多结果…';
     },
     maximumSelected: function (args) {
-      var message = '最多只能选择' + args.maximum + '个项目';
+      var message = '最多只能' + args.maximum + '个选项';
 
       if (args.maximum != 1) {
         message += 's';
