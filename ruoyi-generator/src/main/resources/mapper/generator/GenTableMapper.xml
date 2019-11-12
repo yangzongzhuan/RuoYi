@@ -57,10 +57,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="selectGenTableVo"/>
 		<where>
 			<if test="tableName != null and tableName != ''">
-				AND table_name like concat('%', #{tableName}, '%')
+				AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
 			</if>
 			<if test="tableComment != null and tableComment != ''">
-				AND table_comment like concat('%', #{tableComment}, '%')
+				AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
 			</if>
 		</where>
 	</select>
@@ -71,10 +71,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND table_name NOT LIKE 'qrtz_%' AND table_name NOT LIKE 'gen_%'
 		AND table_name NOT IN (select table_name from gen_table)
 		<if test="tableName != null and tableName != ''">
-			AND table_name like concat('%', #{tableName}, '%')
+			AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
 		</if>
 		<if test="tableComment != null and tableComment != ''">
-			AND table_comment like concat('%', #{tableComment}, '%')
+			AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
 		</if>
 	</select>
 	

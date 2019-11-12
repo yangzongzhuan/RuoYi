@@ -1,6 +1,7 @@
 package com.ruoyi.generator.util;
 
 import java.util.Arrays;
+import org.apache.commons.lang3.RegExUtils;
 import com.ruoyi.common.constant.GenConstants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.generator.config.GenConfig;
@@ -179,7 +180,7 @@ public class GenUtils
      */
     public static String replaceText(String text)
     {
-        return text.replaceAll("(?:表|若依)", "");
+        return RegExUtils.replaceAll(text, "(?:表|若依)", "");
     }
 
     /**
