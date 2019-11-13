@@ -81,7 +81,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
     public int update${ClassName}(${ClassName} ${className})
     {
 #foreach ($column in $columns)
-#if($column.javaField == 'createTime')
+#if($column.javaField == 'updateTime')
         ${className}.setUpdateTime(DateUtils.getNowDate());
 #end
 #end
