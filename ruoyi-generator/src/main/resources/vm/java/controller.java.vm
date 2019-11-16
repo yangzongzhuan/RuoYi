@@ -77,6 +77,7 @@ public class ${ClassName}Controller extends BaseController
      * 导出${functionName}列表
      */
     @RequiresPermissions("${permissionPrefix}:export")
+    @Log(title = "${functionName}", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(${ClassName} ${className})
