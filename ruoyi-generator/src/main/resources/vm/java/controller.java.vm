@@ -46,19 +46,7 @@ public class ${ClassName}Controller extends BaseController
         return prefix + "/${businessName}";
     }
 
-#if($table.tree)
-    /**
-     * 查询${functionName}树列表
-     */
-    @RequiresPermissions("${permissionPrefix}:list")
-    @PostMapping("/list")
-    @ResponseBody
-    public List<${ClassName}> list(${ClassName} ${className})
-    {
-        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
-        return list;
-    }
-#elseif($table.crud)
+#if($table.crud)
     /**
      * 查询${functionName}列表
      */
@@ -70,6 +58,18 @@ public class ${ClassName}Controller extends BaseController
         startPage();
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
         return getDataTable(list);
+    }
+#elseif($table.tree)
+    /**
+     * 查询${functionName}树列表
+     */
+    @RequiresPermissions("${permissionPrefix}:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public List<${ClassName}> list(${ClassName} ${className})
+    {
+        List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
+        return list;
     }
 #end
 
