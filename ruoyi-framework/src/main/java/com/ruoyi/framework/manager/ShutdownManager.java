@@ -1,6 +1,7 @@
 package com.ruoyi.framework.manager;
 
 import com.ruoyi.framework.shiro.web.session.SpringSessionValidationScheduler;
+import net.sf.ehcache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class ShutdownManager
     {
         shutdownSpringSessionValidationScheduler();
         shutdownAsyncManager();
+        CacheManager.getCacheManager("ruoyi").shutdown();
     }
 
     /**
