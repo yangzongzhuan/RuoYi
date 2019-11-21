@@ -225,11 +225,11 @@ public class ExcelUtil<T>
                         else
                         {
                             String dateFormat = field.getAnnotation(Excel.class).dateFormat();
-                            if(StringUtils.isNotEmpty(dateFormat))
+                            if (StringUtils.isNotEmpty(dateFormat))
                             {
-                                val=DateUtils.parseDateToStr(dateFormat,(Date) val);
+                                val = DateUtils.parseDateToStr(dateFormat, (Date) val);
                             }
-                            else 
+                            else
                             {
                                 val = Convert.toStr(val);
                             }
