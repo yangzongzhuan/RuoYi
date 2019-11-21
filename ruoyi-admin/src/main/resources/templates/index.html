@@ -175,7 +175,7 @@
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-				    <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
+                    <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
                     <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
@@ -247,7 +247,15 @@
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:inline="javascript">
 var ctx = [[@{/}]];
+// 皮肤缓存
 var skin = storage.get("skin");
+// history（表示去掉地址的#）否则地址以"#"形式展示
+var mode = "history";
+// 历史访问路径缓存
+var historyPath = storage.get("historyPath");
+// 排除非左侧菜单链接
+var excludesUrl = ["/system/user/profile"];
+
 // 本地主题优先，未设置取系统配置
 if($.common.isNotEmpty(skin)){
 	$("body").addClass(skin.split('|')[0]);
@@ -275,18 +283,27 @@ function switchSkin() {
 	})
 }
 
-// 排除非左侧菜单链接
-var excludesUrl = ["/system/user/profile"];
+/** 刷新时访问路径页签 */
+function applyPath(url) {
+	$('a[href$="' + decodeURI(url) + '"]').click();
+    if($.inArray(url, excludesUrl)){
+        $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+    }
+}
 
 $(function() {
-    var hash = location.hash;
-    if (hash !== '') {
-        var url = hash.substring(1, hash.length);
-        $('a[href$="' + decodeURI(url) + '"]').click();
-        if($.inArray(url, excludesUrl)){
-            $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
-        }
-    }
+	if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
+		var url = storage.get('publicPath');
+	    if ($.common.isNotEmpty(url)) {
+	    	applyPath(url);
+	    }
+	} else {
+		var hash = location.hash;
+	    if ($.common.isNotEmpty(hash)) {
+	        var url = hash.substring(1, hash.length);
+	        applyPath(url);
+	    }
+	}
 });
 </script>
 </body>

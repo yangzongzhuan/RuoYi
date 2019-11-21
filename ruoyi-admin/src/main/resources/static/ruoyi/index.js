@@ -482,9 +482,13 @@ $(function() {
     
     // 设置锚点
     function setIframeUrl(href) {
-        var nowUrl = window.location.href;
-        var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
-        window.location.href = newUrl + "#" + href;
+    	if($.common.equals("history", mode)) {
+    		storage.set('publicPath', href);
+    	} else {
+    		var nowUrl = window.location.href;
+            var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
+            window.location.href = newUrl + "#" + href;
+    	}
     }
     
     $(window).keydown(function(event) {
