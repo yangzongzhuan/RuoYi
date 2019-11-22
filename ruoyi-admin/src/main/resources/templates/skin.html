@@ -118,6 +118,25 @@
 		</a>
 		<p class="text-center">黄灰</p>
 	</li>
+	
+	<li style="float:left; width: 33.33333%; padding: 5px;">
+		<a href="javascript:" data-skin="skin-blue|theme-blue" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+			<span style="width: 20%; float: left; height: 13px; background: #367fa9"></span>
+			<span style="width: 80%; float: left; height: 13px; background: #3c8dbc"></span>
+			<span style="width: 20%; float: left; height: 30px; background: rgba(15,41,80,1)"></span>
+			<span style="width: 80%; float: left; height: 30px; background: #f4f5f7"></span>
+		</a>
+		<p class="text-center">蓝浅（新）</p>
+	</li>
+	<li style="float:left; width: 33.33333%; padding: 5px;">
+		<a href="javascript:" data-skin="skin-green|theme-blue" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">
+			<span style="width: 20%; float: left; height: 13px; background: #008d4c"></span>
+			<span style="width: 80%; float: left; height: 13px; background: #00a65a"></span>
+			<span style="width: 20%; float: left; height: 30px; background: rgba(15,41,80,1)"></span>
+			<span style="width: 80%; float: left; height: 30px; background: #f4f5f7"></span>
+		</a>
+		<p class="text-center">绿浅（新）</p>
+	</li>
 </ul>
 </body>
 <script th:src="@{/js/jquery.min.js}"></script>
@@ -127,7 +146,7 @@
 var skins = ["skin-blue", "skin-green", "skin-purple", "skin-red", "skin-yellow"];
 
 // 主题样式列表
-var themes = ["theme-dark", "theme-light"];
+var themes = ["theme-dark", "theme-light", "theme-blue"];
 
 $("[data-skin]").on('click',
 function(e) {
