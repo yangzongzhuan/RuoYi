@@ -38,11 +38,6 @@ public class Constants
     public static final String LOGIN_FAIL = "Error";
 
     /**
-     * 自动去除表前缀
-     */
-    public static final String AUTO_REOMVE_PRE = "true";
-
-    /**
      * 当前记录起始索引
      */
     public static final String PAGE_NUM = "pageNum";
