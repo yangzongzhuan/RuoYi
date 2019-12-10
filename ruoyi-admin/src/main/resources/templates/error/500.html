@@ -15,8 +15,14 @@
 
         <div class="error-desc">
                                 服务器遇到意外事件，不允许完成请求。我们抱歉。您可以返回主页面。
-            <a th:href="@{/index}" class="btn btn-primary m-t">主页</a>
+            <a href="javascript:index()" class="btn btn-primary m-t">主页</a>
         </div>
     </div>
+    <script th:inline="javascript">
+      var ctx = [[@{/}]];
+      function index() {
+          window.parent.frames.location.href = ctx + "index";
+      }
+    </script>
 </body>
 </html>
