@@ -327,7 +327,8 @@ label.error {
 	right: 18px;
 	top: 10px;
 	color: #ef392b;
-	font-size: 12px
+	font-size: 12px;
+	z-index:99;
 }
 
 .input-group label.error {
