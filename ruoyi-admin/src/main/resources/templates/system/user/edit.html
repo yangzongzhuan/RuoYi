@@ -13,7 +13,7 @@
             <div class="row">
             	<div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>用户名称：</label>
+                        <label class="col-sm-4 control-label is-required">用户名称：</label>
                         <div class="col-sm-8">
                             <input name="userName" placeholder="请输入用户名称" class="form-control" type="text" maxlength="30" th:field="*{userName}" required>
                         </div>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>归属部门：</label>
+                        <label class="col-sm-4 control-label is-required">归属部门：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
                                 <input class="form-control" type="text" name="deptName" onclick="selectDeptTree()" id="treeName" th:field="*{dept.deptName}" required>
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>手机号码：</label>
+                        <label class="col-sm-4 control-label is-required">手机号码：</label>
                         <div class="col-sm-8">
                             <input name="phonenumber" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11" th:field="*{phonenumber}" required>
                         </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>邮箱：</label>
+                        <label class="col-sm-4 control-label is-required">邮箱：</label>
                         <div class="col-sm-8">
                             <input name="email" class="form-control email" type="text" maxlength="20" placeholder="请输入邮箱" th:field="*{email}" required>
                         </div>
@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><span style="color: red; ">*</span>登录账号：</label>
+                        <label class="col-sm-4 control-label is-required">登录账号：</label>
                         <div class="col-sm-8">
                             <input class="form-control" type="text" readonly="true" th:field="*{loginName}"/>
                         </div>

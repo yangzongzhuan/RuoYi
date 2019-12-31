@@ -77,12 +77,12 @@
         });
         
 		initChildTable = function(index, row, $detail) {
-			var cur_table = $detail.html('<table style="table-layout:fixed"></table>').find('table');
-    	    $(cur_table).bootstrapTable({
+			var childTable = $detail.html('<table style="table-layout:fixed"></table>').find('table');
+    	    $(childTable).bootstrapTable({
     	        url: prefix + "/list",
     	        method: 'post',
     	        sidePagination: "server",
-    	        contentType: "application/x-www-form-urlencoded",   // 编码类型
+    	        contentType: "application/x-www-form-urlencoded",
     	        queryParams : {
                     userName: '测试8'
 				},

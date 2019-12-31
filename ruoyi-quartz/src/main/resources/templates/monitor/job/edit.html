@@ -9,7 +9,7 @@
 			<input id="jobId" name="jobId" type="hidden" th:field="*{jobId}"/>
 			<input type="hidden" name="updateBy" th:value="${@permission.getPrincipalProperty('loginName')}">
 			<div class="form-group">
-				<label class="col-sm-3 control-label">任务名称：</label>
+				<label class="col-sm-3 control-label is-required">任务名称：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="jobName" id="jobName" th:field="*{jobName}" required>
 				</div>
@@ -23,7 +23,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label ">调用目标字符串：</label>
+				<label class="col-sm-3 control-label is-required">调用目标字符串：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="invokeTarget" id="invokeTarget" th:field="*{invokeTarget}" required>
 				    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> Bean调用示例：ryTask.ryParams('ry')</span>
@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label ">cron表达式：</label>
+				<label class="col-sm-3 control-label is-required">cron表达式：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="cronExpression" id="cronExpression" th:field="*{cronExpression}" required>
 				</div>

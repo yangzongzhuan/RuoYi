@@ -322,6 +322,11 @@
 }
 
 /** 表单验证 样式布局 **/
+.control-label.is-required:before {
+  content: '* ';
+  color: red;
+}
+
 label.error {
 	position: absolute;
 	right: 18px;
