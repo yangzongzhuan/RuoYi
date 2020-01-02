@@ -817,10 +817,24 @@ label {
 	border: 0px!important;
 }
 
-.table-striped .table, .table-striped .table, .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+.table-striped table>thead>tr>th, .table-striped table>tbody>tr>th, .table-striped table>tfoot>tr>th, .table-striped table>thead>tr>td, .table-striped table>tbody>tr>td, .table-striped table>tfoot>tr>td {
 	border-bottom: 1px solid #e7eaec!important;
 	background-color: transparent;
 	border: 0px;
+}
+
+
+.table-bordered table>thead>tr>th:first-child, .table-bordered table>tbody>tr>td:first-child {
+    border-left: 1px solid #ddd;
+}
+ 
+.table-bordered table>thead>tr>th:last-child, .table-bordered table>tbody>tr>td:last-child {
+	border-right: 1px solid #ddd;
+}
+
+.table-bordered table>thead>tr>th, .table-bordered table>tbody>tr>td {
+    border-top: 1px solid #ddd!important;
+    border-bottom: 1px solid #ddd;
 }
 
 .fixed-table-footer {
@@ -842,10 +856,6 @@ label {
 }
 .table-striped table thead {
     background-color: #eff3f8;
-}
-
-.table-bordered td,.table-bordered th {
-	border: 1px solid #ddd!important
 }
 
 .fixed-table-container thead th  >.both{ 
