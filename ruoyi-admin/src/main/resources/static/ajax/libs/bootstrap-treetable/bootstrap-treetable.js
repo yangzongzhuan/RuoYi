@@ -252,8 +252,12 @@
             $.each(data, function(index, item) {
                 // 添加一个默认属性，用来判断当前节点有没有被显示
                 item.isShow = false;
-                // 顶级节点校验判断
-                var _defaultRootFlag = $.inArray(item[options.code], parentCodes) > 0 && !rootFlag;
+                // 顶级节点校验判断，兼容0,'0','',null
+                var _defaultRootFlag = item[options.parentCode] == '0' ||
+                item[options.parentCode] == 0 ||
+                item[options.parentCode] == null ||
+                item[options.parentCode] == '' ||
+                $.inArray(item[options.code], parentCodes) > 0 && !rootFlag;
                 if (!item[options.parentCode] || (_root ? (item[options.parentCode] == options.rootIdValue) : _defaultRootFlag)) {
                 	rootFlag = true;
                 	if (!target.data_list["_root_"]) {
