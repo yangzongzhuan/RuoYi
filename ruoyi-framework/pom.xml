@@ -47,7 +47,7 @@
 			</exclusions>
 		</dependency>
 
-		<!-- Shiro使用Srping框架 -->
+		<!-- Shiro使用Spring框架 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
