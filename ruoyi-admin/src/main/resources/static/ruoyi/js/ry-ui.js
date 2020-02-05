@@ -58,6 +58,7 @@ var table = {
                     showToggle: true,
                     showExport: false,
                     clickToSelect: false,
+                    singleSelect: false,
                     mobileResponsive: true,
                     rememberSelected: false,
         		    fixedColumns: false,
@@ -103,6 +104,7 @@ var table = {
                     showExport: options.showExport,                     // 是否支持导出文件
                     uniqueId: options.uniqueId,                         // 唯 一的标识符
                     clickToSelect: options.clickToSelect,				// 是否启用点击选中行
+                    singleSelect: options.singleSelect,                 // 是否单选checkbox
                     mobileResponsive: options.mobileResponsive,         // 是否支持移动端适配
                     detailView: options.detailView,                     // 是否启用显示细节视图
                     onClickRow: options.onClickRow,                     // 点击某行触发的事件
