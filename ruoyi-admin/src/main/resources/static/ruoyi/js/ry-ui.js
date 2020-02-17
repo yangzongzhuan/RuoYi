@@ -339,6 +339,7 @@ var table = {
     			} else{
     				$("#" + table.options.id).bootstrapTable('refresh', params);
     			}
+    		    data = {};
     		},
     		// 导出数据
     		exportExcel: function(formId) {
