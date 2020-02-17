@@ -585,6 +585,12 @@ var table = {
                 	} else{
                 	    $("#" + tableId).bootstrapTable('refresh');
                 	}
+            	} else if (table.options.type == table_type.bootstrapTreeTable) {
+            		if($.common.isEmpty(tableId)){
+            	    	$("#" + table.options.id).bootstrapTreeTable('refresh', []);
+                	} else{
+                	    $("#" + tableId).bootstrapTreeTable('refresh', []);
+                	}
             	}
             },
             // 获取选中复选框项
