@@ -400,9 +400,9 @@ var table = {
             			}
             			var index = layer.load(2, {shade: false});
             			$.modal.disable();
-            			var formData = new FormData();
-            			formData.append("file", layero.find('#file')[0].files[0]);
-            			formData.append("updateSupport", $("input[name='updateSupport']").is(':checked'));
+            			var formData = new FormData(layero.find('form')[0]);
+            			//formData.append("file", layero.find('#file')[0].files[0]);
+            			//formData.append("updateSupport", $("input[name='updateSupport']").is(':checked'));
             			$.ajax({
             				url: table.options.importUrl,
             				data: formData,
