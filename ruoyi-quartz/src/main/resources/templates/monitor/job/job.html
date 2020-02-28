@@ -145,7 +145,7 @@
 		/* 立即执行一次 */
 		function run(jobId, jobGroup) {
 			$.modal.confirm("确认要立即执行一次任务吗？", function() {
-				$.operate.post(prefix + "/run", { "jobId": jobId, "jobId": jobId, "jobGroup": jobGroup});
+				$.operate.post(prefix + "/run", { "jobId": jobId, "jobGroup": jobGroup});
 		    })
 		}
 
