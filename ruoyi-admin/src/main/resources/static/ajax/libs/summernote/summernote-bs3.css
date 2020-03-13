@@ -5778,7 +5778,7 @@ td.visible-lg {
     display: table-cell !important;
   }
 }
-.hidden-xs {
+.summernote .hidden-xs {
   display: block !important;
 }
 tr.hidden-xs {

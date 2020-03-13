@@ -71,7 +71,7 @@
                 </a>
                 <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="${permissionPrefix}:export">
                     <i class="fa fa-download"></i> 导出
-                 </a>
+                </a>
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
