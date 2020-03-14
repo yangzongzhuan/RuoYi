@@ -66,9 +66,9 @@ $(function() {
 		                startDate.config.max.month = date.month - 1;
 		                startDate.config.max.date = date.date;
 		            } else {
-		                startDate.config.max.year = '';
-		                startDate.config.max.month = '';
-		                startDate.config.max.date = '';
+		                startDate.config.max.year = '2099';
+		                startDate.config.max.month = '12';
+		                startDate.config.max.date = '31';
 		            }
 		        }
 		    });
