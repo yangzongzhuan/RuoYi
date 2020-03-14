@@ -562,12 +562,15 @@ var table = {
             	return $.common.uniqueFn(rows);
             },
             // 请求获取数据后处理回调函数，校验异常状态提醒
-            responseHandler: function(data) {
-            	if (data.code != undefined && data.code != 0) {
-            		$.modal.alertWarning(data.msg);
+            responseHandler: function(res) {
+            	if (typeof table.options.responseHandler == "function") {
+            		table.options.responseHandler(res);
+                }
+            	if (res.code != undefined && res.code != 0) {
+            		$.modal.alertWarning(res.msg);
             		return [];
                 } else {
-                    return data;
+                    return res;
                 }
             },
         },
