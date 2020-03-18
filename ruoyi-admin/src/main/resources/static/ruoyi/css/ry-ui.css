@@ -644,7 +644,7 @@ label {
 	margin: 5px 15px 5px 0px;
 }
 
-.select-list li p{
+.select-list li p, .select-list li label{
 	float: left;
 	width: 65px;
 	margin: 5px 5px 5px 0px;

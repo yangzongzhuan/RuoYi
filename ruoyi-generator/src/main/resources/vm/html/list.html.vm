@@ -22,12 +22,12 @@
 #end  
 #if($column.htmlType == "input")
                             <li>
-                                <p>${comment}：</p>
+                                <label>${comment}：</label>
                                 <input type="text" name="${column.javaField}"/>
                             </li>
 #elseif($column.htmlType == "select" || $column.htmlType == "radio" && "" != $dictType)
                             <li>
-                                <p>${comment}：</p>
+                                <label>${comment}：</label>
                                 <select name="${column.javaField}" th:with="type=${@dict.getType('${dictType}')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -35,14 +35,14 @@
                             </li>
 #elseif($column.htmlType == "select" || $column.htmlType == "radio" && $dictType)
                             <li>
-                                <p>${comment}：</p>
+                                <label>${comment}：</label>
                                 <select name="${column.javaField}">
                                     <option value="">所有</option>
                                 </select>
                             </li>
 #elseif($column.htmlType == "datetime")
                             <li class="select-time">
-                                <p>${comment}：</p>
+                                <label>${comment}：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[begin${AttrName}]"/>
                                 <span>-</span>
                                 <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[end${AttrName}]"/>
