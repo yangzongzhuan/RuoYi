@@ -82,7 +82,11 @@
 					},
 					{
 						field: 'dictLabel',
-						title: '字典标签'
+						title: '字典标签',
+						formatter: function(value, row, index) {
+							var listClass = $.common.equals("default", row.listClass) || $.common.isEmpty(row.listClass) ? "" : "badge badge-" + row.listClass;
+	                    	return $.common.sprintf("<span class='%s'>%s</span>", listClass, value);
+						}
 					},
 					{
 						field: 'dictValue',
