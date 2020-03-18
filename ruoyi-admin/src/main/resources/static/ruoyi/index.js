@@ -7,6 +7,8 @@ layer.config({
     skin: 'layer-ext-moon'
 });
 
+var isMobile = $.common.isMobile() || $(window).width() < 769;
+
 $(function() {
     // MetsiMenu
     $('#side-menu').metisMenu();
@@ -22,14 +24,19 @@ $(function() {
 
     // 菜单切换
     $('.navbar-minimalize').click(function() {
-        $("body").toggleClass("mini-navbar");
+    	if (isMobile) {
+    		$("body").toggleClass("canvas-menu");
+    	} else {
+    		$("body").toggleClass("mini-navbar");
+    	}
         SmoothlyMenu();
     });
-
+    
     $('#side-menu>li').click(function() {
-        if ($('body').hasClass('mini-navbar')) {
+    	if ($('body').hasClass('canvas-menu mini-navbar')) {
             NavToggle();
         }
+    	
     });
     $('#side-menu>li li a').click(function() {
         if ($(window).width() < 769) {
@@ -49,9 +56,8 @@ $(function() {
 $(window).bind("load resize",
 function() {
     if ($(this).width() < 769) {
-        $('body').addClass('mini-navbar');
-        $('.navbar-static-side').fadeIn();
-        $(".sidebar-collapse .logo").addClass("hide");
+        $('body').addClass('canvas-menu');
+        $("nav .logo").addClass("hide");
         $(".slimScrollDiv").css({ "overflow":"hidden" })
     }
 });
@@ -60,21 +66,27 @@ function NavToggle() {
     $('.navbar-minimalize').trigger('click');
 }
 
+function fixedSidebar() {
+	$('#side-menu').hide();
+	$("nav .logo").addClass("hide");
+    setTimeout(function() {
+        $('#side-menu').fadeIn(500);
+    },
+    100);
+}
+
 function SmoothlyMenu() {
-    if (!$('body').hasClass('mini-navbar')) {
-        $('#side-menu').hide();
-        $(".sidebar-collapse .logo").removeClass("hide");
-        setTimeout(function() {
-            $('#side-menu').fadeIn(500);
-        },
-        100);
-    } else if ($('body').hasClass('fixed-sidebar')) {
-        $('#side-menu').hide();
-        $(".sidebar-collapse .logo").addClass("hide");
-        setTimeout(function() {
-            $('#side-menu').fadeIn(500);
-        },
-        300);
+    if (isMobile && !$('body').hasClass('canvas-menu')) {
+    	$('.navbar-static-side').fadeIn();
+    	fixedSidebar();
+    } else if (!isMobile &&!$('body').hasClass('mini-navbar')) {
+    	fixedSidebar();
+    	$("nav .logo").removeClass("hide");
+    } else if (isMobile && $('body').hasClass('fixed-sidebar')) {
+    	$('.navbar-static-side').fadeOut();
+    	fixedSidebar();
+    } else if (!isMobile && $('body').hasClass('fixed-sidebar')) {
+    	fixedSidebar();
     } else {
         $('#side-menu').removeAttr('style');
     }

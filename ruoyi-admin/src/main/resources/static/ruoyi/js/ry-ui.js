@@ -711,7 +711,7 @@ var table = {
             // 弹出层指定宽度
             open: function (title, url, width, height, callback) {
             	//如果是移动端，就使用自适应大小弹窗
-            	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+            	if ($.common.isMobile()) {
             	    width = 'auto';
             	    height = 'auto';
             	}
@@ -783,7 +783,7 @@ var table = {
             // 弹出层全屏
             openFull: function (title, url, width, height) {
             	//如果是移动端，就使用自适应大小弹窗
-            	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+            	if ($.common.isMobile()) {
             	    width = 'auto';
             	    height = 'auto';
             	}
@@ -896,7 +896,7 @@ var table = {
             	var _width = $.common.isEmpty(width) ? "800" : width; 
                 var _height = $.common.isEmpty(height) ? ($(window).height() - 50) : height;
             	//如果是移动端，就使用自适应大小弹窗
-            	if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+            	if ($.common.isMobile()) {
             	    _width = 'auto';
             	    _height = 'auto';
             	}
@@ -1487,7 +1487,11 @@ var table = {
                     }　　
                 }
                 return count;
-            }
+            },
+            // 判断移动端
+            isMobile: function () {
+                return navigator.userAgent.match(/(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)/i);
+            },
         }
     });
 })(jQuery);
