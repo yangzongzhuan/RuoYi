@@ -6939,7 +6939,7 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 	background: #f5f5f5;
 }
 
-.nav .logo {
+nav .logo {
 	background-color: #367fa9;
 	color: #fff;
 	border-bottom: 0 solid transparent;
