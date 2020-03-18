@@ -10,6 +10,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysMenuService;
 
 /**
@@ -23,6 +24,9 @@ public class SysIndexController extends BaseController
     @Autowired
     private ISysMenuService menuService;
 
+    @Autowired
+    private ISysConfigService configService;
+
     // 系统首页
     @GetMapping("/index")
     public String index(ModelMap mmap)
@@ -33,6 +37,8 @@ public class SysIndexController extends BaseController
         List<SysMenu> menus = menuService.selectMenusByUser(user);
         mmap.put("menus", menus);
         mmap.put("user", user);
+        mmap.put("sideTheme", configService.selectConfigByKey("sys.index.sideTheme"));
+        mmap.put("skinName", configService.selectConfigByKey("sys.index.skinName"));
         mmap.put("copyrightYear", Global.getCopyrightYear());
         mmap.put("demoEnabled", Global.isDemoEnabled());
         return "index";

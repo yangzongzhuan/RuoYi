@@ -42,6 +42,14 @@
            statistics="true">
     </cache>
 
+    <!-- 系统参数缓存 -->
+    <cache name="sys-config"
+           maxEntriesLocalHeap="1000"
+           eternal="true"
+           overflowToDisk="true"
+           statistics="true">
+    </cache>
+    
     <!-- 系统会话缓存 -->
     <cache name="shiro-activeSessionCache"
            maxElementsInMemory="10000"
@@ -52,6 +60,6 @@
            diskPersistent="true"
            diskExpiryThreadIntervalSeconds="600">
     </cache>
-
+    
 </ehcache>
 	

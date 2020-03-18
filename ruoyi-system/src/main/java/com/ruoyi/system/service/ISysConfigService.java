@@ -59,6 +59,11 @@ public interface ISysConfigService
     public int deleteConfigByIds(String ids);
 
     /**
+     * 清空缓存数据
+     */
+    public void clearCache();
+
+    /**
      * 校验参数键名是否唯一
      * 
      * @param config 参数信息

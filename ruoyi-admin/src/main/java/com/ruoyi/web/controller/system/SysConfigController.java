@@ -133,6 +133,19 @@ public class SysConfigController extends BaseController
     }
 
     /**
+     * 清空缓存
+     */
+    @RequiresPermissions("system:config:remove")
+    @Log(title = "参数管理", businessType = BusinessType.CLEAN)
+    @GetMapping("/clearCache")
+    @ResponseBody
+    public AjaxResult clearCache()
+    {
+        configService.clearCache();
+        return success();
+    }
+
+    /**
      * 校验参数键名
      */
     @PostMapping("/checkConfigKeyUnique")

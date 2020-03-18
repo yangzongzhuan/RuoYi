@@ -267,10 +267,8 @@ if($.common.isNotEmpty(skin)){
 	$("body").addClass(skin.split('|')[0]);
 	$("body").addClass(skin.split('|')[1]);
 } else {
-	var sideTheme = [[${@config.getKey('sys.index.sideTheme')}]];
-	var skinName = [[${@config.getKey('sys.index.skinName')}]];
-	$("body").addClass(sideTheme);
-	$("body").addClass(skinName);
+	$("body").addClass([[${sideTheme}]]);
+	$("body").addClass([[${skinName}]]);
 }
 
 /* 用户管理-重置密码 */
