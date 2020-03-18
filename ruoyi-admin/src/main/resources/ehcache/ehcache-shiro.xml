@@ -41,9 +41,25 @@
            timeToIdleSeconds="0"
            statistics="true">
     </cache>
-
+    
+    <!-- 系统缓存 -->
+    <cache name="sys-cache"
+           maxEntriesLocalHeap="1000"
+           eternal="true"
+           overflowToDisk="true"
+           statistics="true">
+    </cache>
+    
     <!-- 系统参数缓存 -->
     <cache name="sys-config"
+           maxEntriesLocalHeap="1000"
+           eternal="true"
+           overflowToDisk="true"
+           statistics="true">
+    </cache>
+    
+    <!-- 系统字典缓存 -->
+    <cache name="sys-dict"
            maxEntriesLocalHeap="1000"
            eternal="true"
            overflowToDisk="true"

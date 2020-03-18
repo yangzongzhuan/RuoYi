@@ -7,6 +7,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.system.domain.SysDictData;
 import com.ruoyi.system.mapper.SysDictDataMapper;
 import com.ruoyi.system.service.ISysDictDataService;
+import com.ruoyi.system.utils.DictUtils;
 
 /**
  * 字典 业务层处理
@@ -29,18 +30,6 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     public List<SysDictData> selectDictDataList(SysDictData dictData)
     {
         return dictDataMapper.selectDictDataList(dictData);
-    }
-
-    /**
-     * 根据字典类型查询字典数据
-     * 
-     * @param dictType 字典类型
-     * @return 字典数据集合信息
-     */
-    @Override
-    public List<SysDictData> selectDictDataByType(String dictType)
-    {
-        return dictDataMapper.selectDictDataByType(dictType);
     }
 
     /**
@@ -69,18 +58,6 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     }
 
     /**
-     * 通过字典ID删除字典数据信息
-     * 
-     * @param dictCode 字典数据ID
-     * @return 结果
-     */
-    @Override
-    public int deleteDictDataById(Long dictCode)
-    {
-        return dictDataMapper.deleteDictDataById(dictCode);
-    }
-
-    /**
      * 批量删除字典数据
      * 
      * @param ids 需要删除的数据
@@ -89,7 +66,12 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public int deleteDictDataByIds(String ids)
     {
-        return dictDataMapper.deleteDictDataByIds(Convert.toStrArray(ids));
+        int row = dictDataMapper.deleteDictDataByIds(Convert.toStrArray(ids));
+        if (row > 0)
+        {
+            DictUtils.clearDictCache();
+        }
+        return row;
     }
 
     /**
@@ -101,7 +83,12 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public int insertDictData(SysDictData dictData)
     {
-        return dictDataMapper.insertDictData(dictData);
+        int row = dictDataMapper.insertDictData(dictData);
+        if (row > 0)
+        {
+            DictUtils.clearDictCache();
+        }
+        return row;
     }
 
     /**
@@ -113,6 +100,11 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     @Override
     public int updateDictData(SysDictData dictData)
     {
-        return dictDataMapper.updateDictData(dictData);
+        int row = dictDataMapper.updateDictData(dictData);
+        if (row > 0)
+        {
+            DictUtils.clearDictCache();
+        }
+        return row;
     }
 }
