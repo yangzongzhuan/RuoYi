@@ -1014,6 +1014,25 @@ label {
     background-color: #F5F5F5;
 }
 
+/** 气泡弹出框样式 **/
+.popover {
+	font-size: 13px;
+	max-width: unset;
+}
+
+.popover-title {
+	padding: 8px 14px;
+	margin: 0 !important;
+	font-size: 14px;
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #ebebeb;
+	border-radius: 5px 5px 0 0;
+}
+
+.popover-content {
+	padding: 5px;
+}
+
 ::-webkit-scrollbar {
     width: 6px;
     height: 10px;

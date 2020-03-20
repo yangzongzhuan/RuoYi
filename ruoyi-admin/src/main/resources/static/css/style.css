@@ -763,15 +763,15 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 
 .btn-default {
-    background-color: #c2c2c2;
-    border-color: #c2c2c2;
-    color: #FFFFFF;
+    background-color: #f4f4f4;
+    border-color: #ddd;
+    color: #444;
 }
 
 .btn-default:hover, .btn-default:focus, .btn-default:active,  .btn-default.active, .open .dropdown-toggle.btn-default {
-    background-color: #bababa;
-    border-color: #bababa;
-    color: #FFFFFF;
+    background-color: #e7e7e7;
+    border-color: #e7e7e7;
+    color: #444;
 }
 
 .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {

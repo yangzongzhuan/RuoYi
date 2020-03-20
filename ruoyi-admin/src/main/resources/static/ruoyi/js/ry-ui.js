@@ -253,7 +253,27 @@ var table = {
             		table.options.onLoadSuccess(data);
             	}
             	// 浮动提示框特效
-            	$("[data-toggle='tooltip']").tooltip();
+            	$(".table [data-toggle='tooltip']").tooltip();
+            	
+            	// 气泡弹出框特效
+            	$('.table [data-toggle="popover"]').each(function() {
+            	    $(this).popover({ trigger: "manual", html: true, animation: false, container: "body", placement: "left" 
+            	    }).on("mouseenter",
+                        function() {
+	            	        var _this = this;
+	            	        $(this).popover("show");
+	            	        $(".popover").on("mouseleave", function() {
+                                $(_this).popover('hide'); 
+	            	        });
+            	    }).on("mouseleave",
+                        function() {
+            	            var _this = this;
+	            	        setTimeout(function() {
+		            	        if (!$(".popover:hover").length)
+			            	        $(_this).popover("hide");
+            	        }, 100);
+            	    });
+            	});
             },
             // 表格销毁
             destroy: function (tableId) {

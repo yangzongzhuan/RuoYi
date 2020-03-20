@@ -179,12 +179,11 @@ public class SysJobServiceImpl implements ISysJobService
     public void run(SysJob job) throws SchedulerException
     {
         Long jobId = job.getJobId();
-        String jobGroup = job.getJobGroup();
-        SysJob properties = selectJobById(job.getJobId());
+        SysJob tmpObj = selectJobById(job.getJobId());
         // 参数
         JobDataMap dataMap = new JobDataMap();
-        dataMap.put(ScheduleConstants.TASK_PROPERTIES, properties);
-        scheduler.triggerJob(ScheduleUtils.getJobKey(jobId, jobGroup), dataMap);
+        dataMap.put(ScheduleConstants.TASK_PROPERTIES, tmpObj);
+        scheduler.triggerJob(ScheduleUtils.getJobKey(jobId, tmpObj.getJobGroup()), dataMap);
     }
 
     /**
