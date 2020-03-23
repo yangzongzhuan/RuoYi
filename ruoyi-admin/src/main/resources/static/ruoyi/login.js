@@ -26,7 +26,7 @@ function login() {
         data: {
             "username": username,
             "password": password,
-            "validateCode" : validateCode,
+            "validateCode": validateCode,
             "rememberMe": rememberMe
         },
         success: function(r) {

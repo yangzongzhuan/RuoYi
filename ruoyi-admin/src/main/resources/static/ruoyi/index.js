@@ -13,10 +13,10 @@ $(function() {
     // MetsiMenu
     $('#side-menu').metisMenu();
 
-    //固定菜单栏
+    // 固定菜单栏
     $(function() {
         $('.sidebar-collapse').slimScroll({
-            height: '100%',
+            height: '96%',
             railOpacity: 0.9,
             alwaysVisible: false
         });

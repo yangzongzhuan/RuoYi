@@ -166,7 +166,10 @@
 		                var actions = [];
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.userId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
 		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.userId + '\')"><i class="fa fa-remove"></i>删除</a> ');
-		                actions.push('<a class="btn btn-info btn-xs ' + resetPwdFlag + '" href="javascript:void(0)" onclick="resetPwd(\'' + row.userId + '\')"><i class="fa fa-key"></i>重置</a>');
+		                var more = [];
+		                more.push("<a class='btn btn-default btn-xs " + resetPwdFlag + "' href='javascript:void(0)' onclick='resetPwd(" + row.userId + ")'><i class='fa fa-key'></i>重置密码</a> ");
+		                more.push("<a class='btn btn-default btn-xs " + editFlag + "' href='javascript:void(0)' onclick='authRole(" + row.userId + ")'><i class='fa fa-check-square-o'></i>分配角色</a>");
+		                actions.push('<a class="btn btn-info btn-xs" role="button" data-toggle="popover" data-content="' + more.join('') + '"><i class="fa fa-chevron-circle-right"></i>更多操作</a>');
 		                return actions.join('');
 		            }
 		        }]
@@ -217,6 +220,12 @@
 		function resetPwd(userId) {
 		    var url = prefix + '/resetPwd/' + userId;
 		    $.modal.open("重置密码", url, '800', '300');
+		}
+		
+		/* 用户管理-分配角色 */
+		function authRole(userId) {
+		    var url = prefix + '/authRole/' + userId;
+		    $.modal.openTab("用户分配角色", url);
 		}
 		
 		/* 用户状态显示 */

@@ -108,7 +108,10 @@
 		        },
 		        {
 		            field: 'remark',
-		            title: '备注'
+		            title: '备注',
+		            formatter: function(value, row, index) {
+                        return $.table.tooltip(value);
+			        }
 		        },
 		        {
 		            field: 'createTime',

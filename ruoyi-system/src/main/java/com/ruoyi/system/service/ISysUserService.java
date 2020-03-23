@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.domain.SysUserRole;
 
 /**
  * 用户 业务层
@@ -67,6 +68,14 @@ public interface ISysUserService
     public SysUser selectUserById(Long userId);
 
     /**
+     * 通过用户ID查询用户和角色关联
+     * 
+     * @param userId 用户ID
+     * @return 用户和角色关联列表
+     */
+    public List<SysUserRole> selectUserRoleByUserId(Long userId);
+
+    /**
      * 通过用户ID删除用户
      * 
      * @param userId 用户ID
@@ -92,6 +101,14 @@ public interface ISysUserService
     public int insertUser(SysUser user);
 
     /**
+     * 注册用户信息
+     * 
+     * @param user 用户信息
+     * @return 结果
+     */
+    public boolean registerUser(SysUser user);
+
+    /**
      * 保存用户信息
      * 
      * @param user 用户信息
@@ -106,6 +123,14 @@ public interface ISysUserService
      * @return 结果
      */
     public int updateUserInfo(SysUser user);
+
+    /**
+     * 用户授权角色
+     * 
+     * @param userId 用户ID
+     * @param roleIds 角色组
+     */
+    public void insertUserAuth(Long userId, Long[] roleIds);
 
     /**
      * 修改用户密码信息

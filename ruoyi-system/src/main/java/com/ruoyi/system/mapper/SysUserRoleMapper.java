@@ -12,6 +12,14 @@ import com.ruoyi.system.domain.SysUserRole;
 public interface SysUserRoleMapper
 {
     /**
+     * 通过用户ID查询用户和角色关联
+     * 
+     * @param userId 用户ID
+     * @return 用户和角色关联列表
+     */
+    public List<SysUserRole> selectUserRoleByUserId(Long userId);
+
+    /**
      * 通过用户ID删除用户和角色关联
      * 
      * @param userId 用户ID
@@ -42,7 +50,7 @@ public interface SysUserRoleMapper
      * @return 结果
      */
     public int batchUserRole(List<SysUserRole> userRoleList);
-    
+
     /**
      * 删除用户和角色关联信息
      * 

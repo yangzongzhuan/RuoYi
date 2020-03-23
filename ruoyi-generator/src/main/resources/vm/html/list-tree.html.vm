@@ -115,8 +115,8 @@
 #if($column.pk)
 #elseif($column.list && "" != $dictType)
                 {
-                    field : '${javaField}', 
-                    title : '${comment}',
+                    field: '${javaField}', 
+                    title: '${comment}',
                     align: 'left',
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(${javaField}Datas, value);
@@ -124,8 +124,8 @@
                 },
 #elseif($column.list && "" != $javaField)
                 {
-                    field : '${javaField}', 
-                    title : '${comment}',
+                    field: '${javaField}', 
+                    title: '${comment}',
                     align: 'left'
                 },
 #end                

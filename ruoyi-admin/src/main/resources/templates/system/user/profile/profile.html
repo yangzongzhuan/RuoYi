@@ -27,7 +27,7 @@
                             <b  class="font-noraml">手机号码：</b>
                             <p class="pull-right">[[${user.phonenumber}]]</p>
                         </li>
-                        <li class="list-group-item"><i class="fa fa-group"></i>
+                        <li class="list-group-item" th:if="${user.dept?.deptName != null}"><i class="fa fa-group"></i>
                             <b  class="font-noraml">所属部门：</b>
                             <p class="pull-right" >[[${user.dept?.deptName}]] / [[${#strings.defaultString(postGroup,'无岗位')}]]</p>
                         </li>

@@ -99,10 +99,75 @@
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v42">v4.2.0</a><code class="pull-right">2020.03.23</code>
+								   </h5>
+								</div>
+								<div id="v42" class="panel-collapse collapse in">
+									<div class="panel-body">
+									   <ol>
+									        <li>用户管理添加分配角色页面</li>
+									        <li>定时任务添加调度日志按钮</li>
+									        <li>新增是否开启用户注册功能</li>
+											<li>新增页面滚动显示返回顶部按钮</li>
+											<li>用户&角色&任务添加更多操作按钮</li>
+											<li>iframe框架页会话过期弹出超时提示</li>
+											<li>移动端登录不显示左侧菜单</li>
+											<li>侧边栏添加一套深蓝色主题</li>
+											<li>首页logo固定，不随菜单滚动</li>
+											<li>支持mode配置history（表示去掉地址栏的#）</li>
+											<li>任务分组字典翻译（调度日志详细）</li>
+											<li>字典管理添加缓存读取</li>
+											<li>字典数据列表标签显示样式</li>
+											<li>参数管理支持缓存操作</li>
+											<li>日期控件清空结束时间设置开始默认值为2099-12-31</li>
+											<li>表格树添加获取数据后响应回调处理</li>
+											<li>批量替换表前缀调整</li>
+											<li>支持表格导入模板的弹窗表单加入其它输入控件</li>
+											<li>表单重置刷新表格树</li>
+											<li>新增支持导出数据字段排序</li>
+											<li>新增表格参数（是否单选checkbox）</li>
+											<li>druid未授权不允许访问</li>
+											<li>表格树父节点兼容0,'0','',null</li>
+											<li>表单必填的项添加星号</li>
+											<li>修复select2不显示校验错误信息</li>
+											<li>添加自定义HTML过滤器</li>
+											<li>修复多数据源下开关关闭出现异常问题</li>
+											<li>修复翻页记住选择项数据问题</li>
+											<li>用户邮箱长度限制20</li>
+											<li>修改错误页面返回主页出现嵌套问题</li>
+											<li>表格浮动提示单双引号转义</li>
+											<li>支持配置四级菜单</li>
+											<li>升级shiro到最新版1.4.2 阻止rememberMe漏洞攻击</li>
+											<li>升级summernote到最新版本v0.8.12</li>
+											<li>导入Excel根据dateFormat属性格式处理</li>
+											<li>修复War部署无法正常shutdown,ehcache内存泄漏</li>
+											<li>修复代码生成短字段无法识别问题</li>
+											<li>修复serviceImpl模版，修改方法判断日期错误</li>
+											<li>代码生成模板增加导出功能日志记录</li>
+											<li>代码生成唯一编号调整为tableId</li>
+											<li>代码生成查询时忽略大小写</li>
+											<li>代码生成支持翻页记住选中</li>
+											<li>代码生成表注释未填写也允许导入</li>
+											<li>Global全局配置类修改为注解，防止多环境配置下读取问题</li>
+											<li>修复多表格情况下，firstLoad只对第一个表格生效</li>
+											<li>处理Maven打包出现警告问题</li>
+											<li>默认主题样式，防止网速慢情况下出现空白</li>
+											<li>修复文件上传多级目录识别问题</li>
+											<li>锚链接解码url，防止中文导致页面不能加载问题</li>
+											<li>修复右键Tab页刷新事件重复请求问题</li>
+											<li>角色禁用&菜单隐藏不查询权限</li>
+											<li>其他细节优化</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
 									   <a data-toggle="collapse" data-parent="#version" href="#v41">v4.1.0</a><code class="pull-right">2019.10.22</code>
 								   </h5>
 								</div>
-								<div id="v41" class="panel-collapse collapse in">
+								<div id="v41" class="panel-collapse collapse">
 									<div class="panel-body">
 									   <ol>
 									        <li>支持多表格实例操作</li>
@@ -142,7 +207,7 @@
 										</ol>
 									</div>
 								</div>
-							 </div>
+							</div>
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">
@@ -203,8 +268,8 @@
 											<li>其他细节优化</li>
 										</ol>
 									</div>
-								</div>
-							 </div>
+							    </div>
+							</div>
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">

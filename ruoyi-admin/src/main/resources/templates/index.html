@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <title>若依系统首页</title>
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
+    <!-- 避免IE使用兼容模式 -->
+ 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link th:href="@{favicon.ico}" rel="stylesheet"/>
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/jquery.contextMenu.min.css}" rel="stylesheet"/>
@@ -15,7 +14,7 @@
     <link th:href="@{/css/animate.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
-    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.1.0}" rel="stylesheet"/>
+    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.2.0}" rel="stylesheet"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
@@ -187,7 +186,7 @@
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="user-image">
-							<span class="hidden-xs">[[${user.userName}]]</span>
+							<span class="hidden-xs">[[${#strings.defaultString(user.userName, '-')}]]</span>
 						</a>
 						<ul class="dropdown-menu">
 							<li class="mt5">
@@ -247,8 +246,8 @@
 <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
 <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script th:src="@{/ruoyi/js/ry-ui.js?v=4.1.0}"></script>
-<script th:src="@{/ruoyi/js/common.js?v=4.1.0}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.2.0}"></script>
+<script th:src="@{/ruoyi/js/common.js?v=4.2.0}"></script>
 <script th:src="@{/ruoyi/index.js}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:inline="javascript">

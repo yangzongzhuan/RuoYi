@@ -31,6 +31,11 @@ public class Constants
      * 注销
      */
     public static final String LOGOUT = "Logout";
+    
+    /**
+     * 注册
+     */
+    public static final String REGISTER = "Register";
 
     /**
      * 登录失败

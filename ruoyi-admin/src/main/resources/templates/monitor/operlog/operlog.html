@@ -155,8 +155,9 @@
 		}
 		
 		function resetPre() {
-			$.form.reset();
+			$("#operlog-form")[0].reset();
 			$("#businessTypes").selectpicker('refresh');
+			$.table.search('operlog-form', 'bootstrap-table');
 		}
 	</script>
 </body>
