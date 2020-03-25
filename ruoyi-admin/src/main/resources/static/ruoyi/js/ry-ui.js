@@ -214,10 +214,15 @@ var table = {
             	// 图片预览事件
             	$(optionsIds).off("click").on("click", '.img-circle', function() {
     			    var src = $(this).attr('src');
-    			    var target = $(this).data('target');
-    			    var height = $(this).data('height');
     			    var width = $(this).data('width');
     			    if($.common.equals("self", target)) {
+    			    	var height = $(this).data('height');
+						var width = $(this).data('width');
+						// 如果是移动端，就使用自适应大小弹窗
+						if ($.common.isMobile()) {
+							width = 'auto';
+							height = 'auto';
+						}
     			    	layer.open({
         			        title: false,
         			        type: 1,
@@ -1031,8 +1036,17 @@ var table = {
             	if ($.common.isNotEmpty(id)) {
             	    url = table.options.updateUrl.replace("{id}", id);
             	} else {
-            	    var row = $.common.isEmpty(table.options.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns(table.options.uniqueId);
-            	    url = table.options.updateUrl.replace("{id}", row);
+            		if(table.options.type == table_type.bootstrapTreeTable) {
+            			var row = $("#" + table.options.id).bootstrapTreeTable('getSelections')[0];
+            			if ($.common.isEmpty(row)) {
+            				$.modal.alertWarning("请至少选择一条记录");
+            				return;
+            			}
+            			url = table.options.updateUrl.replace("{id}", row[table.options.uniqueId]);
+            		} else {
+            			var row = $.common.isEmpty(table.options.uniqueId) ? $.table.selectFirstColumns() : $.table.selectColumns(table.options.uniqueId);
+                	    url = table.options.updateUrl.replace("{id}", row);
+            		}
             	}
             	$.modal.openFull("修改" + table.options.modalName, url);
             },
