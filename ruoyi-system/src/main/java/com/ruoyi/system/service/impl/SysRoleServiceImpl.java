@@ -299,6 +299,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * 
      * @param role 角色信息
      */
+    @Override
     public void checkRoleAllowed(SysRole role)
     {
         if (StringUtils.isNotNull(role.getRoleId()) && role.isAdmin())
@@ -350,6 +351,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @param userIds 需要删除的用户数据ID
      * @return 结果
      */
+    @Override
     public int deleteAuthUsers(Long roleId, String userIds)
     {
         return userRoleMapper.deleteUserRoleInfos(roleId, Convert.toLongArray(userIds));
@@ -362,6 +364,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @param userIds 需要删除的用户数据ID
      * @return 结果
      */
+    @Override
     public int insertAuthUsers(Long roleId, String userIds)
     {
         Long[] users = Convert.toLongArray(userIds);
