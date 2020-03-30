@@ -214,7 +214,7 @@ var table = {
             	// 图片预览事件
             	$(optionsIds).off("click").on("click", '.img-circle', function() {
     			    var src = $(this).attr('src');
-    			    var width = $(this).data('width');
+    			    var target = $(this).data('target');
     			    if($.common.equals("self", target)) {
     			    	var height = $(this).data('height');
 						var width = $(this).data('width');
