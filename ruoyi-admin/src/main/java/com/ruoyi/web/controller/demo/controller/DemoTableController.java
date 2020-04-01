@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -141,6 +142,16 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 直接加载表格数据
+     */
+    @GetMapping("/data")
+    public String data(ModelMap mmap)
+    {
+        mmap.put("users", users);
+        return prefix + "/data";
+    }
+
+    /**
      * 表格冻结列
      */
     @GetMapping("/fixedColumns")
@@ -166,7 +177,7 @@ public class DemoTableController extends BaseController
     {
         return prefix + "/detail";
     }
-    
+
     /**
      * 表格父子视图
      */
