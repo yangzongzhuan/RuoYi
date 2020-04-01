@@ -88,12 +88,18 @@
 		        {
 		            field: 'tableName',
 		            title: '表名称',
-		            sortable: true
+		            sortable: true,
+		            formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
 		        },
 		        {
 		            field: 'tableComment',
 		            title: '表描述',
-		            sortable: true
+		            sortable: true,
+		            formatter: function(value, row, index) {
+                    	return $.table.tooltip(value, 15);
+                    }
 		        },
 		        {
 		            field: 'className',

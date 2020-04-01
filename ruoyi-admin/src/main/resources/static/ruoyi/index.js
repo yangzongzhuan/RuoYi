@@ -14,12 +14,10 @@ $(function() {
     $('#side-menu').metisMenu();
 
     // 固定菜单栏
-    $(function() {
-        $('.sidebar-collapse').slimScroll({
-            height: '96%',
-            railOpacity: 0.9,
-            alwaysVisible: false
-        });
+    $('.sidebar-collapse').slimScroll({
+        height: '96%',
+        railOpacity: 0.9,
+        alwaysVisible: false
     });
 
     // 菜单切换
