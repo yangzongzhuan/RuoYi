@@ -25,7 +25,7 @@
                                 <label>${comment}：</label>
                                 <input type="text" name="${column.javaField}"/>
                             </li>
-#elseif($column.htmlType == "select" || $column.htmlType == "radio" && "" != $dictType)
+#elseif(($column.htmlType == "select" || $column.htmlType == "radio") && "" != $dictType)
                             <li>
                                 <label>${comment}：</label>
                                 <select name="${column.javaField}" th:with="type=${@dict.getType('${dictType}')}">
@@ -33,11 +33,12 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-#elseif($column.htmlType == "select" || $column.htmlType == "radio" && $dictType)
+#elseif(($column.htmlType == "select" || $column.htmlType == "radio") && $dictType)
                             <li>
                                 <label>${comment}：</label>
                                 <select name="${column.javaField}">
                                     <option value="">所有</option>
+                                    <option value="-1">代码生成请选择字典属性</option>
                                 </select>
                             </li>
 #elseif($column.htmlType == "datetime")
