@@ -1,6 +1,7 @@
 package com.ruoyi.framework.aspectj;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,6 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.annotation.DataSource;
@@ -16,7 +18,7 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 多数据源处理
- * 
+ *
  * @author ruoyi
  */
 @Aspect
@@ -60,17 +62,14 @@ public class DataSourceAspect
     public DataSource getDataSource(ProceedingJoinPoint point)
     {
         MethodSignature signature = (MethodSignature) point.getSignature();
-        Class<? extends Object> targetClass = point.getTarget().getClass();
-        DataSource targetDataSource = targetClass.getAnnotation(DataSource.class);
-        if (StringUtils.isNotNull(targetDataSource))
+        // point.getTarget().getClass(); 这个获取的是动态代理的class，上面获取不到自定义注解
+        // 先获取方法上的，获取不到啊再从class上找
+        DataSource dataSource = AnnotationUtils.findAnnotation(signature.getMethod(), DataSource.class);
+        if (Objects.nonNull(dataSource))
         {
-            return targetDataSource;
-        }
-        else
-        {
-            Method method = signature.getMethod();
-            DataSource dataSource = method.getAnnotation(DataSource.class);
             return dataSource;
         }
+
+        return AnnotationUtils.findAnnotation(signature.getDeclaringType(), DataSource.class);
     }
 }
