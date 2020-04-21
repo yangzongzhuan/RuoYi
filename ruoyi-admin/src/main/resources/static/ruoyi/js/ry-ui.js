@@ -504,6 +504,16 @@ var table = {
             hideColumn: function(column, tableId) {
             	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
             	$("#" + currentId).bootstrapTable('hideColumn', column);
+            },
+            // 显示所有表格列
+            showAllColumns: function(tableId) {
+            	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
+            	$("#" + currentId).bootstrapTable('showAllColumns');
+            },
+            // 隐藏所有表格列
+            hideAllColumns: function(tableId) {
+            	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
+            	$("#" + currentId).bootstrapTable('hideAllColumns');
             }
         },
         // 表格树封装处理
