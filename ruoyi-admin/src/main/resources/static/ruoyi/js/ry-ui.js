@@ -43,6 +43,7 @@ var table = {
         		    sortName: "",
         		    sortOrder: "asc",
         		    pagination: true,
+        		    paginationLoop: false,
         		    pageSize: 10,
         		    pageList: [10, 25, 50],
         		    toolbar: "toolbar",
@@ -85,6 +86,7 @@ var table = {
                     sortName: options.sortName,                         // 排序列名称
                     sortOrder: options.sortOrder,                       // 排序方式  asc 或者 desc
                     pagination: options.pagination,                     // 是否显示分页（*）
+                    paginationLoop: options.paginationLoop,             // 是否启用分页条无限循环的功能
                     pageNumber: 1,                                      // 初始化加载第一页，默认第一页
                     pageSize: options.pageSize,                         // 每页的记录行数（*） 
                     pageList: options.pageList,                         // 可供选择的每页的行数（*）
