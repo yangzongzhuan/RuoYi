@@ -105,6 +105,7 @@ var table = {
                     showToggle: options.showToggle,                     // 是否显示详细视图和列表视图的切换按钮
                     showExport: options.showExport,                     // 是否支持导出文件
                     showHeader: options.showHeader,                     // 是否显示表头
+                    showFullscreen: options.showFullscreen,             // 是否显示全屏按钮
                     uniqueId: options.uniqueId,                         // 唯 一的标识符
                     clickToSelect: options.clickToSelect,				// 是否启用点击选中行
                     singleSelect: options.singleSelect,                 // 是否单选checkbox
