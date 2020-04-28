@@ -8,6 +8,7 @@ layer.config({
 });
 
 var isMobile = $.common.isMobile() || $(window).width() < 769;
+var sidebarHeight = isMobile ? '100%' : '96%';
 
 $(function() {
     // MetsiMenu
@@ -15,7 +16,7 @@ $(function() {
 
     // 固定菜单栏
     $('.sidebar-collapse').slimScroll({
-        height: '96%',
+        height: sidebarHeight,
         railOpacity: 0.9,
         alwaysVisible: false
     });
