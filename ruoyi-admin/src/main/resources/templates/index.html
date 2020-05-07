@@ -33,7 +33,7 @@
             <ul class="nav" id="side-menu">
             	<li>
             		<div class="user-panel">
-            			<a class="menuItem" title="个人中心" th:href="@{/system/user/profile}"> 
+            			<a class="menuItem noactive" title="个人中心" th:href="@{/system/user/profile}"> 
             				<div class="hide" th:text="个人中心"></div>
 					        <div class="pull-left image">
 		                    	<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" class="img-circle" alt="User Image">
@@ -288,7 +288,9 @@ function switchSkin() {
 /** 刷新时访问路径页签 */
 function applyPath(url) {
 	$('a[href$="' + decodeURI(url) + '"]').click();
-    $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li :not(.user-panel)").addClass("active").end().parents("ul").addClass("in");
+	if (!$('a[href$="' + url + '"]').hasClass("noactive")) {
+	    $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+	}
 }
 
 $(function() {
