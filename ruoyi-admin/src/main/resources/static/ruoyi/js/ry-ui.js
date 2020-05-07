@@ -110,6 +110,7 @@ var table = {
                     clickToSelect: options.clickToSelect,				// 是否启用点击选中行
                     singleSelect: options.singleSelect,                 // 是否单选checkbox
                     mobileResponsive: options.mobileResponsive,         // 是否支持移动端适配
+                    cardView: options.cardView,                         // 是否启用显示卡片视图
                     detailView: options.detailView,                     // 是否启用显示细节视图
                     onClickRow: options.onClickRow,                     // 点击某行触发的事件
                     onDblClickRow: options.onDblClickRow,               // 双击某行触发的事件
