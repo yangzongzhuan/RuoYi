@@ -153,11 +153,16 @@ public class SysDeptController extends BaseController
 
     /**
      * 选择部门树
+     * 
+     * @param deptId 部门ID
+     * @param excludeId 排除ID
      */
-    @GetMapping("/selectDeptTree/{deptId}")
-    public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap)
+    @GetMapping(value = { "/selectDeptTree/{deptId}", "/selectDeptTree/{deptId}/{excludeId}" })
+    public String selectDeptTree(@PathVariable("deptId") Long deptId,
+            @PathVariable(value = "excludeId", required = false) String excludeId, ModelMap mmap)
     {
         mmap.put("dept", deptService.selectDeptById(deptId));
+        mmap.put("excludeId", excludeId);
         return prefix + "/tree";
     }
 
@@ -169,6 +174,19 @@ public class SysDeptController extends BaseController
     public List<Ztree> treeData()
     {
         List<Ztree> ztrees = deptService.selectDeptTree(new SysDept());
+        return ztrees;
+    }
+
+    /**
+     * 加载部门列表树（排除下级）
+     */
+    @GetMapping("/treeData/{excludeId}")
+    @ResponseBody
+    public List<Ztree> treeDataExcludeChild(@PathVariable(value = "excludeId", required = false) Long excludeId)
+    {
+        SysDept dept = new SysDept();
+        dept.setDeptId(excludeId);
+        List<Ztree> ztrees = deptService.selectDeptTreeExcludeChild(dept);
         return ztrees;
     }
 
