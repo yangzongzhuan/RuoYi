@@ -900,6 +900,16 @@ label {
     z-index:100;
 }
 
+/** 表格全屏样式 **/
+.bootstrap-table.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100%!important;
+    background: #FFF;
+}
+
 /** 表格树样式 **/
 .bootstrap-tree-table .treetable-indent {width:16px; height: 16px; display: inline-block; position: relative;}
 .bootstrap-tree-table .treetable-expander {width:16px; height: 16px; display: inline-block; position: relative; cursor: pointer;}

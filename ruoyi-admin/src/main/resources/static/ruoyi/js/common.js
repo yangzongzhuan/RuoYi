@@ -53,6 +53,13 @@ $(function() {
 			if (!$(".popover:hover").length) $(_this).popover("hide");
 		}, 100);
 	});
+	
+	// 取消回车自动提交表单
+	$(document).on("keypress", ":input:not(textarea):not([type=submit])", function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
 	 
 	// laydate 时间控件绑定
 	if ($(".select-time").length > 0) {

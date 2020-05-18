@@ -113,11 +113,12 @@
 		/*部门管理-修改-选择部门树*/
 		function selectDeptTree() {
 			var deptId = $("#treeId").val();
+			var excludeId = $("input[name='deptId']").val();
 			if(deptId > 0) {
 			    var options = {
 					title: '部门选择',
 					width: "380",
-					url: prefix + "/selectDeptTree/" + $("#treeId").val(),
+					url: prefix + "/selectDeptTree/" + $("#treeId").val() + "/" + excludeId,
 					callBack: doSubmit
 				};
 				$.modal.openOptions(options);

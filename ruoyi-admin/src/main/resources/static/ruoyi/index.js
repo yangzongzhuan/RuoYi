@@ -8,6 +8,7 @@ layer.config({
 });
 
 var isMobile = $.common.isMobile() || $(window).width() < 769;
+var sidebarHeight = isMobile ? '100%' : '96%';
 
 $(function() {
     // MetsiMenu
@@ -15,7 +16,7 @@ $(function() {
 
     // 固定菜单栏
     $('.sidebar-collapse').slimScroll({
-        height: '96%',
+        height: sidebarHeight,
         railOpacity: 0.9,
         alwaysVisible: false
     });
@@ -371,6 +372,7 @@ $(function() {
             });
         }
         scrollToTab($('.menuTab.active'));
+        setIframeUrl($('.page-tabs-content').find('.active').attr('data-id'));
         return false;
     }
     
@@ -428,6 +430,7 @@ $(function() {
             $(this).remove();
         });
         $('.page-tabs-content').css("margin-left", "0");
+        setIframeUrl($('.page-tabs-content').find('.active').attr('data-id'));
     }
     
     // 关闭全部选项卡
@@ -441,6 +444,7 @@ $(function() {
             $(this).addClass("active");
         });
         $('.page-tabs-content').css("margin-left", "0");
+        setIframeUrl($('.page-tabs-content').find('.active').attr('data-id'));
     }
     
     
