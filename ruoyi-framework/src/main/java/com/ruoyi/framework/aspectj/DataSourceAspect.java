@@ -1,6 +1,5 @@
 package com.ruoyi.framework.aspectj;
 
-import java.lang.reflect.Method;
 import java.util.Objects;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,7 +17,7 @@ import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 多数据源处理
- *
+ * 
  * @author ruoyi
  */
 @Aspect
@@ -62,8 +61,6 @@ public class DataSourceAspect
     public DataSource getDataSource(ProceedingJoinPoint point)
     {
         MethodSignature signature = (MethodSignature) point.getSignature();
-        // point.getTarget().getClass(); 这个获取的是动态代理的class，上面获取不到自定义注解
-        // 先获取方法上的，获取不到啊再从class上找
         DataSource dataSource = AnnotationUtils.findAnnotation(signature.getMethod(), DataSource.class);
         if (Objects.nonNull(dataSource))
         {
