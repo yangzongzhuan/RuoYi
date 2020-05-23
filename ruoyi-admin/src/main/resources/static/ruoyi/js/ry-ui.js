@@ -447,13 +447,13 @@ var table = {
             // 查询表格指定列值
             selectColumns: function(column) {
             	var rows = $.map($("#" + table.options.id).bootstrapTable('getSelections'), function (row) {
-        	        return row[column];
+        	        return getItemField(row, column);
         	    });
             	if ($.common.isNotEmpty(table.options.rememberSelected) && table.options.rememberSelected) {
             		var selectedRows = table.rememberSelecteds[table.options.id];
             		if($.common.isNotEmpty(selectedRows)) {
 	            		rows = $.map(table.rememberSelecteds[table.options.id], function (row) {
-	                        return row[column];
+	                        return getItemField(row, column);
 	                    });
             		}
             	}
@@ -465,7 +465,7 @@ var table = {
             	var rowIds;
             	if ($.isArray(rows)) {
             	    rowIds = $.map(rows, function(row) {
-            	        return row[column];
+            	        return getItemField(row, column);
             	    });
             	} else {
             	    rowIds = [rows[column]];
@@ -475,13 +475,13 @@ var table = {
             // 查询表格首列值
             selectFirstColumns: function() {
             	var rows = $.map($("#" + table.options.id).bootstrapTable('getSelections'), function (row) {
-        	        return row[table.options.columns[1].field];
+        	        return getItemField(row, table.options.columns[1].field);
         	    });
             	if ($.common.isNotEmpty(table.options.rememberSelected) && table.options.rememberSelected) {
             		var selectedRows = table.rememberSelecteds[table.options.id];
             		if($.common.isNotEmpty(selectedRows)) {
             			rows = $.map(selectedRows, function (row) {
-                            return row[table.options.columns[1].field];
+                            return getItemField(row, table.options.columns[1].field);
                         });
             		}
             	}
@@ -577,7 +577,7 @@ var table = {
             // 查询表格树指定列值
             selectColumns: function(column) {
             	var rows = $.map($.bttTable.bootstrapTreeTable('getSelections'), function (row) {
-        	        return row[column];
+        	        return getItemField(row, column);
         	    });
             	return $.common.uniqueFn(rows);
             },
@@ -1461,6 +1461,18 @@ var table = {
                     return arg;
                 });
                 return flag ? str : '';
+            },
+            // 获取节点数据，支持多层级访问
+            getItemField: function (item, field) {
+                var value = item;
+                if (typeof field !== 'string' || item.hasOwnProperty(field)) {
+                    return item[field];
+                }
+                var props = field.split('.');
+                for (var p in props) {
+                    value = value && value[props[p]];
+                }
+                return value;
             },
             // 指定随机数返回
             random: function (min, max) {
