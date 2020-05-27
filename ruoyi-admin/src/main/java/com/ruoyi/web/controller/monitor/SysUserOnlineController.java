@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.monitor;
 
 import java.util.List;
+
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,11 +57,19 @@ public class SysUserOnlineController extends BaseController
         return getDataTable(list);
     }
 
-    @RequiresPermissions("monitor:online:batchForceLogout")
+    /**
+     * 1、删除了 forceLogout 方法
+     * 2、将 batchForceLogout 和 forceLogout 的权限逻辑 改成了 OR【按需要设定】
+     * 3、@RequestParam("ids[]") ==> @RequestParam("ids")
+     * 4、开源拥有者 可以斟酌一下
+     * @param ids
+     * @return
+     */
+    @RequiresPermissions(value = {"monitor:online:batchForceLogout","monitor:online:forceLogout"},logical = Logical.OR)
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @PostMapping("/batchForceLogout")
     @ResponseBody
-    public AjaxResult batchForceLogout(@RequestParam("ids[]") String[] ids)
+    public AjaxResult batchForceLogout(@RequestParam("ids") String[] ids)
     {
         for (String sessionId : ids)
         {
@@ -82,33 +92,6 @@ public class SysUserOnlineController extends BaseController
             online.setStatus(OnlineStatus.off_line);
             userOnlineService.saveOnline(online);
         }
-        return success();
-    }
-
-    @RequiresPermissions("monitor:online:forceLogout")
-    @Log(title = "在线用户", businessType = BusinessType.FORCE)
-    @PostMapping("/forceLogout")
-    @ResponseBody
-    public AjaxResult forceLogout(String sessionId)
-    {
-        SysUserOnline online = userOnlineService.selectOnlineById(sessionId);
-        if (sessionId.equals(ShiroUtils.getSessionId()))
-        {
-            return error("当前登陆用户无法强退");
-        }
-        if (online == null)
-        {
-            return error("用户已下线");
-        }
-        OnlineSession onlineSession = (OnlineSession) onlineSessionDAO.readSession(online.getSessionId());
-        if (onlineSession == null)
-        {
-            return error("用户已下线");
-        }
-        onlineSession.setStatus(OnlineStatus.off_line);
-        onlineSessionDAO.update(onlineSession);
-        online.setStatus(OnlineStatus.off_line);
-        userOnlineService.saveOnline(online);
         return success();
     }
 }
