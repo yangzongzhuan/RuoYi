@@ -1,7 +1,6 @@
 package com.ruoyi.web.controller.monitor;
 
 import java.util.List;
-
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.framework.shiro.session.OnlineSession;
@@ -57,21 +56,13 @@ public class SysUserOnlineController extends BaseController
         return getDataTable(list);
     }
 
-    /**
-     * 1、删除了 forceLogout 方法
-     * 2、将 batchForceLogout 和 forceLogout 的权限逻辑 改成了 OR【按需要设定】
-     * 3、@RequestParam("ids[]") ==> @RequestParam("ids")
-     * 4、开源拥有者 可以斟酌一下
-     * @param ids
-     * @return
-     */
-    @RequiresPermissions(value = {"monitor:online:batchForceLogout","monitor:online:forceLogout"},logical = Logical.OR)
+    @RequiresPermissions(value = { "monitor:online:batchForceLogout", "monitor:online:forceLogout" }, logical = Logical.OR)
     @Log(title = "在线用户", businessType = BusinessType.FORCE)
     @PostMapping("/batchForceLogout")
     @ResponseBody
-    public AjaxResult batchForceLogout(@RequestParam("ids") String[] ids)
+    public AjaxResult batchForceLogout(String ids)
     {
-        for (String sessionId : ids)
+        for (String sessionId : Convert.toStrArray(ids))
         {
             SysUserOnline online = userOnlineService.selectOnlineById(sessionId);
             if (online == null)

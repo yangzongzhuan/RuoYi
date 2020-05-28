@@ -114,9 +114,7 @@
 		            title: '操作',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		            	// 传值改成 array 类型
-		            	var ids = [row.sessionId]
-		                var msg = '<a class="btn btn-danger btn-xs ' + forceFlag + '" href="javascript:void(0)" onclick="forceLogout(\'' + ids + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
+		                var msg = '<a class="btn btn-danger btn-xs ' + forceFlag + '" href="javascript:void(0)" onclick="forceLogout(\'' + row.sessionId + '\')"><i class="fa fa-sign-out"></i>强退</a> ';
 		                return msg;
 		            }
 		        }]
@@ -125,7 +123,6 @@
 		});
 
 		// 单条强退
-		// 将该请求并到  batchForceLogout 中
 		function forceLogout(sessionId) {
 		    $.modal.confirm("确定要强制选中用户下线吗？", function() {
 		    	var data = { "ids": sessionId };
@@ -142,7 +139,7 @@
 		    }
 		    $.modal.confirm("确认要强退选中的" + rows.length + "条数据吗?", function() {
 		        var url = prefix + "/batchForceLogout";
-		        var data = { "ids": rows };
+		        var data = { "ids": rows.join() };
 		        $.operate.post(url, data);
 		    });
 		}
