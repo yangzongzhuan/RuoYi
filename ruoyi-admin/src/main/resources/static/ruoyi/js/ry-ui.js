@@ -1263,9 +1263,11 @@ var table = {
         			var treeId = $("#treeId").val();
         			tree = $.fn.zTree.init($("#" + options.id), setting, data);
         			$._tree = tree;
-        			var nodes = tree.getNodesByParam("level", options.expandLevel - 1);
-        			for (var i = 0; i < nodes.length; i++) {
-        				tree.expandNode(nodes[i], true, false, false);
+        			for (var i = 0; i < options.expandLevel; i++) {
+        			    var nodes = tree.getNodesByParam("level", i);
+        			    for (var j = 0; j < nodes.length; j++) {
+        			        tree.expandNode(nodes[j], true, false, false);
+        			    }
         			}
         			var node = tree.getNodesByParam("id", treeId, null)[0];
         			$.tree.selectByIdName(treeId, node);
