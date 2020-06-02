@@ -167,6 +167,7 @@
                     success: function(data, textStatus, jqXHR) {
                     	data = calculateObjectValue(options, options.responseHandler, [data], data);
                         renderTable(data);
+                        calculateObjectValue(options, options.onLoadSuccess, [data], data);
                     },
                     error: function(xhr, textStatus) {
                         var _errorMsg = '<tr><td colspan="' + options.columns.length + '"><div style="display: block;text-align: center;">' + xhr.responseText + '</div></td></tr>'
@@ -737,6 +738,9 @@
         expanderExpandedClass: 'glyphicon glyphicon-chevron-down', // 展开的按钮的图标
         expanderCollapsedClass: 'glyphicon glyphicon-chevron-right', // 缩起的按钮的图标
         responseHandler: function(res) {
+            return false;
+        },
+        onLoadSuccess: function(res) {
             return false;
         }
     };
