@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<th:block th:include="include :: header('多级联动下拉')" />
+</head>
+<body class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>多级联动下拉<small>https://github.com/ciaoca/cxSelect</small></h5>
+                    </div>  
+                    <div class="ibox-content">
+                        <p>简单联动示例。</p>
+                        <div id="element" class="row">
+                            <div class="col-sm-2">
+	                            <select class="type form-control m-b" data-first-title="请选择">
+				                  <option value="">请选择</option>
+				                </select>
+			                </div>
+			                <div class="col-sm-2">
+				                <select class="router form-control m-b" data-first-title="请选择">
+				                  <option value="">请选择</option>
+				                </select>
+			                </div>
+                        </div>
+                        <hr>
+                        
+                        <p>国内省市区联动。</p>
+                        <div id="element1" class="row">
+                            <div class="col-sm-2">
+	                            <select class="province form-control m-b" data-first-title="选择省">
+				                  <option value="">请选择</option>
+				                  <option value="广东省" selected>广东省</option>
+				                </select>
+			                </div>
+			                <div class="col-sm-2">
+				                <select class="city form-control m-b" data-first-title="选择市">
+				                  <option value="">请选择</option>
+				                  <option value="深圳市" selected>深圳市</option>
+				                </select>
+			                </div>
+			                <div class="col-sm-2">
+				                <select class="area form-control m-b" data-first-title="选择地区">
+				                  <option value="">请选择</option>
+				                  <option value="南山区" selected>南山区</option>
+				                </select>
+			                </div>
+                        </div>
+                        <hr>
+                        
+                        <p>自定义选项。</p>
+                        <div id="element2" class="row">
+                            <div class="col-sm-2">
+	                            <select class="first form-control m-b"></select>
+			                </div>
+			                <div class="col-sm-2">
+				                <select class="second form-control m-b"></select>
+			                </div>
+			                <div class="col-sm-2">
+				                <select class="third form-control m-b"></select>
+			                </div>
+			                <div class="col-sm-2">
+				                <select class="fourth form-control m-b"></select>
+			                </div>
+			                <div class="col-sm-2">
+			                    <select class="fifth form-control m-b"></select>
+			                </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="font-noraml">相关参数详细信息</label>
+                            <div><a href="http://doc.ruoyi.vip/ruoyi/document/zjwd.html#cxselect" target="_blank">http://doc.ruoyi.vip/ruoyi/document/zjwd.html#cxselect</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: cxselect-js" />
+    <script th:inline="javascript">
+        // 直接返回获取
+   		var data = [[${data}]];
+    	$('#element').cxSelect({
+    	  selects: ['type', 'router'],
+    	  jsonValue: 'v',
+    	  data: data
+    	});
+    	
+    	// 通过默认url获取
+    	var urlChina = 'cityData';
+    	$.cxSelect.defaults.url = urlChina;
+    	$('#element1').cxSelect({
+   		  selects: ['province', 'city', 'area'],
+   		  nodata: 'none'
+   		});
+    	
+    	// 固定值获取
+    	$('#element2').cxSelect({
+   		  selects: ['first', 'second', 'third', 'fourth', 'fifth'],
+   		  required: true,
+   		  jsonValue: 'v',
+   		  data: [
+   			{'v': '1', 'n': '第一级 >', 's': [
+   			  {'v': '2', 'n': '第二级 >', 's': [
+   				{'v': '3', 'n': '第三级 >', 's': [
+   				  {'v': '4', 'n': '第四级 >', 's': [
+   					{'v': '5', 'n': '第五级 >', 's': [
+   					  {'v': '6', 'n': '第六级 >'}
+   					]}
+   				  ]}
+   				]}
+   			  ]}
+   			]},
+   			{'v': 'test number', 'n': '测试数字', 's': [
+   			  {'v': 'text', 'n': '文本类型', 's': [
+   				{'v': '4', 'n': '4'},
+   				{'v': '5', 'n': '5'},
+   				{'v': '6', 'n': '6'},
+   				{'v': '7', 'n': '7'},
+   				{'v': '8', 'n': '8'},
+   				{'v': '9', 'n': '9'},
+   				{'v': '10', 'n': '10'}
+   			  ]},
+   			  {'v': 'number', 'n': '数值类型', 's': [
+   				{'v': 11, 'n': 11},
+   				{'v': 12, 'n': 12},
+   				{'v': 13, 'n': 13},
+   				{'v': 14, 'n': 14},
+   				{'v': 15, 'n': 15},
+   				{'v': 16, 'n': 16},
+   				{'v': 17, 'n': 17}
+   			  ]}
+   			]},
+   			{'v': 'test boolean','n': '测试 Boolean 类型', 's': [
+   			  {'v': true ,'n': true},
+   			  {'v': false ,'n': false}
+   			]},
+   			{v: 'test quotes', n: '测试属性不加引号', s: [
+   			  {v: 'quotes', n: '引号'}
+   			]},
+   			{v: 'test other', n: '测试奇怪的值', s: [
+   			  {v: '[]', n: '数组（空）'},
+   			  {v: [1,2,3], n: '数组（数值）'},
+   			  {v: ['a','b','c'], n: '数组（文字）'},
+   			  {v: new Date(), n: '日期'},
+   			  {v: new RegExp('\\d+'), n: '正则对象'},
+   			  {v: /\d+/, n: '正则直接量'},
+   			  {v: {}, n: '对象'},
+   			  {v: document.getElementById('custom_data'), n: 'DOM'},
+   			  {v: null, n: 'Null'},
+   			  {n: '未设置 value'}
+   			]},
+   			{'v': '' , 'n': '无子级'}
+   		  ]
+   		});
+    </script>
+</body>
+</html>
