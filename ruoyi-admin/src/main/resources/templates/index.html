@@ -47,10 +47,7 @@
 				    </div>
             	</li>
                 <li>
-                    <a href="#"><i class="fa fa-home"></i> <span class="nav-label">主页</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li><a class="menuItem" th:href="@{/system/main}">了解若依</a></li>
-                    </ul>
+                    <a class="menuItem" th:href="@{/system/main}"><i class="fa fa-home"></i> <span class="nav-label">首页</span> </a>
                 </li>
                 <li th:each="menu : ${menus}">
                 	<a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
