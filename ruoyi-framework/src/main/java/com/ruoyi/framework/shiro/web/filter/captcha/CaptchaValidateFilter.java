@@ -61,10 +61,13 @@ public class CaptchaValidateFilter extends AccessControlFilter
     {
         Object obj = ShiroUtils.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
         String code = String.valueOf(obj != null ? obj : "");
+        //无论验证码是否正确，凡验证过一次后都应将原值不可用,直到页面重新请求验证码,以防恶意用户持有该验证码进行针对后台发包的暴力破解
+        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, ShiroConstants.CAPTCHA_ERROR);
         if (StringUtils.isEmpty(validateCode) || !validateCode.equalsIgnoreCase(code))
         {
             return false;
         }
+
         return true;
     }
 
