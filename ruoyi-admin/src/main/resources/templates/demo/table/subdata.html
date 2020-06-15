@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('主子表提交')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="gray-bg">
+    <div class="main-content">
+        <form id="form-add" class="form-horizontal">
+            <input name="deptId" type="hidden" id="treeId"/>
+            <h4 class="form-header h4">客户信息</h4>
+            <div class="row">
+            	<div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">客户名称：</label>
+                        <div class="col-sm-8">
+                            <input name="name" placeholder="请输入客户名称" class="form-control" type="text" maxlength="30">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">用户性别：</label>
+                        <div class="col-sm-8">
+                            <select name="sex" class="form-control" th:with="type=${@dict.getType('sys_user_sex')}">
+				                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+				            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">手机号码：</label>
+                        <div class="col-sm-8">
+                            <input id="phonenumber" name="phonenumber" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label is-required">生日：</label>
+                        <div class="col-sm-8">
+                            <div class="input-group date">
+		                        <input name="birthday" class="form-control" placeholder="yyyy-MM-dd" type="text">
+		                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注：</label>
+                        <div class="col-xs-10">
+                            <textarea name="remark" maxlength="500" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="form-header h4">商品数据</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-white btn-sm" onclick="return addColumn()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="return delColumn()"><i class="fa fa-minus"> 删除</i></button>
+                    <div class="col-sm-12 select-table table-striped">
+					    <table id="bootstrap-table"></table>
+					</div>
+                </div>
+            </div>
+        </form>
+    </div>
+      
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-10">
+            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+	<script th:inline="javascript">
+	    $(function() {
+		    var options = {
+                pagination: false,
+		        showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+		        columns: [{
+		            checkbox: true
+		        },
+		        {
+		            field: 'name',
+		            align: 'center',
+		            title: '商品名称',
+		            formatter: function(value, row, index) {
+		            	var html = $.common.sprintf("<input class='form-control' type='text' name='goods[%s].name' value='%s'>", index, value);
+		        		return html;
+                    }
+		        },
+		        {
+		            field: 'weight',
+		            align: 'center',
+		            title: '商品重量',
+		            formatter: function(value, row, index) {
+		            	var html = $.common.sprintf("<input class='form-control' type='text' name='goods[%s].weight' value='%s'>", index, value);
+		        		return html;
+                    }
+		        },
+		        {
+		            field: 'price',
+		            align: 'center',
+		            title: '商品价格',
+		            formatter: function(value, row, index) {
+		            	var html = $.common.sprintf("<input class='form-control' type='text' name='goods[%s].price' value='%s'>", index, value);
+		        		return html;
+                    }
+		        },
+		        {
+		            field: 'type',
+		            align: 'center',
+		            title: '商品种类',
+		            formatter: function(value, row, index) {
+		            	var html = $.common.sprintf("<select class='form-control' name='goods[%s].type'><option value=''>所有</option><option value='0'>寒性</option><option value='1'>热性</option></select>", index);
+		        		return html;
+                    }
+		        }]
+		    };
+		    $.table.init(options);
+		});
+	    
+	    /* 主子表-提交 */
+        function submitHandler(index, layero){
+        	var data = $("#form-add").serializeArray();
+			$.operate.saveModal("/demo/operate/customer/add", data);
+        }
+	    
+        $("input[name='birthday']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        
+        function addColumn(){
+        	var count = $("#" + table.options.id).bootstrapTable('getData').length;
+        	var randomId = 100 + ~~(Math.random() * 100)
+        	$("#" + table.options.id).bootstrapTable('insertRow', {
+        		index: count,
+                row: {
+                	name: '商品' + randomId,
+                	weight: 20 + randomId,
+                	price: 1 + + randomId + .2,
+                	type: 10 + randomId,
+                }
+        	})
+        }
+        
+        function delColumn(){
+        	var ids = $.table.selectColumns("name");
+        	if (ids.length == 0) {
+    			$.modal.alertWarning("请至少选择一条记录");
+    			return;
+    		}
+        	$("#" + table.options.id).bootstrapTable('remove', {
+        	    field: 'name',
+        	    values: ids
+        	})
+        }
+    </script>
+</body>
+</html>

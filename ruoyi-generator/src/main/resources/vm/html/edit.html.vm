@@ -88,8 +88,8 @@
                 <label class="col-sm-3 control-label">${comment}：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         <input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
