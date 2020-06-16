@@ -81,6 +81,7 @@
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: datetimepicker-js" />
+    <script th:src="@{/js/jquery.tmpl.js}"></script>
 	<script th:inline="javascript">
 	    $(function() {
 		    var options = {
@@ -92,6 +93,11 @@
 		        columns: [{
 		            checkbox: true
 		        },
+		        {
+		        	field: 'index',
+		        	align: 'center',
+                    title: "序号"
+                },
 		        {
 		            field: 'name',
 		            align: 'center',
@@ -124,8 +130,8 @@
 		            align: 'center',
 		            title: '商品种类',
 		            formatter: function(value, row, index) {
-		            	var html = $.common.sprintf("<select class='form-control' name='goods[%s].type'><option value=''>所有</option><option value='0'>寒性</option><option value='1'>热性</option></select>", index);
-		        		return html;
+		        		var data = [{ index: index, type: value }];
+		                return $("#goodsTypeTpl").tmpl(data).html();
                     }
 		        }]
 		    };
@@ -146,29 +152,71 @@
         
         function addColumn(){
         	var count = $("#" + table.options.id).bootstrapTable('getData').length;
-        	var randomId = 100 + ~~(Math.random() * 100)
+        	
+			var params = new Array();
+			for (var dataIndex = 0; dataIndex <= count; dataIndex++) {
+			    var columns = $('#' + table.options.id + ' tr[data-index="' + dataIndex + '"] td');
+			    var obj = new Object();
+			    for (var i = 0; i < columns.length; i++) {
+			        var inputValue = $(columns[i]).find('input');
+			        var selectValue = $(columns[i]).find('select');
+			        var key = table.options.columns[i].field;
+			        if ($.common.isNotEmpty(inputValue.val())) {
+			            obj[key] = inputValue.val();
+			        } else if ($.common.isNotEmpty(selectValue.val())) {
+			            obj[key] = selectValue.val();
+			        } else {
+			            obj[key] = "";
+			        }
+			    }
+			    params.push({ index: dataIndex, row: obj });
+			}
+			$("#" + table.options.id).bootstrapTable("updateRow", params);
+        	
         	$("#" + table.options.id).bootstrapTable('insertRow', {
         		index: count,
                 row: {
-                	name: '商品' + randomId,
-                	weight: 20 + randomId,
-                	price: 1 + + randomId + .2,
-                	type: 10 + randomId,
+                	index: $.table.serialNumber(count),
+                	name: "",
+                	weight: "",
+                	price: "",
+                	type: "",
                 }
         	})
+        	resetIndex();
         }
         
         function delColumn(){
-        	var ids = $.table.selectColumns("name");
+        	var ids = $.table.selectColumns("index");
         	if (ids.length == 0) {
     			$.modal.alertWarning("请至少选择一条记录");
     			return;
     		}
         	$("#" + table.options.id).bootstrapTable('remove', {
-        	    field: 'name',
+        	    field: 'index',
         	    values: ids
         	})
+        	resetIndex();
+        }
+        
+        function resetIndex() {
+            var count = $("#" + table.options.id).bootstrapTable('getData').length;
+            for (var index = 0; index <= count; index++) {
+                // 重置序号
+                $("#" + table.options.id).bootstrapTable('updateRow', { index: index, row: { index: parseInt(index + 1) } })
+            }
         }
     </script>
 </body>
 </html>
+
+<!-- 查询方式 -->
+<script id="goodsTypeTpl" type="text/x-jquery-tmpl">
+<div>
+<select class='form-control' name='goods[${index}].type'>
+    <option value="">所有</option>
+    <option value="0" {{if type==="0"}}selected{{/if}}>寒性</option>
+    <option value="1" {{if type==="1"}}selected{{/if}}>热性</option>
+</select>
+</div>
+</script>
