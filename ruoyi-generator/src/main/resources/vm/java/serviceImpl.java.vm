@@ -13,6 +13,12 @@ import com.ruoyi.common.utils.DateUtils;
 #end
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+#if($table.sub)
+import java.util.ArrayList;
+import com.ruoyi.common.utils.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
+import ${packageName}.domain.${subClassName};
+#end
 import ${packageName}.mapper.${ClassName}Mapper;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
@@ -60,6 +66,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
      * @param ${className} ${functionName}
      * @return 结果
      */
+#if($table.sub)
+    @Transactional
+#end
     @Override
     public int insert${ClassName}(${ClassName} ${className})
     {
@@ -68,7 +77,13 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
         ${className}.setCreateTime(DateUtils.getNowDate());
 #end
 #end
+#if($table.sub)
+        int rows = ${className}Mapper.insert${ClassName}(${className});
+        insert${subClassName}(${className});
+        return rows;
+#else
         return ${className}Mapper.insert${ClassName}(${className});
+#end
     }
 
     /**
@@ -77,6 +92,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
      * @param ${className} ${functionName}
      * @return 结果
      */
+#if($table.sub)
+    @Transactional
+#end
     @Override
     public int update${ClassName}(${ClassName} ${className})
     {
@@ -84,6 +102,10 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
 #if($column.javaField == 'updateTime')
         ${className}.setUpdateTime(DateUtils.getNowDate());
 #end
+#end
+#if($table.sub)
+        ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${className}.get${pkColumn.capJavaField}());
+        insert${subClassName}(${className});
 #end
         return ${className}Mapper.update${ClassName}(${className});
     }
@@ -94,9 +116,15 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
      * @param ids 需要删除的数据ID
      * @return 结果
      */
+#if($table.sub)
+    @Transactional
+#end
     @Override
     public int delete${ClassName}ByIds(String ids)
     {
+#if($table.sub)
+        ${className}Mapper.delete${subClassName}By${subTableFkClassName}s(Convert.toStrArray(ids));
+#end
         return ${className}Mapper.delete${ClassName}ByIds(Convert.toStrArray(ids));
     }
 
@@ -109,6 +137,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
     @Override
     public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField})
     {
+#if($table.sub)
+        ${className}Mapper.delete${subClassName}By${subTableFkClassName}(${pkColumn.javaField});
+#end
         return ${className}Mapper.delete${ClassName}ById(${pkColumn.javaField});
     }
 #if($table.tree)
@@ -136,6 +167,32 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
             ztrees.add(ztree);
         }
         return ztrees;
+    }
+#end
+#if($table.sub)
+
+    /**
+     * 新增${subTable.functionName}信息
+     * 
+     * @param ${className} ${functionName}对象
+     */
+    public void insert${subClassName}(${ClassName} ${className})
+    {
+        List<${subClassName}> ${subclassName}List = ${className}.get${subClassName}List();
+        Long ${pkColumn.javaField} = ${className}.get${pkColumn.capJavaField}();
+        if (StringUtils.isNotNull(${subclassName}List))
+        {
+            List<${subClassName}> list = new ArrayList<${subClassName}>();
+            for (${subClassName} ${subclassName} : ${subclassName}List)
+            {
+                ${subclassName}.set${pkColumn.capJavaField}(${pkColumn.javaField});
+                list.add(${subclassName});
+            }
+            if (list.size() > 0)
+            {
+                ${className}Mapper.batch${subClassName}(list);
+            }
+        }
     }
 #end
 }

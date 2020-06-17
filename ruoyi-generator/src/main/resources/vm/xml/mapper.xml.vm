@@ -12,6 +12,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="parentName" column="parent_name" />
 #end
     </resultMap>
+#if($table.sub)
+
+    <resultMap id="${ClassName}${subClassName}Result" type="${ClassName}" extends="${ClassName}Result">
+        <collection property="${subclassName}List" notNullColumn="${subTable.pkColumn.columnName}" javaType="java.util.List" resultMap="${subClassName}Result" />
+    </resultMap>
+
+    <resultMap type="${subClassName}" id="${subClassName}Result">
+#foreach ($column in $subTable.columns)
+        <result property="${column.javaField}"    column="${column.columnName}"    />
+#end
+    </resultMap>
+#end
 
     <sql id="select${ClassName}Vo">
         select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
@@ -52,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #end
     </select>
     
-    <select id="select${ClassName}ById" parameterType="${pkColumn.javaType}" resultMap="${ClassName}Result">
+    <select id="select${ClassName}ById" parameterType="${pkColumn.javaType}" resultMap="#if($table.sub)${ClassName}${subClassName}Result#else${ClassName}Result#end">
 #if($table.crud)
         <include refid="select${ClassName}Vo"/>
         where ${pkColumn.columnName} = #{${pkColumn.javaField}}
@@ -61,6 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from ${tableName} t
         left join ${tableName} p on p.${pkColumn.columnName} = t.${tree_parent_code}
         where t.${pkColumn.columnName} = #{${pkColumn.javaField}}
+#elseif($table.sub)
+        select#foreach($column in $columns) a.$column.columnName#if($velocityCount != $columns.size()),#end#end,
+           #foreach($column in $subTable.columns) b.$column.columnName#if($velocityCount != $subTable.columns.size()),#end#end
+
+        from ${tableName} a
+        left join ${subTableName} b on b.${subTableFkName} = a.${pkColumn.columnName}
+        where a.${pkColumn.columnName} = #{${pkColumn.javaField}}
 #end
     </select>
         
@@ -104,5 +123,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{${pkColumn.javaField}}
         </foreach>
     </delete>
+#if($table.sub)
     
+    <delete id="delete${subClassName}By${subTableFkClassName}s" parameterType="String">
+        delete from ${subTableName} where ${subTableFkName} in 
+        <foreach item="${subTableFkclassName}" collection="array" open="(" separator="," close=")">
+            #{${subTableFkclassName}}
+        </foreach>
+    </delete>
+
+    <delete id="delete${subClassName}By${subTableFkClassName}" parameterType="Long">
+        delete from ${subTableName} where ${subTableFkName} = #{${subTableFkclassName}}
+    </delete>
+
+    <insert id="batch${subClassName}">
+        insert into ${subTableName}(#foreach($column in $subTable.columns) $column.columnName#if($velocityCount != $columns.size()),#end#end) values
+		<foreach item="item" index="index" collection="list" separator=",">
+            (#foreach($column in $subTable.columns) #{item.$column.javaField}#if($velocityCount != $columns.size()),#end#end)
+        </foreach>
+    </insert>
+#end
+
 </mapper>

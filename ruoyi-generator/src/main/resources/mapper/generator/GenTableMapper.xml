@@ -5,23 +5,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.generator.mapper.GenTableMapper">
 
 	<resultMap type="GenTable" id="GenTableResult">
-	    <id     property="tableId"        column="table_id"        />
-		<result property="tableName"      column="table_name"      />
-		<result property="tableComment"   column="table_comment"   />
-		<result property="className"      column="class_name"      />
-		<result property="tplCategory"    column="tpl_category"    />
-		<result property="packageName"    column="package_name"    />
-		<result property="moduleName"     column="module_name"     />
-		<result property="businessName"   column="business_name"   />
-		<result property="functionName"   column="function_name"   />
-		<result property="functionAuthor" column="function_author" />
-		<result property="options"        column="options"         />
-		<result property="createBy"       column="create_by"       />
-		<result property="createTime"     column="create_time"     />
-		<result property="updateBy"       column="update_by"       />
-		<result property="updateTime"     column="update_time"     />
-		<result property="remark"         column="remark"          />
-		<collection  property="columns"  javaType="java.util.List"  resultMap="GenTableColumnResult" />
+	    <id     property="tableId"        column="table_id"          />
+		<result property="tableName"      column="table_name"        />
+		<result property="tableComment"   column="table_comment"     />
+		<result property="subTableName"   column="sub_table_name"    />
+		<result property="subTableFkName" column="sub_table_fk_name" />
+		<result property="className"      column="class_name"        />
+		<result property="tplCategory"    column="tpl_category"      />
+		<result property="packageName"    column="package_name"      />
+		<result property="moduleName"     column="module_name"       />
+		<result property="businessName"   column="business_name"     />
+		<result property="functionName"   column="function_name"     />
+		<result property="functionAuthor" column="function_author"   />
+		<result property="options"        column="options"           />
+		<result property="createBy"       column="create_by"         />
+		<result property="createTime"     column="create_time"       />
+		<result property="updateBy"       column="update_by"         />
+		<result property="updateTime"     column="update_time"       />
+		<result property="remark"         column="remark"            />
+		<collection property="columns" javaType="java.util.List" resultMap="GenTableColumnResult" />
 	</resultMap>
 	
 	<resultMap type="GenTableColumn" id="GenTableColumnResult">
@@ -50,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	
 	<sql id="selectGenTableVo">
-        select table_id, table_name, table_comment, class_name, tpl_category, package_name, module_name, business_name, function_name, function_author, options, create_by, create_time, update_by, update_time, remark from gen_table
+        select table_id, table_name, table_comment, sub_table_name, sub_table_fk_name, class_name, tpl_category, package_name, module_name, business_name, function_name, function_author, options, create_by, create_time, update_by, update_time, remark from gen_table
     </sql>
     
     <select id="selectGenTableList" parameterType="GenTable" resultMap="GenTableResult">
@@ -94,7 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectGenTableById" parameterType="Long" resultMap="GenTableResult">
-	    SELECT t.table_id, t.table_name, t.table_comment, t.class_name, t.tpl_category, t.package_name, t.module_name, t.business_name, t.function_name, t.function_author, t.options, t.remark,
+	    SELECT t.table_id, t.table_name, t.table_comment, t.sub_table_name, t.sub_table_fk_name, t.class_name, t.tpl_category, t.package_name, t.module_name, t.business_name, t.function_name, t.function_author, t.options, t.remark,
 			   c.column_id, c.column_name, c.column_comment, c.column_type, c.java_type, c.java_field, c.is_pk, c.is_increment, c.is_required, c.is_insert, c.is_edit, c.is_list, c.is_query, c.query_type, c.html_type, c.dict_type, c.sort
 		FROM gen_table t
 			 LEFT JOIN gen_table_column c ON t.table_id = c.table_id
@@ -102,11 +104,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectGenTableByName" parameterType="String" resultMap="GenTableResult">
-	    SELECT t.table_id, t.table_name, t.table_comment, t.class_name, t.tpl_category, t.package_name, t.module_name, t.business_name, t.function_name, t.function_author, t.options, t.remark,
+	    SELECT t.table_id, t.table_name, t.table_comment, t.sub_table_name, t.sub_table_fk_name, t.class_name, t.tpl_category, t.package_name, t.module_name, t.business_name, t.function_name, t.function_author, t.options, t.remark,
 			   c.column_id, c.column_name, c.column_comment, c.column_type, c.java_type, c.java_field, c.is_pk, c.is_increment, c.is_required, c.is_insert, c.is_edit, c.is_list, c.is_query, c.query_type, c.html_type, c.dict_type, c.sort
 		FROM gen_table t
 			 LEFT JOIN gen_table_column c ON t.table_id = c.table_id
 		where t.table_name = #{tableName} order by c.sort
+	</select>
+	
+	<select id="selectGenTableAll" parameterType="String" resultMap="GenTableResult">
+	    SELECT t.table_id, t.table_name, t.table_comment, t.sub_table_name, t.sub_table_fk_name, t.class_name, t.tpl_category, t.package_name, t.module_name, t.business_name, t.function_name, t.function_author, t.options, t.remark,
+			   c.column_id, c.column_name, c.column_comment, c.column_type, c.java_type, c.java_field, c.is_pk, c.is_increment, c.is_required, c.is_insert, c.is_edit, c.is_list, c.is_query, c.query_type, c.html_type, c.dict_type, c.sort
+		FROM gen_table t
+			 LEFT JOIN gen_table_column c ON t.table_id = c.table_id
+		order by c.sort
 	</select>
 	
 	<insert id="insertGenTable" parameterType="GenTable" useGeneratedKeys="true" keyProperty="tableId">
@@ -144,6 +154,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <set>
             <if test="tableName != null">table_name = #{tableName},</if>
             <if test="tableComment != null and tableComment != ''">table_comment = #{tableComment},</if>
+            <if test="subTableName != null and subTableName != ''">sub_table_name = #{subTableName},</if>
+            <if test="subTableFkName != null and subTableFkName != ''">sub_table_fk_name = #{subTableFkName},</if>
             <if test="className != null and className != ''">class_name = #{className},</if>
             <if test="functionAuthor != null and functionAuthor != ''">function_author = #{functionAuthor},</if>
             <if test="tplCategory != null and tplCategory != ''">tpl_category = #{tplCategory},</if>

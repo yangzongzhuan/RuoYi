@@ -1523,6 +1523,20 @@ var table = {
                  });
             	return json;
             },
+            // 数据字典转下拉框
+            dictToSelect: function(datas, value, name) {
+            	var actions = [];
+            	actions.push($.common.sprintf("<select class='form-control' name='%s'>", name));
+                $.each(datas, function(index, dict) {
+                	actions.push($.common.sprintf("<option value='%s'", dict.dictValue));
+                    if (dict.dictValue == ('' + value)) {
+                    	actions.push(' selected');
+                    }
+                    actions.push($.common.sprintf(">%s</option>", dict.dictLabel));
+                });
+                actions.push('</select>');
+                return actions.join('');
+            },
             // 获取obj对象长度
             getLength: function(obj) {
                 var count = 0;　　

@@ -101,7 +101,7 @@
                 exportUrl: prefix + "/export",
                 modalName: "${functionName}",
                 columns: [{
-                    field: 'selectItem', 
+                    field: 'selectItem',
                     radio: true
                 },
 #foreach($column in $columns)
@@ -116,7 +116,7 @@
 #if($column.pk)
 #elseif($column.list && "" != $dictType)
                 {
-                    field: '${javaField}', 
+                    field: '${javaField}',
                     title: '${comment}',
                     align: 'left',
                     formatter: function(value, row, index) {
@@ -125,7 +125,7 @@
                 },
 #elseif($column.list && "" != $javaField)
                 {
-                    field: '${javaField}', 
+                    field: '${javaField}',
                     title: '${comment}',
                     align: 'left'
                 },

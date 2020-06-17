@@ -112,13 +112,13 @@
 #end
 #if($column.pk)
                 {
-                    field: '${javaField}', 
+                    field: '${javaField}',
                     title: '${comment}',
                     visible: false
                 },
 #elseif($column.list && "" != $dictType)
                 {
-                    field: '${javaField}', 
+                    field: '${javaField}',
                     title: '${comment}',
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel(${javaField}Datas, value);
@@ -126,7 +126,7 @@
                 },
 #elseif($column.list && "" != $javaField)
                 {
-                    field: '${javaField}', 
+                    field: '${javaField}',
                     title: '${comment}'
                 },
 #end                

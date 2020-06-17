@@ -12,6 +12,9 @@
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-${businessName}-edit" th:object="${${className}}">
+#if($table.sub)
+            <h4 class="form-header h4">${functionName}信息</h4>
+#end
             <input name="${pkColumn.javaField}" th:field="*{${pkColumn.javaField}}" type="hidden">
 #foreach($column in $columns)
 #if($column.edit && !$column.pk)
@@ -104,6 +107,18 @@
 #end
 #end
 #end
+#if($table.sub)
+            <h4 class="form-header h4">${subTable.functionName}信息</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-white btn-sm" onclick="addColumn()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delColumn()"><i class="fa fa-minus"> 删除</i></button>
+                    <div class="col-sm-12 select-table table-striped">
+                        <table id="bootstrap-table"></table>
+                    </div>
+                </div>
+            </div>
+#end
         </form>
     </div>
     <th:block th:include="include :: footer" />
@@ -113,8 +128,15 @@
 #break
 #end
 #end
-    <script type="text/javascript">
+    <script th:inline="javascript">
         var prefix = ctx + "${moduleName}/${businessName}";
+#if($table.sub)
+#foreach($column in $subTable.columns)
+#if(${column.dictType} != '')
+        var ${column.javaField}Datas = [[${@dict.getType('${column.dictType}')}]];
+#end
+#end
+#end
         $("#form-${businessName}-edit").validate({
             focusCleanup: true
         });
@@ -152,6 +174,85 @@
                $("#treeId").val(body.find('#treeId').val());
                $("#treeName").val(body.find('#treeName').val());
                layer.close(index);
+        }
+#end
+#if($table.sub)
+
+        $(function() {
+            var options = {
+                data: [[${${className}.${subclassName}List}]],
+                pagination: false,
+                showSearch: false,
+                showRefresh: false,
+                showToggle: false,
+                showColumns: false,
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'index',
+                    align: 'center',
+                    title: "序号"
+                },
+#foreach($column in $subTable.columns)
+#set($dictType=$column.dictType)
+#set($javaField=$column.javaField)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#if($column.pk || $javaField == ${subTableFkclassName})
+#elseif($column.list && "" != $dictType)
+                {
+                    field: '${javaField}',
+                    align: 'center',
+                    title: '${comment}',
+                    formatter: function(value, row, index) {
+                        var name = $.common.sprintf("${subclassName}List[%s].${javaField}", index);
+                        return $.common.dictToSelect(${javaField}Datas, value, name);
+                    }
+                #if($velocityCount != $subTable.columns.size())},#end
+
+#else
+                {
+                    field: '${javaField}',
+                    align: 'center',
+                    title: '${comment}',
+                    formatter: function(value, row, index) {
+                        var html = $.common.sprintf("<input class='form-control' type='text' name='${subclassName}List[%s].${javaField}' value='%s'>", index, value);
+                        return html;
+                    }
+				#if($velocityCount != $subTable.columns.size())},#end
+
+#end
+#end
+                }]
+            };
+            $.table.init(options);
+            sub.resetIndex();
+        });
+
+        function addColumn() {
+            var count = $("#" + table.options.id).bootstrapTable('getData').length;
+            sub.editColumn();
+        	
+            $("#" + table.options.id).bootstrapTable('insertRow', {
+                index: count,
+                row: {
+                    index: $.table.serialNumber(count),
+#foreach($column in $subTable.columns)
+#set($javaField=$column.javaField)
+#if($column.pk || $javaField == ${subTableFkclassName})
+#else
+                    ${javaField}: ""#if($velocityCount != $subTable.columns.size()),#end
+
+#end
+#end
+        	    }
+            });
+            sub.resetIndex();
         }
 #end
     </script>

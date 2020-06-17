@@ -63,8 +63,8 @@
             <h4 class="form-header h4">商品数据</h4>
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="button" class="btn btn-white btn-sm" onclick="return addColumn()"><i class="fa fa-plus"> 增加</i></button>
-                    <button type="button" class="btn btn-white btn-sm" onclick="return delColumn()"><i class="fa fa-minus"> 删除</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="addColumn()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delColumn()"><i class="fa fa-minus"> 删除</i></button>
                     <div class="col-sm-12 select-table table-striped">
 					    <table id="bootstrap-table"></table>
 					</div>
@@ -150,28 +150,9 @@
             autoclose: true
         });
         
-        function addColumn(){
+        function addColumn() {
         	var count = $("#" + table.options.id).bootstrapTable('getData').length;
-        	
-			var params = new Array();
-			for (var dataIndex = 0; dataIndex <= count; dataIndex++) {
-			    var columns = $('#' + table.options.id + ' tr[data-index="' + dataIndex + '"] td');
-			    var obj = new Object();
-			    for (var i = 0; i < columns.length; i++) {
-			        var inputValue = $(columns[i]).find('input');
-			        var selectValue = $(columns[i]).find('select');
-			        var key = table.options.columns[i].field;
-			        if ($.common.isNotEmpty(inputValue.val())) {
-			            obj[key] = inputValue.val();
-			        } else if ($.common.isNotEmpty(selectValue.val())) {
-			            obj[key] = selectValue.val();
-			        } else {
-			            obj[key] = "";
-			        }
-			    }
-			    params.push({ index: dataIndex, row: obj });
-			}
-			$("#" + table.options.id).bootstrapTable("updateRow", params);
+        	sub.editColumn();
         	
         	$("#" + table.options.id).bootstrapTable('insertRow', {
         		index: count,
@@ -182,35 +163,14 @@
                 	price: "",
                 	type: "",
                 }
-        	})
-        	resetIndex();
-        }
-        
-        function delColumn(){
-        	var ids = $.table.selectColumns("index");
-        	if (ids.length == 0) {
-    			$.modal.alertWarning("请至少选择一条记录");
-    			return;
-    		}
-        	$("#" + table.options.id).bootstrapTable('remove', {
-        	    field: 'index',
-        	    values: ids
-        	})
-        	resetIndex();
-        }
-        
-        function resetIndex() {
-            var count = $("#" + table.options.id).bootstrapTable('getData').length;
-            for (var index = 0; index <= count; index++) {
-                // 重置序号
-                $("#" + table.options.id).bootstrapTable('updateRow', { index: index, row: { index: parseInt(index + 1) } })
-            }
+        	});
+        	sub.resetIndex();
         }
     </script>
 </body>
 </html>
 
-<!-- 查询方式 -->
+<!-- 商品类型 -->
 <script id="goodsTypeTpl" type="text/x-jquery-tmpl">
 <div>
 <select class='form-control' name='goods[${index}].type'>

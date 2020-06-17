@@ -92,6 +92,7 @@
 					                            <select class='form-control' id="tplCategory" name='tplCategory' style="width: 100%">
 												    <option value="crud" th:field="*{tplCategory}">单表（增删改查）</option>
 												    <option value="tree" th:field="*{tplCategory}">树表（增删改查）</option>
+												    <option value="sub" th:field="*{tplCategory}">主子表（增删改查）</option>
 												</select>
 					                        </div>
 					                    </div>
@@ -132,6 +133,31 @@
 					                        </div>
 					                    </div>
 					                </div>
+					            </div>
+					            <div class="hidden" id="subInfo">
+					            <h4 class="form-header h4">关联信息</h4>
+					            <div class="row">
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                        <label class="col-sm-4 control-label is-required" title="关联子表的表名， 如：sys_user">关联子表的表名：<i class="fa fa-question-circle-o"></i></label>
+					                        <div class="col-sm-8">
+					                            <select class='type form-control' id="subTableName" name='subTableName' th:attr='data-value=*{subTableName}' style="width: 100%">
+					                                <option value="">---请选择---</option>
+												</select>
+					                        </div>
+					                    </div>
+					                </div>
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                        <label class="col-sm-4 control-label is-required" title="子表关联的外键名， 如：user_id">子表关联的外键名：<i class="fa fa-question-circle-o"></i></label>
+					                        <div class="col-sm-8">
+					                            <select class='router form-control' id="subTableFkName" name='subTableFkName' th:attr='data-value=*{subTableFkName}' style="width: 100%">
+					                                <option value="">---请选择---</option>
+												</select>
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
 					            </div>
 					            <div class="hidden" id="otherInfo">
 					            <h4 class="form-header h4">其他信息</h4>
@@ -192,8 +218,9 @@
     <th:block th:include="include :: select2-js" />
     <th:block th:include="include :: bootstrap-table-reorder-js" />
     <script th:src="@{/js/jquery.tmpl.js}"></script>
-    <script type="text/javascript">
-	    /*用户信息-修改*/
+    <th:block th:include="include :: jquery-cxselect-js" />
+    <script th:inline="javascript">
+	    /* 用户信息-修改 */
 	    $("#form-table-edit").validate({
 	    	rules: {
 	    	    tableName: {
@@ -201,7 +228,15 @@
 	    	    },
 	    	},
 			focusCleanup: true
-		}); 
+		});
+	    
+	    /* 表级联信息 */
+   		var data = [[${data}]];
+    	$('#subInfo').cxSelect({
+    	  selects: ['type', 'router'],
+    	  jsonValue: 'v',
+    	  data: data
+    	});
 	    
 	    function submitHandler() {
 	        if ($.validate.form()) {
@@ -404,12 +439,19 @@
 				$("#treeParentCode").select2("val", [""]);
 				$("#treeName").select2("val", [""]);
 				$("#otherInfo").addClass("hidden");
-				
+				$("#subInfo").addClass("hidden");
 			} else if("tree" == tplCategory){
 				$("#otherInfo").removeClass("hidden");
 				$("#treeCode").attr("required", "true");
 				$("#treeParentCode").attr("required", "true");
 				$("#treeName").attr("required", "true");
+				$("#subInfo").addClass("hidden");
+			} else if("sub" == tplCategory){
+				$("#subInfo").removeClass("hidden");
+				$("#treeCode").select2("val", [""]);
+				$("#treeParentCode").select2("val", [""]);
+				$("#treeName").select2("val", [""]);
+				$("#otherInfo").addClass("hidden");
 			}
         }
 		
