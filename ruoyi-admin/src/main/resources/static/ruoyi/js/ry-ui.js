@@ -1136,7 +1136,7 @@ var table = {
                 } else if (result.code == web_status.SUCCESS && table.options.type == table_type.bootstrapTreeTable) {
                 	$.modal.msgSuccess(result.msg);
                 	$.treeTable.refresh();
-                } else if (result.code == web_status.SUCCESS && table.option.type == undefined) {
+                } else if (result.code == web_status.SUCCESS && $.common.isEmpty(table.options.type)) {
                     $.modal.msgSuccess(result.msg)
                 }  else if (result.code == web_status.WARNING) {
                     $.modal.alertWarning(result.msg)
