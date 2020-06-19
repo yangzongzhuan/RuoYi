@@ -104,6 +104,7 @@ public class GenTableServiceImpl implements IGenTableService
      * 
      * @return 表信息集合
      */
+    @Override
     public List<GenTable> selectGenTableAll()
     {
         return genTableMapper.selectGenTableAll();
