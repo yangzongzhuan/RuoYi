@@ -5,7 +5,7 @@ package com.ruoyi.common.constant;
  * 
  * @author ruoyi
  */
-public interface ShiroConstants
+public class ShiroConstants
 {
     /**
      * 当前登录的用户
