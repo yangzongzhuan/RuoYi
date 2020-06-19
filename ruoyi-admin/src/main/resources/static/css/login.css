@@ -145,3 +145,17 @@ body.signin {
     margin-bottom: 0;
     text-align: left;
 }
+
+.form-control, .form-control:focus, .has-error .form-control:focus,  .has-success .form-control:focus, .has-warning .form-control:focus,  .navbar-collapse, .navbar-form, .navbar-form-custom .form-control:focus,  .navbar-form-custom .form-control:hover, .open .btn.dropdown-toggle,  .panel, .popover, .progress, .progress-bar {
+    box-shadow: none;
+}
+
+.form-control{
+	border-radius: 1px!important;
+	padding: 6px 12px!important;
+	height: 34px!important;
+}
+
+.form-control:focus{
+    border-color: #1ab394 !important;
+}
