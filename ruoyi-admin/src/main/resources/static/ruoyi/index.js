@@ -7,7 +7,7 @@ layer.config({
     skin: 'layer-ext-moon'
 });
 
-var isMobile = $.common.isMobile() || $(window).width() < 769;
+var isMobile = false;
 var sidebarHeight = isMobile ? '100%' : '96%';
 
 $(function() {
@@ -52,12 +52,23 @@ $(function() {
 
 });
 
-$(window).bind("load resize",
-function() {
-    if ($(this).width() < 769) {
+$(window).bind("load resize", function() {
+    isMobile = $.common.isMobile() || $(window).width() < 769;
+    if (isMobile) {
         $('body').addClass('canvas-menu');
+        $("body").removeClass("mini-navbar");
         $("nav .logo").addClass("hide");
-        $(".slimScrollDiv").css({ "overflow":"hidden" })
+        $(".slimScrollDiv").css({ "overflow": "hidden" });
+        $('.navbar-static-side').fadeOut();
+    } else {
+    	if($('body').hasClass('canvas-menu')) {
+	        $('body').addClass('fixed-sidebar');
+	        $('body').removeClass('canvas-menu');
+	        $("body").removeClass("mini-navbar");
+	        $("nav .logo").removeClass("hide");
+	        $(".slimScrollDiv").css({ "overflow": "visible" });
+	        $('.navbar-static-side').fadeIn();
+    	}
     }
 });
 
