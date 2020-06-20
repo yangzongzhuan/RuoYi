@@ -121,7 +121,7 @@
                     field: '${javaField}',
                     title: '${comment}',
                     formatter: function(value, row, index) {
-                       return $.table.selectDictLabel(${javaField}Datas, value);
+                       return $.table.selectDictLabel#if($column.htmlType == "checkbox")s#end(${javaField}Datas, value);
                     }
                 },
 #elseif($column.list && "" != $javaField)

@@ -65,6 +65,25 @@
                     <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
                 </div>
             </div>
+#elseif($column.htmlType == "checkbox" && "" != $dictType)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8" th:with="type=${@dict.getType('${dictType}')}">
+                    <label th:each="dict : ${type}" class="check-box">
+                        <input name="${field}" type="checkbox" th:value="${dict.dictValue}" th:text="${dict.dictLabel}"#if($column.required) required#end>
+                    </label>
+                </div>
+            </div>
+#elseif($column.htmlType == "checkbox" && $dictType)
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">${comment}：</label>
+                <div class="col-sm-8">
+                    <label class="check-box">
+                        <input name="${field}" type="checkbox"#if($column.required) required#end> 无
+                    </label>
+                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                </div>
+            </div>
 #elseif($column.htmlType == "radio" && "" != $dictType)
             <div class="form-group">    
                 <label class="col-sm-3 control-label">${comment}：</label>
