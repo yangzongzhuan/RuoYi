@@ -1859,8 +1859,8 @@ table.dataTable thead .sorting:after {
 
 .input-group-addon {
     background-color: #fff;
-    border: 1px solid #E5E6E7;
-    border-radius: 1px;
+    border: 1px solid #e5e6e7;
+    border-radius: 4px;
     color: inherit;
     font-size: 14px;
     font-weight: 400;
