@@ -36,7 +36,10 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">手机号码：</label>
                         <div class="col-sm-8">
-                            <input name="phonenumber" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11" th:field="*{phonenumber}" required>
+                            <div class="input-group">
+                                <input name="phonenumber" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11" th:field="*{phonenumber}" required>
+                                <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,7 +47,10 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">邮箱：</label>
                         <div class="col-sm-8">
-                            <input name="email" class="form-control email" type="text" maxlength="20" placeholder="请输入邮箱" th:field="*{email}" required>
+                            <div class="input-group">
+                                <input name="email" class="form-control email" type="text" maxlength="20" placeholder="请输入邮箱" th:field="*{email}" required>
+                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            </div>
                         </div>
                     </div>
                 </div>
