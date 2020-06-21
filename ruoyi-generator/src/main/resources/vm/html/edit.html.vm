@@ -211,7 +211,11 @@
                 {
                     field: 'index',
                     align: 'center',
-                    title: "序号"
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                    	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
+                    	return columnIndex + $.table.serialNumber(index);
+                    }
                 },
 #foreach($column in $subTable.columns)
 #set($dictType=$column.dictType)
@@ -250,7 +254,6 @@
                 }]
             };
             $.table.init(options);
-            sub.resetIndex();
         });
 
         function addColumn() {
@@ -271,7 +274,6 @@
 #end
         	    }
             });
-            sub.resetIndex();
         }
 #end
     </script>

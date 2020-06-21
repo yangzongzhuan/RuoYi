@@ -365,6 +365,7 @@ var sub = {
     	$("#" + table.options.id).bootstrapTable("updateRow", params);
     },
     delColumn: function(column) {
+    	sub.editColumn();
     	var subColumn = $.common.isEmpty(column) ? "index" : column;
     	var ids = $.table.selectColumns(subColumn);
         if (ids.length == 0) {
@@ -372,17 +373,6 @@ var sub = {
             return;
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
-        if($.common.equals("index", subColumn))
-        {
-        	sub.resetIndex();
-        }
-    },
-    resetIndex: function(msg) {
-    	var count = $("#" + table.options.id).bootstrapTable('getData').length;
-        for (var index = 0; index <= count; index++) {
-            // 重置序号
-            $("#" + table.options.id).bootstrapTable('updateRow', { index: index, row: { index: parseInt(index + 1) } })
-        }
     }
 };
 

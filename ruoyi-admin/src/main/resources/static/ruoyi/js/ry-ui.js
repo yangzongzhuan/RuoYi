@@ -45,6 +45,7 @@ var table = {
         		    pagination: true,
         		    paginationLoop: false,
         		    pageSize: 10,
+        		    pageNumber: 1,
         		    pageList: [10, 25, 50],
         		    toolbar: "toolbar",
         		    striped: false,
@@ -275,8 +276,8 @@ var table = {
             serialNumber: function (index, tableId) {
             	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
 				var tableParams = $("#" + currentId).bootstrapTable('getOptions');
-				var pageSize = tableParams.pageSize;
-				var pageNumber = tableParams.pageNumber;
+				var pageSize = $.common.isNotEmpty(tableParams.pageSize) ? tableParams.pageSize: table.options.pageSize;
+				var pageNumber = $.common.isNotEmpty(tableParams.pageNumber) ? tableParams.pageNumber: table.options.pageNumber;
 				return pageSize * (pageNumber - 1) + index + 1;
 			},
 			// 列超出指定长度浮动提示 target（copy单击复制文本 open弹窗打开文本）
