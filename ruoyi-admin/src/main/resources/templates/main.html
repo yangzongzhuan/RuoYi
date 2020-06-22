@@ -99,10 +99,76 @@
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v43">v4.3.0</a><code class="pull-right">2020.06.22</code>
+								   </h5>
+								</div>
+								<div id="v43" class="panel-collapse collapse in">
+									<div class="panel-body">
+									   <ol>
+									        <li>代码生成模板支持主子表</li>
+									        <li>代码生成显示类型支持复选框</li>
+									        <li>前端表单样式修改成圆角</li>
+									        <li>新增回显数据字典（字符串数组）</li>
+									        <li>修复浏览器手动缩放比例后菜单无法自适应问题</li>
+									        <li>限制用户不允许选择系统管理员角色</li>
+									        <li>用户信息添加输入框组图标&鼠标按下显示密码</li>
+									        <li>升级fastjson到最新版1.2.70 修复高危安全漏洞</li>
+									        <li>升级Bootstrap版本到v3.3.7</li>
+									        <li>修复selectColumns方法获取子对象数据无效问题</li>
+									        <li>修改数据源类型优先级，先根据方法，再根据类</li>
+									        <li>修改上级部门（选择项排除本身和下级）</li>
+									        <li>首页菜单显示调整</li>
+									        <li>添加是否开启swagger配置</li>
+									        <li>新增示例（主子表提交）</li>
+									        <li>新增示例（多级联动下拉示例）</li>
+									        <li>新增示例（表格属性data数据加载）</li>
+									        <li>新增表格列参数（是否列选项可见ignore）</li>
+									        <li>新增表格参数（是否启用显示卡片视图cardView）</li>
+									        <li>新增表格参数（是否显示全屏按钮showFullscreen）</li>
+									        <li>新增表格参数（是否启用分页条无限循环的功能paginationLoop）</li>
+									        <li>新增表格参数（是否显示表头showHeader）</li>
+									        <li>表格添加显示/隐藏所有列方法 showAllColumns/hideAllColumns</li>
+									        <li>修复部分情况节点不展开问题</li>
+									        <li>修复关闭标签页后刷新还是上次地址问题</li>
+									        <li>修复选择菜单后刷新页面，菜单箭头显示不对问题</li>
+											<li>修复jquery表单序列化时复选框未选中不会序列化到对象中问题</li>
+											<li>Excel支持readConverterExp读取字符串组内容</li>
+									        <li>更换IP地址查询接口</li>
+									        <li>默认关闭获取ip地址</li>
+									        <li>操作处理ajaxSuccess判断修正</li>
+									        <li>HttpUtils.sendPost()方法，参数无需拼接参数到url</li>
+									        <li>通用http发送方法增加参数 contentType 编码类型</li>
+									        <li>HTML过滤器不替换&实体</li>
+									        <li>代码生成浮点型改用BigDecimal</li>
+									        <li>修复表单构建单选和多选框渲染问题</li>
+									        <li>代码生成模板调整，字段为String并且必填则加空串条件</li>
+									        <li>字典数据查询列表根据dictSort升序排序</li>
+									        <li>修复树表对imageView和tooltip方法无效问题</li>
+									        <li>修复Long类型比较相等问题调整</li>
+									        <li>示例demo页面清除html链接，防止点击后跳转出现404</li>
+									        <li>在线用户强退方法合并</li>
+									        <li>添加校验部门包含未停用的子部门</li>
+									        <li>取消回车自动提交表单</li>
+									        <li>'A','I','BUTTON' 标签忽略clickToSelect事件，防止点击操作按钮时选中</li>
+									        <li>邮箱显示截取部分字符串，防止低分辨率错位</li>
+									        <li>代码生成列属性根据sort排序</li>
+									        <li>修复更多操作部分浏览器不兼容情况</li>
+									        <li>图片预览事件属性修正</li>
+									        <li>修复冻结列排序样式无效问题</li>
+									        <li>修复context-path的情况下个人中心刷新导致样式问题</li>
+									        <li>全屏editFull打开适配表树</li>
+									        <li>其他细节优化</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
 									   <a data-toggle="collapse" data-parent="#version" href="#v42">v4.2.0</a><code class="pull-right">2020.03.23</code>
 								   </h5>
 								</div>
-								<div id="v42" class="panel-collapse collapse in">
+								<div id="v42" class="panel-collapse collapse">
 									<div class="panel-body">
 									   <ol>
 									        <li>用户管理添加分配角色页面</li>
