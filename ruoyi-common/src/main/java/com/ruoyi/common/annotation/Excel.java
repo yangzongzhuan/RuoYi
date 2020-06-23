@@ -25,6 +25,11 @@ public @interface Excel
     public String dateFormat() default "";
 
     /**
+     * 如果是字典类型，请设置字典的type值
+     */
+    public String dictType() default "";
+
+    /**
      * 读取内容转表达式 (如: 0=男,1=女,2=未知)
      */
     public String readConverterExp() default "";
@@ -33,7 +38,7 @@ public @interface Excel
      * 分隔符，读取字符串组内容
      */
     public String separator() default ",";
-    
+
     /**
      * 导出类型（0数字 1字符串）
      */
