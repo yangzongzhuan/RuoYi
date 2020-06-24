@@ -239,9 +239,12 @@ $(function() {
         dataIndex = $(this).data('index'),
         menuName = $.trim($(this).text()),
         flag = true;
-        $(".nav ul li, .nav li").removeClass("selected");
-        $(this).parent("li").addClass("selected");
-        setIframeUrl($(this).attr("href"));
+        
+        if (!$('a[href$="' + dataUrl + '"]').hasClass("noactive")) {
+            $(".nav ul li, .nav li").removeClass("selected");
+            $(this).parent("li").addClass("selected");
+        }
+        setIframeUrl(dataUrl);
         if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
 
         // 选项卡菜单已存在
