@@ -156,9 +156,9 @@ public class GenTableServiceImpl implements IGenTableService
     @Transactional
     public void importGenTable(List<GenTable> tableList, String operName)
     {
-        for (GenTable table : tableList)
+        try
         {
-            try
+            for (GenTable table : tableList)
             {
                 String tableName = table.getTableName();
                 GenUtils.initTable(table, operName);
@@ -174,10 +174,10 @@ public class GenTableServiceImpl implements IGenTableService
                     }
                 }
             }
-            catch (Exception e)
-            {
-                log.error("表名 " + table.getTableName() + " 导入失败：", e);
-            }
+        }
+        catch (Exception e)
+        {
+            throw new BusinessException("导入失败：" + e.getMessage());
         }
     }
 
