@@ -316,7 +316,7 @@ $(function() {
 		        $dataObj.parents("ul").addClass("in")
 		        $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
 		        $dataObj.parents("ul").css('height', 'auto').height();
-		        $('a[href$="' + decodeURI(dataId) + '"]').click();
+		        $dataObj.click();
 		    }
 		})
 	}
