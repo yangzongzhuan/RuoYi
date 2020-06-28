@@ -810,7 +810,7 @@ var table = {
 					    }
 					}
         		}
-        		layer.open($.extend({
+        		var index = layer.open($.extend({
         			type: 2,
         			maxmin: true,
         			shade: 0.3,
@@ -826,6 +826,9 @@ var table = {
         				return true;
         			}
         		}, btnCallback));
+        		if ($.common.isNotEmpty(options.full) && options.full === true) {
+        		    layer.full(index);
+        		}
             },
             // 弹出层全屏
             openFull: function (title, url, width, height) {
