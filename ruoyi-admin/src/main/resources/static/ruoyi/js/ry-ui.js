@@ -812,7 +812,7 @@ var table = {
         		}
         		var index = layer.open($.extend({
         			type: 2,
-        			maxmin: true,
+        			maxmin: $.common.isEmpty(options.maxmin) ? true : options.maxmin,
         			shade: 0.3,
         			title: _title,
         			fix: false,
