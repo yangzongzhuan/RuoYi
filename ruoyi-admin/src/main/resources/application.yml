@@ -108,6 +108,8 @@ shiro:
     httpOnly: true
     # 设置Cookie的过期时间，天为单位
     maxAge: 30
+    # 设置密钥，务必保持唯一性（生成方式，直接拷贝到main运行即可）KeyGenerator keygen = KeyGenerator.getInstance("AES"); SecretKey deskey = keygen.generateKey(); System.out.println(Base64.encodeToString(deskey.getEncoded()));
+    cipherKey: zSyK5Kp6PZAAjlT+eeNMlg==
   session:
     # Session超时时间，-1代表永不过期（默认30分钟）
     expireTime: 30
