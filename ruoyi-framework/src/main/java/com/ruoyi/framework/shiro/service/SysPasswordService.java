@@ -83,8 +83,8 @@ public class SysPasswordService
         return new Md5Hash(username + password + salt).toHex();
     }
 
-    public void unlock(String loginName){
+    public void unlock(String loginName)
+    {
         loginRecordCache.remove(loginName);
     }
-
 }
