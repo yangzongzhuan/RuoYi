@@ -224,9 +224,12 @@
                 height: height,
                 top: top + 1
             }).show();
-
+            
+            var bsHeight = $("#" + table.options.id).find("tr").eq(1).height();
+            var fixedHeight = $("#" + table.options.id).parent().prev().find("tr").eq(1).height();
+            var resizeHeight = bsHeight > fixedHeight ? bsHeight: fixedHeight;
             this.$body.find('> tr').each(function (i) {
-            	that.$fixedBody.find('tr:eq(' + i + ')').height($(this).height() - 0.5);
+            	that.$fixedBody.find('tr:eq(' + i + ')').height(i == 0 ? resizeHeight - 1 : resizeHeight);
                 var thattds = this;
                 that.$fixedBody.find('tr:eq(' + i + ')').find('td').each(function (j) {
                     $(this).width($($(thattds).find('td')[j]).width() + 1);
