@@ -57,7 +57,7 @@
             this.$rightfixedBodyColumns = this.$rightfixedBody.find('tbody');
             this.$tableBody.before(this.$rightfixedBody);
             if (this.options.fixedColumns) {
-                $('.right-fixed-table-columns').attr('style','right:0px');
+                $('.right-fixed-table-columns').attr('style','right:0px;');
             }
         }
     };
@@ -183,21 +183,16 @@
             this.$fixedHeader.width(headerWidth + 2).show();
         }
         if (that.options.rightFixedColumns) {
+            headerWidth = 0;
+            var totalLength = $("#" + table.options.id).find('th').length;
             this.$body.find('tr:first-child:not(.no-records-found) > *').each(function (i) {
-                var $this = $(this),
-                    index = i;
+            	var $this = $(this),
+            	    index = totalLength - i - 1;
 
-                if (i >= visibleFields.length - that.options.rightFixedNumber) {
-                    return false;
-
-
-                    if (that.options.detailView && !that.options.cardView) {
-                       index = i - 1;
-                    }
-                    that.$rightfixedBody.find('thead th[data-field="' + visibleFields[index] + '"]')
-                        .find('.fht-cell').width($this.innerWidth() - 1);
-                    headerWidth += $this.outerWidth();
-                }
+            	if (i >= that.options.rightFixedNumber) {
+            	    return false;
+            	}
+                headerWidth += $("#"  + table.options.id).find("tr:first-child>th").eq(index).width();
             });
             this.$rightfixedBody.width(headerWidth - 1).show();
         }
@@ -230,6 +225,7 @@
             var resizeHeight = bsHeight > fixedHeight ? bsHeight: fixedHeight;
             this.$body.find('> tr').each(function (i) {
             	that.$fixedBody.find('tr:eq(' + i + ')').height(i == 0 ? resizeHeight - 1 : resizeHeight);
+                $("#" + table.options.id).find('tbody>tr:eq(' + i + ')').height(resizeHeight);
                 var thattds = this;
                 that.$fixedBody.find('tr:eq(' + i + ')').find('td').each(function (j) {
                     $(this).width($($(thattds).find('td')[j]).width() + 1);
