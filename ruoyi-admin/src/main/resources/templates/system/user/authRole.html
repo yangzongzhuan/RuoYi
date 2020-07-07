@@ -47,26 +47,27 @@
 	<th:block th:include="include :: footer" />
 	<script th:inline="javascript">
 	    var prefix = ctx + "system/user/authRole";
-	    var userRoles = [[${userRoles}]]
+	    var roles = [[${roles}]]
 	    
 	    $(function() {
 		    var options = {
-		        url: ctx + "system/role/list",
+		        data: roles,
+		        sidePagination: "client",
 		        sortName: "roleSort",
 		        showSearch: false,
                 showRefresh: false,
                 showToggle: false,
                 showColumns: false,
                 clickToSelect: true,
+                maintainSelected: true,
 		        columns: [{
 		            checkbox: true,
 		            formatter:function (value, row, index) {
-		            	for (var i = 0; i < userRoles.length; i++) {
-		            	    if (userRoles[i].roleId == row.roleId) {
-		            	        return { checked: true };
-		            	    }
+		            	if($.common.isEmpty(value)) {
+		            		return { checked: row.flag };
+		            	} else {
+		            		return { checked: value }
 		            	}
-		            	return { checked: false };
 		            }
 		        },
 		        {
@@ -74,9 +75,14 @@
 		            title: '角色编号'
 		        },
 		        {
+		            field: 'roleSort',
+		            title: '排序',
+		            sortable: true,
+		            visible: false
+		        },
+		        {
 		            field: 'roleName',
-		            title: '角色名称',
-		            sortable: true
+		            title: '角色名称'
 		        },
 		        {
 		            field: 'roleKey',

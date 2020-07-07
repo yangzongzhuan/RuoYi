@@ -24,7 +24,6 @@ import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysRole;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.domain.SysUserRole;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
@@ -212,9 +211,9 @@ public class SysUserController extends BaseController
     {
         SysUser user = userService.selectUserById(userId);
         // 获取用户所属的角色列表
-        List<SysUserRole> userRoles = userService.selectUserRoleByUserId(userId);
+        List<SysRole> roles = roleService.selectRolesByUserId(userId);
         mmap.put("user", user);
-        mmap.put("userRoles", userRoles);
+        mmap.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         return prefix + "/authRole";
     }
 
