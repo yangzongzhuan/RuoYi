@@ -8,6 +8,12 @@
 #break
 #end
 #end
+#foreach($column in $columns)
+#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "upload")
+    <th:block th:include="include :: bootstrap-fileinput-css"/>
+#break
+#end
+#end
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -44,6 +50,16 @@
                 <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <input name="${field}" th:field="*{${field}}" class="form-control" type="text"#if($column.required) required#end>
+                </div>
+            </div>
+#elseif($column.htmlType == "upload")
+            <div class="form-group">    
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
+                <div class="col-sm-8">
+                    <input type="hidden" name="${field}" th:field="*{${field}}">
+                    <div class="file-loading">
+                        <input class="form-control file-upload" id="${field}" name="file" type="file">
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "select" && "" != $dictType)
@@ -147,6 +163,12 @@
 #break
 #end
 #end
+#foreach($column in $columns)
+#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "upload")
+    <th:block th:include="include :: bootstrap-fileinput-js"/>
+#break
+#end
+#end
     <script th:inline="javascript">
         var prefix = ctx + "${moduleName}/${businessName}";
 #if($table.sub)
@@ -173,6 +195,27 @@
             minView: "month",
             autoclose: true
         });
+#end
+#end
+#foreach($column in $columns)
+#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "upload")
+
+        $(".file-upload").each(function (i) {
+            var val = $("input[name='" + this.id + "']").val()
+            $(this).fileinput({
+                'uploadUrl': '/common/upload',
+                initialPreviewAsData: true,
+                initialPreview: [val],
+                maxFileCount: 1,
+                autoReplace: true
+            }).on('fileuploaded', function (event, data, previewId, index) {
+                $("input[name='" + event.currentTarget.id + "']").val(data.response.url)
+            }).on('fileremoved', function (event, id, index) {
+                $("input[name='" + event.currentTarget.id + "']").val('')
+            })
+            $(this).fileinput('_initFileActions');
+        });
+#break
 #end
 #end
 #if($table.tree)

@@ -1829,6 +1829,10 @@ table.dataTable thead .sorting:after {
     font-size: 14px;
 }
 
+.form-control.kv-fileinput-caption {
+    height: 34px!important;
+}
+
 .form-control:focus, .single-line:focus {
     border-color: #3c8dbc !important;
 }
@@ -4917,14 +4921,13 @@ dd.project-people {
     font-size: 10px;
     text-transform: uppercase;
 }
-
 /* Chat view */
 .message-input {
     height: 90px !important;
 }
 
 .chat-avatar {
-    width: 36px;
+    white: 36px;
     height: 36px;
     float: left;
     margin-right: 10px;
@@ -4951,10 +4954,9 @@ dd.project-people {
     margin-left: -30px;
 }
 
-@media (max-width: 992px) {
-    .chat-users,
-    .chat-statistic {
-        margin-left: 0;
+@media ( max-width : 992px) {
+    .chat-users, .chat-statistic {
+        margin-left: 0px;
     }
 }
 
@@ -4974,12 +4976,12 @@ dd.project-people {
     margin-top: 1px;
 }
 
-.chat-discussion .chat-message.left .message-avatar {
+.chat-discussion .chat-message:nth-child(2n+1) .message-avatar {
     float: left;
     margin-right: 10px;
 }
 
-.chat-discussion .chat-message.right .message-avatar {
+.chat-discussion .chat-message:nth-child(2n) .message-avatar {
     float: right;
     margin-left: 10px;
 }
@@ -4994,20 +4996,20 @@ dd.project-people {
     border-radius: 4px;
 }
 
-.chat-discussion .chat-message.left .message-date {
+.chat-discussion .chat-message:nth-child(2n+1) .message-date {
     float: right;
 }
 
-.chat-discussion .chat-message.right .message-date {
+.chat-discussion .chat-message:nth-child(2n) .message-date {
     float: left;
 }
 
-.chat-discussion .chat-message.left .message {
+.chat-discussion .chat-message:nth-child(2n+1) .message {
     text-align: left;
     margin-left: 55px;
 }
 
-.chat-discussion .chat-message.right .message {
+.chat-discussion .chat-message:nth-child(2n) .message {
     text-align: right;
     margin-right: 55px;
 }
@@ -5036,7 +5038,6 @@ dd.project-people {
 .chat-message-form .form-group {
     margin-bottom: 0;
 }
-
 /* jsTree */
 .jstree-open>.jstree-anchor>.fa-folder:before {
     content: "\f07c";
