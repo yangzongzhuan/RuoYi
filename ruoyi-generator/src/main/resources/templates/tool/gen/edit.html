@@ -146,6 +146,35 @@
 					                    </div>
 					                </div>
 					            </div>
+					            <div class="row">
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                        <label class="col-sm-4 control-label" title="默认为zip压缩包下载，也可以自定义生成路径">生成代码方式：<i class="fa fa-question-circle-o"></i></label>
+					                        <div class="col-sm-8">
+                                                <label class="radio-box"> <input type="radio" name="genType" value="0" th:field="*{genType}" /> zip压缩包 </label> 
+                                                <label class="radio-box"> <input type="radio" name="genType" value="1" th:field="*{genType}" /> 自定义路径</label> 
+					                        </div>
+					                    </div>
+					                </div>
+					            </div>
+					            <div class="hidden row" id="pathinfo">
+					                <div class="col-sm-12">
+					                    <div class="form-group">
+					                        <label class="col-xs-2 control-label" title="填写磁盘绝对路径，若不填写，则生成到当前Web项目下">生成基础路径：<i class="fa fa-question-circle-o"></i></label>
+						                    <div class="col-xs-10">
+						                        <div class="input-group input-group-sm">
+						                            <input id="genPath" name="genPath" class="form-control" type="text" th:field="*{genPath}" placeholder="请输入项目路径" maxlength="200">
+						                            <div class="input-group-btn">
+						                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">最近路径快速选择 <span class="caret"></span></button>
+															<ul class="dropdown-menu dropdown-menu-right" role="menu">
+																<li><a href="javascript:$('#genPath').val('/')"><i class="fa fa-refresh"></i>恢复默认的生成基础路径</a></li>
+															</ul>
+														</div>
+													</div>
+						                    </div>
+					                    </div>
+					                </div>
+					            </div>
 					            <div class="hidden" id="subInfo">
 					            <h4 class="form-header h4">关联信息</h4>
 					            <div class="row">
@@ -438,6 +467,8 @@
 		$(function() {
             var tplCategory = $("#tplCategory option:selected").val();
             tplCategoryVisible(tplCategory);
+            var genType = $('input[name="genType"]:checked').val();
+            pathInfoVisible(genType);
         });
 		
 		$('#tplCategory').on('select2:select', function (event) {
@@ -466,6 +497,20 @@
 				$("#otherInfo").addClass("hidden");
 			}
         }
+		
+		$('input').on('ifChecked', function(event){
+			var genType = $(event.target).val();
+			pathInfoVisible(genType);
+		});
+		
+		function pathInfoVisible(genType) {
+			if("0" == genType){
+				$("#genPath").val("/");
+				$("#pathinfo").addClass("hidden");
+			} else if("1" == genType){
+				$("#pathinfo").removeClass("hidden");
+			}
+		}
 		
 		// 选择字典处理函数
 		function selectDictTree(columnId, obj) {

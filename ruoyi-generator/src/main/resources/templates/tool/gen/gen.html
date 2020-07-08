@@ -124,7 +124,7 @@
 		                actions.push('<a class="btn btn-info btn-xs ' + previewFlag + '" href="javascript:void(0)" onclick="preview(\'' + row.tableId + '\')"><i class="fa fa-search"></i>预览</a> ');
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.tableId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
 		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.tableId + '\')"><i class="fa fa-remove"></i>删除</a> ');
-		                actions.push('<a class="btn btn-primary btn-xs ' + codeFlag + '" href="javascript:void(0)" onclick="genCode(\'' + row.tableName + '\')"><i class="fa fa-bug"></i>生成代码</a> ');
+		                actions.push('<a class="btn btn-primary btn-xs ' + codeFlag + '" href="javascript:void(0)" onclick="genCode(\'' + row.tableName + '\',\'' + row.genType + '\')"><i class="fa fa-bug"></i>生成代码</a> ');
 		                return actions.join('');
 		            }
 		        }]
@@ -162,14 +162,18 @@
 		}
 	
 		// 生成代码
-		function genCode(tableName) {
+		function genCode(tableName, genType) {
 		    $.modal.confirm("确定要生成" + tableName + "表代码吗？", function() {
-		    	location.href = prefix + "/genCode/" + tableName;
-		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+		    	if(genType === "0") {
+			    	location.href = prefix + "/download/" + tableName;
+			        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+				} else if(genType === "1") {
+					$.operate.get(prefix + "/genCode/" + tableName);
+				}
 		    })
 		}
 	
-		//批量生成代码
+		// 批量生成代码
 		function batchGenCode() {
 		    var rows = $.table.selectColumns("tableName");
 		    if (rows.length == 0) {

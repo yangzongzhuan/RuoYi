@@ -1,4 +1,4 @@
-package ${basePackage}.web.controller.${moduleName};
+package ${packageName}.controller;
 
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
