@@ -133,6 +133,18 @@
 					                        </div>
 					                    </div>
 					                </div>
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                        <label class="col-sm-4 control-label is-required" title="分配到指定菜单下，例如 系统管理">上级菜单：<i class="fa fa-question-circle-o"></i></label>
+					                        <div class="col-sm-8">
+					                            <input id="parentMenuId" name="params[parentMenuId]" type="hidden" th:value="*{parentMenuId}"/>
+					                            <div class="input-group">
+												    <input id="parentMenuName" name="params[parentMenuName]" class="form-control" type="text" onclick="selectMenuTree()" placeholder="请选择上级菜单" maxlength="50" th:value="*{parentMenuName}" required>
+											        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+											    </div>
+					                        </div>
+					                    </div>
+					                </div>
 					            </div>
 					            <div class="hidden" id="subInfo">
 					            <h4 class="form-header h4">关联信息</h4>
@@ -463,17 +475,38 @@
 				title: '选择字典类型',
 				width: "380",
 				url: url,
-				callBack: doSubmit
+				callBack: doDictSubmit
 			};
 			$.modal.openOptions(options);
 		}
 		
-		function doSubmit(index, layero){
+		// 选择菜单处理函数
+        function selectMenuTree() {
+        	var parentMenuId = $("#parentMenuId").val();
+        	var menuId = parentMenuId > 0 ? parentMenuId : 1;
+        	var url = ctx + "system/menu/selectMenuTree/" + menuId;
+			var options = {
+				title: '菜单选择',
+				width: "380",
+				url: url,
+				callBack: doMenuSubmit
+			};
+			$.modal.openOptions(options);
+		}
+		
+		function doDictSubmit(index, layero){
 			var body = layer.getChildFrame('body', index);
    			var columnId = body.find('#columnId').val();
    			var dictType = body.find('#dictType').val();
    			layer.close(index);
    			$("#columns_dict_" + columnId).val(dictType);
+		}
+		
+		function doMenuSubmit(index, layero){
+			var body = layer.getChildFrame('body', index);
+   			$("#parentMenuId").val(body.find('#treeId').val());
+   			$("#parentMenuName").val(body.find('#treeName').val());
+   			layer.close(index);
 		}
     </script>
 </body>
