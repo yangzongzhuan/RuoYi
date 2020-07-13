@@ -143,9 +143,28 @@
 	    /*用户管理-头像*/
 	    function avatar() {
 	        var url = ctx + 'system/user/profile/avatar';
-	        $.modal.open("修改头像", url);
+	        top.layer.open({
+        		type: 2,
+        		area: [$(window).width() + 'px', $(window).height() + 'px'],
+        		fix: false,
+        		//不固定
+        		maxmin: true,
+        		shade: 0.3,
+        		title: "修改头像",
+        		content: url,
+        		btn: ['确定', '关闭'],
+        	    // 弹层外区域关闭
+        		shadeClose: true,
+        		yes: function(index, layero) {
+                    var iframeWin = layero.find('iframe')[0];
+                    iframeWin.contentWindow.submitHandler(index, layero);
+                },
+        	    cancel: function(index) {
+        	        return true;
+        	    }
+        	});
 	    }
-	    
+
 	    /*用户信息-修改*/
 	    $("#form-user-edit").validate({
 			onkeyup: false,
