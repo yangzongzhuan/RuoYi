@@ -927,6 +927,7 @@
 .theme-blue.skin-blue .navbar-default .nav>li.selected>a,
 .theme-blue.skin-blue .navbar-default .nav>li.selected>a:focus {
 	background-color: #1890ff;
+	color: rgba(255,255,255,1);
 }
 
 .theme-blue.skin-green .navbar-default .nav>li.active>a {
