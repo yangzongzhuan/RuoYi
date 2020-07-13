@@ -214,29 +214,48 @@ $(window).load(function() {
 });
 
 function submitHandler() {
-	if(!croppable){
-		$.modal.alertWarning("裁剪框加载中,请稍后...");
-		return
-	}
-    cropper.getCroppedCanvas().toBlob(function(img){
-		var formdata = new FormData();
-		formdata.append("avatarfile", img);
-		$.ajax({
-			url: ctx + "system/user/profile/updateAvatar",
-			data: formdata,
-			type: "post",
-			processData: false,
-			contentType: false,
-			success: function(result) {
-				$.operate.saveSuccess(result);
-			}
-		})
-	});
+    if (!croppable) {
+        $.modal.alertWarning("裁剪框加载中,请稍后...");
+        return
+    }
+    cropper.getCroppedCanvas().toBlob(function(img) {
+        var formdata = new FormData();
+        formdata.append("avatarfile", img);
+        $.ajax({
+            url: ctx + "system/user/profile/updateAvatar",
+            data: formdata,
+            type: "post",
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                $.operate.saveSuccess(result);
+            }
+        })
+    });
 }
 
-$(window).resize(function(){
-	$('.imageBox').height($(window).height()-80);
+$(window).resize(function() {
+    $('.imageBox').height($(window).height() - 80);
 }).resize();
+
+if (!HTMLCanvasElement.prototype.toBlob) {
+    Object.defineProperty(HTMLCanvasElement.prototype, 'toBlob', {
+        value: function(callback, type, quality) {
+            var canvas = this;
+            setTimeout(function() {
+                var binStr = atob(canvas.toDataURL(type, quality).split(',')[1]);
+                var len = binStr.length;
+                var arr = new Uint8Array(len);
+                for (var i = 0; i < len; i++) {
+                    arr[i] = binStr.charCodeAt(i);
+                }
+                callback(new Blob([arr], {
+                    type: type || 'image/png'
+                }));
+            });
+        }
+    });
+}
 </script>
 </body>
 </html>
