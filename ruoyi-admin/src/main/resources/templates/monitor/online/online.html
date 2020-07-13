@@ -37,6 +37,7 @@
 		</div>
 	</div>
 	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: bootstrap-table-export-js" />
 	<script th:inline="javascript">
 		var forceFlag = [[${@permission.hasPermi('monitor:online:forceLogout')}]];
 		var prefix = ctx + "monitor/online";

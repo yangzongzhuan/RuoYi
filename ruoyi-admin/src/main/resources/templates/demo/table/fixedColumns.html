@@ -23,6 +23,7 @@
 		</div>
 	</div>
     <div th:include="include :: footer"></div>
+    <th:block th:include="include :: bootstrap-table-fixed-columns-js" />
     <script th:inline="javascript">
         var prefix = ctx + "demo/table";
         var datas = [[${@dict.getType('sys_normal_disable')}]];
