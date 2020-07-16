@@ -10,25 +10,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ruoyi-quartz</artifactId>
-	
-	<description>
-	    quartz定时任务
-	</description>
+
+    <description>
+        quartz定时任务
+    </description>
 
     <dependencies>
-    
-		<!-- 定时任务 -->
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>com.mchange</groupId>
-					<artifactId>c3p0</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		
+
+        <!-- 定时任务 -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.mchange</groupId>
+                    <artifactId>c3p0</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <!-- 通用工具-->
         <dependency>
             <groupId>com.ruoyi</groupId>
@@ -36,5 +36,5 @@
         </dependency>
 
     </dependencies>
-	
+
 </project>
