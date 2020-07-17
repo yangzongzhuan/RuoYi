@@ -2,31 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
 	<th:block th:include="include :: header('用户个人信息')" />
-    <style>
-        .user-info-head {
-            position: relative;
-            display: inline-block;
-        }
-
-        .user-info-head:hover:after {
-            content: '\f030';
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            color: #eee;
-            background: rgba(0, 0, 0, 0.5);
-            font-family: FontAwesome;
-            font-size: 24px;
-            font-style: normal;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            cursor: pointer;
-            line-height: 110px;
-            border-radius: 50%;
-        }
-    </style>
+    <style type="text/css">.user-info-head{position:relative;display:inline-block;}.user-info-head:hover:after{content:'\f030';position:absolute;left:0;right:0;top:0;bottom:0;color:#eee;background:rgba(0,0,0,0.5);font-family:FontAwesome;font-size:24px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;cursor:pointer;line-height:110px;border-radius:50%;}</style>
 </head>
 
 <body class="gray-bg" style="font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial, sans-serif !important;">
@@ -41,7 +17,7 @@
                 <div class="ibox-content">
                     <div class="text-center">
                         <p class="user-info-head" onclick="javascript:avatar()"><img class="img-circle img-lg" th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}"></p>
-                        <!--<p><a href="javascript:avatar()">修改头像</a></p>-->
+                        <p><a href="javascript:avatar()">修改头像</a></p>
                     </div>
                     <ul class="list-group list-group-striped">
                         <li class="list-group-item"><i class="fa fa-user"></i>
