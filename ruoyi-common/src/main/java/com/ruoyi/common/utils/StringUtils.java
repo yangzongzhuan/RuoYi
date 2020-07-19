@@ -301,7 +301,6 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             }
             sb.append(Character.toLowerCase(c));
         }
-
         return sb.toString();
     }
 
@@ -364,13 +363,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * 驼峰式命名法 例如：user_name->userName
+     * 驼峰式命名法
+     * 例如：user_name->userName
      */
     public static String toCamelCase(String s)
     {
         if (s == null)
         {
             return null;
+        }
+        if (s.indexOf(SEPARATOR) == -1)
+        {
+            return s;
         }
         s = s.toLowerCase();
         StringBuilder sb = new StringBuilder(s.length());
