@@ -35,7 +35,7 @@
 					</div>
 				</form>
 			</div>
-			
+
 			<div class="col-sm-12 search-collapse">
 			    <p class="select-title">时间条件查询</p>
 				<form id="time-form">
@@ -61,10 +61,10 @@
 					</div>
 				</form>
 			</div>
-			
+
 			<div class="col-sm-12 search-collapse">
 			    <p class="select-title">多级联动下拉查询</p>
-				<form id="select-form">
+				<form id="cxselect-form">
 					<div class="select-list">
 						<ul id="element">
 						    <li>
@@ -78,13 +78,13 @@
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-							    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset('select-form')"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset('cxselect-form')"><i class="fa fa-refresh"></i>&nbsp;重置</a>
 							</li>
 						</ul>
 					</div>
 				</form>
 			</div>
-			
+
 			<div class="col-sm-12 search-collapse">
 			    <p class="select-title">下拉多选条件查询</p>
 				<form id="select-form">
@@ -113,7 +113,7 @@
 					</div>
 				</form>
 			</div>
-			
+
 			<div class="col-sm-12 search-collapse">
 			    <p class="select-title">复杂条件查询</p>
 				<form id="complex-form">
@@ -174,7 +174,7 @@
 								<span>-</span>
 								<input type="text" class="time-input" placeholder="结束时间"/>
 							</li>
-							
+
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm m50" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 							    <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset('complex-form')"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -188,7 +188,7 @@
 	<th:block th:include="include :: footer" />
 	<th:block th:include="include :: bootstrap-select-js" />
 	<th:block th:include="include :: jquery-cxselect-js" />
-	
+
 	<script th:inline="javascript">
 	    // 直接返回获取
    		var data = [{"v":"taobao","n":"淘宝","s":[{"v":"tm","n":"天猫"},{"v":"jhs","n":"聚划算"}]},{"v":"jd","n":"京东","s":[{"v":"jdcs","n":"京东超市"},{"v":"jdsx","n":"京东生鲜"}]}];
