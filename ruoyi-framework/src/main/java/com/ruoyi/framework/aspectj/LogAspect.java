@@ -84,7 +84,7 @@ public class LogAspect
             String ip = ShiroUtils.getIp();
             operLog.setOperIp(ip);
             // 返回参数
-            operLog.setJsonResult(JSON.marshal(jsonResult));
+            operLog.setJsonResult(StringUtils.substring(JSON.marshal(jsonResult), 0, 2000));
 
             operLog.setOperUrl(ServletUtils.getRequest().getRequestURI());
             if (currentUser != null)
