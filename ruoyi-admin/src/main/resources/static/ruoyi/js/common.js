@@ -266,7 +266,7 @@ var closeItem = function(dataId){
 /** 创建选项卡 */
 function createMenuItem(dataUrl, menuName) {
 	var panelUrl = window.frameElement.getAttribute('data-id');
-    dataIndex = $.common.random(1,100),
+    dataIndex = $.common.random(1, 100),
     flag = true;
     if (dataUrl == undefined || $.trim(dataUrl).length == 0) return false;
     var topWindow = $(window.parent.document);
@@ -275,6 +275,7 @@ function createMenuItem(dataUrl, menuName) {
         if ($(this).data('id') == dataUrl) {
             if (!$(this).hasClass('active')) {
                 $(this).addClass('active').siblings('.menuTab').removeClass('active');
+                scrollToTab(this);
                 $('.page-tabs-content').animate({ marginLeft: ""}, "fast");
                 // 显示tab对应的内容区
                 $('.mainContent .RuoYi_iframe', topWindow).each(function() {
@@ -304,8 +305,46 @@ function createMenuItem(dataUrl, menuName) {
 
         // 添加选项卡
         $('.menuTabs .page-tabs-content', topWindow).append(str);
+        scrollToTab($('.menuTab.active', topWindow));
     }
     return false;
+}
+
+// 滚动到指定选项卡
+function scrollToTab(element) {
+	var topWindow = $(window.parent.document);
+    var marginLeftVal = calSumWidth($(element).prevAll()),
+    marginRightVal = calSumWidth($(element).nextAll());
+    // 可视区域非tab宽度
+    var tabOuterWidth = calSumWidth($(".content-tabs", topWindow).children().not(".menuTabs"));
+    //可视区域tab宽度
+    var visibleWidth = $(".content-tabs", topWindow).outerWidth(true) - tabOuterWidth;
+    //实际滚动宽度
+    var scrollVal = 0;
+    if ($(".page-tabs-content", topWindow).outerWidth() < visibleWidth) {
+        scrollVal = 0;
+    } else if (marginRightVal <= (visibleWidth - $(element).outerWidth(true) - $(element).next().outerWidth(true))) {
+        if ((visibleWidth - $(element).next().outerWidth(true)) > marginRightVal) {
+            scrollVal = marginLeftVal;
+            var tabElement = element;
+            while ((scrollVal - $(tabElement).outerWidth()) > ($(".page-tabs-content", topWindow).outerWidth() - visibleWidth)) {
+                scrollVal -= $(tabElement).prev().outerWidth();
+                tabElement = $(tabElement).prev();
+            }
+        }
+    } else if (marginLeftVal > (visibleWidth - $(element).outerWidth(true) - $(element).prev().outerWidth(true))) {
+        scrollVal = marginLeftVal - $(element).prev().outerWidth(true);
+    }
+    $('.page-tabs-content', topWindow).animate({ marginLeft: 0 - scrollVal + 'px' }, "fast");
+}
+
+//计算元素集合的总宽度
+function calSumWidth(elements) {
+    var width = 0;
+    $(elements).each(function() {
+        width += $(this).outerWidth(true);
+    });
+    return width;
 }
 
 // 日志打印封装处理
