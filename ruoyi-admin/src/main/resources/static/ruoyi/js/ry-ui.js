@@ -38,6 +38,7 @@ var table = {
             	var defaults = {
             		id: "bootstrap-table",
             		type: 0, // 0 代表bootstrapTable 1代表bootstrapTreeTable
+            		method: 'post',
         		    height: undefined,
         		    sidePagination: "server",
         		    sortName: "",
@@ -78,7 +79,7 @@ var table = {
                 	id: options.id,
                     url: options.url,                                   // 请求后台的URL（*）
                     contentType: "application/x-www-form-urlencoded",   // 编码类型
-                    method: 'post',                                     // 请求方式（*）
+                    method: options.method,                             // 请求方式（*）
                     cache: false,                                       // 是否使用缓存
                     height: options.height,                             // 表格的高度
                     striped: options.striped,                           // 是否显示行间隔色
