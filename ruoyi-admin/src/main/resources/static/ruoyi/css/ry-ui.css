@@ -813,8 +813,13 @@ label {
 	min-height: 75%;
 }
 
-.table-striped .bootstrap-table {
+.table-striped .bootstrap-table, .table-striped .table-bordered {
 	border: 0px!important;
+}
+
+.table-bordered .table>thead>tr>th, .table-bordered .table>tbody>tr>th {
+	font-weight: normal;
+	font-size: 13px
 }
 
 .table-striped table>thead>tr>th, .table-striped table>tbody>tr>th, .table-striped table>tfoot>tr>th, .table-striped table>thead>tr>td, .table-striped table>tbody>tr>td, .table-striped table>tfoot>tr>td {
@@ -822,7 +827,6 @@ label {
 	background-color: transparent;
 	border: 0px;
 }
-
 
 .table-bordered table>thead>tr>th:first-child, .table-bordered table>tbody>tr>td:first-child {
     border-left: 1px solid #ddd;
@@ -848,12 +852,10 @@ label {
 .table-striped .table>thead>tr>th, .table-striped .table>tbody>tr>th {
 	border-bottom: 1px solid #ccc!important;
 	border-top: 0px!important;
-}
-
-.table-striped .table>thead:first-child>tr:first-child>th {
 	font-weight: normal;
 	font-size: 13px
 }
+
 .table-striped table thead {
     background-color: #eff3f8;
 }
