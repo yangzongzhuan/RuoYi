@@ -1002,7 +1002,7 @@ label {
 }
 
 /** 表格选中样式 **/
-.fixed-table-container .selected {
+.bootstrap-table .fixed-table-container .table tbody tr.selected td {
     background-color: #E8F7FD;
     color: #1890ff;
 }
