@@ -867,47 +867,33 @@ label {
 }
 
 /** 表格冻结列样式 **/
-.left-fixed-table-columns, .left-fixed-body-columns {
-    position: absolute;
-    background-color: #fff;
-    display: none;
-    box-sizing: border-box;
-    overflow: hidden;
+.fixed-columns, .fixed-columns-right {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 1;
 }
 
-.left-fixed-table-columns .table, .left-fixed-body-columns .table {
-    border-right: 1px solid #ddd;
+.fixed-columns {
+  left: 0;
 }
 
-.left-fixed-table-columns .table.table-no-bordered, .left-fixed-body-columns .table.table-no-bordered {
-    border-right: 1px solid transparent;
+.fixed-columns .fixed-table-body {
+  overflow: hidden !important;
 }
 
-.left-fixed-body-columns table {
-    position: absolute;
-    animation: none;
+.fixed-columns-right {
+  right: 0;
+}
+
+.fixed-columns-right .fixed-table-body {
+  overflow-x: hidden !important;
 }
 
 .bootstrap-table .table-hover > tbody > tr.hover > td {
     background-color: #f5f5f5;
-}
-
-.right-fixed-table-columns{ 
-    position: absolute;
-    right:63px;
-    border-left:1px solid #ddd;
-    display: none;
-    z-index:100;
-}
-
-/** 表格全屏样式 **/
-.bootstrap-table.fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1050;
-    width: 100%!important;
-    background: #FFF;
 }
 
 /** 表格树样式 **/
@@ -1070,14 +1056,20 @@ label {
 
 /* 设置滚动条样式 */
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 10px;
-    background-color: #F5F5F5;
+   width:10px!important;
+   height:10px!important;
+   -webkit-appearance:none;
+   background:#f1f1f1
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 6px;
-	background-color: #999;
+    height:5px;
+    border:1px solid transparent;
+    border-top:0;
+    border-bottom:0;
+    border-radius:6px;
+    background-color:#ccc;
+    background-clip:padding-box
 }
 
 /* 设置placeholder样式 */

@@ -66,8 +66,7 @@ var table = {
                     rememberSelected: false,
         		    fixedColumns: false,
         		    fixedNumber: 0,
-        		    rightFixedColumns: false,
-        		    rightFixedNumber: 0,
+        		    fixedRightNumber: 0,
         		    queryParams: $.table.queryParams,
         		    rowStyle: {},
         		};
@@ -124,8 +123,7 @@ var table = {
                     rememberSelected: options.rememberSelected,         // 启用翻页记住前面的选择
                     fixedColumns: options.fixedColumns,                 // 是否启用冻结列（左侧）
                     fixedNumber: options.fixedNumber,                   // 列冻结的个数（左侧）
-                    rightFixedColumns: options.rightFixedColumns,       // 是否启用冻结列（右侧）
-                    rightFixedNumber: options.rightFixedNumber,         // 列冻结的个数（右侧）
+                    fixedRightNumber: options.fixedRightNumber,         // 列冻结的个数（右侧）
                     onReorderRow: options.onReorderRow,                 // 当拖拽结束后处理函数
                     queryParams: options.queryParams,                   // 传递参数（*）
                     rowStyle: options.rowStyle,                         // 通过自定义函数设置行样式
