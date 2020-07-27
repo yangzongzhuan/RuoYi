@@ -49,6 +49,7 @@ var table = {
         		    pageNumber: 1,
         		    pageList: [10, 25, 50],
         		    toolbar: "toolbar",
+        		    loadingFontSize: 13,
         		    striped: false,
         		    escape: false,
         		    firstLoad: true,
@@ -97,6 +98,7 @@ var table = {
                     showFooter: options.showFooter,                     // 是否显示表尾
                     iconSize: 'outline',                                // 图标大小：undefined默认的按钮尺寸 xs超小按钮sm小按钮lg大按钮
                     toolbar: '#' + options.toolbar,                     // 指定工作栏
+                    loadingFontSize: options.loadingFontSize,           // 自定义加载文本的字体大小
                     sidePagination: options.sidePagination,             // server启用服务端分页client客户端分页
                     search: options.search,                             // 是否显示搜索框功能
                     searchText: options.searchText,                     // 搜索框初始显示的内容，默认为空
