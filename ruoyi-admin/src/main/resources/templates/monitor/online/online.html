@@ -62,7 +62,10 @@
                 },
 		        {
 		            field: 'sessionId',
-		            title: '会话编号'
+		            title: '会话编号',
+		            formatter: function(value, row, index) {
+                    	return $.table.tooltip(value);
+                    }
 		        },
 		        {
 		            field: 'loginName',

@@ -35,7 +35,7 @@ public final class HTMLFilter
     private static final Pattern P_VALID_ENTITIES = Pattern.compile("&([^&;]*)(?=(;|&|$))");
     private static final Pattern P_VALID_QUOTES = Pattern.compile("(>|^)([^<]+?)(<|$)", Pattern.DOTALL);
     private static final Pattern P_END_ARROW = Pattern.compile("^>");
-    // private static final Pattern P_BODY_TO_END = Pattern.compile("<([^>]*?)(?=<|$)");
+    private static final Pattern P_BODY_TO_END = Pattern.compile("<([^>]*?)(?=<|$)");
     private static final Pattern P_XML_CONTENT = Pattern.compile("(^|>)([^<]*?)(?=>)");
     private static final Pattern P_STRAY_LEFT_ARROW = Pattern.compile("<([^>]*?)(?=<|$)");
     private static final Pattern P_STRAY_RIGHT_ARROW = Pattern.compile("(^|>)([^<]*?)(?=>)");
@@ -131,7 +131,7 @@ public final class HTMLFilter
         vAllowedEntities = new String[] { "amp", "gt", "lt", "quot" };
         stripComment = true;
         encodeQuotes = true;
-        alwaysMakeTags = true;
+        alwaysMakeTags = false;
     }
 
     /**
@@ -246,7 +246,7 @@ public final class HTMLFilter
             //
             s = regexReplace(P_END_ARROW, "", s);
             // 不追加结束标签
-            // s = regexReplace(P_BODY_TO_END, "<$1>", s);
+            s = regexReplace(P_BODY_TO_END, "<$1>", s);
             s = regexReplace(P_XML_CONTENT, "$1<$2", s);
 
         }
