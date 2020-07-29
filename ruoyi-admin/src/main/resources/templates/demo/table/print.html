@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('表格打印配置')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-table table-striped">
+			    <!-- data-show-print设置为true为显示工具栏上的“打印”按钮。
+			         data-print-as-filtered-and-sorted-on-ui为true时-在用户界面上按排序和过滤条件打印表格。请注意，如果设置为true以及用于过滤和排序的显式预定义打印选项（printFilter，printSortOrder，printSortColumn），则它们将应用于已由UI控件过滤和排序的数据。对于在UI上按过滤和排序方式打印数据-请勿设置以下3个选项：printFilter，printSortOrder，printSortColumn
+			         data-print-page-builder 接收html <table>元素作为字符串参数，返回html字符串进行打印。用于样式和添加页眉或页脚。
+			         data-print-sort-column 设置列字段名称以对打印表进行排序
+			         data-print-sort-order 有效值：“ asc”，“ desc”。仅当设置了printSortColumn时相关
+			         data-print-filter 设置值以按此列过滤打印的数据。
+			         data-print-formatter 函数（值，行，索引）-返回字符串。格式化打印表中此列的单元格值。函数行为类似于“ formatter”列选项
+			         printIgnore 设置为true可以在打印页面中隐藏此列。 -->
+				<table id="bootstrap-table"  data-show-print="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <th:block th:include="include :: bootstrap-table-print-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "demo/table";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+		        showSearch: false,
+		        showRefresh: false,
+		        showToggle: false,
+		        showColumns: false,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'userId', 
+					title : '用户ID'
+				},
+				{
+					field : 'userCode', 
+					title : '用户编号'
+				},
+				{
+					field : 'userName', 
+					title : '用户姓名'
+				},
+				{
+					field : 'userPhone', 
+					title : '用户手机'
+				},
+				{
+					field : 'userEmail', 
+					title : '用户邮箱'
+				},
+				{
+				    field : 'userBalance',
+				    title : '用户余额'
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+                        actions.push('<a class="btn btn-danger btn-xs" href="javascript:;" onclick="remove(this)"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+        
+        // 假删除操作
+        function remove(obj) {
+        	$.modal.confirm("确认要删除吗？", function() {
+        	    $(obj).parents("tr").remove();
+        	    $.modal.msgSuccess('已删除!');
+        	});
+        }
+    </script>
+</body>
+</html>
