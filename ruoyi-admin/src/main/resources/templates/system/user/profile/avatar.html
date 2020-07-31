@@ -15,7 +15,6 @@
 	
 	.cropped {
 		width: 200px;
-		height: 345px;
 		border: 1px #ddd solid;
 		box-shadow: 0px 0px 12px #ddd;
 	}
@@ -236,6 +235,7 @@ function submitHandler() {
 
 $(window).resize(function() {
     $('.imageBox').height($(window).height() - 80);
+    $('.cropped').height($(window).height() - 40);
 }).resize();
 
 if (!HTMLCanvasElement.prototype.toBlob) {
