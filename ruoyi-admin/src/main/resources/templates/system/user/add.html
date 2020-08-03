@@ -221,7 +221,7 @@
         });
         
         function submitHandler() {
-        	var chrtype = [[${@config.getKey('sys.account.chrtype')}]];
+        	var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
 			var password = $("#password").val();
 	        if ($.validate.form() && checkpwd(chrtype, password)) {
 	        	var data = $("#form-user-add").serializeArray();

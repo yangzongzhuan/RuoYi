@@ -82,7 +82,7 @@
 		});
 		
 		function submitHandler() {
-			var chrtype = [[${@config.getKey('sys.account.chrtype')}]];
+			var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
 			var password = $("#newPassword").val();
 	        if ($.validate.form() && checkpwd(chrtype, password)) {
 	        	$.operate.save(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
