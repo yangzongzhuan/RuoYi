@@ -283,7 +283,9 @@
 		});
 		
 		function submitChangPassword () {
-	        if ($.validate.form("form-user-resetPwd")) {
+			var chrtype = [[${@config.getKey('sys.account.chrtype')}]];
+			var password = $("#newPassword").val();
+	        if ($.validate.form("form-user-resetPwd") && checkpwd(chrtype, password)) {
 	        	$.operate.saveModal(ctx + "system/user/profile/resetPwd", $('#form-user-resetPwd').serialize());
 	        }
 	    }

@@ -221,7 +221,9 @@
         });
         
         function submitHandler() {
-	        if ($.validate.form()) {
+        	var chrtype = [[${@config.getKey('sys.account.chrtype')}]];
+			var password = $("#password").val();
+	        if ($.validate.form() && checkpwd(chrtype, password)) {
 	        	var data = $("#form-user-add").serializeArray();
 	        	var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
 	        	var roleIds = $.form.selectCheckeds("role");
@@ -233,7 +235,7 @@
 	        }
 	    }
          
-        /*用户管理-新增-选择部门树*/
+        /* 用户管理-新增-选择部门树 */
         function selectDeptTree() {
         	var treeId = $("#treeId").val();
         	var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
