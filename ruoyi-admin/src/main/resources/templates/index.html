@@ -36,7 +36,7 @@
             			<a class="menuItem noactive" title="个人中心" th:href="@{/system/user/profile}">
             				<div class="hide" th:text="个人中心"></div>
 					        <div class="pull-left image">
-		                    	<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
+		                    	<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
 					        </div>
 				        </a>
 				        <div class="pull-left info">
@@ -50,21 +50,21 @@
                     <a class="menuItem" th:href="@{/system/main}"><i class="fa fa-home"></i> <span class="nav-label">首页</span> </a>
                 </li>
                 <li th:each="menu : ${menus}">
-                	<a th:class="@{${menu.url != '' && menu.url != '#'} ? ${menu.target}}" th:href="@{${menu.url == ''} ? |#| : ${menu.url}}">
+                	<a th:class="@{${!#strings.isEmpty(menu.url) && menu.url != '#'} ? ${menu.target}}" th:href="@{${#strings.isEmpty(menu.url)} ? |#| : ${menu.url}}">
                 		<i class="fa fa-bar-chart-o" th:class="${menu.icon}"></i>
                     	<span class="nav-label" th:text="${menu.menuName}">一级菜单</span>
-                    	<span th:class="${menu.url == '' || menu.url == '#'} ? |fa arrow|"></span>
+                    	<span th:class="${#strings.isEmpty(menu.url) || menu.url == '#'} ? |fa arrow|"></span>
                 	</a>
                     <ul class="nav nav-second-level collapse">
 						<li th:each="cmenu : ${menu.children}">
-							<a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${cmenu.target == ''} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
+							<a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}">二级菜单</a>
 							<a th:if="${not #lists.isEmpty(cmenu.children)}" href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
 							<ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-third-level">
 								<li th:each="emenu : ${cmenu.children}">
-								    <a th:if="${#lists.isEmpty(emenu.children)}" th:class="${emenu.target == ''} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}">三级菜单</a>
+								    <a th:if="${#lists.isEmpty(emenu.children)}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}">三级菜单</a>
 								    <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
 								    <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-four-level">
-								      	<li th:each="fmenu : ${emenu.children}"><a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${fmenu.target == ''} ? |menuItem| : ${fmenu.target}" th:text="${fmenu.menuName}" th:href="@{${fmenu.url}}">四级菜单</a></li>
+								      	<li th:each="fmenu : ${emenu.children}"><a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${#strings.isEmpty(fmenu.target)} ? |menuItem| : ${fmenu.target}" th:text="${fmenu.menuName}" th:href="@{${fmenu.url}}">四级菜单</a></li>
 								    </ul>
 								</li>
 							</ul>
@@ -187,7 +187,7 @@
 	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
-							<img th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
+							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
 							<span class="hidden-xs">[[${#strings.defaultString(user.userName, '-')}]]</span>
 						</a>
 						<ul class="dropdown-menu">
