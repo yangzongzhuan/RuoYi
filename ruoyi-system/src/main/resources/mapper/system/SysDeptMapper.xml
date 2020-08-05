@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="checkDeptNameUnique" resultMap="SysDeptResult">
 	    <include refid="selectDeptVo"/>
-		where dept_name=#{deptName} and parent_id = #{parentId}
+		where dept_name=#{deptName} and parent_id = #{parentId} limit 1
 	</select>
 
 	<select id="selectDeptById" parameterType="Long" resultMap="SysDeptResult">
