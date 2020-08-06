@@ -75,7 +75,7 @@ $(window).bind("load resize", function() {
 function syncMenuTab(dataId) {
 	if(isLinkage) {
         var $dataObj = $('a[href$="' + decodeURI(dataId) + '"]');
-        if (!$dataObj.hasClass("noactive")) {
+        if ($dataObj.attr("class") != null && !$dataObj.hasClass("noactive")) {
             $('.nav ul').removeClass("in");
             $dataObj.parents("ul").addClass("in")
             $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
@@ -254,7 +254,12 @@ $(function() {
         menuName = $.trim($(this).text()),
         flag = true;
 
-        if (!$('a[href$="' + dataUrl + '"]').hasClass("noactive")) {
+        var $dataObj = $('a[href$="' + decodeURI(dataUrl) + '"]');
+        if (!$dataObj.hasClass("noactive")) {
+        	$('.nav ul').removeClass("in");
+            $dataObj.parents("ul").addClass("in")
+            $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
+            $dataObj.parents("ul").css('height', 'auto').height();
             $(".nav ul li, .nav li").removeClass("selected");
             $(this).parent("li").addClass("selected");
         }
