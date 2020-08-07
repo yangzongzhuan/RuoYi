@@ -191,8 +191,9 @@ var table = {
             		table.set($(this).attr("id"));
             	});
             	// 选中、取消、全部选中、全部取消（事件）
-            	$(optionsIds).on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rows) {
+            	$(optionsIds).on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rowsAfter, rowsBefore) {
             		// 复选框分页保留保存选中数组
+            		var rows = $.common.equals("uncheck-all", e.type) ? rowsBefore : rowsAfter;
             		var rowIds = $.table.affectedRowIds(rows);
             		if ($.common.isNotEmpty(table.options.rememberSelected) && table.options.rememberSelected) {
             			func = $.inArray(e.type, ['check', 'check-all']) > -1 ? 'union' : 'difference';
