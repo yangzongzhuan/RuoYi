@@ -332,24 +332,10 @@ var table = {
 				}
 			},
             // 搜索-默认第一个form
-            search: function(formId, tableId, data) {
+            search: function(formId, tableId) {
             	table.set(tableId);
             	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	var params = $.common.isEmpty(tableId) ? $("#" + table.options.id).bootstrapTable('getOptions') : $("#" + tableId).bootstrapTable('getOptions');
-            	params.queryParams = function(params) {
-                    var search = $.common.formToJSON(currentId);
-                    if($.common.isNotEmpty(data)){
-	                    $.each(data, function(key) {
-	                        search[key] = data[key];
-	                    });
-                    }
-                    search.pageSize = params.limit;
-                    search.pageNum = params.offset / params.limit + 1;
-                    search.searchValue = params.search;
-                    search.orderByColumn = params.sort;
-                    search.isAsc = params.order;
-    		        return search;
-    		    }
     		    if($.common.isNotEmpty(tableId)){
     				$("#" + tableId).bootstrapTable('refresh', params);
     			} else{

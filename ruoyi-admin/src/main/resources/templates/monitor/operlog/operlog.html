@@ -75,6 +75,7 @@
 		        detailUrl: prefix + "/detail/{id}",
 		        removeUrl: prefix + "/remove",
 		        exportUrl: prefix + "/export",
+		        queryParams: queryParams,
 		        sortName: "operTime",
 		        sortOrder: "desc",
 		        modalName: "操作日志",
@@ -148,10 +149,14 @@
 		    $.table.init(options);
 		});
 		
+		function queryParams(params) {
+			var search = $.table.queryParams(params);
+			search.businessTypes = $.common.join($('#businessTypes').selectpicker('val'));
+			return search;
+		}
+		
 		function searchPre() {
-		    var data = {};
-		    data.businessTypes = $.common.join($('#businessTypes').selectpicker('val'));
-		    $.table.search('operlog-form', 'bootstrap-table', data);
+		    $.table.search('operlog-form', 'bootstrap-table');
 		}
 		
 		function resetPre() {
