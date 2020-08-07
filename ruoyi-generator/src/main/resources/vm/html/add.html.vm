@@ -14,6 +14,12 @@
 #break
 #end
 #end
+#foreach($column in $columns)
+#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "summernote")
+    <th:block th:include="include :: summernote-css" />
+#break
+#end
+#end
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -60,6 +66,14 @@
                     <div class="file-loading">
                         <input class="form-control file-upload" id="${field}" name="file" type="file">
                     </div>
+                </div>
+            </div>
+#elseif($column.htmlType == "summernote")
+            <div class="form-group">    
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
+                <div class="col-sm-8">
+                    <input type="hidden" class="form-control" name="${field}">
+                    <div class="summernote" id="${field}"></div>
                 </div>
             </div>
 #elseif($column.htmlType == "select" && "" != $dictType)
@@ -169,6 +183,12 @@
 #break
 #end
 #end
+#foreach($column in $columns)
+#if($column.insert && !$column.superColumn && !$column.pk && $column.htmlType == "summernote")
+    <th:block th:include="include :: summernote-js" />
+#break
+#end
+#end
     <script th:inline="javascript">
         var prefix = ctx + "${moduleName}/${businessName}"
 #if($table.sub)
@@ -209,6 +229,46 @@
         }).on('fileremoved', function (event, id, index) {
             $("input[name='" + event.currentTarget.id + "']").val('')
         })
+#break
+#end
+#end
+#foreach($column in $columns)
+#if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "summernote")
+
+        $(function() {
+            $('.summernote').summernote({
+                lang: 'zh-CN',
+                callbacks: {
+                    onChange: function(contents, $edittable) {
+                        $("input[name='" + this.id + "']").val(contents);
+                    },
+                    onImageUpload: function(files) {
+                    	var obj = this;
+                    	var data = new FormData();
+                    	data.append("file", files[0]);
+                    	$.ajax({
+                    		type: "post",
+                    		url: ctx + "common/upload",
+                    		data: data,
+                    		cache: false,
+                    		contentType: false,
+                    		processData: false,
+                    		dataType: 'json',
+                    		success: function(result) {
+                    			if (result.code == web_status.SUCCESS) {
+                    				$('#' + obj.id).summernote('insertImage', result.url);
+                    			} else {
+                    				$.modal.alertError(result.msg);
+                    			}
+                    		},
+                    		error: function(error) {
+                    			$.modal.alertWarning("图片上传失败。");
+                    		}
+                    	});
+                    }
+                }
+            });
+        });
 #break
 #end
 #end
