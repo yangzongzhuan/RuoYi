@@ -249,7 +249,6 @@ public class ShiroConfig
     public LogoutFilter logoutFilter()
     {
         LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setCacheManager(getEhCacheManager());
         logoutFilter.setLoginUrl(loginUrl);
         return logoutFilter;
     }

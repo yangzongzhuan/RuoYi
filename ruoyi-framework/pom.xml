@@ -53,12 +53,6 @@
             <artifactId>shiro-spring</artifactId>
         </dependency>
 
-        <!-- Shiro使用EhCache缓存框架 -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-        </dependency>
-
         <!-- thymeleaf模板引擎和shiro框架的整合 -->
         <dependency>
             <groupId>com.github.theborakompanioni</groupId>
