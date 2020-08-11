@@ -119,7 +119,7 @@ public class SysUserOnlineServiceImpl implements ISysUserOnlineService
     {
         Cache<String, Deque<Serializable>> cache = ehCacheManager.getCache(ShiroConstants.SYS_USERCACHE);
         Deque<Serializable> deque = cache.get(loginName);
-        if (StringUtils.isNull(cache) || StringUtils.isEmpty(deque))
+        if (StringUtils.isEmpty(deque) || deque.size() == 0)
         {
             return;
         }
