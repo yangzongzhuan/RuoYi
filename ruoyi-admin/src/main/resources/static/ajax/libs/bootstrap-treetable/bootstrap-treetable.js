@@ -133,7 +133,7 @@
                 if((!target.isFixWidth)&& column.width){
                     target.isFixWidth = column.width.indexOf("px")>-1?true:false;
                 }
-                $th.text(column.title);
+                $th.html(column.title);
                 $thr.append($th);
             });
             var $thead = $('<thead class="treetable-thead"></thead>');
