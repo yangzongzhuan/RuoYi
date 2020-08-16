@@ -149,7 +149,8 @@ public class FileUtils extends org.apache.commons.io.FileUtils
      * @param realFileName 真实文件名
      * @return
      */
-    public static void setAttachmentResponseHeader(HttpServletResponse response,String realFileName) throws UnsupportedEncodingException {
+    public static void setAttachmentResponseHeader(HttpServletResponse response, String realFileName) throws UnsupportedEncodingException
+    {
         String percentEncodedFileName = percentEncode(realFileName);
 
         StringBuilder contentDispositionValue = new StringBuilder();
@@ -160,8 +161,7 @@ public class FileUtils extends org.apache.commons.io.FileUtils
                 .append("utf-8''")
                 .append(percentEncodedFileName);
 
-        response.setHeader("Content-disposition",
-                contentDispositionValue.toString());
+        response.setHeader("Content-disposition", contentDispositionValue.toString());
     }
 
     /**
@@ -170,8 +170,9 @@ public class FileUtils extends org.apache.commons.io.FileUtils
      * @param s 需要百分号编码的字符串
      * @return 百分号编码后的字符串
      */
-    public static String percentEncode(String s) throws UnsupportedEncodingException {
+    public static String percentEncode(String s) throws UnsupportedEncodingException
+    {
         String encode = URLEncoder.encode(s, StandardCharsets.UTF_8.toString());
-        return encode .replaceAll("\\+", "%20");
+        return encode.replaceAll("\\+", "%20");
     }
 }
