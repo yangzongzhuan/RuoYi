@@ -12,6 +12,8 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessStatus;
 import com.ruoyi.common.json.JSON;
@@ -33,6 +35,9 @@ import com.ruoyi.system.domain.SysUser;
 public class LogAspect
 {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
+
+    /** 排除敏感属性字段 */
+    public static final String[] EXCLUDE_PROPERTIES = { "password", "oldPassword", "newPassword", "confirmPassword" };
 
     // 配置织入点
     @Pointcut("@annotation(com.ruoyi.common.annotation.Log)")
@@ -154,8 +159,13 @@ public class LogAspect
     private void setRequestValue(SysOperLog operLog) throws Exception
     {
         Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
-        String params = JSON.marshal(map);
-        operLog.setOperParam(StringUtils.substring(params, 0, 2000));
+        if (StringUtils.isNotEmpty(map))
+        {
+            PropertyPreFilters.MySimplePropertyPreFilter excludefilter = new PropertyPreFilters().addFilter();
+            excludefilter.addExcludes(EXCLUDE_PROPERTIES);
+            String params = JSONObject.toJSONString(map, excludefilter);
+            operLog.setOperParam(StringUtils.substring(params, 0, 2000));
+        }
     }
 
     /**

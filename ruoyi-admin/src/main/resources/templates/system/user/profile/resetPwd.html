@@ -28,7 +28,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">再次确认：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="password" name="confirm" id="confirm">
+					<input class="form-control" type="password" name="confirmPassword" id="confirmPassword">
 					<span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 请再次输入您的密码</span>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 	                minlength: 5,
 	    			maxlength: 20
 	            },
-	            confirm: {
+	            confirmPassword: {
 	                required: true,
 	                equalTo: "#newPassword"
 	            }
@@ -72,7 +72,7 @@
 	                minlength: "密码不能小于6个字符",
 	                maxlength: "密码不能大于20个字符"
 	            },
-	            confirm: {
+	            confirmPassword: {
 	                required: "请再次输入新密码",
 	                equalTo: "两次密码输入不一致"
 	            }
