@@ -94,9 +94,15 @@ public interface IGenTableService
      * 生成代码（自定义路径）
      * 
      * @param tableName 表名称
-     * @return 数据
      */
     public void generatorCode(String tableName);
+    
+    /**
+     * 同步数据库
+     * 
+     * @param tableName 表名称
+     */
+    public void synchDb(String tableName);
 
     /**
      * 批量生成代码（下载方式）

@@ -125,6 +125,7 @@
 		                actions.push('<a class="btn btn-info btn-xs ' + previewFlag + '" href="javascript:void(0)" onclick="preview(\'' + row.tableId + '\')"><i class="fa fa-search"></i>预览</a> ');
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.editTab(\'' + row.tableId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
 		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.tableId + '\')"><i class="fa fa-remove"></i>删除</a> ');
+		                actions.push('<a class="btn btn-warning btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="synchDb(\'' + row.tableName + '\')"><i class="fa fa-refresh"></i>同步</a> ');
 		                actions.push('<a class="btn btn-primary btn-xs ' + codeFlag + '" href="javascript:void(0)" onclick="genCode(\'' + row.tableName + '\',\'' + row.genType + '\')"><i class="fa fa-bug"></i>生成代码</a> ');
 		                return actions.join('');
 		            }
@@ -172,6 +173,13 @@
 					$.operate.get(prefix + "/genCode/" + tableName);
 				}
 		    })
+		}
+		
+		// 同步数据库
+		function synchDb(tableName){
+			$.modal.confirm("确认要强制同步" + tableName + "表结构吗？", function() {
+			    $.operate.get(prefix + "/synchDb/" + tableName);
+			})
 		}
 	
 		// 批量生成代码
