@@ -552,9 +552,13 @@ public class ExcelUtil<T>
                 {
                     cell.setCellValue(convertByExp(Convert.toStr(value), readConverterExp, separator));
                 }
-                else if (StringUtils.isNotEmpty(dictType))
+                else if (StringUtils.isNotEmpty(dictType) && StringUtils.isNotNull(value))
                 {
                     cell.setCellValue(convertDictByExp(Convert.toStr(value), dictType, separator));
+                }
+                else if (value instanceof BigDecimal && -1 != attr.scale())
+                {
+                    cell.setCellValue((((BigDecimal) value).setScale(attr.scale(), attr.roundingMode())).toString());
                 }
                 else
                 {
