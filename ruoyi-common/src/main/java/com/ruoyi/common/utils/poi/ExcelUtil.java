@@ -923,7 +923,7 @@ public class ExcelUtil<T>
                     {
                         if ((Double) val % 1 > 0)
                         {
-                            val = new DecimalFormat("0.00").format(val);
+                            val = new BigDecimal(val.toString());
                         }
                         else
                         {
