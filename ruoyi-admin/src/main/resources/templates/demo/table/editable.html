@@ -108,7 +108,7 @@
             $.table.init(options);
         });
         
-        function onEditableSave (field, row, oldValue, $el) {
+        function onEditableSave (field, row, rowIndex, oldValue, $el) {
         	alert("字段名：" + field + "，当前值：" + row[field]  + "，旧值：" + oldValue);
         }
         
