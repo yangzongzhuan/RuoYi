@@ -99,10 +99,65 @@
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v44">v4.4.0</a><code class="pull-right">2020.08.24</code>
+								   </h5>
+								</div>
+								<div id="v44" class="panel-collapse collapse in">
+									<div class="panel-body">
+									   <ol>
+									        <li>升级bootstrapTable到最新版本1.17.1</li>
+									        <li>升级shiro到最新版1.6.0 阻止权限绕过漏洞</li>
+									        <li>升级fastjson到最新版1.2.73</li>
+									        <li>代码生成支持同步数据库</li>
+									        <li>代码生成支持富文本控件</li>
+									        <li>用户密码支持自定义配置规则</li>
+									        <li>新增表格自动刷新插件</li>
+									        <li>新增表格打印配置插件</li>
+									        <li>更换图片裁剪工具为cropper</li>
+									        <li>Excel支持sort导出排序</li>
+									        <li>代码生成支持自定义路径</li>
+									        <li>代码生成支持选择上级菜单</li>
+									        <li>代码生成支持上传控件</li>
+									        <li>新增表格参数（自定义加载文本的字体大小loadingFontSize）</li>
+									        <li>Excel注解支持设置BigDecimal精度&舍入规则</li>
+									        <li>操作日志记录排除敏感属性字段</li>
+									        <li>修复不同浏览器附件下载中文名乱码的问题</li>
+									        <li>用户分配角色不允许选择超级管理员角色</li>
+									        <li>更换表格冻结列插件</li>
+									        <li>添加右侧冻结列示例</li>
+									        <li>升级表格行编辑&移动端适应插件</li>
+									        <li>修复更新表格插件后无法设置实例配置问题</li>
+									        <li>修复更新表格插件后导致的主子表错误</li>
+									        <li>修复页面存在多表格，回调函数res数据不正确问题</li>
+									        <li>强退&过期清理登录帐号缓存会话</li>
+									        <li>表格树标题内容支持html语义化标签</li>
+									        <li>修复配置应用的访问路径首页页签重复问题</li>
+									        <li>优化openTab打开时滚动到当前页签</li>
+									        <li>表格请求方式method支持自定义配置</li>
+									        <li>菜单页签联动优化</li>
+									        <li>用户邮箱长度限制修改为50</li>
+									        <li>主子表示例添加日期格式案例</li>
+									        <li>修改表格行内编辑示例旧值参数</li>
+									        <li>操作日志查询方式调整</li>
+									        <li>唯一限制条件只返回单条数据</li>
+									        <li>修改Excel设置STRING单元格类型</li>
+									        <li>添加获取当前的环境配置方法</li>
+									        <li>截取返回参数长度，防止超出异常</li>
+									        <li>定时任务cron表达式验证</li>
+									        <li>拆分表格插件，按需引入</li>
+									        <li>多行文本框补齐必填错误提示背景</li>
+									        <li>其他细节优化</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
 									   <a data-toggle="collapse" data-parent="#version" href="#v431">v4.3.1</a><code class="pull-right">2020.07.05</code>
 								   </h5>
 								</div>
-								<div id="v431" class="panel-collapse collapse in">
+								<div id="v431" class="panel-collapse collapse">
 									<div class="panel-body">
 									   <ol>
 									        <li>国家信息安全漏洞（请务必保持cipherKey密钥唯一性）</li>
