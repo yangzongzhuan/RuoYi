@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<th:block th:include="include :: header('局部刷新')" />
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content  animated fadeInRight">
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="ibox">
+					<div class="ibox-content">
+						<h3>任务列表</h3>
+						<p class="small">
+							<i class="fa fa-hand-o-up"></i>
+							点击刷新按钮刷新数据到列表中
+						</p>
+
+						<div class="input-group">
+							<input id="task-name" type="text" placeholder="任务名称" class="input input-sm form-control">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-sm btn-white" onclick="refresh()">
+									<i class="fa fa-refresh"></i>
+									刷新
+								</button>
+							</span>
+						</div>
+						<div id="tasklist">
+							<ul class="sortable-list connectList agile-list" th:fragment="fragment-tasklist">
+								<li th:if="${tasks != null}" th:each="item : ${tasks}" class="warning-element">
+									[[${item.name}]]
+									<div class="agile-detail">
+										<a href="#" class="pull-right btn btn-xs btn-white">[[${item.type}]]</a>
+										<i class="fa fa-clock-o"></i>
+										[[${item.date}]]
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script>
+		function refresh(){
+			$.ajax({
+				type: "post",
+				url: ctx + "demo/form/localrefresh/task",
+				data: {
+					"taskName": $("#task-name").val(),
+					"fragment":'fragment-tasklist'
+				},
+				success: function(data) {
+					$("#tasklist").html(data);
+				}
+			});
+		}
+	</script>
+</body>
+</html>
