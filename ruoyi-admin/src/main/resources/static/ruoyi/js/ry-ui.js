@@ -334,7 +334,7 @@ var table = {
             // 搜索-默认第一个form
             search: function(formId, tableId) {
             	table.set(tableId);
-            	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+            	table.options.formId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
             	var params = $.common.isEmpty(tableId) ? $("#" + table.options.id).bootstrapTable('getOptions') : $("#" + tableId).bootstrapTable('getOptions');
     		    if($.common.isNotEmpty(tableId)){
     				$("#" + tableId).bootstrapTable('refresh', params);
