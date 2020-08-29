@@ -130,6 +130,7 @@ var table = {
                     onReorderRow: options.onReorderRow,                 // 当拖拽结束后处理函数
                     queryParams: options.queryParams,                   // 传递参数（*）
                     rowStyle: options.rowStyle,                         // 通过自定义函数设置行样式
+                    footerStyle: options.footerStyle,                   // 通过自定义函数设置页脚样式
                     columns: options.columns,                           // 显示列信息（*）
                     data: options.data,                                 // 被加载的数据
                     responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数

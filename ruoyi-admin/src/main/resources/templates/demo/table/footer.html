@@ -24,6 +24,7 @@
 		        showRefresh: false,
 		        showToggle: false,
 		        showColumns: false,
+		        footerStyle: footerStyle,
                 columns: [{
 		            checkbox: true
 		        },
@@ -78,6 +79,17 @@
             };
             $.table.init(options);
         });
+        
+        function footerStyle(column) {
+        	return {
+//         	    userBalance: {
+//         	        classes: 'class'
+//         	    },
+        	    userBalance: {
+        	        css: { color: 'red', 'font-weight': 'normal' }
+        	    }
+        	}[column.field]
+          }
     </script>
 </body>
 </html>
