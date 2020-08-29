@@ -68,4 +68,14 @@ public class InvalidExtensionException extends FileUploadException
             super(allowedExtension, extension, filename);
         }
     }
+    
+    public static class InvalidVideoExtensionException extends InvalidExtensionException
+    {
+        private static final long serialVersionUID = 1L;
+
+        public InvalidVideoExtensionException(String[] allowedExtension, String extension, String filename)
+        {
+            super(allowedExtension, extension, filename);
+        }
+    }
 }
