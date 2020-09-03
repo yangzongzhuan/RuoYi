@@ -50,21 +50,21 @@
 			  <ul class="nav">
                 <li th:each="cmenu : ${menu.children}">
 			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}">
-			        <i th:class="${cmenu.icon}"></i> <span class="nav-label">[[${cmenu.menuName}]]</span>
+			        <i th:class="${cmenu.icon} + ' fa-fw'"></i> <span class="nav-label">[[${cmenu.menuName}]]</span>
 			      </a>
 			      <a class="menu-content" th:if="${not #lists.isEmpty(cmenu.children)}" href="#">
-			        <i th:class="${cmenu.icon}"></i>
+			        <i th:class="${cmenu.icon} + 'fa-fw'"></i>
 			        <span class="nav-label">[[${cmenu.menuName}]]</span>
 			        <span class="fa arrow"></span>
                   </a>
 				  <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-second-level collapse">
 				    <li th:each="emenu : ${cmenu.children}">
 				      <a th:if="${#lists.isEmpty(emenu.children)}" th:href="@{${emenu.url}}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}">
-				        <i th:class="${emenu.icon}"></i> 
+				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
 				        <span class="nav-label">[[${emenu.menuName}]]</span>
 				      </a>
 				      <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">
-				        <i th:class="${emenu.icon}"></i> 
+				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
 				        <span class="nav-label">[[${emenu.menuName}]]</span>
 				        <span class="fa arrow"></span>
 				      </a>
@@ -211,7 +211,7 @@
                     <!-- 顶部菜单列表 -->
 	                <th:block th:each="menu : ${menus}">
                	    <li role="presentation" th:id="|tab_${menu.menuId}|">
-                        <a data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank'}" th:href="@{${!#strings.isEmpty(menu.target) && target != 'menuBlank'} ? ${menu.url} : |#menu_${menu.menuId}|}">
+                        <a data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank'}" th:href="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? ${menu.url} : |#menu_${menu.menuId}|}">
                             <i th:class="${menu.icon}"></i> <span>[[${menu.menuName}]]</span>
                         </a>
                     </li>
@@ -306,7 +306,6 @@
 <script th:src="@{/ruoyi/js/common.js?v=4.4.0}"></script>
 <script th:src="@{/ruoyi/index.js?v=20200902}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
-<script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:src="@{/js/resize-tabs.js}"></script>
 <script th:inline="javascript">
 var ctx = [[@{/}]];
@@ -374,6 +373,8 @@ $(function() {
 		var url = storage.get('publicPath');
 	    if ($.common.isNotEmpty(url)) {
 	    	applyPath(url);
+	    } else {
+	    	$(".navbar-toolbar li a").eq(0).click();
 	    }
 	} else {
 		var hash = location.hash;
