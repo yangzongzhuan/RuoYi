@@ -297,9 +297,9 @@ function switchSkin() {
 /* 切换菜单 */
 function toggleMenu() {
 	$.modal.confirm("确认要切换成横向菜单吗？", function() {
-		$.get(ctx + 'system/menuStyle/topnav',function(result){
+		$.get(ctx + 'system/menuStyle/topnav', function(result) {
             window.location.reload();
-        });
+	    });
 	})
 }
 

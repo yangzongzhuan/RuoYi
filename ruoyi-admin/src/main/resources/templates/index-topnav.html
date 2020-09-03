@@ -45,8 +45,8 @@
 			</div>
 			
             <!-- 左侧菜单 -->
-			<th:block th:each="menu,menuStat : ${menus}">
-			<div class="tab-pane fade height-full" th:id="|menu_${menu.menuId}|" th:classappend="${menuStat.first} ? |active in|">
+			<th:block th:each="menu : ${menus}">
+			<div class="tab-pane fade height-full" th:id="|menu_${menu.menuId}|">
 			  <ul class="nav">
                 <li th:each="cmenu : ${menu.children}">
 			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}">
@@ -347,18 +347,26 @@ function switchSkin() {
 /* 切换菜单 */
 function toggleMenu() {
 	$.modal.confirm("确认要切换成左侧菜单吗？", function() {
-		$.get(ctx + 'system/menuStyle/left',function(result){
+		$.get(ctx + 'system/menuStyle/default', function(result) {
             window.location.reload();
-        });
+	    });
 	})
 }
 
 /** 刷新时访问路径页签 */
 function applyPath(url) {
-	$('a[href$="' + decodeURI(url) + '"]').click();
-	if (!$('a[href$="' + url + '"]').hasClass("noactive")) {
-	    $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+	var $dataObj = $('a[href$="' + decodeURI(url) + '"]');
+	$dataObj.click();
+	if (!$dataObj.hasClass("noactive")) {
+	    $dataObj.parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
 	}
+	// 顶部菜单同步处理
+    var tabStr = $dataObj.parents(".tab-pane").attr("id");
+    if ($.common.isNotEmpty(tabStr)) {
+        var sepIndex = tabStr.lastIndexOf('_');
+        var menuId = tabStr.substring(sepIndex + 1, tabStr.length);
+        $("#tab_" + menuId + " a").click();
+    }
 }
 
 $(function() {
@@ -372,6 +380,8 @@ $(function() {
 	    if ($.common.isNotEmpty(hash)) {
 	        var url = hash.substring(1, hash.length);
 	        applyPath(url);
+	    } else {
+	    	$(".navbar-toolbar li a").eq(0).click();
 	    }
 	}
 });
