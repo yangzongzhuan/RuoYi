@@ -46,7 +46,7 @@ a:focus {
     /*white-space: nowrap;*/
 }
 
-.nav.navbar-right>li>a {
+.nav.navbar-right>li>a, .nav.navbar-left>li>a {
 	color: #fff;
 	font-size: 14px;
 	height: 50px;
@@ -57,7 +57,7 @@ a:focus {
     color: #ffffff;
 }
 
-.nav.navbar-right>li>a>.label {
+.nav.navbar-right>li>a>.label, .nav.navbar-left>li>a>.label {
 	position: absolute;
 	top: 9px;
 	right: 5px;
@@ -66,7 +66,7 @@ a:focus {
 	padding: 2px 4px;
 	line-height: .9;
 }
-.nav.navbar-right>li>a:hover {
+.nav.navbar-right>li>a:hover, .nav.navbar-left>li>a:hover {
 	background-color: #367fa9;
 	color: #fff;
 }
@@ -6873,7 +6873,7 @@ body.rtls .top-navigation .footer.fixed, body.rtls.top-navigation .footer.fixed 
 }
 
 .navbar-header {
-	width: 10%;
+	/* width: 10%; */
 	height: 50px;
 }
 

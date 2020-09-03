@@ -1056,6 +1056,23 @@ label {
 	visibility: visible;
 }
 
+/* 设置菜单样式 */
+.menu-content {
+	padding: 10px 10px 10px 25px !important;
+}
+
+.tab-content > .tab-pane {
+    display: none;
+}
+
+.tab-content > .active {
+    display: block;
+}
+
+.height-full {
+    height: 100% !important;
+}
+
 /* 设置滚动条样式 */
 ::-webkit-scrollbar {
    width:10px!important;

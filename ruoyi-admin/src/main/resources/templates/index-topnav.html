@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>若依系统首页</title>
+    <!-- 避免IE使用兼容模式 -->
+ 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{favicon.ico}" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/jquery.contextMenu.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/animate.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/skins.css?v=20200902}" rel="stylesheet"/>
+    <link th:href="@{/ruoyi/css/ry-ui.css?v=4.4.0}" rel="stylesheet"/>
+</head>
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
+<div id="wrapper">
+
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close">
+            <i class="fa fa-times-circle"></i>
+        </div>
+        <a th:href="@{/index}">
+            <li class="logo hidden-xs">
+                <span class="logo-lg">RuoYi</span>
+            </li>
+         </a>
+        <div class="sidebar-collapse tab-content" id="side-menu">
+			<div class="user-panel">
+				<a class="menuItem noactive" title="个人中心" th:href="@{/system/user/profile}">
+					<div class="hide" th:text="个人中心"></div>
+					<div class="pull-left image">
+						<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="img-circle" alt="User Image">
+					</div>
+				</a>
+				<div class="pull-left info">
+				  <p>[[${user.loginName}]]</p>
+				  <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+				  <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
+				</div>
+			</div>
+			
+            <!-- 左侧菜单 -->
+			<th:block th:each="menu : ${menus}">
+			<div class="tab-pane fade height-full" th:id="|menu_${menu.menuId}|" th:classappend="${menu.menuId == 1} ? |active in|">
+			  <ul class="nav">
+                <li th:each="cmenu : ${menu.children}">
+			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}">
+			        <i th:class="${cmenu.icon}"></i> <span class="nav-label">[[${cmenu.menuName}]]</span>
+			      </a>
+			      <a class="menu-content" th:if="${not #lists.isEmpty(cmenu.children)}" href="#">
+			        <i th:class="${cmenu.icon}"></i>
+			        <span class="nav-label">[[${cmenu.menuName}]]</span>
+			        <span class="fa arrow"></span>
+                  </a>
+				  <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-second-level collapse">
+				    <li th:each="emenu : ${cmenu.children}">
+				      <a th:if="${#lists.isEmpty(emenu.children)}" th:href="@{${emenu.url}}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}">
+				        <i th:class="${emenu.icon}"></i> 
+				        <span class="nav-label">[[${emenu.menuName}]]</span>
+				      </a>
+				      <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">
+				        <i th:class="${emenu.icon}"></i> 
+				        <span class="nav-label">[[${emenu.menuName}]]</span>
+				        <span class="fa arrow"></span>
+				      </a>
+				      <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-third-level collapse">
+				        <li th:each="fmenu : ${emenu.children}"><a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${#strings.isEmpty(fmenu.target)} ? |menuItem| : ${fmenu.target}" th:href="@{${fmenu.url}}">[[${fmenu.menuName}]]</a></li>
+				      </ul>
+				    </li>
+				  </ul>
+                </li>
+			  </ul>
+			</div>
+			</th:block>
+			
+			<!-- 首页菜单 -->
+			<div class="tab-pane fade height-full" id="index">
+			  <ul class="nav">
+			    <li>
+			      <a class="menuItem" th:href="@{/system/main}">
+			      <i class="fa fa-home"></i> <span class="nav-label">首页</span></a>
+			    </li>
+			  </ul>
+			</div>
+			
+            <!-- 实例演示菜单 -->
+			<div class="tab-pane fade height-full" id="demo" th:if="${demoEnabled}">
+			  <ul class="nav">
+			    <li>
+			      <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li><a class="menuItem" th:href="@{/demo/form/button}">按钮</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/grid}">栅格</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/select}">下拉框</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/timeline}">时间轴</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/basic}">基本表单</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/cards}">卡片列表</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/jasny}">功能扩展</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/sortable}">拖动排序</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/tabs_panels}">选项卡 & 面板</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/validate}">表单校验</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/wizard}">表单向导</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/upload}">文件上传</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/datetime}">日期和时间</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/summernote}">富文本编辑器</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/duallistbox}">左右互选组件</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/autocomplete}">搜索自动补全</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/cxselect}">多级联动下拉</a></li>
+					<li><a class="menuItem" th:href="@{/demo/form/localrefresh}">Ajax局部刷新</a></li>
+			      </ul>
+			    </li>
+			    <li>
+			      <a href="#"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li><a class="menuItem" th:href="@{/demo/table/search}">查询条件</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/footer}">数据汇总</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/groupHeader}">组合表头</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/export}">表格导出</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/remember}">翻页记住选择</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/pageGo}">跳转至指定页</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/params}">自定义查询参数</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/multi}">初始多表格</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/button}">点击按钮加载表格</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/data}">直接加载表格数据</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/fixedColumns}">表格冻结列</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/event}">自定义触发事件</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/detail}">表格细节视图</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/child}">表格父子视图</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/image}">表格图片预览</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/curd}">动态增删改查</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/reorder}">表格拖拽操作</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/editable}">表格行内编辑</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/subdata}">主子表提交</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/refresh}">表格自动刷新</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/print}">表格打印配置</a></li>
+					<li><a class="menuItem" th:href="@{/demo/table/other}">表格其他操作</a></li>
+			      </ul>
+			    </li>
+			    <li>
+			      <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">弹框</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li><a class="menuItem" th:href="@{/demo/modal/dialog}">模态窗口</a></li>
+					<li><a class="menuItem" th:href="@{/demo/modal/layer}">弹层组件</a></li>
+					<li><a class="menuItem" th:href="@{/demo/modal/table}">弹层表格</a></li>
+			      </ul>
+			    </li>
+			    <li>
+			      <a href="#"><i class="fa fa-wpforms"></i> <span class="nav-label">操作</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li><a class="menuItem" th:href="@{/demo/operate/table}">表格</a></li>
+					<li><a class="menuItem" th:href="@{/demo/operate/other}">其他</a></li>
+			      </ul>
+			    </li>
+			    <li>
+			      <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">报表</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li><a class="menuItem" th:href="@{/demo/report/echarts}">百度ECharts</a></li>
+					<li><a class="menuItem" th:href="@{/demo/report/peity}">peity</a></li>
+					<li><a class="menuItem" th:href="@{/demo/report/sparkline}">sparkline</a></li>
+					<li><a class="menuItem" th:href="@{/demo/report/metrics}">图表组合</a></li>
+			      </ul>
+			    </li>
+			    <li>
+			      <a href="#"><i class="fa fa-book"></i> <span class="nav-label">图标</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li><a class="menuItem" th:href="@{/demo/icon/fontawesome}">Font Awesome</a></li>
+					<li><a class="menuItem" th:href="@{/demo/icon/glyphicons}">Glyphicons</a></li>
+			      </ul>
+			    </li>
+			    <li>
+			      <a href="#"><i class="fa fa-navicon"></i> <span class="nav-label">四层菜单</span><span class="fa arrow"></span></a>
+			      <ul class="nav nav-second-level collapse">
+					<li>
+						<a href="#" id="damian">三级菜单1<span class="fa arrow"></span></a>
+						<ul class="nav nav-third-level collapse">
+							<li>
+								<a href="#">四级菜单1</a>
+							</li>
+							<li>
+								<a href="#">四级菜单2</a>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#">三级菜单2</a></li>
+			      </ul>
+			    </li>
+			  </ul>
+			</div>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
+                    	<i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <!-- 顶部栏 -->
+                <div id="navMenu">
+                  <ul class="nav navbar-toolbar nav-tabs navbar-left hidden-xs">
+                    
+                    <!-- 顶部菜单列表 -->
+	                <th:block th:each="menu : ${menus}">
+               	    <li role="presentation" th:id="|tab_${menu.menuId}|">
+                        <a data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank'}" th:href="@{${!#strings.isEmpty(menu.target) && target != 'menuBlank'} ? ${menu.url} : |#menu_${menu.menuId}|}">
+                            <i th:class="${menu.icon}"></i> <span>[[${menu.menuName}]]</span>
+                        </a>
+                    </li>
+	                </th:block>
+	                
+	                <li role="presentation" id="tab_index">
+                      <a data-toggle="tab" href="#index">
+                        <i class="fa fa-area-chart"></i> <span>统计报表</span>
+                      </a>
+                    </li>
+                    
+                    <li role="presentation" id="tab_demo">
+                      <a data-toggle="tab" href="#demo">
+                        <i class="fa fa-desktop"></i> <span>实例演示</span>
+                      </a>
+                    </li>
+				  </ul>
+				</div>
+                <!-- 右侧栏 -->
+                <ul class="nav navbar-top-links navbar-right welcome-message">
+                    <li><a title="视频教程" href="http://doc.ruoyi.vip/ruoyi/document/spjc.html" target="_blank"><i class="fa fa-video-camera"></i> 视频教程</a></li>
+                    <li><a title="开发文档" href="http://doc.ruoyi.vip" target="_blank"><i class="fa fa-question-circle"></i> 开发文档</a></li>
+	                <li><a title="全屏显示" href="javascript:void(0)" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏显示</a></li>
+                    <li class="dropdown user-menu">
+						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
+							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
+							<span class="hidden-xs">[[${#strings.defaultString(user.userName, '-')}]]</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="mt5">
+								<a th:href="@{/system/user/profile}" class="menuItem">
+								<i class="fa fa-user"></i> 个人中心</a>
+							</li>
+							<li>
+								<a onclick="resetPwd()">
+								<i class="fa fa-key"></i> 修改密码</a>
+							</li>
+							<li>
+								<a onclick="switchSkin()">
+								<i class="fa fa-dashboard"></i> 切换主题</a>
+							</li>
+							<li>
+								<a onclick="toggleMenu()">
+								<i class="fa fa-toggle-off"></i> 左侧菜单</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a th:href="@{logout}">
+								<i class="fa fa-sign-out"></i> 退出登录</a>
+							</li>
+						</ul>
+					</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left tabLeft">
+                <i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs menuTabs">
+                <div class="page-tabs-content">
+                    <a href="javascript:;" class="active menuTab" th:data-id="@{/system/main}">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right tabRight">
+                <i class="fa fa-forward"></i>
+            </button>
+            <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
+        </div>
+
+        <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
+
+        <div class="row mainContent" id="content-main">
+            <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"
+                    th:src="@{/system/main}" frameborder="0" seamless></iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right">© [[${copyrightYear}]] RuoYi Copyright </div>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+</div>
+<!-- 全局js -->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/js/jquery.contextMenu.min.js}"></script>
+<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.4.0}"></script>
+<script th:src="@{/ruoyi/js/common.js?v=4.4.0}"></script>
+<script th:src="@{/ruoyi/index.js?v=20200902}"></script>
+<script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
+<script th:src="@{/js/resize-tabs.js}"></script>
+<script th:inline="javascript">
+var ctx = [[@{/}]];
+// 皮肤缓存
+var skin = storage.get("skin");
+// history（表示去掉地址的#）否则地址以"#"形式展示
+var mode = "history";
+// 历史访问路径缓存
+var historyPath = storage.get("historyPath");
+// 是否页签与菜单联动
+var isLinkage = true;
+
+// 本地主题优先，未设置取系统配置
+if($.common.isNotEmpty(skin)){
+	$("body").addClass(skin.split('|')[0]);
+	$("body").addClass(skin.split('|')[1]);
+} else {
+	$("body").addClass([[${sideTheme}]]);
+	$("body").addClass([[${skinName}]]);
+}
+
+/* 用户管理-重置密码 */
+function resetPwd() {
+    var url = ctx + 'system/user/profile/resetPwd';
+    $.modal.open("重置密码", url, '770', '380');
+}
+/* 切换主题 */
+function switchSkin() {
+    layer.open({
+		type : 2,
+		shadeClose : true,
+		title : "切换主题",
+		area : ["530px", "386px"],
+		content : [ctx + "system/switchSkin", 'no']
+	})
+}
+
+/* 切换菜单 */
+function toggleMenu() {
+	$.modal.confirm("确认要切换成左侧菜单吗？", function() {
+		$.get(ctx + 'system/menuStyle/left',function(result){
+            window.location.reload();
+        });
+	})
+}
+
+/** 刷新时访问路径页签 */
+function applyPath(url) {
+	$('a[href$="' + decodeURI(url) + '"]').click();
+	if (!$('a[href$="' + url + '"]').hasClass("noactive")) {
+	    $('a[href$="' + url + '"]').parent("li").addClass("selected").parents("li").addClass("active").end().parents("ul").addClass("in");
+	}
+}
+
+$(function() {
+	if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
+		var url = storage.get('publicPath');
+	    if ($.common.isNotEmpty(url)) {
+	    	applyPath(url);
+	    }
+	} else {
+		var hash = location.hash;
+	    if ($.common.isNotEmpty(hash)) {
+	        var url = hash.substring(1, hash.length);
+	        applyPath(url);
+	    }
+	}
+});
+</script>
+</body>
+</html>

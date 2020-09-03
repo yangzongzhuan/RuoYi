@@ -12,6 +12,8 @@ ruoyi:
   profile: D:/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: false
+  # 菜单导航显示风格（default为左侧导航菜单，topnav为顶部导航菜单）
+  menuStyle: default
 
 # 开发环境配置
 server:

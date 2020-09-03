@@ -204,6 +204,10 @@
 								<a onclick="switchSkin()">
 								<i class="fa fa-dashboard"></i> 切换主题</a>
 							</li>
+							<li>
+								<a onclick="toggleMenu()">
+								<i class="fa fa-toggle-off"></i> 横向菜单</a>
+							</li>
 							<li class="divider"></li>
 							<li>
 								<a th:href="@{logout}">
@@ -278,6 +282,7 @@ function resetPwd() {
     var url = ctx + 'system/user/profile/resetPwd';
     $.modal.open("重置密码", url, '770', '380');
 }
+
 /* 切换主题 */
 function switchSkin() {
     layer.open({
@@ -286,6 +291,15 @@ function switchSkin() {
 		title : "切换主题",
 		area : ["530px", "386px"],
 		content : [ctx + "system/switchSkin", 'no']
+	})
+}
+
+/* 切换菜单 */
+function toggleMenu() {
+	$.modal.confirm("确认要切换成横向菜单吗？", function() {
+		$.get(ctx + 'system/menuStyle/topnav',function(result){
+            window.location.reload();
+        });
 	})
 }
 

@@ -81,6 +81,13 @@ function syncMenuTab(dataId) {
             $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
             $dataObj.parents("ul").css('height', 'auto').height();
             $dataObj.click();
+            // 顶部菜单同步处理
+            var tabStr = $dataObj.parents(".tab-pane").attr("id");
+            if ($.common.isNotEmpty(tabStr)) {
+                var sepIndex = tabStr.lastIndexOf('_');
+                var menuId = tabStr.substring(sepIndex + 1, tabStr.length);
+                $("#tab_" + menuId + " a").click();
+            }
         }
 	}
 }
@@ -256,6 +263,7 @@ $(function() {
 
         var $dataObj = $('a[href$="' + decodeURI(dataUrl) + '"]');
         if (!$dataObj.hasClass("noactive")) {
+        	$('.tab-pane li').removeClass("active");
         	$('.nav ul').removeClass("in");
             $dataObj.parents("ul").addClass("in")
             $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
