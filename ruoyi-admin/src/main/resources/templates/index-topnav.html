@@ -45,8 +45,8 @@
 			</div>
 			
             <!-- 左侧菜单 -->
-			<th:block th:each="menu : ${menus}">
-			<div class="tab-pane fade height-full" th:id="|menu_${menu.menuId}|" th:classappend="${menu.menuId == 1} ? |active in|">
+			<th:block th:each="menu,menuStat : ${menus}">
+			<div class="tab-pane fade height-full" th:id="|menu_${menu.menuId}|" th:classappend="${menuStat.first} ? |active in|">
 			  <ul class="nav">
                 <li th:each="cmenu : ${menu.children}">
 			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}">
