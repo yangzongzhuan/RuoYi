@@ -479,13 +479,12 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
     border-left-width: 0;
 }
 
-/*伸缩菜单*/
+/* 伸缩菜单 */
 .fixed-sidebar.mini-navbar .nav li:hover>a> span.nav-label {
     top: 0px;
     padding: 10px 10px 10px 10px;
     text-align: center;
     background-color: #243747;
-    border-bottom: dashed 1px #fff;
 }
 
 .fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level {
