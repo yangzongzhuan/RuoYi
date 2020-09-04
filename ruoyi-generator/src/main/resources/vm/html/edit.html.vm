@@ -41,7 +41,7 @@
 #set($dictType=$column.dictType)
 #if("" != $treeParentCode && $column.javaField == $treeParentCode)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <div class="input-group">
 #set($BusinessName=$businessName.substring(0,1).toUpperCase() + ${businessName.substring(1)})
@@ -78,7 +78,7 @@
             </div>
 #elseif($column.htmlType == "select" && "" != $dictType)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <select name="${field}" class="form-control m-b" th:with="type=${@dict.getType('${dictType}')}"#if($column.required) required#end>
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{${field}}"></option>
@@ -87,7 +87,7 @@
             </div>
 #elseif($column.htmlType == "select" && $dictType)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <select name="${field}" class="form-control m-b"#if($column.required) required#end>
                         <option value="">所有</option>
@@ -97,7 +97,7 @@
             </div>
 #elseif($column.htmlType == "checkbox" && "" != $dictType)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8" th:with="type=${@dict.getType('${dictType}')}">
                     <label th:each="dict : ${type}" class="check-box">
                         <input name="${field}" type="checkbox" th:value="${dict.dictValue}" th:text="${dict.dictLabel}" th:attr="checked=${${className}.${field}.contains(dict.dictValue)?true:false}"#if($column.required) required#end>
@@ -106,7 +106,7 @@
             </div>
 #elseif($column.htmlType == "checkbox" && $dictType)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <label class="check-box">
                         <input name="${field}" type="checkbox"#if($column.required) required#end> 无
@@ -116,7 +116,7 @@
             </div>
 #elseif($column.htmlType == "radio" && "" != $dictType)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <div class="radio-box" th:each="dict : ${@dict.getType('${dictType}')}">
                         <input type="radio" th:id="${'${field}_' + dict.dictCode}" name="${field}" th:value="${dict.dictValue}" th:field="*{${field}}"#if($column.required) required#end>
@@ -126,7 +126,7 @@
             </div>
 #elseif($column.htmlType == "radio" && $dictType)
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <div class="radio-box">
                         <input type="radio" name="${field}" value=""#if($column.required) required#end>
@@ -137,7 +137,7 @@
             </div>
 #elseif($column.htmlType == "datetime")
             <div class="form-group">    
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
                         <input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
@@ -147,7 +147,7 @@
             </div>
 #elseif($column.htmlType == "textarea")
             <div class="form-group">
-                <label class="col-sm-3 control-label">${comment}：</label>
+                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
                 <div class="col-sm-8">
                     <textarea name="${field}" class="form-control"#if($column.required) required#end>[[*{${field}}]]</textarea>
                 </div>
