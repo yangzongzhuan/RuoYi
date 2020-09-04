@@ -280,6 +280,8 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav-second-level li, .nav-third-level li {
     border-bottom: none !important;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .nav-second-level li a {
@@ -288,7 +290,7 @@ body.body-small .navbar-top-links li:last-child {
 }
 
 .nav-third-level li a {
-    padding-left: 62px;
+    padding-left: 70px;
 }
 
 .nav-second-level li:last-child {
@@ -305,6 +307,10 @@ body:not(.fixed-sidebar ):not(.canvas-menu ).mini-navbar .nav li:hover>.nav-seco
 body.mini-navbar .navbar-default .nav>li>.nav-second-level li a {
     font-size: 12px;
     border-radius: 0 2px 2px 0;
+}
+
+body.mini-navbar .navbar-default .nav>li>.nav-third-level li a {
+    padding-left: 31px;
 }
 
 .fixed-nav .slimScrollDiv #side-menu {
@@ -495,6 +501,11 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
     min-width: 140px;
     border-radius: 2px;
 }
+
+.fixed-sidebar.mini-navbar .nav .nav-second-level a> span, .fixed-sidebar.mini-navbar .nav .nav-third-level a> span {
+    display: inline-block;
+}
+
 /*伸缩菜单结束*/
 
 body.fixed-sidebar.mini-navbar .navbar-default .nav>li>.nav-second-level li a {

@@ -53,7 +53,7 @@
 			        <i th:class="${cmenu.icon} + ' fa-fw'"></i> <span class="nav-label">[[${cmenu.menuName}]]</span>
 			      </a>
 			      <a class="menu-content" th:if="${not #lists.isEmpty(cmenu.children)}" href="#">
-			        <i th:class="${cmenu.icon} + 'fa-fw'"></i>
+			        <i th:class="${cmenu.icon} + ' fa-fw'"></i>
 			        <span class="nav-label">[[${cmenu.menuName}]]</span>
 			        <span class="fa arrow"></span>
                   </a>
@@ -61,11 +61,11 @@
 				    <li th:each="emenu : ${cmenu.children}">
 				      <a th:if="${#lists.isEmpty(emenu.children)}" th:href="@{${emenu.url}}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}">
 				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
-				        <span class="nav-label">[[${emenu.menuName}]]</span>
+				        [[${emenu.menuName}]]
 				      </a>
 				      <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">
 				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
-				        <span class="nav-label">[[${emenu.menuName}]]</span>
+				        [[${emenu.menuName}]]
 				        <span class="fa arrow"></span>
 				      </a>
 				      <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-third-level collapse">
