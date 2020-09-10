@@ -495,7 +495,7 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
 
 .fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level, .fixed-sidebar.mini-navbar .nav li:hover>a> span.nav-label {
     position: absolute;
-    left: 70px;
+    left: 67px;
     display: block;
     min-width: 140px;
     border-radius: 2px;
