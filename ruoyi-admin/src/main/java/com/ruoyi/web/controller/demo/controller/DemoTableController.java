@@ -251,6 +251,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格标题格式化
+     */
+    @GetMapping("/headerStyle")
+    public String headerStyle()
+    {
+        return prefix + "/headerStyle";
+    }
+
+    /**
      * 表格其他操作
      */
     @GetMapping("/other")
