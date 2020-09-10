@@ -495,10 +495,14 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
 
 .fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level, .fixed-sidebar.mini-navbar .nav li:hover>a> span.nav-label {
     position: absolute;
-    left: 67px;
+    left: 70px;
     display: block;
     min-width: 140px;
     border-radius: 2px;
+}
+
+.fixed-sidebar.mini-navbar .nav li.active:hover>.nav-second-level, .fixed-sidebar.mini-navbar .nav li.active:hover>a> span.nav-label {
+    left: 67px;
 }
 
 .fixed-sidebar.mini-navbar .nav .nav-second-level a> span, .fixed-sidebar.mini-navbar .nav .nav-third-level a> span {
