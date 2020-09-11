@@ -326,9 +326,6 @@ $(function() {
 	    } else {
 	    	if($.common.equals("history", mode)) {
 	    		storage.set('publicPath', "");
-	    	} else {
-	    		var nowUrl = window.location.href;
-	    		window.location.href = nowUrl.substring(0, nowUrl.indexOf("#"))
 	    	}
 	    }
 	}
