@@ -323,6 +323,13 @@ $(function() {
 	    if ($.common.isNotEmpty(hash)) {
 	        var url = hash.substring(1, hash.length);
 	        applyPath(url);
+	    } else {
+	    	if($.common.equals("history", mode)) {
+	    		storage.set('publicPath', "");
+	    	} else {
+	    		var nowUrl = window.location.href;
+	    		window.location.href = nowUrl.substring(0, nowUrl.indexOf("#"))
+	    	}
 	    }
 	}
 });

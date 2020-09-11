@@ -383,6 +383,9 @@ $(function() {
 	        var url = hash.substring(1, hash.length);
 	        applyPath(url);
 	    } else {
+	    	if($.common.equals("history", mode)) {
+	    		storage.set('publicPath', "");
+	    	}
 	    	$(".navbar-toolbar li a").eq(0).click();
 	    }
 	}

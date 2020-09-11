@@ -1175,6 +1175,8 @@ button.dim:active:before {
 /* TOOLTIPS */
 .tooltip-inner {
     background-color: #2F4050;
+   	word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .tooltip.top .tooltip-arrow {
