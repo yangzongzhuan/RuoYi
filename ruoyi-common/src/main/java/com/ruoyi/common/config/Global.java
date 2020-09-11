@@ -30,9 +30,6 @@ public class Global
     /** 获取地址开关 */
     private static boolean addressEnabled;
 
-    /** 菜单导航显示风格 */
-    private static String menuStyle;
-
     public static String getName()
     {
         return name;
@@ -91,16 +88,6 @@ public class Global
     public void setAddressEnabled(boolean addressEnabled)
     {
         Global.addressEnabled = addressEnabled;
-    }
-
-    public static String getMenuStyle()
-    {
-        return menuStyle;
-    }
-
-    public void setMenuStyle(String menuStyle)
-    {
-        Global.menuStyle = menuStyle;
     }
 
     /**
