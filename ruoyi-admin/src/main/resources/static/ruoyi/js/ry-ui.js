@@ -192,6 +192,11 @@ var table = {
             	$(optionsIds).on(TABLE_EVENTS, function () {
             		table.set($(this).attr("id"));
             	});
+            	// 在表格体渲染完成，并在 DOM 中可见后触发（事件）
+            	$(optionsIds).on("post-body.bs.table", function (e, args) {
+            		// 浮动提示框特效
+            		$(".table [data-toggle='tooltip']").tooltip();
+            	});
             	// 选中、取消、全部选中、全部取消（事件）
             	$(optionsIds).on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rowsAfter, rowsBefore) {
             		// 复选框分页保留保存选中数组
@@ -270,8 +275,6 @@ var table = {
             	if (typeof table.options.onLoadSuccess == "function") {
             		table.options.onLoadSuccess(data);
             	}
-            	// 浮动提示框特效
-            	$(".table [data-toggle='tooltip']").tooltip();
             },
             // 表格销毁
             destroy: function (tableId) {
