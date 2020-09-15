@@ -176,6 +176,12 @@
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder/jquery.tablednd.js}"></script>
 </div>
 
+<!-- 表格列宽拖动插件 -->
+<div th:fragment="bootstrap-table-resizable-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/jquery.resizableColumns.min.js}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/bootstrap-table-resizable.min.js}"></script>
+</div>
+
 <!-- 表格行内编辑插件 -->
 <div th:fragment="bootstrap-editable-css">
     <link th:href="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.css}" rel="stylesheet"/>

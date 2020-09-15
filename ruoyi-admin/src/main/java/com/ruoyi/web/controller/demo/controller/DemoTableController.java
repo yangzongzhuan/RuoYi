@@ -215,6 +215,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格列宽拖动
+     */
+    @GetMapping("/resizable")
+    public String resizable()
+    {
+        return prefix + "/resizable";
+    }
+
+    /**
      * 表格行内编辑操作
      */
     @GetMapping("/editable")
