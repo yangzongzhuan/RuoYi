@@ -1,192 +1,332 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-	<th:block th:include="include :: header('基本表单')" />
-	<th:block th:include="include :: jquery-steps-css" />
+<th:block th:include="include :: header('基本表单')" />
+<th:block th:include="include :: jquery-smartwizard-css" />
+<style type="text/css">
+/* 如果要让工具栏固定在页面底部,使用下面的样式,不需要的可以注释 */
+.sw>.toolbar-bottom{
+	z-index: 100;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    text-align: right;
+    background: #fff;
+    box-shadow: 0 -2px 6px 1px hsla(223,8%,83%,.5);
+    border-top: 1px solid #e3e4e8;
+}
+/* 如果设置了是否自动调节高度为false,需要加滚动条 */
+.sw>.tab-content{
+	overflow-x: hidden;
+    overflow-y: auto;
+}
+</style>
 </head>
 <body class="gray-bg">
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="row">
-            <div class="col-sm-5">
-                <div class="jumbotron">
-                    <h1>表单向导</h1>
-                    <p>Smart UI 部件允许您快速创建表单向导接口。</p>
-                    <p><a href="https://github.com/rstaib/jquery-steps" target="_blank" class="btn btn-primary btn-lg" role="button">了解 jQuery Steps</a>
-                    </p>
-                </div>
-            </div>
-            <div class="col-sm-7">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>基础表单向导</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p>
-                                                                      这是一个简单的表单向导示例
-                        </p>
-                        <div id="wizard">
-                            <h1>第一步</h1>
-                            <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <h2>第一步</h2>
-                                    <p>
-                                                                                                       这是第一步的内容
-                                    </p>
-                                </div>
-                            </div>
+	<div class="wrapper wrapper-content animated fadeInRight" style="height: 100%;">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox">
+					<div class="ibox-title">
+						<h5>
+							表单向导
+							<small>https://github.com/techlab/jquery-smartwizard</small>
+						</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row select-list" style="padding-left: 15px; margin-bottom: 10px;">
+							<ul>
+								<li>
+									选择样式：
+									<select id="theme-selector">
+										<option value="default">Default</option>
+										<option value="arrows" selected>Arrows</option>
+										<option value="dots">Dots</option>
+										<option value="progress">Progress</option>
+									</select>
+								</li>
+								<!-- 快速操作栏按钮 -->
+								<li>
+									<div class="btn-group-sm" role="group">
+										<a class="btn btn-info" id="prev-btn"> 上一步 </a>
+										<a class="btn btn-success" id="next-btn"> 下一步 </a>
+										<a class="btn btn-danger" id="reset-btn"> 重置 </a>
+									</div>
+								</li>
+							</ul>
 
-                            <h1>第二步</h1>
-                            <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <h2>第二步</h2>
-                                    <p>
-                                                                                                       这是第二步的内容
-                                    </p>
-                                </div>
-                            </div>
+						</div>
+						<div id="smartwizard">
+							<ul class="nav">
+								<li class="nav-item">
+									<a class="nav-link" href="#step-1"> 第一步 </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#step-2"> 第二步 </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#step-3"> 第三步 </a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#step-4"> 第四步 </a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+									<div>
+										<form class="form form-horizontal m-t">
+											<div class="form-group">
+												<label class="col-sm-3 control-label">姓氏：</label>
+												<div class="col-sm-8">
+													<input id="firstname" name="firstname" class="form-control" type="text">
+													<span class="help-block m-b-none">
+														<i class="fa fa-info-circle"></i>
+														这里写点提示的内容
+													</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label is-required">名字：</label>
+												<div class="col-sm-8">
+													<input id="lastname" name="lastname" class="form-control" type="text" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label is-required">用户名：</label>
+												<div class="col-sm-8">
+													<input id="username" name="username" class="form-control" type="text" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">密码：</label>
+												<div class="col-sm-8">
+													<input id="password" name="password" class="form-control" type="password">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">确认密码：</label>
+												<div class="col-sm-8">
+													<input id="confirm_password" name="confirm_password" class="form-control" type="password">
+													<span class="help-block m-b-none">
+														<i class="fa fa-info-circle"></i>
+														请再次输入您的密码
+													</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">E-mail：</label>
+												<div class="col-sm-8">
+													<input id="email" name="email" class="form-control" type="email">
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+									<div>
+										<form class="form form-horizontal m-t">
+											<div class="form-group">
+												<label class="col-sm-3 control-label">性别：</label>
+												<div class="col-sm-8">
+													<select name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_user_sex')}">
+				                						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+				            						</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">时间：</label>
+												<div class="col-sm-8">
+													<input id="time" name="time" class="form-control time-input" type="text">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-3 control-label">状态：</label>
+												<div class="col-sm-8">
+													<div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
+														<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:checked="${dict.default}">
+														<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<div id="step-3" class="tab-pane" role="tabpanel" aria-labelledby="step-3">
+									<div class="m-t-md">
+										<p>1、如果需要工具栏在页面底部显示, 将style中下面的部分取消注释<blockquote>.sw>.toolbar-bottom </blockquote></p>
+										<p>2、如果设置了自动调节高度为false, 将style中下面的部分取消注释<blockquote>.sw>.tab-content </blockquote></p>
+										<p>3、工具栏的按钮样式会被表单插件中.btn样式覆盖导致bootstrap中的按钮样式无效, 如果需要改变按钮样式可以自己定义并提高优先级</blockquote></p>
+									</div>
+								</div>
+								<div id="step-4" class="tab-pane" role="tabpanel" aria-labelledby="step-4">
+									<div class="m-t-md">
+										<h3>测试多行显示</h3>
+										<pre style="overflow-x: hidden;">
+$('#smartwizard').smartWizard({
+  selected: 0, // Initial selected step, 0 = first step
+  theme: 'default', // theme for the wizard, related css need to include for other than default theme
+  justified: true, // Nav menu justification. true/false
+  darkMode:false, // Enable/disable Dark Mode if the theme supports. true/false
+  autoAdjustHeight: true, // Automatically adjust content height
+  cycleSteps: false, // Allows to cycle the navigation of steps
+  backButtonSupport: true, // Enable the back button support
+  enableURLhash: true, // Enable selection of the step based on url hash
+  transition: {
+      animation: 'none', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+      speed: '400', // Transion animation speed
+      easing:'' // Transition animation easing. Not supported without a jQuery easing plugin
+  },
+  toolbarSettings: {
+      toolbarPosition: 'bottom', // none, top, bottom, both
+      toolbarButtonPosition: 'right', // left, right, center
+      showNextButton: true, // show/hide a Next button
+      showPreviousButton: true, // show/hide a Previous button
+      toolbarExtraButtons: [] // Extra buttons to show on toolbar, array of jQuery input/buttons elements
+  },
+  anchorSettings: {
+      anchorClickable: true, // Enable/Disable anchor navigation
+      enableAllAnchors: false, // Activates all anchors clickable all times
+      markDoneStep: true, // Add done state on navigation
+      markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+      removeDoneStepOnNavigateBack: false, // While navigate back done step after active step will be cleared
+      enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+  },
+  keyboardSettings: {
+      keyNavigation: true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+      keyLeft: [37], // Left key code
+      keyRight: [39] // Right key code
+  },
+  lang: { // Language variables for button
+      next: 'Next',
+      previous: 'Previous'
+  },
+  disabledSteps: [], // Array Steps disabled
+  errorSteps: [], // Highlight step with errors
+  hiddenSteps: [] // Hidden steps
+});
+										</pre>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-                            <h1>第三步</h1>
-                            <div class="step-content">
-                                <div class="text-center m-t-md">
-                                    <h2>第三步</h2>
-                                    <p>
-                                                                                                      这是第三步的内容
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+		</div>
+	</div>
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: jquery-smartwizard-js" />
+	<script>
+		$(document).ready(function() {
+			// 工具栏按钮
+            var btnFinish = $('<a id="btn-finish"></a>').text('完成')
+                                             .addClass('btn btn-info')
+                                             .on('click', function(){ submit(); });
+            var btnCancel = $('<a id="btn-cancel"></a>').text('取消')
+                                             .addClass('btn btn-danger')
+                                             .on('click', function(){ $('#smartwizard').smartWizard("reset"); });
+           	// 下面两个按钮是为了因为插件默认的是botton,这里换成<a>,也可以选择用样式替换,或者不替换
+            var btnNext = $('<a id="btn-next"></a>').text('下一步')
+											 .addClass('btn btn-info')
+											 .on('click', function(){ $('#smartwizard').smartWizard("next");});
+			var btnPrev = $('<a id="btn-prev"></a>').text('上一步')
+											 .addClass('btn btn-success disabled')
+											 .on('click', function(){ $('#smartwizard').smartWizard("prev"); });
+            // 初始化表单向导组件
+            $('#smartwizard').smartWizard({
+                theme: 'arrows', // default, arrows, dots, progress
+                autoAdjustHeight : false, // 自动调整高度, 默认true
+                enableURLhash:false, //开启URL hash,开启后点击浏览器前进后退按钮会执行下一步和上一步操作
+                transition: {
+                    animation: 'slide-horizontal', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                },
+                toolbarSettings: {
+                	showNextButton: false,// 因为上面自定义了下一步按钮, 所以隐藏掉插件自带的按钮, 如果不使用自定义按钮, 需要改为true或者去掉该属性
+    				showPreviousButton: false,// 因为上面自定义了上一步按钮, 所以隐藏掉插件自带的按钮, 如果不使用自定义按钮, 需要改为true或者去掉该属性
+                    toolbarExtraButtons: [btnCancel,btnPrev,btnNext,btnFinish]// 扩展的按钮集合
+                }
+            });
+		});
+		
+		function submit(){
+			var data = {};
+			$('.form').each(function (index, form){
+				// 这里可以使用$.common.formToJSON(formId);  需要在form上加id
+                $.each($(form).serializeArray(), function(i, field) {
+                 	 if(data[field.name]) {
+                 		data[field.name] += ("," + field.value);
+					 } else {
+						data[field.name] = field.value;
+                     }
+                });
+			});
+			alert(JSON.stringify(data))
+		}
+		// 显示步骤时将触发事件
+        $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+        	// 下面按钮是快速操作栏的
+        	$("#prev-btn").removeClass('disabled');
+            $("#next-btn").removeClass('disabled');
+        	// 下面按钮是工具栏的
+        	$("#btn-prev").removeClass('disabled');
+            $("#btn-next").removeClass('disabled');
+            $("#btn-finish").removeClass('disabled');
+            if(stepPosition === 'first') {
+            	$("#prev-btn").addClass('disabled');// 快速操作栏（演示用）
+            	$("#btn-prev").addClass('disabled');
+				$("#btn-finish").addClass('disabled');
+            } else if(stepPosition === 'last') {
+            	$("#next-btn").addClass('disabled');// 快速操作栏（演示用）
+                $("#btn-next").addClass('disabled');
+            } else {
+            	$("#prev-btn").removeClass('disabled');// 快速操作栏（演示用）
+                $("#next-btn").removeClass('disabled');// 快速操作栏（演示用）
+                $("#btn-prev").removeClass('disabled');
+                $("#btn-next").removeClass('disabled');
+                $("#btn-finish").addClass('disabled');
+            }
+        });
+		
+		// 该事件在离开某个步骤之前触发
+		$("#smartwizard").on("leaveStep", function(e, anchorObject, currentStepNumber, nextStepNumber, stepDirection) {
+			if(stepDirection == 'forward'){
+				var form = $("#step-" + (currentStepNumber + 1)).find('.form');
+				if(form.length > 0){
+					return form.validate().form();
+				}
+				return true;
+			}
+			return true;
+		});
+		
+		$("#theme-selector").on("change", function() {
+			// Change theme
+			var options = {
+				theme : $(this).val()
+			};
+			$('#smartwizard').smartWizard("setOptions", options);
+			return true;
+		});
 
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox">
-                    <div class="ibox-title">
-                        <h5>带验证的表单向导</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h2>
-                                                                               带验证的表单向导
-                            </h2>
-                        <p>
-                                                                              下面这个示例展示了如何在表单向导中使用 jQuery Validation 插件
-                        </p>
+		$("#reset-btn").on("click", function() {
+            // Reset wizard
+            $('#smartwizard').smartWizard("reset");
+            return true;
+        });
 
-                        <form id="form" action="" class="wizard-big">
-                            <h1>账户</h1>
-                            <fieldset>
-                                <h2>账户信息</h2>
-                                <div class="row">
-                                    <div class="col-sm-8">
-                                        <div class="form-group">
-                                            <label>用户名 *</label>
-                                            <input id="userName" name="userName" type="text" class="form-control required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>密码 *</label>
-                                            <input id="password" name="password" type="text" class="form-control required">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>确认密码 *</label>
-                                            <input id="confirm" name="confirm" type="text" class="form-control required">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="text-center">
-                                            <div style="margin-top: 20px">
-                                                <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        $("#prev-btn").on("click", function() {
+            // Navigate previous
+            $('#smartwizard').smartWizard("prev");
+            return true;
+        });
 
-                            </fieldset>
-                            <h1>个人资料</h1>
-                            <fieldset>
-                                <h2>个人资料信息</h2>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>姓名 *</label>
-                                            <input id="name" name="name" type="text" class="form-control required">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Email *</label>
-                                            <input id="email" name="email" type="text" class="form-control required email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>地址 *</label>
-                                            <input id="address" name="address" type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <h1>警告</h1>
-                            <fieldset>
-                                <div class="text-center" style="margin-top: 120px">
-                                    <h2>你是火星人 :-)</h2>
-                                </div>
-                            </fieldset>
-
-                            <h1>完成</h1>
-                            <fieldset>
-                                <h2>条款</h2>
-                                <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required">
-                                <label for="acceptTerms">我同意注册条款</label>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <th:block th:include="include :: footer" />
-    <th:block th:include="include :: jquery-steps-js" />
-    <script>
-	    $(document).ready(function () {
-	        $("#wizard").steps();
-	        $("#form").steps({
-	            bodyTag: "fieldset", onStepChanging: function (event, currentIndex, newIndex) {
-	                if (currentIndex > newIndex) {
-	                    return true
-	                }
-	                if (newIndex === 3 && Number($("#age").val()) < 18) {
-	                    return false
-	                }
-	                var form = $(this);
-	                if (currentIndex < newIndex) {
-	                    $(".body:eq(" + newIndex + ") label.error", form).remove();
-	                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error")
-	                }
-	                form.validate().settings.ignore = ":disabled,:hidden";
-	                return form.valid()
-	            }, onStepChanged: function (event, currentIndex, priorIndex) {
-	                if (currentIndex === 2 && Number($("#age").val()) >= 18) {
-	                    $(this).steps("next")
-	                }
-	                if (currentIndex === 2 && priorIndex === 3) {
-	                    $(this).steps("previous")
-	                }
-	            }, onFinishing: function (event, currentIndex) {
-	                var form = $(this);
-	                form.validate().settings.ignore = ":disabled";
-	                return form.valid()
-	            }, onFinished: function (event, currentIndex) {
-	                var form = $(this);
-	                form.submit()
-	            }
-	        }).validate({
-	            errorPlacement: function (error, element) {
-	                element.before(error)
-	            }, rules: {confirm: {equalTo: "#password"}}
-	        })
-	    });
+        $("#next-btn").on("click", function() {
+            // Navigate next
+            $('#smartwizard').smartWizard("next");
+            return true;
+        });
 	</script>
 </body>
 </html>
