@@ -1261,6 +1261,7 @@ var table = {
             		check: {
     				    enable: false,             // 置 zTree 的节点上是否显示 checkbox / radio
     				    nocheckInherit: true,      // 设置子节点是否自动继承
+    				    chkboxType: { "Y": "ps", "N": "ps" } // 父子节点的关联关系
     				},
     				data: {
     			        key: {
