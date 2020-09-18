@@ -722,9 +722,13 @@ var table = {
             	$.modal.alert(content, modal_status.WARNING);
             },
             // 关闭窗体
-            close: function () {
-            	var index = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(index);
+            close: function (index) {
+            	if($.common.isEmpty(index)){
+            		var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+            	} else {
+            		layer.close(index);
+            	}
             },
             // 关闭全部窗体
             closeAll: function () {
