@@ -164,14 +164,6 @@
             autoclose: true
         });
         
-        function bindDatetimepicker() {
-	        $("input[name$='date']").datetimepicker({
-	            format: "yyyy-mm-dd",
-	            minView: "month",
-	            autoclose: true,
-	            pickerPosition:'top-right'
-	        });
-        }
         
         function addColumn() {
         	var count = $("#" + table.options.id).bootstrapTable('getData').length;
@@ -188,9 +180,16 @@
                 	type: "",
                 }
         	});
-            
-        	bindDatetimepicker();
         }
+        
+        $("#bootstrap-table").on("post-body.bs.table", function (e, args) {
+        	$("input[name$='date']").datetimepicker({
+	            format: "yyyy-mm-dd",
+	            minView: "month",
+	            autoclose: true,
+	            pickerPosition:'top-right'
+	        });
+    	});
     </script>
 </body>
 </html>
