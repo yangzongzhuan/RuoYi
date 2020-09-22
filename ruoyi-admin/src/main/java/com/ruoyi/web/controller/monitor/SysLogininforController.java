@@ -88,7 +88,7 @@ public class SysLogininforController extends BaseController
     @ResponseBody
     public AjaxResult unlock(String loginName)
     {
-        passwordService.unlock(loginName);
+        passwordService.clearLoginRecordCache(loginName);
         return success();
     }
 }
