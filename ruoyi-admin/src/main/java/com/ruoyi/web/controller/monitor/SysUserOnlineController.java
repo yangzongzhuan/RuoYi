@@ -76,7 +76,7 @@ public class SysUserOnlineController extends BaseController
             }
             if (sessionId.equals(ShiroUtils.getSessionId()))
             {
-                return error("当前登陆用户无法强退");
+                return error("当前登录用户无法强退");
             }
             onlineSessionDAO.delete(onlineSession);
             online.setStatus(OnlineStatus.off_line);
