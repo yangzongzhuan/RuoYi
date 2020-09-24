@@ -49,6 +49,14 @@
                 "/img/profile.jpg"
             ]
         });
+        
+        $("#fileinput-demo-1").on("fileuploaded", function(event, data, proviewId, index) {
+            console.info(event);
+            console.info(data);
+            console.info(proviewId);
+            console.info(index);
+        });
+        
     });
     </script>
 </body>

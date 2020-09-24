@@ -1,11 +1,11 @@
 /*!
- * bootstrap-fileinput v5.0.4
+ * bootstrap-fileinput v5.1.2
  * http://plugins.krajee.com/file-input
  *
  * Krajee default styling for bootstrap-fileinput.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2019, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2020, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
@@ -60,10 +60,9 @@
     height: 16px;
 }
 
-.krajee-default .file-thumb-progress .progress, .krajee-default .file-thumb-progress .progress-bar {
-    height: 20px;
+.file-thumb-progress .progress, .file-thumb-progress .progress-bar {
     font-family: Verdana, Helvetica, sans-serif;
-    font-size: 9px;
+    font-size: 0.7rem;
 }
 
 .krajee-default .file-thumb-progress .progress, .kv-upload-progress .progress {
@@ -205,8 +204,8 @@
 
 .krajee-default.file-preview-frame {
     margin: 8px;
-    border: 1px solid rgba(0,0,0,0.2);
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     padding: 6px;
     float: left;
     text-align: center;
@@ -237,8 +236,8 @@
 }
 
 .krajee-default.file-preview-frame:not(.file-preview-error):hover {
-    border: 1px solid rgba(0,0,0,0.3);
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
 }
 
 .krajee-default .file-preview-text {
@@ -292,7 +291,6 @@
 }
 
 .krajee-default .file-thumb-progress {
-    height: 11px;
     top: 37px;
     left: 0;
     right: 0;
@@ -318,7 +316,7 @@
 }
 
 .kv-upload-progress .progress-bar {
-    height: 20px;
+    height: 11px;
     font-family: Verdana, Helvetica, sans-serif;
 }
 
@@ -340,13 +338,13 @@
 
 .file-zoom-dialog .btn-navigate {
     padding: 0;
-    margin: 0;
+    margin: -60px 0 0;
+    font-size: 60px;
     background: transparent;
     text-decoration: none;
     outline: none;
     opacity: 0.7;
-    top: 45%;
-    font-size: 4em;
+    top: 50%;
     color: #1c94c4;
 }
 
@@ -402,6 +400,7 @@
 
 .file-drop-zone {
     border: 1px dashed #aaa;
+    min-height: 260px;
     border-radius: 4px;
     text-align: center;
     vertical-align: middle;
@@ -424,6 +423,7 @@
 .file-drop-zone-title {
     color: #aaa;
     font-size: 1.6em;
+    text-align:center;
     padding: 85px 10px;
     cursor: default;
 }
@@ -467,8 +467,8 @@
 }
 
 .file-zoom-content {
-    height: 480px;
     text-align: center;
+    min-height: 300px;
 }
 
 .file-zoom-content .file-preview-image {
@@ -532,19 +532,29 @@
     padding-right: 20px;
 }
 
-.file-sortable .file-drag-handle {
-    cursor: move;
-    opacity: 1;
+.clickable .file-drop-zone-title {
+    cursor: pointer;
 }
 
 .file-sortable .file-drag-handle:hover {
     opacity: 0.7;
 }
 
-.clickable .file-drop-zone-title {
-    cursor: pointer;
+.file-sortable .file-drag-handle {
+    cursor: grab;
+    opacity: 1;
 }
 
-.file-preview-initial.sortable-chosen {
+.file-grabbing, .file-grabbing * {
+    cursor: not-allowed !important;
+}
+
+.file-grabbing .file-preview-thumbnails * {
+    cursor: grabbing !important;
+}
+
+.file-preview-frame.sortable-chosen {
     background-color: #d9edf7;
+    border-color: #17a2b8;
+    box-shadow: none !important;
 }
