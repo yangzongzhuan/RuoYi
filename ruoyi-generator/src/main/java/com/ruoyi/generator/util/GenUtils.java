@@ -157,7 +157,7 @@ public class GenUtils
      */
     public static String getBusinessName(String tableName)
     {
-        int lastIndex = tableName.lastIndexOf("_");
+        int lastIndex = tableName.indexOf("_");
         int nameLength = tableName.length();
         String businessName = StringUtils.substring(tableName, lastIndex + 1, nameLength);
         return businessName;
