@@ -383,12 +383,14 @@ var table = {
     			});
             },
             // 导入数据
-            importExcel: function(formId) {
+            importExcel: function(formId, width, height) {
             	table.set();
             	var currentId = $.common.isEmpty(formId) ? 'importTpl' : formId;
+            	var _width = $.common.isEmpty(width) ? "400" : width;
+                var _height = $.common.isEmpty(height) ? "230" : height;
             	layer.open({
             		type: 1,
-            		area: ['400px', '230px'],
+            		area: [_width + 'px', _height + 'px'],
             		fix: false,
             		//不固定
             		maxmin: true,
