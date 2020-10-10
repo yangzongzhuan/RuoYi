@@ -499,8 +499,8 @@ var table = {
             },
             // 回显数据字典（字符串数组）
             selectDictLabels: function(datas, value, separator) {
-            	if ($.common.isEmpty(value)){
-            		return '';
+            	if ($.common.isEmpty(value)) {
+            	    return '';
             	}
             	var currentSeparator = $.common.isEmpty(separator) ? "," : separator;
             	var actions = [];
