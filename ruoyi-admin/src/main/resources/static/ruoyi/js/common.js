@@ -191,8 +191,8 @@ $(function() {
     'use strict';
     $.fn.toTop = function(opt) {
         var elem = this;
-        var win = $(window);
-        var doc = $('html, body');
+        var win = (opt && opt.hasOwnProperty('win')) ? opt.win : $(window);
+        var doc = (opt && opt.hasOwnProperty('doc')) ? opt.doc : $('html, body');
         var options = $.extend({
             autohide: true,
             offset: 50,
