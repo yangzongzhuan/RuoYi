@@ -1306,6 +1306,10 @@ var table = {
         			}
         			var node = tree.getNodesByParam("id", treeId, null)[0];
         			$.tree.selectByIdName(treeId, node);
+        			// 回调tree方法
+                    if(typeof(options.callBack) === "function"){
+                        options.callBack(tree);
+                    }
         		});
         	},
         	// 搜索节点
