@@ -55,6 +55,7 @@ create table sys_user (
   del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
   login_ip          varchar(50)     default ''                 comment '最后登录IP',
   login_date        datetime                                   comment '最后登录时间',
+  pwd_update_date   datetime                                   comment '密码最后更新时间',
   create_by         varchar(64)     default ''                 comment '创建者',
   create_time       datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
@@ -66,8 +67,8 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '管理员');
-insert into sys_user values(2,  105, 'ry',    '若依', '00', 'ry@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '测试员');
+insert into sys_user values(1,  103, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', sysdate(), sysdate(), 'admin', sysdate(), '', null, '管理员');
+insert into sys_user values(2,  105, 'ry',    '若依', '00', 'ry@qq.com',  '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', sysdate(), sysdate(), 'admin', sysdate(), '', null, '测试员');
 
 
 -- ----------------------------
@@ -536,8 +537,9 @@ insert into sys_config values(2, '用户管理-账号初始密码',         'sys
 insert into sys_config values(3, '主框架页-侧边栏主题',           'sys.index.sideTheme',            'theme-dark',    'Y', 'admin', sysdate(), '', null, '深黑主题theme-dark，浅色主题theme-light，深蓝主题theme-blue');
 insert into sys_config values(4, '账号自助-是否开启用户注册功能', 'sys.account.registerUser',       'false',         'Y', 'admin', sysdate(), '', null, '是否开启注册用户功能（true开启，false关闭）');
 insert into sys_config values(5, '用户管理-密码字符范围',         'sys.account.chrtype',            '0',             'Y', 'admin', sysdate(), '', null, '默认任意字符范围，0任意（密码可以输入任意字符），1数字（密码只能为0-9数字），2英文字母（密码只能为a-z和A-Z字母），3字母和数字（密码必须包含字母，数字）,4字母数组和特殊字符（密码必须包含字母，数字，特殊字符-_）');
-insert into sys_config values(6, '主框架页-菜单导航显示风格',     'sys.index.menuStyle',            'default',       'Y', 'admin', sysdate(), '', null, '菜单导航显示风格（default为左侧导航菜单，topnav为顶部导航菜单）');
-insert into sys_config values(7, '主框架页-是否开启页脚',         'sys.index.ignoreFooter',         'true',          'Y', 'admin', sysdate(), '', null, '是否开启底部页脚显示（true显示，false隐藏）');
+insert into sys_config values(6, '用户管理-初始密码修改策略',     'sys.account.initPasswordModify', '0',             'Y', 'admin', sysdate(), '', null, '0：初始密码修改策略关闭，没有任何提示，1：提醒用户，如果未修改初始密码，则在登录时就会提醒修改密码对话框');
+insert into sys_config values(7, '主框架页-菜单导航显示风格',     'sys.index.menuStyle',            'default',       'Y', 'admin', sysdate(), '', null, '菜单导航显示风格（default为左侧导航菜单，topnav为顶部导航菜单）');
+insert into sys_config values(8, '主框架页-是否开启页脚',         'sys.index.ignoreFooter',         'true',          'Y', 'admin', sysdate(), '', null, '是否开启底部页脚显示（true显示，false隐藏）');
 
 
 -- ----------------------------
