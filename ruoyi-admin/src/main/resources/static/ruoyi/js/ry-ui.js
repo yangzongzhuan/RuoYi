@@ -1637,7 +1637,7 @@ var table = {
         	},
         	// 英文、数字、特殊字符正则表达式，必须包含（字母，数字，特殊字符-_）
         	charValid : function(text){
-        		var patten = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[-_])[A-Za-z\d-_]{6,}$/);
+        		var patten = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#\$%\^&\*\(\)\-=_\+])[A-Za-z\d~!@#\$%\^&\*\(\)\-=_\+]{6,}$/);
         		return patten.test(text);
         	},
         }

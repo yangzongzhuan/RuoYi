@@ -366,7 +366,7 @@ function checkpwd(chrtype, password) {
 		}
 	} else if (chrtype == 4) {
 		if(!$.common.charValid(password)){
-			$.modal.alertWarning("密码必须包含字母、数字、以及特殊符号-、_");
+			$.modal.alertWarning("密码必须包含字母、数字、以及特殊符号<font color='red'>~!@#$%^&*()-=_+</font>");
 			return false;
 		}
 	}
