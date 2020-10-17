@@ -28,7 +28,7 @@
            timeToIdleSeconds="600"
            timeToLiveSeconds="0"
            overflowToDisk="false"
-           statistics="true">
+           statistics="false">
     </cache>
 
     <!-- 系统活跃用户缓存 -->
@@ -39,7 +39,7 @@
            diskPersistent="false"
            timeToLiveSeconds="0"
            timeToIdleSeconds="0"
-           statistics="true">
+           statistics="false">
     </cache>
     
     <!-- 系统缓存 -->
@@ -47,7 +47,7 @@
            maxEntriesLocalHeap="1000"
            eternal="true"
            overflowToDisk="true"
-           statistics="true">
+           statistics="false">
     </cache>
     
     <!-- 系统参数缓存 -->
@@ -55,7 +55,7 @@
            maxEntriesLocalHeap="1000"
            eternal="true"
            overflowToDisk="true"
-           statistics="true">
+           statistics="false">
     </cache>
     
     <!-- 系统字典缓存 -->
@@ -63,19 +63,18 @@
            maxEntriesLocalHeap="1000"
            eternal="true"
            overflowToDisk="true"
-           statistics="true">
+           statistics="false">
     </cache>
     
     <!-- 系统会话缓存 -->
     <cache name="shiro-activeSessionCache"
-           maxElementsInMemory="10000"
-           overflowToDisk="true"
-           eternal="true"
+           maxEntriesLocalHeap="10000"
+           overflowToDisk="false"
+           eternal="false"
+           diskPersistent="false"
            timeToLiveSeconds="0"
            timeToIdleSeconds="0"
-           diskPersistent="true"
-           diskExpiryThreadIntervalSeconds="600">
-    </cache>
+           statistics="false"/>
     
 </ehcache>
 	
