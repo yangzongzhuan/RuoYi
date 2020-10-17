@@ -110,7 +110,7 @@ var table = {
                     showExport: options.showExport,                     // 是否支持导出文件
                     showHeader: options.showHeader,                     // 是否显示表头
                     showFullscreen: options.showFullscreen,             // 是否显示全屏按钮
-                    uniqueId: options.uniqueId,                         // 唯 一的标识符
+                    uniqueId: options.uniqueId,                         // 唯一的标识符
                     clickToSelect: options.clickToSelect,				// 是否启用点击选中行
                     singleSelect: options.singleSelect,                 // 是否单选checkbox
                     mobileResponsive: options.mobileResponsive,         // 是否支持移动端适配

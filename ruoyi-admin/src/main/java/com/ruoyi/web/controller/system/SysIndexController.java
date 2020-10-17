@@ -105,8 +105,8 @@ public class SysIndexController extends BaseController
     // 检查密码是否过期
     public boolean passwordIsExpiration(Date pwdUpdateDate)
     {
-        int passwordValidataDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidataDays"));
-        if (passwordValidataDays > 0)
+        int passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
+        if (passwordValidateDays > 0)
         {
             if (StringUtils.isNull(pwdUpdateDate))
             {
@@ -114,7 +114,7 @@ public class SysIndexController extends BaseController
                 return true;
             }
             Date nowDate = DateUtils.getNowDate();
-            return DateUtils.differentDaysByMillisecond(nowDate, pwdUpdateDate) > passwordValidataDays;
+            return DateUtils.differentDaysByMillisecond(nowDate, pwdUpdateDate) > passwordValidateDays;
         }
         return false;
     }
