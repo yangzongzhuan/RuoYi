@@ -2,9 +2,9 @@
 $(function() {
     validateRule();
     $('.imgcode').click(function() {
-		var url = ctx + "captcha/captchaImage?type=" + captchaType + "&s=" + Math.random();
-		$(".imgcode").attr("src", url);
-	});
+        var url = ctx + "captcha/captchaImage?type=" + captchaType + "&s=" + Math.random();
+        $(".imgcode").attr("src", url);
+    });
 });
 
 $.validator.setDefaults({
@@ -14,8 +14,8 @@ $.validator.setDefaults({
 });
 
 function register() {
-	$.modal.loading($("#btnSubmit").data("loading"));
-	var username = $.common.trim($("input[name='username']").val());
+    $.modal.loading($("#btnSubmit").data("loading"));
+    var username = $.common.trim($("input[name='username']").val());
     var password = $.common.trim($("input[name='password']").val());
     var validateCode = $("input[name='validateCode']").val();
     $.ajax({
@@ -29,14 +29,14 @@ function register() {
         success: function(r) {
             if (r.code == 0) {
             	layer.alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", {
-        	        icon: 1,
-        	        title: "系统提示"
-        	    },
-        	    function(index) {
-        	        //关闭弹窗
-        	        layer.close(index);
-        	        location.href = ctx + 'login';
-        	    });
+            	    icon: 1,
+            	    title: "系统提示"
+            	},
+            	function(index) {
+            	    //关闭弹窗
+            	    layer.close(index);
+            	    location.href = ctx + 'login';
+            	});
             } else {
             	$.modal.closeLoading();
             	$('.imgcode').click();
@@ -48,7 +48,7 @@ function register() {
 }
 
 function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
+    var icon = "<i class='fa fa-times-circle'></i> ";
     $("#registerForm").validate({
         rules: {
             username: {
