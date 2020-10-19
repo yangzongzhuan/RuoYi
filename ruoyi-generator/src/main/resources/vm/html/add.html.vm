@@ -221,7 +221,7 @@
 #if($column.edit && !$column.superColumn && !$column.pk && $column.htmlType == "upload")
 
         $(".file-upload").fileinput({
-            uploadUrl: '/common/upload',
+            uploadUrl: ctx + 'common/upload',
             maxFileCount: 1,
             autoReplace: true
         }).on('fileuploaded', function (event, data, previewId, index) {
