@@ -99,10 +99,72 @@
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v45">v4.5.0</a><code class="pull-right">2020.10.20</code>
+								   </h5>
+								</div>
+								<div id="v45" class="panel-collapse collapse in">
+									<div class="panel-body">
+									   <ol>
+									        <li>新增菜单导航显示风格（default为左侧导航菜单，topnav为顶部导航菜单）</li>
+									        <li>菜单&数据权限新增（展开/折叠 全选/全不选 父子联动）</li>
+									        <li>账号密码支持自定义更新周期</li>
+									        <li>初始密码支持自定义修改策略</li>
+									        <li>新增校验用户修改新密码不能与旧密码相同</li>
+									        <li>添加检查密码范围支持的特殊字符包括：~!@#$%^&*()-=_+</li>
+									        <li>注册账号设置默认用户名称及密码最后更新时间</li>
+									        <li>去除用户手机邮箱部门必填验证</li>
+									        <li>新增日期格式化方法</li>
+									        <li>代码生成添加bit类型</li>
+									        <li>树结构加载添加callBack回调方法</li>
+									        <li>修复用户管理页面滚动返回顶部条失效</li>
+									        <li>修复代码生成模板文件上传组件缺少ctx的问题</li>
+									        <li>限制系统内置参数不允许删除</li>
+									        <li>新增表格列宽拖动插件</li>
+									        <li>新增Ajax局部刷新demo</li>
+									        <li>新增是否开启页脚功能</li>
+									        <li>新增表格参数（通过自定义函数设置标题样式headerStyle）</li>
+									        <li>新增表格参数（通过自定义函数设置页脚样式footerStyle）</li>
+									        <li>修复窗体大小改变后浮动提示框失效问题</li>
+									        <li>生成代码补充必填样式</li>
+									        <li>生成页面时不忽略remark属性</li>
+									        <li>字典数据列表页添加关闭按钮</li>
+									        <li>Excel注解支持自动统计数据总和</li>
+									        <li>升级springboot到2.1.17 提升安全性</li>
+									        <li>升级pagehelper到最新版1.3.0</li>
+									        <li>升级druid到最新版本v1.2.1</li>
+									        <li>升级fastjson到最新版1.2.74</li>
+									        <li>升级bootstrap-fileinput到最新版本5.1.2</li>
+									        <li>升级oshi到最新版本v5.2.5</li>
+									        <li>表单向导插件更换为jquery-smartwizard</li>
+									        <li>修改主子表提交示例代码防止渲染失效</li>
+									        <li>添加导入数据弹出窗体自定义宽高</li>
+									        <li>用户信息参数返回忽略掉密码字段</li>
+									        <li>优化关闭窗体添加index参数</li>
+									        <li>回显数据字典（字符串数组）增加空值判断</li>
+									        <li>修改前端密码长度校验和错误提示不符问题</li>
+									        <li>AjaxResult重写put方法，以方便链式调用</li>
+									        <li>增强验证码校验的语义，更易懂</li>
+									        <li>导入excel整形值校验优化</li>
+									        <li>Excel导出类型NUMERIC支持精度浮点类型</li>
+									        <li>导出Excel调整targetAttr获取值方法，防止get方法不规范</li>
+									        <li>输入框组验证错误后置图标提示颜色</li>
+									        <li>上传媒体类型添加视频格式</li>
+									        <li>数据权限判断参数类型</li>
+									        <li>修正数据库字符串类型nvarchar</li>
+									        <li>优化递归子节点</li>
+									        <li>修复多表格搜索formId无效</li>
+									        <li>其他细节优化</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
 									   <a data-toggle="collapse" data-parent="#version" href="#v44">v4.4.0</a><code class="pull-right">2020.08.24</code>
 								   </h5>
 								</div>
-								<div id="v44" class="panel-collapse collapse in">
+								<div id="v44" class="panel-collapse collapse">
 									<div class="panel-body">
 									   <ol>
 									        <li>升级bootstrapTable到最新版本1.17.1</li>
