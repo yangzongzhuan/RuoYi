@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.support.spring.PropertyPreFilters;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.enums.BusinessStatus;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.common.utils.ServletUtils;
+import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
-import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysOperLog;
-import com.ruoyi.system.domain.SysUser;
 
 /**
  * 操作日志记录处理

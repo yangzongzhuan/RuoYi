@@ -10,11 +10,11 @@ import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import com.ruoyi.common.constant.ShiroConstants;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.enums.OnlineStatus;
+import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysUser;
 
 /**
  * 自定义访问控制

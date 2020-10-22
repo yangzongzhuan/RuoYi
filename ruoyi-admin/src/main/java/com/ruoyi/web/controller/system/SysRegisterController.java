@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.framework.shiro.service.SysRegisterService;
-import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysConfigService;
 
 /**

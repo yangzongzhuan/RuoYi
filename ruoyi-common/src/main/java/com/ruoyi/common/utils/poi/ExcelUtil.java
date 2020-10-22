@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -51,9 +50,9 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.exception.BusinessException;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.reflect.ReflectUtils;
-import com.ruoyi.common.utils.spring.SpringUtils;
 
 /**
  * Excel相关处理
@@ -746,10 +745,7 @@ public class ExcelUtil<T>
      */
     public static String convertDictByExp(String dictValue, String dictType, String separator) throws Exception
     {
-        Object bean = SpringUtils.getBean("dictUtils");
-        String methodName = "getDictLabel";
-        Method method = bean.getClass().getDeclaredMethod(methodName, String.class, String.class, String.class);
-        return Convert.toStr(method.invoke(bean, dictType, dictValue, separator));
+        return DictUtils.getDictLabel(dictType, dictValue, separator);
     }
 
     /**
@@ -762,10 +758,7 @@ public class ExcelUtil<T>
      */
     public static String reverseDictByExp(String dictLabel, String dictType, String separator) throws Exception
     {
-        Object bean = SpringUtils.getBean("dictUtils");
-        String methodName = "getDictValue";
-        Method method = bean.getClass().getDeclaredMethod(methodName, String.class, String.class, String.class);
-        return Convert.toStr(method.invoke(bean, dictType, dictLabel, separator));
+        return DictUtils.getDictValue(dictType, dictLabel, separator);
     }
 
     /**

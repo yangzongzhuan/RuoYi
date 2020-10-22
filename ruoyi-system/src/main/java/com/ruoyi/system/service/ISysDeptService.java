@@ -2,8 +2,8 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.common.core.domain.Ztree;
-import com.ruoyi.system.domain.SysDept;
-import com.ruoyi.system.domain.SysRole;
+import com.ruoyi.common.core.domain.entity.SysDept;
+import com.ruoyi.common.core.domain.entity.SysRole;
 
 /**
  * 部门管理 服务层

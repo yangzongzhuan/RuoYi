@@ -1,16 +1,13 @@
-package com.ruoyi.framework.util;
+package com.ruoyi.common.utils;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
-import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.utils.bean.BeanUtils;
-import com.ruoyi.framework.shiro.realm.UserRealm;
-import com.ruoyi.system.domain.SysUser;
 
 /**
  * shiro 工具类
@@ -54,13 +51,6 @@ public class ShiroUtils
         PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(user, realmName);
         // 重新加载Principal
         subject.runAs(newPrincipalCollection);
-    }
-
-    public static void clearCachedAuthorizationInfo()
-    {
-        RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
-        UserRealm realm = (UserRealm) rsm.getRealms().iterator().next();
-        realm.clearCachedAuthorizationInfo();
     }
 
     public static Long getUserId()

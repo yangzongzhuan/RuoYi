@@ -17,14 +17,15 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.framework.shiro.util.AuthorizationUtils;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
@@ -176,6 +177,7 @@ public class SysUserController extends BaseController
             return error("修改用户'" + user.getLoginName() + "'失败，邮箱账号已存在");
         }
         user.setUpdateBy(ShiroUtils.getLoginName());
+        AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(userService.updateUser(user));
     }
 
@@ -231,6 +233,7 @@ public class SysUserController extends BaseController
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
     {
         userService.insertUserAuth(userId, roleIds);
+        AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return success();
     }
 

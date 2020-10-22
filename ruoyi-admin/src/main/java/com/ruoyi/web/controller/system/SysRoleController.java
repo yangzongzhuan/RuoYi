@@ -15,12 +15,13 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.framework.shiro.util.AuthorizationUtils;
 import com.ruoyi.system.domain.SysUserRole;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
@@ -97,7 +98,7 @@ public class SysRoleController extends BaseController
             return error("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setCreateBy(ShiroUtils.getLoginName());
-        ShiroUtils.clearCachedAuthorizationInfo();
+        AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(roleService.insertRole(role));
 
     }
@@ -131,7 +132,7 @@ public class SysRoleController extends BaseController
             return error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
         role.setUpdateBy(ShiroUtils.getLoginName());
-        ShiroUtils.clearCachedAuthorizationInfo();
+        AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(roleService.updateRole(role));
     }
 

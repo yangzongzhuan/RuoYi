@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.Ztree;
+import com.ruoyi.common.core.domain.entity.SysDictData;
+import com.ruoyi.common.core.domain.entity.SysDictType;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.exception.BusinessException;
+import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysDictData;
-import com.ruoyi.system.domain.SysDictType;
 import com.ruoyi.system.mapper.SysDictDataMapper;
 import com.ruoyi.system.mapper.SysDictTypeMapper;
 import com.ruoyi.system.service.ISysDictTypeService;
-import com.ruoyi.system.utils.DictUtils;
 
 /**
  * 字典 业务层处理

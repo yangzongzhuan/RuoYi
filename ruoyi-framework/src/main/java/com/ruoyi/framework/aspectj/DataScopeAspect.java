@@ -10,10 +10,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.framework.util.ShiroUtils;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysUser;
 
 /**
  * 数据过滤处理

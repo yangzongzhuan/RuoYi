@@ -1,7 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
-import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.system.domain.SysUserRole;
 
 /**

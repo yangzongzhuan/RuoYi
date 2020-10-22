@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import com.ruoyi.common.core.domain.Ztree;
-import com.ruoyi.system.domain.SysMenu;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.common.core.domain.entity.SysMenu;
+import com.ruoyi.common.core.domain.entity.SysRole;
+import com.ruoyi.common.core.domain.entity.SysUser;
 
 /**
  * 菜单 业务层

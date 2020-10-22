@@ -2,8 +2,8 @@ package com.ruoyi.system.service;
 
 import java.util.List;
 import com.ruoyi.common.core.domain.Ztree;
-import com.ruoyi.system.domain.SysDictData;
-import com.ruoyi.system.domain.SysDictType;
+import com.ruoyi.common.core.domain.entity.SysDictData;
+import com.ruoyi.common.core.domain.entity.SysDictType;
 
 /**
  * 字典 业务层
