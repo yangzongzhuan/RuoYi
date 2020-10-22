@@ -134,7 +134,7 @@
 	<div class="row container">
 		<div class="col-md-10">
 			<div class="imageBox">
-				<img id="avatar" th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='../../../img/profile.jpg'">
+				<img id="avatar" th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="'this.src=\'' + @{'/img/profile.jpg'} + '\''">
 			</div>
 			<div class="action">
 				<div class="new-contentarea tc">

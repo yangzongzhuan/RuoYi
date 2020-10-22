@@ -16,7 +16,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="text-center">
-                        <p class="user-info-head" onclick="avatar()"><img class="img-circle img-lg" th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='../../img/profile.jpg'"></p>
+                        <p class="user-info-head" onclick="avatar()"><img class="img-circle img-lg" th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="'this.src=\'' + @{'/img/profile.jpg'} + '\''"></p>
                         <p><a href="javascript:avatar()">修改头像</a></p>
                     </div>
                     <ul class="list-group list-group-striped">
