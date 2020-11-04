@@ -53,6 +53,7 @@
 	</div>
 	<th:block th:include="include :: footer" />
 	<th:block th:include="include :: bootstrap-table-export-js" />
+	<script th:src="@{/ajax/libs/highlight/highlight.min.js}"></script>
 	<script th:inline="javascript">
 		var prefix = ctx + "tool/gen";
 		var editFlag = [[${@permission.hasPermi('tool:gen:edit')}]];
@@ -142,19 +143,23 @@
 				if (result.code == web_status.SUCCESS) {
 					 var items = [];
 		                $.each(result.data, function(index, value) {
+		                	var highCode = hljs.highlightAuto(value).value;
 		                	value = value.replace(/</g, "&lt;");
 		                	value = value.replace(/>/g, "&gt;");
 		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
 		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName) && !$.common.equals("sub-domain.java", templateName)){
 			                    items.push({
-			                        title: templateName , content: "<pre class=\"layui-code\">" + value + "</pre>"
+			                        title: templateName , content: "<pre class=\"layui-code\"><code>" + highCode + "</code></pre>"
 			                    })
 		                    }
 		                });
 		                top.layer.tab({
-		                    area: ['90%', '90%'],
-		                    shadeClose: true,
-		                    tab: items
+                            area: ['90%', '90%'],
+                            shadeClose: true,
+                            success: function(layero, index){
+                                parent.loadCss(ctx + "ajax/libs/highlight/default.min.css");
+                            },
+	                        tab: items
 		                });
 				} else {
 					$.modal.alertError(result.msg);
