@@ -144,8 +144,6 @@
 					 var items = [];
 		                $.each(result.data, function(index, value) {
 		                	var highCode = hljs.highlightAuto(value).value;
-		                	value = value.replace(/</g, "&lt;");
-		                	value = value.replace(/>/g, "&gt;");
 		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
 		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName) && !$.common.equals("sub-domain.java", templateName)){
 			                    items.push({
