@@ -174,10 +174,7 @@ $(function() {
         } else if (marginLeftVal > (visibleWidth - $(element).outerWidth(true) - $(element).prev().outerWidth(true))) {
             scrollVal = marginLeftVal - $(element).prev().outerWidth(true);
         }
-        $('.page-tabs-content').animate({
-            marginLeft: 0 - scrollVal + 'px'
-        },
-        "fast");
+        $('.page-tabs-content').animate({ marginLeft: 0 - scrollVal + 'px' }, "fast");
     }
 
     //查看左侧隐藏的选项卡
@@ -207,10 +204,7 @@ $(function() {
                 scrollVal = calSumWidth($(tabElement).prevAll());
             }
         }
-        $('.page-tabs-content').animate({
-            marginLeft: 0 - scrollVal + 'px'
-        },
-        "fast");
+        $('.page-tabs-content').animate({ marginLeft: 0 - scrollVal + 'px' }, "fast");
     }
 
     //查看右侧隐藏的选项卡
@@ -238,10 +232,7 @@ $(function() {
             }
             scrollVal = calSumWidth($(tabElement).prevAll());
             if (scrollVal > 0) {
-                $('.page-tabs-content').animate({
-                    marginLeft: 0 - scrollVal + 'px'
-                },
-                "fast");
+                $('.page-tabs-content').animate({ marginLeft: 0 - scrollVal + 'px' }, "fast");
             }
         }
     }
@@ -347,10 +338,7 @@ $(function() {
 
                 var marginLeftVal = parseInt($('.page-tabs-content').css('margin-left'));
                 if (marginLeftVal < 0) {
-                    $('.page-tabs-content').animate({
-                        marginLeft: (marginLeftVal + currentWidth) + 'px'
-                    },
-                    "fast");
+                    $('.page-tabs-content').animate({ marginLeft: (marginLeftVal + currentWidth) + 'px' }, "fast");
                 }
 
                 //  移除当前选项卡
@@ -470,7 +458,7 @@ $(function() {
             $('.RuoYi_iframe[data-id="' + $(this).data('id') + '"]').remove();
             $(this).remove();
         });
-        $('.page-tabs-content').css("margin-left", "0");
+        $('.page-tabs-content').animate({ marginLeft: '0px' }, "fast");
     }
 
     // 关闭全部选项卡
@@ -591,7 +579,7 @@ $(function() {
                         $('.RuoYi_iframe[data-id="' + $(this).data('id') + '"]').remove();
                         $(this).remove();
                     });
-                    $('.page-tabs-content').css("margin-left", "0");
+                    $('.page-tabs-content').animate({ marginLeft: '0px' }, "fast");
                 }
             },
             "close_right": {
