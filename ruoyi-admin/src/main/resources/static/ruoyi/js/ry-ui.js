@@ -116,6 +116,10 @@ var table = {
                     mobileResponsive: options.mobileResponsive,         // 是否支持移动端适配
                     cardView: options.cardView,                         // 是否启用显示卡片视图
                     detailView: options.detailView,                     // 是否启用显示细节视图
+                    onCheck: options.onCheck,                           // 当选择此行时触发
+                    onUncheck: options.onUncheck,                       // 当取消此行时触发
+                    onCheckAll: options.onCheckAll,                     // 当全选行时触发
+                    onUncheckAll: options.onUncheckAll,                 // 当取消全选行时触发
                     onClickRow: options.onClickRow,                     // 点击某行触发的事件
                     onDblClickRow: options.onDblClickRow,               // 双击某行触发的事件
                     onClickCell: options.onClickCell,                   // 单击某格触发的事件

@@ -24,6 +24,10 @@
 		        showRefresh: false,
 		        showToggle: false,
 		        showColumns: false,
+		        onCheck: onCheck,
+		        onUncheck: onUncheck,
+		        onCheckAll: onCheckAll,
+		        onUncheckAll: onUncheckAll,
 		        onClickRow: onClickRow,
 		        onDblClickRow: onDblClickRow,
 		        onClickCell: onClickCell,
@@ -93,6 +97,28 @@
         
         function onDblClickCell(field, value, row, $element){
         	alert("双击格name：" + field + " value：" + value);
+        }
+        
+        function onCheck(row, $element){
+        	alert("选中行userId：" + row.userId + " userName：" + row.userName);
+        }
+        
+        function onUncheck(row, $element){
+        	alert("取消行userId：" + row.userId + " userName：" + row.userName);
+        }
+        
+        function onCheckAll(rowsAfter, rowsBefore){
+        	var rows = $.map(rowsAfter, function(row) {
+    	        return $.common.getItemField(row, "userId");
+    	    });
+        	alert("全选行：" + rows);
+        }
+        
+        function onUncheckAll(rowsAfter, rowsBefore){
+        	var rows = $.map(rowsBefore, function(row) {
+    	        return $.common.getItemField(row, "userId");
+    	    });
+        	alert("取消行：" + rows);
         }
         
         function responseHandler(res){
