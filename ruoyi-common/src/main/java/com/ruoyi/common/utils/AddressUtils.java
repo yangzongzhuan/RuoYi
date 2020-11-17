@@ -3,7 +3,7 @@ package com.ruoyi.common.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSONObject;
-import com.ruoyi.common.config.Global;
+import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.http.HttpUtils;
 
@@ -30,7 +30,7 @@ public class AddressUtils
         {
             return "内网IP";
         }
-        if (Global.isAddressEnabled())
+        if (RuoYiConfig.isAddressEnabled())
         {
             try
             {

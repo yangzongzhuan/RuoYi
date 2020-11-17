@@ -3,7 +3,7 @@ package com.ruoyi.web.core.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.ruoyi.common.config.Global;
+import com.ruoyi.common.config.RuoYiConfig;
 import io.swagger.annotations.ApiOperation;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -61,9 +61,9 @@ public class SwaggerConfig
                 // 描述
                 .description("描述：用于管理集团旗下公司的人员信息,具体包括XXX,XXX模块...")
                 // 作者信息
-                .contact(new Contact(Global.getName(), null, null))
+                .contact(new Contact(RuoYiConfig.getName(), null, null))
                 // 版本
-                .version("版本号:" + Global.getVersion())
+                .version("版本号:" + RuoYiConfig.getVersion())
                 .build();
     }
 }
