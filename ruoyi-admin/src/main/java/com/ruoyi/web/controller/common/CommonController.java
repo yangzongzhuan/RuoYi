@@ -43,7 +43,7 @@ public class CommonController
     {
         try
         {
-            if (!FileUtils.isValidFilename(fileName))
+            if (!FileUtils.checkAllowDownload(fileName))
             {
                 throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
             }
@@ -52,7 +52,6 @@ public class CommonController
 
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             FileUtils.setAttachmentResponseHeader(response, realFileName);
-
             FileUtils.writeBytes(filePath, response.getOutputStream());
             if (delete)
             {
@@ -97,16 +96,25 @@ public class CommonController
     public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response)
             throws Exception
     {
-        // 本地资源路径
-        String localPath = Global.getProfile();
-        // 数据库资源地址
-        String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
-        // 下载名称
-        String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
-
-        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-        FileUtils.setAttachmentResponseHeader(response, downloadName);
-
-        FileUtils.writeBytes(downloadPath, response.getOutputStream());
+        try
+        {
+            if (!FileUtils.checkAllowDownload(resource))
+            {
+                throw new Exception(StringUtils.format("资源文件({})非法，不允许下载。 ", resource));
+            }
+            // 本地资源路径
+            String localPath = Global.getProfile();
+            // 数据库资源地址
+            String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
+            // 下载名称
+            String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            FileUtils.setAttachmentResponseHeader(response, downloadName);
+            FileUtils.writeBytes(downloadPath, response.getOutputStream());
+        }
+        catch (Exception e)
+        {
+            log.error("下载文件失败", e);
+        }
     }
 }

@@ -10,6 +10,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.ArrayUtils;
+import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 文件处理工具类
@@ -107,14 +109,37 @@ public class FileUtils extends org.apache.commons.io.FileUtils
     }
 
     /**
+     * 检查文件是否可下载
+     * 
+     * @param resource 需要下载的文件
+     * @return true 正常 false 非法
+     */
+    public static boolean checkAllowDownload(String resource)
+    {
+        // 禁止目录上跳级别
+        if (StringUtils.contains(resource, ".."))
+        {
+            return false;
+        }
+
+        // 检查允许下载的文件规则
+        if (ArrayUtils.contains(MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION, FileTypeUtils.getFileType(resource)))
+        {
+            return true;
+        }
+
+        // 不在允许下载的文件规则
+        return false;
+    }
+
+    /**
      * 下载文件名重新编码
      * 
      * @param request 请求对象
      * @param fileName 文件名
      * @return 编码后的文件名
      */
-    public static String setFileDownloadHeader(HttpServletRequest request, String fileName)
-            throws UnsupportedEncodingException
+    public static String setFileDownloadHeader(HttpServletRequest request, String fileName) throws UnsupportedEncodingException
     {
         final String agent = request.getHeader("USER-AGENT");
         String filename = fileName;
