@@ -42,6 +42,17 @@
            statistics="false">
     </cache>
     
+    <!-- 系统用户授权缓存  没必要过期 -->
+    <cache name="sys-authCache"
+           maxEntriesLocalHeap="10000"
+           overflowToDisk="false"
+           eternal="false"
+           diskPersistent="false"
+           timeToLiveSeconds="0"
+           timeToIdleSeconds="0"
+           memoryStoreEvictionPolicy="LRU"
+           statistics="false"/>
+    
     <!-- 系统缓存 -->
     <cache name="sys-cache"
            maxEntriesLocalHeap="1000"

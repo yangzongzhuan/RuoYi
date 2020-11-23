@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('缓存监控')" />
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <input type="hidden" id="cacheName">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>缓存列表</h5>
+                            <div class="ibox-tools">
+                                <a href="javascript:getCacheNames()"><i class="fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>缓存名称</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cacheNames">
+                                    <tr th:fragment="fragment-cache-names" th:each="cacheName, stat : ${cacheNames}">
+                                        <td>[[${stat.index + 1}]]</td>
+                                        <td style="word-wrap:break-word;word-break:break-all;" th:onclick="getCacheKeys([[${cacheName}]])">[[${cacheName}]]</td>
+                                        <td style="width: 50px"><a href="#" th:onclick="clearCacheName([[${cacheName}]])" title="清空"><i class="fa fa-trash-o text-danger"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>键名列表</h5>
+                            <div class="ibox-tools">
+                                <a href="javascript:getCacheKeys('', true)"><i class="fa fa-refresh"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <table class="table table-hover no-margins">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>缓存键名</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cacheKyes">
+                                    <tr th:fragment="fragment-cache-kyes" th:each="cacheKey, stat : ${cacheKyes}">
+                                        <td>[[${stat.index + 1}]]</td>
+                                        <td style="word-wrap:break-word;word-break:break-all;" th:onclick="getCacheValue([[${cacheName}]], [[${cacheKey}]])">[[${cacheKey}]]</td>
+                                        <td style="width: 50px"><a href="#" th:onclick="clearCacheKey([[${cacheName}]], [[${cacheKey}]])" title="清空"><i class="fa fa-trash-o text-danger"></i></a></td>
+                                    </tr>
+                                </tbody>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>缓存内容</h5>
+                            <div class="ibox-tools">
+                                <a href="javascript:clearAll()"><i class="fa fa-refresh"></i> 清理全部</a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+	                        <div class="row" id="cacheValue">
+	                            <div class="col-sm-12" th:fragment="fragment-cache-value">
+	                                <div class="form-group">
+	                                    <label>缓存名称：</label>
+	                                    <input type="text" class="form-control" th:value="${cacheName}">
+	                                </div>
+	                                <div class="form-group">
+	                                    <label>缓存键名：</label>
+	                                    <input type="text"class="form-control" th:value="${cacheKey}">
+	                                </div>
+	                                <div class="form-group">
+	                                    <label>缓存内容：</label>
+	                                    <textarea class="form-control" style="height: 100px">[[${cacheValue}]]</textarea>
+	                                </div>
+	                            </div>
+	                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+var prefix = ctx + "monitor/cache";
+
+function getCacheNames() {
+    $.ajax({
+        type: "post",
+        url: prefix + "/getNames",
+        data: {
+            "fragment": 'fragment-cache-names'
+        },
+        success: function(data) {
+            $("#cacheNames").html(data);
+            $.modal.msgSuccess("刷新缓存列表成功");
+        }
+    });
+}
+
+function getCacheKeys(cacheName, isMsg) {
+	var _cacheName = $.common.isNotEmpty(cacheName) ? cacheName : $("#cacheName").val();
+    $.ajax({
+        type: "post",
+        url: prefix + "/getKeys",
+        data: {
+            "cacheName": _cacheName,
+            "fragment": 'fragment-cache-kyes'
+        },
+        success: function(data) {
+            $("#cacheKyes").html(data);
+            $("#cacheName").val(_cacheName);
+            if (isMsg) {
+                $.modal.msgSuccess("刷新键名列表成功");
+            }
+        }
+    });
+}
+
+function getCacheValue(cacheName, cacheKey) {
+    $.ajax({
+        type: "post",
+        url: prefix + "/getValue",
+        data: {
+            "cacheName": cacheName,
+            "cacheKey": cacheKey,
+            "fragment": 'fragment-cache-value'
+        },
+        success: function(data) {
+            $("#cacheValue").html(data);
+        }
+    });
+}
+
+function clearCacheName(cacheName){
+	$.post(prefix + "/clearCacheName", {cacheName: cacheName}, function(result) {
+		if (result.code == web_status.SUCCESS) {
+			$.modal.msgSuccess("清理缓存[" + cacheName + "]成功")
+			getCacheKeys(cacheName);
+        } else {
+            $.modal.msgError(result.msg);
+        }
+	});
+}
+
+function clearCacheKey(cacheName, cacheKey) {
+	$.post(prefix + "/clearCacheKey", {cacheName: cacheName, cacheKey: cacheKey}, function(result) {
+		if (result.code == web_status.SUCCESS) {
+			$.modal.msgSuccess("清理缓存[" + cacheKey + "]成功")
+			getCacheKeys(cacheName);
+        } else {
+            $.modal.msgError(result.msg);
+        }
+	});
+}
+
+function clearAll(){
+	$.get(prefix + "/clearAll", function(result) {
+		if (result.code == web_status.SUCCESS) {
+			$.modal.msgSuccess("清理缓存成功")
+        } else {
+            $.modal.msgError(result.msg);
+        }
+	});
+}
+</script>
+</html>

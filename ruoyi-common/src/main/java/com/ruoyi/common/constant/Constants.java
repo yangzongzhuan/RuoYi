@@ -66,6 +66,11 @@ public class Constants
      * 排序的方向 "desc" 或者 "asc".
      */
     public static final String IS_ASC = "isAsc";
+    
+    /**
+     * 系统用户授权缓存
+     */
+    public static final String SYS_AUTH_CACHE = "sys-authCache";
 
     /**
      * 参数管理 cache name

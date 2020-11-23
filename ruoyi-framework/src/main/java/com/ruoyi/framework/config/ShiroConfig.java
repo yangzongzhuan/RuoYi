@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
@@ -175,6 +176,7 @@ public class ShiroConfig
     public UserRealm userRealm(EhCacheManager cacheManager)
     {
         UserRealm userRealm = new UserRealm();
+        userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
         userRealm.setCacheManager(cacheManager);
         return userRealm;
     }

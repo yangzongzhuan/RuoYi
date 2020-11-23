@@ -170,10 +170,11 @@ insert into sys_menu values('108',  '日志管理', '1', '9', '#',              
 insert into sys_menu values('109',  '在线用户', '2', '1', '/monitor/online',       '', 'C', '0', 'monitor:online:view',      'fa fa-user-circle',     'admin', sysdate(), '', null, '在线用户菜单');
 insert into sys_menu values('110',  '定时任务', '2', '2', '/monitor/job',          '', 'C', '0', 'monitor:job:view',         'fa fa-tasks',           'admin', sysdate(), '', null, '定时任务菜单');
 insert into sys_menu values('111',  '数据监控', '2', '3', '/monitor/data',         '', 'C', '0', 'monitor:data:view',        'fa fa-bug',             'admin', sysdate(), '', null, '数据监控菜单');
-insert into sys_menu values('112',  '服务监控', '2', '3', '/monitor/server',       '', 'C', '0', 'monitor:server:view',      'fa fa-server',          'admin', sysdate(), '', null, '服务监控菜单');
-insert into sys_menu values('113',  '表单构建', '3', '1', '/tool/build',           '', 'C', '0', 'tool:build:view',          'fa fa-wpforms',         'admin', sysdate(), '', null, '表单构建菜单');
-insert into sys_menu values('114',  '代码生成', '3', '2', '/tool/gen',             '', 'C', '0', 'tool:gen:view',            'fa fa-code',            'admin', sysdate(), '', null, '代码生成菜单');
-insert into sys_menu values('115',  '系统接口', '3', '3', '/tool/swagger',         '', 'C', '0', 'tool:swagger:view',        'fa fa-gg',              'admin', sysdate(), '', null, '系统接口菜单');
+insert into sys_menu values('112',  '服务监控', '2', '4', '/monitor/server',       '', 'C', '0', 'monitor:server:view',      'fa fa-server',          'admin', sysdate(), '', null, '服务监控菜单');
+insert into sys_menu values('113',  '缓存监控', '2', '5', '/monitor/cache',        '', 'C', '0', 'monitor:cache:view',       'fa fa-cube',            'admin', sysdate(), '', null, '缓存监控菜单');
+insert into sys_menu values('114',  '表单构建', '3', '1', '/tool/build',           '', 'C', '0', 'tool:build:view',          'fa fa-wpforms',         'admin', sysdate(), '', null, '表单构建菜单');
+insert into sys_menu values('115',  '代码生成', '3', '2', '/tool/gen',             '', 'C', '0', 'tool:gen:view',            'fa fa-code',            'admin', sysdate(), '', null, '代码生成菜单');
+insert into sys_menu values('116',  '系统接口', '3', '3', '/tool/swagger',         '', 'C', '0', 'tool:swagger:view',        'fa fa-gg',              'admin', sysdate(), '', null, '系统接口菜单');
 -- 三级菜单
 insert into sys_menu values('500',  '操作日志', '108', '1', '/monitor/operlog',    '', 'C', '0', 'monitor:operlog:view',     'fa fa-address-book',    'admin', sysdate(), '', null, '操作日志菜单');
 insert into sys_menu values('501',  '登录日志', '108', '2', '/monitor/logininfor', '', 'C', '0', 'monitor:logininfor:view',  'fa fa-file-image-o',    'admin', sysdate(), '', null, '登录日志菜单');
@@ -247,11 +248,11 @@ insert into sys_menu values('1054', '状态修改', '110', '5', '#', '',  'F', '
 insert into sys_menu values('1055', '任务详细', '110', '6', '#', '',  'F', '0', 'monitor:job:detail',              '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1056', '任务导出', '110', '7', '#', '',  'F', '0', 'monitor:job:export',              '#', 'admin', sysdate(), '', null, '');
 -- 代码生成按钮
-insert into sys_menu values('1057', '生成查询', '114', '1', '#', '',  'F', '0', 'tool:gen:list',     '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1058', '生成修改', '114', '2', '#', '',  'F', '0', 'tool:gen:edit',     '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1059', '生成删除', '114', '3', '#', '',  'F', '0', 'tool:gen:remove',   '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1060', '预览代码', '114', '4', '#', '',  'F', '0', 'tool:gen:preview',  '#', 'admin', sysdate(), '', null, '');
-insert into sys_menu values('1061', '生成代码', '114', '5', '#', '',  'F', '0', 'tool:gen:code',     '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1057', '生成查询', '115', '1', '#', '',  'F', '0', 'tool:gen:list',     '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1058', '生成修改', '115', '2', '#', '',  'F', '0', 'tool:gen:edit',     '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1059', '生成删除', '115', '3', '#', '',  'F', '0', 'tool:gen:remove',   '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1060', '预览代码', '115', '4', '#', '',  'F', '0', 'tool:gen:preview',  '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1061', '生成代码', '115', '5', '#', '',  'F', '0', 'tool:gen:code',     '#', 'admin', sysdate(), '', null, '');
 
 
 -- ----------------------------
@@ -304,6 +305,7 @@ insert into sys_role_menu values ('2', '112');
 insert into sys_role_menu values ('2', '113');
 insert into sys_role_menu values ('2', '114');
 insert into sys_role_menu values ('2', '115');
+insert into sys_role_menu values ('2', '116');
 insert into sys_role_menu values ('2', '500');
 insert into sys_role_menu values ('2', '501');
 insert into sys_role_menu values ('2', '1000');

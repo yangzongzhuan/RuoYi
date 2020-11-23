@@ -1,5 +1,7 @@
 package com.ruoyi.framework.shiro.session;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.session.mgt.SimpleSession;
 import com.ruoyi.common.enums.OnlineStatus;
 
@@ -144,5 +146,20 @@ public class OnlineSession extends SimpleSession
     public Object removeAttribute(Object key)
     {
         return super.removeAttribute(key);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("userId", getUserId())
+            .append("loginName", getLoginName())
+            .append("deptName", getDeptName())
+            .append("avatar", getAvatar())
+            .append("host", getHost())
+            .append("browser", getBrowser())
+            .append("os", getOs())
+            .append("status", getStatus())
+            .append("attributeChanged", isAttributeChanged())
+            .toString();
     }
 }
