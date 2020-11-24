@@ -295,6 +295,9 @@ public class ExcelUtil<T>
                         {
                             val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
                         }
+                        if (fieldType == boolean.class && (val == null||"".equals(val))) {
+                            val = false;
+                        }
                         ReflectUtils.invokeSetter(entity, propertyName, val);
                     }
                 }
