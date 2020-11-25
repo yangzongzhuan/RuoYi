@@ -98,15 +98,15 @@ public class SysIndexController extends BaseController
     // 检查初始密码是否提醒修改
     public boolean initPasswordIsModify(Date pwdUpdateDate)
     {
-        int initPasswordModify = Convert.toInt(configService.selectConfigByKey("sys.account.initPasswordModify"));
-        return initPasswordModify == 1 && pwdUpdateDate == null;
+        Integer initPasswordModify = Convert.toInt(configService.selectConfigByKey("sys.account.initPasswordModify"));
+        return initPasswordModify !=null && initPasswordModify == 1 && pwdUpdateDate == null;
     }
 
     // 检查密码是否过期
     public boolean passwordIsExpiration(Date pwdUpdateDate)
     {
-        int passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
-        if (passwordValidateDays > 0)
+        Integer passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
+        if (passwordValidateDays !=null && passwordValidateDays > 0)
         {
             if (StringUtils.isNull(pwdUpdateDate))
             {
