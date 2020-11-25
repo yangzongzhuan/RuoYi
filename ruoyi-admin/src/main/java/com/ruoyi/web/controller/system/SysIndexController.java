@@ -99,14 +99,14 @@ public class SysIndexController extends BaseController
     public boolean initPasswordIsModify(Date pwdUpdateDate)
     {
         Integer initPasswordModify = Convert.toInt(configService.selectConfigByKey("sys.account.initPasswordModify"));
-        return initPasswordModify !=null && initPasswordModify == 1 && pwdUpdateDate == null;
+        return initPasswordModify != null && initPasswordModify == 1 && pwdUpdateDate == null;
     }
 
     // 检查密码是否过期
     public boolean passwordIsExpiration(Date pwdUpdateDate)
     {
         Integer passwordValidateDays = Convert.toInt(configService.selectConfigByKey("sys.account.passwordValidateDays"));
-        if (passwordValidateDays !=null && passwordValidateDays > 0)
+        if (passwordValidateDays != null && passwordValidateDays > 0)
         {
             if (StringUtils.isNull(pwdUpdateDate))
             {
