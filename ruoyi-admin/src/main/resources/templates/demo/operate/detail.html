@@ -8,7 +8,9 @@
 		<form class="form-horizontal m" id="form-user-edit">
 			<div class="form-group">
 				<label class="col-sm-3 control-label">用户编号：</label>
-				<div class="form-control-static" th:text="${user.userCode}"></div>
+				<div class="col-sm-8">
+					<div class="form-control-static" th:text="${user.userCode}"></div>
+				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">用户姓名：</label>
@@ -45,7 +47,7 @@
 	<th:block th:include="include :: footer" />
 	<script type="text/javascript">
 		var prefix = ctx + "demo/operate";
-		
+
 		$("#form-user-add").validate({
 			onkeyup: false,
 			rules:{
@@ -58,7 +60,7 @@
 			},
 		    focusCleanup: true
 		});
-		
+
 		function submitHandler() {
 	        if ($.validate.form()) {
 	        	$.operate.save(prefix + "/edit", $('#form-user-edit').serialize());
