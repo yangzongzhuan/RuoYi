@@ -279,6 +279,10 @@ public class ExcelUtil<T>
                             val = DateUtil.getJavaDate((Double) val);
                         }
                     }
+                    else if (Boolean.TYPE == fieldType || Boolean.class == fieldType)
+                    {
+                        val = Convert.toBool(val, false);
+                    }
                     if (StringUtils.isNotNull(fieldType))
                     {
                         Excel attr = field.getAnnotation(Excel.class);
@@ -294,9 +298,6 @@ public class ExcelUtil<T>
                         else if (StringUtils.isNotEmpty(attr.dictType()))
                         {
                             val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
-                        }
-                        if (fieldType == boolean.class && (val == null||"".equals(val))) {
-                            val = false;
                         }
                         ReflectUtils.invokeSetter(entity, propertyName, val);
                     }
