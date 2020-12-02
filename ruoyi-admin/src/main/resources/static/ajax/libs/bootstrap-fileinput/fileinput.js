@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v5.1.2
+ * bootstrap-fileinput v5.1.3
  * http://plugins.krajee.com/file-input
  *
  * Author: Kartik Visweswaran
@@ -111,7 +111,7 @@
             if (!relativePath) {
                 return null;
             }
-            return (file.size + '_' + relativePath.replace(/\s/img, '_'));
+            return (file.size + '_' + encodeURIComponent(relativePath).replace(/%/g, '_'));
         },
         getFrameSelector: function (id, selector) {
             selector = selector || '';
@@ -471,18 +471,8 @@
         uniqId: function () {
             return (new Date().getTime() + Math.floor(Math.random() * Math.pow(10, 15))).toString(36);
         },
-        parseEventCallback: function (str) {
-            return Function('\'use strict\'; return (function() { ' + str + ' });')(); // jshint ignore:line
-        },
         cspBuffer: {
             CSP_ATTRIB: 'data-csp-01928735', // a randomly named temporary attribute to store the CSP elem id
-            domEventsList: [
-                'mousedown', 'mouseup', 'click', 'dblclick', 'mousemove', 'mouseover', 'mousewheel', 'mouseout',
-                'contextmenu', 'touchstart', 'touchmove', 'touchend', 'touchcancel', 'keydown', 'keypress', 'keyup',
-                'focus', 'blur', 'change', 'submit', 'scroll', 'resize', 'hashchange', 'load', 'unload',
-                'cut', 'copy', 'paste'
-            ],
-            domElementEvents: {},
             domElementsStyles: {},
             stash: function (htmlString) {
                 var self = this, outerDom = $.parseHTML('<div>' + htmlString + '</div>'), $el = $(outerDom);
@@ -503,20 +493,6 @@
                     }
                 });
                 $el.filter('*').removeAttr('style');                   // make sure all style attr are removed
-                $.each(self.domEventsList, function (key, eventName) { // handle onXXX events set as inline markup
-                    var id, fn, event = 'on' + eventName, $inlineEvent = $el.find('[' + event + ']');
-                    if ($inlineEvent.length) {
-                        fn = $h.parseEventCallback($inlineEvent.attr(event));
-                        if ($inlineEvent.attr(self.CSP_ATTRIB)) {
-                            id = $inlineEvent.attr(self.CSP_ATTRIB);
-                        } else {
-                            id = $h.uniqId();
-                            self.domElementEvents[id] = [];
-                        }
-                        self.domElementEvents[id].push({name: eventName + '.csp', handler: fn}); // special csp namespace
-                        $inlineEvent.removeAttr(event).attr(self.CSP_ATTRIB, id);
-                    }
-                });
                 var values = Object.values ? Object.values(outerDom) : Object.keys(outerDom).map(function (itm) {
                     return outerDom[itm];
                 });
@@ -527,22 +503,13 @@
             apply: function (domElement) {
                 var self = this, $el = $(domElement);
                 $el.find('[' + self.CSP_ATTRIB + ']').each(function (key, elem) {
-                    var $elem = $(elem), id = $elem.attr(self.CSP_ATTRIB), styles = self.domElementsStyles[id],
-                        events = self.domElementEvents[id];
+                    var $elem = $(elem), id = $elem.attr(self.CSP_ATTRIB), styles = self.domElementsStyles[id];
                     if (styles) {
                         $elem.css(styles);
-                    }
-                    if (events) {
-                        $.each(events, function (key, event) {
-                            if (event && event.name) {
-                                $elem.off(event.name).on(event.name, event.handler);
-                            }
-                        });
                     }
                     $elem.removeAttr(self.CSP_ATTRIB);
                 });
                 self.domElementsStyles = {};
-                self.domElementEvents = {};
             }
         },
         setHtml: function ($elem, htmlString) {
@@ -1651,7 +1618,10 @@
                 tModalMain, tModal, tProgress, tSize, tFooter, tActions, tActionDelete, tActionUpload, tActionDownload,
                 tActionZoom, tActionDrag, tIndicator, tTagBef, tTagBef1, tTagBef2, tTagAft, tGeneric, tHtml, tImage,
                 tText, tOffice, tGdocs, tVideo, tAudio, tFlash, tObject, tPdf, tOther, tStyle, tZoomCache, vDefaultDim,
-                tStats;
+                tStats, tModalLabel, renderObject = function (type, mime) {
+                    return '<object class="kv-preview-data file-preview-' + type + '" title="{caption}" ' +
+                        'data="{data}" type="' + mime + '"' + tStyle + '>\n' + $h.DEFAULT_PREVIEW + '\n</object>\n';
+                };
             tMain1 = '{preview}\n' +
                 '<div class="kv-upload-progress kv-hidden"></div><div class="clearfix"></div>\n' +
                 '<div class="input-group {class}">\n' +
@@ -1680,7 +1650,7 @@
             // noinspection HtmlUnknownAttribute
             tCaption = '<div class="file-caption form-control {class}" tabindex="500">\n' +
                 '  <span class="file-caption-icon"></span>\n' +
-                '  <input class="file-caption-name" onkeydown="return false;" onpaste="return false;">\n' +
+                '  <input class="file-caption-name">\n' +
                 '</div>';
             //noinspection HtmlUnknownAttribute
             tBtnDefault = '<button type="{type}" tabindex="500" title="{title}" class="{css}" ' +
@@ -1689,12 +1659,13 @@
             tBtnLink = '<a href="{href}" tabindex="500" title="{title}" class="{css}" {status}>{icon} {label}</a>';
             //noinspection HtmlUnknownAttribute
             tBtnBrowse = '<div tabindex="500" class="{css}" {status}>{icon} {label}</div>';
+            tModalLabel = $h.MODAL_ID + 'Label';
             tModalMain = '<div id="' + $h.MODAL_ID + '" class="file-zoom-dialog modal fade" ' +
-                'tabindex="-1" aria-labelledby="' + $h.MODAL_ID + 'Label"></div>';
+                'tabindex="-1" aria-labelledby="' + tModalLabel + '"></div>';
             tModal = '<div class="modal-dialog modal-lg{rtl}" role="document">\n' +
                 '  <div class="modal-content">\n' +
                 '    <div class="modal-header">\n' +
-                '      <h5 class="modal-title">{heading}</h5>\n' +
+                '      <h5 class="modal-title" id="' + tModalLabel + '">{heading}</h5>\n' +
                 '      <span class="kv-zoom-title"></span>\n' +
                 '      <div class="kv-zoom-actions">{toggleheader}{fullscreen}{borderless}{close}</div>\n' +
                 '    </div>\n' +
@@ -1747,11 +1718,11 @@
             tTagAft = '</div>{footer}\n{zoomCache}</div>\n';
             tGeneric = '{content}\n';
             tStyle = ' {style}';
-            tHtml = '<div class="kv-preview-data file-preview-html" title="{caption}"' + tStyle + '>{data}</div>\n';
-            tImage = '<img src="{data}" class="file-preview-image kv-preview-data" title="{title}" ' +
-                'alt="{alt}"' + tStyle + '>\n';
-            tText = '<textarea class="kv-preview-data file-preview-text" title="{caption}" readonly' + tStyle + '>' +
-                '{data}</textarea>\n';
+            tHtml = renderObject('html', 'text/html');
+            tText = renderObject('text', 'text/plain;charset=UTF-8');
+            tPdf = renderObject('pdf', 'application/pdf');
+            tImage = '<img src="{data}" class="file-preview-image kv-preview-data" title="{title}" alt="{alt}"' +
+                tStyle + '>\n';
             tOffice = '<iframe class="kv-preview-data file-preview-office" ' +
                 'src="https://view.officeapps.live.com/op/embed.aspx?src={data}"' + tStyle + '></iframe>';
             tGdocs = '<iframe class="kv-preview-data file-preview-gdocs" ' +
@@ -1761,12 +1732,11 @@
             tAudio = '<!--suppress ALL --><audio class="kv-preview-data file-preview-audio" controls' + tStyle + '>\n<source src="{data}" ' +
                 'type="{type}">\n' + $h.DEFAULT_PREVIEW + '\n</audio>\n';
             tFlash = '<embed class="kv-preview-data file-preview-flash" src="{data}" type="application/x-shockwave-flash"' + tStyle + '>\n';
-            tPdf = '<embed class="kv-preview-data file-preview-pdf" src="{data}" type="application/pdf"' + tStyle + '>\n';
             tObject = '<object class="kv-preview-data file-preview-object file-object {typeCss}" ' +
                 'data="{data}" type="{type}"' + tStyle + '>\n' + '<param name="movie" value="{caption}" />\n' +
                 $h.OBJECT_PARAMS + ' ' + $h.DEFAULT_PREVIEW + '\n</object>\n';
             tOther = '<div class="kv-preview-data file-preview-other-frame"' + tStyle + '>\n' + $h.DEFAULT_PREVIEW + '\n</div>\n';
-            tZoomCache = '<div class="kv-zoom-cache" style="display:none">{zoomContent}</div>';
+            tZoomCache = '<div class="kv-zoom-cache">{zoomContent}</div>';
             vDefaultDim = {width: '100%', height: '100%', 'min-height': '480px'};
             if (self._isPdfRendered()) {
                 tPdf = self.pdfRendererTemplate.replace('{renderer}', self._encodeURI(self.pdfRendererUrl));
@@ -1879,7 +1849,7 @@
                     },
                     text: function (vType, vName) {
                         return $h.compare(vType, 'text.*') || $h.compare(vName, /\.(xml|javascript)$/i) ||
-                            $h.compare(vName, /\.(txt|md|csv|nfo|ini|json|php|js|css)$/i);
+                            $h.compare(vName, /\.(txt|md|nfo|ini|json|php|js|css)$/i);
                     },
                     video: function (vType, vName) {
                         return $h.compare(vType, 'video.*') && ($h.compare(vType, /(ogg|mp4|mp?g|mov|webm|3gp)$/i) ||
@@ -1956,7 +1926,7 @@
             $.each(self.previewContentTemplates, function (key, value) {
                 if ($h.isEmpty(self.previewTemplates[key])) {
                     tagBef = tags.tagBefore2;
-                    if (key === 'generic' || key === 'image' || key === 'html' || key === 'text') {
+                    if (key === 'generic' || key === 'image') {
                         tagBef = tags.tagBefore1;
                     }
                     if (self._isPdfRendered() && key === 'pdf') {
@@ -2473,7 +2443,7 @@
             }
         },
         _listen: function () {
-            var self = this, $el = self.$element, $form = self.$form, $cont = self.$container, fullScreenEvents;
+            var self = this, $el = self.$element, $form = self.$form, $cont = self.$container, fullScreenEv, $cap, fn;
             self._handler($el, 'click', function (e) {
                 if ($el.hasClass('file-no-browse')) {
                     if ($el.data('zoneClicked')) {
@@ -2487,9 +2457,15 @@
             if (self.showBrowse) {
                 self._handler(self.$btnFile, 'click', $.proxy(self._browse, self));
             }
+            $cap = $cont.find('.file-caption-name');
+            fn = function () {
+                return false;
+            };
             self._handler($cont.find('.fileinput-remove:not([disabled])'), 'click', $.proxy(self.clear, self));
             self._handler($cont.find('.fileinput-cancel'), 'click', $.proxy(self.cancel, self));
             self._handler($cont.find('.fileinput-pause'), 'click', $.proxy(self.pause, self));
+            self._handler($cap, 'keydown', fn);
+            self._handler($cap, 'paste', fn);
             self._initDragDrop();
             self._handler($form, 'reset', $.proxy(self.clear, self));
             if (!self.isAjaxUpload) {
@@ -2499,8 +2475,8 @@
             self._handler($(window), 'resize', function () {
                 self._listenFullScreen(screen.width === window.innerWidth && screen.height === window.innerHeight);
             });
-            fullScreenEvents = 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange';
-            self._handler($(document), fullScreenEvents, function () {
+            fullScreenEv = 'webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange';
+            self._handler($(document), fullScreenEv, function () {
                 self._listenFullScreen($h.checkFullScreen());
             });
             self._autoFitContent();
@@ -2563,15 +2539,15 @@
             e.preventDefault();
         },
         _zoneDragEnter: function (e) {
-            var self = this, dataTransfer = e.originalEvent.dataTransfer,
-                hasFiles = $.inArray('Files', dataTransfer.types) > -1;
+            var self = this, dt = e.originalEvent.dataTransfer, hasFiles = $.inArray('Files', dt.types) > -1;
             self._zoneDragDropInit(e);
             if (self.isDisabled || !hasFiles) {
-                e.originalEvent.dataTransfer.effectAllowed = 'none';
-                e.originalEvent.dataTransfer.dropEffect = 'none';
+                dt.effectAllowed = 'none';
+                dt.dropEffect = 'none';
                 return;
             }
-            if (self._raise('fileDragEnter', {'sourceEvent': e, 'files': dataTransfer.types.Files})) {
+            dt.dropEffect = 'copy';
+            if (self._raise('fileDragEnter', {'sourceEvent': e, 'files': dt.types.Files})) {
                 $h.addCss(self.$dropZone, 'file-highlighted');
             }
         },
@@ -2588,8 +2564,8 @@
         },
         _zoneDrop: function (e) {
             /** @namespace e.originalEvent.dataTransfer */
-            var self = this, i, $el = self.$element, dataTransfer = e.originalEvent.dataTransfer,
-                files = dataTransfer.files, items = dataTransfer.items, folders = $h.getDragDropFolders(items),
+            var self = this, i, $el = self.$element, dt = e.originalEvent.dataTransfer,
+                files = dt.files, items = dt.items, folders = $h.getDragDropFolders(items),
                 processFiles = function () {
                     if (!self.isAjaxUpload) {
                         self.changeTriggered = true;
@@ -3639,9 +3615,17 @@
                     self._showFileError(errMsg, params);
                 }, self.processDelay);
             };
-            formdata.append(self.uploadFileAttr, fileObj.file, fileName);
+            self._setFileData(formdata, fileObj.file, fileName, id);
             self._setUploadData(formdata, {fileId: id});
             self._ajaxSubmit(fnBefore, fnSuccess, fnComplete, fnError, formdata, id, i);
+        },
+        _setFileData: function (formdata, file, fileName, fileId) {
+            var self = this, preProcess = self.preProcessUpload;
+            if (preProcess && typeof preProcess === 'function') {
+                formdata.append(self.uploadFileAttr, preProcess(fileId, file));
+            } else {
+                formdata.append(self.uploadFileAttr, file, fileName);
+            }
         },
         _uploadBatch: function () {
             var self = this, fm = self.fileManager, total = fm.total(), params = {}, fnBefore, fnSuccess, fnError,
@@ -3766,7 +3750,7 @@
             var ctr = 0;
             $.each(self.fileManager.stack, function (key, data) {
                 if (!$h.isEmpty(data.file)) {
-                    formdata.append(self.uploadFileAttr, data.file, (data.nameFmt || ('untitled_' + ctr)));
+                    self._setFileData(formdata, data.file, (data.nameFmt || ('untitled_' + ctr)), key);
                 }
                 ctr++;
             });
@@ -4082,9 +4066,6 @@
                     css = css.replace(' ' + $h.SORT_CSS, '');
                 }
                 tmplt = self._parseFilePreviewIcon(tmplt, fname);
-                if (c === 'text') {
-                    d = $h.htmlEncode(d);
-                }
                 if (cat === 'object' && !ftype) {
                     $.each(self.defaults.fileTypeSettings, function (key, func) {
                         if (key === 'object' || key === 'other') {
@@ -4161,12 +4142,9 @@
             }
             var self = this, fname = $h.getFileName(file), ftype = fileInfo.type, caption = fileInfo.name,
                 cat = self._parseFileType(ftype, fname), content, $preview = self.$preview, fsize = file.size || 0,
-                iData = (cat === 'text' || cat === 'html' || cat === 'image') ? theFile.target.result : data,
+                iData = cat === 'image' ? theFile.target.result : data,
                 fileId = self.fileManager.getId(file), previewId = self._getThumbId(fileId);
             /** @namespace window.DOMPurify */
-            if (cat === 'html' && self.purifyHtml && window.DOMPurify) {
-                iData = window.DOMPurify.sanitize(iData);
-            }
             content = self._generatePreviewTemplate(cat, iData, fname, ftype, previewId, fileId, false, fsize);
             self._clearDefaultPreview();
             self._addToPreview($preview, content);
@@ -5217,12 +5195,12 @@
                     return;
                 }
                 self.lock(true);
-                var file = files[i], previewId = previewInitId + '-' + self._getFileId(file), fSizeKB, j, msg,
+                var file = files[i], id = self._getFileId(file), previewId = previewInitId + '-' + id, fSizeKB, j, msg,
                     fnText = settings.text, fnImage = settings.image, fnHtml = settings.html, typ, chk, typ1, typ2,
                     caption = self._getFileName(file, ''), fileSize = (file && file.size || 0) / 1000,
                     fileExtExpr = '', previewData = $h.createObjectURL(file), fileCount = 0,
                     strTypes = '', fileId, canLoad, fileReaderAborted = false,
-                    func, knownTypes = 0, isText, isHtml, isImage, txtFlag, processFileLoaded = function () {
+                    func, knownTypes = 0, isImage, txtFlag, processFileLoaded = function () {
                         var msg = msgProgress.setTokens({
                             'index': i + 1,
                             'files': numFiles,
@@ -5234,7 +5212,7 @@
                             self._updateFileDetails(numFiles);
                             readFile(i + 1);
                         }, self.processDelay);
-                        if (self._raise('fileloaded', [file, previewId, i, reader]) && self.isAjaxUpload) {
+                        if (self._raise('fileloaded', [file, previewId, id, i, reader]) && self.isAjaxUpload) {
                             fm.add(file);
                         }
                     };
@@ -5336,12 +5314,10 @@
                             self._updateFileDetails(numFiles);
                         }
                         readFile(i + 1);
-                        self._raise('fileloaded', [file, previewId, i]);
+                        self._raise('fileloaded', [file, previewId, id, i]);
                     }, 10);
                     return;
                 }
-                isText = fnText(file.type, caption);
-                isHtml = fnHtml(file.type, caption);
                 isImage = fnImage(file.type, caption);
                 $status.html(msgLoading.replace('{index}', i + 1).replace('{files}', numFiles));
                 $container.addClass('file-thumb-loading');
@@ -5349,7 +5325,7 @@
                     self._errorHandler(evt, caption);
                 };
                 reader.onload = function (theFile) {
-                    var hex, fileInfo, uint, byte, bytes = [], contents, mime, readTextImage = function (textFlag) {
+                    var hex, fileInfo, uint, byte, bytes = [], contents, mime, readImage = function () {
                         var newReader = new FileReader();
                         newReader.onerror = function (theFileNew) {
                             self._errorHandler(theFileNew, caption);
@@ -5368,11 +5344,7 @@
                             self._initFileActions();
                             processFileLoaded();
                         };
-                        if (textFlag) {
-                            newReader.readAsText(file, self.textEncoding);
-                        } else {
-                            newReader.readAsDataURL(file);
-                        }
+                        newReader.readAsDataURL(file);
                     };
                     fileInfo = {'name': caption, 'type': file.type};
                     $.each(settings, function (k, f) {
@@ -5393,12 +5365,9 @@
                             mime = $h.isSvg(contents) ? 'image/svg+xml' : $h.getMimeType(hex, contents, file.type);
                         }
                         fileInfo = {'name': caption, 'type': mime};
-                        isText = fnText(mime, '');
-                        isHtml = fnHtml(mime, '');
                         isImage = fnImage(mime, '');
-                        txtFlag = isText || isHtml;
-                        if (txtFlag || isImage) {
-                            readTextImage(txtFlag);
+                        if (isImage) {
+                            readImage(txtFlag);
                             return;
                         }
                     }
@@ -5431,14 +5400,10 @@
                         }, self.processDelay);
                     }
                 };
-                if (isText || isHtml) {
-                    reader.readAsText(file, self.textEncoding);
+                if (isImage) {
+                    reader.readAsDataURL(file);
                 } else {
-                    if (isImage) {
-                        reader.readAsDataURL(file);
-                    } else {
-                        reader.readAsArrayBuffer(file);
-                    }
+                    reader.readAsArrayBuffer(file);
                 }
             };
 
@@ -5831,7 +5796,6 @@
         frameClass: 'krajee-default',
         mainClass: 'file-caption-main',
         mainTemplate: null,
-        purifyHtml: true,
         fileSizeGetter: null,
         initialCaption: '',
         initialPreview: [],
@@ -5939,7 +5903,7 @@
         resizeQuality: 0.92,
         resizeDefaultImageType: 'image/jpeg',
         resizeIfSizeMoreThan: 0, // in KB
-        minFileSize: 0,
+        minFileSize: -1,
         maxFileSize: 0,
         maxFilePreviewSize: 25600, // 25 MB
         minFileCount: 0,
@@ -5949,11 +5913,11 @@
         msgValidationErrorClass: 'text-danger',
         msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ',
         msgErrorClass: 'file-error-message',
-        progressThumbClass: 'progress-bar progress-bar-striped active',
-        progressClass: 'progress-bar bg-success progress-bar-success progress-bar-striped active',
-        progressInfoClass: 'progress-bar bg-info progress-bar-info progress-bar-striped active',
+        progressThumbClass: 'progress-bar progress-bar-striped active progress-bar-animated',
+        progressClass: 'progress-bar bg-success progress-bar-success progress-bar-striped active progress-bar-animated',
+        progressInfoClass: 'progress-bar bg-info progress-bar-info progress-bar-striped active progress-bar-animated',
         progressCompleteClass: 'progress-bar bg-success progress-bar-success',
-        progressPauseClass: 'progress-bar bg-primary progress-bar-primary progress-bar-striped active',
+        progressPauseClass: 'progress-bar bg-primary progress-bar-primary progress-bar-striped active progress-bar-animated',
         progressErrorClass: 'progress-bar bg-danger progress-bar-danger',
         progressUploadThreshold: 99,
         previewFileType: 'image',
@@ -5970,6 +5934,7 @@
         fileActionSettings: {},
         otherActionButtons: '',
         textEncoding: 'UTF-8',
+        preProcessUpload: null,
         ajaxSettings: {},
         ajaxDeleteSettings: {},
         showAjaxErrorDetails: true,
@@ -6071,7 +6036,7 @@
             close: 'Close detailed preview'
         }
     };
-
+    
     $.fn.fileinputLocales.zh = {
         fileSingle: '文件',
         filePlural: '个文件',
@@ -6088,13 +6053,14 @@
         msgNoFilesSelected: '未选择文件',
         msgPaused: 'Paused',
         msgCancelled: '取消',
-        msgPlaceholder: '选择 {files}...',
+        msgPlaceholder: '选择 {files} ...',
         msgZoomModalHeading: '详细预览',
         msgFileRequired: '必须选择一个文件上传.',
         msgSizeTooSmall: '文件 "{name}" (<b>{size} KB</b>) 必须大于限定大小 <b>{minSize} KB</b>.',
         msgSizeTooLarge: '文件 "{name}" (<b>{size} KB</b>) 超过了允许大小 <b>{maxSize} KB</b>.',
         msgFilesTooLess: '你必须选择最少 <b>{n}</b> {files} 来上传. ',
         msgFilesTooMany: '选择的上传文件个数 <b>({n})</b> 超出最大文件的限制个数 <b>{m}</b>.',
+        msgTotalFilesTooMany: 'You can upload a maximum of <b>{m}</b> files (<b>{n}</b> files detected).',
         msgFileNotFound: '文件 "{name}" 未找到!',
         msgFileSecured: '安全限制，为了防止读取文件 "{name}".',
         msgFileNotReadable: '文件 "{name}" 不可读.',
@@ -6114,10 +6080,10 @@
             'object': 'object'
         },
         msgUploadAborted: '该文件上传被中止',
-        msgUploadThreshold: '处理中...',
-        msgUploadBegin: '正在初始化...',
+        msgUploadThreshold: '处理中 &hellip;',
+        msgUploadBegin: '正在初始化 &hellip;',
         msgUploadEnd: '完成',
-        msgUploadResume: 'Resuming upload...',
+        msgUploadResume: 'Resuming upload &hellip;',
         msgUploadEmpty: '无效的文件上传.',
         msgUploadError: 'Upload Error',
         msgDeleteError: 'Delete Error',
@@ -6158,7 +6124,7 @@
             indicatorSuccessTitle: '上传',
             indicatorErrorTitle: '上传错误',
             indicatorPausedTitle: 'Upload Paused',
-            indicatorLoadingTitle:  '上传 ...'
+            indicatorLoadingTitle:  '上传 &hellip;'
         },
         previewZoomButtonTitles: {
             prev: '预览上一个文件',
@@ -6169,7 +6135,7 @@
             close: '关闭当前预览'
         }
     };
-
+    
     $.fn.fileinput.Constructor = FileInput;
 
     /**
