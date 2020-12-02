@@ -584,7 +584,7 @@ var table = {
                     expandFirst: options.expandFirst,                   // 是否默认第一级展开--expandAll为false时生效
                     columns: options.columns,                           // 显示列信息（*）
                     responseHandler: $.treeTable.responseHandler,       // 在加载服务器发送来的数据之前处理函数
-                    onLoadSuccess: $.table.onLoadSuccess                // 当所有数据被加载时触发处理函数
+                    onLoadSuccess: $.treeTable.onLoadSuccess            // 当所有数据被加载时触发处理函数
                 });
             },
             // 条件查询
@@ -615,6 +615,13 @@ var table = {
                 } else {
                     return res;
                 }
+            },
+            // 当所有数据被加载时触发
+            onLoadSuccess: function(data) {
+            	if (typeof table.options.onLoadSuccess == "function") {
+                    table.options.onLoadSuccess(data);
+            	}
+            	$(".table [data-toggle='tooltip']").tooltip();
             },
         },
         // 表单封装处理
