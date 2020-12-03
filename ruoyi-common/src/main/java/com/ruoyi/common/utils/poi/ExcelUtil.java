@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -521,12 +520,10 @@ public class ExcelUtil<T>
     {
         if (ColumnType.STRING == attr.cellType())
         {
-            cell.setCellType(CellType.STRING);
             cell.setCellValue(StringUtils.isNull(value) ? attr.defaultValue() : value + attr.suffix());
         }
         else if (ColumnType.NUMERIC == attr.cellType())
         {
-            cell.setCellType(CellType.NUMERIC);
             cell.setCellValue(StringUtils.contains(Convert.toStr(value), ".") ? Convert.toDouble(value) : Convert.toInt(value));
         }
     }
@@ -994,10 +991,10 @@ public class ExcelUtil<T>
             Cell cell = row.getCell(column);
             if (StringUtils.isNotNull(cell))
             {
-                if (cell.getCellTypeEnum() == CellType.NUMERIC || cell.getCellTypeEnum() == CellType.FORMULA)
+                if (cell.getCellType() == CellType.NUMERIC || cell.getCellType() == CellType.FORMULA)
                 {
                     val = cell.getNumericCellValue();
-                    if (HSSFDateUtil.isCellDateFormatted(cell))
+                    if (DateUtil.isCellDateFormatted(cell))
                     {
                         val = DateUtil.getJavaDate((Double) val); // POI Excel 日期格式转换
                     }
@@ -1013,15 +1010,15 @@ public class ExcelUtil<T>
                         }
                     }
                 }
-                else if (cell.getCellTypeEnum() == CellType.STRING)
+                else if (cell.getCellType() == CellType.STRING)
                 {
                     val = cell.getStringCellValue();
                 }
-                else if (cell.getCellTypeEnum() == CellType.BOOLEAN)
+                else if (cell.getCellType() == CellType.BOOLEAN)
                 {
                     val = cell.getBooleanCellValue();
                 }
-                else if (cell.getCellTypeEnum() == CellType.ERROR)
+                else if (cell.getCellType() == CellType.ERROR)
                 {
                     val = cell.getErrorCellValue();
                 }
