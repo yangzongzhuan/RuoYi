@@ -438,6 +438,16 @@ var sub = {
             return;
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
+    },
+    addColumn: function(row, tableId) {
+    	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
+    	table.set(currentId);
+    	var count = $("#" + currentId).bootstrapTable('getData').length;
+    	sub.editColumn();
+    	$("#" + currentId).bootstrapTable('insertRow', {
+            index: count + 1,
+            row: row
+        });
     }
 };
 
