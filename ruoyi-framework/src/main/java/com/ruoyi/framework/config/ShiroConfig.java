@@ -309,28 +309,27 @@ public class ShiroConfig
     /**
      * 自定义在线用户处理过滤器
      */
-    @Bean
     public OnlineSessionFilter onlineSessionFilter()
     {
         OnlineSessionFilter onlineSessionFilter = new OnlineSessionFilter();
         onlineSessionFilter.setLoginUrl(loginUrl);
+        onlineSessionFilter.setOnlineSessionDAO(sessionDAO());
         return onlineSessionFilter;
     }
 
     /**
      * 自定义在线用户同步过滤器
      */
-    @Bean
     public SyncOnlineSessionFilter syncOnlineSessionFilter()
     {
         SyncOnlineSessionFilter syncOnlineSessionFilter = new SyncOnlineSessionFilter();
+        syncOnlineSessionFilter.setOnlineSessionDAO(sessionDAO());
         return syncOnlineSessionFilter;
     }
 
     /**
      * 自定义验证码过滤器
      */
-    @Bean
     public CaptchaValidateFilter captchaValidateFilter()
     {
         CaptchaValidateFilter captchaValidateFilter = new CaptchaValidateFilter();

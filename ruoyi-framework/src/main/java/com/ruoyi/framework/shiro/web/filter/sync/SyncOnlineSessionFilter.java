@@ -3,7 +3,6 @@ package com.ruoyi.framework.shiro.web.filter.sync;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import org.apache.shiro.web.filter.PathMatchingFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
@@ -15,7 +14,6 @@ import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
  */
 public class SyncOnlineSessionFilter extends PathMatchingFilter
 {
-    @Autowired
     private OnlineSessionDAO onlineSessionDAO;
 
     /**
@@ -32,5 +30,10 @@ public class SyncOnlineSessionFilter extends PathMatchingFilter
             onlineSessionDAO.syncToDb(session);
         }
         return true;
+    }
+
+    public void setOnlineSessionDAO(OnlineSessionDAO onlineSessionDAO)
+    {
+        this.onlineSessionDAO = onlineSessionDAO;
     }
 }
