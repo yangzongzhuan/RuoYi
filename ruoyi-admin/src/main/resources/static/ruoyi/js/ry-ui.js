@@ -492,6 +492,9 @@ var table = {
             },
             // 回显数据字典
             selectDictLabel: function(datas, value) {
+            	if ($.common.isEmpty(datas) || $.common.isEmpty(value)) {
+            	    return '';
+            	}
             	var actions = [];
                 $.each(datas, function(index, dict) {
                     if (dict.dictValue == ('' + value)) {
@@ -504,7 +507,7 @@ var table = {
             },
             // 回显数据字典（字符串数组）
             selectDictLabels: function(datas, value, separator) {
-            	if ($.common.isEmpty(value)) {
+            	if ($.common.isEmpty(datas) || $.common.isEmpty(value)) {
             	    return '';
             	}
             	var currentSeparator = $.common.isEmpty(separator) ? "," : separator;
