@@ -133,8 +133,13 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 结果
      */
     @Override
+    @Transactional
     public boolean deleteRoleById(Long roleId)
     {
+        // 删除角色与菜单关联
+        roleMenuMapper.deleteRoleMenuByRoleId(roleId);
+        // 删除角色与部门关联
+        roleDeptMapper.deleteRoleDeptByRoleId(roleId);
         return roleMapper.deleteRoleById(roleId) > 0 ? true : false;
     }
 
@@ -145,7 +150,8 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @throws Exception
      */
     @Override
-    public int deleteRoleByIds(String ids) throws BusinessException
+    @Transactional
+    public int deleteRoleByIds(String ids)
     {
         Long[] roleIds = Convert.toLongArray(ids);
         for (Long roleId : roleIds)
@@ -157,6 +163,10 @@ public class SysRoleServiceImpl implements ISysRoleService
                 throw new BusinessException(String.format("%1$s已分配,不能删除", role.getRoleName()));
             }
         }
+        // 删除角色与菜单关联
+        roleMenuMapper.deleteRoleMenu(roleIds);
+        // 删除角色与部门关联
+        roleDeptMapper.deleteRoleDept(roleIds);
         return roleMapper.deleteRoleByIds(roleIds);
     }
 

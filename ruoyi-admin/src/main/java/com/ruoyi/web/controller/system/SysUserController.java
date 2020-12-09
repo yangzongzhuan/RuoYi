@@ -240,14 +240,7 @@ public class SysUserController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        try
-        {
-            return toAjax(userService.deleteUserByIds(ids));
-        }
-        catch (Exception e)
-        {
-            return error(e.getMessage());
-        }
+        return toAjax(userService.deleteUserByIds(ids));
     }
 
     /**
