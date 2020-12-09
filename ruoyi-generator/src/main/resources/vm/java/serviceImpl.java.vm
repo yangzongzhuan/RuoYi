@@ -185,7 +185,7 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
             List<${subClassName}> list = new ArrayList<${subClassName}>();
             for (${subClassName} ${subclassName} : ${subclassName}List)
             {
-                ${subclassName}.set${pkColumn.capJavaField}(${pkColumn.javaField});
+                ${subclassName}.set${pkColumn.subTableFkClassName}(${pkColumn.javaField});
                 list.add(${subclassName});
             }
             if (list.size() > 0)
