@@ -72,10 +72,21 @@
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">菜单状态：</label>
-				<div class="col-sm-8">
+				<div class="col-sm-3">
 					<div class="radio-box" th:each="dict : ${@dict.getType('sys_show_hide')}">
 						<input type="radio" th:id="${dict.dictCode}" name="visible" th:value="${dict.dictValue}" th:field="*{visible}">
 						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
+					</div>
+				</div>
+				<label class="col-sm-2 control-label is-refresh" title="打开菜单选项卡是否刷新页面">是否刷新：<i class="fa fa-question-circle-o"></i></label>
+				<div class="col-sm-3 is-refresh">
+				    <div class="radio-box">
+						<input type="radio" id="refresh-no" name="isRefresh" value="1" th:field="*{isRefresh}">
+						<label for="refresh-no">否</label>
+					</div>
+					<div class="radio-box">
+						<input type="radio" id="refresh-yes" name="isRefresh" value="0" th:field="*{isRefresh}">
+						<label for="refresh-yes">是</label>
 					</div>
 				</div>
 			</div>
@@ -163,18 +174,21 @@
                 $("#icon").parents(".form-group").show();
                 $("#target").parents(".form-group").hide();
                 $("input[name='visible']").parents(".form-group").show();
+                $(".is-refresh").hide();
             } else if (menuType == "C") {
                 $("#url").parents(".form-group").show();
                 $("#perms").parents(".form-group").show();
                 $("#icon").parents(".form-group").show();
                 $("#target").parents(".form-group").show();
                 $("input[name='visible']").parents(".form-group").show();
+                $(".is-refresh").show();
             } else if (menuType == "F") {
                 $("#url").parents(".form-group").hide();
                 $("#perms").parents(".form-group").show();
                 $("#icon").parents(".form-group").hide();
                 $("#target").parents(".form-group").hide();
                 $("input[name='visible']").parents(".form-group").hide();
+                $(".is-refresh").hide();
             }
         }
 

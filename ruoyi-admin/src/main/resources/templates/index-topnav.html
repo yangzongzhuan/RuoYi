@@ -49,7 +49,7 @@
 			<div class="tab-pane fade height-full" th:id="|menu_${menu.menuId}|">
 			  <ul class="nav">
                 <li th:each="cmenu : ${menu.children}">
-			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}">
+			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}" th:data-refresh="${cmenu.isRefresh == '0'}">
 			        <i th:class="${cmenu.icon} + ' fa-fw'"></i> <span class="nav-label">[[${cmenu.menuName}]]</span>
 			      </a>
 			      <a class="menu-content" th:if="${not #lists.isEmpty(cmenu.children)}" href="#">
@@ -59,7 +59,7 @@
                   </a>
 				  <ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-second-level collapse">
 				    <li th:each="emenu : ${cmenu.children}">
-				      <a th:if="${#lists.isEmpty(emenu.children)}" th:href="@{${emenu.url}}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}">
+				      <a th:if="${#lists.isEmpty(emenu.children)}" th:href="@{${emenu.url}}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}" th:data-refresh="${emenu.isRefresh == '0'}">
 				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
 				        [[${emenu.menuName}]]
 				      </a>
@@ -69,7 +69,7 @@
 				        <span class="fa arrow"></span>
 				      </a>
 				      <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-third-level collapse">
-				        <li th:each="fmenu : ${emenu.children}"><a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${#strings.isEmpty(fmenu.target)} ? |menuItem| : ${fmenu.target}" th:href="@{${fmenu.url}}">[[${fmenu.menuName}]]</a></li>
+				        <li th:each="fmenu : ${emenu.children}"><a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${#strings.isEmpty(fmenu.target)} ? |menuItem| : ${fmenu.target}" th:href="@{${fmenu.url}}" th:data-refresh="${fmenu.isRefresh == '0'}">[[${fmenu.menuName}]]</a></li>
 				      </ul>
 				    </li>
 				  </ul>

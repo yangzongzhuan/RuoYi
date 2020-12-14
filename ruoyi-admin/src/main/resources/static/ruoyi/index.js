@@ -80,7 +80,10 @@ function syncMenuTab(dataId) {
             $dataObj.parents("ul").addClass("in")
             $dataObj.parents("li").addClass("active").siblings().removeClass("active").find('li').removeClass("active");
             $dataObj.parents("ul").css('height', 'auto').height();
-            $dataObj.click();
+            $(".nav ul li, .nav li").removeClass("selected");
+            $dataObj.parent("li").addClass("selected");
+            setIframeUrl(dataId);
+            
             // 顶部菜单同步处理
             var tabStr = $dataObj.parents(".tab-pane").attr("id");
             if ($.common.isNotEmpty(tabStr)) {
@@ -102,6 +105,17 @@ function fixedSidebar() {
     setTimeout(function() {
         $('#side-menu').fadeIn(500);
     }, 100);
+}
+
+// 设置锚点
+function setIframeUrl(href) {
+	if($.common.equals("history", mode)) {
+	    storage.set('publicPath', href);
+	} else {
+	    var nowUrl = window.location.href;
+	    var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
+	    window.location.href = newUrl + "#" + href;
+	}
 }
 
 function SmoothlyMenu() {
@@ -529,17 +543,6 @@ $(function() {
     function activeTabMax() {
         $('#content-main').toggleClass('max');
         $('#ax_close_max').show();
-    }
-
-    // 设置锚点
-    function setIframeUrl(href) {
-    	if($.common.equals("history", mode)) {
-    	    storage.set('publicPath', href);
-    	} else {
-    	    var nowUrl = window.location.href;
-    	    var newUrl = nowUrl.substring(0, nowUrl.indexOf("#"));
-    	    window.location.href = newUrl + "#" + href;
-    	}
     }
 
     $(window).keydown(function(event) {
