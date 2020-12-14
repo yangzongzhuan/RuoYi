@@ -264,7 +264,7 @@ var closeItem = function(dataId){
 }
 
 /** 创建选项卡 */
-function createMenuItem(dataUrl, menuName) {
+function createMenuItem(dataUrl, menuName, isRefresh) {
     var panelUrl = window.frameElement.getAttribute('data-id');
     dataIndex = $.common.random(1, 100),
     flag = true;
@@ -284,6 +284,9 @@ function createMenuItem(dataUrl, menuName) {
                         return false;
                     }
                 });
+            }
+            if (isRefresh) {
+            	refreshTab();
             }
             flag = false;
             return false;
@@ -308,6 +311,15 @@ function createMenuItem(dataUrl, menuName) {
         scrollToTab($('.menuTab.active', topWindow));
     }
     return false;
+}
+
+// 刷新iframe
+function refreshTab() {
+	var topWindow = $(window.parent.document);
+	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
+	var target = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow);
+    var url = target.attr('src');
+	target.attr('src', url).ready();
 }
 
 // 滚动到指定选项卡

@@ -891,8 +891,8 @@ var table = {
                 layer.full(index);
             },
             // 选卡页方式打开
-            openTab: function (title, url) {
-            	createMenuItem(url, title);
+            openTab: function (title, url, isRefresh) {
+            	createMenuItem(url, title, isRefresh);
             },
             // 选卡页同一页签打开
             parentTab: function (title, url) {

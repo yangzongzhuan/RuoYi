@@ -249,6 +249,7 @@ $(function() {
         var dataUrl = $(this).attr('href'),
         dataIndex = $(this).data('index'),
         menuName = $.trim($(this).text()),
+        isRefresh = $(this).data("refresh"),
         flag = true;
 
         var $dataObj = $('a[href$="' + decodeURI(dataUrl) + '"]');
@@ -277,6 +278,9 @@ $(function() {
                             return false;
                         }
                     });
+                }
+                if (isRefresh) {
+                    refreshTab();
                 }
                 flag = false;
                 return false;
