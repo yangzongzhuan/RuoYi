@@ -647,6 +647,10 @@ var table = {
                         $("#" + tableId).bootstrapTreeTable('refresh', []);
                     }
             	}
+            	var search_selects = $("form select");
+                $.each(search_selects, function(index, arg) {
+                    $(arg).val(document.getElementById(arg.id).options[0].value).trigger("change");
+                });
             },
             // 获取选中复选框项
             selectCheckeds: function(name) {
