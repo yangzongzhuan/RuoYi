@@ -31,8 +31,10 @@
 		        showRefresh: false,
 		        showToggle: false,
 		        showColumns: false,
+		        printPageBuilder: printPageBuilder,
                 columns: [{
-		            checkbox: true
+		            checkbox: true,
+		            printIgnore: true
 		        },
 				{
 					field : 'userId', 
@@ -61,6 +63,7 @@
 		        {
 		            title: '操作',
 		            align: 'center',
+		            printIgnore: true,
 		            formatter: function(value, row, index) {
 		            	var actions = [];
                         actions.push('<a class="btn btn-danger btn-xs" href="javascript:;" onclick="remove(this)"><i class="fa fa-remove"></i>删除</a>');
@@ -77,6 +80,50 @@
         	    $(obj).parents("tr").remove();
         	    $.modal.msgSuccess('已删除!');
         	});
+        }
+        
+        // 自定义打印页面模板
+        function printPageBuilder(table){
+        	return `
+        	<html>
+        	  <head>
+        	  <style type="text/css" media="print">
+        	  @page {
+        	    size: auto;
+        	    margin: 25px 0 25px 0;
+        	  }
+        	  </style>
+        	  <style type="text/css" media="all">
+        	  table {
+        	    border-collapse: collapse;
+        	    font-size: 12px;
+        	  }
+        	  table, th, td {
+        	    border: 1px solid grey;
+        	  }
+        	  th, td {
+        	    text-align: center;
+        	    vertical-align: middle;
+        	  }
+        	  p {
+        	    font-weight: bold;
+        	    margin-left:20px;
+        	  }
+        	  table {
+        	    width:94%;
+        	    margin-left:3%;
+        	    margin-right:3%;
+        	  }
+        	  div.bs-table-print {
+        	    text-align:center;
+        	  }
+        	  </style>
+        	  </head>
+        	  <title>Print Table</title>
+        	  <body>
+        	  <div class="bs-table-print">${table}</div>
+        	  </body>
+        	</html>`
         }
     </script>
 </body>
