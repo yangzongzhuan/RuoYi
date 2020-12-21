@@ -172,7 +172,7 @@ var table = {
             	if (typeof table.get(this.id).responseHandler == "function") {
                     table.get(this.id).responseHandler(res);
                 }
-                if (res.code == 0) {
+                if (res.code == web_status.SUCCESS) {
                     if ($.common.isNotEmpty(table.options.sidePagination) && table.options.sidePagination == 'client') {
                     	return res.rows;
                     } else {
@@ -612,7 +612,7 @@ var table = {
             	if (typeof table.options.responseHandler == "function") {
                     table.options.responseHandler(res);
                 }
-            	if (res.code != undefined && res.code != 0) {
+            	if (res.code != undefined && res.code != web_status.SUCCESS) {
                     $.modal.alertWarning(res.msg);
                     return [];
                 } else {

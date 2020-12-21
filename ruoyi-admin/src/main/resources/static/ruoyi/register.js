@@ -27,7 +27,7 @@ function register() {
             "validateCode": validateCode
         },
         success: function(r) {
-            if (r.code == 0) {
+            if (r.code == web_status.SUCCESS) {
             	layer.alert("<font color='red'>恭喜你，您的账号 " + username + " 注册成功！</font>", {
             	    icon: 1,
             	    title: "系统提示"

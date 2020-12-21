@@ -30,7 +30,7 @@ function login() {
             "rememberMe": rememberMe
         },
         success: function(r) {
-            if (r.code == 0) {
+            if (r.code == web_status.SUCCESS) {
                 location.href = ctx + 'index';
             } else {
             	$.modal.closeLoading();
