@@ -58,7 +58,7 @@
 	            data: $('#form-demo-2').serialize(),
 	            type: "post",
 	            success: function(result) {
-	            	if (result.code == 0) {
+	            	if (result.code == web_status.SUCCESS) {
 	            		layer.msg("保存成功,正在刷新数据请稍后……", {
 		            	    icon: 1,
 		            	    time: 500,
