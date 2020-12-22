@@ -422,7 +422,7 @@ var sub = {
     editColumn: function() {
     	var count = $("#" + table.options.id).bootstrapTable('getData').length;
     	var params = new Array();
-    	for (var dataIndex = 0; dataIndex <= count; dataIndex++) {
+    	for (var dataIndex = 0; dataIndex < count; dataIndex++) {
     	    var columns = $('#' + table.options.id + ' tr[data-index="' + dataIndex + '"] td');
     	    var obj = new Object();
     	    for (var i = 0; i < columns.length; i++) {
