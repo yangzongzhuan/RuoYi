@@ -128,7 +128,7 @@
                     target.hasSelectItem = true;
                     $th = $('<th style="width:36px"></th>');
                 } else {
-                    $th = $('<th style="' + ((column.width) ? ('width:' + column.width) : '') + '" class="' + column.field + '_cls"></th>');
+                    $th = $('<th style="' + ((column.width) ? ('width:' + column.width + ((column.widthUnit) ? column.widthUnit : 'px')) : '') + '" class="' + column.field + '_cls"></th>');
                 }
                 if((!target.isFixWidth)&& column.width){
                     target.isFixWidth = column.width.indexOf("px")>-1?true:false;
@@ -334,7 +334,7 @@
                 } else {
                     var $td = $('<td name="' + column.field + '" class="' + column.field + '_cls"></td>');
                     if(column.width){
-                        $td.css("width",column.width);
+                        $td.css("width",column.width + (column.widthUnit ? column.widthUnit : 'px'));
                     }
                     if(column.align){
                         $td.css("text-align",column.align);
