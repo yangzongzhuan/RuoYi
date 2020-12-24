@@ -20,7 +20,7 @@
     <script th:inline="javascript">
       var ctx = [[@{/}]];
       function index() {
-          window.parent.frames.location.href = ctx + "index";
+    	  window.top.location = ctx + "index";
       }
     </script>
 </body>
