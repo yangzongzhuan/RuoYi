@@ -768,7 +768,7 @@ var table = {
             },
             // 弹出层指定宽度
             open: function (title, url, width, height, callback) {
-            	//如果是移动端，就使用自适应大小弹窗
+            	// 如果是移动端，就使用自适应大小弹窗
             	if ($.common.isMobile()) {
             	    width = 'auto';
             	    height = 'auto';
@@ -816,6 +816,11 @@ var table = {
                 var _width = $.common.isEmpty(options.width) ? "800" : options.width; 
                 var _height = $.common.isEmpty(options.height) ? ($(window).height() - 50) : options.height;
                 var _btn = ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-close"></i> 关闭'];
+            	// 如果是移动端，就使用自适应大小弹窗
+            	if ($.common.isMobile()) {
+            	    _width = 'auto';
+            	    _height = 'auto';
+            	}
                 if ($.common.isEmpty(options.yes)) {
                     options.yes = function(index, layero) {
                         options.callBack(index, layero);
@@ -852,7 +857,7 @@ var table = {
             },
             // 弹出层全屏
             openFull: function (title, url, width, height) {
-            	//如果是移动端，就使用自适应大小弹窗
+            	// 如果是移动端，就使用自适应大小弹窗
             	if ($.common.isMobile()) {
             	    width = 'auto';
             	    height = 'auto';
@@ -963,17 +968,10 @@ var table = {
             detail: function(id, width, height) {
             	table.set();
             	var _url = $.operate.detailUrl(id);
-            	var _width = $.common.isEmpty(width) ? "800" : width; 
-                var _height = $.common.isEmpty(height) ? ($(window).height() - 50) : height;
-            	//如果是移动端，就使用自适应大小弹窗
-            	if ($.common.isMobile()) {
-            	    _width = 'auto';
-            	    _height = 'auto';
-            	}
             	var options = {
                     title: table.options.modalName + "详细",
-                    width: _width,
-                    height: _height,
+                    width: width,
+                    height: height,
                     url: _url,
                     skin: 'layui-layer-gray', 
                     btn: ['关闭'],
