@@ -40,6 +40,7 @@ public class ${ClassName} extends ${Entity}
 #if($parentheseIndex != -1)
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
 #elseif($column.javaType == 'Date')
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "${comment}", width = 30, dateFormat = "yyyy-MM-dd")
 #else
     @Excel(name = "${comment}")

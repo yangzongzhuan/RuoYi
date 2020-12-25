@@ -602,7 +602,7 @@ div.ztree-border {
 	list-style: none;
 }
 
-.time-input {
+.select-time .time-input {
 	display: block;
 	width: 100%;
 	padding-left: 10px;

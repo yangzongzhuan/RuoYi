@@ -41,7 +41,12 @@
                                     <option value="-1">代码生成请选择字典属性</option>
                                 </select>
                             </li>
-#elseif($column.htmlType == "datetime")
+#elseif($column.htmlType == "datetime" && $column.queryType != "BETWEEN")
+                            <li>
+                                <label>${comment}：</label>
+                                <input type="text" class="time-input" placeholder="请选择${comment}" name="${column.javaField}"/>
+                            </li>
+#elseif($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
                             <li class="select-time">
                                 <label>${comment}：</label>
                                 <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[begin${AttrName}]"/>
