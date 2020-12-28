@@ -31,9 +31,11 @@ public class GenConstants
     /** 上级菜单名称字段 */
     public static final String PARENT_MENU_NAME = "parentMenuName";
 
-    /** 数据库字符串类型 */
-    public static final String[] COLUMNTYPE_STR = { "char", "varchar", "nvarchar", "varchar2", "tinytext", "text",
-            "mediumtext", "longtext" };
+   /** 数据库字符串类型 */
+    public static final String[] COLUMNTYPE_STR = { "char", "varchar", "nvarchar", "varchar2"};
+
+    /** 数据库文本类型 */
+    public static final String[] COLUMNTYPE_TEXT = { "tinytext", "text", "mediumtext", "longtext" };
 
     /** 数据库时间类型 */
     public static final String[] COLUMNTYPE_TIME = { "datetime", "time", "date", "timestamp" };
