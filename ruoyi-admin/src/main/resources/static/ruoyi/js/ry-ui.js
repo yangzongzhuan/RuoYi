@@ -1345,7 +1345,7 @@ var table = {
             },
             // 根据Id和Name选中指定节点
             selectByIdName: function(treeId, node) {
-        		if ($.common.isNotEmpty(treeId) && treeId == node.id) {
+        		if ($.common.isNotEmpty(treeId) && node && treeId == node.id) {
         			$._tree.selectNode(node, true);
         		}
             },
