@@ -44,8 +44,6 @@ import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 @Configuration
 public class ShiroConfig
 {
-    public static final String PREMISSION_STRING = "perms[\"{0}\"]";
-
     /**
      * Session超时时间，单位为毫秒（默认30分钟）
      */
