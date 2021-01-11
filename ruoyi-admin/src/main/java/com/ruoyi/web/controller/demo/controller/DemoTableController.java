@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
@@ -58,6 +59,16 @@ public class DemoTableController extends BaseController
         users.add(new UserTableModel(24, "1000024", "测试24", "1", "15666666666", "ry@qq.com", 570.0, "1"));
         users.add(new UserTableModel(25, "1000025", "测试25", "1", "15666666666", "ry@qq.com", 250.0, "1"));
         users.add(new UserTableModel(26, "1000026", "测试26", "1", "15666666666", "ry@qq.com", 250.0, "1"));
+    }
+
+    private final static List<UserTableColumn> columns = new ArrayList<UserTableColumn>();
+    {
+        columns.add(new UserTableColumn("用户ID", "userId"));
+        columns.add(new UserTableColumn("用户编号", "userCode"));
+        columns.add(new UserTableColumn("用户姓名", "userName"));
+        columns.add(new UserTableColumn("用户手机", "userPhone"));
+        columns.add(new UserTableColumn("用户邮箱", "userEmail"));
+        columns.add(new UserTableColumn("用户状态", "status"));
     }
 
     /**
@@ -269,12 +280,37 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格动态列
+     */
+    @GetMapping("/dynamicColumns")
+    public String dynamicColumns()
+    {
+        return prefix + "/dynamicColumns";
+    }
+
+    /**
      * 表格其他操作
      */
     @GetMapping("/other")
     public String other()
     {
         return prefix + "/other";
+    }
+
+    /**
+     * 动态获取列
+     */
+    @PostMapping("/ajaxColumns")
+    @ResponseBody
+    public AjaxResult ajaxColumns(UserTableColumn userColumn)
+    {
+        List<UserTableColumn> columnList = new ArrayList<UserTableColumn>(Arrays.asList(new UserTableColumn[columns.size()]));
+        Collections.copy(columnList, columns);
+        if (userColumn != null && "userBalance".equals(userColumn.getField()))
+        {
+            columnList.add(new UserTableColumn("用户余额", "userBalance"));
+        }
+        return AjaxResult.success(columnList);
     }
 
     /**
@@ -315,6 +351,45 @@ public class DemoTableController extends BaseController
         rspData.setRows(userList.subList(pageNum, pageSize));
         rspData.setTotal(userList.size());
         return rspData;
+    }
+}
+
+class UserTableColumn
+{
+    /** 表头 */
+    private String title;
+    /** 字段 */
+    private String field;
+
+    public UserTableColumn()
+    {
+
+    }
+
+    public UserTableColumn(String title, String field)
+    {
+        this.title = title;
+        this.field = field;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public String getField()
+    {
+        return field;
+    }
+
+    public void setField(String field)
+    {
+        this.field = field;
     }
 }
 

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<th:block th:include="include :: header('动态列')" />
+</head>
+<body class="gray-bg">
+	<div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="table-form">
+					<div class="select-list">
+						<ul>
+							<li>
+								要增加的列：
+								<select name="field">
+									<option value="">默认</option>
+									<option value="userBalance">用户余额</option>
+								</select>
+							</li>
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="tableSearch()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table"></table>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script th:inline="javascript">
+        var prefix = ctx + "demo/table";
+        var datas = [[${@dict.getType('sys_normal_disable')}]];
+
+        $(function() {
+        	ajaxColumns();
+        });
+        // 动态获取列
+        function ajaxColumns() {
+        	var url = prefix + "/ajaxColumns";
+        	var dataParam = $.common.formToJSON("table-form");
+            $.modal.loading("正在查询中，请稍后...");
+            $.post(url, dataParam, function(result) {
+                if (result.code == web_status.SUCCESS) {
+                	setColumns(result.data);
+                } else if (result.code == web_status.WARNING) {
+                    $.modal.alertWarning(result.msg)
+                } else {
+                    $.modal.alertError(result.msg);
+                }
+                $.modal.closeLoading();
+            });
+        }
+      	// 设置列
+        function setColumns(list) {
+        	var columns = [];
+        	list.forEach(function(item) {
+        	    if($.common.equals('status',item.field)){
+        	    	columns.push({
+        	    		field : item.field, 
+    					title : item.title,
+                        align: 'center',
+                        formatter: function(value, row, index) {
+                        	return $.table.selectDictLabel(datas, value);
+                        }
+        	    	})
+        	    } else {
+        	    	columns.push({
+        	    		field : item.field, 
+    					title : item.title
+        	    	})
+        	    }
+        	});
+        	columns.push({
+	            title: '操作',
+	            align: 'center',
+	            formatter: function(value, row, index) {
+	            	var actions = [];
+	            	actions.push('<a class="btn btn-success btn-xs" href="#"><i class="fa fa-edit"></i>编辑</a> ');
+                    actions.push('<a class="btn btn-danger btn-xs" href="#"><i class="fa fa-remove"></i>删除</a>');
+					return actions.join('');
+	            }
+	        });
+        	if(!table.get(table.options.id)){
+        		initTable(columns);
+        	} else {
+        		refreshTable(columns);
+        	}
+        }
+      	// 刷新表格
+        function refreshTable(columns) {
+        	var options = {
+        		columns: columns
+        	};
+        	$("#" + table.options.id).bootstrapTable('refreshOptions',options);
+        }
+      	// 初始化表格
+        function initTable(columns){
+        	var options = {
+        		url: prefix + "/list",
+            	showSearch: false,
+            	showRefresh: false,
+            	showToggle: false,
+            	showColumns: false,
+            	columns: columns
+            };
+            $.table.init(options);
+        }
+      	// 搜索
+        function tableSearch(){
+        	ajaxColumns();
+        }
+      	// 重置
+		function reset(){
+			$("#table-form")[0].reset();
+			ajaxColumns();
+        }
+    </script>
+</body>
+</html>
