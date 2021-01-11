@@ -59,7 +59,7 @@ public class GenUtils
         {
             column.setHtmlType(GenConstants.HTML_INPUT);
 
-            // 如果是浮点型
+            // 如果是浮点型 统一用BigDecimal
             String[] str = StringUtils.split(StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
             if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0)
             {
@@ -249,21 +249,5 @@ public class GenUtils
         {
             return 0;
         }
-    }
-
-    /**
-     * 获取空数组列表
-     * 
-     * @param length 长度
-     * @return 数组信息
-     */
-    public static String[] emptyList(int length)
-    {
-        String[] values = new String[length];
-        for (int i = 0; i < length; i++)
-        {
-            values[i] = StringUtils.EMPTY;
-        }
-        return values;
     }
 }

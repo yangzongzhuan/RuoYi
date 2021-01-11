@@ -160,8 +160,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <set>
             <if test="tableName != null">table_name = #{tableName},</if>
             <if test="tableComment != null and tableComment != ''">table_comment = #{tableComment},</if>
-            <if test="subTableName != null and subTableName != ''">sub_table_name = #{subTableName},</if>
-            <if test="subTableFkName != null and subTableFkName != ''">sub_table_fk_name = #{subTableFkName},</if>
+            <if test="subTableName != null">sub_table_name = #{subTableName},</if>
+            <if test="subTableFkName != null">sub_table_fk_name = #{subTableFkName},</if>
             <if test="className != null and className != ''">class_name = #{className},</if>
             <if test="functionAuthor != null and functionAuthor != ''">function_author = #{functionAuthor},</if>
             <if test="genType != null and genType != ''">gen_type = #{genType},</if>
