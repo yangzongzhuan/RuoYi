@@ -1059,7 +1059,7 @@ public class ExcelUtil<T>
                     }
                     else
                     {
-                        if ((Double) val % 1 > 0)
+                        if ((Double) val % 1 != 0)
                         {
                             val = new BigDecimal(val.toString());
                         }
