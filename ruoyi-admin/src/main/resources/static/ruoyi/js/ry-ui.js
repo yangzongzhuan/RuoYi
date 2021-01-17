@@ -286,6 +286,8 @@ var table = {
             destroy: function (tableId) {
             	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
             	$("#" + currentId).bootstrapTable('destroy');
+            	delete table.rememberSelectedIds[currentId];
+            	delete table.rememberSelecteds[currentId];
             },
             // 序列号生成
             serialNumber: function (index, tableId) {
