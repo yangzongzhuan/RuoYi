@@ -101,8 +101,9 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="text-right">
-                        <button class="btn btn-primary" onclick="printPage(this)"><i class="fa fa-print"></i> 打印</button>
+                    <!-- 打印网页时通过hidden-print隐藏元素 -->
+                    <div class="text-right hidden-print">
+                        <button class="btn btn-primary" onclick="printPage()"><i class="fa fa-print"></i> 打印</button>
                     </div>
 
                     <div class="well m-t"><strong>注意：</strong> 请在30日内完成付款，否则订单会自动取消。
@@ -113,10 +114,8 @@
     </div>
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
-        function printPage(obj) {
-            $(obj).hide();
+        function printPage() {
             window.print();
-            $(obj).show();
         }
     </script>
 </body>
