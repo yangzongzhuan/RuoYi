@@ -420,15 +420,22 @@ var storage = {
 // 主子表操作封装处理
 var sub = {
     editColumn: function() {
-    	var count = $("#" + table.options.id).bootstrapTable('getData').length;
-    	var params = new Array();
+    	var dataColumns = [];
+		for (var columnIndex = 0; columnIndex < table.options.columns.length; columnIndex++) {
+    		if (table.options.columns[columnIndex].visible != false) {
+    			dataColumns.push(table.options.columns[columnIndex]);
+    		}
+    	}
+		var params = new Array();
+		var data = $("#" + table.options.id).bootstrapTable('getData');
+    	var count = data.length;
     	for (var dataIndex = 0; dataIndex < count; dataIndex++) {
     	    var columns = $('#' + table.options.id + ' tr[data-index="' + dataIndex + '"] td');
     	    var obj = new Object();
     	    for (var i = 0; i < columns.length; i++) {
     	        var inputValue = $(columns[i]).find('input');
     	        var selectValue = $(columns[i]).find('select');
-    	        var key = table.options.columns[i].field;
+    	        var key = dataColumns[i].field;
     	        if ($.common.isNotEmpty(inputValue.val())) {
     	            obj[key] = inputValue.val();
     	        } else if ($.common.isNotEmpty(selectValue.val())) {
@@ -437,7 +444,9 @@ var sub = {
     	            obj[key] = "";
     	        }
     	    }
-    	    params.push({ index: dataIndex, row: obj });
+    	    var item = data[dataIndex];
+    	    var extendObj = $.extend({},item,obj);
+    	    params.push({ index: dataIndex, row: extendObj });
     	}
     	$("#" + table.options.id).bootstrapTable("updateRow", params);
     },
