@@ -37,23 +37,6 @@ $(function() {
         })
     }
 	
-    // 气泡弹出框特效（移到元素时）
-    $(document).on("mouseenter", '.table [data-toggle="popover"]', function() {
-        var _this = this;
-        $(this).popover("show");
-        $(".popover").on("mouseleave", function() {
-            $(_this).popover('hide');
-        });
-    })
-
-    // 气泡弹出框特效（离开元素时）
-    $(document).on("mouseleave", '.table [data-toggle="popover"]', function() {
-        var _this = this;
-        setTimeout(function() {
-            if (!$(".popover:hover").length) $(_this).popover("hide");
-        }, 100);
-    });
-	
     // 取消回车自动提交表单
     $(document).on("keypress", ":input:not(textarea):not([type=submit])", function(event) {
         if (event.keyCode == 13) {
@@ -445,7 +428,7 @@ var sub = {
     	        }
     	    }
     	    var item = data[dataIndex];
-    	    var extendObj = $.extend({},item,obj);
+    	    var extendObj = $.extend({}, item, obj);
     	    params.push({ index: dataIndex, row: extendObj });
     	}
     	$("#" + table.options.id).bootstrapTable("updateRow", params);
