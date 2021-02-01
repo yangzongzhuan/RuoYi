@@ -84,7 +84,26 @@
     <script th:src="@{/js/jquery.tmpl.js}"></script>
 	<script th:inline="javascript">
 	    $(function() {
+	    	// 初始化数据, 可以由后台传过来
+	    	var data = [
+	    	{
+	    		id: "100",
+	    		name: "商品名称",
+            	weight: "100",
+            	price: "12.5",
+            	date: "2021-02-01",
+            	type: "1",
+	    	},
+	    	{
+	    		id: "101",
+	    		name: "商品名称2",
+            	weight: "50",
+            	price: "10.8",
+            	date: "2021-02-01",
+            	type: "0",
+	    	}];
 		    var options = {
+		    	data: data,
                 pagination: false,
 		        showSearch: false,
                 showRefresh: false,
@@ -100,7 +119,8 @@
 		        	title: "序号",
                     formatter: function (value, row, index) {
                     	var columnIndex = $.common.sprintf("<input type='hidden' name='index' value='%s'>", $.table.serialNumber(index));
-                    	return columnIndex + $.table.serialNumber(index);
+                    	var columnId = $.common.sprintf("<input type='hidden' name='goods[%s].id' value='%s'>", index, row.id);
+                    	return columnIndex + $.table.serialNumber(index) + columnId;
                     }
                 },
 		        {
@@ -155,6 +175,7 @@
 	    /* 主子表-提交 */
         function submitHandler(index, layero){
         	var data = $("#form-add").serializeArray();
+        	alert(JSON.stringify(data))
 			$.operate.saveModal("/demo/operate/customer/add", data);
         }
 	    
