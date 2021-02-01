@@ -185,7 +185,8 @@ public class ExcelUtil<T>
             throw new IOException("文件sheet不存在");
         }
 
-        int rows = sheet.getPhysicalNumberOfRows();
+        // 获取最后一个非空行的行下标，比如总行数为n，则返回的为n-1
+        int rows = sheet.getLastRowNum();
 
         if (rows > 0)
         {
@@ -229,6 +230,11 @@ public class ExcelUtil<T>
             {
                 // 从第2行开始取数据,默认第一行是表头.
                 Row row = sheet.getRow(i);
+                // 判断当前行是否是空行
+                if (isRowEmpty(row))
+                {
+                    continue;
+                }
                 T entity = null;
                 for (Map.Entry<Integer, Field> entry : fieldsMap.entrySet())
                 {
@@ -1089,5 +1095,28 @@ public class ExcelUtil<T>
             return val;
         }
         return val;
+    }
+    
+    /**
+     * 判断是否是空行
+     * 
+     * @param row 判断的行
+     * @return
+     */
+    private boolean isRowEmpty(Row row)
+    {
+        if (row == null)
+        {
+            return true;
+        }
+        for (int i = row.getFirstCellNum(); i < row.getLastCellNum(); i++) 
+        {
+            Cell cell = row.getCell(i);
+            if (cell != null && cell.getCellType() != CellType.BLANK)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
