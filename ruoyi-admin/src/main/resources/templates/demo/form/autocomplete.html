@@ -259,12 +259,13 @@
 	    
 	    //淘宝搜索建议测试
 	    var taobaoBsSuggest = $("#taobao").bsSuggest({
-	        indexId: 2, //data.value 的第几个数据，作为input输入框的内容
-	        indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
-	        allowNoKeyword: false, //是否允许无关键字时请求数据
-	        multiWord: true, //以分隔符号分割的多关键字支持
-	        separator: ",", //多关键字支持时的分隔符，默认为空格
-	        getDataMethod: "url", //获取数据的方式，总是从 URL 获取
+	        indexId: 2,                 // data.value 的第几个数据，作为input输入框的内容
+	        indexKey: 1,                // data.value 的第几个数据，作为input输入框的内容
+	        allowNoKeyword: false,      // 是否允许无关键字时请求数据
+	        hideOnSelect: true,         // 鼠标从列表单击选择了值时，是否隐藏选择列表
+	        multiWord: true,            // 以分隔符号分割的多关键字支持
+	        separator: ",",             // 多关键字支持时的分隔符，默认为空格
+	        getDataMethod: "url",       // 获取数据的方式，总是从 URL 获取
 	        effectiveFieldsAlias: {
 	            Id: "序号",
 	            Keyword: "关键字",
