@@ -63,7 +63,7 @@ public class ScheduleUtils
         JobDetail jobDetail = JobBuilder.newJob(jobClass).withIdentity(getJobKey(jobId, jobGroup)).build();
 
         // 表达式调度构建器
-        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
+        CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression()).inTimeZone(TimeZone.getDefault());
         cronScheduleBuilder = handleCronScheduleMisfirePolicy(job, cronScheduleBuilder);
 
         // 按新的cronExpression表达式构建一个新的trigger
