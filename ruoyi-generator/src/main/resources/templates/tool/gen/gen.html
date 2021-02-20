@@ -143,10 +143,11 @@
 				if (result.code == web_status.SUCCESS) {
 					 var items = [];
 		                $.each(result.data, function(index, value) {
-		                	var highCode = hljs.highlightAuto(value).value;
 		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
 		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName) && !$.common.equals("sub-domain.java", templateName)){
-			                    items.push({
+		                    	var language = templateName.substring(templateName.lastIndexOf(".") + 1);
+			                    var highCode = hljs.highlight(language, value).value;
+		                    	items.push({
 			                        title: templateName , content: "<pre class=\"layui-code\"><code>" + highCode + "</code></pre>"
 			                    })
 		                    }
