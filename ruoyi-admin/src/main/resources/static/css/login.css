@@ -62,7 +62,7 @@ body.signin {
 @media screen and (max-width:768px) {
 	.signinpanel,.signuppanel {
 	margin:0 auto;
-	width:420px!important;
+	width:380px!important;
 	padding:20px
 }
 .signinpanel form {
