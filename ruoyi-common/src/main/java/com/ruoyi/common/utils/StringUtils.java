@@ -257,7 +257,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * 下划线转驼峰命名
+     * 驼峰转下划线命名
      */
     public static String toUnderScoreCase(String str)
     {

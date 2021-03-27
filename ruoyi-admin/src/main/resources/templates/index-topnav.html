@@ -379,6 +379,7 @@ function applyPath(url) {
 }
 
 $(function() {
+	var lockPath = storage.get('lockPath');
 	if($.common.equals("history", mode) && window.performance.navigation.type == 1) {
 		var url = storage.get('publicPath');
 	    if ($.common.isNotEmpty(url)) {
@@ -386,6 +387,9 @@ $(function() {
 	    } else {
 	    	$(".navbar-toolbar li a").eq(0).click();
 	    }
+	} else if($.common.isNotEmpty(lockPath)) {
+	    applyPath(lockPath);
+	    storage.remove('lockPath');
 	} else {
 		var hash = location.hash;
 	    if ($.common.isNotEmpty(hash)) {

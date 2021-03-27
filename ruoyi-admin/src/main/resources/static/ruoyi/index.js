@@ -501,6 +501,7 @@ $(function() {
     
     // 锁定屏幕
     $('#lockScreen').on('click', function () {
+    	storage.set('lockPath', $('.page-tabs-content').find('.active').attr('data-id'));
     	location.href  = ctx + "lockscreen";
     });
 
