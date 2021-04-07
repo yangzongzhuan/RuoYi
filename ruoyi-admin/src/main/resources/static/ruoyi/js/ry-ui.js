@@ -985,6 +985,11 @@ var table = {
                 };
             	$.modal.openOptions(options);
             },
+            // 详细信息，以tab页展现
+            detailTab: function(id) {
+            	table.set();
+            	$.modal.openTab("详细" + table.options.modalName, $.operate.detailUrl(id));
+            },
             // 详细访问地址
             detailUrl: function(id) {
             	var url = "/404.html";
