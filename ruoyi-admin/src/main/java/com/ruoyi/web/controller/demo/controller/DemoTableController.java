@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
  * 表格相关
@@ -105,6 +109,44 @@ public class DemoTableController extends BaseController
     public String export()
     {
         return prefix + "/export";
+    }
+
+    /**
+     * 表格导出选择列
+     */
+    @GetMapping("/exportSelected")
+    public String exportSelected()
+    {
+        return prefix + "/exportSelected";
+    }
+
+    /**
+     * 导出数据
+     */
+    @PostMapping("/exportData")
+    @ResponseBody
+    public AjaxResult exportSelected(UserTableModel userModel, String userIds)
+    {
+        List<UserTableModel> userList = new ArrayList<UserTableModel>(Arrays.asList(new UserTableModel[users.size()]));
+        Collections.copy(userList, users);
+
+        // 条件过滤
+        if (StringUtils.isNotEmpty(userIds))
+        {
+            userList.clear();
+            for (Long userId : Convert.toLongArray(userIds))
+            {
+                for (UserTableModel user : users)
+                {
+                    if (user.getUserId() == userId)
+                    {
+                        userList.add(user);
+                    }
+                }
+            }
+        }
+        ExcelUtil<UserTableModel> util = new ExcelUtil<UserTableModel>(UserTableModel.class);
+        return util.exportExcel(userList, "用户数据");
     }
 
     /**
@@ -399,21 +441,26 @@ class UserTableModel
     private int userId;
 
     /** 用户编号 */
+    @Excel(name = "用户编号", cellType = ColumnType.NUMERIC)
     private String userCode;
 
     /** 用户姓名 */
+    @Excel(name = "用户姓名")
     private String userName;
 
     /** 用户性别 */
     private String userSex;
 
     /** 用户手机 */
+    @Excel(name = "用户手机")
     private String userPhone;
 
     /** 用户邮箱 */
+    @Excel(name = "用户邮箱")
     private String userEmail;
 
     /** 用户余额 */
+    @Excel(name = "用户余额", cellType = ColumnType.NUMERIC)
     private double userBalance;
 
     /** 用户状态（0正常 1停用） */
