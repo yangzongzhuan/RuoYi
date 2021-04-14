@@ -84,7 +84,7 @@ public class ${ClassName}Controller extends BaseController
     {
         List<${ClassName}> list = ${className}Service.select${ClassName}List(${className});
         ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}.class);
-        return util.exportExcel(list, "${businessName}");
+        return util.exportExcel(list, "${functionName}数据");
     }
 
 #if($table.crud || $table.sub)
