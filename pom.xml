@@ -95,7 +95,7 @@
                 <artifactId>UserAgentUtils</artifactId>
                 <version>${bitwalker.version}</version>
             </dependency>
-            
+
             <!-- SpringBoot集成mybatis框架 -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
