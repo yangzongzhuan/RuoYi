@@ -21,6 +21,13 @@
 	overflow-x: hidden;
     overflow-y: auto;
 }
+/* 解决工具栏无法固定底部的问题（如果页面没有animated类可以不写这部分代码） */
+.animated {
+    animation-fill-mode: none;
+    -webkit-animation-fill-mode: none;
+    -moz-animation-fill-mode: none;
+    -o-animation-fill-mode: none;
+}
 </style>
 </head>
 <body class="gray-bg">
