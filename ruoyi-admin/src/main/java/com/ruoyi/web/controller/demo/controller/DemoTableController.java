@@ -259,12 +259,21 @@ public class DemoTableController extends BaseController
     }
 
     /**
-     * 表格拖拽操作
+     * 表格行拖拽操作
      */
-    @GetMapping("/reorder")
-    public String reorder()
+    @GetMapping("/reorderRows")
+    public String reorderRows()
     {
-        return prefix + "/reorder";
+        return prefix + "/reorderRows";
+    }
+
+    /**
+     * 表格列拖拽操作
+     */
+    @GetMapping("/reorderColumns")
+    public String reorderColumns()
+    {
+        return prefix + "/reorderColumns";
     }
 
     /**

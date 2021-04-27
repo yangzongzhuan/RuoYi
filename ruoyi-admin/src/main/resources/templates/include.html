@@ -170,10 +170,16 @@
     <script th:src="@{/ajax/libs/report/sparkline/jquery.sparkline.min.js}"></script>
 </div>
 
-<!-- 表格拖拽插件 -->
+<!-- 表格行拖拽插件 -->
 <div th:fragment="bootstrap-table-reorder-js">
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder/bootstrap-table-reorder.js}"></script>
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder/jquery.tablednd.js}"></script>
+</div>
+
+<!-- 表格列拖拽插件 -->
+<div th:fragment="bootstrap-table-reorder-columns-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder.js?v=20210202}"></script>
 </div>
 
 <!-- 表格列宽拖动插件 -->

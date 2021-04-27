@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('表格列拖拽操作')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="btn-group-sm" id="toolbar" role="group">
+	        <a class="btn btn-success" onclick="orderColumns()">
+	            <i class="fa fa-refresh"></i> 恢复顺序
+	        </a>
+        </div>
+		<div class="row">
+			<div class="col-sm-12 select-table table-bordered">
+			    <p class="select-title">按住表格列拖拽</p>
+				<table id="bootstrap-table"
+				 data-reorderable-columns="true"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:src="@{/js/jquery-ui-1.10.4.min.js}"></script>
+    <th:block th:include="include :: bootstrap-table-reorder-columns-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "demo/table";
+        var datas = [[${@dict.getType('sys_normal_disable')}]];
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+		        showSearch: false,
+		        showRefresh: false,
+		        showToggle: false,
+		        showColumns: false,
+                columns: [{
+					field : 'userId', 
+					title : '用户ID'
+				},
+				{
+					field : 'userCode', 
+					title : '用户编号'
+				},
+				{
+					field : 'userName', 
+					title : '用户姓名'
+				},
+				{
+					field : 'userPhone', 
+					title : '用户手机'
+				},
+				{
+					field : 'userEmail', 
+					title : '用户邮箱'
+				},
+				{
+				    field : 'userBalance',
+				    title : '用户余额'
+				},
+				{
+                    field: 'status',
+                    title: '用户状态',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                    	return $.table.selectDictLabel(datas, value);
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        
+        function orderColumns() {
+            $('#bootstrap-table').bootstrapTable('orderColumns', {
+            	userId: 0,
+            	userCode: 1,
+            	userName: 2,
+            	userPhone: 3,
+            	userEmail: 4,
+            	userBalance: 5,
+            	status: 6
+            })
+        }
+    </script>
+</body>
+</html>

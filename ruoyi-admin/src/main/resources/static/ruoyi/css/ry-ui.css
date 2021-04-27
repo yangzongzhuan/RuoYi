@@ -1025,12 +1025,48 @@ table.rc-table-resizing thead > th > a {
     float:left;
 }
 
-/** 表格拖拽样式 **/
+/** 表格行拖拽样式 **/
 .reorder_rows_onDragClass td {
     color:yellow!important;
 	background-color:#999!important;
 	text-shadow:0 0 10px black,0 0 10px black,0 0 8px black,0 0 6px black,0 0 6px black;
 	box-shadow:0 12px 14px -12px #111 inset,0 -2px 2px -1px #333 inset
+}
+
+/** 表格列拖拽样式 **/
+.dragtable-sortable { 
+    list-style-type: none; margin: 0; padding: 0; -moz-user-select: none;
+}
+
+.dragtable-sortable li {
+    margin: 0; padding: 0; float: left; font-size: 1em; background: white; 
+}
+
+.dragtable-sortable th, .dragtable-sortable td{
+    border-left: 0px;
+}
+
+.dragtable-sortable li:first-child th, .dragtable-sortable li:first-child td {
+    border-left: 1px solid #CCC; 
+}
+
+.ui-sortable-helper {
+    opacity: 0.7;filter: alpha(opacity=70);
+}
+
+.ui-sortable-placeholder { 
+    -moz-box-shadow: 4px 5px 4px #C6C6C6 inset;
+    -webkit-box-shadow: 4px 5px 4px #C6C6C6 inset;
+    box-shadow: 4px 5px 4px #C6C6C6 inset;
+    border-bottom: 1px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    visibility: visible !important;
+    background: #EFEFEF !important; 
+    visibility: visible !important;
+}
+
+.ui-sortable-placeholder * { 
+    opacity: 0.0; visibility: hidden; 
 }
 
 /** 表格选中样式 **/
