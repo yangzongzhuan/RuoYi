@@ -274,7 +274,7 @@
 #end
 #if($table.tree)
 
-        /*${functionName}-新增-选择父部门树*/
+        /*${functionName}-新增-选择父${functionName}树*/
         function select${BusinessName}Tree() {
             var options = {
                 title: '${functionName}选择',
