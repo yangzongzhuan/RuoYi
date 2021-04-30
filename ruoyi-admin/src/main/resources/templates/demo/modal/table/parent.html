@@ -72,7 +72,7 @@
             $.table.init(options);
         });
         
-        /* 添加用户-选择用户-提交 */
+        /* 添加用户-选择用户-提交(子页面调用父页面形式) */
 		function submitHandler(index, layero) {
 			var rows = $.table.selectFirstColumns();
 			if (rows.length == 0) {
@@ -84,6 +84,11 @@
 			// parent.selectUsers();
 			// 父页面的变量
 			parent.$('#userids').html(rows.join());
+		}
+        
+		/* 添加用户-选择用户-提交(回调形式-父页面调用子页面) */
+		function getSelections() {
+			return $.table.selectFirstColumns();
 		}
     </script>
 </body>

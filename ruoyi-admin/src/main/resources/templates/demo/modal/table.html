@@ -26,6 +26,7 @@
 	                <div class="ibox-content" id="test">
 	                    <p>弹出复选框表格及单选框表格（点击提交后得到数据并回显到父窗体）。 </p>
 	                    <button type="button" class="btn btn-info" onclick="selectUsersToParent()">弹出表格（复选框）</button>
+	                    <button type="button" class="btn btn-warning" onclick="selectUsersToParentCallBack()">弹出表格（复选框）- 回调形式</button>
 	                    <p id="userids"> </p>
 	                </div>
 	            </div>
@@ -47,6 +48,25 @@
 		function selectUsersToParent(){
 			$.modal.open("选择用户", prefix + "/parent");
         }
+		
+		function selectUsersToParentCallBack(){
+            var options = {
+                title: '选择用户',
+                url: prefix + "/parent",
+                callBack: doSubmit
+             };
+             $.modal.openOptions(options);
+        }
+		
+		function doSubmit(index, layero){
+		    var rows = layero.find("iframe")[0].contentWindow.getSelections();
+		    if (rows.length == 0) {
+                $.modal.alertWarning("请至少选择一条记录");
+                return;
+            }
+		    $('#userids').html(rows.join())
+		    layer.close(index);
+		}
 		
 		function selectUsers(){
 			alert(1);
