@@ -2,6 +2,10 @@
 <html lang="zh">
 <head>
 	<th:block th:include="include :: header('弹层组件')" />
+	<style>
+        /* 解决layer相册层弹出时导致页面自动滚动 */
+        html {height: auto;}
+    </style>
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content fadeInRight">
@@ -103,6 +107,7 @@
 	                    <button type="button" class="btn btn-primary" id="button-open-8">tab层</button>
 	                    <button type="button" class="btn btn-primary" id="button-open-9">prompt层</button>
 	                    <button type="button" class="btn btn-primary" id="button-open-10">捕获页</button>
+	                    <button type="button" class="btn btn-primary" id="button-open-16">相册层</button>
 	                </div>
 	            </div>
 	        </div>
@@ -251,6 +256,33 @@
 	    	// 需要关闭窗口的url
 	    	$.modal.closeTab(prefix + "/form");
 	    })
+	    
+	    $("#button-open-16").click(function(){
+            var json = {
+            		"title": "若依相册", //相册标题
+            		"id": 123, //相册id
+            		"start": 0, //初始显示的图片序号，默认0
+            		"data": [   //相册包含的图片，数组格式
+            		    {
+            		        "alt": "默认头像",
+            		        "pid": 1, //图片id
+            		        "src": "/img/profile.jpg", //原图地址
+            		        "thumb": "/img/profile.jpg" //缩略图地址
+            		    },
+            		    {
+                            "alt": "打赏",
+                            "pid": 2, //图片id
+                            "src": "/img/pay.png", //原图地址
+                            "thumb": "/img/pay.png" //缩略图地址
+                        }
+            		 ]
+            };
+            layer.photos({
+                photos: json,
+                closeBtn: 0, //右上角按钮，可通过配置1和2来展示，如果不显示，则closeBtn: 0
+                anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+            });
+        })
 	</script>
 </body>
 </html>
