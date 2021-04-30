@@ -418,11 +418,14 @@ var sub = {
     	    for (var i = 0; i < columns.length; i++) {
     	        var inputValue = $(columns[i]).find('input');
     	        var selectValue = $(columns[i]).find('select');
+    	        var textareaValue = $(columns[i]).find('textarea');
     	        var key = dataColumns[i].field;
     	        if ($.common.isNotEmpty(inputValue.val())) {
     	            obj[key] = inputValue.val();
     	        } else if ($.common.isNotEmpty(selectValue.val())) {
     	            obj[key] = selectValue.val();
+    	        } else if ($.common.isNotEmpty(textareaValue.val())) {
+    	            obj[key] = textareaValue.val();
     	        } else {
     	            obj[key] = "";
     	        }
