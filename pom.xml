@@ -228,7 +228,12 @@
                 <artifactId>ruoyi-common</artifactId>
                 <version>${ruoyi.version}</version>
             </dependency>
-
+            <!-- python解释器-->
+            <dependency>
+                <groupId>org.python</groupId>
+                <artifactId>jython-standalone</artifactId>
+                <version>2.7.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
