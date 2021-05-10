@@ -8,11 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="id"    column="id"    />
         <result property="username"    column="username"    />
         <result property="comment"    column="comment"    />
+        <result property="state"    column="state"    />
         <result property="time"    column="time"    />
     </resultMap>
 
     <sql id="selectCommentVo">
-        select id, username, comment, time from comment
+        select id, username, comment, state, time from comment
     </sql>
 
     <select id="selectCommentList" parameterType="Comment" resultMap="CommentResult">
@@ -20,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>  
             <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
             <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+            <if test="state != null "> and state = #{state}</if>
             <if test="time != null "> and time = #{time}</if>
         </where>
     </select>
@@ -29,18 +31,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertComment" parameterType="Comment">
+    <insert id="insertComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
         insert into comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="username != null">username,</if>
             <if test="comment != null">comment,</if>
+            <if test="state != null">state,</if>
             <if test="time != null">time,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="username != null">#{username},</if>
             <if test="comment != null">#{comment},</if>
+            <if test="state != null">#{state},</if>
             <if test="time != null">#{time},</if>
          </trim>
     </insert>
@@ -50,6 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="username != null">username = #{username},</if>
             <if test="comment != null">comment = #{comment},</if>
+            <if test="state != null">state = #{state},</if>
             <if test="time != null">time = #{time},</if>
         </trim>
         where id = #{id}

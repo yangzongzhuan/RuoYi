@@ -28,6 +28,10 @@ public class Comment extends BaseEntity
     @Excel(name = "评论内容")
     private String comment;
 
+    /** 评论的审核状态 */
+    @Excel(name = "评论的审核状态")
+    private Long state;
+
     /** 评论时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "评论时间", width = 30, dateFormat = "yyyy-MM-dd")
@@ -60,6 +64,15 @@ public class Comment extends BaseEntity
     {
         return comment;
     }
+    public void setState(Long state) 
+    {
+        this.state = state;
+    }
+
+    public Long getState() 
+    {
+        return state;
+    }
     public void setTime(Date time) 
     {
         this.time = time;
@@ -76,6 +89,7 @@ public class Comment extends BaseEntity
             .append("id", getId())
             .append("username", getUsername())
             .append("comment", getComment())
+            .append("state", getState())
             .append("time", getTime())
             .toString();
     }

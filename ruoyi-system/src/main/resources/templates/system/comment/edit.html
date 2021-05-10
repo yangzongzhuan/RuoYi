@@ -21,11 +21,28 @@
                 </div>
             </div>
             <div class="form-group">    
+                <label class="col-sm-3 control-label">评论的审核状态：</label>
+                <div class="col-sm-8">
+                    <select name="state" class="form-control m-b" th:with="type=${@dict.getType('comment_state')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{state}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
                 <label class="col-sm-3 control-label">评论时间：</label>
                 <div class="col-sm-8">
                     <div class="input-group date">
                         <input name="time" th:value="${#dates.format(comment.time, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">验证码：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <input name="time" th:value="${#dates.format(comment.time, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                        <img src="http://c2020502194rsy.scd.wezhan.cn/Common/GenerateCommentCaptcha?timestamp=0.3333336222553">
                     </div>
                 </div>
             </div>
