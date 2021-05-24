@@ -25,9 +25,13 @@
 		        showToggle: false,
 		        showColumns: false,
 		        showExport: true,
+		        exportDataType: 'selected', // 导出选择数据
+		        exportTypes: ['json', 'xml', 'csv', 'txt', 'sql', 'excel'], // 导出的文件类型
 		        exportOptions: {
-		        	ignoreColumn: [0, 8]  //忽略第一列和最后一列
+		        	fileName: '用户数据',    // 文件名称设置
+		        	ignoreColumn: [0, 8]    // 忽略第一列和最后一列
 		        },
+		        clickToSelect: true,
                 columns: [{
 		            checkbox: true
 		        },

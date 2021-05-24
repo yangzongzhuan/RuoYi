@@ -61,6 +61,8 @@ var table = {
                     showColumns: true,
                     showToggle: true,
                     showExport: false,
+                    exportDataType: 'all',
+                    exportTypes: ['csv', 'txt', 'doc', 'excel'],
                     clickToSelect: false,
                     singleSelect: false,
                     mobileResponsive: true,
@@ -142,6 +144,8 @@ var table = {
                     responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数
                     onLoadSuccess: $.table.onLoadSuccess,               // 当所有数据被加载时触发处理函数
                     exportOptions: options.exportOptions,               // 前端导出忽略列索引
+                    exportDataType: options.exportDataType,             // 导出方式（默认all：导出所有数据；basic：导出当前页的数据；selected：导出选中的数据）
+                    exportTypes: options.exportTypes,                   // 导出文件类型 （json、xml、png、csv、txt、sql、doc、excel、xlsx、powerpoint、pdf）
                     printPageBuilder: options.printPageBuilder,         // 自定义打印页面模板
                     detailFormatter: options.detailFormatter,           // 在行下面展示其他数据列表
                 });
