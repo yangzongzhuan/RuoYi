@@ -83,7 +83,7 @@ public interface ${ClassName}Mapper
     /**
      * 通过${functionName}ID删除${subTable.functionName}信息
      * 
-     * @param roleId 角色ID
+     * @param ${pkColumn.javaField} ${functionName}ID
      * @return 结果
      */
     public int delete${subClassName}By${subTableFkClassName}(${pkColumn.javaType} ${pkColumn.javaField});
