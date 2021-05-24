@@ -22,7 +22,7 @@ public class ExceptionUtil
         return str;
     }
 
-    public static String getRootErrorMseeage(Exception e)
+    public static String getRootErrorMessage(Exception e)
     {
         Throwable root = ExceptionUtils.getRootCause(e);
         root = (root == null ? e : root);
