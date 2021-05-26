@@ -125,19 +125,20 @@ public class SysDictTypeController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(dictTypeService.deleteDictTypeByIds(ids));
+        dictTypeService.deleteDictTypeByIds(ids);
+        return success();
     }
 
     /**
-     * 清空缓存
+     * 刷新字典缓存
      */
     @RequiresPermissions("system:dict:remove")
     @Log(title = "字典类型", businessType = BusinessType.CLEAN)
-    @GetMapping("/clearCache")
+    @GetMapping("/refreshCache")
     @ResponseBody
-    public AjaxResult clearCache()
+    public AjaxResult refreshCache()
     {
-        dictTypeService.clearCache();
+        dictTypeService.resetDictCache();
         return success();
     }
 

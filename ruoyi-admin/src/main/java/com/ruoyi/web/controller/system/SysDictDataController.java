@@ -115,6 +115,7 @@ public class SysDictDataController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(dictDataService.deleteDictDataByIds(ids));
+        dictDataService.deleteDictDataByIds(ids);
+        return success();
     }
 }

@@ -41,7 +41,7 @@ public interface ISysDictDataService
      * @param ids 需要删除的数据
      * @return 结果
      */
-    public int deleteDictDataByIds(String ids);
+    public void deleteDictDataByIds(String ids);
 
     /**
      * 新增保存字典数据信息

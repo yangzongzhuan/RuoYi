@@ -98,6 +98,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where config_id = #{configId}
     </update>
 	
+	<delete id="deleteConfigById" parameterType="Long">
+		delete from sys_config where config_id = #{configId}
+	</delete>
+	
     <delete id="deleteConfigByIds" parameterType="String">
         delete from sys_config where config_id in 
         <foreach item="configId" collection="array" open="(" separator="," close=")">

@@ -58,12 +58,22 @@ public interface ISysDictTypeService
      * @return 结果
      * @throws Exception 异常
      */
-    public int deleteDictTypeByIds(String ids);
+    public void deleteDictTypeByIds(String ids);
 
     /**
-     * 清空缓存数据
+     * 加载字典缓存数据
      */
-    public void clearCache();
+    public void loadingDictCache();
+
+    /**
+     * 清空字典缓存数据
+     */
+    public void clearDictCache();
+
+    /**
+     * 重置字典缓存数据
+     */
+    public void resetDictCache();
 
     /**
      * 新增保存字典类型信息

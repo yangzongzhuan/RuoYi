@@ -50,8 +50,8 @@
 		        <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:dict:export">
 		            <i class="fa fa-download"></i> 导出
 		        </a>
-		        <a class="btn btn-danger" onclick="clearCache()" shiro:hasPermission="system:dict:remove">
-		            <i class="fa fa-refresh"></i> 清理缓存
+		        <a class="btn btn-danger" onclick="refreshCache()" shiro:hasPermission="system:dict:remove">
+		            <i class="fa fa-refresh"></i> 刷新缓存
 		        </a>
 	        </div>
 	        
@@ -139,9 +139,9 @@
 		    $.modal.openTab("字典数据", url);
 		}
 		
-		/** 清理字典缓存 */
-        function clearCache() {
-            $.operate.get(prefix + "/clearCache");
+		/** 刷新字典缓存 */
+        function refreshCache() {
+            $.operate.get(prefix + "/refreshCache");
         }
 	</script>
 </body>

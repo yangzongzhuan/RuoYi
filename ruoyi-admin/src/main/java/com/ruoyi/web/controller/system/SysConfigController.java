@@ -129,19 +129,20 @@ public class SysConfigController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        return toAjax(configService.deleteConfigByIds(ids));
+        configService.deleteConfigByIds(ids);
+        return success();
     }
 
     /**
-     * 清空缓存
+     * 刷新参数缓存
      */
     @RequiresPermissions("system:config:remove")
     @Log(title = "参数管理", businessType = BusinessType.CLEAN)
-    @GetMapping("/clearCache")
+    @GetMapping("/refreshCache")
     @ResponseBody
-    public AjaxResult clearCache()
+    public AjaxResult refreshCache()
     {
-        configService.clearCache();
+        configService.resetConfigCache();
         return success();
     }
 

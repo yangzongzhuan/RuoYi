@@ -50,8 +50,8 @@
 		        <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:config:export">
 		            <i class="fa fa-download"></i> 导出
 		        </a>
-		        <a class="btn btn-danger" onclick="clearCache()" shiro:hasPermission="system:config:remove">
-		            <i class="fa fa-refresh"></i> 清理缓存
+		        <a class="btn btn-danger" onclick="refreshCache()" shiro:hasPermission="system:config:remove">
+		            <i class="fa fa-refresh"></i> 刷新缓存
 		        </a>
 	        </div>
 	        <div class="col-sm-12 select-table table-striped">
@@ -135,9 +135,9 @@
             $.table.init(options);
         });
         
-        /** 清理参数缓存 */
-        function clearCache() {
-            $.operate.get(prefix + "/clearCache");
+        /** 刷新参数缓存 */
+        function refreshCache() {
+            $.operate.get(prefix + "/refreshCache");
         }
     </script>
 </body>
