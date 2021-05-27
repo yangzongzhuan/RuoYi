@@ -152,7 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	        <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  	        update_time = sysdate()
         </set>
- 	    where dept_id in (${ancestors})
+ 	    where find_in_set(#{deptId}, ancestors)
 	</update>
 
 </mapper> 

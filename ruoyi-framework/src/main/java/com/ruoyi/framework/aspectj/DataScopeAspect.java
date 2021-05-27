@@ -63,6 +63,7 @@ public class DataScopeAspect
     @Before("dataScopePointCut()")
     public void doBefore(JoinPoint point) throws Throwable
     {
+        clearDataScope(point);
         handleDataScope(point);
     }
 
@@ -162,5 +163,18 @@ public class DataScopeAspect
             return method.getAnnotation(DataScope.class);
         }
         return null;
+    }
+
+    /**
+     * 拼接权限sql前先清空params.dataScope参数防止注入
+     */
+    private void clearDataScope(final JoinPoint joinPoint)
+    {
+        Object params = joinPoint.getArgs()[0];
+        if (StringUtils.isNotNull(params) && params instanceof BaseEntity)
+        {
+            BaseEntity baseEntity = (BaseEntity) params;
+            baseEntity.getParams().put(DATA_SCOPE, "");
+        }
     }
 }
