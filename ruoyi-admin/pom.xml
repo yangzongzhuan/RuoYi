@@ -106,7 +106,39 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>${project.artifactId}</warName>
                 </configuration>   
-           </plugin>   
+            </plugin>   
+            <!-- YUI Compressor (CSS/JS压缩) 
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <jswarn>false</jswarn>
+                    <nosuffix>true</nosuffix>
+                    <linebreakpos>50000</linebreakpos>
+                    <sourceDirectory>src/main/resources/static</sourceDirectory>
+                    <force>true</force>
+                    <includes>
+                        <include>**/*.js</include>
+                        <include>**/*.css</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/*.min.js</exclude>
+                        <exclude>**/*.min.css</exclude>
+                        <exclude>**/fileinput.js</exclude>
+                        <exclude>**/bootstrap-treetable.js</exclude>
+                    </excludes>
+                </configuration>
+            </plugin> -->
         </plugins>
         <finalName>${project.artifactId}</finalName>
     </build>
