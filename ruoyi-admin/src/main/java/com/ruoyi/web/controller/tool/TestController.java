@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.core.controller.BaseController;
@@ -16,6 +17,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.StringUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -60,7 +62,12 @@ public class TestController extends BaseController
     }
 
     @ApiOperation("新增用户")
-    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "userId", value = "用户id", dataType = "Integer"),
+        @ApiImplicitParam(name = "username", value = "用户名称", dataType = "String"),
+        @ApiImplicitParam(name = "password", value = "用户密码", dataType = "String"),
+        @ApiImplicitParam(name = "mobile", value = "用户手机", dataType = "String")
+    })
     @PostMapping("/save")
     public AjaxResult save(UserEntity user)
     {
@@ -72,9 +79,8 @@ public class TestController extends BaseController
     }
 
     @ApiOperation("更新用户")
-    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
     @PutMapping("/update")
-    public AjaxResult update(UserEntity user)
+    public AjaxResult update(@RequestBody UserEntity user)
     {
         if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId()))
         {
@@ -105,7 +111,7 @@ public class TestController extends BaseController
     }
 }
 
-@ApiModel("用户实体")
+@ApiModel(value = "UserEntity", description = "用户实体")
 class UserEntity
 {
     @ApiModelProperty("用户ID")
