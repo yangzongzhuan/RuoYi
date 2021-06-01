@@ -346,10 +346,16 @@ var table = {
                 }
             },
             // 搜索-默认第一个form
-            search: function(formId, tableId) {
+            search: function(formId, tableId, pageNumber, pageSize) {
                 table.set(tableId);
                 table.options.formId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 var params = $.common.isEmpty(tableId) ? $("#" + table.options.id).bootstrapTable('getOptions') : $("#" + tableId).bootstrapTable('getOptions');
+                if ($.common.isNotEmpty(pageNumber)) {
+                	params.pageNumber = pageNumber;
+                }
+                if ($.common.isNotEmpty(pageSize)) {
+                	params.pageSize = pageSize;
+                }
                 if($.common.isNotEmpty(tableId)){
                     $("#" + tableId).bootstrapTable('refresh', params);
                 } else{
@@ -445,10 +451,23 @@ var table = {
             	});
             },
             // 刷新表格
-            refresh: function(tableId) {
+            refresh: function(tableId, pageNumber, pageSize, url) {
             	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
+            	var params = $("#" + currentId).bootstrapTable('getOptions');
+            	if ($.common.isEmpty(pageNumber)) {
+            		pageNumber = params.pageNumber;
+            	}
+            	if ($.common.isEmpty(pageSize)) {
+            		pageSize = params.pageSize;
+            	}
+            	if ($.common.isEmpty(url)) {
+            		url = $.common.isEmpty(url) ? params.url : url;
+            	}
             	$("#" + currentId).bootstrapTable('refresh', {
-                    silent: true
+                    silent: true,
+                    url: url,
+                    pageNumber: pageNumber,
+                    pageSize: pageSize
                 });
             },
             // 查询表格指定列值
@@ -634,22 +653,22 @@ var table = {
         // 表单封装处理
     	form: {
             // 表单重置
-            reset: function(formId, tableId) {
+            reset: function(formId, tableId, pageNumber, pageSize) {
                 table.set(tableId);
-            	var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
-            	$("#" + currentId)[0].reset();
+            	formId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
+            	$("#" + formId)[0].reset();
+            	var tableId = $.common.isEmpty(tableId) ? table.options.id : tableId;
             	if (table.options.type == table_type.bootstrapTable) {
-                    if($.common.isEmpty(tableId)){
-                        $("#" + table.options.id).bootstrapTable('refresh');
-                    } else{
-                        $("#" + tableId).bootstrapTable('refresh');
+            		var params = $("#" + tableId).bootstrapTable('getOptions');
+                    if ($.common.isNotEmpty(pageNumber)) {
+                    	params.pageNumber = pageNumber;
                     }
+                    if ($.common.isNotEmpty(pageSize)) {
+                    	params.pageSize = pageSize;
+                    }
+                    $("#" + tableId).bootstrapTable('refresh', params);
             	} else if (table.options.type == table_type.bootstrapTreeTable) {
-                    if($.common.isEmpty(tableId)){
-                        $("#" + table.options.id).bootstrapTreeTable('refresh', []);
-                    } else{
-                        $("#" + tableId).bootstrapTreeTable('refresh', []);
-                    }
+            		$("#" + tableId).bootstrapTreeTable('refresh', []);
             	}
             },
             // 获取选中复选框项
