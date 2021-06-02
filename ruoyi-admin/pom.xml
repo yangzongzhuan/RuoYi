@@ -135,7 +135,7 @@
                         <exclude>**/*.min.js</exclude>
                         <exclude>**/*.min.css</exclude>
                         <exclude>**/fileinput.js</exclude>
-                        <exclude>**/bootstrap-treetable.js</exclude>
+                        <exclude>**/bootstrap-table/**</exclude>
                     </excludes>
                 </configuration>
             </plugin> -->
