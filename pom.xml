@@ -133,11 +133,13 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
-                <version>3.0.0</version>
-                <exclusion>
+                <version>${swagger.version}</version>
+				<exclusions>
+                    <exclusion>
                     <groupId>io.swagger</groupId>
                     <artifactId>swagger-models</artifactId>
                 </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- io常用工具类 -->
