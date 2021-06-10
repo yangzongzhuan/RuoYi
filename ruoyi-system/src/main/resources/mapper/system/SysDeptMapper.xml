@@ -145,14 +145,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update sys_dept set del_flag = '2' where dept_id = #{deptId}
 	</delete>
 	
-	<update id="updateDeptStatus" parameterType="SysDept">
- 	    update sys_dept
- 	    <set>
- 	        <if test="status != null and status != ''">status = #{status},</if>
- 	        <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
- 	        update_time = sysdate()
-        </set>
- 	    where find_in_set(#{deptId}, ancestors)
+	<update id="updateDeptStatusNormal" parameterType="Long">
+ 	    update sys_dept set status = '0' where dept_id in 
+ 	    <foreach collection="array" item="deptId" open="(" separator="," close=")">
+        	#{deptId}
+        </foreach>
 	</update>
 
 </mapper> 
