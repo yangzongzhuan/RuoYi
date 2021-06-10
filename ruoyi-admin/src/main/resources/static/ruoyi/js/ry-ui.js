@@ -472,6 +472,11 @@ var table = {
                     pageSize: pageSize
                 });
             },
+            // 刷新options配置
+            refreshOptions: function(options,tableId) {
+                var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
+                $("#" + currentId).bootstrapTable('refreshOptions', options);
+            },
             // 查询表格指定列值
             selectColumns: function(column) {
             	var rows = $.map($("#" + table.options.id).bootstrapTable('getSelections'), function (row) {
