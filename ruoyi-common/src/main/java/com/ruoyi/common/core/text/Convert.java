@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.util.Set;
 import com.ruoyi.common.utils.StringUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * 类型转换器
@@ -795,9 +796,14 @@ public class Convert
         {
             return (String) obj;
         }
-        else if (obj instanceof byte[] || obj instanceof Byte[])
+        else if (obj instanceof byte[])
         {
-            return str((Byte[]) obj, charset);
+            return str((byte[]) obj, charset);
+        }
+        else if (obj instanceof Byte[])
+        {
+            byte[] bytes = ArrayUtils.toPrimitive((Byte[]) obj);
+            return str(bytes, charset);
         }
         else if (obj instanceof ByteBuffer)
         {
