@@ -15,7 +15,7 @@
 			         data-print-filter 设置值以按此列过滤打印的数据。
 			         data-print-formatter 函数（值，行，索引）-返回字符串。格式化打印表中此列的单元格值。函数行为类似于“ formatter”列选项
 			         printIgnore 设置为true可以在打印页面中隐藏此列。 -->
-				<table id="bootstrap-table"  data-show-print="true"></table>
+				<table id="bootstrap-table"></table>
 			</div>
 		</div>
 	</div>
@@ -27,6 +27,7 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
+                showPrint: true,
 		        showSearch: false,
 		        showRefresh: false,
 		        showToggle: false,
