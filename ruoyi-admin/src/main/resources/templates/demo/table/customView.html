@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('自定义视图分页')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-page-size="10" 
+				       data-show-custom-view="true" data-custom-view="customViewFormatter"
+                       data-show-custom-view-button="true">
+                </table>
+			</div>
+		</div>
+	</div>
+	
+    <template id="profileTemplate">
+        <div class="col-sm-4">
+            <div class="contact-box">
+                <a href="profile.html">
+                    <div class="col-sm-4">
+                        <div class="text-center">
+                            <img alt="image" class="img-circle m-t-xs img-responsive" src="%IMAGE%">
+                            <div class="m-t-xs font-bold">%userName%</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h3><strong>%userCode%</strong></h3>
+                        <p><i class="fa fa-jpy"></i> %userBalance%</p>
+                        <address>
+                        <strong>RuoYi, Inc.</strong><br>
+                        E-mail: %userEmail%<br>
+                        <abbr title="Phone">Tel:</abbr> %userPhone%
+                       </address>
+                    </div>
+                    <div class="clearfix"></div>
+                 </a>
+             </div>
+        </div>
+    </template>
+
+    <div th:include="include :: footer"></div>
+    <th:block th:include="include :: bootstrap-table-custom-view-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "demo/table";
+        var datas = [[${@dict.getType('sys_normal_disable')}]];
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+		        showSearch: false,
+		        showRefresh: false,
+		        showToggle: false,
+		        showColumns: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'userId', 
+					title : '用户ID'
+				},
+				{
+					field : 'userCode', 
+					title : '用户编号'
+				},
+				{
+					field : 'userName', 
+					title : '用户姓名'
+				},
+				{
+					field : 'userPhone', 
+					title : '用户手机'
+				},
+				{
+					field : 'userEmail', 
+					title : '用户邮箱'
+				},
+				{
+				    field : 'userBalance',
+				    title : '用户余额'
+				},
+				{
+                    field: 'status',
+                    title: '用户状态',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                    	return $.table.selectDictLabel(datas, value);
+                    }
+                },
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs" href="#"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs" href="#"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+        
+        function customViewFormatter (data) {
+            var template = $('#profileTemplate').html()
+            var view = ''
+            $.each(data, function (i, row) {
+              view += template.replace('%userCode%', row.userCode)
+                .replace('%IMAGE%', "http://demo.ruoyi.vip/img/profile.jpg")
+                .replace('%userName%', row.userName)
+                .replace('%userEmail%', row.userEmail)
+                .replace('%userPhone%', row.userPhone)
+                .replace('%userBalance%', row.userBalance);
+            })
+
+            return `<div class="row mx-0">${view}</div>`
+          }
+    </script>
+</body>
+</html>

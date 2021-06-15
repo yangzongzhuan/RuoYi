@@ -340,6 +340,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 自定义视图分页
+     */
+    @GetMapping("/customView")
+    public String customView()
+    {
+        return prefix + "/customView";
+    }
+
+    /**
      * 表格其他操作
      */
     @GetMapping("/other")

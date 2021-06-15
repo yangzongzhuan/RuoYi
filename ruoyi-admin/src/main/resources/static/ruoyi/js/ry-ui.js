@@ -473,7 +473,7 @@ var table = {
                 });
             },
             // 刷新options配置
-            refreshOptions: function(options,tableId) {
+            refreshOptions: function(options, tableId) {
                 var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
                 $("#" + currentId).bootstrapTable('refreshOptions', options);
             },
