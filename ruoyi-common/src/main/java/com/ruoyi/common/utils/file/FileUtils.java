@@ -18,7 +18,7 @@ import com.ruoyi.common.utils.StringUtils;
  * 
  * @author ruoyi
  */
-public class FileUtils extends org.apache.commons.io.FileUtils
+public class FileUtils
 {
     public static String FILENAME_PATTERN = "[a-zA-Z0-9_\\-\\|\\.\\u4e00-\\u9fa5]+";
 
