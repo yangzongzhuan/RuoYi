@@ -91,5 +91,12 @@
         </form>
     </div>
 	<th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        function submitHandler() {
+        	if ($.validate.form()) {
+        		$.modal.msgSuccess('保存成功！');
+            }
+        }
+    </script>
 </body>
 </html>
