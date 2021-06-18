@@ -152,11 +152,16 @@ jQuery.tableDnD = {
         config.dragHandle
             // We only need to add the event to the specified cells
             && $(config.dragHandle, table).each(function() {
-                // The cell is bound to "this"
-                $(this).bind(startEvent, function(e) {
-                    $.tableDnD.initialiseDrag($(this).parents('tr')[0], table, this, e, config);
-                    return false;
-                });
+                if (! $(this).hasClass("nodrag")) {
+                    // The cell is bound to "this"
+                    $(this).bind(startEvent, function(e) {
+                        if (e.target.tagName === "TD" && event.target.className !== "nodrag") {
+                    	    $.tableDnD.initialiseDrag($(this).parents('tr')[0], table, this, e, config);
+                            return false;
+                	    }
+                        return true;
+                    });
+                }
             })
             // For backwards compatibility, we add the event to the whole row
             // get all the rows as a wrapped set
