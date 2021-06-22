@@ -108,6 +108,8 @@ shiro:
     httpOnly: true
     # 设置Cookie的过期时间，天为单位
     maxAge: 30
+    # 设置密钥，务必保持唯一性（生成方式，直接拷贝到main运行即可）Base64.encodeToString(CipherUtils.generateNewKey(128, "AES").getEncoded()) （默认启动生成随机秘钥，随机秘钥会导致之前客户端RememberMe Cookie无效，如设置固定秘钥RememberMe Cookie则有效）
+    cipherKey: 
   session:
     # Session超时时间，-1代表永不过期（默认30分钟）
     expireTime: 30
