@@ -946,6 +946,8 @@ table.rc-table-resizing thead > th > a {
 .bootstrap-tree-table .treetable-bars .tool-right{float: right;}
 .bootstrap-tree-table .treetable-bars .columns li label{display: block;padding: 3px 20px;clear: both;font-weight: 400;line-height: 1.428571429;max-width: 100%;margin-bottom: 5px;cursor:pointer;}
 .bootstrap-tree-table .table{border-bottom: 0px solid #e7eaec!important;}
+.bootstrap-tree-table .table-bordered .treetable-thead th {border-left: 1px solid #e7eaec!important;}
+.bootstrap-tree-table .table-bordered .treetable-tbody td {border-right: 1px solid #e7eaec!important;}
 
 /** 首页样式 **/
 .ax_close_max {
