@@ -73,7 +73,7 @@ var table = {
                     fixedNumber: 0,
                     fixedRightNumber: 0,
                     queryParams: $.table.queryParams,
-                    rowStyle: {},
+                    rowStyle: undefined,
                 };
             	var options = $.extend(defaults, options);
             	table.options = options;
