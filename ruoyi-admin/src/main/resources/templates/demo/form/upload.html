@@ -14,16 +14,16 @@
                     </div>
                     <div class="ibox-content">
                     	<div class="form-group">
-                            <label class="font-noraml">简单示例</label>
+                            <label class="font-noraml">单文件上传</label>
 	                        <div class="file-loading">
-					            <input class="file" type="file" multiple data-min-file-count="1" data-theme="fas">
+					            <input id="singleFile" name="file" type="file">
 					        </div>
                         </div>
                         
                         <div class="form-group">
                             <label class="font-noraml">多文件上传</label>
 	                        <div class="file-loading">
-					            <input id="fileinput-demo-1" type="file" multiple>
+					            <input id="multipleFile" name="files" type="file" multiple>
 					        </div>
                         </div>
                         <hr>
@@ -38,25 +38,36 @@
     </div>
     <th:block th:include="include :: footer" />
     <th:block th:include="include :: bootstrap-fileinput-js" />
-    <script type="text/javascript">
+    <script th:inline="javascript">
+    
     $(document).ready(function () {
-        $("#fileinput-demo-1").fileinput({
-            'theme': 'explorer-fas',
-            'uploadUrl': '#',
-            overwriteInitial: false,
-            initialPreviewAsData: true,
-            initialPreview: [
-                "/img/profile.jpg"
-            ]
-        });
+    	// 单图上传
+    	$("#singleFile").fileinput({
+            uploadUrl: ctx + 'common/upload',
+            maxFileCount: 1,
+            autoReplace: true
+        }).on('fileuploaded', function (event, data, previewId, index) {
+        	var rsp = data.response;
+            log.info("return url：" + rsp.url)
+            log.info("reutrn fileName：" + rsp.fileName)
+        }).on('fileremoved', function (event, id, index) {
+            $("input[name='" + event.currentTarget.id + "']").val('')
+        })
         
-        $("#fileinput-demo-1").on("fileuploaded", function(event, data, proviewId, index) {
-            console.info(event);
-            console.info(data);
-            console.info(proviewId);
-            console.info(index);
-        });
-        
+        // 多图上传
+        $("#multipleFile").fileinput({
+            uploadUrl: ctx + 'common/uploads',
+            uploadAsync: false
+        }).on('filebatchuploadsuccess', function (event, data, previewId, index) {
+        	var rsp = data.response;
+        	var fileJson = rsp.data;
+        	for (var i in fileJson) {
+        	    log.info("return data.url：" + fileJson[i].url) 
+        	    log.info("reutrn data.name：" + fileJson[i].name)
+        	}
+        }).on('fileremoved', function (event, id, index) {
+            $("input[name='" + event.currentTarget.id + "']").val('')
+        })
     });
     </script>
 </body>
