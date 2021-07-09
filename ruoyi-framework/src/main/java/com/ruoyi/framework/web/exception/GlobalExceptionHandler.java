@@ -47,8 +47,9 @@ public class GlobalExceptionHandler
     /**
      * 请求方式不支持
      */
-    @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-    public AjaxResult handleException(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
+    @ExceptionHandler({ HttpRequestMethodNotSupportedException.class })
+    public AjaxResult handleException(HttpRequestMethodNotSupportedException e, HttpServletRequest request)
+    {
         String requestURI = request.getRequestURI();
         String msg = String.format("访问的URL[%s]不支持%s请求", requestURI, e.getMethod());
         log.error(msg, e);
@@ -59,7 +60,8 @@ public class GlobalExceptionHandler
      * 拦截未知的运行时异常
      */
     @ExceptionHandler(RuntimeException.class)
-    public AjaxResult notFount(RuntimeException e, HttpServletRequest request) {
+    public AjaxResult notFount(RuntimeException e, HttpServletRequest request)
+    {
         String requestURI = request.getRequestURI();
         String msg = String.format("访问的URL[%s]发生异常%s", requestURI, e.getMessage());
         log.error(msg, e);
