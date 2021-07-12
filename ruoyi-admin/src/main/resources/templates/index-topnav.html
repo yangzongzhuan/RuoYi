@@ -219,10 +219,10 @@
                     <!-- 顶部菜单列表 -->
 	                <th:block th:each="menu : ${menus}">
                	    <li role="presentation" th:id="|tab_${menu.menuId}|">
-               	        <a th:if="${#lists.isEmpty(menu.children)}" data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank' : 'menuItem noactive'}" th:href="${menu.url}">
+               	        <a th:if="${#lists.isEmpty(menu.children)}" data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank' : 'menuItem noactive'}" th:href="@{${menu.url}}">
                             <i th:class="${menu.icon}"></i> <span>[[${menu.menuName}]]</span>
                         </a>	
-                        <a th:if="${not #lists.isEmpty(menu.children)}" data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank'}" th:href="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? ${menu.url} : |#menu_${menu.menuId}|}">
+                        <a th:if="${not #lists.isEmpty(menu.children)}" data-toggle="tab" th:class="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? 'menuBlank'}" th:href="@{${!#strings.isEmpty(menu.target) && menu.target == 'menuBlank'} ? @{${menu.url}} : |#menu_${menu.menuId}|}">
                             <i th:class="${menu.icon}"></i> <span>[[${menu.menuName}]]</span>
                         </a>
                     </li>
