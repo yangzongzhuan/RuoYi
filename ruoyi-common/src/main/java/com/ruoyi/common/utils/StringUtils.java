@@ -1,7 +1,13 @@
 package com.ruoyi.common.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import org.springframework.util.AntPathMatcher;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.text.StrFormatter;
 
 /**
@@ -257,6 +263,68 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
+     * 是否为http(s)://开头
+     * 
+     * @param link 链接
+     * @return 结果
+     */
+    public static boolean ishttp(String link)
+    {
+        return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
+    }
+
+    /**
+     * 字符串转set
+     * 
+     * @param str 字符串
+     * @param sep 分隔符
+     * @return set集合
+     */
+    public static final Set<String> str2Set(String str, String sep)
+    {
+        return new HashSet<String>(str2List(str, sep, true, false));
+    }
+
+    /**
+     * 字符串转list
+     * 
+     * @param str 字符串
+     * @param sep 分隔符
+     * @param filterBlank 过滤纯空白
+     * @param trim 去掉首尾空白
+     * @return list集合
+     */
+    public static final List<String> str2List(String str, String sep, boolean filterBlank, boolean trim)
+    {
+        List<String> list = new ArrayList<String>();
+        if (StringUtils.isEmpty(str))
+        {
+            return list;
+        }
+
+        // 过滤空白字符串
+        if (filterBlank && StringUtils.isBlank(str))
+        {
+            return list;
+        }
+        String[] split = str.split(sep);
+        for (String string : split)
+        {
+            if (filterBlank && StringUtils.isBlank(string))
+            {
+                continue;
+            }
+            if (trim)
+            {
+                string = string.trim();
+            }
+            list.add(string);
+        }
+
+        return list;
+    }
+
+    /**
      * 驼峰转下划线命名
      */
     public static String toUnderScoreCase(String str)
@@ -301,6 +369,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             }
             sb.append(Character.toLowerCase(c));
         }
+
         return sb.toString();
     }
 
@@ -398,6 +467,45 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 查找指定字符串是否匹配指定字符串列表中的任意一个字符串
+     * 
+     * @param str 指定字符串
+     * @param strs 需要检查的字符串数组
+     * @return 是否匹配
+     */
+    public static boolean matches(String str, List<String> strs)
+    {
+        if (isEmpty(str) || isEmpty(strs))
+        {
+            return false;
+        }
+        for (String pattern : strs)
+        {
+            if (isMatch(pattern, str))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断url是否与规则配置: 
+     * ? 表示单个字符; 
+     * * 表示一层路径内的任意字符串，不可跨层级; 
+     * ** 表示任意层路径;
+     * 
+     * @param pattern 匹配规则
+     * @param url 需要匹配的url
+     * @return
+     */
+    public static boolean isMatch(String pattern, String url)
+    {
+        AntPathMatcher matcher = new AntPathMatcher();
+        return matcher.match(pattern, url);
     }
 
     @SuppressWarnings("unchecked")
