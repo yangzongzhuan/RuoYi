@@ -245,6 +245,7 @@
             $('.summernote').each(function(i) {
                 $('#' + this.id).summernote({
                     lang: 'zh-CN',
+                    dialogsInBody: true,
                     callbacks: {
                         onChange: function(contents, $edittable) {
                             $("input[name='" + this.id + "']").val(contents);
