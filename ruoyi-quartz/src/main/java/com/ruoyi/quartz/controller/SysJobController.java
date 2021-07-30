@@ -133,7 +133,7 @@ public class SysJobController extends BaseController
     {
         if (!CronUtils.isValid(job.getCronExpression()))
         {
-            return AjaxResult.error("新增任务'" + job.getJobName() + "'失败，Cron表达式不正确");
+            return error("新增任务'" + job.getJobName() + "'失败，Cron表达式不正确");
         }
         else if (StringUtils.containsIgnoreCase(job.getInvokeTarget(), Constants.LOOKUP_RMI))
         {
@@ -167,7 +167,7 @@ public class SysJobController extends BaseController
     {
         if (!CronUtils.isValid(job.getCronExpression()))
         {
-            return AjaxResult.error("修改任务'" + job.getJobName() + "'失败，Cron表达式不正确");
+            return error("修改任务'" + job.getJobName() + "'失败，Cron表达式不正确");
         }
         else if (StringUtils.containsIgnoreCase(job.getInvokeTarget(), Constants.LOOKUP_RMI))
         {
