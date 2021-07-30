@@ -325,6 +325,29 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
+     * 查找指定字符串是否包含指定字符串列表中的任意一个字符串同时串忽略大小写
+     *
+     * @param cs 指定字符串
+     * @param searchCharSequences 需要检查的字符串数组
+     * @return 是否包含任意一个字符串
+     */
+    public static boolean containsAnyIgnoreCase(CharSequence cs, CharSequence... searchCharSequences)
+    {
+        if (isEmpty(cs) || isEmpty(searchCharSequences))
+        {
+            return false;
+        }
+        for (CharSequence testStr : searchCharSequences)
+        {
+            if (containsIgnoreCase(cs, testStr))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 驼峰转下划线命名
      */
     public static String toUnderScoreCase(String str)
