@@ -17,10 +17,10 @@ public interface ${ClassName}Mapper
     /**
      * 查询${functionName}
      * 
-     * @param ${pkColumn.javaField} ${functionName}ID
+     * @param ${pkColumn.javaField} ${functionName}主键
      * @return ${functionName}
      */
-    public ${ClassName} select${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+    public ${ClassName} select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
 
     /**
      * 查询${functionName}列表
@@ -49,27 +49,27 @@ public interface ${ClassName}Mapper
     /**
      * 删除${functionName}
      * 
-     * @param ${pkColumn.javaField} ${functionName}ID
+     * @param ${pkColumn.javaField} ${functionName}主键
      * @return 结果
      */
-    public int delete${ClassName}ById(${pkColumn.javaType} ${pkColumn.javaField});
+    public int delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
 
     /**
      * 批量删除${functionName}
      * 
-     * @param ${pkColumn.javaField}s 需要删除的数据ID
+     * @param ${pkColumn.javaField}s 需要删除的数据主键集合
      * @return 结果
      */
-    public int delete${ClassName}ByIds(String[] ${pkColumn.javaField}s);
+    public int delete${ClassName}By${pkColumn.capJavaField}s(String[] ${pkColumn.javaField}s);
 #if($table.sub)
 
     /**
      * 批量删除${subTable.functionName}
      * 
-     * @param customerIds 需要删除的数据ID
+     * @param ${pkColumn.javaField}s 需要删除的数据主键集合
      * @return 结果
      */
-    public int delete${subClassName}By${subTableFkClassName}s(String[] ${pkColumn.javaField}s);
+    public int delete${subClassName}By${pkColumn.capJavaField}s(String[] ${pkColumn.javaField}s);
     
     /**
      * 批量新增${subTable.functionName}
@@ -81,11 +81,11 @@ public interface ${ClassName}Mapper
     
 
     /**
-     * 通过${functionName}ID删除${subTable.functionName}信息
+     * 通过${functionName}主键删除${subTable.functionName}信息
      * 
      * @param ${pkColumn.javaField} ${functionName}ID
      * @return 结果
      */
-    public int delete${subClassName}By${subTableFkClassName}(${pkColumn.javaType} ${pkColumn.javaField});
+    public int delete${subClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField});
 #end
 }
