@@ -28,7 +28,7 @@
         <fastjson.version>1.2.76</fastjson.version>
         <oshi.version>5.8.0</oshi.version>
         <jna.version>5.8.0</jna.version>
-        <commons.io.version>2.10.0</commons.io.version>
+        <commons.io.version>2.11.0</commons.io.version>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>1.7</velocity.version>
