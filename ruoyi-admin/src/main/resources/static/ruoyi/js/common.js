@@ -52,6 +52,7 @@ $(function() {
                 elem: '#startTime',
                 max: $('#endTime').val(),
                 theme: 'molv',
+                type: $('#startTime').attr("data-type") || 'date',
                 trigger: 'click',
                 done: function(value, date) {
                     // 结束时间大于开始时间
@@ -70,6 +71,7 @@ $(function() {
                 elem: '#endTime',
                 min: $('#startTime').val(),
                 theme: 'molv',
+                type: $('#endTime').attr("data-type") || 'date',
                 trigger: 'click',
                 done: function(value, date) {
                     // 开始时间小于结束时间
