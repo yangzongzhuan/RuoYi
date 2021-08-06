@@ -19,7 +19,6 @@ import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.util.AuthorizationUtils;
 import com.ruoyi.system.domain.SysUserRole;
@@ -97,7 +96,7 @@ public class SysRoleController extends BaseController
         {
             return error("新增角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
-        role.setCreateBy(ShiroUtils.getLoginName());
+        role.setCreateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(roleService.insertRole(role));
 
@@ -131,7 +130,7 @@ public class SysRoleController extends BaseController
         {
             return error("修改角色'" + role.getRoleName() + "'失败，角色权限已存在");
         }
-        role.setUpdateBy(ShiroUtils.getLoginName());
+        role.setUpdateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(roleService.updateRole(role));
     }
@@ -156,10 +155,10 @@ public class SysRoleController extends BaseController
     public AjaxResult authDataScopeSave(SysRole role)
     {
         roleService.checkRoleAllowed(role);
-        role.setUpdateBy(ShiroUtils.getLoginName());
+        role.setUpdateBy(getLoginName());
         if (roleService.authDataScope(role) > 0)
         {
-            ShiroUtils.setSysUser(userService.selectUserById(ShiroUtils.getSysUser().getUserId()));
+            setSysUser(userService.selectUserById(getUserId()));
             return success();
         }
         return error();

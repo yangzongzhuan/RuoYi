@@ -17,7 +17,6 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.system.service.ISysDictDataService;
 
@@ -82,7 +81,7 @@ public class SysDictDataController extends BaseController
     @ResponseBody
     public AjaxResult addSave(@Validated SysDictData dict)
     {
-        dict.setCreateBy(ShiroUtils.getLoginName());
+        dict.setCreateBy(getLoginName());
         return toAjax(dictDataService.insertDictData(dict));
     }
 
@@ -105,7 +104,7 @@ public class SysDictDataController extends BaseController
     @ResponseBody
     public AjaxResult editSave(@Validated SysDictData dict)
     {
-        dict.setUpdateBy(ShiroUtils.getLoginName());
+        dict.setUpdateBy(getLoginName());
         return toAjax(dictDataService.updateDictData(dict));
     }
 

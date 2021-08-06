@@ -21,7 +21,6 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.CookieUtils;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.ServletUtils;
-import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.system.service.ISysConfigService;
@@ -49,7 +48,7 @@ public class SysIndexController extends BaseController
     public String index(ModelMap mmap)
     {
         // 取身份信息
-        SysUser user = ShiroUtils.getSysUser();
+        SysUser user = getSysUser();
         // 根据用户id取出菜单
         List<SysMenu> menus = menuService.selectMenusByUser(user);
         mmap.put("menus", menus);
@@ -85,7 +84,7 @@ public class SysIndexController extends BaseController
     @GetMapping("/lockscreen")
     public String lockscreen(ModelMap mmap)
     {
-        mmap.put("user", ShiroUtils.getSysUser());
+        mmap.put("user", getSysUser());
         ServletUtils.getSession().setAttribute(ShiroConstants.LOCK_SCREEN, true);
         return "lock";
     }
@@ -95,7 +94,7 @@ public class SysIndexController extends BaseController
     @ResponseBody
     public AjaxResult unlockscreen(String password)
     {
-        SysUser user = ShiroUtils.getSysUser();
+        SysUser user = getSysUser();
         if (StringUtils.isNull(user))
         {
             return AjaxResult.error("服务器超时，请重新登陆");

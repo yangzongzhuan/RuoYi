@@ -15,7 +15,6 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
-import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.service.ISysNoticeService;
 
@@ -71,7 +70,7 @@ public class SysNoticeController extends BaseController
     @ResponseBody
     public AjaxResult addSave(SysNotice notice)
     {
-        notice.setCreateBy(ShiroUtils.getLoginName());
+        notice.setCreateBy(getLoginName());
         return toAjax(noticeService.insertNotice(notice));
     }
 
@@ -94,7 +93,7 @@ public class SysNoticeController extends BaseController
     @ResponseBody
     public AjaxResult editSave(SysNotice notice)
     {
-        notice.setUpdateBy(ShiroUtils.getLoginName());
+        notice.setUpdateBy(getLoginName());
         return toAjax(noticeService.updateNotice(notice));
     }
 

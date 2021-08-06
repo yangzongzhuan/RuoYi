@@ -109,7 +109,7 @@ public class SysMenuController extends BaseController
         {
             return error("新增菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
-        menu.setCreateBy(ShiroUtils.getLoginName());
+        menu.setCreateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(menuService.insertMenu(menu));
     }
@@ -137,7 +137,7 @@ public class SysMenuController extends BaseController
         {
             return error("修改菜单'" + menu.getMenuName() + "'失败，菜单名称已存在");
         }
-        menu.setUpdateBy(ShiroUtils.getLoginName());
+        menu.setUpdateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(menuService.updateMenu(menu));
     }
