@@ -60,11 +60,8 @@
             uploadAsync: false
         }).on('filebatchuploadsuccess', function (event, data, previewId, index) {
         	var rsp = data.response;
-        	var fileJson = rsp.data;
-        	for (var i in fileJson) {
-        	    log.info("return data.url：" + fileJson[i].url) 
-        	    log.info("reutrn data.name：" + fileJson[i].name)
-        	}
+        	log.info("return urls：" + rsp.urls)
+            log.info("reutrn fileNames：" + rsp.fileNames)
         }).on('fileremoved', function (event, id, index) {
             $("input[name='" + event.currentTarget.id + "']").val('')
         })

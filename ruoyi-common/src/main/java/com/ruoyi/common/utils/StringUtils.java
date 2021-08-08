@@ -419,6 +419,22 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
+     * 删除最后一个字符串
+     *
+     * @param str 输入字符串
+     * @param spit 以什么类型结尾的
+     * @return 截取后的字符串
+     */
+    public static String lastStringDel(String str, String spit)
+    {
+        if (!StringUtils.isEmpty(str) && str.endsWith(spit))
+        {
+            return str.subSequence(0, str.length() - 1).toString();
+        }
+        return str;
+    }
+
+    /**
      * 将下划线大写方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。 例如：HELLO_WORLD->HelloWorld
      * 
      * @param name 转换前的下划线大写方式命名的字符串
