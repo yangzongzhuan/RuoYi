@@ -60,6 +60,7 @@ public class SysIndexController extends BaseController
         mmap.put("demoEnabled", RuoYiConfig.isDemoEnabled());
         mmap.put("isDefaultModifyPwd", initPasswordIsModify(user.getPwdUpdateDate()));
         mmap.put("isPasswordExpired", passwordIsExpiration(user.getPwdUpdateDate()));
+        mmap.put("isMobile", ServletUtils.checkAgentIsMobile(ServletUtils.getRequest().getHeader("User-Agent")));
 
         // 菜单导航显示风格
         String menuStyle = configService.selectConfigByKey("sys.index.menuStyle");

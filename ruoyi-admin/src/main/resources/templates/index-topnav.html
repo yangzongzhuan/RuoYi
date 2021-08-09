@@ -16,7 +16,7 @@
     <link th:href="@{/css/skins.css?v=20200902}" rel="stylesheet"/>
     <link th:href="@{/ruoyi/css/ry-ui.css?v=4.6.2}" rel="stylesheet"/>
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
+<body class="fixed-sidebar full-height-layout gray-bg" th:classappend="${isMobile} ? 'canvas-menu'" style="overflow: hidden">
 <div id="wrapper">
 
     <!--左侧导航开始-->
