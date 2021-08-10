@@ -894,10 +894,9 @@ public class ExcelUtil<T>
     {
         if (statistics.size() > 0)
         {
-            Cell cell = null;
             Row row = sheet.createRow(sheet.getLastRowNum() + 1);
             Set<Integer> keys = statistics.keySet();
-            cell = row.createCell(0);
+            Cell cell = row.createCell(0);
             cell.setCellStyle(styles.get("total"));
             cell.setCellValue("合计");
 
