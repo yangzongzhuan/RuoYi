@@ -101,21 +101,20 @@ public class CommonController
     {
         try
         {
-         // 上传文件路径
+            // 上传文件路径
             String filePath = RuoYiConfig.getUploadPath();
-            String fileNames = "";
-            String urls = "";
-            for (MultipartFile file : files)
-            {
+            List<String> fileNames = new ArrayList<>();
+            List<String> urls = new ArrayList<>();
+            for (MultipartFile file : files) {
                 // 上传并返回新文件名称
                 String fileName = FileUploadUtils.upload(filePath, file);
                 String url = serverConfig.getUrl() + fileName;
-                fileNames += fileName + FILE_DELIMETER;
-                urls += url + FILE_DELIMETER;
+                fileNames.add(fileName);
+                urls.add(url);
             }
             AjaxResult ajax = AjaxResult.success();
-            ajax.put("fileNames", StringUtils.lastStringDel(fileNames, FILE_DELIMETER));
-            ajax.put("urls", StringUtils.lastStringDel(urls, FILE_DELIMETER));
+            ajax.put("fileNames", StringUtils.join(fileNames, FILE_DELIMETER));
+            ajax.put("urls", StringUtils.join(urls, FILE_DELIMETER));
             return ajax;
         }
         catch (Exception e)
