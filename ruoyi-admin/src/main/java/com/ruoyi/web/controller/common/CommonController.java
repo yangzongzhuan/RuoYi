@@ -1,5 +1,6 @@
 package com.ruoyi.web.controller.common;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -103,9 +104,10 @@ public class CommonController
         {
             // 上传文件路径
             String filePath = RuoYiConfig.getUploadPath();
-            List<String> fileNames = new ArrayList<>();
-            List<String> urls = new ArrayList<>();
-            for (MultipartFile file : files) {
+            List<String> fileNames = new ArrayList<String>();
+            List<String> urls = new ArrayList<String>();
+            for (MultipartFile file : files)
+            {
                 // 上传并返回新文件名称
                 String fileName = FileUploadUtils.upload(filePath, file);
                 String url = serverConfig.getUrl() + fileName;

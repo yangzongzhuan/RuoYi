@@ -37,7 +37,7 @@
                         <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>
                         <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Bootstrap</li>
                     </ul>
-                    <strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>
+                    <strong th:if="${isAllowRegister}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>
                 </div>
             </div>
             <div class="col-sm-5">
@@ -56,7 +56,7 @@
 							</a>
 						</div>
 					</div>
-                    <div class="checkbox-custom" th:classappend="${captchaEnabled==false} ? 'm-t'">
+                    <div class="checkbox-custom" th:if="${isRemembered}" th:classappend="${captchaEnabled==false} ? 'm-t'">
 				        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
 				    </div>
                     <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>

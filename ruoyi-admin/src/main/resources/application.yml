@@ -120,6 +120,9 @@ shiro:
     maxSession: -1
     # 踢出之前登录的/之后登录的用户，默认踢出之前登录的用户
     kickoutAfter: false
+  rememberMe:
+    # 是否开启记住我
+    enabled: true
 
 # 防止XSS攻击
 xss: 

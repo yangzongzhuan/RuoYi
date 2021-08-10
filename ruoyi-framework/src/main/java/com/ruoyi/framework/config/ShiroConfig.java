@@ -124,6 +124,12 @@ public class ShiroConfig
     private String unauthorizedUrl;
 
     /**
+     * 是否开启记住我功能
+     */
+    @Value("${shiro.rememberMe.enabled: false}")
+    private boolean rememberMe;
+
+    /**
      * 缓存管理器 使用Ehcache实现
      */
     @Bean
@@ -236,7 +242,7 @@ public class ShiroConfig
         // 设置realm.
         securityManager.setRealm(userRealm);
         // 记住我
-        securityManager.setRememberMeManager(rememberMeManager());
+        securityManager.setRememberMeManager(rememberMe ? rememberMeManager() : null);
         // 注入缓存管理器;
         securityManager.setCacheManager(getEhCacheManager());
         // session管理器
