@@ -91,6 +91,14 @@ public class RuoYiConfig
     }
 
     /**
+     * 获取导入上传路径
+     */
+    public static String getImportPath()
+    {
+        return getProfile() + "/import";
+    }
+
+    /**
      * 获取头像上传路径
      */
     public static String getAvatarPath()
