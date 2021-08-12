@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cron表达式在线生成</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/zen-checkbox.css}" rel="stylesheet"/>
+</head>
+<body class="load-indicator">
+    <div class="container t-small-margin">
+      <div class="t-big-margin">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tabSecond">秒</a></li>
+            <li><a data-toggle="tab" href="#tabMinute">分</a></li>
+            <li><a data-toggle="tab" href="#tabHour">时</a></li>
+            <li><a data-toggle="tab" href="#tabDay">日</a></li>
+            <li><a data-toggle="tab" href="#tabMonth">月</a></li>
+            <li><a data-toggle="tab" href="#tabWeek">周</a></li>
+            <li><a data-toggle="tab" href="#tabYear">年</a></li>
+        </ul>
+        <div class="tab-content tab-cron">
+            <div class="tab-pane active" id="tabSecond">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="sec_all" name="rdoSecond"> 每秒 允许的通配符[, - * /]
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" id="sec_circle" name="rdoSecond">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="sec_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input type="number" id="sec_circle2" class="form-control">
+                            <span class="input-group-addon">秒</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  ">
+                    <label class="custom-radio">
+                        <input type="radio" id="sec_per" name="rdoSecond">
+                        <div class="input-group">
+                            <span class="input-group-addon">从</span>
+                            <input type="number" id="sec_per1" class="form-control">
+                            <span class="input-group-addon">秒开始，每</span>
+                            <input type="number" id="sec_per2" class="form-control">
+                            <span class="input-group-addon">秒执行一次</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  tabsecondchk">
+                    <label>
+                        <input type="radio" id="sec_assign" name="rdoSecond">指定
+                        <div class="checkbox">
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond1" name="zd_second" value="1">
+                                <label for="zdSecond1">1</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond2" name="zd_second" value="2">
+                                <label for="zdSecond2">2</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond3" name="zd_second" value="3">
+                                <label for="zdSecond3">3</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond4" name="zd_second" value="4">
+                                <label for="zdSecond4">4</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond5" name="zd_second" value="5">
+                                <label for="zdSecond5">5</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond6" name="zd_second" value="6">
+                                <label for="zdSecond6">6</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond7" name="zd_second" value="7">
+                                <label for="zdSecond7">7</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond8" name="zd_second" value="8">
+                                <label for="zdSecond8">8</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond9" name="zd_second" value="9">
+                                <label for="zdSecond9">9</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond10" name="zd_second" value="10">
+                                <label for="zdSecond10">10</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond11" name="zd_second" value="11">
+                                <label for="zdSecond11">11</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond12" name="zd_second" value="12">
+                                <label for="zdSecond12">12</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond13" name="zd_second" value="13">
+                                <label for="zdSecond13">13</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond14" name="zd_second" value="14">
+                                <label for="zdSecond14">14</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond15" name="zd_second" value="15">
+                                <label for="zdSecond15">15</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond16" name="zd_second" value="16">
+                                <label for="zdSecond16">16</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond17" name="zd_second" value="17">
+                                <label for="zdSecond17">17</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond18" name="zd_second" value="18">
+                                <label for="zdSecond18">18</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond19" name="zd_second" value="19">
+                                <label for="zdSecond19">19</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond20" name="zd_second" value="20">
+                                <label for="zdSecond20">20</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond21" name="zd_second" value="21">
+                                <label for="zdSecond21">21</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond22" name="zd_second" value="22">
+                                <label for="zdSecond22">22</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond23" name="zd_second" value="23">
+                                <label for="zdSecond23">23</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond24" name="zd_second" value="24">
+                                <label for="zdSecond24">24</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond25" name="zd_second" value="25">
+                                <label for="zdSecond25">25</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond26" name="zd_second" value="26">
+                                <label for="zdSecond26">26</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond27" name="zd_second" value="27">
+                                <label for="zdSecond27">27</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond28" name="zd_second" value="28">
+                                <label for="zdSecond28">28</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond29" name="zd_second" value="29">
+                                <label for="zdSecond29">29</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond30" name="zd_second" value="30">
+                                <label for="zdSecond30">30</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond31" name="zd_second" value="31">
+                                <label for="zdSecond31">31</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond32" name="zd_second" value="32">
+                                <label for="zdSecond32">32</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond33" name="zd_second" value="33">
+                                <label for="zdSecond33">33</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond34" name="zd_second" value="34">
+                                <label for="zdSecond34">34</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond35" name="zd_second" value="35">
+                                <label for="zdSecond35">35</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond36" name="zd_second" value="36">
+                                <label for="zdSecond36">36</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond37" name="zd_second" value="37">
+                                <label for="zdSecond37">37</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond38" name="zd_second" value="38">
+                                <label for="zdSecond38">38</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond39" name="zd_second" value="39">
+                                <label for="zdSecond39">39</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond40" name="zd_second" value="40">
+                                <label for="zdSecond40">40</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond41" name="zd_second" value="41">
+                                <label for="zdSecond41">41</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond42" name="zd_second" value="42">
+                                <label for="zdSecond42">42</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond43" name="zd_second" value="43">
+                                <label for="zdSecond43">43</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond44" name="zd_second" value="44">
+                                <label for="zdSecond44">44</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond45" name="zd_second" value="45">
+                                <label for="zdSecond45">45</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond46" name="zd_second" value="46">
+                                <label for="zdSecond46">46</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond47" name="zd_second" value="47">
+                                <label for="zdSecond47">47</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond48" name="zd_second" value="48">
+                                <label for="zdSecond48">48</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond49" name="zd_second" value="49">
+                                <label for="zdSecond49">49</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond50" name="zd_second" value="50">
+                                <label for="zdSecond50">50</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond51" name="zd_second" value="51">
+                                <label for="zdSecond51">51</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond52" name="zd_second" value="52">
+                                <label for="zdSecond52">52</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond53" name="zd_second" value="53">
+                                <label for="zdSecond53">53</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond54" name="zd_second" value="54">
+                                <label for="zdSecond54">54</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond55" name="zd_second" value="55">
+                                <label for="zdSecond55">55</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond56" name="zd_second" value="56">
+                                <label for="zdSecond56">56</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond57" name="zd_second" value="57">
+                                <label for="zdSecond57">57</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond58" name="zd_second" value="58">
+                                <label for="zdSecond58">58</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond59" name="zd_second" value="59">
+                                <label for="zdSecond59">59</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdSecond60" name="zd_second" value="60">
+                                <label for="zdSecond60">60</label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="tabMinute">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="min_all" name="rdoMinute"> 每分 允许的通配符[, - * /]
+                    </label>
+                </div>
+                <div class="radio  ">
+                    <label class="custom-radio">
+                        <input type="radio" id="min_circle" name="rdoMinute">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="min_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input id="min_circle2" type="number" class="form-control">
+                            <span class="input-group-addon">分</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  ">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoMinute" id="min_per">
+                        <div class="input-group">
+                            <span class="input-group-addon">从</span>
+                            <input type="number" id="min_per1" class="form-control">
+                            <span class="input-group-addon">分开始，每</span>
+                            <input type="number" id="min_per2" class="form-control">
+                            <span class="input-group-addon">分执行一次</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  tabsecondchk">
+                    <label>
+                        <input type="radio" id="min_assign" name="rdoMinute">指定
+                        <div class="checkbox">
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute1" name="zd_minute" value="1">
+                                <label for="zdMinute1">1</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute2" name="zd_minute" value="2">
+                                <label for="zdMinute2">2</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute3" name="zd_minute" value="3">
+                                <label for="zdMinute3">3</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute4" name="zd_minute" value="4">
+                                <label for="zdMinute4">4</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute5" name="zd_minute" value="5">
+                                <label for="zdMinute5">5</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute6" name="zd_minute" value="6">
+                                <label for="zdMinute6">6</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute7" name="zd_minute" value="7">
+                                <label for="zdMinute7">7</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute8" name="zd_minute" value="8">
+                                <label for="zdMinute8">8</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute9" name="zd_minute" value="9">
+                                <label for="zdMinute9">9</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute10" name="zd_minute" value="10">
+                                <label for="zdMinute10">10</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute11" name="zd_minute" value="11">
+                                <label for="zdMinute11">11</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute12" name="zd_minute" value="12">
+                                <label for="zdMinute12">12</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute13" name="zd_minute" value="13">
+                                <label for="zdMinute13">13</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute14" name="zd_minute" value="14">
+                                <label for="zdMinute14">14</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute15" name="zd_minute" value="15">
+                                <label for="zdMinute15">15</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute16" name="zd_minute" value="16">
+                                <label for="zdMinute16">16</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute17" name="zd_minute" value="17">
+                                <label for="zdMinute17">17</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute18" name="zd_minute" value="18">
+                                <label for="zdMinute18">18</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute19" name="zd_minute" value="19">
+                                <label for="zdMinute19">19</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute20" name="zd_minute" value="20">
+                                <label for="zdMinute20">20</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute21" name="zd_minute" value="21">
+                                <label for="zdMinute21">21</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute22" name="zd_minute" value="22">
+                                <label for="zdMinute22">22</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute23" name="zd_minute" value="23">
+                                <label for="zdMinute23">23</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute24" name="zd_minute" value="24">
+                                <label for="zdMinute24">24</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute25" name="zd_minute" value="25">
+                                <label for="zdMinute25">25</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute26" name="zd_minute" value="26">
+                                <label for="zdMinute26">26</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute27" name="zd_minute" value="27">
+                                <label for="zdMinute27">27</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute28" name="zd_minute" value="28">
+                                <label for="zdMinute28">28</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute29" name="zd_minute" value="29">
+                                <label for="zdMinute29">29</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute30" name="zd_minute" value="30">
+                                <label for="zdMinute30">30</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute31" name="zd_minute" value="31">
+                                <label for="zdMinute31">31</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute32" name="zd_minute" value="32">
+                                <label for="zdMinute32">32</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute33" name="zd_minute" value="33">
+                                <label for="zdMinute33">33</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute34" name="zd_minute" value="34">
+                                <label for="zdMinute34">34</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute35" name="zd_minute" value="35">
+                                <label for="zdMinute35">35</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute36" name="zd_minute" value="36">
+                                <label for="zdMinute36">36</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute37" name="zd_minute" value="37">
+                                <label for="zdMinute37">37</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute38" name="zd_minute" value="38">
+                                <label for="zdMinute38">38</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute39" name="zd_minute" value="39">
+                                <label for="zdMinute39">39</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute40" name="zd_minute" value="40">
+                                <label for="zdMinute40">40</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute41" name="zd_minute" value="41">
+                                <label for="zdMinute41">41</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute42" name="zd_minute" value="42">
+                                <label for="zdMinute42">42</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute43" name="zd_minute" value="43">
+                                <label for="zdMinute43">43</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute44" name="zd_minute" value="44">
+                                <label for="zdMinute44">44</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute45" name="zd_minute" value="45">
+                                <label for="zdMinute45">45</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute46" name="zd_minute" value="46">
+                                <label for="zdMinute46">46</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute47" name="zd_minute" value="47">
+                                <label for="zdMinute47">47</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute48" name="zd_minute" value="48">
+                                <label for="zdMinute48">48</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute49" name="zd_minute" value="49">
+                                <label for="zdMinute49">49</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute50" name="zd_minute" value="50">
+                                <label for="zdMinute50">50</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute51" name="zd_minute" value="51">
+                                <label for="zdMinute51">51</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute52" name="zd_minute" value="52">
+                                <label for="zdMinute52">52</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute53" name="zd_minute" value="53">
+                                <label for="zdMinute53">53</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute54" name="zd_minute" value="54">
+                                <label for="zdMinute54">54</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute55" name="zd_minute" value="55">
+                                <label for="zdMinute55">55</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute56" name="zd_minute" value="56">
+                                <label for="zdMinute56">56</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute57" name="zd_minute" value="57">
+                                <label for="zdMinute57">57</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute58" name="zd_minute" value="58">
+                                <label for="zdMinute58">58</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute59" name="zd_minute" value="59">
+                                <label for="zdMinute59">59</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMinute60" name="zd_minute" value="60">
+                                <label for="zdMinute60">60</label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="tabHour">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="hour_all" name="rdoMinute"> 每小时 允许的通配符[, - * /]
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" id="hour_circle" name="rdoMinute">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="hour_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input type="number" id="hour_circle2" class="form-control">
+                            <span class="input-group-addon">小时</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoMinute" id="hour_per">
+                        <div class="input-group">
+                            <span class="input-group-addon">从</span>
+                            <input type="number" id="hour_per1" class="form-control">
+                            <span class="input-group-addon">小时开始，每</span>
+                            <input type="number" id="hour_per2" class="form-control">
+                            <span class="input-group-addon">小时执行一次</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  tabsecondchk">
+                    <label>
+                        <input type="radio" id="hour_assign" name="rdoMinute">指定
+                        <div class="checkbox">
+                            <label>AM:</label>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour1" name="zd_hour" value="1">
+                                <label for="zdHour1">1</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour2" name="zd_hour" value="2">
+                                <label for="zdHour2">2</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour3" name="zd_hour" value="3">
+                                <label for="zdHour3">3</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour4" name="zd_hour" value="4">
+                                <label for="zdHour4">4</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour5" name="zd_hour" value="5">
+                                <label for="zdHour5">5</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour6" name="zd_hour" value="6">
+                                <label for="zdHour6">6</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour7" name="zd_hour" value="7">
+                                <label for="zdHour7">7</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour8" name="zd_hour" value="8">
+                                <label for="zdHour8">8</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour9" name="zd_hour" value="9">
+                                <label for="zdHour9">9</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour10" name="zd_hour" value="10">
+                                <label for="zdHour10">10</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour11" name="zd_hour" value="11">
+                                <label for="zdHour11">11</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour12" name="zd_hour" value="12">
+                                <label for="zdHour12">12</label>
+                            </div>
+                            <br>
+                            <label>PM:</label>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour13" name="zd_hour" value="13">
+                                <label for="zdHour13">13</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour14" name="zd_hour" value="14">
+                                <label for="zdHour14">14</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour15" name="zd_hour" value="15">
+                                <label for="zdHour15">15</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour16" name="zd_hour" value="16">
+                                <label for="zdHour16">16</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour17" name="zd_hour" value="17">
+                                <label for="zdHour17">17</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour18" name="zd_hour" value="18">
+                                <label for="zdHour18">18</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour19" name="zd_hour" value="19">
+                                <label for="zdHour19">19</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour20" name="zd_hour" value="20">
+                                <label for="zdHour20">20</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour21" name="zd_hour" value="21">
+                                <label for="zdHour21">21</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour22" name="zd_hour" value="22">
+                                <label for="zdHour22">22</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour23" name="zd_hour" value="23">
+                                <label for="zdHour23">23</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdHour24" name="zd_hour" value="24">
+                                <label for="zdHour24">24</label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="tabDay">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="rdoDay" id="day_all"> 每小时 允许的通配符[, - * /]
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="rdoDay" id="day_no"> 不指定
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoDay" id="day_circle">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="day_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input type="number" id="day_circle2" class="form-control">
+                            <span class="input-group-addon">日</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoDay" id="day_per">
+                        <div class="input-group">
+                            <span class="input-group-addon">从</span>
+                            <input type="number" id="day_per1" class="form-control">
+                            <span class="input-group-addon">日开始，每</span>
+                            <input type="number" id="day_per2" class="form-control">
+                            <span class="input-group-addon">日执行一次</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoDay" id="day_work">
+                        <div class="input-group">
+                            <span class="input-group-addon">每月</span>
+                            <input type="number" id="day_work1" class="form-control">
+                            <span class="input-group-addon">号最近的那个工作日</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="rdoDay" id="day_last"> 本月最后一日
+                    </label>
+                </div>
+                <div class="radio  tabsecondchk">
+                    <label>
+                        <input type="radio" id="day_assign" name="rdoDay">指定
+                        <div class="checkbox">
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay1" name="zd_day" value="1">
+                                <label for="zdDay1">1</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay2" name="zd_day" value="2">
+                                <label for="zdDay2">2</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay3" name="zd_day" value="3">
+                                <label for="zdDay3">3</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay4" name="zd_day" value="4">
+                                <label for="zdDay4">4</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay5" name="zd_day" value="5">
+                                <label for="zdDay5">5</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay6" name="zd_day" value="6">
+                                <label for="zdDay6">6</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay7" name="zd_day" value="7">
+                                <label for="zdDay7">7</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay8" name="zd_day" value="8">
+                                <label for="zdDay8">8</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay9" name="zd_day" value="9">
+                                <label for="zdDay9">9</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay10" name="zd_day" value="10">
+                                <label for="zdDay10">10</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay11" name="zd_day" value="11">
+                                <label for="zdDay11">11</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay12" name="zd_day" value="12">
+                                <label for="zdDay12">12</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay13" name="zd_day" value="13">
+                                <label for="zdDay13">13</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay14" name="zd_day" value="14">
+                                <label for="zdDay14">14</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay15" name="zd_day" value="15">
+                                <label for="zdDay15">15</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay16" name="zd_day" value="16">
+                                <label for="zdDay16">16</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay17" name="zd_day" value="17">
+                                <label for="zdDay17">17</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay18" name="zd_day" value="18">
+                                <label for="zdDay18">18</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay19" name="zd_day" value="19">
+                                <label for="zdDay19">19</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay20" name="zd_day" value="20">
+                                <label for="zdDay20">20</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay21" name="zd_day" value="21">
+                                <label for="zdDay21">21</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay22" name="zd_day" value="22">
+                                <label for="zdDay22">22</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay23" name="zd_day" value="23">
+                                <label for="zdDay23">23</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay24" name="zd_day" value="24">
+                                <label for="zdDay24">24</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay25" name="zd_day" value="25">
+                                <label for="zdDay25">25</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay26" name="zd_day" value="26">
+                                <label for="zdDay26">26</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay27" name="zd_day" value="27">
+                                <label for="zdDay27">27</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay28" name="zd_day" value="28">
+                                <label for="zdDay28">28</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay29" name="zd_day" value="29">
+                                <label for="zdDay29">29</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay30" name="zd_day" value="30">
+                                <label for="zdDay30">30</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdDay31" name="zd_day" value="31">
+                                <label for="zdDay31">31</label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="tabMonth">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="rdoMonth" id="month_all"> 每月 允许的通配符[, - * /]
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="rdoMonth" id="month_no"> 不指定
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoMonth" id="month_circle">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="month_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input type="number" id="month_circle2" class="form-control">
+                            <span class="input-group-addon">月</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoMonth" id="month_per">
+                        <div class="input-group">
+                            <span class="input-group-addon">从</span>
+                            <input type="number" id="month_per1" class="form-control">
+                            <span class="input-group-addon">月开始，每</span>
+                            <input type="number" id="month_per2" class="form-control">
+                            <span class="input-group-addon">月执行一次</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  tabsecondchk">
+                    <label>
+                        <input type="radio" id="month_assign" name="rdoMonth">指定
+                        <div class="checkbox">
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth1" name="zd_month" value="1">
+                                <label for="zdMonth1">1</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth2" name="zd_month" value="2">
+                                <label for="zdMonth2">2</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth3" name="zd_month" value="3">
+                                <label for="zdMonth3">3</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth4" name="zd_month" value="4">
+                                <label for="zdMonth4">4</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth5" name="zd_month" value="5">
+                                <label for="zdMonth5">5</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth6" name="zd_month" value="6">
+                                <label for="zdMonth6">6</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth7" name="zd_month" value="7">
+                                <label for="zdMonth7">7</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth8" name="zd_month" value="8">
+                                <label for="zdMonth8">8</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth9" name="zd_month" value="9">
+                                <label for="zdMonth9">9</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth10" name="zd_month" value="10">
+                                <label for="zdMonth10">10</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth11" name="zd_month" value="11">
+                                <label for="zdMonth11">11</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdMonth12" name="zd_month" value="12">
+                                <label for="zdMonth12">12</label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="tabWeek">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="week_all" name="rdoWeek"> 周 允许的通配符[, - * /]
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="week_no" name="rdoWeek"> 不指定
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoWeek" id="week_circle">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="week_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input type="number" id="week_circle2" class="form-control">
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoWeek" id="week_num">
+                        <div class="input-group">
+                            <span class="input-group-addon">第</span>
+                            <input type="number" id="week_num1" class="form-control">
+                            <span class="input-group-addon">星期的星期</span>
+                            <input type="number" id="week_num2" class="form-control">
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="rdoWeek" id="week_last">
+                        <div class="input-group">
+                            <span class="input-group-addon">本月最后一个星期</span>
+                            <input type="number" id="week_last1" class="form-control">
+                        </div>
+                    </label>
+                </div>
+                <div class="radio  tabsecondchk">
+                    <label>
+                        <input type="radio" id="week_assign" name="rdoWeek">指定
+                        <div class="checkbox">
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek1" name="zd_week" value="1">
+                                <label for="zdWeek1">1</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek2" name="zd_week" value="2">
+                                <label for="zdWeek2">2</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek3" name="zd_week" value="3">
+                                <label for="zdWeek3">3</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek4" name="zd_week" value="4">
+                                <label for="zdWeek4">4</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek5" name="zd_week" value="5">
+                                <label for="zdWeek5">5</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek6" name="zd_week" value="6">
+                                <label for="zdWeek6">6</label>
+                            </div>
+                            <div class="checkbox-primary">
+                                <input type="checkbox" id="zdWeek7" name="zd_week" value="7">
+                                <label for="zdWeek7">7</label>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="tab-pane" id="tabYear">
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="year_no" name="rdoWeek"> 不指定 允许的通配符[, - * /] 非必填
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" id="year_all" name="rdoWeek"> 每年
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="custom-radio">
+                        <input type="radio" name="rdoWeek" id="year_circle">
+                        <div class="input-group">
+                            <span class="input-group-addon">周期从</span>
+                            <input type="number" id="year_circle1" class="form-control">
+                            <span class="input-group-addon">-</span>
+                            <input type="number" id="year_circle2" class="form-control">
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="t-big-margin">
+            <h4>表达式</h4>
+        </div>
+        <table class="table table-hover cron_table table-bordered">
+            <tbody>
+            <tr>
+                <td></td>
+                <td align="center">秒</td>
+                <td align="center">分钟</td>
+                <td align="center">小时</td>
+                <td align="center">日</td>
+                <td align="center">月</td>
+                <td align="center">星期</td>
+                <td align="center">年</td>
+            </tr>
+            <tr>
+                <td>表达式字段</td>
+                <td><input type="text" class="form-control" id="v_second" value="*" readonly=""></td>
+                <td><input type="text" class="form-control" id="v_min" value="*" readonly=""></td>
+                <td><input type="text" class="form-control" id="v_hour" value="*" readonly=""></td>
+                <td><input type="text" class="form-control" id="v_day" value="*" readonly=""></td>
+                <td><input type="text" class="form-control" id="v_month" value="*" readonly=""></td>
+                <td><input type="text" class="form-control" id="v_week" value="?" readonly=""></td>
+                <td><input type="text" class="form-control" id="v_year" readonly=""></td>
+            </tr>
+            <tr>
+                <td>Cron 表达式</td>
+                <td colspan="7"><input type="text" class="form-control" id="cron" value="* * * * * ?"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button type="button" class="btn btn-primary" id="runBtn">查询最近10次运行时间</button>
+            <button type="button" class="btn btn-info" id="unrunBtn">Cron表达式转成字段</button>
+            <button type="button" class="btn btn-warning" id="checkCron">Cron表达式验证</button>
+        </div>
+        <br/>
+      </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/ruoyi/js/ry-ui.js?v=4.6.2}"></script>
+<script th:src="@{/js/cron.js}"></script>
+<script th:inline="javascript">
+var prefix = [[@{/}]] + "monitor/job";
+
+// 查询最近10次运行时间
+$('#runBtn').click(function() {
+    var cronExpression = $("#cron").val();
+    $.get(prefix + "/queryCronExpression", { "cronExpression": cronExpression }, function(result) {
+    	if (result.code == web_status.SUCCESS) {
+    		if (result.data.length > 0) {
+        		var time = "表达式<font color='red'>[" + cronExpression + "]</font>最近10次运行时间<br/>";
+                for (var i = 0; i < result.data.length; i++) {
+                	time += i + 1 +"、" + result.data[i] + "<br/>"
+                }
+                $.modal.alertSuccess(time);
+        	} else {
+                $.modal.alertError("表达式有误，未查询出结果");
+            }
+        } else {
+            $.modal.alertError(result.msg);
+        }
+    });
+});
+
+// Cron表达式验证
+$('#checkCron').click(function() {
+    var cronExpression = $("#cron").val();
+    $.post(prefix + "/checkCronExpressionIsValid", { "cronExpression": cronExpression }, function(result) {
+        if (result) {
+            $.modal.msgSuccess("恭喜你，格式正确");
+        } else {
+            $.modal.msgError("很遗憾，格式错误");
+        }
+    });
+});
+</script>
+</body>
+</html>

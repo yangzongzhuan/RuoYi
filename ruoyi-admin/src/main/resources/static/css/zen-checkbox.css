@@ -1,0 +1,149 @@
+@font-face {
+	font-family:ZenIcon;src:url(../fonts/zenicon.woff?v=2.2.0) format('woff')
+}
+
+.checkbox-primary,.radio-primary {
+	position: relative;
+	display: block
+}
+
+.checkbox-primary>input,.radio-primary>input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	width: 100%;
+	width: 20px;
+	height: 100%;
+	margin: 0;
+	opacity: 0
+}
+
+.checkbox-primary>label,.radio-primary>label {
+	padding-left: 25px;
+	font-weight: 400;
+	cursor: pointer
+}
+
+.checkbox-primary>label:after,.checkbox-primary>label:before,.radio-primary>label:after,.radio-primary>label:before {
+	position: absolute;
+	top: 2px;
+	right: 0;
+	left: 0;
+	display: block;
+	width: 16px;
+	height: 16px;
+	line-height: 16px;
+	text-align: center;
+	content: ' ';
+	border-radius: 2px
+}
+
+.checkbox-primary>label:after,.radio-primary>label:after {
+	z-index: 1;
+	border: 1px solid gray;
+	-webkit-transition: .4s cubic-bezier(.175,.885,.32,1);
+	-o-transition: .4s cubic-bezier(.175,.885,.32,1);
+	transition: .4s cubic-bezier(.175,.885,.32,1);
+	-webkit-transition-property: border,background-color;
+	-o-transition-property: border,background-color;
+	transition-property: border,background-color
+}
+
+.checkbox-primary>label:before,.radio-primary>label:before {
+	top: 3px;
+	z-index: 2;
+	font-family: ZenIcon;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	line-height: 1;
+	text-transform: none;
+	content: '\e60d';
+	opacity: 0;
+	-webkit-transition: .2s cubic-bezier(.175,.885,.32,1);
+	-o-transition: .2s cubic-bezier(.175,.885,.32,1);
+	transition: .2s cubic-bezier(.175,.885,.32,1);
+	-webkit-transition-property: opacity,-webkit-transform;
+	-o-transition-property: opacity,-o-transform;
+	transition-property: opacity,-webkit-transform;
+	transition-property: opacity,transform;
+	transition-property: opacity,transform,-webkit-transform,-o-transform;
+	-webkit-transform: scale(0);
+	-ms-transform: scale(0);
+	-o-transform: scale(0);
+	transform: scale(0);
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale
+}
+
+.checkbox-primary.checked>label:after,.checkbox-primary>input:checked+label:after,.radio-primary.checked>label:after,.radio-primary>input:checked+label:after {
+	background-color: #3280fc;
+	border-color: #3280fc;
+	border-width: 4px
+}
+
+.checkbox-primary.checked>label:before,.checkbox-primary>input:checked+label:before,.radio-primary.checked>label:before,.radio-primary>input:checked+label:before {
+	color: #fff;
+	opacity: 1;
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1)
+}
+
+.checkbox-primary.focus>label:after,.checkbox-primary>input:focus+label:after,.radio-primary.focus>label:after,.radio-primary>input:focus+label:after {
+	border-color: #3280fc;
+	-webkit-box-shadow: 0 0 8px #3280fc;
+	box-shadow: 0 0 8px #3280fc
+}
+
+.checkbox-primary input:disabled+label:after,.checkbox-primary.disabled>label:after,.radio-primary input:disabled+label:after,.radio-primary.disabled>label:after {
+	background-color: #e5e5e5;
+	border-color: #bbb
+}
+
+.checkbox-primary input:disabled:checked+label:after,.checkbox-primary.checked.disabled>label:after,.radio-primary input:disabled:checked+label:after,.radio-primary.checked.disabled>label:after {
+	background-color: #bbb
+}
+
+.radio-primary>label:after {
+	border-radius: 50%
+}
+
+.radio-primary>label:before {
+	top: 7px;
+	left: 5px;
+	width: 6px;
+	height: 6px;
+	content: ' ';
+	border: 0;
+	border-radius: 50%
+}
+
+.radio-primary.checked>label:after,.radio-primary>input:checked+label:after {
+	background-color: transparent;
+	border-color: #3280fc;
+	border-width: 2px
+}
+
+.radio-primary.checked>label:before,.radio-primary>input:checked+label:before {
+	background-color: #3280fc
+}
+
+.radio-primary input:disabled:checked+label:after,.radio-primary.checked.disabled>label:after {
+	background-color: transparent;
+	border-color: #bbb
+}
+
+.radio-primary input:disabled:checked+label:before,.radio-primary.checked.disabled>label:before {
+	background-color: #bbb
+}
+
+.tab-cron .tab-pane .tabsecondchk .checkbox-primary,.tab-qqskey .tab-pane .tabsecondchk .checkbox-primary {
+	width: 50px;
+	display: inline-block;
+	margin-bottom: 10px
+}

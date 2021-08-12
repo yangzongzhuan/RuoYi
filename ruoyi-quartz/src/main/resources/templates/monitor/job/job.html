@@ -47,6 +47,9 @@
 		         <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="monitor:job:export">
 		            <i class="fa fa-download"></i> 导出
 		        </a>
+		        <a class="btn btn-primary" onclick="javascript:cron()">
+		            <i class="fa fa-code"></i> 生成表达式
+		        </a>
 		        <a class="btn btn-info" onclick="javascript:jobLog()" shiro:hasPermission="monitor:job:detail">
 		            <i class="fa fa-list"></i> 日志
 		        </a>
@@ -175,6 +178,19 @@
 		        url += '?jobId=' + jobId;
 		    }
 		    $.modal.openTab("调度日志", url);
+		}
+		
+		/* cron表达式生成 */
+		function cron() {
+		    var url = prefix + '/cron';
+            var height = $(window).height() - 50;
+            top.layer.open({
+                title: "Cron表达式生成器",
+                type: 2,
+                area: ['800px', height + "px" ], //宽高
+                shadeClose: true,
+                content: url
+            });
 		}
 	</script>
 </body>

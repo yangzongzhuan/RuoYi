@@ -162,6 +162,14 @@ public class BaseController
     }
 
     /**
+     * 返回成功数据
+     */
+    public static AjaxResult success(Object data)
+    {
+        return AjaxResult.success("操作成功", data);
+    }
+
+    /**
      * 返回失败消息
      */
     public AjaxResult error(String message)
