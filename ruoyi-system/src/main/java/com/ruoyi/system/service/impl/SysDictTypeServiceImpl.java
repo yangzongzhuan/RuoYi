@@ -136,6 +136,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
     /**
      * 加载字典缓存数据
      */
+    @Override
     public void loadingDictCache()
     {
         List<SysDictType> dictTypeList = dictTypeMapper.selectDictTypeAll();
@@ -149,6 +150,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
     /**
      * 清空字典缓存数据
      */
+    @Override
     public void clearDictCache()
     {
         DictUtils.clearDictCache();
@@ -157,6 +159,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
     /**
      * 重置字典缓存数据
      */
+    @Override
     public void resetDictCache()
     {
         clearDictCache();
