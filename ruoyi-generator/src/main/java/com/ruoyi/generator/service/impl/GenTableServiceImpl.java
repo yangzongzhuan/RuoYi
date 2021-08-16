@@ -26,7 +26,7 @@ import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.GenConstants;
 import com.ruoyi.common.core.text.CharsetKit;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.BusinessException;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.generator.domain.GenTable;
 import com.ruoyi.generator.domain.GenTableColumn;
@@ -181,7 +181,7 @@ public class GenTableServiceImpl implements IGenTableService
         }
         catch (Exception e)
         {
-            throw new BusinessException("导入失败：" + e.getMessage());
+            throw new ServiceException("导入失败：" + e.getMessage());
         }
     }
 
@@ -270,7 +270,7 @@ public class GenTableServiceImpl implements IGenTableService
                 }
                 catch (IOException e)
                 {
-                    throw new BusinessException("渲染模板失败，表名：" + table.getTableName());
+                    throw new ServiceException("渲染模板失败，表名：" + table.getTableName());
                 }
             }
         }
@@ -292,7 +292,7 @@ public class GenTableServiceImpl implements IGenTableService
         List<GenTableColumn> dbTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
         if (StringUtils.isEmpty(dbTableColumns))
         {
-            throw new BusinessException("同步数据失败，原表结构不存在");
+            throw new ServiceException("同步数据失败，原表结构不存在");
         }
         List<String> dbTableColumnNames = dbTableColumns.stream().map(GenTableColumn::getColumnName).collect(Collectors.toList());
 
@@ -385,26 +385,26 @@ public class GenTableServiceImpl implements IGenTableService
             JSONObject paramsObj = JSONObject.parseObject(options);
             if (StringUtils.isEmpty(paramsObj.getString(GenConstants.TREE_CODE)))
             {
-                throw new BusinessException("树编码字段不能为空");
+                throw new ServiceException("树编码字段不能为空");
             }
             else if (StringUtils.isEmpty(paramsObj.getString(GenConstants.TREE_PARENT_CODE)))
             {
-                throw new BusinessException("树父编码字段不能为空");
+                throw new ServiceException("树父编码字段不能为空");
             }
             else if (StringUtils.isEmpty(paramsObj.getString(GenConstants.TREE_NAME)))
             {
-                throw new BusinessException("树名称字段不能为空");
+                throw new ServiceException("树名称字段不能为空");
             }
         }
         else if (GenConstants.TPL_SUB.equals(genTable.getTplCategory()))
         {
             if (StringUtils.isEmpty(genTable.getSubTableName()))
             {
-                throw new BusinessException("关联子表的表名不能为空");
+                throw new ServiceException("关联子表的表名不能为空");
             }
             else if (StringUtils.isEmpty(genTable.getSubTableFkName()))
             {
-                throw new BusinessException("子表关联的外键名不能为空");
+                throw new ServiceException("子表关联的外键名不能为空");
             }
         }
     }

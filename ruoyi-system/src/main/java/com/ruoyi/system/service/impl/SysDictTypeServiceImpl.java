@@ -11,7 +11,7 @@ import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.core.domain.entity.SysDictType;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.BusinessException;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.DictUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.mapper.SysDictDataMapper;
@@ -126,7 +126,7 @@ public class SysDictTypeServiceImpl implements ISysDictTypeService
             SysDictType dictType = selectDictTypeById(dictId);
             if (dictDataMapper.countDictDataByType(dictType.getDictType()) > 0)
             {
-                throw new BusinessException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
+                throw new ServiceException(String.format("%1$s已分配,不能删除", dictType.getDictName()));
             }
             dictTypeMapper.deleteDictTypeById(dictId);
             DictUtils.removeDictCache(dictType.getDictType());

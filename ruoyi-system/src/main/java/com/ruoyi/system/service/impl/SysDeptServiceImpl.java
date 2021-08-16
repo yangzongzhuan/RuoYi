@@ -13,7 +13,7 @@ import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.common.core.domain.entity.SysDept;
 import com.ruoyi.common.core.domain.entity.SysRole;
 import com.ruoyi.common.core.text.Convert;
-import com.ruoyi.common.exception.BusinessException;
+import com.ruoyi.common.exception.ServiceException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.mapper.SysDeptMapper;
 import com.ruoyi.system.service.ISysDeptService;
@@ -201,7 +201,7 @@ public class SysDeptServiceImpl implements ISysDeptService
         // 如果父节点不为"正常"状态,则不允许新增子节点
         if (!UserConstants.DEPT_NORMAL.equals(info.getStatus()))
         {
-            throw new BusinessException("部门停用，不允许新增");
+            throw new ServiceException("部门停用，不允许新增");
         }
         dept.setAncestors(info.getAncestors() + "," + dept.getParentId());
         return deptMapper.insertDept(dept);
