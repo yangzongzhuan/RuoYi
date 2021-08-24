@@ -62,6 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
 		where u.del_flag = '0'
+		<if test="userId != null and userId != 0">
+			AND u.user_id = #{userId}
+		</if>
 		<if test="loginName != null and loginName != ''">
 			AND u.login_name like concat('%', #{loginName}, '%')
 		</if>

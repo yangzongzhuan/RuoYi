@@ -89,6 +89,7 @@ public class SysDeptController extends BaseController
     @GetMapping("/edit/{deptId}")
     public String edit(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
+        deptService.checkDeptDataScope(deptId);
         SysDept dept = deptService.selectDeptById(deptId);
         if (StringUtils.isNotNull(dept) && 100L == deptId)
         {
