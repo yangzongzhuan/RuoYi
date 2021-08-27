@@ -680,6 +680,14 @@ var table = {
                 } else if (table.options.type == table_type.bootstrapTreeTable) {
                     $("#" + tableId).bootstrapTreeTable('refresh', []);
                 }
+                if ($.common.isNotEmpty(startLayDate) && $.common.isNotEmpty(endLayDate)) {
+                    endLayDate.config.min.year = '';
+                    endLayDate.config.min.month = '';
+                    endLayDate.config.min.date = '';
+                    startLayDate.config.max.year = '2099';
+                    startLayDate.config.max.month = '12';
+                    startLayDate.config.max.date = '31';
+                 }
             },
             // 获取选中复选框项
             selectCheckeds: function(name) {
@@ -877,6 +885,7 @@ var table = {
                     content: _url,
                     shadeClose: $.common.isEmpty(options.shadeClose) ? true : options.shadeClose,
                     skin: options.skin,
+                    // options.btn设置为0表示不显示按钮
                     btn: $.common.isEmpty(options.btn) ? _btn : options.btn,
                     yes: options.yes,
                     cancel: function () {

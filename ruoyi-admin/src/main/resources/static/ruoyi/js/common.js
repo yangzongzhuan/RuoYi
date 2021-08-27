@@ -2,6 +2,9 @@
  * 通用方法封装处理
  * Copyright (c) 2019 ruoyi 
  */
+
+var startLayDate;
+var endLayDate;
 $(function() {
 	
     //  layer扩展皮肤
@@ -48,7 +51,7 @@ $(function() {
     if ($(".select-time").length > 0) {
        layui.use('laydate', function() {
             var laydate = layui.laydate;
-            var startDate = laydate.render({
+            startLayDate = laydate.render({
                 elem: '#startTime',
                 max: $('#endTime').val(),
                 theme: 'molv',
@@ -57,17 +60,17 @@ $(function() {
                 done: function(value, date) {
                     // 结束时间大于开始时间
                     if (value !== '') {
-                        endDate.config.min.year = date.year;
-                        endDate.config.min.month = date.month - 1;
-                        endDate.config.min.date = date.date;
+                        endLayDate.config.min.year = date.year;
+                        endLayDate.config.min.month = date.month - 1;
+                        endLayDate.config.min.date = date.date;
                     } else {
-                        endDate.config.min.year = '';
-                        endDate.config.min.month = '';
-                        endDate.config.min.date = '';
+                        endLayDate.config.min.year = '';
+                        endLayDate.config.min.month = '';
+                        endLayDate.config.min.date = '';
                     }
                 }
             });
-            var endDate = laydate.render({
+            endLayDate = laydate.render({
                 elem: '#endTime',
                 min: $('#startTime').val(),
                 theme: 'molv',
@@ -76,13 +79,13 @@ $(function() {
                 done: function(value, date) {
                     // 开始时间小于结束时间
                     if (value !== '') {
-                        startDate.config.max.year = date.year;
-                        startDate.config.max.month = date.month - 1;
-                        startDate.config.max.date = date.date;
+                        startLayDate.config.max.year = date.year;
+                        startLayDate.config.max.month = date.month - 1;
+                        startLayDate.config.max.date = date.date;
                     } else {
-                        startDate.config.max.year = '2099';
-                        startDate.config.max.month = '12';
-                        startDate.config.max.date = '31';
+                        startLayDate.config.max.year = '2099';
+                        startLayDate.config.max.month = '12';
+                        startLayDate.config.max.date = '31';
                     }
                 }
             });
