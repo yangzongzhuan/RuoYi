@@ -70,14 +70,14 @@ public class SysDeptServiceImpl implements ISysDeptService
     @DataScope(deptAlias = "d")
     public List<Ztree> selectDeptTreeExcludeChild(SysDept dept)
     {
-        Long deptId = dept.getDeptId();
+        Long excludeId = dept.getExcludeId();
         List<SysDept> deptList = deptMapper.selectDeptList(dept);
         Iterator<SysDept> it = deptList.iterator();
         while (it.hasNext())
         {
             SysDept d = (SysDept) it.next();
-            if (d.getDeptId().intValue() == deptId
-                    || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""))
+            if (d.getDeptId().intValue() == excludeId
+                    || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), excludeId + ""))
             {
                 it.remove();
             }
