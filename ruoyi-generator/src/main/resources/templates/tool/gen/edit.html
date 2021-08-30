@@ -542,18 +542,18 @@
 		}
 		
 		function doDictSubmit(index, layero){
-			var body = layer.getChildFrame('body', index);
+			var body = $.modal.getChildFrame(index);
    			var columnId = body.find('#columnId').val();
    			var dictType = body.find('#dictType').val();
-   			layer.close(index);
+   			$.modal.close(index);
    			$("#columns_dict_" + columnId).val(dictType);
 		}
 		
 		function doMenuSubmit(index, layero){
-			var body = layer.getChildFrame('body', index);
+			var body = $.modal.getChildFrame(index);
    			$("#parentMenuId").val(body.find('#treeId').val());
    			$("#parentMenuName").val(body.find('#treeName').val());
-   			layer.close(index);
+   			$.modal.close(index);
 		}
     </script>
 </body>

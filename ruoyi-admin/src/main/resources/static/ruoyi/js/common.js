@@ -338,13 +338,21 @@ function scrollToTab(element) {
     $('.page-tabs-content', topWindow).animate({ marginLeft: 0 - scrollVal + 'px' }, "fast");
 }
 
-//计算元素集合的总宽度
+// 计算元素集合的总宽度
 function calSumWidth(elements) {
     var width = 0;
     $(elements).each(function() {
         width += $(this).outerWidth(true);
     });
     return width;
+}
+
+// 返回当前激活的Tab页面关联的iframe的Windows对象
+function activeWindow() {
+	var topWindow = $(window.parent.document);
+	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
+	var activeWindow = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
+    return activeWindow;
 }
 
 /** 密码规则范围验证 */

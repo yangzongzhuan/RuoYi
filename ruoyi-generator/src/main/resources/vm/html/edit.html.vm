@@ -297,10 +297,10 @@
         }
 
         function doSubmit(index, layero){
-            var body = layer.getChildFrame('body', index);
-               $("#treeId").val(body.find('#treeId').val());
-               $("#treeName").val(body.find('#treeName').val());
-               layer.close(index);
+            var body = $.modal.getChildFrame(index);
+            $("#treeId").val(body.find('#treeId').val());
+            $("#treeName").val(body.find('#treeName').val());
+            $.modal.close(index);
         }
 #end
 #if($table.sub)

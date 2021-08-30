@@ -227,7 +227,7 @@ function submitHandler() {
             processData: false,
             contentType: false,
             success: function(result) {
-                $.operate.saveSuccess(result);
+                $.operate.saveReload(result);
             }
         })
     });
