@@ -19,7 +19,7 @@
 <div th:fragment="footer">
     <script th:inline="javascript"> var ctx = [[@{/}]]; var lockscreen = [[${session.lockscreen}]]; if(lockscreen){window.top.location=ctx+"lockscreen";} </script>
     <a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
-	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery.min.js?v=3.6.0}"></script>
 	<script th:src="@{/js/bootstrap.min.js}"></script>
 	<!-- bootstrap-table 表格插件 -->
 	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=20210602}"></script>

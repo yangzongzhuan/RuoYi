@@ -290,7 +290,7 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
         $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
         
         window.parent.$.modal.loading("数据加载中，请稍后...");
-        $('.mainContent iframe:visible', topWindow).load(function () {
+        $('.mainContent iframe:visible', topWindow).on('load', function() {
             window.parent.$.modal.closeLoading();
         });
 

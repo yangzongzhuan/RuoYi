@@ -311,7 +311,7 @@ $(function() {
 
             $.modal.loading("数据加载中，请稍后...");
 
-            $('.mainContent iframe:visible').load(function () {
+            $('.mainContent iframe:visible').on('load', function() {
             	$.modal.closeLoading();
             });
 
@@ -342,7 +342,7 @@ $(function() {
         if ($(this).parents('.menuTab').hasClass('active')) {
 
             // 当前元素后面有同辈元素，使后面的一个元素处于活动状态
-            if ($(this).parents('.menuTab').next('.menuTab').size()) {
+            if ($(this).parents('.menuTab').next('.menuTab').length) {
 
                 var activeId = $(this).parents('.menuTab').next('.menuTab:eq(0)').data('id');
                 $(this).parents('.menuTab').next('.menuTab:eq(0)').addClass('active');
@@ -372,7 +372,7 @@ $(function() {
             }
 
             // 当前元素后面没有同辈元素，使当前元素的上一个元素处于活动状态
-            if ($(this).parents('.menuTab').prev('.menuTab').size()) {
+            if ($(this).parents('.menuTab').prev('.menuTab').length) {
                 var activeId = $(this).parents('.menuTab').prev('.menuTab:last').data('id');
                 $(this).parents('.menuTab').prev('.menuTab:last').addClass('active');
                 $('.mainContent .RuoYi_iframe').each(function() {
@@ -631,7 +631,7 @@ $(function() {
                     var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
                     var url = target.attr('src');
                     $.modal.loading("数据加载中，请稍后...");
-                    target.attr('src', url).load(function () {
+                    target.attr('src', url).on('load', function() {
                     	$.modal.closeLoading();
                     });
                 }

@@ -169,7 +169,7 @@
 <script type="text/javascript">
 var cropper;
 var croppable = false;
-$(window).load(function() {
+$(window).on('load', function() {
 	var image = document.getElementById('avatar');
 	cropper = new Cropper(image, {
 		aspectRatio: 1,
