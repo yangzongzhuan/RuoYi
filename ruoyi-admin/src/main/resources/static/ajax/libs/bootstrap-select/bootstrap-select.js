@@ -1,7 +1,7 @@
 /*!
- * Bootstrap-select v1.13.10 (https://developer.snapappointments.com/bootstrap-select)
+ * Bootstrap-select v1.13.18 (https://developer.snapappointments.com/bootstrap-select)
  *
- * Copyright 2012-2019 SnapAppointments, LLC
+ * Copyright 2012-2020 SnapAppointments, LLC
  * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
  */
 
@@ -355,7 +355,7 @@
       opt = options[i];
 
       if (!(opt.disabled || opt.parentNode.tagName === 'OPTGROUP' && opt.parentNode.disabled)) {
-        value.push(opt.value || opt.text);
+        value.push(opt.value);
       }
     }
 
@@ -677,6 +677,7 @@
   }
 
   var elementTemplates = {
+    div: document.createElement('div'),
     span: document.createElement('span'),
     i: document.createElement('i'),
     subtext: document.createElement('small'),
@@ -686,7 +687,12 @@
     fragment: document.createDocumentFragment()
   }
 
+  elementTemplates.noResults = elementTemplates.li.cloneNode(false);
+  elementTemplates.noResults.className = 'no-results';
+
   elementTemplates.a.setAttribute('role', 'option');
+  elementTemplates.a.className = 'dropdown-item';
+
   elementTemplates.subtext.className = 'text-muted';
 
   elementTemplates.text = elementTemplates.span.cloneNode(false);
@@ -726,8 +732,7 @@
         }
       }
 
-      if (typeof classes !== 'undefined' && classes !== '') a.className = classes;
-      if (version.major === '4') a.classList.add('dropdown-item');
+      if (typeof classes !== 'undefined' && classes !== '') a.classList.add.apply(a.classList, classes.split(/\s+/));
       if (inline) a.setAttribute('style', inline);
 
       return a;
@@ -749,7 +754,7 @@
           // need to use <i> for icons in the button to prevent a breaking change
           // note: switch to span in next major release
           iconElement = (useFragment === true ? elementTemplates.i : elementTemplates.span).cloneNode(false);
-          iconElement.className = options.iconBase + ' ' + options.icon;
+          iconElement.className = this.options.iconBase + ' ' + options.icon;
 
           elementTemplates.fragment.appendChild(iconElement);
           elementTemplates.fragment.appendChild(whitespace);
@@ -778,13 +783,13 @@
           subtextElement,
           iconElement;
 
-      textElement.innerHTML = options.label;
+      textElement.innerHTML = options.display;
 
       if (options.icon) {
         var whitespace = elementTemplates.whitespace.cloneNode(false);
 
         iconElement = elementTemplates.span.cloneNode(false);
-        iconElement.className = options.iconBase + ' ' + options.icon;
+        iconElement.className = this.options.iconBase + ' ' + options.icon;
 
         elementTemplates.fragment.appendChild(iconElement);
         elementTemplates.fragment.appendChild(whitespace);
@@ -799,6 +804,13 @@
       elementTemplates.fragment.appendChild(textElement);
 
       return elementTemplates.fragment;
+    }
+  }
+
+  function showNoResults (searchMatch, searchValue) {
+    if (!searchMatch.length) {
+      elementTemplates.noResults.innerHTML = this.options.noneResultsText.replace('{0}', '"' + htmlEscape(searchValue) + '"');
+      this.$menuInner[0].firstChild.appendChild(elementTemplates.noResults);
     }
   }
 
@@ -821,6 +833,7 @@
       search: {},
       current: {}, // current changes if a search is in progress
       view: {},
+      isSearching: false,
       keydown: {
         keyHistory: '',
         resetKeyHistory: {
@@ -832,6 +845,9 @@
         }
       }
     };
+
+    this.sizeInfo = {};
+
     // If we have no title yet, try to pull it from the html title attribute (jQuery doesnt' pick it up as it's not a
     // data-attribute)
     if (this.options.title === null) {
@@ -859,7 +875,7 @@
     this.init();
   };
 
-  Selectpicker.VERSION = '1.13.10';
+  Selectpicker.VERSION = '1.13.18';
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
@@ -921,31 +937,40 @@
 
     init: function () {
       var that = this,
-          id = this.$element.attr('id');
+          id = this.$element.attr('id'),
+          element = this.$element[0],
+          form = element.form;
 
       selectId++;
       this.selectId = 'bs-select-' + selectId;
 
-      this.$element[0].classList.add('bs-select-hidden');
+      element.classList.add('bs-select-hidden');
 
       this.multiple = this.$element.prop('multiple');
       this.autofocus = this.$element.prop('autofocus');
 
-      if (this.$element[0].classList.contains('show-tick')) {
+      if (element.classList.contains('show-tick')) {
         this.options.showTick = true;
       }
 
       this.$newElement = this.createDropdown();
+      this.buildData();
       this.$element
         .after(this.$newElement)
         .prependTo(this.$newElement);
+
+      // ensure select is associated with form element if it got unlinked after moving it inside newElement
+      if (form && element.form === null) {
+        if (!form.id) form.id = 'form-' + this.selectId;
+        element.setAttribute('form', form.id);
+      }
 
       this.$button = this.$newElement.children('button');
       this.$menu = this.$newElement.children(Selector.MENU);
       this.$menuInner = this.$menu.children('.inner');
       this.$searchbox = this.$menu.find('input');
 
-      this.$element[0].classList.remove('bs-select-hidden');
+      element.classList.remove('bs-select-hidden');
 
       if (this.options.dropdownAlignRight === true) this.$menu[0].classList.add(classNames.MENURIGHT);
 
@@ -1000,7 +1025,7 @@
         }
       });
 
-      if (that.$element[0].hasAttribute('required')) {
+      if (element.hasAttribute('required')) {
         this.$element.on('invalid' + EVENT_KEY, function () {
           that.$button[0].classList.add('bs-invalid');
 
@@ -1024,7 +1049,7 @@
       }
 
       setTimeout(function () {
-        that.createLi();
+        that.buildList();
         that.$element.trigger('loaded' + EVENT_KEY);
       });
     },
@@ -1059,7 +1084,7 @@
       if (this.options.liveSearch) {
         searchbox =
           '<div class="bs-searchbox">' +
-            '<input type="text" class="form-control" autocomplete="off"' +
+            '<input type="search" class="form-control" autocomplete="off"' +
               (
                 this.options.liveSearchPlaceholder === null ? ''
                 :
@@ -1096,7 +1121,7 @@
 
       drop =
         '<div class="dropdown bootstrap-select' + showTick + inputGroup + '">' +
-          '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" ' + (this.options.display === 'static' ? 'data-display="static"' : '') + 'data-toggle="dropdown"' + autofocus + ' role="combobox" aria-owns="' + this.selectId + '" aria-haspopup="listbox" aria-expanded="false">' +
+          '<button type="button" tabindex="-1" class="' + this.options.styleBase + ' dropdown-toggle" ' + (this.options.display === 'static' ? 'data-display="static"' : '') + 'data-toggle="dropdown"' + autofocus + ' role="combobox" aria-owns="' + this.selectId + '" aria-haspopup="listbox" aria-expanded="false">' +
             '<div class="filter-option">' +
               '<div class="filter-option-inner">' +
                 '<div class="filter-option-inner-inner"></div>' +
@@ -1128,6 +1153,7 @@
     setPositionData: function () {
       this.selectpicker.view.canHighlight = [];
       this.selectpicker.view.size = 0;
+      this.selectpicker.view.firstHighlightIndex = false;
 
       for (var i = 0; i < this.selectpicker.current.data.length; i++) {
         var li = this.selectpicker.current.data[i],
@@ -1150,6 +1176,7 @@
         if (canHighlight) {
           this.selectpicker.view.size++;
           li.posinset = this.selectpicker.view.size;
+          if (this.selectpicker.view.firstHighlightIndex === false) this.selectpicker.view.firstHighlightIndex = i;
         }
 
         li.position = (i === 0 ? 0 : this.selectpicker.current.data[i - 1].position) + li.height;
@@ -1167,6 +1194,7 @@
           selected,
           prevActive;
 
+      this.selectpicker.isSearching = isSearching;
       this.selectpicker.current = isSearching ? this.selectpicker.search : this.selectpicker.main;
 
       this.setPositionData();
@@ -1212,15 +1240,6 @@
 
         that.selectpicker.view.scrollTop = scrollTop;
 
-        if (isVirtual === true) {
-          // if an option that is encountered that is wider than the current menu width, update the menu width accordingly
-          if (that.sizeInfo.hasScrollBar && that.$menu[0].offsetWidth > that.sizeInfo.totalMenuWidth) {
-            that.sizeInfo.menuWidth = that.$menu[0].offsetWidth;
-            that.sizeInfo.totalMenuWidth = that.sizeInfo.menuWidth + that.sizeInfo.scrollBarWidth;
-            that.$menu.css('min-width', that.sizeInfo.menuWidth);
-          }
-        }
-
         chunkSize = Math.ceil(that.sizeInfo.menuInnerHeight / that.sizeInfo.liHeight * 1.5); // number of options in a chunk
         chunkCount = Math.round(size / chunkSize) || 1; // number of chunks
 
@@ -1238,7 +1257,7 @@
 
           if (!size) break;
 
-          if (currentChunk === undefined && scrollTop <= that.selectpicker.current.data[endOfChunk - 1].position - that.sizeInfo.menuInnerHeight) {
+          if (currentChunk === undefined && scrollTop - 1 <= that.selectpicker.current.data[endOfChunk - 1].position - that.sizeInfo.menuInnerHeight) {
             currentChunk = i;
           }
         }
@@ -1343,6 +1362,29 @@
             }
 
             menuInner.firstChild.appendChild(menuFragment);
+
+            // if an option is encountered that is wider than the current menu width, update the menu width accordingly
+            // switch to ResizeObserver with increased browser support
+            if (isVirtual === true && that.sizeInfo.hasScrollBar) {
+              var menuInnerInnerWidth = menuInner.firstChild.offsetWidth;
+
+              if (init && menuInnerInnerWidth < that.sizeInfo.menuInnerInnerWidth && that.sizeInfo.totalMenuWidth > that.sizeInfo.selectWidth) {
+                menuInner.firstChild.style.minWidth = that.sizeInfo.menuInnerInnerWidth + 'px';
+              } else if (menuInnerInnerWidth > that.sizeInfo.menuInnerInnerWidth) {
+                // set to 0 to get actual width of menu
+                that.$menu[0].style.minWidth = 0;
+
+                var actualMenuWidth = menuInner.firstChild.offsetWidth;
+
+                if (actualMenuWidth > that.sizeInfo.menuInnerInnerWidth) {
+                  that.sizeInfo.menuInnerInnerWidth = actualMenuWidth;
+                  menuInner.firstChild.style.minWidth = that.sizeInfo.menuInnerInnerWidth + 'px';
+                }
+
+                // reset to default CSS styling
+                that.$menu[0].style.minWidth = '';
+              }
+            }
           }
         }
 
@@ -1403,7 +1445,8 @@
     },
 
     setPlaceholder: function () {
-      var updateIndex = false;
+      var that = this,
+          updateIndex = false;
 
       if (this.options.title && !this.multiple) {
         if (!this.selectpicker.view.titleOption) this.selectpicker.view.titleOption = document.createElement('option');
@@ -1413,8 +1456,13 @@
         updateIndex = true;
 
         var element = this.$element[0],
-            isSelected = false,
-            titleNotAppended = !this.selectpicker.view.titleOption.parentNode;
+            selectTitleOption = false,
+            titleNotAppended = !this.selectpicker.view.titleOption.parentNode,
+            selectedIndex = element.selectedIndex,
+            selectedOption = element.options[selectedIndex],
+            navigation = window.performance && window.performance.getEntriesByType('navigation'),
+            // Safari doesn't support getEntriesByType('navigation') - fall back to performance.navigation
+            isNotBackForward = (navigation && navigation.length) ? navigation[0].type !== 'back_forward' : window.performance.navigation.type !== 2;
 
         if (titleNotAppended) {
           // Use native JS to prepend option (faster)
@@ -1424,8 +1472,7 @@
           // Check if selected or data-selected attribute is already set on an option. If not, select the titleOption option.
           // the selected item may have been changed by user or programmatically before the bootstrap select plugin runs,
           // if so, the select will have the data-selected attribute
-          var $opt = $(element.options[element.selectedIndex]);
-          isSelected = $opt.attr('selected') === undefined && this.$element.data('selected') === undefined;
+          selectTitleOption = !selectedOption || (selectedIndex === 0 && selectedOption.defaultSelected === false && this.$element.data('selected') === undefined);
         }
 
         if (titleNotAppended || this.selectpicker.view.titleOption.index !== 0) {
@@ -1435,28 +1482,27 @@
         // Set selected *after* appending to select,
         // otherwise the option doesn't get selected in IE
         // set using selectedIndex, as setting the selected attr to true here doesn't work in IE11
-        if (isSelected) element.selectedIndex = 0;
+        if (selectTitleOption && isNotBackForward) {
+          element.selectedIndex = 0;
+        } else if (document.readyState !== 'complete') {
+          // if navigation type is back_forward, there's a chance the select will have its value set by BFCache
+          // wait for that value to be set, then run render again
+          window.addEventListener('pageshow', function () {
+            if (that.selectpicker.view.displayedValue !== element.value) that.render();
+          });
+        }
       }
 
       return updateIndex;
     },
 
-    createLi: function () {
-      var that = this,
-          iconBase = this.options.iconBase,
-          optionSelector = ':not([hidden]):not([data-hidden="true"])',
-          mainElements = [],
+    buildData: function () {
+      var optionSelector = ':not([hidden]):not([data-hidden="true"])',
           mainData = [],
-          widestOptionLength = 0,
           optID = 0,
           startIndex = this.setPlaceholder() ? 1 : 0; // append the titleOption if necessary and skip the first option in the loop
 
       if (this.options.hideDisabled) optionSelector += ':not(:disabled)';
-
-      if ((that.options.showTick || that.multiple) && !elementTemplates.checkMark.parentNode) {
-        elementTemplates.checkMark.className = iconBase + ' ' + that.options.tickIcon + ' check-mark';
-        elementTemplates.a.appendChild(elementTemplates.checkMark);
-      }
 
       var selectOptions = this.$element[0].querySelectorAll('select > *' + optionSelector);
 
@@ -1474,14 +1520,6 @@
 
         config = config || {};
         config.type = 'divider';
-
-        mainElements.push(
-          generateOption.li(
-            false,
-            classNames.DIVIDER,
-            (config.optID ? config.optID + 'div' : undefined)
-          )
-        );
 
         mainData.push(config);
       }
@@ -1503,30 +1541,14 @@
 
           if (config.optID) optionClass = 'opt ' + optionClass;
 
+          config.optionClass = optionClass.trim();
+          config.inlineStyle = inlineStyle;
           config.text = option.textContent;
 
           config.content = option.getAttribute('data-content');
           config.tokens = option.getAttribute('data-tokens');
           config.subtext = option.getAttribute('data-subtext');
           config.icon = option.getAttribute('data-icon');
-          config.iconBase = iconBase;
-
-          var textElement = generateOption.text(config);
-          var liElement = generateOption.li(
-            generateOption.a(
-              textElement,
-              optionClass,
-              inlineStyle
-            ),
-            '',
-            config.optID
-          );
-
-          if (liElement.firstChild) {
-            liElement.firstChild.id = that.selectId + '-' + liIndex;
-          }
-
-          mainElements.push(liElement);
 
           option.liIndex = liIndex;
 
@@ -1534,44 +1556,29 @@
           config.type = 'option';
           config.index = liIndex;
           config.option = option;
-          config.disabled = config.disabled || option.disabled;
+          config.selected = !!option.selected;
+          config.disabled = config.disabled || !!option.disabled;
 
           mainData.push(config);
-
-          var combinedLength = 0;
-
-          // count the number of characters in the option - not perfect, but should work in most cases
-          if (config.display) combinedLength += config.display.length;
-          if (config.subtext) combinedLength += config.subtext.length;
-          // if there is an icon, ensure this option's width is checked
-          if (config.icon) combinedLength += 1;
-
-          if (combinedLength > widestOptionLength) {
-            widestOptionLength = combinedLength;
-
-            // guess which option is the widest
-            // use this when calculating menu width
-            // not perfect, but it's fast, and the width will be updating accordingly when scrolling
-            that.selectpicker.view.widestOption = mainElements[mainElements.length - 1];
-          }
         }
       }
 
       function addOptgroup (index, selectOptions) {
         var optgroup = selectOptions[index],
-            previous = selectOptions[index - 1],
+            // skip placeholder option
+            previous = index - 1 < startIndex ? false : selectOptions[index - 1],
             next = selectOptions[index + 1],
             options = optgroup.querySelectorAll('option' + optionSelector);
 
         if (!options.length) return;
 
         var config = {
-              label: htmlEscape(optgroup.label),
+              display: htmlEscape(optgroup.label),
               subtext: optgroup.getAttribute('data-subtext'),
               icon: optgroup.getAttribute('data-icon'),
-              iconBase: iconBase
+              type: 'optgroup-label',
+              optgroupClass: ' ' + (optgroup.className || '')
             },
-            optgroupClass = ' ' + (optgroup.className || ''),
             headerIndex,
             lastIndex;
 
@@ -1581,18 +1588,9 @@
           addDivider({ optID: optID });
         }
 
-        var labelElement = generateOption.label(config);
+        config.optID = optID;
 
-        mainElements.push(
-          generateOption.li(labelElement, 'dropdown-header' + optgroupClass, optID)
-        );
-
-        mainData.push({
-          display: config.label,
-          subtext: config.subtext,
-          type: 'optgroup-label',
-          optID: optID
-        });
+        mainData.push(config);
 
         for (var j = 0, len = options.length; j < len; j++) {
           var option = options[j];
@@ -1605,8 +1603,8 @@
           addOption(option, {
             headerIndex: headerIndex,
             lastIndex: lastIndex,
-            optID: optID,
-            optgroupClass: optgroupClass,
+            optID: config.optID,
+            optgroupClass: config.optgroupClass,
             disabled: optgroup.disabled
           });
         }
@@ -1616,20 +1614,97 @@
         }
       }
 
-      for (var len = selectOptions.length; startIndex < len; startIndex++) {
-        var item = selectOptions[startIndex];
+      for (var len = selectOptions.length, i = startIndex; i < len; i++) {
+        var item = selectOptions[i];
 
         if (item.tagName !== 'OPTGROUP') {
           addOption(item, {});
         } else {
-          addOptgroup(startIndex, selectOptions);
+          addOptgroup(i, selectOptions);
         }
       }
 
-      this.selectpicker.main.elements = mainElements;
-      this.selectpicker.main.data = mainData;
+      this.selectpicker.main.data = this.selectpicker.current.data = mainData;
+    },
 
-      this.selectpicker.current = this.selectpicker.main;
+    buildList: function () {
+      var that = this,
+          selectData = this.selectpicker.main.data,
+          mainElements = [],
+          widestOptionLength = 0;
+
+      if ((that.options.showTick || that.multiple) && !elementTemplates.checkMark.parentNode) {
+        elementTemplates.checkMark.className = this.options.iconBase + ' ' + that.options.tickIcon + ' check-mark';
+        elementTemplates.a.appendChild(elementTemplates.checkMark);
+      }
+
+      function buildElement (item) {
+        var liElement,
+            combinedLength = 0;
+
+        switch (item.type) {
+          case 'divider':
+            liElement = generateOption.li(
+              false,
+              classNames.DIVIDER,
+              (item.optID ? item.optID + 'div' : undefined)
+            );
+
+            break;
+
+          case 'option':
+            liElement = generateOption.li(
+              generateOption.a(
+                generateOption.text.call(that, item),
+                item.optionClass,
+                item.inlineStyle
+              ),
+              '',
+              item.optID
+            );
+
+            if (liElement.firstChild) {
+              liElement.firstChild.id = that.selectId + '-' + item.index;
+            }
+
+            break;
+
+          case 'optgroup-label':
+            liElement = generateOption.li(
+              generateOption.label.call(that, item),
+              'dropdown-header' + item.optgroupClass,
+              item.optID
+            );
+
+            break;
+        }
+
+        item.element = liElement;
+        mainElements.push(liElement);
+
+        // count the number of characters in the option - not perfect, but should work in most cases
+        if (item.display) combinedLength += item.display.length;
+        if (item.subtext) combinedLength += item.subtext.length;
+        // if there is an icon, ensure this option's width is checked
+        if (item.icon) combinedLength += 1;
+
+        if (combinedLength > widestOptionLength) {
+          widestOptionLength = combinedLength;
+
+          // guess which option is the widest
+          // use this when calculating menu width
+          // not perfect, but it's fast, and the width will be updating accordingly when scrolling
+          that.selectpicker.view.widestOption = mainElements[mainElements.length - 1];
+        }
+      }
+
+      for (var len = selectData.length, i = 0; i < len; i++) {
+        var item = selectData[i];
+
+        buildElement(item);
+      }
+
+      this.selectpicker.main.elements = this.selectpicker.current.elements = mainElements;
     },
 
     findLis: function () {
@@ -1637,11 +1712,10 @@
     },
 
     render: function () {
-      // ensure titleOption is appended and selected (if necessary) before getting selectedOptions
-      this.setPlaceholder();
-
       var that = this,
           element = this.$element[0],
+          // ensure titleOption is appended and selected (if necessary) before getting selectedOptions
+          placeholderSelected = this.setPlaceholder() && element.selectedIndex === 0,
           selectedOptions = getSelectedOptions(element, this.options.hideDisabled),
           selectedCount = selectedOptions.length,
           button = this.$button[0],
@@ -1654,10 +1728,12 @@
 
       button.classList.toggle('bs-placeholder', that.multiple ? !selectedCount : !getSelectValues(element, selectedOptions));
 
-      this.tabIndex();
+      if (!that.multiple && selectedOptions.length === 1) {
+        that.selectpicker.view.displayedValue = getSelectValues(element, selectedOptions);
+      }
 
       if (this.options.selectedTextFormat === 'static') {
-        titleFragment = generateOption.text({ text: this.options.title }, true);
+        titleFragment = generateOption.text.call(this, { text: this.options.title }, true);
       } else {
         showCount = this.multiple && this.options.selectedTextFormat.indexOf('count') !== -1 && selectedCount > 1;
 
@@ -1669,43 +1745,42 @@
 
         // only loop through all selected options if the count won't be shown
         if (showCount === false) {
-          for (var selectedIndex = 0; selectedIndex < selectedCount; selectedIndex++) {
-            if (selectedIndex < 50) {
-              var option = selectedOptions[selectedIndex],
-                  titleOptions = {},
-                  thisData = {
-                    content: option.getAttribute('data-content'),
-                    subtext: option.getAttribute('data-subtext'),
-                    icon: option.getAttribute('data-icon')
-                  };
+          if (!placeholderSelected) {
+            for (var selectedIndex = 0; selectedIndex < selectedCount; selectedIndex++) {
+              if (selectedIndex < 50) {
+                var option = selectedOptions[selectedIndex],
+                    thisData = this.selectpicker.main.data[option.liIndex],
+                    titleOptions = {};
 
-              if (this.multiple && selectedIndex > 0) {
-                titleFragment.appendChild(multipleSeparator.cloneNode(false));
-              }
-
-              if (option.title) {
-                titleOptions.text = option.title;
-              } else if (thisData.content && that.options.showContent) {
-                titleOptions.content = thisData.content.toString();
-                hasContent = true;
-              } else {
-                if (that.options.showIcon) {
-                  titleOptions.icon = thisData.icon;
-                  titleOptions.iconBase = this.options.iconBase;
+                if (this.multiple && selectedIndex > 0) {
+                  titleFragment.appendChild(multipleSeparator.cloneNode(false));
                 }
-                if (that.options.showSubtext && !that.multiple && thisData.subtext) titleOptions.subtext = ' ' + thisData.subtext;
-                titleOptions.text = option.textContent.trim();
+
+                if (option.title) {
+                  titleOptions.text = option.title;
+                } else if (thisData) {
+                  if (thisData.content && that.options.showContent) {
+                    titleOptions.content = thisData.content.toString();
+                    hasContent = true;
+                  } else {
+                    if (that.options.showIcon) {
+                      titleOptions.icon = thisData.icon;
+                    }
+                    if (that.options.showSubtext && !that.multiple && thisData.subtext) titleOptions.subtext = ' ' + thisData.subtext;
+                    titleOptions.text = option.textContent.trim();
+                  }
+                }
+
+                titleFragment.appendChild(generateOption.text.call(this, titleOptions, true));
+              } else {
+                break;
               }
-
-              titleFragment.appendChild(generateOption.text(titleOptions, true));
-            } else {
-              break;
             }
-          }
 
-          // add ellipsis
-          if (selectedCount > 49) {
-            titleFragment.appendChild(document.createTextNode('...'));
+            // add ellipsis
+            if (selectedCount > 49) {
+              titleFragment.appendChild(document.createTextNode('...'));
+            }
           }
         } else {
           var optionSelector = ':not([hidden]):not([data-hidden="true"]):not([data-divider="true"])';
@@ -1715,7 +1790,7 @@
           var totalCount = this.$element[0].querySelectorAll('select > option' + optionSelector + ', optgroup' + optionSelector + ' option' + optionSelector).length,
               tr8nText = (typeof this.options.countSelectedText === 'function') ? this.options.countSelectedText(selectedCount, totalCount) : this.options.countSelectedText;
 
-          titleFragment = generateOption.text({
+          titleFragment = generateOption.text.call(this, {
             text: tr8nText.replace('{0}', selectedCount.toString()).replace('{1}', totalCount.toString())
           }, true);
         }
@@ -1728,7 +1803,7 @@
 
       // If the select doesn't have a title, then use the default, or if nothing is set at all, use noneSelectedText
       if (!titleFragment.childNodes.length) {
-        titleFragment = generateOption.text({
+        titleFragment = generateOption.text.call(this, {
           text: typeof this.options.title !== 'undefined' ? this.options.title : this.options.noneSelectedText
         }, true);
       }
@@ -1776,7 +1851,7 @@
       if (version.major < 4) {
         newElement.classList.add('bs3');
 
-        if (newElement.parentNode.classList.contains('input-group') &&
+        if (newElement.parentNode.classList && newElement.parentNode.classList.contains('input-group') &&
             (newElement.previousElementSibling || newElement.nextElementSibling) &&
             (newElement.previousElementSibling || newElement.nextElementSibling).classList.contains('input-group-addon')
         ) {
@@ -1801,21 +1876,19 @@
     },
 
     liHeight: function (refresh) {
-      if (!refresh && (this.options.size === false || this.sizeInfo)) return;
+      if (!refresh && (this.options.size === false || Object.keys(this.sizeInfo).length)) return;
 
-      if (!this.sizeInfo) this.sizeInfo = {};
-
-      var newElement = document.createElement('div'),
-          menu = document.createElement('div'),
-          menuInner = document.createElement('div'),
+      var newElement = elementTemplates.div.cloneNode(false),
+          menu = elementTemplates.div.cloneNode(false),
+          menuInner = elementTemplates.div.cloneNode(false),
           menuInnerInner = document.createElement('ul'),
-          divider = document.createElement('li'),
-          dropdownHeader = document.createElement('li'),
-          li = document.createElement('li'),
-          a = document.createElement('a'),
-          text = document.createElement('span'),
+          divider = elementTemplates.li.cloneNode(false),
+          dropdownHeader = elementTemplates.li.cloneNode(false),
+          li,
+          a = elementTemplates.a.cloneNode(false),
+          text = elementTemplates.span.cloneNode(false),
           header = this.options.header && this.$menu.find('.' + classNames.POPOVERHEADER).length > 0 ? this.$menu.find('.' + classNames.POPOVERHEADER)[0].cloneNode(true) : null,
-          search = this.options.liveSearch ? document.createElement('div') : null,
+          search = this.options.liveSearch ? elementTemplates.div.cloneNode(false) : null,
           actions = this.options.actionsBox && this.multiple && this.$menu.find('.bs-actionsbox').length > 0 ? this.$menu.find('.bs-actionsbox')[0].cloneNode(true) : null,
           doneButton = this.options.doneButton && this.multiple && this.$menu.find('.bs-donebutton').length > 0 ? this.$menu.find('.bs-donebutton')[0].cloneNode(true) : null,
           firstOption = this.$element.find('option')[0];
@@ -1825,7 +1898,7 @@
       text.className = 'text';
       a.className = 'dropdown-item ' + (firstOption ? firstOption.className : '');
       newElement.className = this.$menu[0].parentNode.className + ' ' + classNames.SHOW;
-      newElement.style.width = this.sizeInfo.selectWidth + 'px';
+      newElement.style.width = 0; // ensure button width doesn't affect natural width of menu when calculating
       if (this.options.width === 'auto') menu.style.minWidth = 0;
       menu.className = classNames.MENU + ' ' + classNames.SHOW;
       menuInner.className = 'inner ' + classNames.SHOW;
@@ -1834,8 +1907,21 @@
       dropdownHeader.className = 'dropdown-header';
 
       text.appendChild(document.createTextNode('\u200b'));
-      a.appendChild(text);
-      li.appendChild(a);
+
+      if (this.selectpicker.current.data.length) {
+        for (var i = 0; i < this.selectpicker.current.data.length; i++) {
+          var data = this.selectpicker.current.data[i];
+          if (data.type === 'option') {
+            li = data.element;
+            break;
+          }
+        }
+      } else {
+        li = elementTemplates.li.cloneNode(false);
+        a.appendChild(text);
+        li.appendChild(a);
+      }
+
       dropdownHeader.appendChild(text.cloneNode(true));
 
       if (this.selectpicker.view.widestOption) {
@@ -1908,6 +1994,7 @@
       this.sizeInfo.menuPadding = menuPadding;
       this.sizeInfo.menuExtras = menuExtras;
       this.sizeInfo.menuWidth = menuWidth;
+      this.sizeInfo.menuInnerInnerWidth = menuWidth - menuPadding.horiz;
       this.sizeInfo.totalMenuWidth = this.sizeInfo.menuWidth;
       this.sizeInfo.scrollBarWidth = scrollBarWidth;
       this.sizeInfo.selectHeight = this.$newElement[0].offsetHeight;
@@ -1958,7 +2045,8 @@
           _minHeight,
           maxHeight,
           menuInnerMinHeight,
-          estimate;
+          estimate,
+          isDropup;
 
       if (this.options.dropupAuto) {
         // Get the estimated height of the menu without scrollbars.
@@ -1966,7 +2054,16 @@
         // below the button without setting dropup, but we can't know
         // the exact height of the menu until createView is called later
         estimate = liHeight * this.selectpicker.current.elements.length + menuPadding.vert;
-        this.$newElement.toggleClass(classNames.DROPUP, this.sizeInfo.selectOffsetTop - this.sizeInfo.selectOffsetBot > this.sizeInfo.menuExtras.vert && estimate + this.sizeInfo.menuExtras.vert + 50 > this.sizeInfo.selectOffsetBot);
+
+        isDropup = this.sizeInfo.selectOffsetTop - this.sizeInfo.selectOffsetBot > this.sizeInfo.menuExtras.vert && estimate + this.sizeInfo.menuExtras.vert + 50 > this.sizeInfo.selectOffsetBot;
+
+        // ensure dropup doesn't change while searching (so menu doesn't bounce back and forth)
+        if (this.selectpicker.isSearching === true) {
+          isDropup = this.selectpicker.dropup;
+        }
+
+        this.$newElement.toggleClass(classNames.DROPUP, isDropup);
+        this.selectpicker.dropup = isDropup;
       }
 
       if (this.options.size === 'auto') {
@@ -1992,10 +2089,6 @@
         minHeight = menuInnerMinHeight = '';
       }
 
-      if (this.options.dropdownAlignRight === 'auto') {
-        this.$menu.toggleClass(classNames.MENURIGHT, this.sizeInfo.selectOffsetLeft > this.sizeInfo.selectOffsetRight && this.sizeInfo.selectOffsetRight < (this.sizeInfo.totalMenuWidth - selectWidth));
-      }
-
       this.$menu.css({
         'max-height': maxHeight + 'px',
         'overflow': 'hidden',
@@ -2014,8 +2107,10 @@
       if (this.selectpicker.current.data.length && this.selectpicker.current.data[this.selectpicker.current.data.length - 1].position > this.sizeInfo.menuInnerHeight) {
         this.sizeInfo.hasScrollBar = true;
         this.sizeInfo.totalMenuWidth = this.sizeInfo.menuWidth + this.sizeInfo.scrollBarWidth;
+      }
 
-        this.$menu.css('min-width', this.sizeInfo.totalMenuWidth);
+      if (this.options.dropdownAlignRight === 'auto') {
+        this.$menu.toggleClass(classNames.MENURIGHT, this.sizeInfo.selectOffsetLeft > this.sizeInfo.selectOffsetRight && this.sizeInfo.selectOffsetRight < (this.sizeInfo.totalMenuWidth - selectWidth));
       }
 
       if (this.dropdown && this.dropdown._popper) this.dropdown._popper.update();
@@ -2025,32 +2120,33 @@
       this.liHeight(refresh);
 
       if (this.options.header) this.$menu.css('padding-top', 0);
-      if (this.options.size === false) return;
 
-      var that = this,
-          $window = $(window);
+      if (this.options.size !== false) {
+        var that = this,
+            $window = $(window);
 
-      this.setMenuSize();
+        this.setMenuSize();
 
-      if (this.options.liveSearch) {
-        this.$searchbox
-          .off('input.setMenuSize propertychange.setMenuSize')
-          .on('input.setMenuSize propertychange.setMenuSize', function () {
-            return that.setMenuSize();
-          });
+        if (this.options.liveSearch) {
+          this.$searchbox
+            .off('input.setMenuSize propertychange.setMenuSize')
+            .on('input.setMenuSize propertychange.setMenuSize', function () {
+              return that.setMenuSize();
+            });
+        }
+
+        if (this.options.size === 'auto') {
+          $window
+            .off('resize' + EVENT_KEY + '.' + this.selectId + '.setMenuSize' + ' scroll' + EVENT_KEY + '.' + this.selectId + '.setMenuSize')
+            .on('resize' + EVENT_KEY + '.' + this.selectId + '.setMenuSize' + ' scroll' + EVENT_KEY + '.' + this.selectId + '.setMenuSize', function () {
+              return that.setMenuSize();
+            });
+        } else if (this.options.size && this.options.size != 'auto' && this.selectpicker.current.elements.length > this.options.size) {
+          $window.off('resize' + EVENT_KEY + '.' + this.selectId + '.setMenuSize' + ' scroll' + EVENT_KEY + '.' + this.selectId + '.setMenuSize');
+        }
       }
 
-      if (this.options.size === 'auto') {
-        $window
-          .off('resize' + EVENT_KEY + '.' + this.selectId + '.setMenuSize' + ' scroll' + EVENT_KEY + '.' + this.selectId + '.setMenuSize')
-          .on('resize' + EVENT_KEY + '.' + this.selectId + '.setMenuSize' + ' scroll' + EVENT_KEY + '.' + this.selectId + '.setMenuSize', function () {
-            return that.setMenuSize();
-          });
-      } else if (this.options.size && this.options.size != 'auto' && this.selectpicker.current.elements.length > this.options.size) {
-        $window.off('resize' + EVENT_KEY + '.' + this.selectId + '.setMenuSize' + ' scroll' + EVENT_KEY + '.' + this.selectId + '.setMenuSize');
-      }
-
-      that.createView(false, true, refresh);
+      this.createView(false, true, refresh);
     },
 
     setWidth: function () {
@@ -2280,35 +2376,15 @@
     },
 
     checkDisabled: function () {
-      var that = this;
-
       if (this.isDisabled()) {
         this.$newElement[0].classList.add(classNames.DISABLED);
-        this.$button.addClass(classNames.DISABLED).attr('tabindex', -1).attr('aria-disabled', true);
+        this.$button.addClass(classNames.DISABLED).attr('aria-disabled', true);
       } else {
         if (this.$button[0].classList.contains(classNames.DISABLED)) {
           this.$newElement[0].classList.remove(classNames.DISABLED);
           this.$button.removeClass(classNames.DISABLED).attr('aria-disabled', false);
         }
-
-        if (this.$button.attr('tabindex') == -1 && !this.$element.data('tabindex')) {
-          this.$button.removeAttr('tabindex');
-        }
       }
-
-      this.$button.on('click', function () {
-        return !that.isDisabled();
-      });
-    },
-
-    tabIndex: function () {
-      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') &&
-        (this.$element.attr('tabindex') !== -98 && this.$element.attr('tabindex') !== '-98')) {
-        this.$element.data('tabindex', this.$element.attr('tabindex'));
-        this.$button.attr('tabindex', this.$element.data('tabindex'));
-      }
-
-      this.$element.attr('tabindex', -98);
     },
 
     clickListener: function () {
@@ -2395,8 +2471,7 @@
 
         // Don't run if the select is disabled
         if (!that.isDisabled() && !$this.parent().hasClass(classNames.DISABLED)) {
-          var $options = that.$element.find('option'),
-              option = clickedData.option,
+          var option = clickedData.option,
               $option = $(option),
               state = option.selected,
               $optgroup = $option.parent('optgroup'),
@@ -2412,38 +2487,32 @@
           }
 
           if (!that.multiple) { // Deselect all others if not multi select box
-            prevOption.selected = false;
+            if (prevOption) prevOption.selected = false;
             option.selected = true;
             that.setSelected(clickedIndex, true);
           } else { // Toggle the one we have chosen if we are multi select.
             option.selected = !state;
 
             that.setSelected(clickedIndex, !state);
-            $this.trigger('blur');
+            that.focusedParent.focus();
 
             if (maxOptions !== false || maxOptionsGrp !== false) {
-              var maxReached = maxOptions < $options.filter(':selected').length,
+              var maxReached = maxOptions < getSelectedOptions(element).length,
                   maxReachedGrp = maxOptionsGrp < $optgroup.find('option:selected').length;
 
               if ((maxOptions && maxReached) || (maxOptionsGrp && maxReachedGrp)) {
                 if (maxOptions && maxOptions == 1) {
-                  $options.prop('selected', false);
-                  $option.prop('selected', true);
-
-                  for (var i = 0; i < $options.length; i++) {
-                    that.setSelected(i, false);
-                  }
-
-                  that.setSelected(clickedIndex, true);
+                  element.selectedIndex = -1;
+                  option.selected = true;
+                  that.setOptionStatus(true);
                 } else if (maxOptionsGrp && maxOptionsGrp == 1) {
-                  $optgroup.find('option:selected').prop('selected', false);
-                  $option.prop('selected', true);
-
                   for (var i = 0; i < $optgroupOptions.length; i++) {
-                    var option = $optgroupOptions[i];
-                    that.setSelected($options.index(option), false);
+                    var _option = $optgroupOptions[i];
+                    _option.selected = false;
+                    that.setSelected(_option.liIndex, false);
                   }
 
+                  option.selected = true;
                   that.setSelected(clickedIndex, true);
                 } else {
                   var maxOptionsText = typeof that.options.maxOptionsText === 'string' ? [that.options.maxOptionsText, that.options.maxOptionsText] : that.options.maxOptionsText,
@@ -2458,7 +2527,7 @@
                     maxTxtGrp = maxTxtGrp.replace('{var}', maxOptionsArr[2][maxOptionsGrp > 1 ? 0 : 1]);
                   }
 
-                  $option.prop('selected', false);
+                  option.selected = false;
 
                   that.$menu.append($notify);
 
@@ -2478,9 +2547,11 @@
                     that.setSelected(clickedIndex, false);
                   }, 10);
 
-                  $notify.delay(750).fadeOut(300, function () {
-                    $(this).remove();
-                  });
+                  $notify[0].classList.add('fadeOut');
+
+                  setTimeout(function () {
+                    $notify.remove();
+                  }, 1050);
                 }
               }
             }
@@ -2551,6 +2622,28 @@
         }
       });
 
+      this.$button
+        .on('focus' + EVENT_KEY, function (e) {
+          var tabindex = that.$element[0].getAttribute('tabindex');
+
+          // only change when button is actually focused
+          if (tabindex !== undefined && e.originalEvent && e.originalEvent.isTrusted) {
+            // apply select element's tabindex to ensure correct order is followed when tabbing to the next element
+            this.setAttribute('tabindex', tabindex);
+            // set element's tabindex to -1 to allow for reverse tabbing
+            that.$element[0].setAttribute('tabindex', -1);
+            that.selectpicker.view.tabindex = tabindex;
+          }
+        })
+        .on('blur' + EVENT_KEY, function (e) {
+          // revert everything to original tabindex
+          if (that.selectpicker.view.tabindex !== undefined && e.originalEvent && e.originalEvent.isTrusted) {
+            that.$element[0].setAttribute('tabindex', that.selectpicker.view.tabindex);
+            this.setAttribute('tabindex', -1);
+            that.selectpicker.view.tabindex = undefined;
+          }
+        });
+
       this.$element
         .on('change' + EVENT_KEY, function () {
           that.render();
@@ -2558,17 +2651,17 @@
           changedArguments = null;
         })
         .on('focus' + EVENT_KEY, function () {
-          if (!that.options.mobile) that.$button.trigger('focus');
+          if (!that.options.mobile) that.$button[0].focus();
         });
     },
 
     liveSearchListener: function () {
-      var that = this,
-          noResults = document.createElement('li');
+      var that = this;
 
       this.$button.on('click.bs.dropdown.data-api', function () {
         if (!!that.$searchbox.val()) {
           that.$searchbox.val('');
+          that.selectpicker.search.previousValue = undefined;
         }
       });
 
@@ -2577,7 +2670,7 @@
       });
 
       this.$searchbox.on('input propertychange', function () {
-        var searchValue = that.$searchbox.val();
+        var searchValue = that.$searchbox[0].value;
 
         that.selectpicker.search.elements = [];
         that.selectpicker.search.data = [];
@@ -2592,8 +2685,6 @@
               normalizeSearch = that.options.liveSearchNormalize;
 
           if (normalizeSearch) q = normalizeToBase(q);
-
-          that._$lisSelected = that.$menuInner.find('.selected');
 
           for (var i = 0; i < that.selectpicker.main.data.length; i++) {
             var li = that.selectpicker.main.data[i];
@@ -2634,16 +2725,13 @@
           that.$menuInner.scrollTop(0);
           that.selectpicker.search.elements = searchMatch;
           that.createView(true);
-
-          if (!searchMatch.length) {
-            noResults.className = 'no-results';
-            noResults.innerHTML = that.options.noneResultsText.replace('{0}', '"' + htmlEscape(searchValue) + '"');
-            that.$menuInner[0].firstChild.appendChild(noResults);
-          }
-        } else {
+          showNoResults.call(that, searchMatch, searchValue);
+        } else if (that.selectpicker.search.previousValue) { // for IE11 (#2402)
           that.$menuInner.scrollTop(0);
           that.createView(false);
         }
+
+        that.selectpicker.search.previousValue =  searchValue;
       });
     },
 
@@ -2697,14 +2785,14 @@
 
       element.classList.add('bs-select-hidden');
 
-      for (var i = 0, len = this.selectpicker.current.elements.length; i < len; i++) {
-        var liData = this.selectpicker.current.data[i],
+      for (var i = 0, data = this.selectpicker.current.data, len = data.length; i < len; i++) {
+        var liData = data[i],
             option = liData.option;
 
         if (option && !liData.disabled && liData.type !== 'divider') {
           if (liData.selected) previousSelected++;
           option.selected = status;
-          if (status) currentSelected++;
+          if (status === true) currentSelected++;
         }
       }
 
@@ -2754,6 +2842,9 @@
           isVirtual = that.isVirtual(),
           position0 = isVirtual === true ? that.selectpicker.view.position0 : 0;
 
+      // do nothing if a function key is pressed
+      if (e.which >= 112 && e.which <= 123) return;
+
       isActive = that.$newElement.hasClass(classNames.SHOW);
 
       if (
@@ -2798,7 +2889,7 @@
           }
         } else if (e.which === keyCodes.ARROW_DOWN || downOnTab) { // down
           index++;
-          if (index + position0 >= that.selectpicker.view.canHighlight.length) index = 0;
+          if (index + position0 >= that.selectpicker.view.canHighlight.length) index = that.selectpicker.view.firstHighlightIndex;
 
           if (!that.selectpicker.view.canHighlight[index + position0]) {
             index = index + 1 + that.selectpicker.view.canHighlight.slice(index + position0 + 1).indexOf(true);
@@ -2823,10 +2914,10 @@
           }
         } else if (e.which === keyCodes.ARROW_DOWN || downOnTab) { // down
           // scroll to top and highlight first option
-          if (index === 0) {
+          if (index === that.selectpicker.view.firstHighlightIndex) {
             that.$menuInner[0].scrollTop = 0;
 
-            liActiveIndex = 0;
+            liActiveIndex = that.selectpicker.view.firstHighlightIndex;
           } else {
             activeLi = that.selectpicker.current.data[liActiveIndex];
             offset = activeLi.position - that.sizeInfo.menuInnerHeight;
@@ -2953,6 +3044,8 @@
     },
 
     mobile: function () {
+      // ensure mobile is set to true if mobile function is called after init
+      this.options.mobile = true;
       this.$element[0].classList.add('mobile-device');
     },
 
@@ -2962,9 +3055,10 @@
       this.options = config;
 
       this.checkDisabled();
+      this.buildData();
       this.setStyle();
       this.render();
-      this.createLi();
+      this.buildList();
       this.setWidth();
 
       this.setSize(true);
@@ -2992,6 +3086,10 @@
         this.$bsContainer.remove();
       } else {
         this.$menu.remove();
+      }
+
+      if (this.selectpicker.view.titleOption && this.selectpicker.view.titleOption.parentNode) {
+        this.selectpicker.view.titleOption.parentNode.removeChild(this.selectpicker.view.titleOption);
       }
 
       this.$element
@@ -3072,7 +3170,7 @@
           var dataAttributes = $this.data();
 
           for (var dataAttr in dataAttributes) {
-            if (dataAttributes.hasOwnProperty(dataAttr) && $.inArray(dataAttr, DISALLOWED_ATTRIBUTES) !== -1) {
+            if (Object.prototype.hasOwnProperty.call(dataAttributes, dataAttr) && $.inArray(dataAttr, DISALLOWED_ATTRIBUTES) !== -1) {
               delete dataAttributes[dataAttr];
             }
           }
@@ -3082,7 +3180,7 @@
           $this.data('selectpicker', (data = new Selectpicker(this, config)));
         } else if (options) {
           for (var i in options) {
-            if (options.hasOwnProperty(i)) {
+            if (Object.prototype.hasOwnProperty.call(options, i)) {
               data.options[i] = options[i];
             }
           }
@@ -3117,8 +3215,19 @@
     return this;
   };
 
+  // get Bootstrap's keydown event handler for either Bootstrap 4 or Bootstrap 3
+  function keydownHandler () {
+    if ($.fn.dropdown) {
+      // wait to define until function is called in case Bootstrap isn't loaded yet
+      var bootstrapKeydown = $.fn.dropdown.Constructor._dataApiKeydownHandler || $.fn.dropdown.Constructor.prototype.keydown;
+      return bootstrapKeydown.apply(this, arguments);
+    }
+  }
+
   $(document)
     .off('keydown.bs.dropdown.data-api')
+    .on('keydown.bs.dropdown.data-api', ':not(.bootstrap-select) > [data-toggle="dropdown"]', keydownHandler)
+    .on('keydown.bs.dropdown.data-api', ':not(.bootstrap-select) > .dropdown-menu', keydownHandler)
     .on('keydown' + EVENT_KEY, '.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bootstrap-select .bs-searchbox input', Selectpicker.prototype.keydown)
     .on('focusin.modal', '.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bootstrap-select .bs-searchbox input', function (e) {
       e.stopPropagation();
