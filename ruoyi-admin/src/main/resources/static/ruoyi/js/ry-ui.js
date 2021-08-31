@@ -388,8 +388,7 @@ var table = {
             },
             // 下载模板
             importTemplate: function() {
-                table.set();
-                $.get(table.options.importTemplateUrl, function(result) {
+                $.get(activeWindow().table.options.importTemplateUrl, function(result) {
                     if (result.code == web_status.SUCCESS) {
                         window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
                     } else if (result.code == web_status.WARNING) {
