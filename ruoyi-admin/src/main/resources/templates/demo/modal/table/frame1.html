@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('多层窗口A')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<form id="form-user-add" class="form-horizontal">
+	            <div class="row">
+	            	<div class="col-sm-12" style="margin-top: 50px">
+	                    <div class="form-group">
+	                        <label class="col-sm-4 control-label">用户名称：</label>
+	                        <div class="col-sm-4">
+	                            <input id="name" placeholder="请输入用户名称" class="form-control" type="text">
+	                        </div>
+	                        <button type="button" class="btn btn-primary" onclick="selectUserToParentId()">选择</button>
+	                    </div>
+	                </div>
+	           </div>
+			</form>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        /* 提交 */
+		function submitHandler() {
+        	var name = $("#name").val();
+			activeWindow().$('#username').html(name);
+			$.modal.close();
+		}
+        
+		// 根据父窗口ID获取
+		function selectUserToParentId(){
+			var prefix = ctx + "demo/modal";
+            var options = {
+                width: '100px',
+                height: '100px',
+                title: '多层窗口B',
+                url: prefix + "/frame2",
+                callBack: doSubmit
+            };
+            $.modal.openOptions(options);
+        }
+		
+		function doSubmit(index, layero){
+			var body = $.modal.getChildFrame(index);
+   			$("#name").val(body.find('#name').val());
+   			$.modal.close(index);
+		}
+    </script>
+</body>
+</html>

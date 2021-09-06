@@ -4,6 +4,7 @@
 	<th:block th:include="include :: header('表格传值给父页面')" />
 </head>
 <body class="gray-bg">
+     <input type="hidden" id="rowIds">
      <div class="container-div">
 		<div class="row">
 			<div class="col-sm-12 select-table table-striped">
@@ -81,15 +82,21 @@
        		}
 			$.modal.close();
 			// 父页面的方法
-			// parent.selectUsers();
+			// activeWindow().selectUsers();
 			// 父页面的变量
-			parent.$('#userids').html(rows.join());
+			activeWindow().$('#userids').html('我是通过方式一来的：' + rows.join());
 		}
         
 		/* 添加用户-选择用户-提交(回调形式-父页面调用子页面) */
 		function getSelections() {
 			return $.table.selectFirstColumns();
 		}
+
+		$("#bootstrap-table").on("check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table", function (e, rowsAfter, rowsBefore) {
+            var rows = $.common.equals("uncheck-all", e.type) ? rowsBefore : rowsAfter;
+            var rowIds = $.table.affectedRowIds(rows);
+            $("#rowIds").val(rowIds);
+        });
     </script>
 </body>
 </html>
