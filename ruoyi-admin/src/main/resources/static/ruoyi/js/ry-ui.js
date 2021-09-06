@@ -889,6 +889,8 @@ var table = {
                     }
                 }
                 var index = top.layer.open($.extend({
+                    id: options.id,       // 唯一id
+                    anim: options.anim,   // 弹出动画 0-6
                     type: 2,
                     maxmin: $.common.isEmpty(options.maxmin) ? true : options.maxmin,
                     shade: 0.3,
