@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v5.2.3
+ * bootstrap-fileinput v5.2.4
  * http://plugins.krajee.com/file-input
  *
  * Author: Kartik Visweswaran
@@ -45,13 +45,17 @@
         };
     }
 
-    var $h, FileInput;
+    var $h, FileInput, getLoadingUrl = function () {
+        var src = document.currentScript.src, srcPath = src.substring(0, src.lastIndexOf("/"));
+        return srcPath + '/loading.gif'
+    };
 
     // fileinput helper object for all global variables and internal helper methods
     $h = {
         FRAMES: '.kv-preview-thumb',
         SORT_CSS: 'file-sortable',
         INIT_FLAG: 'init-',
+        ZOOM_VAR: getLoadingUrl() + '?kvTemp__2873389129__=', // used to prevent 404 errors in URL parsing
         OBJECT_PARAMS: '<param name="controller" value="true" />\n' +
             '<param name="allowFullScreen" value="true" />\n' +
             '<param name="allowScriptAccess" value="always" />\n' +
@@ -2972,7 +2976,7 @@
                 slideIn = 'slideIn' + dir, slideOut = 'slideOut' + dir, parsed, zoomData = $frame.data('zoom');
             if (zoomData) {
                 zoomData = decodeURIComponent(zoomData);
-                parsed = $zoomPreview.html().setTokens({zoomData: zoomData});
+                parsed = $zoomPreview.html().replace($h.ZOOM_VAR, '').setTokens({zoomData: zoomData});
                 $zoomPreview.html(parsed);
                 $frame.data('zoom', '');
                 $zoomPreview.attr('data-zoom', zoomData);
@@ -4231,7 +4235,8 @@
                     'fileid': fileId || '',
                     'typeCss': typeCss,
                     'footer': footer,
-                    'data': zoom && vZoomData ? '{zoomData}' : vData,
+                    'data': vData,
+//                    'data': zoom && vZoomData ? $h.ZOOM_VAR + '{zoomData}' : vData,
                     'template': templ || cat,
                     'style': styleAttribs ? 'style="' + styleAttribs + '"' : '',
                     'zoomData': vZoomData ? encodeURIComponent(vZoomData) : ''
