@@ -37,4 +37,9 @@ public @interface Log
      * 是否保存请求的参数
      */
     public boolean isSaveRequestData() default true;
+
+    /**
+     * 是否保存响应的参数
+     */
+    public boolean isSaveResponseData() default true;
 }
