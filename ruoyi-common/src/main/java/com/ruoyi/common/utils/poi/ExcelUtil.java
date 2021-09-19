@@ -340,8 +340,11 @@ public class ExcelUtil<T>
                             {
                                 val = "";
                             }
-                            byte[] data = image.getData();
-                            val = FileUtils.writeImportBytes(data);
+                            else
+                            {
+                                byte[] data = image.getData();
+                                val = FileUtils.writeImportBytes(data);
+                            }
                         }
                         ReflectUtils.invokeSetter(entity, propertyName, val);
                     }
