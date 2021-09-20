@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
+import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.json.JSON;
 import com.ruoyi.framework.interceptor.RepeatSubmitInterceptor;
 
@@ -23,21 +24,9 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor
 
     public final String SESSION_REPEAT_KEY = "repeatData";
 
-    /**
-     * 间隔时间，单位:秒 默认10秒
-     * 
-     * 两次相同参数的请求，如果间隔时间大于该参数，系统不会认定为重复提交的数据
-     */
-    private int intervalTime = 10;
-
-    public void setIntervalTime(int intervalTime)
-    {
-        this.intervalTime = intervalTime;
-    }
-
     @SuppressWarnings("unchecked")
     @Override
-    public boolean isRepeatSubmit(HttpServletRequest request) throws Exception
+    public boolean isRepeatSubmit(HttpServletRequest request, RepeatSubmit annotation) throws Exception
     {
         // 本次参数及系统时间
         String nowParams = JSON.marshal(request.getParameterMap());
@@ -56,7 +45,7 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor
             if (sessionMap.containsKey(url))
             {
                 Map<String, Object> preDataMap = (Map<String, Object>) sessionMap.get(url);
-                if (compareParams(nowDataMap, preDataMap) && compareTime(nowDataMap, preDataMap))
+                if (compareParams(nowDataMap, preDataMap) && compareTime(nowDataMap, preDataMap, annotation.interval()))
                 {
                     return true;
                 }
@@ -81,11 +70,11 @@ public class SameUrlDataInterceptor extends RepeatSubmitInterceptor
     /**
      * 判断两次间隔时间
      */
-    private boolean compareTime(Map<String, Object> nowMap, Map<String, Object> preMap)
+    private boolean compareTime(Map<String, Object> nowMap, Map<String, Object> preMap, int interval)
     {
         long time1 = (Long) nowMap.get(REPEAT_TIME);
         long time2 = (Long) preMap.get(REPEAT_TIME);
-        if ((time1 - time2) < (this.intervalTime * 1000))
+        if ((time1 - time2) < interval)
         {
             return true;
         }

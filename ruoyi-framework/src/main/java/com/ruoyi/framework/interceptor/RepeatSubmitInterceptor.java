@@ -29,9 +29,9 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
             if (annotation != null)
             {
-                if (this.isRepeatSubmit(request))
+                if (this.isRepeatSubmit(request, annotation))
                 {
-                    AjaxResult ajaxResult = AjaxResult.error("不允许重复提交，请稍后再试");
+                    AjaxResult ajaxResult = AjaxResult.error(annotation.message());
                     ServletUtils.renderString(response, JSON.marshal(ajaxResult));
                     return false;
                 }
@@ -51,5 +51,5 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter
      * @return
      * @throws Exception
      */
-    public abstract boolean isRepeatSubmit(HttpServletRequest request) throws Exception;
+    public abstract boolean isRepeatSubmit(HttpServletRequest request, RepeatSubmit annotation) throws Exception;
 }
