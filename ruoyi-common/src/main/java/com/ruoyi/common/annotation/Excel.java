@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.math.BigDecimal;
+import com.ruoyi.common.utils.poi.ExcelHandlerAdapter;
 
 /**
  * 自定义导出Excel数据注解
@@ -108,7 +109,17 @@ public @interface Excel
     /**
      * 导出字段对齐方式（0：默认；1：靠左；2：居中；3：靠右）
      */
-    Align align() default Align.AUTO;
+    public Align align() default Align.AUTO;
+
+    /**
+     * 自定义数据处理器
+     */
+    public Class<?> handler() default ExcelHandlerAdapter.class;
+
+    /**
+     * 自定义数据处理器参数
+     */
+    public String[] args() default {};
 
     public enum Align
     {

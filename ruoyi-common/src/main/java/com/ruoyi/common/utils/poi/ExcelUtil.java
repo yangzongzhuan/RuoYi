@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -332,6 +333,10 @@ public class ExcelUtil<T>
                         else if (StringUtils.isNotEmpty(attr.dictType()))
                         {
                             val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
+                        }
+                        else if (!attr.handler().equals(ExcelHandlerAdapter.class))
+                        {
+                            val = dataFormatHandlerAdapter(val, attr);
                         }
                         else if (ColumnType.IMAGE == attr.cellType() && StringUtils.isNotEmpty(pictures))
                         {
@@ -729,6 +734,10 @@ public class ExcelUtil<T>
                 {
                     cell.setCellValue((((BigDecimal) value).setScale(attr.scale(), attr.roundingMode())).toString());
                 }
+                else if (!attr.handler().equals(ExcelHandlerAdapter.class))
+                {
+                    cell.setCellValue(dataFormatHandlerAdapter(value, attr));
+                }
                 else
                 {
                     // 设置列类型
@@ -899,6 +908,28 @@ public class ExcelUtil<T>
     public static String reverseDictByExp(String dictLabel, String dictType, String separator)
     {
         return DictUtils.getDictValue(dictType, dictLabel, separator);
+    }
+
+    /**
+     * 数据处理器
+     * 
+     * @param value 数据值
+     * @param excel 数据注解
+     * @return
+     */
+    public String dataFormatHandlerAdapter(Object value, Excel excel)
+    {
+        try
+        {
+            Object instance = excel.handler().newInstance();
+            Method formatMethod = excel.handler().getMethod("format", new Class[] { Object.class, String[].class });
+            value = formatMethod.invoke(instance, value, excel.args());
+        }
+        catch (Exception e)
+        {
+            log.error("不能格式化数据 " + excel.handler(), e.getMessage());
+        }
+        return Convert.toStr(value);
     }
 
     /**
