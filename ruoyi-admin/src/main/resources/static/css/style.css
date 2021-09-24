@@ -3344,6 +3344,21 @@ nav.page-tabs .page-tabs-content {
     overflow: hidden;
 }
 
+.tagsview-hide#content-main {
+    height: calc(100% - 88px);
+    overflow: hidden;
+}
+
+.footer-hide#content-main {
+    height: calc(100% - 91px);
+    overflow: hidden;
+}
+
+.tagsview-footer-hide#content-main {
+    height: calc(100% - 52px);
+    overflow: hidden;
+}
+
 .fixed-nav #content-main {
     height: calc(100% - 80px);
     overflow: hidden;

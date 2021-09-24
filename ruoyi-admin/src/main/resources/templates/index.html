@@ -226,7 +226,7 @@
                 </ul>
             </nav>
         </div>
-        <div class="row content-tabs">
+        <div class="row content-tabs" th:classappend="${#bools.isFalse(tagsView)} ? |hide|">
             <button class="roll-nav roll-left tabLeft">
                 <i class="fa fa-backward"></i>
             </button>
@@ -243,12 +243,12 @@
 
         <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
 
-        <div class="row mainContent" id="content-main" th:style="${#bools.isFalse(ignoreFooter)} ? |height: calc(100% - 91px)|">
+        <div class="row mainContent" id="content-main" th:classappend="${mainClass}">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"
-                    th:src="@{/system/main}" frameborder="0" seamless></iframe>
+                th:src="@{/system/main}" frameborder="0" seamless></iframe>
         </div>
-        
-        <div th:if="${ignoreFooter}" class="footer">
+
+        <div th:if="${footer}" class="footer">
             <div class="pull-right">© [[${copyrightYear}]] RuoYi Copyright </div>
         </div>
     </div>
