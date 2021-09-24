@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.service.ConfigService;
@@ -47,7 +48,7 @@ public class SysLoginController extends BaseController
         // 是否开启记住我
         mmap.put("isRemembered", rememberMe);
         // 是否开启用户注册
-        mmap.put("isAllowRegister", configService.getKey("sys.account.registerUser"));
+        mmap.put("isAllowRegister", Convert.toBool(configService.getKey("sys.account.registerUser"), false));
         return "login";
     }
 
