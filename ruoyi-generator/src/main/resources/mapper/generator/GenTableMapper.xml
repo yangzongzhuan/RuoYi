@@ -155,8 +155,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			sysdate()
          )
     </insert>
-    
-    <update id="updateGenTable" parameterType="GenTable">
+
+	<update id="createTable">
+		${sql}
+	</update>
+
+	<update id="updateGenTable" parameterType="GenTable">
         update gen_table
         <set>
             <if test="tableName != null">table_name = #{tableName},</if>

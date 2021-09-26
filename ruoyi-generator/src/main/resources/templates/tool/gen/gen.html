@@ -35,6 +35,9 @@
 			     <a class="btn btn-success multiple disabled" onclick="javascript:batchGenCode()" shiro:hasPermission="tool:gen:code">
 			        <i class="fa fa-download"></i> 生成
 			    </a>
+				<a class="btn btn-success" onclick="createTable()">
+					<i class="fa fa-plus"></i> 创建
+				</a>
 				<a class="btn btn-info" onclick="importTable()">
 			        <i class="fa fa-upload"></i> 导入
 			    </a>
@@ -198,11 +201,17 @@
 		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
 		    });
 		}
-		
+
 		// 导入表结构
 		function importTable() {
 			var importTableUrl = prefix + "/importTable";
 			$.modal.open("导入表结构", importTableUrl);
+		}
+
+		// 创建表结构
+		function createTable() {
+			var creatTableUrl = prefix + "/createTable";
+			$.modal.open("创建表结构", creatTableUrl);
 		}
 	</script>
 </body>

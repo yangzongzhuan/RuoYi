@@ -150,9 +150,14 @@ public class GenTableServiceImpl implements IGenTableService
         genTableColumnMapper.deleteGenTableColumnByIds(Convert.toLongArray(ids));
     }
 
+    @Override
+    public int createTable(String sql) {
+        return genTableMapper.createTable(sql);
+    }
+
     /**
      * 导入表结构
-     * 
+     *
      * @param tableList 导入表列表
      * @param operName 操作人员
      */

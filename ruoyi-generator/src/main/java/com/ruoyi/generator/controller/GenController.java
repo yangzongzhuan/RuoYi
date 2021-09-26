@@ -30,6 +30,11 @@ import com.ruoyi.generator.domain.GenTable;
 import com.ruoyi.generator.domain.GenTableColumn;
 import com.ruoyi.generator.service.IGenTableColumnService;
 import com.ruoyi.generator.service.IGenTableService;
+import com.alibaba.druid.DbType;
+import com.alibaba.druid.sql.SQLUtils;
+import com.alibaba.druid.sql.ast.SQLStatement;
+import com.alibaba.druid.sql.dialect.mysql.ast.statement.MySqlCreateTableStatement;
+import com.alibaba.fastjson.JSON;
 
 /**
  * 代码生成 操作处理
@@ -107,6 +112,15 @@ public class GenController extends BaseController
     }
 
     /**
+     * 创建表结构
+     */
+
+    @GetMapping("/createTable")
+    public String createTable() {
+        return prefix + "/createTable" ;
+    }
+
+    /**
      * 导入表结构（保存）
      */
     @RequiresPermissions("tool:gen:list")
@@ -172,6 +186,32 @@ public class GenController extends BaseController
     public AjaxResult remove(String ids)
     {
         genTableService.deleteGenTableByIds(ids);
+        return AjaxResult.success();
+    }
+
+    @Log(title = "创建表", businessType = BusinessType.OTHER)
+    @PostMapping("/createTable")
+    @ResponseBody
+    public AjaxResult create(String sql) {
+        List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);
+        List<String> tableNames = new ArrayList<>();
+        for (SQLStatement sqlStatement : sqlStatements) {
+            if (sqlStatement instanceof MySqlCreateTableStatement) {
+                MySqlCreateTableStatement sqlStatement1 = (MySqlCreateTableStatement) sqlStatement;
+                String tableName = sqlStatement1.getTableName();
+                tableName = tableName.replaceAll("`", "");
+
+                int msg = genTableService.createTable(sqlStatement1.toString());
+                if (msg == 0) {
+                    tableNames.add(tableName);
+                }
+            } else {
+                return AjaxResult.error("请输入建表语句");
+            }
+        }
+        List<GenTable> tableList = genTableService.selectDbTableListByNames(
+                (tableNames.toArray(new String[tableNames.size()])));
+        genTableService.importGenTable(tableList, "admin");
         return AjaxResult.success();
     }
 
