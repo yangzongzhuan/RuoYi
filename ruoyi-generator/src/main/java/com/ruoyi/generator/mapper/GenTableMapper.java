@@ -85,7 +85,7 @@ public interface GenTableMapper
      * 创建表
      *
      * @param sql
-     * @return
+     * @return 结果
      */
     public int createTable(String sql);
 }
