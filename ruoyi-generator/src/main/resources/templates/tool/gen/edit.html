@@ -431,7 +431,7 @@
 		            title: '字典类型',
 		            width: "13%",
 		            formatter: function (value, row, index) {
-		        		var html = $.common.sprintf("<input class='form-control' type='text' name='columns[%s].dictType' value='%s' id='columns_dict_%s'>", index, value, row.columnId);
+		        		var html = $.common.sprintf("<input class='form-control' type='text' name='columns[%s].dictType' value='%s' id='columns_dict_%s'>", index, (value === undefined ? '' : value), row.columnId);
 		        		return "<div class='input-group'>" + html + "<span class='input-group-addon input-sm' onclick='selectDictTree(" + row.columnId + ", this)'><i class='fa fa-search'></i></span></div>";
 		        	},
 		        	cellStyle: function(value, row, index) {
