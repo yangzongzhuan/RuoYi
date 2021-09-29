@@ -30,7 +30,7 @@ function start()
 	if [ x"$PID" != x"" ]; then
 	    echo "$AppName is running..."
 	else
-		nohup java -jar  $JVM_OPTS target/$AppName > /dev/null 2>&1 &
+		nohup java $JVM_OPTS -jar $AppName > /dev/null 2>&1 &
 		echo "Start $AppName success..."
 	fi
 }
@@ -38,7 +38,7 @@ function start()
 function stop()
 {
     echo "Stop $AppName"
-	
+
 	PID=""
 	query(){
 		PID=`ps -ef |grep java|grep $AppName|grep -v grep|awk '{print $2}'`
