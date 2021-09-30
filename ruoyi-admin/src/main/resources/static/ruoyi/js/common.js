@@ -351,8 +351,10 @@ function calSumWidth(elements) {
 function activeWindow() {
 	var topWindow = $(window.parent.document);
 	var currentId = $('.page-tabs-content', topWindow).find('.active').attr('data-id');
-	var activeWindow = $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
-    return activeWindow;
+	if (!currentId) {
+		return window.parent;
+	}
+    return $('.RuoYi_iframe[data-id="' + currentId + '"]', topWindow)[0].contentWindow;
 }
 
 /** 密码规则范围验证 */
