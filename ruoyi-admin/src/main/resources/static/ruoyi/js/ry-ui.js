@@ -447,6 +447,9 @@ var table = {
                                     $.modal.enable();
                                     $.modal.alertError(result.msg);
                                 }
+                            },
+                            complete: function () {
+                            	layero.find('#file').val('');
                             }
                         });
                     }
