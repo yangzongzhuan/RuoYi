@@ -245,7 +245,7 @@ public class GenTableServiceImpl implements IGenTableService
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
-    
+
     /**
      * 生成代码（自定义路径）
      * 
@@ -325,7 +325,7 @@ public class GenTableServiceImpl implements IGenTableService
     }
 
     /**
-     * 批量生成代码
+     * 批量生成代码（下载方式）
      * 
      * @param tableNames 表数组
      * @return 数据
