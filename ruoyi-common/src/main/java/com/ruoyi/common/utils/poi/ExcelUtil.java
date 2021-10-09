@@ -493,7 +493,7 @@ public class ExcelUtil<T>
      */
     public void importTemplateExcel(HttpServletResponse response, String sheetName) throws IOException
     {
-        importTemplateExcel(response, sheetName);
+        importTemplateExcel(response, sheetName, StringUtils.EMPTY);
     }
 
     /**
