@@ -37,8 +37,6 @@
 		$(function() {
 		    var options = {
 		        url: prefix + "/db/list",
-		        // sortName: "createTime",
-		        // sortOrder: "desc",
 		        showSearch: false,
 		        showRefresh: false,
 		        showToggle: false,
@@ -59,7 +57,6 @@
 		        {
 		            field: 'tableName',
 		            title: '表名称',
-		            sortable: true,
 		            formatter: function(value, row, index) {
                     	return $.table.tooltip(value);
                     }
@@ -67,20 +64,17 @@
 		        {
 		            field: 'tableComment',
 		            title: '表描述',
-		            sortable: true,
 		            formatter: function(value, row, index) {
                     	return $.table.tooltip(value);
                     }
 		        },
 		        {
 		            field: 'createTime',
-		            title: '创建时间',
-		            sortable: true
+		            title: '创建时间'
 		        },
 		        {
 		            field: 'updateTime',
-		            title: '更新时间',
-		            sortable: true
+		            title: '更新时间'
 		        }]
 		    };
 		    $.table.init(options);
