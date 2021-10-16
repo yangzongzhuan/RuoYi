@@ -141,7 +141,7 @@
 		// 预览代码
 		function preview(tableId) {
 			var preViewUrl = prefix + "/preview/" + tableId;
-			$.modal.loading("正在加载数据，请稍后...");
+			$.modal.loading("正在加载数据，请稍候...");
 			$.get(preViewUrl, function(result) {
 				if (result.code == web_status.SUCCESS) {
 					 var items = [];
@@ -175,7 +175,7 @@
 		    $.modal.confirm("确定要生成" + tableName + "表代码吗？", function() {
 		    	if(genType === "0") {
 			    	location.href = prefix + "/download/" + tableName;
-			        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+			        layer.msg('执行成功,正在生成代码请稍候…', { icon: 1 });
 				} else if(genType === "1") {
 					$.operate.get(prefix + "/genCode/" + tableName);
 				}
@@ -198,7 +198,7 @@
 		    }
 		    $.modal.confirm("确认要生成选中的" + rows.length + "条数据吗?", function() {
 		    	location.href = prefix + "/batchGenCode?tables=" + rows;
-		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+		        layer.msg('执行成功,正在生成代码请稍候…', { icon: 1 });
 		    });
 		}
 

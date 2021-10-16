@@ -309,7 +309,7 @@ $(function() {
             var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
             $('.mainContent').find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
 
-            $.modal.loading("数据加载中，请稍后...");
+            $.modal.loading("数据加载中，请稍候...");
 
             $('.mainContent iframe:visible').on('load', function() {
             	$.modal.closeLoading();
@@ -630,7 +630,7 @@ $(function() {
                     setActiveTab(this);
                     var target = $('.RuoYi_iframe[data-id="' + this.data('id') + '"]');
                     var url = target.attr('src');
-                    $.modal.loading("数据加载中，请稍后...");
+                    $.modal.loading("数据加载中，请稍候...");
                     target.attr('src', url).on('load', function() {
                     	$.modal.closeLoading();
                     });
@@ -645,5 +645,5 @@ $(function() {
                 }
             },
         }
-    })
+    });
 });
