@@ -73,7 +73,7 @@ var table = {
                     fixedNumber: 0,
                     fixedRightNumber: 0,
                     queryParams: $.table.queryParams,
-                    rowStyle: undefined,
+                    rowStyle: undefined
                 };
                 var options = $.extend(defaults, options);
                 table.options = options;
@@ -373,7 +373,7 @@ var table = {
                     var dataParam = $("#" + currentId).serializeArray();
                     dataParam.push({ "name": "orderByColumn", "value": params.sortName });
                     dataParam.push({ "name": "isAsc", "value": params.sortOrder });
-                    $.modal.loading("正在导出数据，请稍后...");
+                    $.modal.loading("正在导出数据，请稍候...");
                     $.post(table.options.exportUrl, dataParam, function(result) {
                         if (result.code == web_status.SUCCESS) {
                             window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
@@ -1004,7 +1004,7 @@ var table = {
                     dataType: dataType,
                     data: data,
                     beforeSend: function () {
-                        $.modal.loading("正在处理中，请稍后...");
+                        $.modal.loading("正在处理中，请稍候...");
                     },
                     success: function(result) {
                         if (typeof callback == "function") {
@@ -1179,7 +1179,7 @@ var table = {
                     dataType: "json",
                     data: data,
                     beforeSend: function () {
-                        $.modal.loading("正在处理中，请稍后...");
+                        $.modal.loading("正在处理中，请稍候...");
                         $.modal.disable();
                     },
                     success: function(result) {
@@ -1199,7 +1199,7 @@ var table = {
                     dataType: "json",
                     data: data,
                     beforeSend: function () {
-                        $.modal.loading("正在处理中，请稍后...");
+                        $.modal.loading("正在处理中，请稍候...");
                     },
                     success: function(result) {
                         if (typeof callback == "function") {
@@ -1225,7 +1225,7 @@ var table = {
                     dataType: "json",
                     data: data,
                     beforeSend: function () {
-                        $.modal.loading("正在处理中，请稍后...");
+                        $.modal.loading("正在处理中，请稍候...");
                     },
                     success: function(result) {
                         if (typeof callback == "function") {

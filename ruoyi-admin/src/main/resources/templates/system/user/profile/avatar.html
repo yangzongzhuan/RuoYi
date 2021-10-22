@@ -198,7 +198,7 @@ $(window).on('load', function() {
 
 	$('.btn-custom').on('click',function (e) {
 		if (!croppable) {
-			$.modal.alertWarning("裁剪框加载中,请稍后...");
+			$.modal.alertWarning("裁剪框加载中,请稍候...");
 			return;
 		}
 		var data = {
@@ -214,7 +214,7 @@ $(window).on('load', function() {
 
 function submitHandler() {
     if (!croppable) {
-        $.modal.alertWarning("裁剪框加载中,请稍后...");
+        $.modal.alertWarning("裁剪框加载中,请稍候...");
         return
     }
     cropper.getCroppedCanvas().toBlob(function(img) {
