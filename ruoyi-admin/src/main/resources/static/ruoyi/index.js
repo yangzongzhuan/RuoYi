@@ -601,7 +601,7 @@ $(function() {
                 callback: function(key, opt) {
                     setActiveTab(this);
                     this.nextAll('.menuTab').each(function() {
-                        $('.menuTab[data-id="' + $(this).data('id') + '"]').remove();
+                        $('.RuoYi_iframe[data-id="' + $(this).data('id') + '"]').remove();
                         $(this).remove();
                     });
                 }
