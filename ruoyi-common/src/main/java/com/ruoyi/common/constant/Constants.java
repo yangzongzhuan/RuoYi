@@ -116,4 +116,10 @@ public class Constants
      * LDAP 远程方法调用
      */
     public static final String LOOKUP_LDAP = "ldap://";
+
+    /**
+     * 定时任务违规的字符
+     */
+    public static final String[] JOB_ERROR_STR = { "java.net.URL", "javax.naming.InitialContext", "org.yaml.snakeyaml",
+            "org.springframework.jndi" };
 }
