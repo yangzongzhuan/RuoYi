@@ -912,7 +912,7 @@ var table = {
                     }
                 }, btnCallback));
                 if ($.common.isNotEmpty(options.full) && options.full === true) {
-                    layer.full(index);
+                    top.layer.full(index);
                 }
             },
             // 弹出层全屏
