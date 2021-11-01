@@ -511,7 +511,7 @@ window.onload = function() {
 				return _stopIt(event);
 			}
 			var type_e = elem.type.toUpperCase();
-			if (name == 'INPUT' && (type_e != 'TEXT' && type_e != 'TEXTAREA' && type_e != 'PASSWORD' && type_e != 'FILE' && type_e != 'SEARCH')) {
+			if (name == 'INPUT' && (type_e != 'TEXT' && type_e != 'TEXTAREA' && type_e != 'PASSWORD' && type_e != 'FILE' && type_e != 'SEARCH' && type_e != 'NUMBER')) {
 				return _stopIt(event);
 			}
 			if (name == 'INPUT' && (elem.readOnly == true || elem.disabled == true)) {
