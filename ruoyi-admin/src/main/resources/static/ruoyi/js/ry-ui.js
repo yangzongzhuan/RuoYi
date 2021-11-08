@@ -10,7 +10,7 @@ var table = {
     options: {},
     // 设置实例配置
     set: function(id) {
-        if($.common.getLength(table.config) > 1) {
+        if($.common.getLength(table.config) > 1 && $.common.isNotEmpty(event)) {
             var tableId = $.common.isEmpty(id) ? $(event.currentTarget).parents(".bootstrap-table").find("table.table").attr("id") : id;
             if ($.common.isNotEmpty(tableId)) {
                 table.options = table.get(tableId);
