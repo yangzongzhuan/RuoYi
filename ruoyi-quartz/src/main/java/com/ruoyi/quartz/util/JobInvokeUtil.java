@@ -110,7 +110,7 @@ public class JobInvokeUtil
         {
             return null;
         }
-        String[] methodParams = methodStr.split(",");
+        String[] methodParams = methodStr.split(",(?=(?:[^\']*\"[^\']*\')*[^\']*$)");
         List<Object[]> classs = new LinkedList<>();
         for (int i = 0; i < methodParams.length; i++)
         {
