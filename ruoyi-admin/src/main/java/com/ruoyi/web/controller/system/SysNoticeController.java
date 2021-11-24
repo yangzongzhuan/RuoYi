@@ -77,6 +77,7 @@ public class SysNoticeController extends BaseController
     /**
      * 修改公告
      */
+    @RequiresPermissions("system:notice:edit")
     @GetMapping("/edit/{noticeId}")
     public String edit(@PathVariable("noticeId") Long noticeId, ModelMap mmap)
     {

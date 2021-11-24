@@ -140,6 +140,7 @@ public class GenController extends BaseController
     /**
      * 修改代码生成业务
      */
+    @RequiresPermissions("tool:gen:edit")
     @GetMapping("/edit/{tableId}")
     public String edit(@PathVariable("tableId") Long tableId, ModelMap mmap)
     {

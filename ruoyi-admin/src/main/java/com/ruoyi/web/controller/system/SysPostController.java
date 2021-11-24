@@ -112,6 +112,7 @@ public class SysPostController extends BaseController
     /**
      * 修改岗位
      */
+    @RequiresPermissions("system:post:edit")
     @GetMapping("/edit/{postId}")
     public String edit(@PathVariable("postId") Long postId, ModelMap mmap)
     {

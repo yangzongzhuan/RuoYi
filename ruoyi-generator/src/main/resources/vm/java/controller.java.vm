@@ -126,6 +126,7 @@ public class ${ClassName}Controller extends BaseController
     /**
      * 修改${functionName}
      */
+    @RequiresPermissions("${permissionPrefix}:edit")
     @GetMapping("/edit/{${pkColumn.javaField}}")
     public String edit(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}, ModelMap mmap)
     {

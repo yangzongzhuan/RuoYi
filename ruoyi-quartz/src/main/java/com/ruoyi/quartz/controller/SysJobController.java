@@ -159,6 +159,7 @@ public class SysJobController extends BaseController
     /**
      * 修改调度
      */
+    @RequiresPermissions("monitor:job:edit")
     @GetMapping("/edit/{jobId}")
     public String edit(@PathVariable("jobId") Long jobId, ModelMap mmap)
     {

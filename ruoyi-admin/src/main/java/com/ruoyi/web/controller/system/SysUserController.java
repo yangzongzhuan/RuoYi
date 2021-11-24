@@ -147,6 +147,7 @@ public class SysUserController extends BaseController
     /**
      * 修改用户
      */
+    @RequiresPermissions("system:user:edit")
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
     {
