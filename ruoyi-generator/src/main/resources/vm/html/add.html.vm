@@ -334,7 +334,7 @@
                         var name = $.common.sprintf("${subclassName}List[%s].${javaField}", index);
                         return $.common.dictToSelect(${javaField}Datas, value, name);
                     }
-                #if($velocityCount != $subTable.columns.size())},#end
+                #if($foreach.count != $subTable.columns.size())},#end
 
 #else
                 {
@@ -345,7 +345,7 @@
                         var html = $.common.sprintf("<input class='form-control' type='text' name='${subclassName}List[%s].${javaField}' value='%s'>", index, value);
                         return html;
                     }
-                #if($velocityCount != $subTable.columns.size())},#end
+                #if($foreach.count != $subTable.columns.size())},#end
 
 #end
 #end
@@ -366,7 +366,7 @@
 #set($javaField=$column.javaField)
 #if($column.pk || $javaField == ${subTableFkclassName})
 #else
-                    ${javaField}: ""#if($velocityCount != $subTable.columns.size()),#end
+                    ${javaField}: ""#if($foreach.count != $subTable.columns.size()),#end
 
 #end
 #end
