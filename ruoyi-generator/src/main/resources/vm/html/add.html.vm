@@ -334,8 +334,9 @@
                         var name = $.common.sprintf("${subclassName}List[%s].${javaField}", index);
                         return $.common.dictToSelect(${javaField}Datas, value, name);
                     }
-                #if($foreach.count != $subTable.columns.size())},#end
-
+#if($foreach.count != $subTable.columns.size())
+                },
+#end
 #else
                 {
                     field: '${javaField}',
@@ -345,8 +346,9 @@
                         var html = $.common.sprintf("<input class='form-control' type='text' name='${subclassName}List[%s].${javaField}' value='%s'>", index, value);
                         return html;
                     }
-                #if($foreach.count != $subTable.columns.size())},#end
-
+#if($foreach.count != $subTable.columns.size())
+                },
+#end
 #end
 #end
                 }]
