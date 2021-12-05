@@ -2,7 +2,7 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 // Reasonable defaults
 const PIXEL_STEP = 10

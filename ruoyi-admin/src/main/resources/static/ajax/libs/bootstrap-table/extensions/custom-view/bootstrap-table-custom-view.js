@@ -2,7 +2,7 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 $.extend($.fn.bootstrapTable.defaults, {
   customView: false,

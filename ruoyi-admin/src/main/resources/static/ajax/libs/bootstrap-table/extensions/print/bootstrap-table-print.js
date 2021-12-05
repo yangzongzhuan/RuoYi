@@ -2,7 +2,7 @@
  * @update zhixin wen <wenzhixin2010@gmail.com>
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 function printPageBuilderDefault (table) {
   return `

@@ -3,7 +3,7 @@
  * extensions: https://github.com/hhurz/tableExport.jquery.plugin
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 const TYPE_NAME = {
   json: 'JSON',
