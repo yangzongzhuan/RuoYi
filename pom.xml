@@ -32,7 +32,7 @@
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
-        <log4j2.version>2.15.0</log4j2.version>
+        <log4j2.version>2.16.0</log4j2.version>
     </properties>
 
     <!-- 依赖声明 -->
