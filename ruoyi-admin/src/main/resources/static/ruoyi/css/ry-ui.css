@@ -347,7 +347,7 @@ label.error {
 
 .input-group.date label.error {
 	z-index:99;
-	right: 3px
+	right: 40px
 }
 
 .Validform_error,input.error,textarea.error,select.error {
