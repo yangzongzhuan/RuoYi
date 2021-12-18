@@ -8,7 +8,7 @@ $(document).ready(function(){
 	//手机号码验证身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)
 	jQuery.validator.addMethod("isPhone",function(value,element){
 		var length = value.length;
-		var phone=/^1[3|4|5|6|7|8|9][0-9]\d{8}$/;
+		var phone=/^1[3-9]\d{9}$/;
 		return this.optional(element)||(length == 11 && phone.test(value));
 	},"请填写正确的11位手机号");
 	//电话号码验证
@@ -31,7 +31,12 @@ $(document).ready(function(){
 	jQuery.validator.addMethod("isIdentity",function(value,element){
 		var id= /^(\d{15}$|^\d{18}$|^\d{17}(\d|X))$/;
 		return this.optional(element) || (id.test(value));
-	},"请输入正确的15或18位身份证号,末尾为大写X");
+	},"请输入正确的15或18位身份证号,末尾若为X请大写");
+	//校验二代身份证
+	jQuery.validator.addMethod("isIdentity18",function(value,element){
+		var id= /^(^\d{17}(\d|X))$/;
+		return this.optional(element) || (id.test(value));
+	},"请输入正确的18位身份证号，末尾若为X请大写");
 	//校验出生日期
 	jQuery.validator.addMethod("isBirth",function(value,element){
 		var birth = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;
