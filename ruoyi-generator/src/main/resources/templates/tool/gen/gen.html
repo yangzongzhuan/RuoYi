@@ -35,7 +35,7 @@
 			     <a class="btn btn-success multiple disabled" onclick="javascript:batchGenCode()" shiro:hasPermission="tool:gen:code">
 			        <i class="fa fa-download"></i> 生成
 			    </a>
-				<a class="btn btn-success" onclick="createTable()">
+				<a class="btn btn-success" onclick="createTable()" shiro:hasRole="admin">
 					<i class="fa fa-plus"></i> 创建
 				</a>
 				<a class="btn btn-info" onclick="importTable()">
