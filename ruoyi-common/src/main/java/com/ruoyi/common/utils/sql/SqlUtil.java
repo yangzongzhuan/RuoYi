@@ -1,6 +1,6 @@
 package com.ruoyi.common.utils.sql;
 
-import com.ruoyi.common.exception.base.BaseException;
+import com.ruoyi.common.exception.UtilException;
 import com.ruoyi.common.utils.StringUtils;
 
 /**
@@ -27,7 +27,7 @@ public class SqlUtil
     {
         if (StringUtils.isNotEmpty(value) && !isValidOrderBySql(value))
         {
-            throw new BaseException("参数不符合规范，不能进行查询");
+            throw new UtilException("参数不符合规范，不能进行查询");
         }
         return value;
     }
@@ -54,7 +54,7 @@ public class SqlUtil
         {
             if (StringUtils.indexOfIgnoreCase(value, sqlKeywords[i]) > -1)
             {
-                throw new BaseException("参数存在SQL注入风险");
+                throw new UtilException("参数存在SQL注入风险");
             }
         }
     }
