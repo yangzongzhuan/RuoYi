@@ -25,7 +25,7 @@
         <swagger.version>3.0.0</swagger.version>
         <mybatis-spring-boot.version>2.2.0</mybatis-spring-boot.version>
         <pagehelper.boot.version>1.4.0</pagehelper.boot.version>
-        <fastjson.version>1.2.78</fastjson.version>
+        <fastjson.version>1.2.79</fastjson.version>
         <oshi.version>5.8.2</oshi.version>
         <jna.version>5.9.0</jna.version>
         <commons.io.version>2.11.0</commons.io.version>
