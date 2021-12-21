@@ -31,6 +31,7 @@ import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.PermissionUtils;
+import com.ruoyi.common.utils.sql.SqlUtil;
 import com.ruoyi.generator.domain.GenTable;
 import com.ruoyi.generator.domain.GenTableColumn;
 import com.ruoyi.generator.service.IGenTableColumnService;
@@ -196,31 +197,33 @@ public class GenController extends BaseController
     @ResponseBody
     public AjaxResult create(String sql)
     {
-        List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);
-        List<String> tableNames = new ArrayList<>();
-        for (SQLStatement sqlStatement : sqlStatements)
+        try
         {
-            if (sqlStatement instanceof MySqlCreateTableStatement)
+            SqlUtil.filterKeyword(sql);
+            List<SQLStatement> sqlStatements = SQLUtils.parseStatements(sql, DbType.mysql);
+            List<String> tableNames = new ArrayList<>();
+            for (SQLStatement sqlStatement : sqlStatements)
             {
-                MySqlCreateTableStatement createTableStatement = (MySqlCreateTableStatement) sqlStatement;
-                String tableName = createTableStatement.getTableName();
-                tableName = tableName.replaceAll("`", "");
-
-                int msg = genTableService.createTable(createTableStatement.toString());
-                if (msg == 0)
+                if (sqlStatement instanceof MySqlCreateTableStatement)
                 {
-                    tableNames.add(tableName);
+                    MySqlCreateTableStatement createTableStatement = (MySqlCreateTableStatement) sqlStatement;
+                    if (genTableService.createTable(createTableStatement.toString()))
+                    {
+                        String tableName = createTableStatement.getTableName().replaceAll("`", "");
+                        tableNames.add(tableName);
+                    }
                 }
             }
-            else
-            {
-                return AjaxResult.error("请输入建表语句");
-            }
+            List<GenTable> tableList = genTableService.selectDbTableListByNames(tableNames.toArray(new String[tableNames.size()]));
+            String operName = Convert.toStr(PermissionUtils.getPrincipalProperty("loginName"));
+            genTableService.importGenTable(tableList, operName);
+            return AjaxResult.success();
         }
-        List<GenTable> tableList = genTableService.selectDbTableListByNames((tableNames.toArray(new String[tableNames.size()])));
-        String operName = Convert.toStr(PermissionUtils.getPrincipalProperty("loginName"));
-        genTableService.importGenTable(tableList, operName);
-        return AjaxResult.success();
+        catch (Exception e)
+        {
+            logger.error(e.getMessage(), e);
+            return AjaxResult.error("创建表结构异常" + e.getMessage());
+        }
     }
 
     /**

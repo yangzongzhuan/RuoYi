@@ -72,7 +72,7 @@ public interface IGenTableService
      * @param sql 创建表语句
      * @return 结果
      */
-    public int createTable(String sql);
+    public boolean createTable(String sql);
 
     /**
      * 导入表结构
