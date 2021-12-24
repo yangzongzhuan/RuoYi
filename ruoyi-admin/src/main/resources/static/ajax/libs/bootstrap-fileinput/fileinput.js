@@ -46,10 +46,10 @@
     }
     
     if (!document.currentScript) {
-    	document.currentScript = function() {
-    		var scripts = document.getElementsByTagName('script');
-    	    return scripts[scripts.length - 1];
-    	}();
+        document.currentScript = function() {
+            var scripts = document.getElementsByTagName('script');
+            return scripts[scripts.length - 1];
+        }();
 	}
 
     var $h, FileInput, getLoadingUrl = function () {
