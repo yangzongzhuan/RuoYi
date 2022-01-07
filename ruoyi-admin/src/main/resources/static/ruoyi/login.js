@@ -33,11 +33,11 @@ function login() {
             if (r.code == web_status.SUCCESS) {
                 location.href = ctx + 'index';
             } else {
-            	$.modal.closeLoading();
             	$('.imgcode').click();
             	$(".code").val("");
             	$.modal.msg(r.msg);
             }
+            $.modal.closeLoading();
         }
     });
 }
