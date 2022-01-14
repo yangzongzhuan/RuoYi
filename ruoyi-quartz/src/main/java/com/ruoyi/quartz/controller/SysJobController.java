@@ -143,7 +143,7 @@ public class SysJobController extends BaseController
         }
         else if (StringUtils.containsAnyIgnoreCase(job.getInvokeTarget(), new String[] { Constants.LOOKUP_LDAP, Constants.LOOKUP_LDAPS }))
         {
-            return error("新增任务'" + job.getJobName() + "'失败，目标字符串不允许'ldap'调用");
+            return error("新增任务'" + job.getJobName() + "'失败，目标字符串不允许'ldap(s)'调用");
         }
         else if (StringUtils.containsAnyIgnoreCase(job.getInvokeTarget(), new String[] { Constants.HTTP, Constants.HTTPS }))
         {

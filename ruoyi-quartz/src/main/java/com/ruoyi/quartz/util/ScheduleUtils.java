@@ -121,7 +121,7 @@ public class ScheduleUtils
      */
     public static boolean whiteList(String invokeTarget)
     {
-        String packageName = StringUtils.substringBefore(invokeTarget, ")");
+        String packageName = StringUtils.substringBefore(invokeTarget, "(");
         int count = StringUtils.countMatches(packageName, ".");
         if (count > 1)
         {
