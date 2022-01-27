@@ -169,6 +169,7 @@ public class SysUserController extends BaseController
     public AjaxResult editSave(@Validated SysUser user)
     {
         userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
         if (StringUtils.isNotEmpty(user.getPhonenumber())
                 && UserConstants.USER_PHONE_NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
         {
@@ -199,6 +200,7 @@ public class SysUserController extends BaseController
     public AjaxResult resetPwdSave(SysUser user)
     {
         userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
         user.setSalt(ShiroUtils.randomSalt());
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         if (userService.resetUserPwd(user) > 0)
@@ -235,6 +237,7 @@ public class SysUserController extends BaseController
     @ResponseBody
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
     {
+        userService.checkUserDataScope(userId);
         userService.insertUserAuth(userId, roleIds);
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return success();
@@ -293,6 +296,7 @@ public class SysUserController extends BaseController
     public AjaxResult changeStatus(SysUser user)
     {
         userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
         return toAjax(userService.changeStatus(user));
     }
 }

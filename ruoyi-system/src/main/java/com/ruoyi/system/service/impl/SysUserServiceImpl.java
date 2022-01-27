@@ -47,7 +47,7 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     private SysRoleMapper roleMapper;
-
+    
     @Autowired
     private SysPostMapper postMapper;
 
@@ -193,6 +193,7 @@ public class SysUserServiceImpl implements ISysUserService
         for (Long userId : userIds)
         {
             checkUserAllowed(new SysUser(userId));
+            checkUserDataScope(userId);
         }
         // 删除用户与角色关联
         userRoleMapper.deleteUserRole(userIds);
