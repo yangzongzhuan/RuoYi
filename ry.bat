@@ -33,7 +33,7 @@ PAUSE
 		PAUSE
 	)
 
-start javaw %JAVA_OPTS% -jar %AppName%
+start javaw %JVM_OPTS% -jar %AppName%
 
 echo  starting¡­¡­
 echo  Start %AppName% success...
