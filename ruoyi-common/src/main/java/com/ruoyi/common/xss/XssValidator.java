@@ -1,5 +1,7 @@
 package com.ruoyi.common.xss;
 
+import com.ruoyi.common.utils.StringUtils;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
