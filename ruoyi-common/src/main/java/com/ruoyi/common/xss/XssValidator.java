@@ -1,7 +1,6 @@
 package com.ruoyi.common.xss;
 
 import com.ruoyi.common.utils.StringUtils;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
@@ -19,7 +18,8 @@ public class XssValidator implements ConstraintValidator<Xss, String>
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext)
     {
-        if (StringUtils.isBlank(value)){
+        if (StringUtils.isBlank(value))
+        {
             return true;
         }
         return !containsHtml(value);

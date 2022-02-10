@@ -47,7 +47,7 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     private SysRoleMapper roleMapper;
-    
+
     @Autowired
     private SysPostMapper postMapper;
 
