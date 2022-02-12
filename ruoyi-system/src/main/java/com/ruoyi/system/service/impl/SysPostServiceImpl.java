@@ -90,7 +90,7 @@ public class SysPostServiceImpl implements ISysPostService
      * 批量删除岗位信息
      * 
      * @param ids 需要删除的数据ID
-     * @throws Exception
+     * @return 结果
      */
     @Override
     public int deletePostByIds(String ids)

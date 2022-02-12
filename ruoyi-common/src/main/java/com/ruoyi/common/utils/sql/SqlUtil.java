@@ -50,9 +50,9 @@ public class SqlUtil
             return;
         }
         String[] sqlKeywords = StringUtils.split(SQL_REGEX, "\\|");
-        for (int i = 0; i < sqlKeywords.length; i++)
+        for (String sqlKeyword : sqlKeywords)
         {
-            if (StringUtils.indexOfIgnoreCase(value, sqlKeywords[i]) > -1)
+            if (StringUtils.indexOfIgnoreCase(value, sqlKeyword) > -1)
             {
                 throw new UtilException("参数存在SQL注入风险");
             }

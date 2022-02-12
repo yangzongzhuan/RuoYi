@@ -384,6 +384,6 @@ public class SysMenuServiceImpl implements ISysMenuService
      */
     private boolean hasChild(List<SysMenu> list, SysMenu t)
     {
-        return getChildList(list, t).size() > 0 ? true : false;
+        return getChildList(list, t).size() > 0;
     }
 }

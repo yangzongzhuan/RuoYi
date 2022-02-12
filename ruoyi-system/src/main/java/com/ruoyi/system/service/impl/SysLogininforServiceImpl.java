@@ -47,7 +47,7 @@ public class SysLogininforServiceImpl implements ISysLogininforService
      * 批量删除系统登录日志
      * 
      * @param ids 需要删除的数据
-     * @return
+     * @return 结果
      */
     @Override
     public int deleteLogininforByIds(String ids)

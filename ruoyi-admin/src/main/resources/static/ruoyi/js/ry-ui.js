@@ -1313,7 +1313,7 @@ var table = {
         },
         // 校验封装处理
         validate: {
-            // 判断返回标识是否唯一 false 不存在 true 存在
+            // 判断返回标识是否唯一 false 为存在 true 为不存在
             unique: function (value) {
                 if (value == "0") {
                     return true;

@@ -39,7 +39,6 @@ public interface ISysDictDataService
      * 批量删除字典数据
      * 
      * @param ids 需要删除的数据
-     * @return 结果
      */
     public void deleteDictDataByIds(String ids);
 
