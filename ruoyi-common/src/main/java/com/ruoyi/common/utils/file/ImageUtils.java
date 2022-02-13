@@ -1,7 +1,6 @@
 package com.ruoyi.common.utils.file;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -65,7 +64,6 @@ public class ImageUtils
     public static byte[] readFile(String url)
     {
         InputStream in = null;
-        ByteArrayOutputStream baos = null;
         try
         {
             if (url.startsWith("http"))
@@ -95,7 +93,6 @@ public class ImageUtils
         finally
         {
             IOUtils.closeQuietly(in);
-            IOUtils.closeQuietly(baos);
         }
     }
 }
