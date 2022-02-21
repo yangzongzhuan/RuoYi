@@ -8,6 +8,7 @@ var Utils = $.fn.bootstrapTable.utils
 
 $.extend($.fn.bootstrapTable.defaults, {
   autoRefresh: false,
+  showAutoRefresh: true,
   autoRefreshInterval: 60,
   autoRefreshSilent: true,
   autoRefreshStatus: true,
@@ -17,6 +18,7 @@ $.extend($.fn.bootstrapTable.defaults, {
 $.extend($.fn.bootstrapTable.defaults.icons, {
   autoRefresh: {
     bootstrap3: 'glyphicon-time icon-time',
+    bootstrap5: 'bi-clock',
     materialize: 'access_time',
     'bootstrap-table': 'icon-clock'
   }[$.fn.bootstrapTable.theme] || 'fa-clock'

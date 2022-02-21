@@ -1,5 +1,6 @@
 /**
- * @author zhixin wen <wenzhixin2010@gmail.com>
+ * @author: Dustin Utecht
+ * @github: https://github.com/UtechtDustin
  */
 
 var Utils = $.fn.bootstrapTable.utils
