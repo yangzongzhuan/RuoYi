@@ -948,6 +948,7 @@ table.rc-table-resizing thead > th > a {
 .bootstrap-tree-table .table{border-bottom: 0px solid #e7eaec!important;}
 .bootstrap-tree-table .table-bordered .treetable-thead th {border-left: 1px solid #e7eaec!important;}
 .bootstrap-tree-table .table-bordered .treetable-tbody td {border-right: 1px solid #e7eaec!important;}
+.bootstrap-tree-table .fixed-table-pagination .pagination-detail {margin-top: 10px;margin-bottom: 10px;}
 
 /** 首页样式 **/
 .ax_close_max {

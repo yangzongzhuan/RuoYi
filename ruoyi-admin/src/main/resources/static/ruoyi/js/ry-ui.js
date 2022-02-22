@@ -588,10 +588,13 @@ var table = {
                     id: "bootstrap-tree-table",
                     type: 1, // 0 代表bootstrapTable 1代表bootstrapTreeTable
                     height: 0,
-                    rootIdValue: null,
+                    rootIdValue: 0,
                     ajaxParams: {},
                     toolbar: "toolbar",
                     striped: false,
+                    pagination: false,
+                    pageSize: 10,
+                    pageList: [10, 25, 50],
                     expandColumn: 1,
                     showSearch: true,
                     showRefresh: true,
@@ -612,6 +615,10 @@ var table = {
                     ajaxParams: options.ajaxParams,                     // 请求数据的ajax的data属性
                     rootIdValue: options.rootIdValue,                   // 设置指定根节点id值
                     height: options.height,                             // 表格树的高度
+                    pagination: options.pagination,                     // 是否显示分页
+                    dataUrl: options.dataUrl,                           // 加载子节点异步请求数据url
+                    pageSize: options.pageSize,                         // 每页的记录行数
+                    pageList: options.pageList,                         // 可供选择的每页的行数
                     expandColumn: options.expandColumn,                 // 在哪一列上面显示展开按钮
                     striped: options.striped,                           // 是否显示行间隔色
                     bordered: options.bordered,                         // 是否显示边框
@@ -622,6 +629,7 @@ var table = {
                     expandAll: options.expandAll,                       // 是否全部展开
                     expandFirst: options.expandFirst,                   // 是否默认第一级展开--expandAll为false时生效
                     columns: options.columns,                           // 显示列信息（*）
+                    onClickRow: options.onClickRow,                     // 单击某行事件
                     responseHandler: $.treeTable.responseHandler,       // 在加载服务器发送来的数据之前处理函数
                     onLoadSuccess: $.treeTable.onLoadSuccess            // 当所有数据被加载时触发处理函数
                 });

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('异步加载表格树')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>区域名称：</label>
+                                <input type="text" name="areaName"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-info" id="expandAllBtn">
+                    <i class="fa fa-exchange"></i> 展开/折叠
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-tree-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "demo/table";
+
+        $(function() {
+            var options = {
+                code: "id",
+                parentCode: "parentId",
+                uniqueId: "id",
+                expandAll: false,
+		        expandFirst: false,
+		        expandColumn: 1,
+                pagination: true,                      // 开启分页
+                url: prefix + "/tree/list",            // 列表请求
+                dataUrl: prefix + "/tree/listChild",   // 子节点异步请求
+                onClickRow: onClickRow,
+                columns: [{
+                    field: 'selectItem',
+                    radio: true
+                },
+                {
+                    field: 'areaName',
+                    title: '区域名称',
+                    align: 'left',
+                },
+                {
+                    field: 'areaCode',
+                    title: '区域代码',
+                    align: 'left'
+                },
+                {
+                    field: 'simplePy',
+                    title: '首字母简拼',
+                    align: 'left'
+                },
+                {
+                    field: 'pinYin',
+                    title: '名称全拼',
+                    align: 'left'
+                }]
+            };
+            $.treeTable.init(options);
+        });
+        
+        function onClickRow(row, $element){
+//         	alert("单击行id：" + row.id + " name：" + row.name);
+        }
+    </script>
+</body>
+</html>
