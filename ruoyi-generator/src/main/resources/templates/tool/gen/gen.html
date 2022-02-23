@@ -148,11 +148,12 @@
 		                $.each(result.data, function(index, value) {
 		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
 		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName) && !$.common.equals("sub-domain.java", templateName)){
-		                    	var language = templateName.substring(templateName.lastIndexOf(".") + 1);
-			                    var highCode = hljs.highlight(language, value).value;
-		                    	items.push({
-			                        title: templateName , content: "<pre class=\"layui-code\"><code>" + highCode + "</code></pre>"
-			                    })
+		                        var codeName = templateName.replace(".", "");
+		                        var language = templateName.substring(templateName.lastIndexOf(".") + 1);
+		                        var highCode = hljs.highlight(language, value).value;
+		                        items.push({
+		                            title: templateName , content: "<pre class=\"layui-code\"><a style=\"float:right\" href=\"javascript:copyText('" + codeName + "')\"><i class=\"fa fa-copy\"></i> 复制</a><code id=\"" + codeName + "\">" + highCode + "</code></pre><textarea id=\"t_" + codeName + "\"></textarea><script>function copyText(codeName){var text = document.getElementById(codeName).innerText;var input = document.getElementById(\"t_\"+codeName);input.value = text;input.select();document.execCommand(\"copy\");$.modal.msgSuccess(\"复制成功\");}<\/script>"
+		                        })
 		                    }
 		                });
 		                top.layer.tab({
