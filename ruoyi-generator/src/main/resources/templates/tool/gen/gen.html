@@ -152,7 +152,7 @@
 		                        var language = templateName.substring(templateName.lastIndexOf(".") + 1);
 		                        var highCode = hljs.highlight(language, value).value;
 		                        items.push({
-		                            title: templateName , content: "<pre class=\"layui-code\"><a style=\"float:right\" href=\"javascript:copyText('" + codeName + "')\"><i class=\"fa fa-copy\"></i> 复制</a><code id=\"" + codeName + "\">" + highCode + "</code></pre><textarea id=\"t_" + codeName + "\"></textarea><script>function copyText(codeName){var text = document.getElementById(codeName).innerText;var input = document.getElementById(\"t_\"+codeName);input.value = text;input.select();document.execCommand(\"copy\");$.modal.msgSuccess(\"复制成功\");}<\/script>"
+		                            title: templateName , content: "<pre class=\"layui-code\"><a style=\"float:right\" href=\"javascript:copyText('" + codeName + "')\"><i class=\"fa fa-copy\"></i> 复制</a><code id=\"" + codeName + "\">" + highCode + "</code></pre><textarea id=\"t_" + codeName + "\" style='position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;'></textarea><script>function copyText(codeName){var text = document.getElementById(codeName).innerText;var input = document.getElementById(\"t_\"+codeName);input.value = text;input.select();document.execCommand(\"copy\");$.modal.msgSuccess(\"复制成功\");}<\/script>"
 		                        })
 		                    }
 		                });
