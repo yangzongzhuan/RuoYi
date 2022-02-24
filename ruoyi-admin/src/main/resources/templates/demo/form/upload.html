@@ -50,6 +50,8 @@
         	var rsp = data.response;
             log.info("return url：" + rsp.url)
             log.info("reutrn fileName：" + rsp.fileName)
+            log.info("reutrn newFileName：" + rsp.newFileName)
+            log.info("return originalFilename：" + rsp.originalFilename)
         }).on('fileremoved', function (event, id, index) {
             $("input[name='" + event.currentTarget.id + "']").val('')
         })
@@ -62,6 +64,8 @@
         	var rsp = data.response;
         	log.info("return urls：" + rsp.urls)
             log.info("reutrn fileNames：" + rsp.fileNames)
+            log.info("reutrn newFileNames：" + rsp.newFileNames)
+            log.info("return originalFilenames：" + rsp.originalFilenames)
         }).on('fileremoved', function (event, id, index) {
             $("input[name='" + event.currentTarget.id + "']").val('')
         })

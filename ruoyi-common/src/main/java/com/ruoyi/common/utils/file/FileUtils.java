@@ -253,4 +253,22 @@ public class FileUtils
         }
         return strFileExtendName;
     }
+
+    /**
+     * 获取名称
+     * 
+     * @param fileName 路径名称
+     * @return 没有文件路径的名称
+     */
+    public static String getName(String fileName)
+    {
+        if (fileName == null)
+        {
+            return null;
+        }
+        int lastUnixPos = fileName.lastIndexOf('/');
+        int lastWindowsPos = fileName.lastIndexOf('\\');
+        int index = Math.max(lastUnixPos, lastWindowsPos);
+        return fileName.substring(index + 1);
+    }
 }
