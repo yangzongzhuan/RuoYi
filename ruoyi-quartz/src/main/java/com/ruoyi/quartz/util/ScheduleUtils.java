@@ -125,10 +125,7 @@ public class ScheduleUtils
         int count = StringUtils.countMatches(packageName, ".");
         if (count > 1)
         {
-            if (!StringUtils.containsAnyIgnoreCase(invokeTarget, Constants.JOB_WHITELIST_STR))
-            {
-                return false;
-            }
+            return StringUtils.containsAnyIgnoreCase(invokeTarget, Constants.JOB_WHITELIST_STR);
         }
         return true;
     }
