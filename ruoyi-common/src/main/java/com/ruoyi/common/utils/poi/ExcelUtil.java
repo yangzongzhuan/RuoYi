@@ -9,6 +9,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -132,7 +134,7 @@ public class ExcelUtil<T>
      * 当前行号
      */
     private int rownum;
-    
+
     /**
      * 标题
      */
@@ -314,7 +316,7 @@ public class ExcelUtil<T>
                             String dateFormat = field.getAnnotation(Excel.class).dateFormat();
                             if (StringUtils.isNotEmpty(dateFormat))
                             {
-                                val = DateUtils.parseDateToStr(dateFormat, (Date) val);
+                                val = parseDateToStr(dateFormat, (Date) val);
                             }
                             else
                             {
@@ -409,7 +411,7 @@ public class ExcelUtil<T>
     {
         return exportExcel(list, sheetName, StringUtils.EMPTY);
     }
-    
+
     /**
      * 对list数据源将其里面的数据导入到excel表单
      * 
@@ -821,7 +823,7 @@ public class ExcelUtil<T>
                 String dictType = attr.dictType();
                 if (StringUtils.isNotEmpty(dateFormat) && StringUtils.isNotNull(value))
                 {
-                    cell.setCellValue(DateUtils.parseDateToStr(dateFormat, (Date) value));
+                    cell.setCellValue(parseDateToStr(dateFormat, (Date) value));
                 }
                 else if (StringUtils.isNotEmpty(readConverterExp) && StringUtils.isNotNull(value))
                 {
@@ -1393,5 +1395,38 @@ public class ExcelUtil<T>
             }
         }
         return sheetIndexPicMap;
+    }
+
+    /**
+     * 格式化不同类型的日期对象
+     * 
+     * @param dateFormat 日期格式
+     * @param val 被格式化的日期对象
+     * @return 格式化后的日期字符
+     */
+    public String parseDateToStr(String dateFormat, Object val)
+    {
+        if (val == null)
+        {
+            return "";
+        }
+        String str;
+        if (val instanceof Date)
+        {
+            str = DateUtils.parseDateToStr(dateFormat, (Date) val);
+        }
+        else if (val instanceof LocalDateTime)
+        {
+            str = DateUtils.parseDateToStr(dateFormat, DateUtils.toDate((LocalDateTime) val));
+        }
+        else if (val instanceof LocalDate)
+        {
+            str = DateUtils.parseDateToStr(dateFormat, DateUtils.toDate((LocalDate) val));
+        }
+        else
+        {
+            str = val.toString();
+        }
+        return str;
     }
 }
