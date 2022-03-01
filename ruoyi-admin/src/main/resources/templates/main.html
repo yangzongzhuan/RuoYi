@@ -99,10 +99,51 @@
                             <div class="panel panel-default">
 								<div class="panel-heading">
 								   <h5 class="panel-title">
+									   <a data-toggle="collapse" data-parent="#version" href="#v473">v4.7.3</a><code class="pull-right">2022.03.01</code>
+								   </h5>
+								</div>
+								<div id="v473" class="panel-collapse collapse in">
+									<div class="panel-body">
+									   <ol>
+									        <li>表格树支持分页/异步加载</li>
+									        <li>代码生成预览支持复制内容</li>
+									        <li>定时任务默认保存到内存中执行</li>
+									        <li>代码生成同步保留必填/类型选项</li>
+									        <li>页面若未匹配到字典标签则返回原字典值</li>
+									        <li>用户访问控制时校验数据权限，防止越权</li>
+									        <li>导出Excel时屏蔽公式，防止CSV注入风险</li>
+									        <li>升级spring-boot到最新版本2.5.10</li>
+									        <li>升级spring-boot-mybatis到最新版2.2.2</li>
+									        <li>升级pagehelper到最新版1.4.1</li>
+									        <li>升级oshi到最新版本6.1.2</li>
+									        <li>升级bootstrap-table到最新版本1.19.1</li>
+									        <li>服务监控新增运行参数信息显示</li>
+									        <li>定时任务目标字符串验证包名白名单</li>
+									        <li>文件上传接口新增原/新文件名返回参数</li>
+									        <li>定时任务屏蔽违规的字符</li>
+									        <li>分页数据新增分页参数合理化参数</li>
+									        <li>表格父子视图添加点击事件打开示例</li>
+									        <li>优化上传文件名称命名规则</li>
+									        <li>优化加载字典缓存数据</li>
+									        <li>优化任务队列满时任务拒绝策略</li>
+									        <li>优化IE11上传预览不显示的问题</li>
+									        <li>优化Excel格式化不同类型的日期对象</li>
+									        <li>优化国际化配置多余的zh请求问题</li>
+									        <li>优化新版Chrome浏览器回退出现的遮罩层</li>
+									        <li>修复EMAIL类型回退键被禁止问题</li>
+									        <li>修复Xss注解字段值为空时的异常问题</li>
+									        <li>其他细节优化</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+                            <div class="panel panel-default">
+								<div class="panel-heading">
+								   <h5 class="panel-title">
 									   <a data-toggle="collapse" data-parent="#version" href="#v472">v4.7.2</a><code class="pull-right">2021.12.23</code>
 								   </h5>
 								</div>
-								<div id="v472" class="panel-collapse collapse in">
+								<div id="v472" class="panel-collapse collapse">
 									<div class="panel-body">
 									   <ol>
 									        <li>自定义xss校验注解实现</li>
