@@ -136,7 +136,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
     const formatValue = (row, i, column) => {
       const value = Utils.calculateObjectValue(column,
         column.printFormatter || column.formatter,
-        [row[column.field], row, i], row[column.field])
+        [$.common.getItemField(row, column.field), row, i], $.common.getItemField(row, column.field))
 
       return typeof value === 'undefined' || value === null ?
         this.options.undefinedText : value
