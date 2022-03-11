@@ -5,7 +5,7 @@
     <parent>
         <artifactId>ruoyi</artifactId>
         <groupId>com.ruoyi</groupId>
-        <version>4.6.2</version>
+        <version>4.7.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -49,8 +49,8 @@
 
         <!-- 自定义验证注解 -->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
         <!--常用工具类 -->

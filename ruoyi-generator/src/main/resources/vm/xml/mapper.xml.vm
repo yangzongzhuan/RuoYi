@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #end
 
     <sql id="select${ClassName}Vo">
-        select#foreach($column in $columns) $column.columnName#if($velocityCount != $columns.size()),#end#end from ${tableName}
+        select#foreach($column in $columns) $column.columnName#if($foreach.count != $columns.size()),#end#end from ${tableName}
     </sql>
 
     <select id="select${ClassName}List" parameterType="${ClassName}" resultMap="${ClassName}Result">
@@ -74,8 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join ${tableName} p on p.${pkColumn.columnName} = t.${tree_parent_code}
         where t.${pkColumn.columnName} = #{${pkColumn.javaField}}
 #elseif($table.sub)
-        select#foreach($column in $columns) a.$column.columnName#if($velocityCount != $columns.size()),#end#end,
-           #foreach($column in $subTable.columns) b.$column.columnName as sub_$column.columnName#if($velocityCount != $subTable.columns.size()),#end#end
+        select#foreach($column in $columns) a.$column.columnName#if($foreach.count != $columns.size()),#end#end,
+           #foreach($column in $subTable.columns) b.$column.columnName as sub_$column.columnName#if($foreach.count != $subTable.columns.size()),#end#end
 
         from ${tableName} a
         left join ${subTableName} b on b.${subTableFkName} = a.${pkColumn.columnName}
@@ -137,9 +137,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <insert id="batch${subClassName}">
-        insert into ${subTableName}(#foreach($column in $subTable.columns) $column.columnName#if($velocityCount != $subTable.columns.size()),#end#end) values
+        insert into ${subTableName}(#foreach($column in $subTable.columns) $column.columnName#if($foreach.count != $subTable.columns.size()),#end#end) values
 		<foreach item="item" index="index" collection="list" separator=",">
-            (#foreach($column in $subTable.columns) #{item.$column.javaField}#if($velocityCount != $subTable.columns.size()),#end#end)
+            (#foreach($column in $subTable.columns) #{item.$column.javaField}#if($foreach.count != $subTable.columns.size()),#end#end)
         </foreach>
     </insert>
 #end

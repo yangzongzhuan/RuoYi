@@ -14,12 +14,14 @@
         }
         // 如果是初始化组件
         options = $.extend({}, $.fn.bootstrapTreeTable.defaults, options || {});
-        target.hasSelectItem = false;// 是否有radio或checkbox
-        target.data_list = null; //用于缓存格式化后的数据-按父分组
-        target.data_obj = null; //用于缓存格式化后的数据-按id存对象
-        target.hiddenColumns = []; //用于存放被隐藏列的field
-        target.lastAjaxParams; //用户最后一次请求的参数
-        target.isFixWidth=false; //是否有固定宽度
+        target.hasSelectItem = false;    // 是否有radio或checkbox
+        target.data_list = null;         // 用于缓存格式化后的数据-按父分组
+        target.data_obj = null;          // 用于缓存格式化后的数据-按id存对象
+        target.hiddenColumns = [];       // 用于存放被隐藏列的field
+        target.lastAjaxParams;           // 用户最后一次请求的参数
+        target.isFixWidth=false;         // 是否有固定宽度
+        target.totalRows = 0;            // 记录总数
+        target.totalPages = 0;           // 总页数
         // 初始化
         var init = function() {
             // 初始化容器
@@ -148,12 +150,30 @@
             if (options.height) {
                 $tbody.css("height", options.height);
             }
+            if (options.pagination) {
+                var $pagination = $('<div class="fixed-table-pagination"></div>');
+                target.append($pagination);
+            }
         }
         // 初始化数据服务
         var initServer = function(parms) {
+            if (options.pagination) {
+                if(parms == undefined || parms == null) {
+                    parms = {};
+                }
+                parms[options.parentCode] = options.rootIdValue;
+            }
             // 加载数据前先清空
             target.data_list = {};
             target.data_obj = {};
+            // 设置请求分页参数
+            if (options.pagination) {
+                var params = {};
+                params.offset = options.pageSize * (options.pageNumber - 1);
+                params.limit = options.pageSize;
+                var curParams = { pageSize: params.limit, pageNum: params.offset / params.limit + 1 };
+                parms = $.extend(curParams, parms);
+            }
             var $tbody = target.find("tbody");
             // 添加加载loading
             var $loading = '<tr><td colspan="' + options.columns.length + '"><div style="display: block;text-align: center;">正在努力地加载数据中，请稍候……</div></td></tr>'
@@ -163,16 +183,15 @@
                     type: options.type,
                     url: options.url,
                     data: parms ? parms : options.ajaxParams,
-                    dataType: "JSON",
+                    dataType: "json",
                     success: function(data, textStatus, jqXHR) {
                     	data = calculateObjectValue(options, options.responseHandler, [data], data);
                         renderTable(data);
-                        calculateObjectValue(options, options.onLoadSuccess, [data], data);
                     },
                     error: function(xhr, textStatus) {
                         var _errorMsg = '<tr><td colspan="' + options.columns.length + '"><div style="display: block;text-align: center;">' + xhr.responseText + '</div></td></tr>'
                         $tbody.html(_errorMsg);
-                    },
+                    }
                 });
             } else {
                 renderTable(options.data);
@@ -180,6 +199,17 @@
         }
         // 加载完数据后渲染表格
         var renderTable = function(data) {
+            var list, totalPage = 0, currPage = 0;
+            if (options.pagination) {
+            	list = data.rows;  // 数据
+                currPage = options.pageNumber; // 当前页
+                totalPage = ~~((data.total - 1) / options.pageSize) + 1 // 总页数
+                target.totalPages  = totalPage;
+                target.totalRows = data.total; // 总记录数
+            } else {
+            	list = data;
+            }
+            data = list;
             var $tbody = target.find("tbody");
             // 先清空
             $tbody.html("");
@@ -196,22 +226,24 @@
             if (rootNode) {
                 $.each(rootNode, function(i, item) {
                     var _child_row_id = "row_id_" + i
-                    recursionNode(item, 1, _child_row_id, "row_root");
+                    recursionNode(item, 1, _child_row_id, "row_root", item[options.code]);
                 });
             }
             // 下边的操作主要是为了查询时让一些没有根节点的节点显示
             $.each(data, function(i, item) {
                 if (!item.isShow) {
-                    var tr = renderRow(item, false, 1, "", "");
+                    var tr = renderRow(item, false, 1, "", "", options.pagination, item[options.code]);
                     $tbody.append(tr);
                 }
             });
-            target.append($tbody);
             registerExpanderEvent();
             registerRowClickEvent();
             initHiddenColumns();
             // 动态设置表头宽度
             autoTheadWidth();
+            if (options.pagination) {
+                initPagination(totalPage, currPage);
+            }
             // 移动端适配
             var treetableTable = $(target).parent('.treetable-table');
             var availableHeight = treetableTable.outerWidth();
@@ -228,6 +260,180 @@
                 });
                 $(target).attr('style','width:' + w +'px');
             }
+        }
+        // 初始化分页
+        var initPagination = function (totalPage,currPage) {
+            var $pagination = target.find(".fixed-table-pagination");
+            $pagination.empty();
+            var html = [];
+            var pageFrom = (options.pageNumber - 1) * options.pageSize + 1;
+            var pageTo = options.pageNumber * options.pageSize;
+            if (pageTo > target.totalRows) {
+                pageTo = target.totalRows;
+            }
+            html.push('<div class="pull-left pagination-detail">');
+            html.push('<span class="pagination-info">' + formatShowingRows(pageFrom, pageTo, target.totalRows) + '</span>');
+            var pageList = false;
+            $.each(options.pageList, function (i, page) {
+                if(target.totalRows > page){
+                    pageList = true;
+                }
+            })
+            if(pageList){
+                var _page_list = [];
+                _page_list.push('<span class="page-list">');
+                _page_list.push('<span class="btn-group dropup">');
+                _page_list.push('<button type="button" class="btn btn-default btn-outline dropdown-toggle" data-toggle="dropdown">');
+                _page_list.push('<span class="page-size">' + options.pageSize + '</span>');
+                _page_list.push('<span class="caret"></span>');
+                _page_list.push('</button>');
+                _page_list.push('<ul class="dropdown-menu" role="menu">');
+                $.each(options.pageList, function (i, page) {
+                    if(page == options.pageSize){
+                        _page_list.push('<li class="active"><a href="javascript:void(0)">' + page + '</a></li>');
+                    }
+                    else if(page >= target.totalRows && i === 1){
+                        _page_list.push('<li><a href="javascript:void(0)">' + page + '</a></li>');
+                    }
+                    else if(page <= target.totalRows){
+                        _page_list.push('<li><a href="javascript:void(0)">' + page + '</a></li>');
+                    }
+                })
+                _page_list.push('</ul>');
+                _page_list.push('</span>');
+                html.push(formatRecordsPerPage(_page_list.join('')))
+                html.push('</span>');
+            }
+            html.push('</div>');
+
+            if(totalPage > 1){
+                html.push('<div class="pull-right pagination">');
+                html.push('<ul class="pagination pagination-outline">');
+                html.push('<li class="page-pre"><a href="javascript:void(0)">' + options.paginationPreText + '</a></li>');
+                var from, to;
+                if (totalPage < 5) {
+                    from = 1;
+                    to = totalPage;
+                } else {
+                    from = currPage - 2;
+                    to = from + 4;
+                    if (from < 1) {
+                        from = 1;
+                        to = 5;
+                    }
+                    if (to > totalPage) {
+                        to = totalPage;
+                        from = to - 4;
+                    }
+                }
+
+                if (totalPage >= 6) {
+                    if (currPage >= 3) {
+                        html.push('<li class="page-first' + (1 == currPage ? ' active' : '') + '">', '<a href="javascript:void(0)">', 1, '</a>', '</li>');
+                        from++;
+                    }
+                    if (currPage >= 4) {
+                        if (currPage == 4 || totalPage == 6 || totalPage == 7) {
+                            from--;
+                        } else {
+                            html.push('<li class="page-first-separator disabled">', '<a href="javascript:void(0)">...</a>', '</li>');
+                        }
+                        to--;
+                    }
+                }
+
+                if (totalPage >= 7) {
+                    if (currPage >= (totalPage - 2)) {
+                        from--;
+                    }
+                }
+                if (totalPage == 6) {
+                    if (currPage >= (totalPage - 2)) {
+                        to++;
+                    }
+                } else if (totalPage >= 7) {
+                    if (totalPage == 7 || currPage >= (totalPage - 3)) {
+                        to++;
+                    }
+                }
+
+                for (var i = from; i <= to; i++) {
+                    html.push('<li class="page-number' + (i == currPage ? ' active' : '') + '">', '<a href="javascript:void(0)">', i, '</a>', '</li>');
+                }
+
+                if (totalPage >= 8) {
+                    if (currPage <= (totalPage - 4)) {
+                        html.push('<li class="page-last-separator disabled">', '<a href="javascript:void(0)">...</a>', '</li>');
+                    }
+                }
+
+                if (totalPage >= 6) {
+                    if (currPage <= (totalPage - 3)) {
+                        html.push('<li class="page-last' + (totalPage === currPage ? ' active' : '') + '">', '<a href="javascript:void(0)">', totalPage, '</a>', '</li>');
+                    }
+                }
+
+                html.push('<li class="page-next"><a href="javascript:void(0)">' + options.paginationNextText + '</a></li>');
+                html.push('</ul></div>');
+            }
+
+            $pagination.append(html.join(''));
+
+            var $pageList = $pagination.find('.page-list a');
+            var $pre = $pagination.find('.page-pre');
+            var $next = $pagination.find('.page-next');
+            var $number = $pagination.find('.page-number');
+            var $first = $pagination.find('.page-first');
+            var $last = $pagination.find('.page-last');
+            $pre.off('click').on('click', $.proxy(onPagePre, this));
+            $pageList.off('click').on('click', $.proxy(onPageListChange, this));
+            $number.off('click').on('click', $.proxy(onPageNumber, this));
+            $first.off('click').on('click', $.proxy(onPageFirst, this));
+            $last.off('click').on('click', $.proxy(onPageLast, this));
+            $next.off('click').on('click', $.proxy(onPageNext, this));
+        }
+        var onPageListChange = function(event){
+            var $this = $(event.currentTarget);
+            $this.parent().addClass('active').siblings().removeClass('active');
+            var $pagination = target.find(".fixed-table-pagination");
+            options.pageSize = $this.text().toUpperCase() === target.totalRows ? target.totalRows : + $this.text();
+            
+            if(target.totalRows < options.pageSize * options.pageNumber){
+                options.pageNumber = 1;
+            }
+            $pagination.find('.page-size').text(options.pageSize);
+            initServer();
+        }
+        var onPagePre = function(event){
+            if ((options.pageNumber - 1) === 0) {
+                options.pageNumber = target.totalPages;
+            } else {
+                options.pageNumber--;
+            }
+            initServer();
+        }
+        var onPageNumber = function(event){
+            if (options.pageNumber == $(event.currentTarget).text()) {
+                return;
+            }
+            options.pageNumber = $(event.currentTarget).text();
+            initServer();
+        }
+        var onPageFirst = function(event){
+            options.pageNumber = 1;
+            initServer();
+        }
+        var onPageLast = function (event) {
+            options.pageNumber = target.totalPages;
+            initServer();
+        }
+        var onPageNext = function(event){
+            if ((options.pageNumber + 1) > target.totalPages) {
+                options.pageNumber = 1;
+            } else {
+                options.pageNumber++;
+            }
+            initServer();
         }
         // 动态设置表头宽度
         var autoTheadWidth = function(initFlag) {
@@ -269,6 +475,14 @@
             $.each(data, function(index, item) {
                 // 添加一个默认属性，用来判断当前节点有没有被显示
                 item.isShow = false;
+                // 是否分页
+                if (options.pagination) {
+                    if (item.isTreeLeaf == undefined || item.isTreeLeaf == null) {
+                        item.isTreeLeaf = false;
+                    } else {
+                        item.isTreeLeaf = (item["isTreeLeaf"] == 1 ? true: false) || ((item["isTreeLeaf"] == 'true' || item["isTreeLeaf"] == true) ? true: false);
+                    }
+                }
                 // 顶级节点校验判断，兼容0,'0','',null
                 var _defaultRootFlag = item[options.parentCode] == '0' ||
                 item[options.parentCode] == 0 ||
@@ -295,26 +509,26 @@
             });
         }
         // 递归获取子节点并且设置子节点
-        var recursionNode = function(parentNode, lv, row_id, p_id) {
+        var recursionNode = function(parentNode, lv, row_id, p_id, k) {
             var $tbody = target.find("tbody");
             var _ls = target.data_list["_n_" + parentNode[options.code]];
-            var $tr = renderRow(parentNode, _ls ? true : false, lv, row_id, p_id);
+            var $tr = renderRow(parentNode, _ls ? true : false, lv, row_id, p_id, options.pagination, k);
             $tbody.append($tr);
             if (_ls) {
                 $.each(_ls, function(i, item) {
                     var _child_row_id = row_id + "_" + i
-                    recursionNode(item, (lv + 1), _child_row_id, row_id)
+                    recursionNode(item, (lv + 1), _child_row_id, row_id, item[options.code])
                 });
             }
         };
         // 绘制行
-        var renderRow = function(item, isP, lv, row_id, p_id) {
+        var renderRow = function(item, isP, lv, row_id, p_id, _pagination, k) {
             // 标记已显示
             item.isShow = true;
             item.row_id = row_id;
             item.p_id = p_id;
             item.lv = lv;
-            var $tr = $('<tr id="' + row_id + '" pid="' + p_id + '"></tr>');
+            var $tr = $('<tr id="' + row_id + '" data-id="' + k + '"pid="' + p_id + '"></tr>');
             var _icon = options.expanderCollapsedClass;
             if (options.expandAll) {
                 $tr.css("display", "table");
@@ -329,6 +543,10 @@
                     $tr.css("display", "none");
                 }
                 _icon = options.expanderCollapsedClass;
+            } else if (_pagination) {
+                if (item.isTreeLeaf) {
+                    _icon = options.expanderCollapsedClass;
+                }
             } else {
                 $tr.css("display", "none");
                 _icon = options.expanderCollapsedClass;
@@ -375,12 +593,20 @@
                         $td.text(getItemField(item, column.field));
                     }
                     if (options.expandColumn == index) {
-                        if (!isP) {
-                            $td.prepend('<span class="treetable-expander"></span>')
-                        } else {
-                            $td.prepend('<span class="treetable-expander ' + _icon + '"></span>')
-                        }
-                        for (var int = 0; int < (lv - 1); int++) {
+                    	if (_pagination) {
+                    	    if (item["isTreeLeaf"]) {
+                    	        $td.prepend('<span class="treetable-expander ' + _icon + '"></span>');
+                    	    } else {
+                    	        $td.prepend('<span class="treetable-expander"></span>')
+                    	    }
+                    	} else {
+	                        if (!isP) {
+	                            $td.prepend('<span class="treetable-expander"></span>')
+	                        } else {
+	                            $td.prepend('<span class="treetable-expander ' + _icon + '"></span>');
+	                        }
+                    	}
+                    	for (var int = 0; int < (lv - options.expandColumn); int++) {
                             $td.prepend('<span class="treetable-indent"></span>')
                         }
                     }
@@ -440,6 +666,8 @@
                             $(this).addClass("treetable-selected");
                         }
                     }
+                    var _rowData = target.data_obj["id_" + $(this).data('id')];
+                    calculateObjectValue(options, options.onClickRow, [_rowData], _rowData);
                 }
             });
         }
@@ -452,26 +680,76 @@
                 if (_isExpanded || _isCollapsed) {
                     var tr = $(this).parent().parent();
                     var row_id = tr.attr("id");
-                    var _ls = target.find("tbody").find("tr[id^='" + row_id + "_']"); //下所有
-                    if (_isExpanded) {
-                        $(this).removeClass(options.expanderExpandedClass);
-                        $(this).addClass(options.expanderCollapsedClass);
-                        if (_ls && _ls.length > 0) {
-                            $.each(_ls, function(index, item) {
-                                $(item).css("display", "none");
-                            });
-                        }
+                    var _id = tr.attr("data-id");
+                    var _ls = target.find("tbody").find("tr[id^='" + row_id + "_']");
+                    if (!options.pagination) {
+	                    if (_isExpanded) {
+	                        $(this).removeClass(options.expanderExpandedClass);
+	                        $(this).addClass(options.expanderCollapsedClass);
+	                        if (_ls && _ls.length > 0) {
+	                            $.each(_ls, function(index, item) {
+	                                $(item).css("display", "none");
+	                            });
+	                        }
+	                    } else {
+	                        $(this).removeClass(options.expanderCollapsedClass);
+	                        $(this).addClass(options.expanderExpandedClass);
+	                        if (_ls && _ls.length > 0) {
+	                            $.each(_ls, function(index, item) {
+	                                var _p_icon = $("#" + $(item).attr("pid")).children().eq(options.expandColumn).find(".treetable-expander");
+	                                if (_p_icon.hasClass(options.expanderExpandedClass)) {
+	                                    $(item).css("display", "table");
+	                                }
+	                            });
+	                        }
+	                    }
                     } else {
-                        $(this).removeClass(options.expanderCollapsedClass);
-                        $(this).addClass(options.expanderExpandedClass);
+                        var _ls = target.find("tbody").find("tr[id^='" + row_id + "_']");
                         if (_ls && _ls.length > 0) {
-                            $.each(_ls, function(index, item) {
-                                // 父icon
-                                var _p_icon = $("#" + $(item).attr("pid")).children().eq(options.expandColumn).find(".treetable-expander");
-                                if (_p_icon.hasClass(options.expanderExpandedClass)) {
-                                    $(item).css("display", "table");
+                            if (_isExpanded) {
+                                $.each(_ls, function(index, item) {
+                                    $(item).css("display", "none");
+                                });
+                            } else {
+                                $.each(_ls, function(index, item) {
+                                    var _icon = $(item).eq(options.expandColumn).find(".treetable-expander");
+                                    if (_icon && _icon.hasClass(options.expanderExpandedClass)) {
+                                        $(item).css("display", "table");
+                                    } else {
+                                        $(item).css("display", "table");
+                                    }
+                                });
+                            }
+                        } else {
+                            if (options.pagination) {
+                                var parms = {};
+                                parms[options.parentCode] = _id;
+                                if (options.dataUrl) {
+                                    $.ajax({
+                                        type: options.type,
+                                        url: options.dataUrl,
+                                        data: parms ? parms : options.ajaxParams,
+                                        dataType: "json",
+                                        success: function(data, textStatus, jqXHR) {
+                                            $("#" + row_id + "_load").remove();
+                                            var list = data;
+                                            data = list;
+                                            target.appendData(data)
+                                        },
+                                        error: function(xhr, textStatus) {
+                                            var _errorMsg = '<tr><td colspan="' + options.columns.length + '"><div style="display: block;text-align: center;">' + xhr.responseText + '</div></td></tr>'
+                                            $("#" + row_id).after(_errorMsg);
+                                        }
+                                    });
                                 }
-                            });
+                            }
+                        }
+                        if (_isExpanded) {
+                            $(this).removeClass(options.expanderExpandedClass);
+                            $(this).addClass(options.expanderCollapsedClass);
+                        } else {
+                            $(this).removeClass(options.expanderCollapsedClass);
+                            $(this).addClass(options.expanderExpandedClass);
                         }
                     }
                 }
@@ -488,6 +766,9 @@
         target.appendData = function(data) {
             // 下边的操作主要是为了查询时让一些没有根节点的节点显示
             $.each(data, function(i, item) {
+                if (options.pagination) {
+                    item.__nodes = (item["nodes"] == 1 ? true: false) || ((item["nodes"] == 'true' || item["nodes"] == true) ? true: false);
+                }
                 var _data = target.data_obj["id_" + item[options.code]];
                 var _p_data = target.data_obj["id_" + item[options.parentCode]];
                 var _c_list = target.data_list["_n_" + item[options.parentCode]];
@@ -509,7 +790,7 @@
                     }
                     _lv = _p_data.lv + 1; //如果有父
                     // 绘制行
-                    tr = renderRow(item, false, _lv, row_id, p_id);
+                    tr = renderRow(item, true, _lv, row_id, p_id, options.pagination, item[options.code]);
 
                     var _p_icon = $("#" + _p_data.row_id).children().eq(options.expandColumn).find(".treetable-expander");
                     var _isExpanded = _p_icon.hasClass(options.expanderExpandedClass);
@@ -531,12 +812,11 @@
                     } else {
                         // 计算父的同级下一行
                         var _tmp_ls = _p_data.row_id.split("_");
-                        var _p_next = _p_data.row_id.substring(0, _p_data.row_id.length - 1) + (parseInt(_tmp_ls[_tmp_ls.length - 1]) + 1);
-                        // 画上
-                        $("#" + _p_next).before(tr);
+                        var _p_next = _p_data.row_id.substring(0, _p_data.row_id.length - (_tmp_ls[_tmp_ls.length - 1] + "").length) + (parseInt(_tmp_ls[_tmp_ls.length - 1]) + 1);
+                        $("#" + _p_data.row_id).after(tr);
                     }
                 } else {
-                    tr = renderRow(item, false, _lv, row_id, p_id);
+                    tr = renderRow(item, false, _lv, row_id, p_id, options.pagination, item[options.code]);
                     if (_data) {
                         $("#" + _data.row_id).before(tr);
                         $("#" + _data.row_id).remove();
@@ -660,6 +940,12 @@
             }
             return defaultValue;
         };
+        var  formatRecordsPerPage =  function (pageNumber) {
+            return '每页显示 ' + pageNumber + ' 条记录';
+        };
+        var formatShowingRows = function (pageFrom, pageTo, totalRows) {
+        	return '显示第 ' + pageFrom + ' 到第 ' + pageTo + ' 条记录，总共 ' + totalRows + ' 条记录。';
+        };
         // 初始化
         init();
         return target;
@@ -732,12 +1018,12 @@
     $.fn.bootstrapTreeTable.defaults = {
         code: 'code',              // 选取记录返回的值,用于设置父子关系
         parentCode: 'parentCode',  // 用于设置父子关系
-        rootIdValue: null,         // 设置根节点id值----可指定根节点，默认为null,"",0,"0"
+        rootIdValue: 0,            // 设置根节点id值----可指定根节点，默认为null,"",0,"0"
         data: null,                // 构造table的数据集合
         type: "GET",               // 请求数据的ajax类型
         url: null,                 // 请求数据的ajax的url
         ajaxParams: {},            // 请求数据的ajax的data属性
-        expandColumn: 0,           // 在哪一列上面显示展开按钮
+        expandColumn: 1,           // 在哪一列上面显示展开按钮
         expandAll: false,          // 是否全部展开
         expandFirst: true,         // 是否默认第一级展开--expandAll为false时生效
         striped: false,            // 是否各行渐变色
@@ -747,11 +1033,19 @@
         columns: [],               // 列
         toolbar: null,             // 顶部工具条
         height: 0,                 // 表格高度
+        pagination: false,         // 是否显示分页
+        dataUrl: null,             // 加载子节点异步请求数据url
+        pageNumber: 1,             // 当前页条数
+        pageSize: 10,              // 每页的记录行数
+        onClickRow: null,          // 单击某行事件
+        pageList: [10, 25, 50],    // 可供选择的每页的行数
         showTitle: true,           // 是否采用title属性显示字段内容（被formatter格式化的字段不会显示）
         showSearch: true,          // 是否显示检索信息
         showColumns: true,         // 是否显示内容列下拉框
         showRefresh: true,         // 是否显示刷新按钮
-        expanderExpandedClass: 'glyphicon glyphicon-chevron-down', // 展开的按钮的图标
+        paginationPreText: '&lsaquo;',
+        paginationNextText: '&rsaquo;',
+        expanderExpandedClass: 'glyphicon glyphicon-chevron-down',   // 展开的按钮的图标
         expanderCollapsedClass: 'glyphicon glyphicon-chevron-right', // 缩起的按钮的图标
         responseHandler: function(res) {
             return false;

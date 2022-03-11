@@ -1,8 +1,11 @@
 package com.ruoyi.common.core.domain.entity;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
@@ -46,6 +49,9 @@ public class SysDept extends BaseEntity
 
     /** 父部门名称 */
     private String parentName;
+
+    /** 排除编号 */
+    private Long excludeId;
 
     public Long getDeptId()
     {
@@ -161,6 +167,17 @@ public class SysDept extends BaseEntity
     public void setParentName(String parentName)
     {
         this.parentName = parentName;
+    }
+
+    @JsonIgnore
+    public Long getExcludeId()
+    {
+        return excludeId;
+    }
+
+    public void setExcludeId(Long excludeId)
+    {
+        this.excludeId = excludeId;
     }
 
     @Override

@@ -35,6 +35,9 @@
 			     <a class="btn btn-success multiple disabled" onclick="javascript:batchGenCode()" shiro:hasPermission="tool:gen:code">
 			        <i class="fa fa-download"></i> 生成
 			    </a>
+				<a class="btn btn-success" onclick="createTable()" shiro:hasRole="admin">
+					<i class="fa fa-plus"></i> 创建
+				</a>
 				<a class="btn btn-info" onclick="importTable()">
 			        <i class="fa fa-upload"></i> 导入
 			    </a>
@@ -138,18 +141,19 @@
 		// 预览代码
 		function preview(tableId) {
 			var preViewUrl = prefix + "/preview/" + tableId;
-			$.modal.loading("正在加载数据，请稍后...");
+			$.modal.loading("正在加载数据，请稍候...");
 			$.get(preViewUrl, function(result) {
 				if (result.code == web_status.SUCCESS) {
 					 var items = [];
 		                $.each(result.data, function(index, value) {
 		                    var templateName = index.substring(index.lastIndexOf("/") + 1, index.length).replace(/\.vm/g, "");
 		                    if(!$.common.equals("sql", templateName) && !$.common.equals("tree.html", templateName) && !$.common.equals("sub-domain.java", templateName)){
-		                    	var language = templateName.substring(templateName.lastIndexOf(".") + 1);
-			                    var highCode = hljs.highlight(language, value).value;
-		                    	items.push({
-			                        title: templateName , content: "<pre class=\"layui-code\"><code>" + highCode + "</code></pre>"
-			                    })
+		                        var codeName = templateName.replace(".", "");
+		                        var language = templateName.substring(templateName.lastIndexOf(".") + 1);
+		                        var highCode = hljs.highlight(language, value).value;
+		                        items.push({
+		                            title: templateName , content: "<pre class=\"layui-code\"><a style=\"float:right\" href=\"javascript:copyText('" + codeName + "')\"><i class=\"fa fa-copy\"></i> 复制</a><code id=\"" + codeName + "\">" + highCode + "</code></pre><textarea id=\"t_" + codeName + "\" style='position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;'></textarea><script>function copyText(codeName){var text = document.getElementById(codeName).innerText;var input = document.getElementById(\"t_\"+codeName);input.value = text;input.select();document.execCommand(\"copy\");$.modal.msgSuccess(\"复制成功\");}<\/script>"
+		                        })
 		                    }
 		                });
 		                top.layer.tab({
@@ -172,7 +176,7 @@
 		    $.modal.confirm("确定要生成" + tableName + "表代码吗？", function() {
 		    	if(genType === "0") {
 			    	location.href = prefix + "/download/" + tableName;
-			        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+			        layer.msg('执行成功,正在生成代码请稍候…', { icon: 1 });
 				} else if(genType === "1") {
 					$.operate.get(prefix + "/genCode/" + tableName);
 				}
@@ -195,14 +199,20 @@
 		    }
 		    $.modal.confirm("确认要生成选中的" + rows.length + "条数据吗?", function() {
 		    	location.href = prefix + "/batchGenCode?tables=" + rows;
-		        layer.msg('执行成功,正在生成代码请稍后…', { icon: 1 });
+		        layer.msg('执行成功,正在生成代码请稍候…', { icon: 1 });
 		    });
 		}
-		
+
 		// 导入表结构
 		function importTable() {
 			var importTableUrl = prefix + "/importTable";
 			$.modal.open("导入表结构", importTableUrl);
+		}
+
+		// 创建表结构
+		function createTable() {
+			var creatTableUrl = prefix + "/createTable";
+			$.modal.open("创建表结构", creatTableUrl);
 		}
 	</script>
 </body>

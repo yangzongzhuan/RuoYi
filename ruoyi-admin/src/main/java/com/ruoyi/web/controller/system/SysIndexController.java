@@ -55,7 +55,11 @@ public class SysIndexController extends BaseController
         mmap.put("user", user);
         mmap.put("sideTheme", configService.selectConfigByKey("sys.index.sideTheme"));
         mmap.put("skinName", configService.selectConfigByKey("sys.index.skinName"));
-        mmap.put("ignoreFooter", configService.selectConfigByKey("sys.index.ignoreFooter"));
+        Boolean footer = Convert.toBool(configService.selectConfigByKey("sys.index.footer"), true);
+        Boolean tagsView = Convert.toBool(configService.selectConfigByKey("sys.index.tagsView"), true);
+        mmap.put("footer", footer);
+        mmap.put("tagsView", tagsView);
+        mmap.put("mainClass", contentMainClass(footer, tagsView));
         mmap.put("copyrightYear", RuoYiConfig.getCopyrightYear());
         mmap.put("demoEnabled", RuoYiConfig.isDemoEnabled());
         mmap.put("isDefaultModifyPwd", initPasswordIsModify(user.getPwdUpdateDate()));
@@ -98,7 +102,7 @@ public class SysIndexController extends BaseController
         SysUser user = getSysUser();
         if (StringUtils.isNull(user))
         {
-            return AjaxResult.error("服务器超时，请重新登陆");
+            return AjaxResult.error("服务器超时，请重新登录");
         }
         if (passwordService.matches(user, password))
         {
@@ -128,6 +132,24 @@ public class SysIndexController extends BaseController
     {
         mmap.put("version", RuoYiConfig.getVersion());
         return "main";
+    }
+
+    // content-main class
+    public String contentMainClass(Boolean footer, Boolean tagsView)
+    {
+        if (!footer && !tagsView)
+        {
+            return "tagsview-footer-hide";
+        }
+        else if (!footer)
+        {
+            return "footer-hide";
+        }
+        else if (!tagsView)
+        {
+            return "tagsview-hide";
+        }
+        return StringUtils.EMPTY;
     }
 
     // 检查初始密码是否提醒修改

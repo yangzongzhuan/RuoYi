@@ -103,7 +103,6 @@
                 createUrl: prefix + "/add/{id}",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove/{id}",
-                exportUrl: prefix + "/export",
                 modalName: "${functionName}",
                 columns: [{
                     field: 'selectItem',

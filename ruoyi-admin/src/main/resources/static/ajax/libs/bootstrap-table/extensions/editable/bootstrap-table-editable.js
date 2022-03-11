@@ -4,7 +4,7 @@
  * extensions: https://github.com/vitalets/x-editable
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 $.extend($.fn.bootstrapTable.defaults, {
   editable: true,

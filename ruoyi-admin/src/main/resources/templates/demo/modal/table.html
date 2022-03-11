@@ -24,10 +24,23 @@
 	                <h5>弹层框</h5>
 	                </div>
 	                <div class="ibox-content" id="test">
-	                    <p>弹出复选框表格及单选框表格（点击提交后得到数据并回显到父窗体）。 </p>
-	                    <button type="button" class="btn btn-info" onclick="selectUsersToParent()">弹出表格（复选框）</button>
-	                    <button type="button" class="btn btn-warning" onclick="selectUsersToParentCallBack()">弹出表格（复选框）- 回调形式</button>
+	                    <p>弹出层，点击提交后得到数据并回显到父窗体。 </p>
+	                    <button type="button" class="btn btn-primary" onclick="selectUsersToParent()">弹出表格（方式一）</button>
+	                    <button type="button" class="btn btn-success" onclick="selectUsersToParentCallBack2()">弹出表格（方式二）</button>
+	                    <button type="button" class="btn btn-info" onclick="selectUsersToParentCallBack3()">弹出表格（方式三）</button>
 	                    <p id="userids"> </p>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="col-sm-12">
+	            <div class="ibox">
+	                <div class="ibox-title">
+	                <h5>弹层框</h5>
+	                </div>
+	                <div class="ibox-content" id="test">
+	                    <p>多层弹出，点击提交后得到数据并回显到父窗体。 </p>
+	                    <button type="button" class="btn btn-primary" onclick="selectUsersToParent4()">弹出窗口（方式四）</button>
+	                    <p id="username"> </p>
 	                </div>
 	            </div>
 	        </div>
@@ -36,36 +49,71 @@
     <th:block th:include="include :: footer" />
     <script type="text/javascript">
         var prefix = ctx + "demo/modal";
-        
+
         function selectCheckUser(){
         	$.modal.open("选择用户", prefix + "/check");
         }
-        
+
 		function selectRadioUser(){
 			$.modal.open("选择用户", prefix + "/radio");
         }
-		
+
+		// 根据当前激活的选项卡获取（方式一）
 		function selectUsersToParent(){
 			$.modal.open("选择用户", prefix + "/parent");
         }
 		
-		function selectUsersToParentCallBack(){
+		// callBack获取父窗口方法（方式二）
+		function selectUsersToParentCallBack2(){
             var options = {
                 title: '选择用户',
                 url: prefix + "/parent",
-                callBack: doSubmit
+                callBack: doSubmit2
+             };
+             $.modal.openOptions(options);
+        }
+
+		// callBack获取父窗口值（方式三）
+		function selectUsersToParentCallBack3(){
+            var options = {
+                title: '选择用户',
+                url: prefix + "/parent",
+                callBack: doSubmit3
              };
              $.modal.openOptions(options);
         }
 		
-		function doSubmit(index, layero){
+		// callBack获取父窗口值（方式四）
+		function selectUsersToParent4(){
+			var prefix = ctx + "demo/modal";
+            var options = {
+                title: '多层窗口A',
+                url: prefix + "/frame1",
+                callBack: doSubmit4
+            };
+            $.modal.openOptions(options);
+        }
+		
+		function doSubmit2(index, layero){
 		    var rows = layero.find("iframe")[0].contentWindow.getSelections();
 		    if (rows.length == 0) {
                 $.modal.alertWarning("请至少选择一条记录");
                 return;
             }
-		    $('#userids').html(rows.join())
-		    layer.close(index);
+		    $('#userids').html('我是通过方式二来的：' + rows.join())
+		    $.modal.close(index);
+		}
+
+		function doSubmit3(index, layero){
+			var body = $.modal.getChildFrame(index);
+   			$("#userids").html('我是通过方式三来的：' + body.find('#rowIds').val());
+   			$.modal.close(index);
+		}
+		
+		function doSubmit4(index, layero){
+			var body = $.modal.getChildFrame(index);
+   			$("#username").html('我是通过方式四来的：' + body.find('#name').val());
+   			$.modal.close(index);
 		}
 		
 		function selectUsers(){

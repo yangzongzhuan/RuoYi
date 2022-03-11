@@ -54,7 +54,6 @@ public interface ISysConfigService
      * 批量删除参数配置信息
      * 
      * @param ids 需要删除的数据ID
-     * @return 结果
      */
     public void deleteConfigByIds(String ids);
 

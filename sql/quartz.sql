@@ -56,7 +56,7 @@ create table QRTZ_TRIGGERS (
 -- ----------------------------
 create table QRTZ_SIMPLE_TRIGGERS (
     sched_name           varchar(120)    not null            comment '调度名称',
-    trigger_name         varchar(200)    not null            comment 'qrtz_triggers表trigger_ name的外键',
+    trigger_name         varchar(200)    not null            comment 'qrtz_triggers表trigger_name的外键',
     trigger_group        varchar(200)    not null            comment 'qrtz_triggers表trigger_group的外键',
     repeat_count         bigint(7)       not null            comment '重复的次数统计',
     repeat_interval      bigint(12)      not null            comment '重复的间隔时间',
@@ -134,7 +134,7 @@ create table QRTZ_FIRED_TRIGGERS (
 -- ---------------------------- 
 create table QRTZ_SCHEDULER_STATE (
     sched_name           varchar(120)    not null            comment '调度名称',
-    instance_name        varchar(200)    not null            comment '之前配置文件中org.quartz.scheduler.instanceId配置的名字，就会写入该字段',
+    instance_name        varchar(200)    not null            comment '实例名称',
     last_checkin_time    bigint(13)      not null            comment '上次检查时间',
     checkin_interval     bigint(13)      not null            comment '检查间隔时间',
     primary key (sched_name, instance_name)
@@ -154,7 +154,7 @@ create table QRTZ_LOCKS (
 -- ---------------------------- 
 create table QRTZ_SIMPROP_TRIGGERS (
     sched_name           varchar(120)    not null            comment '调度名称',
-    trigger_name         varchar(200)    not null            comment 'qrtz_triggers表trigger_ name的外键',
+    trigger_name         varchar(200)    not null            comment 'qrtz_triggers表trigger_name的外键',
     trigger_group        varchar(200)    not null            comment 'qrtz_triggers表trigger_group的外键',
     str_prop_1           varchar(512)    null                comment 'String类型的trigger的第一个参数',
     str_prop_2           varchar(512)    null                comment 'String类型的trigger的第二个参数',

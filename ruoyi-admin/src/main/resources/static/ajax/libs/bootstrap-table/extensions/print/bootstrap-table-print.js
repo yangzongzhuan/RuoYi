@@ -2,7 +2,7 @@
  * @update zhixin wen <wenzhixin2010@gmail.com>
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 function printPageBuilderDefault (table) {
   return `
@@ -134,8 +134,9 @@ $.BootstrapTable = class extends $.BootstrapTable {
 
   doPrint (data) {
     const formatValue = (row, i, column) => {
-      const value = Utils.calculateObjectValue(column, column.printFormatter,
-        [row[column.field], row, i], row[column.field])
+      const value = Utils.calculateObjectValue(column,
+        column.printFormatter || column.formatter,
+        [$.common.getItemField(row, column.field), row, i], $.common.getItemField(row, column.field))
 
       return typeof value === 'undefined' || value === null ?
         this.options.undefinedText : value

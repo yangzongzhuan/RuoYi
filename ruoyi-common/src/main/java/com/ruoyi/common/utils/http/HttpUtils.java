@@ -9,6 +9,7 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -19,6 +20,7 @@ import javax.net.ssl.X509TrustManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.utils.StringUtils;
 
 /**
  * 通用http发送方法
@@ -28,6 +30,17 @@ import com.ruoyi.common.constant.Constants;
 public class HttpUtils
 {
     private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
+
+    /**
+     * 向指定 URL 发送GET方法的请求
+     *
+     * @param url 发送请求的 URL
+     * @return 所代表远程资源的响应结果
+     */
+    public static String sendGet(String url)
+    {
+        return sendGet(url, StringUtils.EMPTY);
+    }
 
     /**
      * 向指定 URL 发送GET方法的请求
@@ -55,7 +68,7 @@ public class HttpUtils
         BufferedReader in = null;
         try
         {
-            String urlNameString = url + "?" + param;
+            String urlNameString = StringUtils.isNotBlank(param) ? url + "?" + param : url;
             log.info("sendGet - {}", urlNameString);
             URL realUrl = new URL(urlNameString);
             URLConnection connection = realUrl.openConnection();
@@ -118,9 +131,8 @@ public class HttpUtils
         StringBuilder result = new StringBuilder();
         try
         {
-            String urlNameString = url;
-            log.info("sendPost - {}", urlNameString);
-            URL realUrl = new URL(urlNameString);
+            log.info("sendPost - {}", url);
+            URL realUrl = new URL(url);
             URLConnection conn = realUrl.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
@@ -132,7 +144,7 @@ public class HttpUtils
             out = new PrintWriter(conn.getOutputStream());
             out.print(param);
             out.flush();
-            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line;
             while ((line = in.readLine()) != null)
             {
@@ -206,7 +218,7 @@ public class HttpUtils
             {
                 if (ret != null && !ret.trim().equals(""))
                 {
-                    result.append(new String(ret.getBytes("ISO-8859-1"), "utf-8"));
+                    result.append(new String(ret.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8));
                 }
             }
             log.info("recv - {}", result);

@@ -2,7 +2,7 @@
  * @author zhixin wen <wenzhixin2010@gmail.com>
  */
 
-const Utils = $.fn.bootstrapTable.utils
+var Utils = $.fn.bootstrapTable.utils
 
 // Reasonable defaults
 const PIXEL_STEP = 10
@@ -225,6 +225,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
     const initFixedBody = ($fixedColumns, $fixedHeader) => {
       $fixedColumns.find('.fixed-table-body').remove()
       $fixedColumns.append(this.$tableBody.clone(true))
+      $fixedColumns.find('.fixed-table-body table').removeAttr('id')
 
       const $fixedBody = $fixedColumns.find('.fixed-table-body')
 

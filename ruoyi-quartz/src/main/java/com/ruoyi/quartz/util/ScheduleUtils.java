@@ -10,9 +10,11 @@ import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
 import org.quartz.TriggerKey;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.common.exception.job.TaskException.Code;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.quartz.domain.SysJob;
 
 /**
@@ -109,5 +111,22 @@ public class ScheduleUtils
                 throw new TaskException("The task misfire policy '" + job.getMisfirePolicy()
                         + "' cannot be used in cron schedule tasks", Code.CONFIG_ERROR);
         }
+    }
+
+    /**
+     * 检查包名是否为白名单配置
+     * 
+     * @param invokeTarget 目标字符串
+     * @return 结果
+     */
+    public static boolean whiteList(String invokeTarget)
+    {
+        String packageName = StringUtils.substringBefore(invokeTarget, "(");
+        int count = StringUtils.countMatches(packageName, ".");
+        if (count > 1)
+        {
+            return StringUtils.containsAnyIgnoreCase(invokeTarget, Constants.JOB_WHITELIST_STR);
+        }
+        return true;
     }
 }

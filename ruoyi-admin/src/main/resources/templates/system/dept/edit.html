@@ -130,10 +130,10 @@
 		function doSubmit(index, layero){
 			var tree = layero.find("iframe")[0].contentWindow.$._tree;
 			if ($.tree.notAllowLastLevel(tree)) {
-	   			var body = layer.getChildFrame('body', index);
+	   			var body = $.modal.getChildFrame(index);
 	   			$("#treeId").val(body.find('#treeId').val());
 	   			$("#treeName").val(body.find('#treeName').val());
-	   			layer.close(index);
+	   			$.modal.close(index);
 			}
 		}
 	</script>

@@ -1,5 +1,5 @@
 /*!
- * bootstrap-fileinput v5.2.3
+ * bootstrap-fileinput v5.2.4
  * http://plugins.krajee.com/file-input
  *
  * Krajee default styling for bootstrap-fileinput.
@@ -179,15 +179,15 @@ input[type=file].file-loading {
 }
 
 .file-caption.icon-visible .file-caption-name {
-    padding-left: 1.875rem;
+    padding-left: 25px;
 }
 
 .file-caption.icon-visible > .input-group-lg .file-caption-name {
-    padding-left: 2.1rem;
+    padding-left: 30px;
 }
 
 .file-caption.icon-visible > .input-group-sm .file-caption-name {
-    padding-left: 1.5rem;
+    padding-left: 22px;
 }
 
 .file-caption-name:not(.file-caption-disabled) {
@@ -201,7 +201,7 @@ input[type=file].file-loading {
 }
 
 .file-caption-icon {
-    padding: 0.5rem;
+    padding: 7px 5px;
     left: 4px;
 }
 

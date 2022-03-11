@@ -249,8 +249,7 @@ public class VelocityUtils
     public static String getPackagePrefix(String packageName)
     {
         int lastIndex = packageName.lastIndexOf(".");
-        String basePackage = StringUtils.substring(packageName, 0, lastIndex);
-        return basePackage;
+        return StringUtils.substring(packageName, 0, lastIndex);
     }
 
     /**
@@ -298,7 +297,7 @@ public class VelocityUtils
     /**
      * 获取上级菜单ID字段
      * 
-     * @param options 生成其他选项
+     * @param paramsObj 生成其他选项
      * @return 上级菜单ID字段
      */
     public static String getParentMenuId(JSONObject paramsObj)
@@ -314,7 +313,7 @@ public class VelocityUtils
     /**
      * 获取树编码
      * 
-     * @param options 生成其他选项
+     * @param paramsObj 生成其他选项
      * @return 树编码
      */
     public static String getTreecode(JSONObject paramsObj)
@@ -329,7 +328,7 @@ public class VelocityUtils
     /**
      * 获取树父编码
      * 
-     * @param options 生成其他选项
+     * @param paramsObj 生成其他选项
      * @return 树父编码
      */
     public static String getTreeParentCode(JSONObject paramsObj)
@@ -344,7 +343,7 @@ public class VelocityUtils
     /**
      * 获取树名称
      * 
-     * @param options 生成其他选项
+     * @param paramsObj 生成其他选项
      * @return 树名称
      */
     public static String getTreeName(JSONObject paramsObj)

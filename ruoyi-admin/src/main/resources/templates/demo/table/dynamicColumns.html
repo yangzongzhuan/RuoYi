@@ -42,7 +42,7 @@
         function ajaxColumns() {
         	var url = prefix + "/ajaxColumns";
         	var dataParam = $.common.formToJSON("table-form");
-            $.modal.loading("正在查询中，请稍后...");
+            $.modal.loading("正在查询中，请稍候...");
             $.post(url, dataParam, function(result) {
                 if (result.code == web_status.SUCCESS) {
                 	setColumns(result.data);

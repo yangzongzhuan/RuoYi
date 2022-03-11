@@ -5,6 +5,11 @@
 </head>
 <body class="gray-bg">
      <div class="container-div">
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-primary" onclick="getData()">
+                <i class="fa fa-search"></i> 查询所有数据
+            </a>
+        </div>
 		<div class="row">
 			<div class="col-sm-12 select-table table-striped">
 			    <p class="select-title">按住表格行拖拽</p>
@@ -29,7 +34,9 @@
 		        showColumns: false,
 		        onReorderRow: function (data) {
 		        	 //当拖拽结束后，data为整个表格的数据
-		            console.log('拖拽结束' + JSON.stringify(data))
+		            console.table(data)
+		            // 当sidePagination: "server"时，拖拽行后顺序错乱，需要重新调用加载数据方法
+		            $("#" + table.options.id).bootstrapTable('load', data);
 		            return false;
 		        },
                 columns: [{
@@ -70,6 +77,12 @@
             };
             $.table.init(options);
         });
+        
+        /* 查询表格所有数据值 */
+        function getData(){
+            var data = $("#" + table.options.id).bootstrapTable('getData');
+            alert(JSON.stringify(data.map( item => { return item.userId })))
+        }
     </script>
 </body>
 </html>

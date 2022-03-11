@@ -7,6 +7,7 @@ import java.io.StringWriter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -151,8 +152,20 @@ public class GenTableServiceImpl implements IGenTableService
     }
 
     /**
+     * 创建表
+     *
+     * @param sql 创建表语句
+     * @return 结果
+     */
+    @Override
+    public boolean createTable(String sql)
+    {
+        return genTableMapper.createTable(sql) == 0;
+    }
+
+    /**
      * 导入表结构
-     * 
+     *
      * @param tableList 导入表列表
      * @param operName 操作人员
      */
@@ -233,7 +246,7 @@ public class GenTableServiceImpl implements IGenTableService
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
-    
+
     /**
      * 生成代码（自定义路径）
      * 
@@ -287,7 +300,7 @@ public class GenTableServiceImpl implements IGenTableService
     {
         GenTable table = genTableMapper.selectGenTableByName(tableName);
         List<GenTableColumn> tableColumns = table.getColumns();
-        List<String> tableColumnNames = tableColumns.stream().map(GenTableColumn::getColumnName).collect(Collectors.toList());
+        Map<String, GenTableColumn> tableColumnMap = tableColumns.stream().collect(Collectors.toMap(GenTableColumn::getColumnName, Function.identity()));
 
         List<GenTableColumn> dbTableColumns = genTableColumnMapper.selectDbTableColumnsByName(tableName);
         if (StringUtils.isEmpty(dbTableColumns))
@@ -297,15 +310,34 @@ public class GenTableServiceImpl implements IGenTableService
         List<String> dbTableColumnNames = dbTableColumns.stream().map(GenTableColumn::getColumnName).collect(Collectors.toList());
 
         dbTableColumns.forEach(column -> {
-            if (!tableColumnNames.contains(column.getColumnName()))
+            GenUtils.initColumnField(column, table);
+            if (tableColumnMap.containsKey(column.getColumnName()))
             {
-                GenUtils.initColumnField(column, table);
+                GenTableColumn prevColumn = tableColumnMap.get(column.getColumnName());
+                column.setColumnId(prevColumn.getColumnId());
+                if (column.isList())
+                {
+                    // 如果是列表，继续保留查询方式/字典类型选项
+                    column.setDictType(prevColumn.getDictType());
+                    column.setQueryType(prevColumn.getQueryType());
+                }
+                if (StringUtils.isNotEmpty(prevColumn.getIsRequired()) && !column.isPk()
+                        && (column.isInsert() || column.isEdit())
+                        && ((column.isUsableColumn()) || (!column.isSuperColumn())))
+                {
+                    // 如果是(新增/修改&非主键/非忽略及父属性)，继续保留必填/显示类型选项
+                    column.setIsRequired(prevColumn.getIsRequired());
+                    column.setHtmlType(prevColumn.getHtmlType());
+                }
+                genTableColumnMapper.updateGenTableColumn(column);
+            }
+            else
+            {
                 genTableColumnMapper.insertGenTableColumn(column);
             }
         });
 
-        List<GenTableColumn> delColumns = tableColumns.stream()
-                .filter(column -> !dbTableColumnNames.contains(column.getColumnName())).collect(Collectors.toList());
+        List<GenTableColumn> delColumns = tableColumns.stream().filter(column -> !dbTableColumnNames.contains(column.getColumnName())).collect(Collectors.toList());
         if (StringUtils.isNotEmpty(delColumns))
         {
             genTableColumnMapper.deleteGenTableColumns(delColumns);
@@ -313,7 +345,7 @@ public class GenTableServiceImpl implements IGenTableService
     }
 
     /**
-     * 批量生成代码
+     * 批量生成代码（下载方式）
      * 
      * @param tableNames 表数组
      * @return 数据
@@ -474,7 +506,7 @@ public class GenTableServiceImpl implements IGenTableService
             String treeName = paramsObj.getString(GenConstants.TREE_NAME);
             String parentMenuId = paramsObj.getString(GenConstants.PARENT_MENU_ID);
             String parentMenuName = paramsObj.getString(GenConstants.PARENT_MENU_NAME);
-            
+
             genTable.setTreeCode(treeCode);
             genTable.setTreeParentCode(treeParentCode);
             genTable.setTreeName(treeName);

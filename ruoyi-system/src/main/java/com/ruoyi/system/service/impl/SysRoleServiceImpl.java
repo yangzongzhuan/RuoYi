@@ -159,6 +159,7 @@ public class SysRoleServiceImpl implements ISysRoleService
         for (Long roleId : roleIds)
         {
             checkRoleAllowed(new SysRole(roleId));
+            checkRoleDataScope(roleId);
             SysRole role = selectRoleById(roleId);
             if (countUserRoleByRoleId(roleId) > 0)
             {
@@ -393,7 +394,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * 批量选择授权用户角色
      * 
      * @param roleId 角色ID
-     * @param userIds 需要删除的用户数据ID
+     * @param userIds 需要授权的用户数据ID
      * @return 结果
      */
     @Override

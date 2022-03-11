@@ -134,6 +134,9 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
      * @param ${pkColumn.javaField} ${functionName}主键
      * @return 结果
      */
+#if($table.sub)
+    @Transactional
+#end
     @Override
     public int delete${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaType} ${pkColumn.javaField})
     {
@@ -157,9 +160,21 @@ public class ${ClassName}ServiceImpl implements I${ClassName}Service
         for (${ClassName} ${className} : ${className}List)
         {
             Ztree ztree = new Ztree();
+#if($treeCode.length() > 2 && $treeCode.substring(1,2).matches("[A-Z]"))
+#set($TreeCode=$treeCode)
+#else
 #set($TreeCode=$treeCode.substring(0,1).toUpperCase() + ${treeCode.substring(1)})
+#end
+#if($treeParentCode.length() > 2 && $treeParentCode.substring(1,2).matches("[A-Z]"))
+#set($TreeParentCode=$treeParentCode)
+#else
 #set($TreeParentCode=$treeParentCode.substring(0,1).toUpperCase() + ${treeParentCode.substring(1)})
+#end
+#if($treeName.length() > 2 && $treeName.substring(1,2).matches("[A-Z]"))
+#set($TreeName=$treeName)
+#else
 #set($TreeName=$treeName.substring(0,1).toUpperCase() + ${treeName.substring(1)})
+#end
             ztree.setId(${className}.get${TreeCode}());
             ztree.setpId(${className}.get${TreeParentCode}());
             ztree.setName(${className}.get${TreeName}());

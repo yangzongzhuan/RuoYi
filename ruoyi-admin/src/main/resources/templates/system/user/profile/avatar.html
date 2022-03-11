@@ -169,7 +169,7 @@
 <script type="text/javascript">
 var cropper;
 var croppable = false;
-$(window).load(function() {
+$(window).on('load', function() {
 	var image = document.getElementById('avatar');
 	cropper = new Cropper(image, {
 		aspectRatio: 1,
@@ -198,7 +198,7 @@ $(window).load(function() {
 
 	$('.btn-custom').on('click',function (e) {
 		if (!croppable) {
-			$.modal.alertWarning("裁剪框加载中,请稍后...");
+			$.modal.alertWarning("裁剪框加载中,请稍候...");
 			return;
 		}
 		var data = {
@@ -214,7 +214,7 @@ $(window).load(function() {
 
 function submitHandler() {
     if (!croppable) {
-        $.modal.alertWarning("裁剪框加载中,请稍后...");
+        $.modal.alertWarning("裁剪框加载中,请稍候...");
         return
     }
     cropper.getCroppedCanvas().toBlob(function(img) {
@@ -227,7 +227,7 @@ function submitHandler() {
             processData: false,
             contentType: false,
             success: function(result) {
-                $.operate.saveSuccess(result);
+                $.operate.saveReload(result);
             }
         })
     });

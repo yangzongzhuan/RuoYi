@@ -27,6 +27,7 @@ import com.ruoyi.common.utils.ShiroUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
+import com.ruoyi.framework.shiro.util.AuthorizationUtils;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
@@ -146,6 +147,7 @@ public class SysUserController extends BaseController
     /**
      * 修改用户
      */
+    @RequiresPermissions("system:user:edit")
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
     {
@@ -167,6 +169,7 @@ public class SysUserController extends BaseController
     public AjaxResult editSave(@Validated SysUser user)
     {
         userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
         if (StringUtils.isNotEmpty(user.getPhonenumber())
                 && UserConstants.USER_PHONE_NOT_UNIQUE.equals(userService.checkPhoneUnique(user)))
         {
@@ -178,6 +181,7 @@ public class SysUserController extends BaseController
             return error("修改用户'" + user.getLoginName() + "'失败，邮箱账号已存在");
         }
         user.setUpdateBy(getLoginName());
+        AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(userService.updateUser(user));
     }
 
@@ -196,6 +200,7 @@ public class SysUserController extends BaseController
     public AjaxResult resetPwdSave(SysUser user)
     {
         userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
         user.setSalt(ShiroUtils.randomSalt());
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         if (userService.resetUserPwd(user) > 0)
@@ -232,7 +237,9 @@ public class SysUserController extends BaseController
     @ResponseBody
     public AjaxResult insertAuthRole(Long userId, Long[] roleIds)
     {
+        userService.checkUserDataScope(userId);
         userService.insertUserAuth(userId, roleIds);
+        AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return success();
     }
 
@@ -289,6 +296,7 @@ public class SysUserController extends BaseController
     public AjaxResult changeStatus(SysUser user)
     {
         userService.checkUserAllowed(user);
+        userService.checkUserDataScope(user.getUserId());
         return toAjax(userService.changeStatus(user));
     }
 }

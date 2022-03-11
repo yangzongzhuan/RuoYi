@@ -77,4 +77,22 @@ public class DemoDialogController
     {
         return prefix + "/table/parent";
     }
+
+    /**
+     * 多层窗口frame1
+     */
+    @GetMapping("/frame1")
+    public String frame1()
+    {
+        return prefix + "/table/frame1";
+    }
+
+    /**
+     * 多层窗口frame2
+     */
+    @GetMapping("/frame2")
+    public String frame2()
+    {
+        return prefix + "/table/frame2";
+    }
 }

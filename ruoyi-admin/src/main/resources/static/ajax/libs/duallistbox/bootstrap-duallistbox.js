@@ -1,5 +1,5 @@
 /*
- *  Bootstrap Duallistbox - v3.0.7
+ *  Bootstrap Duallistbox - v3.0.9
  *  A responsive dual listbox widget optimized for Twitter Bootstrap. It works on all modern browsers and on touch devices.
  *  https://www.virtuosoft.eu/code/bootstrap-duallistbox/
  *
@@ -206,10 +206,13 @@
     selectopt.detach().appendTo(select);
   }
 
-  function sortOptions(select) {
+  function sortOptions(select, dualListbox) {
     select.find('option').sort(function(a, b) {
       return ($(a).data('original-index') > $(b).data('original-index')) ? 1 : -1;
     }).appendTo(select);
+
+    // workaround for chromium bug: https://bugs.chromium.org/p/chromium/issues/detail?id=1072475
+    refreshSelects(dualListbox);
   }
 
   function clearSelections(dualListbox) {
@@ -238,7 +241,7 @@
     if(dualListbox.settings.sortByInputOrder){
         sortOptionsByInputOrder(dualListbox.elements.select2);
     } else {
-        sortOptions(dualListbox.elements.select2);
+        sortOptions(dualListbox.elements.select2, dualListbox);
     }
   }
 
@@ -259,7 +262,7 @@
 
     refreshSelects(dualListbox);
     triggerChangeEvent(dualListbox);
-    sortOptions(dualListbox.elements.select1);
+    sortOptions(dualListbox.elements.select1, dualListbox);
     if(dualListbox.settings.sortByInputOrder){
         sortOptionsByInputOrder(dualListbox.elements.select2);
     }
@@ -484,17 +487,17 @@
       if (value) {
         this.container.removeClass('row').addClass('row-fluid bs2compatible');
         this.container.find('.box1, .box2').removeClass('col-md-6').addClass('span6');
-        this.container.find('.clear1, .clear2').removeClass('btn-white btn-xs').addClass('btn-mini');
+        this.container.find('.clear1, .clear2').removeClass('btn-default btn-xs').addClass('btn-mini');
         this.container.find('input, select').removeClass('form-control');
-        this.container.find('.btn').removeClass('btn-white');
+        this.container.find('.btn').removeClass('btn-default');
         this.container.find('.moveall > i, .move > i').removeClass('glyphicon glyphicon-arrow-right').addClass('icon-arrow-right');
         this.container.find('.removeall > i, .remove > i').removeClass('glyphicon glyphicon-arrow-left').addClass('icon-arrow-left');
       } else {
         this.container.removeClass('row-fluid bs2compatible').addClass('row');
         this.container.find('.box1, .box2').removeClass('span6').addClass('col-md-6');
-        this.container.find('.clear1, .clear2').removeClass('btn-mini').addClass('btn-white btn-xs');
+        this.container.find('.clear1, .clear2').removeClass('btn-mini').addClass('btn-default btn-xs');
         this.container.find('input, select').addClass('form-control');
-        this.container.find('.btn').addClass('btn-white');
+        this.container.find('.btn').addClass('btn-default');
         this.container.find('.moveall > i, .move > i').removeClass('icon-arrow-right').addClass('glyphicon glyphicon-arrow-right');
         this.container.find('.removeall > i, .remove > i').removeClass('icon-arrow-left').addClass('glyphicon glyphicon-arrow-left');
       }

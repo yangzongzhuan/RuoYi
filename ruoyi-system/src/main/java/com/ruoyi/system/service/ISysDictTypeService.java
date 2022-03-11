@@ -55,8 +55,6 @@ public interface ISysDictTypeService
      * 批量删除字典类型
      * 
      * @param ids 需要删除的数据
-     * @return 结果
-     * @throws Exception 异常
      */
     public void deleteDictTypeByIds(String ids);
 
