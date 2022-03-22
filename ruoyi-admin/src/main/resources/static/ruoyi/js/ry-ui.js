@@ -180,14 +180,15 @@ var table = {
                 if (typeof table.get(this.id).responseHandler == "function") {
                     table.get(this.id).responseHandler(res);
                 }
+                var thisOptions = table.config[this.id];
                 if (res.code == web_status.SUCCESS) {
-                    if ($.common.isNotEmpty(table.options.sidePagination) && table.options.sidePagination == 'client') {
+                    if ($.common.isNotEmpty(thisOptions.sidePagination) && thisOptions.sidePagination == 'client') {
                         return res.rows;
                     } else {
-                        if ($.common.isNotEmpty(table.options.rememberSelected) && table.options.rememberSelected) {
-                            var column = $.common.isEmpty(table.options.uniqueId) ? table.options.columns[1].field : table.options.uniqueId;
+                        if ($.common.isNotEmpty(thisOptions.rememberSelected) && thisOptions.rememberSelected) {
+                            var column = $.common.isEmpty(thisOptions.uniqueId) ? thisOptions.columns[1].field : thisOptions.uniqueId;
                             $.each(res.rows, function(i, row) {
-                                row.state = $.inArray(row[column], table.rememberSelectedIds[table.options.id]) !== -1;
+                                row.state = $.inArray(row[column], table.rememberSelectedIds[thisOptions.id]) !== -1;
                             })
                         }
                         return { rows: res.rows, total: res.total };
