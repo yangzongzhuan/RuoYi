@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class IpUtils
 {
+    /**
+     * 获取客户端IP
+     * 
+     * @param request 请求对象
+     * @return IP地址
+     */
     public static String getIpAddr(HttpServletRequest request)
     {
         if (request == null)
@@ -40,15 +46,27 @@ public class IpUtils
             ip = request.getRemoteAddr();
         }
 
-        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : getMultistageReverseProxyIp(ip);
     }
 
+    /**
+     * 检查是否为内部IP地址
+     * 
+     * @param ip IP地址
+     * @return 结果
+     */
     public static boolean internalIp(String ip)
     {
         byte[] addr = textToNumericFormatV4(ip);
         return internalIp(addr) || "127.0.0.1".equals(ip);
     }
 
+    /**
+     * 检查是否为内部IP地址
+     * 
+     * @param addr byte地址
+     * @return 结果
+     */
     private static boolean internalIp(byte[] addr)
     {
         if (StringUtils.isNull(addr) || addr.length < 2)
@@ -109,7 +127,8 @@ public class IpUtils
             {
                 case 1:
                     l = Long.parseLong(elements[0]);
-                    if ((l < 0L) || (l > 4294967295L)) {
+                    if ((l < 0L) || (l > 4294967295L))
+                    {
                         return null;
                     }
                     bytes[0] = (byte) (int) (l >> 24 & 0xFF);
@@ -119,12 +138,14 @@ public class IpUtils
                     break;
                 case 2:
                     l = Integer.parseInt(elements[0]);
-                    if ((l < 0L) || (l > 255L)) {
+                    if ((l < 0L) || (l > 255L))
+                    {
                         return null;
                     }
                     bytes[0] = (byte) (int) (l & 0xFF);
                     l = Integer.parseInt(elements[1]);
-                    if ((l < 0L) || (l > 16777215L)) {
+                    if ((l < 0L) || (l > 16777215L))
+                    {
                         return null;
                     }
                     bytes[1] = (byte) (int) (l >> 16 & 0xFF);
@@ -135,13 +156,15 @@ public class IpUtils
                     for (i = 0; i < 2; ++i)
                     {
                         l = Integer.parseInt(elements[i]);
-                        if ((l < 0L) || (l > 255L)) {
+                        if ((l < 0L) || (l > 255L))
+                        {
                             return null;
                         }
                         bytes[i] = (byte) (int) (l & 0xFF);
                     }
                     l = Integer.parseInt(elements[2]);
-                    if ((l < 0L) || (l > 65535L)) {
+                    if ((l < 0L) || (l > 65535L))
+                    {
                         return null;
                     }
                     bytes[2] = (byte) (int) (l >> 8 & 0xFF);
@@ -151,7 +174,8 @@ public class IpUtils
                     for (i = 0; i < 4; ++i)
                     {
                         l = Integer.parseInt(elements[i]);
-                        if ((l < 0L) || (l > 255L)) {
+                        if ((l < 0L) || (l > 255L))
+                        {
                             return null;
                         }
                         bytes[i] = (byte) (int) (l & 0xFF);
@@ -168,6 +192,11 @@ public class IpUtils
         return bytes;
     }
 
+    /**
+     * 获取IP地址
+     * 
+     * @return 本地IP地址
+     */
     public static String getHostIp()
     {
         try
@@ -180,6 +209,11 @@ public class IpUtils
         return "127.0.0.1";
     }
 
+    /**
+     * 获取主机名
+     * 
+     * @return 本地主机名
+     */
     public static String getHostName()
     {
         try
@@ -190,5 +224,40 @@ public class IpUtils
         {
         }
         return "未知";
+    }
+
+    /**
+     * 从多级反向代理中获得第一个非unknown IP地址
+     *
+     * @param ip 获得的IP地址
+     * @return 第一个非unknown IP地址
+     */
+    public static String getMultistageReverseProxyIp(String ip)
+    {
+        // 多级反向代理检测
+        if (ip != null && ip.indexOf(",") > 0)
+        {
+            final String[] ips = ip.trim().split(",");
+            for (String subIp : ips)
+            {
+                if (false == isUnknown(subIp))
+                {
+                    ip = subIp;
+                    break;
+                }
+            }
+        }
+        return ip;
+    }
+
+    /**
+     * 检测给定字符串是否为未知，多用于检测HTTP请求相关
+     *
+     * @param checkString 被检测的字符串
+     * @return 是否未知
+     */
+    public static boolean isUnknown(String checkString)
+    {
+        return StringUtils.isBlank(checkString) || "unknown".equalsIgnoreCase(checkString);
     }
 }
