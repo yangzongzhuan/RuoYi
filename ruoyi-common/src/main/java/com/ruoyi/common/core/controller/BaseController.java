@@ -73,6 +73,14 @@ public class BaseController
     }
 
     /**
+     * 清理分页的线程变量
+     */
+    protected void clearPage()
+    {
+        PageUtils.clearPage();
+    }
+
+    /**
      * 获取request
      */
     public HttpServletRequest getRequest()
