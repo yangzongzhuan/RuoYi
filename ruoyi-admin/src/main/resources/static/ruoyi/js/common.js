@@ -417,7 +417,7 @@ var storage = {
 
 // 主子表操作封装处理
 var sub = {
-    editColumn: function() {
+    editRow: function() {
     	var dataColumns = [];
 		for (var columnIndex = 0; columnIndex < table.options.columns.length; columnIndex++) {
     		if (table.options.columns[columnIndex].visible != false) {
@@ -442,7 +442,11 @@ var sub = {
     	        } else if ($.common.isNotEmpty(textareaValue.val())) {
     	            obj[key] = textareaValue.val();
     	        } else {
-    	            obj[key] = "";
+    	            if (key == "index" && $.common.isNotEmpty(data[dataIndex].index)) {
+    	                obj[key] = data[dataIndex].index;
+    	            } else {
+    	                obj[key] = "";
+    	            }
     	        }
     	    }
     	    var item = data[dataIndex];
@@ -451,8 +455,8 @@ var sub = {
     	}
     	$("#" + table.options.id).bootstrapTable("updateRow", params);
     },
-    delColumn: function(column) {
-    	sub.editColumn();
+    delRow: function(column) {
+    	sub.editRow();
     	var subColumn = $.common.isEmpty(column) ? "index" : column;
     	var ids = $.table.selectColumns(subColumn);
         if (ids.length == 0) {
@@ -461,15 +465,18 @@ var sub = {
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
     },
-    addColumn: function(row, tableId) {
+    delRowByIndex: function(defindex, index) {
+    	sub.editRow();
+        var value = $.common.isNotEmpty(index) ? index : defindex;
+        $("#" + table.options.id).bootstrapTable('remove', { field: "index", values: [value] });
+        sub.editRow();
+    },
+    addRow: function(row, tableId) {
     	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
     	table.set(currentId);
     	var count = $("#" + currentId).bootstrapTable('getData').length;
-    	sub.editColumn();
-    	$("#" + currentId).bootstrapTable('insertRow', {
-            index: count + 1,
-            row: row
-        });
+    	sub.editRow();
+    	$("#" + currentId).bootstrapTable('insertRow', { index: count + 1, row: row });
     }
 };
 

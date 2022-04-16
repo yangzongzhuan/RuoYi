@@ -160,8 +160,8 @@
             <h4 class="form-header h4">${subTable.functionName}信息</h4>
             <div class="row">
                 <div class="col-sm-12">
-                    <button type="button" class="btn btn-white btn-sm" onclick="addColumn()"><i class="fa fa-plus"> 增加</i></button>
-                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delColumn()"><i class="fa fa-minus"> 删除</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="addRow()"><i class="fa fa-plus"> 增加</i></button>
+                    <button type="button" class="btn btn-white btn-sm" onclick="sub.delRow()"><i class="fa fa-minus"> 删除</i></button>
                     <div class="col-sm-12 select-table table-striped">
                         <table id="bootstrap-table"></table>
                     </div>
@@ -345,9 +345,7 @@
                         var name = $.common.sprintf("${subclassName}List[%s].${javaField}", index);
                         return $.common.dictToSelect(${javaField}Datas, value, name);
                     }
-#if($foreach.count != $subTable.columns.size())
                 },
-#end
 #else
                 {
                     field: '${javaField}',
@@ -357,34 +355,34 @@
                         var html = $.common.sprintf("<input class='form-control' type='text' name='${subclassName}List[%s].${javaField}' value='%s'>", index, value);
                         return html;
                     }
-#if($foreach.count != $subTable.columns.size())
                 },
+
 #end
 #end
-#end
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return '<a class="btn btn-danger btn-xs" href="javascript:void(0)" onclick="sub.delRowByIndex(\'' + $.table.serialNumber(index) + '\', \'' + row.index + '\')"><i class="fa fa-remove"></i>删除</a>';
+                    }
                 }]
             };
             $.table.init(options);
         });
 
-        function addColumn() {
+        function addRow() {
             var count = $("#" + table.options.id).bootstrapTable('getData').length;
-            sub.editColumn();
-        	
-            $("#" + table.options.id).bootstrapTable('insertRow', {
-                index: count,
-                row: {
-                    index: $.table.serialNumber(count),
+            var row = {
+                index: $.table.serialNumber(count),
 #foreach($column in $subTable.columns)
 #set($javaField=$column.javaField)
 #if($column.pk || $javaField == ${subTableFkclassName})
 #else
-                    ${javaField}: ""#if($foreach.count != $subTable.columns.size()),#end
-
+                ${javaField}: "",
 #end
 #end
-        	    }
-            });
+            }
+            sub.addRow(row);
         }
 #end
     </script>
