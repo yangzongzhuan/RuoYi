@@ -15,6 +15,7 @@ import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.common.exception.job.TaskException.Code;
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.quartz.domain.SysJob;
 
 /**
@@ -127,6 +128,7 @@ public class ScheduleUtils
         {
             return StringUtils.containsAnyIgnoreCase(invokeTarget, Constants.JOB_WHITELIST_STR);
         }
-        return true;
+        Object obj = SpringUtils.getBean(StringUtils.split(invokeTarget, ".")[0]);
+        return StringUtils.containsAnyIgnoreCase(obj.getClass().getPackage().getName(), Constants.JOB_WHITELIST_STR);
     }
 }
