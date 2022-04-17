@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import com.ruoyi.common.config.RuoYiConfig;
@@ -255,7 +256,7 @@ public class FileUtils
     }
 
     /**
-     * 获取名称
+     * 获取文件名称 /profile/upload/2022/04/16/ruoyi.png -- ruoyi.png
      * 
      * @param fileName 路径名称
      * @return 没有文件路径的名称
@@ -271,4 +272,21 @@ public class FileUtils
         int index = Math.max(lastUnixPos, lastWindowsPos);
         return fileName.substring(index + 1);
     }
+
+    /**
+     * 获取不带后缀文件名称 /profile/upload/2022/04/16/ruoyi.png -- ruoyi
+     * 
+     * @param fileName 路径名称
+     * @return 没有文件路径和后缀的名称
+     */
+    public static String getNameNotSuffix(String fileName)
+    {
+        if (fileName == null)
+        {
+            return null;
+        }
+        String baseName = FilenameUtils.getBaseName(fileName);
+        return baseName;
+    }
 }
+
