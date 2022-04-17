@@ -465,9 +465,8 @@ var sub = {
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
     },
-    delRowByIndex: function(defindex, index) {
+    delRowByIndex: function(value) {
     	sub.editRow();
-        var value = $.common.isNotEmpty(index) ? index : defindex;
         $("#" + table.options.id).bootstrapTable('remove', { field: "index", values: [value] });
         sub.editRow();
     },
