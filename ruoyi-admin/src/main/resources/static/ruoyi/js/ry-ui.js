@@ -647,7 +647,7 @@ var table = {
             search: function(formId) {
                 var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;
                 var params = $.common.formToJSON(currentId);
-                $.bttTable.bootstrapTreeTable('refresh', params);
+                $.bttTable.bootstrapTreeTable('refresh', $.extend(params, table.options.ajaxParams));
             },
             // 刷新
             refresh: function() {
@@ -699,7 +699,7 @@ var table = {
                     }
                     $("#" + tableId).bootstrapTable('refresh', params);
                 } else if (table.options.type == table_type.bootstrapTreeTable) {
-                    $("#" + tableId).bootstrapTreeTable('refresh', []);
+                    $("#" + tableId).bootstrapTreeTable('refresh', table.options.ajaxParams);
                 }
                 if ($.common.isNotEmpty(startLayDate) && $.common.isNotEmpty(endLayDate)) {
                     endLayDate.config.min.year = '';

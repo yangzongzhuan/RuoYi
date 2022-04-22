@@ -182,7 +182,7 @@
                 $.ajax({
                     type: options.type,
                     url: options.url,
-                    data: parms ? parms : options.ajaxParams,
+                    data: $.extend(parms, options.ajaxParams),
                     dataType: "json",
                     success: function(data, textStatus, jqXHR) {
                     	data = calculateObjectValue(options, options.responseHandler, [data], data);
@@ -728,7 +728,7 @@
                                     $.ajax({
                                         type: options.type,
                                         url: options.dataUrl,
-                                        data: parms ? parms : options.ajaxParams,
+                                        data: $.extend(parms, options.ajaxParams),
                                         dataType: "json",
                                         success: function(data, textStatus, jqXHR) {
                                             $("#" + row_id + "_load").remove();
