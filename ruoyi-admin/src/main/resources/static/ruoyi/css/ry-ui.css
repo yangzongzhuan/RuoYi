@@ -908,6 +908,9 @@ table.rc-table-resizing thead > th > a {
   background-color: #fff;
   box-sizing: border-box;
   z-index: 1;
+  border-width: 0 0 0 1px;
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,.12);
+  box-shadow: 0 0 10px rgba(0,0,0,.12);
 }
 
 .fixed-columns {
