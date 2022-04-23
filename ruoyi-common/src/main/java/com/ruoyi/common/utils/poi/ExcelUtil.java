@@ -672,21 +672,6 @@ public class ExcelUtil<T>
         style.setFont(totalFont);
         styles.put("total", style);
 
-        style = wb.createCellStyle();
-        style.cloneStyleFrom(styles.get("data"));
-        style.setAlignment(HorizontalAlignment.LEFT);
-        styles.put("data1", style);
-
-        style = wb.createCellStyle();
-        style.cloneStyleFrom(styles.get("data"));
-        style.setAlignment(HorizontalAlignment.CENTER);
-        styles.put("data2", style);
-
-        style = wb.createCellStyle();
-        style.cloneStyleFrom(styles.get("data"));
-        style.setAlignment(HorizontalAlignment.RIGHT);
-        styles.put("data3", style);
-
         return styles;
     }
 
@@ -808,8 +793,7 @@ public class ExcelUtil<T>
             {
                 // 创建cell
                 cell = row.createCell(column);
-                int align = attr.align().value();
-                cell.setCellStyle(styles.get("data" + (align >= 1 && align <= 3 ? align : "")));
+                setDataCell(cell, attr);
 
                 // 用于读取对象中的属性
                 Object value = getTargetValue(vo, field, attr);
@@ -850,6 +834,34 @@ public class ExcelUtil<T>
             log.error("导出Excel失败{}", e);
         }
         return cell;
+    }
+
+    /**
+     * 设置单元格样式
+     * 
+     * @param cell 单元格
+     * @param excel 注解信息
+     */
+    public void setDataCell(Cell cell, Excel excel)
+    {
+        CellStyle style = wb.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+        style.setBorderRight(BorderStyle.THIN);
+        style.setRightBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setLeftBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setBorderTop(BorderStyle.THIN);
+        style.setTopBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBottomBorderColor(IndexedColors.GREY_50_PERCENT.getIndex());
+        style.setAlignment(excel.align());
+        Font dataFont = wb.createFont();
+        dataFont.setFontName("Arial");
+        dataFont.setFontHeightInPoints((short) 10);
+        dataFont.setColor(excel.color().index);
+        style.setFont(dataFont);
+        cell.setCellStyle(style);
     }
 
     /**
