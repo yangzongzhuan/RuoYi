@@ -132,7 +132,7 @@
 		<set>
 			<if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
 			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
-			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+			<if test="orderNum != null">order_num = #{orderNum},</if>
 			<if test="url != null">url = #{url},</if>
 			<if test="target != null and target != ''">target = #{target},</if>
 			<if test="menuType != null and menuType != ''">menu_type = #{menuType},</if>
@@ -152,7 +152,7 @@
 		<if test="menuId != null and menuId != 0">menu_id,</if>
 		<if test="parentId != null and parentId != 0">parent_id,</if>
 		<if test="menuName != null and menuName != ''">menu_name,</if>
-		<if test="orderNum != null and orderNum != ''">order_num,</if>
+		<if test="orderNum != null">order_num,</if>
 		<if test="url != null and url != ''">url,</if>
 		<if test="target != null and target != ''">target,</if>
 		<if test="menuType != null and menuType != ''">menu_type,</if>
@@ -167,7 +167,7 @@
 		<if test="menuId != null and menuId != 0">#{menuId},</if>
 		<if test="parentId != null and parentId != 0">#{parentId},</if>
 		<if test="menuName != null and menuName != ''">#{menuName},</if>
-		<if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+		<if test="orderNum != null">#{orderNum},</if>
 		<if test="url != null and url != ''">#{url},</if>
 		<if test="target != null and target != ''">#{target},</if>
 		<if test="menuType != null and menuType != ''">#{menuType},</if>

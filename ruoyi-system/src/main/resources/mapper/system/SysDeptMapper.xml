@@ -92,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="parentId != null and parentId != 0">parent_id,</if>
  			<if test="deptName != null and deptName != ''">dept_name,</if>
  			<if test="ancestors != null and ancestors != ''">ancestors,</if>
- 			<if test="orderNum != null and orderNum != ''">order_num,</if>
+ 			<if test="orderNum != null">order_num,</if>
  			<if test="leader != null and leader != ''">leader,</if>
  			<if test="phone != null and phone != ''">phone,</if>
  			<if test="email != null and email != ''">email,</if>
@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="parentId != null and parentId != 0">#{parentId},</if>
  			<if test="deptName != null and deptName != ''">#{deptName},</if>
  			<if test="ancestors != null and ancestors != ''">#{ancestors},</if>
- 			<if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+ 			<if test="orderNum != null">#{orderNum},</if>
  			<if test="leader != null and leader != ''">#{leader},</if>
  			<if test="phone != null and phone != ''">#{phone},</if>
  			<if test="email != null and email != ''">#{email},</if>
@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
  			<if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
  			<if test="ancestors != null and ancestors != ''">ancestors = #{ancestors},</if>
- 			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+ 			<if test="orderNum != null">order_num = #{orderNum},</if>
  			<if test="leader != null">leader = #{leader},</if>
  			<if test="phone != null">phone = #{phone},</if>
  			<if test="email != null">email = #{email},</if>
