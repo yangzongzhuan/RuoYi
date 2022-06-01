@@ -726,8 +726,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active,  .btn-success.active, .open .dropdown-toggle.btn-success {
-    background-color: #1a7bb9;
-    border-color: #1a7bb9;
+    background-color: #1a7bb9 !important;
+    border-color: #1a7bb9 !important;
     color: #FFFFFF;
 }
 
