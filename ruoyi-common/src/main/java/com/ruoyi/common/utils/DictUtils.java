@@ -82,7 +82,7 @@ public class DictUtils
         StringBuilder propertyString = new StringBuilder();
         List<SysDictData> datas = getDictCache(dictType);
 
-        if (StringUtils.containsAny(separator, dictValue) && StringUtils.isNotEmpty(datas))
+        if (StringUtils.containsAny(dictValue, separator) && StringUtils.isNotEmpty(datas))
         {
             for (SysDictData dict : datas)
             {
@@ -122,7 +122,7 @@ public class DictUtils
         StringBuilder propertyString = new StringBuilder();
         List<SysDictData> datas = getDictCache(dictType);
 
-        if (StringUtils.containsAny(separator, dictLabel) && StringUtils.isNotEmpty(datas))
+        if (StringUtils.containsAny(dictLabel, separator) && StringUtils.isNotEmpty(datas))
         {
             for (SysDictData dict : datas)
             {
