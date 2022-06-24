@@ -47,7 +47,7 @@ public class CacheController extends BaseController
     public String getCacheKeys(String fragment, String cacheName, ModelMap mmap)
     {
         mmap.put("cacheName", cacheName);
-        mmap.put("cacheKyes", cacheService.getCacheKeys(cacheName));
+        mmap.put("cacheKeys", cacheService.getCacheKeys(cacheName));
         return prefix + "/cache::" + fragment;
     }
 
