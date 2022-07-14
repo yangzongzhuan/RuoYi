@@ -102,12 +102,12 @@ public @interface Excel
      * 是否自动统计数据,在最后追加一行统计数据总和
      */
     public boolean isStatistics() default false;
-    
+
     /**
-     * 导出类型（0数字 1字符串）
+     * 导出类型（0数字 1字符串 2图片）
      */
     public ColumnType cellType() default ColumnType.STRING;
-    
+
     /**
      * 导出字体颜色
      */
