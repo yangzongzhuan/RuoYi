@@ -24,7 +24,7 @@
         <kaptcha.version>2.3.2</kaptcha.version>
         <swagger.version>3.0.0</swagger.version>
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
-        <pagehelper.boot.version>1.4.1</pagehelper.boot.version>
+        <pagehelper.boot.version>1.4.3</pagehelper.boot.version>
         <fastjson.version>1.2.83</fastjson.version>
         <oshi.version>6.2.1</oshi.version>
         <commons.io.version>2.11.0</commons.io.version>
