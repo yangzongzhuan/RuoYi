@@ -90,7 +90,7 @@ public class DataScopeAspect
         for (SysRole role : user.getRoles())
         {
             String dataScope = role.getDataScope();
-            if (conditions.contains(dataScope))
+            if (!DATA_SCOPE_CUSTOM.equals(dataScope) && conditions.contains(dataScope))
             {
                 continue;
             }
