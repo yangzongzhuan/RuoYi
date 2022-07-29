@@ -111,8 +111,8 @@ public class SysJobController extends BaseController
     @ResponseBody
     public AjaxResult run(SysJob job) throws SchedulerException
     {
-        jobService.run(job);
-        return success();
+        boolean result = jobService.run(job);
+        return result ? success() : error("任务不存在或已过期！");
     }
 
     /**
