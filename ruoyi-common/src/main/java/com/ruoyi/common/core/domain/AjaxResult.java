@@ -1,6 +1,7 @@
 package com.ruoyi.common.core.domain;
 
 import java.util.HashMap;
+import java.util.Objects;
 import com.ruoyi.common.utils.StringUtils;
 
 /**
@@ -79,20 +80,6 @@ public class AjaxResult extends HashMap<String, Object>
         {
             super.put(DATA_TAG, data);
         }
-    }
-
-    /**
-     * 方便链式调用
-     *
-     * @param key 键
-     * @param value 值
-     * @return 数据对象
-     */
-    @Override
-    public AjaxResult put(String key, Object value)
-    {
-        super.put(key, value);
-        return this;
     }
 
     /**
@@ -192,5 +179,39 @@ public class AjaxResult extends HashMap<String, Object>
     public static AjaxResult error(String msg, Object data)
     {
         return new AjaxResult(Type.ERROR, msg, data);
+    }
+
+    /**
+     * 是否为成功消息
+     *
+     * @return 结果
+     */
+    public boolean isSuccess()
+    {
+        return !isError();
+    }
+
+    /**
+     * 是否为错误消息
+     *
+     * @return 结果
+     */
+    public boolean isError()
+    {
+        return Objects.equals(Type.SUCCESS, this.get(CODE_TAG));
+    }
+
+    /**
+     * 方便链式调用
+     *
+     * @param key 键
+     * @param value 值
+     * @return 数据对象
+     */
+    @Override
+    public AjaxResult put(String key, Object value)
+    {
+        super.put(key, value);
+        return this;
     }
 }
