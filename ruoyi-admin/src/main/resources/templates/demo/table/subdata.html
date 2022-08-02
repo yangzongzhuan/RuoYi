@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-	<th:block th:include="include :: header('主子表提交')" />
+    <th:block th:include="include :: header('主子表提交')" />
     <th:block th:include="include :: datetimepicker-css" />
+    <style type="text/css">
+        table label.error{position: inherit;}select + label.error{z-index:1;right:40px;}
+    </style>
 </head>
 <body class="gray-bg">
     <div class="main-content">
@@ -13,7 +16,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label is-required">客户名称：</label>
                         <div class="col-sm-8">
-                            <input name="name" placeholder="请输入客户名称" class="form-control" type="text" maxlength="30">
+                            <input name="name" placeholder="请输入客户名称" class="form-control" type="text" maxlength="30" required>
                         </div>
                     </div>
                 </div>
@@ -31,9 +34,9 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label is-required">手机号码：</label>
+                        <label class="col-sm-4 control-label">手机号码：</label>
                         <div class="col-sm-8">
-                            <input id="phonenumber" name="phonenumber" placeholder="请输入手机号码" class="form-control" type="text" maxlength="11">
+                            <input id="phonenumber" name="phonenumber" placeholder="请输入手机号码" class="form-control isPhone" type="text" maxlength="11">
                         </div>
                     </div>
                 </div>
@@ -127,7 +130,7 @@
 		            align: 'center',
 		            title: '商品名称',
 		            formatter: function(value, row, index) {
-		            	var html = $.common.sprintf("<input class='form-control' type='text' name='goods[%s].name' value='%s'>", index, value);
+		            	var html = $.common.sprintf("<input class='form-control goodsName' type='text' name='goods[%s].name' value='%s'>", index, value);
 		        		return html;
                     }
 		        },
@@ -136,7 +139,7 @@
 		            align: 'center',
 		            title: '商品重量',
 		            formatter: function(value, row, index) {
-		            	var html = $.common.sprintf("<input class='form-control' type='text' name='goods[%s].weight' value='%s'>", index, value);
+		            	var html = $.common.sprintf("<input class='form-control goodsWeight' type='text' name='goods[%s].weight' value='%s'>", index, value);
 		        		return html;
                     }
 		        },
@@ -179,11 +182,21 @@
 		    $.table.init(options);
 		});
 	    
-	    /* 主子表-提交 */
+        $.validator.addMethod("goodsName", function(value, element) {
+            return !this.optional(element);
+        }, "商品名称必填。");
+        
+        $.validator.addMethod("goodsWeight", function(value, element) {
+            return !this.optional(element) && (value <= 100 && value >= 0);
+        }, "商品重量长度区间0-100。");
+        
+        /* 主子表-提交 */
         function submitHandler(index, layero){
-        	var data = $("#form-add").serializeArray();
-        	alert(JSON.stringify(data))
-			$.operate.saveModal("/demo/operate/customer/add", data);
+            if ($.validate.form()) {
+                var data = $("#form-add").serializeArray();
+                alert(JSON.stringify(data))
+                $.operate.saveModal("/demo/operate/customer/add", data);
+            }
         }
 	    
         $("input[name='birthday']").datetimepicker({
