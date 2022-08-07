@@ -73,12 +73,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="checkRoleNameUnique" parameterType="String" resultMap="SysRoleResult">
 		<include refid="selectRoleVo"/>
-		 where r.role_name=#{roleName} and del_flag = '0' limit 1
+		 where r.role_name=#{roleName} and r.del_flag = '0' limit 1
 	</select>
 	
 	<select id="checkRoleKeyUnique" parameterType="String" resultMap="SysRoleResult">
 		<include refid="selectRoleVo"/>
-		 where r.role_key=#{roleKey} and del_flag = '0' limit 1
+		 where r.role_key=#{roleKey} and r.del_flag = '0' limit 1
 	</select>
 	
 	<delete id="deleteRoleById" parameterType="Long">
