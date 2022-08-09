@@ -1020,7 +1020,7 @@ public class ExcelUtil<T>
                 }
                 else if (value instanceof BigDecimal && -1 != attr.scale())
                 {
-                    cell.setCellValue((((BigDecimal) value).setScale(attr.scale(), attr.roundingMode())).toString());
+                    cell.setCellValue((((BigDecimal) value).setScale(attr.scale(), attr.roundingMode())).doubleValue());
                 }
                 else if (!attr.handler().equals(ExcelHandlerAdapter.class))
                 {
