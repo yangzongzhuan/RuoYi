@@ -187,6 +187,7 @@
                     success: function(data, textStatus, jqXHR) {
                     	data = calculateObjectValue(options, options.responseHandler, [data], data);
                         renderTable(data);
+                        calculateObjectValue(options, options.onLoadSuccess, [data], data);
                     },
                     error: function(xhr, textStatus) {
                         var _errorMsg = '<tr><td colspan="' + options.columns.length + '"><div style="display: block;text-align: center;">' + xhr.responseText + '</div></td></tr>'
