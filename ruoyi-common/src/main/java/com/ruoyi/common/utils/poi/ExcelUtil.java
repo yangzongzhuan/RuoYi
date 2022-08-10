@@ -993,7 +993,7 @@ public class ExcelUtil<T>
             {
                 // 创建cell
                 cell = row.createCell(column);
-                if (isSubListValue(vo) && attr.needMerge())
+                if (isSubListValue(vo) && getListCellValue(vo).size() > 1 && attr.needMerge())
                 {
                     CellRangeAddress cellAddress = new CellRangeAddress(subMergedFirstRowNum, subMergedLastRowNum, column, column);
                     sheet.addMergedRegion(cellAddress);
