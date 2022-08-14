@@ -306,7 +306,7 @@ $(function() {
             $('.menuTab').removeClass('active');
 
             // 添加选项卡对应的iframe
-            var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
+            var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" data-refresh="' + isRefresh + '" seamless></iframe>';
             $('.mainContent').find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
 
             $.modal.loading("数据加载中，请稍候...");
@@ -434,15 +434,20 @@ $(function() {
     function activeTab() {
         if (!$(this).hasClass('active')) {
             var currentId = $(this).data('id');
+            var isRefresh = false;
             syncMenuTab(currentId);
             // 显示tab对应的内容区
             $('.mainContent .RuoYi_iframe').each(function() {
                 if ($(this).data('id') == currentId) {
                     $(this).show().siblings('.RuoYi_iframe').hide();
+                    isRefresh = $(this).data('refresh');
                     return false;
                 }
             });
             $(this).addClass('active').siblings('.menuTab').removeClass('active');
+            if (isRefresh) {
+                refreshTab();
+            }
             scrollToTab(this);
         }
     }
