@@ -63,6 +63,15 @@ public class DemoFormController
     }
 
     /**
+     * 进度条
+     */
+    @GetMapping("/progress_bars")
+    public String progress_bars()
+    {
+        return prefix + "/progress_bars";
+    }
+
+    /**
      * 表单校验
      */
     @GetMapping("/validate")
