@@ -262,7 +262,7 @@ $(function() {
         // 获取标识数据
         var dataUrl = $(this).attr('href'),
         dataIndex = $(this).data('index'),
-        menuName = $.trim($(this).text()),
+        menuName = $(this).data('title') || $.trim($(this).text()),
         isRefresh = $(this).data("refresh"),
         flag = true;
 
