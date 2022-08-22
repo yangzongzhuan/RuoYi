@@ -50,6 +50,14 @@ public interface SysMenuMapper
     public List<String> selectPermsByUserId(Long userId);
 
     /**
+     * 根据角色ID查询权限
+     * 
+     * @param roleId 角色ID
+     * @return 权限列表
+     */
+    public List<String> selectPermsByRoleId(Long roleId);
+
+    /**
      * 根据角色ID查询菜单
      * 
      * @param roleId 角色ID

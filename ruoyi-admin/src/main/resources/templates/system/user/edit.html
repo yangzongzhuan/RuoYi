@@ -203,7 +203,7 @@
         /* 用户管理-修改-选择部门树 */
         function selectDeptTree() {
         	var deptId = $.common.isEmpty($("#treeId").val()) ? "100" : $("#treeId").val();
-            var url = ctx + "system/dept/selectDeptTree/" + deptId;
+            var url = ctx + "system/user/selectDeptTree/" + deptId;
 		    var options = {
 				title: '选择部门',
 				width: "380",
@@ -214,7 +214,6 @@
 		}
 		
 		function doSubmit(index, layero){
-			var tree = layero.find("iframe")[0].contentWindow.$._tree;
 			var body = $.modal.getChildFrame(index);
    			$("#treeId").val(body.find('#treeId').val());
    			$("#treeName").val(body.find('#treeName').val());

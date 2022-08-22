@@ -70,6 +70,13 @@
 		where m.visible = '0' and r.status = '0' and ur.user_id = #{userId}
 	</select>
 
+	<select id="selectPermsByRoleId" parameterType="Long" resultType="String">
+		select distinct m.perms
+		from sys_menu m
+			 left join sys_role_menu rm on m.menu_id = rm.menu_id
+		where m.visible = '0' and rm.role_id = #{roleId}
+	</select>
+
 	<select id="selectMenuTree" parameterType="Long" resultType="String">
 		select concat(m.menu_id, ifnull(m.perms,'')) as perms
 		from sys_menu m

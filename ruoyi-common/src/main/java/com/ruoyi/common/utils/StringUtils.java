@@ -325,6 +325,32 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
+     * 判断给定的set列表中是否包含数组array 判断给定的数组array中是否包含给定的元素value
+     *
+     * @param set 给定的集合
+     * @param array 给定的数组
+     * @return boolean 结果
+     */
+    public static boolean containsAny(Collection<String> collection, String... array)
+    {
+        if (isEmpty(collection) || isEmpty(array))
+        {
+            return false;
+        }
+        else
+        {
+            for (String str : array)
+            {
+                if (collection.contains(str))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    /**
      * 查找指定字符串是否包含指定字符串列表中的任意一个字符串同时串忽略大小写
      *
      * @param cs 指定字符串
