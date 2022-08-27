@@ -508,7 +508,7 @@ div.ztree-border {
 	left: calc(100% - 20px);
 	background-color: #33cabb
 }
- 
+
 .toggle-switch.switch-solid span  {
     height: 20px;
 }
@@ -843,7 +843,7 @@ label {
 .table-bordered table>thead>tr>th:first-child, .table-bordered table>tbody>tr>td:first-child {
     border-left: 1px solid #ddd;
 }
- 
+
 .table-bordered table>thead>tr>th:last-child, .table-bordered table>tbody>tr>td:last-child {
 	border-right: 1px solid #ddd;
 }
@@ -872,7 +872,7 @@ label {
     background-color: #eff3f8;
 }
 
-.fixed-table-container thead th  >.both{ 
+.fixed-table-container thead th  >.both{
     display: inline-block
 }
 
@@ -1040,12 +1040,12 @@ table.rc-table-resizing thead > th > a {
 }
 
 /** 表格列拖拽样式 **/
-.dragtable-sortable { 
+.dragtable-sortable {
     list-style-type: none; margin: 0; padding: 0; -moz-user-select: none;
 }
 
 .dragtable-sortable li {
-    margin: 0; padding: 0; float: left; font-size: 1em; background: white; 
+    margin: 0; padding: 0; float: left; font-size: 1em; background: white;
 }
 
 .dragtable-sortable th, .dragtable-sortable td{
@@ -1053,26 +1053,26 @@ table.rc-table-resizing thead > th > a {
 }
 
 .dragtable-sortable li:first-child th, .dragtable-sortable li:first-child td {
-    border-left: 1px solid #CCC; 
+    border-left: 1px solid #CCC;
 }
 
 .ui-sortable-helper {
     opacity: 0.7;filter: alpha(opacity=70);
 }
 
-.ui-sortable-placeholder { 
+.ui-sortable-placeholder {
     -moz-box-shadow: 4px 5px 4px #C6C6C6 inset;
     -webkit-box-shadow: 4px 5px 4px #C6C6C6 inset;
     box-shadow: 4px 5px 4px #C6C6C6 inset;
     border-bottom: 1px solid #CCCCCC;
     border-top: 1px solid #CCCCCC;
     visibility: visible !important;
-    background: #EFEFEF !important; 
+    background: #EFEFEF !important;
     visibility: visible !important;
 }
 
-.ui-sortable-placeholder * { 
-    opacity: 0.0; visibility: hidden; 
+.ui-sortable-placeholder * {
+    opacity: 0.0; visibility: hidden;
 }
 
 /** 表格选中样式 **/
