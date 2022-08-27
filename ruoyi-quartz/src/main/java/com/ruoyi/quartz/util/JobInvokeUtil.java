@@ -52,12 +52,12 @@ public class JobInvokeUtil
     {
         if (StringUtils.isNotNull(methodParams) && methodParams.size() > 0)
         {
-            Method method = bean.getClass().getDeclaredMethod(methodName, getMethodParamsType(methodParams));
+            Method method = bean.getClass().getMethod(methodName, getMethodParamsType(methodParams));
             method.invoke(bean, getMethodParamsValue(methodParams));
         }
         else
         {
-            Method method = bean.getClass().getDeclaredMethod(methodName);
+            Method method = bean.getClass().getMethod(methodName);
             method.invoke(bean);
         }
     }
