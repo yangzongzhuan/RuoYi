@@ -100,9 +100,14 @@
 	    
 	    /* 添加角色-提交 */
         function submitHandler(index, layero){
-        	var rows = $.table.selectFirstColumns();
-        	var data = { "userId": $("#userId").val(), "roleIds": rows.join() };
-			$.operate.saveTab(prefix + "/insertAuthRole", data);
+            var roleIds = [];
+        	var data = $('#bootstrap-table').bootstrapTable('getData');
+        	for (var i = 0; i < data.length; i++) {
+        		if (data[i][0] || ($.common.isEmpty(data[i][0]) && data[i].flag)) {
+        		    roleIds.push(data[i].roleId)
+        		}
+			}
+        	$.operate.saveTab(prefix + "/insertAuthRole", { "userId": $("#userId").val(), "roleIds": roleIds.join() });
         }
     </script>
 </body>
