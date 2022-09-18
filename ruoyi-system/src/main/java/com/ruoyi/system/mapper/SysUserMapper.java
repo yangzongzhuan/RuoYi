@@ -104,7 +104,7 @@ public interface SysUserMapper
      * @param loginName 登录名称
      * @return 结果
      */
-    public int checkLoginNameUnique(String loginName);
+    public SysUser checkLoginNameUnique(String loginName);
 
     /**
      * 校验手机号码是否唯一
