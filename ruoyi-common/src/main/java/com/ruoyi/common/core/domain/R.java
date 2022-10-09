@@ -102,13 +102,13 @@ public class R<T> implements Serializable
         this.data = data;
     }
 
-    public Boolean isError()
+    public static <T> Boolean isError(R<T> ret)
     {
-        return !isSuccess();
+        return !isSuccess(ret);
     }
 
-    public Boolean isSuccess()
+    public static <T> Boolean isSuccess(R<T> ret)
     {
-        return R.SUCCESS == getCode();
+        return R.SUCCESS == ret.getCode();
     }
 }
