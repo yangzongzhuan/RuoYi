@@ -1,11 +1,11 @@
 /*!
- * bootstrap-fileinput v5.2.4
+ * bootstrap-fileinput v5.5.2
  * http://plugins.krajee.com/file-input
  *
  * Krajee default styling for bootstrap-fileinput.
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2021, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2022, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/bootstrap-fileinput/blob/master/LICENSE.md
@@ -48,6 +48,10 @@ input[type=file].file-loading {
 .is-locked .fileinput-upload-button,
 .is-locked .fileinput-remove-button {
     display: none;
+}
+
+.file-caption .input-group {
+    align-items: center;
 }
 
 .btn-file input[type=file],
@@ -274,17 +278,12 @@ input[type=file].file-loading {
     padding: 6px;
     float: left;
     text-align: center;
+
 }
 
 .krajee-default.file-preview-frame .kv-file-content {
     width: 213px;
     height: 160px;
-}
-
-.krajee-default .file-preview-other-frame {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .krajee-default.file-preview-frame .kv-file-content.kv-pdf-rendered {
@@ -330,7 +329,7 @@ input[type=file].file-loading {
     text-align: center;
     padding-top: 4px;
     font-size: 11px;
-    color: #777;
+    color: #999;
     margin-bottom: 30px;
 }
 
@@ -406,7 +405,7 @@ input[type=file].file-loading {
     height: 2.4rem;
     top: 50%;
     border-radius: 50%;
-    text-align:center;
+    text-align: center;
 }
 
 .btn-navigate * {
@@ -426,19 +425,12 @@ input[type=file].file-loading {
     right: 0;
 }
 
-.file-zoom-dialog .kv-zoom-caption {
-    max-width: 50%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 .file-zoom-dialog .kv-zoom-header {
     padding: 0.5rem;
 }
 
 .file-zoom-dialog .kv-zoom-body {
-    padding: 0.25rem 0.5rem 0.25rem 0;
+    padding: 0.25rem;
 }
 
 .file-zoom-dialog .kv-zoom-description {
@@ -554,6 +546,10 @@ input[type=file].file-loading {
     z-index: 3000;
 }
 
+.kv-zoom-actions {
+    min-width: 140px;
+}
+
 .kv-zoom-actions .btn-kv {
     margin-left: 3px;
 }
@@ -566,15 +562,6 @@ input[type=file].file-loading {
 
 .file-zoom-content:hover {
     background: transparent;
-}
-
-.file-zoom-content > * {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.file-zoom-content .kv-spacer {
-    height: 100%;
 }
 
 .file-zoom-content .file-preview-image {
@@ -668,4 +655,34 @@ input[type=file].file-loading {
 
 .file-preview .kv-zoom-cache {
     display: none;
+}
+
+.file-preview-other-frame, .file-preview-object, .kv-file-content, .kv-zoom-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-kv-rotate,
+.kv-file-rotate {
+    display: none;
+}
+
+.rotatable:not(.hide-rotate) .btn-kv-rotate,
+.rotatable:not(.hide-rotate) .kv-file-rotate {
+    display: inline-block;
+}
+
+.rotatable .file-zoom-detail,
+.rotatable .kv-file-content,
+.rotatable .kv-file-content > :first-child {
+    transform-origin: center center;
+}
+
+.rotate-animate {
+    transition: transform 0.3s ease;
+}
+
+.kv-overflow-hidden {
+    overflow: hidden;
 }
