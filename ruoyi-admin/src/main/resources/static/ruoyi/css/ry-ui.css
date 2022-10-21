@@ -338,7 +338,7 @@ label.error {
 
 .input-group label.error {
 	z-index:99;
-	right: 42px
+	right: 42px;
 }
 
 .input-group input.error + label.error + .input-group-addon>i {
@@ -347,10 +347,14 @@ label.error {
 
 .input-group.date label.error {
 	z-index:99;
-	right: 42px
+	right: 42px;
 }
 
-.Validform_error,input.error,textarea.error,select.error {
+.select2-hidden-accessible + label.error {
+	right: 38px;
+}
+
+.Validform_error,input.error,textarea.error,select.error,label.error+.select2-container--bootstrap .select2-selection--single {
 	background-color: #fbe2e2;
 	border-color: #c66161;
 	color: #c00
