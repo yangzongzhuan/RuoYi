@@ -689,7 +689,7 @@ public class ExcelUtil<T>
         int rowNo = (1 + rownum) - startNo;
         for (int i = startNo; i < endNo; i++)
         {
-            rowNo = i > 1 ? rowNo + 1 : rowNo + i;
+            rowNo = isSubList() ? (i > 1 ? rowNo + 1 : rowNo + i) : i + 1 + rownum - startNo;
             row = sheet.createRow(rowNo);
             // 得到导出对象.
             T vo = (T) list.get(i);
