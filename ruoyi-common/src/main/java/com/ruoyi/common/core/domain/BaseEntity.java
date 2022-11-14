@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * Entity基类
@@ -38,7 +39,7 @@ public class BaseEntity implements Serializable
     private String remark;
 
     /** 请求参数 */
-    @JsonIgnore
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private Map<String, Object> params;
 
     public String getSearchValue()
