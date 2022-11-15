@@ -18,7 +18,7 @@
 								<label>操作人员： </label><input type="text" name="operName"/>
 							</li>
 							<li class="select-selectpicker">
-								<label>操作类型： </label><select id="businessTypes" th:with="type=${@dict.getType('sys_oper_type')}" class="selectpicker" data-none-selected-text="请选择" multiple>
+								<label>操作类型： </label><select id="businessTypes" name="businessTypes" th:with="type=${@dict.getType('sys_oper_type')}" class="selectpicker" data-none-selected-text="请选择" multiple>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
 								</select>
 							</li>
