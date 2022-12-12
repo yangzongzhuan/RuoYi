@@ -116,8 +116,7 @@ public class FileUtils
         // 路径为文件且不为空则进行删除
         if (file.isFile() && file.exists())
         {
-            file.delete();
-            flag = true;
+            flag = file.delete();
         }
         return flag;
     }
