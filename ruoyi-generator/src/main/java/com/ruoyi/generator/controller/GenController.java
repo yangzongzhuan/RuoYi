@@ -222,7 +222,7 @@ public class GenController extends BaseController
         catch (Exception e)
         {
             logger.error(e.getMessage(), e);
-            return AjaxResult.error("创建表结构异常[" + e.getMessage() + "]");
+            return AjaxResult.error("创建表结构异常");
         }
     }
 
