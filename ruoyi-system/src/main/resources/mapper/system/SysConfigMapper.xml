@@ -59,6 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
     </select>
     
+    <select id="selectConfigById" parameterType="Long" resultMap="SysConfigResult">
+		<include refid="selectConfigVo"/>
+		where config_id = #{configId}
+	</select>
+    
     <select id="checkConfigKeyUnique" parameterType="String" resultMap="SysConfigResult">
         <include refid="selectConfigVo"/>
         where config_key = #{configKey} limit 1

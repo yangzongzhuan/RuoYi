@@ -713,7 +713,7 @@ public class Convert
         }
         if (value instanceof Double)
         {
-            return new BigDecimal((Double) value);
+            return BigDecimal.valueOf((Double) value);
         }
         if (value instanceof Integer)
         {
