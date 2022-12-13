@@ -12,7 +12,7 @@ import com.ruoyi.common.core.domain.entity.SysDept;
 public interface SysDeptMapper
 {
     /**
-     * 查询部门人数
+     * 查询下级部门数量
      * 
      * @param dept 部门信息
      * @return 结果
