@@ -465,9 +465,10 @@ var sub = {
         }
         $("#" + table.options.id).bootstrapTable('remove', { field: subColumn, values: ids });
     },
-    delRowByIndex: function(value) {
+    delRowByIndex: function(value, tableId) {
+    	var currentId = $.common.isEmpty(tableId) ? table.options.id : tableId;
     	sub.editRow();
-        $("#" + table.options.id).bootstrapTable('remove', { field: "index", values: [value] });
+        $("#" + currentId).bootstrapTable('remove', { field: "index", values: [value] });
         sub.editRow();
     },
     addRow: function(row, tableId) {
