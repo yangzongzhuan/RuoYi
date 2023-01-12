@@ -440,7 +440,7 @@ $(function() {
             $('.mainContent .RuoYi_iframe').each(function() {
                 if ($(this).data('id') == currentId) {
                     $(this).show().siblings('.RuoYi_iframe').hide();
-                    isRefresh = $(this).data('refresh');
+                    isRefresh = $.common.nullToDefault($(this).data('refresh'), false);
                     return false;
                 }
             });

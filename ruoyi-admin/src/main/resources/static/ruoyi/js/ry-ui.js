@@ -1563,6 +1563,10 @@ var table = {
             isNotEmpty: function (value) {
                 return !$.common.isEmpty(value);
             },
+            // 如果值是空，则返回指定默认字符串，否则返回字符串本身
+            nullToDefault: function (value, defaultValue) {
+                return $.common.isEmpty(value) ? defaultValue : value;
+            },
             // 空对象转字符串
             nullToStr: function(value) {
                 if ($.common.isEmpty(value)) {
