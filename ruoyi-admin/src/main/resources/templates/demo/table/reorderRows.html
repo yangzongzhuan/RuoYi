@@ -32,16 +32,16 @@
 		        showRefresh: false,
 		        showToggle: false,
 		        showColumns: false,
-            onReorderRow: function (data, newRow, oldRow, el) {
-              //当拖拽结束后，data为整个表格的数据
-              console.table(data)
-              // 当sidePagination: "server"时，拖拽行后顺序错乱，需要重新调用加载数据方法
-              $("#" + table.options.id).bootstrapTable('load', {
-                total: el._xhr.responseJSON.total,
-                rows: data
-              });
-              return false;
-            },
+		        onReorderRow: function (data, newRow, oldRow, el) {
+			        // 当拖拽结束后，data为整个表格的数据
+		            console.table(data)
+		            // 当sidePagination: "server"时，拖拽行后顺序错乱，需要重新调用加载数据方法
+		            $("#" + table.options.id).bootstrapTable('load', {
+			            total: el._xhr.responseJSON.total,
+			            rows: data
+			        });
+		            return false;
+		        },
                 columns: [{
 		            checkbox: true
 		        },
