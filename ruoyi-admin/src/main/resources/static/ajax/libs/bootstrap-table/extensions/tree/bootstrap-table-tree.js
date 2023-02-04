@@ -730,7 +730,7 @@
                                     $.ajax({
                                         type: options.type,
                                         url: options.dataUrl,
-                                        data: $.extend(parms, options.ajaxParams),
+                                        data: parms,
                                         dataType: "json",
                                         success: function(data, textStatus, jqXHR) {
                                             $("#" + row_id + "_load").remove();

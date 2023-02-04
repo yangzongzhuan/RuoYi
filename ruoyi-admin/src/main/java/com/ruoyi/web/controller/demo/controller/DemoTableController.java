@@ -506,8 +506,8 @@ public class DemoTableController extends BaseController
             }
         }
         PageDomain pageDomain = TableSupport.buildPageRequest();
-        Integer pageNum = (pageDomain.getPageNum() - 1) * 10;
-        Integer pageSize = pageDomain.getPageNum() * 10;
+        Integer pageNum = (pageDomain.getPageNum() - 1) * pageDomain.getPageSize();
+        Integer pageSize = pageDomain.getPageNum() * pageDomain.getPageSize();
         if (pageSize > areaList.size())
         {
             pageSize = areaList.size();
