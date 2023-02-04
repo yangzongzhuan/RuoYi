@@ -24,6 +24,12 @@ public class DruidProperties
     @Value("${spring.datasource.druid.maxWait}")
     private int maxWait;
 
+    @Value("${spring.datasource.druid.connectTimeout}")
+    private int connectTimeout;
+
+    @Value("${spring.datasource.druid.socketTimeout}")
+    private int socketTimeout;
+
     @Value("${spring.datasource.druid.timeBetweenEvictionRunsMillis}")
     private int timeBetweenEvictionRunsMillis;
 
@@ -54,6 +60,12 @@ public class DruidProperties
 
         /** 配置获取连接等待超时的时间 */
         datasource.setMaxWait(maxWait);
+        
+        /** 配置驱动连接超时时间，检测数据库建立连接的超时时间，单位是毫秒 */
+        datasource.setConnectTimeout(connectTimeout);
+        
+        /** 配置网络超时时间，等待数据库操作完成的网络超时时间，单位是毫秒 */
+        datasource.setSocketTimeout(socketTimeout);
 
         /** 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 */
         datasource.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
