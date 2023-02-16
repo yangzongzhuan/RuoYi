@@ -83,6 +83,10 @@ public class SysOperLog extends BaseEntity
     @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date operTime;
 
+    /** 消耗时间 */
+    @Excel(name = "消耗时间", suffix = "毫秒")
+    private Long costTime;
+
     public Long getOperId()
     {
         return operId;
@@ -253,6 +257,16 @@ public class SysOperLog extends BaseEntity
         this.operTime = operTime;
     }
 
+    public Long getCostTime()
+    {
+        return costTime;
+    }
+
+    public void setCostTime(Long costTime)
+    {
+        this.costTime = costTime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -272,6 +286,7 @@ public class SysOperLog extends BaseEntity
             .append("status", getStatus())
             .append("errorMsg", getErrorMsg())
             .append("operTime", getOperTime())
+            .append("costTime", getCostTime())
             .toString();
     }
 }

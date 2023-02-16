@@ -137,6 +137,14 @@
 		            sortable: true
 		        },
 		        {
+		            field: 'costTime',
+		            title: '消耗时间',
+		            sortable: true,
+		            formatter: function(value, row, index) {
+		                return $.common.sprintf("%s毫秒", value);
+		            }
+		        },
+		        {
 		            title: '操作',
 		            align: 'center',
 		            formatter: function(value, row, index) {
