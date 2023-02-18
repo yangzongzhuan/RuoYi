@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">请求地址：</label>
+				<label class="col-sm-3 control-label" title="访问的请求地址，如：`/system/user`，如外网地址需内链访问则以`http(s)://`开头">请求地址：<i class="fa fa-question-circle-o"></i></label>
 				<div class="col-sm-8">
 					<input id="url" name="url" class="form-control" type="text" th:field="*{url}">
 				</div>
@@ -54,13 +54,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label is-required">显示排序：</label>
+				<label class="col-sm-3 control-label is-required" title="数字越小越靠前">显示排序：<i class="fa fa-question-circle-o"></i></label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="orderNum" th:field="*{orderNum}" required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">图标：</label>
+				<label class="col-sm-3 control-label" title="单击选择需要使用的FontAwesome图标">图标：<i class="fa fa-question-circle-o"></i></label>
 				<div class="col-sm-8">
 					<input id="icon" name="icon" class="form-control" type="text" placeholder="选择图标" th:field="*{icon}">
                     <div class="ms-parent" style="width: 100%;">
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">菜单状态：</label>
+				<label class="col-sm-3 control-label" title="选择隐藏则菜单将不会出现在侧边栏，也没有权限被访问">菜单状态：<i class="fa fa-question-circle-o"></i></label>
 				<div class="col-sm-3">
 					<div class="radio-box" th:each="dict : ${@dict.getType('sys_show_hide')}">
 						<input type="radio" th:id="${dict.dictCode}" name="visible" th:value="${dict.dictValue}" th:field="*{visible}">
