@@ -65,7 +65,7 @@ public class ShiroUtils
 
     public static String getIp()
     {
-        return getSubject().getSession().getHost();
+        return StringUtils.substring(getSubject().getSession().getHost(), 0, 128);
     }
 
     public static String getSessionId()
