@@ -1,7 +1,6 @@
 package com.ruoyi.common.exception.file;
 
 import java.util.Arrays;
-import org.apache.commons.fileupload.FileUploadException;
 
 /**
  * 文件上传 误异常类
