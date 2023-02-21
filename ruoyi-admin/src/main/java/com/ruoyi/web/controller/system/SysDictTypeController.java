@@ -82,7 +82,7 @@ public class SysDictTypeController extends BaseController
     @ResponseBody
     public AjaxResult addSave(@Validated SysDictType dict)
     {
-        if (dictTypeService.checkDictTypeUnique(dict))
+        if (!dictTypeService.checkDictTypeUnique(dict))
         {
             return error("新增字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
@@ -110,7 +110,7 @@ public class SysDictTypeController extends BaseController
     @ResponseBody
     public AjaxResult editSave(@Validated SysDictType dict)
     {
-        if (dictTypeService.checkDictTypeUnique(dict))
+        if (!dictTypeService.checkDictTypeUnique(dict))
         {
             return error("修改字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }

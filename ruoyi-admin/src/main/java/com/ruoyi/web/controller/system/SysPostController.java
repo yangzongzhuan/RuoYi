@@ -96,11 +96,11 @@ public class SysPostController extends BaseController
     @ResponseBody
     public AjaxResult addSave(@Validated SysPost post)
     {
-        if (postService.checkPostNameUnique(post))
+        if (!postService.checkPostNameUnique(post))
         {
             return error("新增岗位'" + post.getPostName() + "'失败，岗位名称已存在");
         }
-        else if (postService.checkPostCodeUnique(post))
+        else if (!postService.checkPostCodeUnique(post))
         {
             return error("新增岗位'" + post.getPostName() + "'失败，岗位编码已存在");
         }
@@ -128,11 +128,11 @@ public class SysPostController extends BaseController
     @ResponseBody
     public AjaxResult editSave(@Validated SysPost post)
     {
-        if (postService.checkPostNameUnique(post))
+        if (!postService.checkPostNameUnique(post))
         {
             return error("修改岗位'" + post.getPostName() + "'失败，岗位名称已存在");
         }
-        else if (postService.checkPostCodeUnique(post))
+        else if (!postService.checkPostCodeUnique(post))
         {
             return error("修改岗位'" + post.getPostName() + "'失败，岗位编码已存在");
         }

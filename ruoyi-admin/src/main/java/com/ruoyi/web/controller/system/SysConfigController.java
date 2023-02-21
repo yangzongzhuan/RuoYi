@@ -83,7 +83,7 @@ public class SysConfigController extends BaseController
     @ResponseBody
     public AjaxResult addSave(@Validated SysConfig config)
     {
-        if (configService.checkConfigKeyUnique(config))
+        if (!configService.checkConfigKeyUnique(config))
         {
             return error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
@@ -111,7 +111,7 @@ public class SysConfigController extends BaseController
     @ResponseBody
     public AjaxResult editSave(@Validated SysConfig config)
     {
-        if (configService.checkConfigKeyUnique(config))
+        if (!configService.checkConfigKeyUnique(config))
         {
             return error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
