@@ -1347,13 +1347,6 @@ var table = {
         },
         // 校验封装处理
         validate: {
-            // 判断返回标识是否唯一 false 为存在 true 为不存在
-            unique: function (value) {
-                if (value == "0") {
-                    return true;
-                }
-                return false;
-            },
             // 表单验证
             form: function (formId) {
                 var currentId = $.common.isEmpty(formId) ? $('form').attr('id') : formId;

@@ -22,7 +22,7 @@ public class Seq
     private static AtomicInteger uploadSeq = new AtomicInteger(1);
 
     // 机器标识
-    private static String machineCode = "A";
+    private static final String machineCode = "A";
 
     /**
      * 获取通用序列号

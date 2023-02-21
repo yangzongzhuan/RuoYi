@@ -79,7 +79,7 @@ public interface ISysPostService
      * @param post 岗位信息
      * @return 结果
      */
-    public String checkPostNameUnique(SysPost post);
+    public boolean checkPostNameUnique(SysPost post);
 
     /**
      * 校验岗位编码
@@ -87,5 +87,5 @@ public interface ISysPostService
      * @param post 岗位信息
      * @return 结果
      */
-    public String checkPostCodeUnique(SysPost post);
+    public boolean checkPostCodeUnique(SysPost post);
 }
