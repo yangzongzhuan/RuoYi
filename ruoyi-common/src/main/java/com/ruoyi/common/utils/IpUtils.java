@@ -345,7 +345,7 @@ public class IpUtils
      */
     public static boolean isMatchedIp(String filter, String ip)
     {
-        if (StringUtils.isEmpty(filter) && StringUtils.isEmpty(ip))
+        if (StringUtils.isEmpty(filter) || StringUtils.isEmpty(ip))
         {
             return false;
         }

@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 
 /**
  * 文件上传异常类
+ * 
+ * @author ruoyi
  */
 public class FileUploadException extends Exception
 {

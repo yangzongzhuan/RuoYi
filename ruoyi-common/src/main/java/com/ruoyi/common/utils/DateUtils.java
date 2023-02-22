@@ -145,7 +145,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
     }
 
     /**
-     * 计算时间差（单位：分钟）
+     * 计算时间差
      *
      * @param endTime 最后时间
      * @param startTime 开始时间
