@@ -24,9 +24,9 @@
 							</li>
 							<li class="select-time">
 								<label>登录时间： </label>
-								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+								<input type="text" class="time-input" id="startTime" placeholder="开始时间"/>
 								<span>-</span>
-								<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+								<input type="text" class="time-input" id="endTime" placeholder="结束时间"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -69,6 +69,7 @@
 		        cleanUrl: prefix + "/clean",
 		        removeUrl: prefix + "/remove",
 		        exportUrl: prefix + "/export",
+		        queryParams: queryParams,
 		        sortName: "loginTime",
 		        sortOrder: "desc",
 		        modalName: "登录日志",
@@ -127,6 +128,15 @@
 		    };
 		    $.table.init(options);
 		});
+		
+		function queryParams(params) {
+			var search = $.table.queryParams(params);
+			search.params = {
+			    beginTime : beginOfTime($("#startTime").val()),
+			    endTime : endOfTime($("#endTime").val())
+			};
+			return search;
+		}
 		
 		function unlock() {
             $.operate.post(prefix + "/unlock?loginName=" + $.table.selectColumns("loginName"));

@@ -704,14 +704,7 @@ var table = {
                 } else if (table.options.type == table_type.bootstrapTreeTable) {
                     $("#" + tableId).bootstrapTreeTable('refresh', table.options.ajaxParams);
                 }
-                if ($.common.isNotEmpty(startLayDate) && $.common.isNotEmpty(endLayDate)) {
-                    endLayDate.config.min.year = '';
-                    endLayDate.config.min.month = '';
-                    endLayDate.config.min.date = '';
-                    startLayDate.config.max.year = '2099';
-                    startLayDate.config.max.month = '12';
-                    startLayDate.config.max.date = '31';
-                 }
+                resetDate();
             },
             // 获取选中复选框项
             selectCheckeds: function(name) {

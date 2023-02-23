@@ -30,9 +30,9 @@
 							</li>
 							<li class="select-time">
 								<label>操作时间： </label>
-								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+								<input type="text" class="time-input" id="startTime" placeholder="开始时间"/>
 								<span>-</span>
-								<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+								<input type="text" class="time-input" id="endTime" placeholder="结束时间"/>
 							</li>
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="searchPre()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -92,14 +92,17 @@
 		        },
 		        {
 		            field: 'title',
-		            title: '系统模块'
-		        },
+		            title: '系统模块',
+                    formatter: function(value, row, index) {
+                        return $.table.tooltip(value);
+                    }
+                },
 		        {
 		            field: 'businessType',
 		            title: '操作类型',
 		            align: 'center',
 		            formatter: function(value, row, index) {
-		            	return $.table.selectDictLabel(datas, value);
+		                return $.table.selectDictLabel(datas, value);
 		            }
 		        },
 		        {
@@ -159,6 +162,10 @@
 		
 		function queryParams(params) {
 			var search = $.table.queryParams(params);
+			search.params = {
+			    beginTime : beginOfTime($("#startTime").val()),
+			    endTime : endOfTime($("#endTime").val())
+			};
 			search.businessTypes = $.common.join($('#businessTypes').selectpicker('val'));
 			return search;
 		}
@@ -168,6 +175,7 @@
 		}
 		
 		function resetPre() {
+			resetDate();
 			$("#operlog-form")[0].reset();
 			$("#businessTypes").selectpicker('refresh');
 			$.table.search('operlog-form', 'bootstrap-table');
