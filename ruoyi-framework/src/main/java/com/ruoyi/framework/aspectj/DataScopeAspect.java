@@ -139,6 +139,12 @@ public class DataScopeAspect
             conditions.add(dataScope);
         }
 
+        // 多角色情况下，所有角色都不包含传递过来的权限字符，这个时候sqlString也会为空，所以要限制一下,不查询任何数据
+        if (StringUtils.isEmpty(conditions))
+        {
+            sqlString.append(StringUtils.format(" OR {}.dept_id = 0 ", deptAlias));
+        }
+
         if (StringUtils.isNotBlank(sqlString.toString()))
         {
             Object params = joinPoint.getArgs()[0];
