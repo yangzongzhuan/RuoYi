@@ -325,9 +325,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     }
 
     /**
-     * 判断给定的set列表中是否包含数组array 判断给定的数组array中是否包含给定的元素value
+     * 判断给定的collection列表中是否包含数组array 判断给定的数组array中是否包含给定的元素value
      *
-     * @param set 给定的集合
+     * @param collection 给定的集合
      * @param array 给定的数组
      * @return boolean 结果
      */
