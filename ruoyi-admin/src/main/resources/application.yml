@@ -140,3 +140,5 @@ xss:
 swagger:
   # 是否开启swagger
   enabled: true
+
+spring.mvc.pathmatch.matching-strategy: ant_path_matcher
