@@ -25,7 +25,7 @@
         <swagger.version>3.0.0</swagger.version>
         <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <oshi.version>6.4.1</oshi.version>
+        <oshi.version>6.4.3</oshi.version>
         <commons.io.version>2.11.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
