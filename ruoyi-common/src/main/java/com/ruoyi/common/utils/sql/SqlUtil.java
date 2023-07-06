@@ -21,6 +21,11 @@ public class SqlUtil
     public static String SQL_PATTERN = "[a-zA-Z0-9_\\ \\,\\.]+";
 
     /**
+     * 限制orderBy最大长度
+     */
+    private static final int ORDER_BY_MAX_LENGTH = 500;
+
+    /**
      * 检查字符，防止注入绕过
      */
     public static String escapeOrderBySql(String value)
@@ -28,6 +33,10 @@ public class SqlUtil
         if (StringUtils.isNotEmpty(value) && !isValidOrderBySql(value))
         {
             throw new UtilException("参数不符合规范，不能进行查询");
+        }
+        if (StringUtils.length(value) > ORDER_BY_MAX_LENGTH)
+        {
+            throw new UtilException("参数已超过最大限制，不能进行查询");
         }
         return value;
     }
