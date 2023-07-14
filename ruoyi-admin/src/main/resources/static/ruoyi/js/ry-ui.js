@@ -694,9 +694,7 @@ var table = {
                 var tableId = $.common.isEmpty(tableId) ? table.options.id : tableId;
                 if (table.options.type == table_type.bootstrapTable) {
                     var params = $("#" + tableId).bootstrapTable('getOptions');
-                    if ($.common.isNotEmpty(pageNumber)) {
-                        params.pageNumber = pageNumber;
-                    }
+                    params.pageNumber = 1;
                     if ($.common.isNotEmpty(pageSize)) {
                         params.pageSize = pageSize;
                     }
