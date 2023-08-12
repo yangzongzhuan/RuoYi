@@ -118,7 +118,7 @@ public class SysLoginService
         
         if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
         {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked")));
             throw new UserBlockedException();
         }
 

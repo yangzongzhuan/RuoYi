@@ -87,26 +87,30 @@
                     field: 'configName',
                     title: '参数名称',
                     formatter: function(value, row, index) {
-                    	return $.table.tooltip(value);
+                        return $.table.tooltip(value);
                     }
                 },
                 {
                     field: 'configKey',
                     title: '参数键名',
                     formatter: function(value, row, index) {
-                    	return $.table.tooltip(value);
+                        return $.table.tooltip(value);
                     }
                 },
                 {
                     field: 'configValue',
-                    title: '参数键值'
+                    title: '参数键值',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.tooltip(value, 10, "open");
+                    }
                 },
                 {
                     field: 'configType',
                     title: '系统内置',
                     align: 'center',
                     formatter: function(value, row, index) {
-                    	return $.table.selectDictLabel(datas, value);
+                        return $.table.selectDictLabel(datas, value);
                     }
                 },
                 {
@@ -114,7 +118,7 @@
                     title: '备注',
                     align: 'center',
                     formatter: function(value, row, index) {
-                    	return $.table.tooltip(value, 10, "open");
+                        return $.table.tooltip(value, 10, "open");
                     }
                 },
                 {
