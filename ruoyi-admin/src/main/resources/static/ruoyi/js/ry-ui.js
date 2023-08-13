@@ -41,6 +41,7 @@ var table = {
                     method: 'post',
                     height: undefined,
                     sidePagination: "server",
+                    undefinedText: '-',
                     sortName: undefined,
                     sortOrder: "asc",
                     pagination: true,
@@ -87,6 +88,7 @@ var table = {
                     cache: false,                                       // 是否使用缓存
                     height: options.height,                             // 表格的高度
                     striped: options.striped,                           // 是否显示行间隔色
+                    undefinedText: options.undefinedText,               // 数据值为空时显示的内容
                     sortable: true,                                     // 是否启用排序
                     sortStable: true,                                   // 设置为 true 将获得稳定的排序
                     sortName: options.sortName,                         // 排序列名称
