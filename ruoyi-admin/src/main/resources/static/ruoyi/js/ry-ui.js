@@ -992,12 +992,12 @@ var table = {
             },
             // 禁用按钮
             disable: function() {
-                var doc = window.top == window.parent ? window.document : window.parent.document;
+                var doc = window.top == window.parent ? top.window.document : window.parent.document;
                 $("a[class*=layui-layer-btn]", doc).addClass("layer-disabled");
             },
             // 启用按钮
             enable: function() {
-                var doc = window.top == window.parent ? window.document : window.parent.document;
+                var doc = window.top == window.parent ? top.window.document : window.parent.document;
                 $("a[class*=layui-layer-btn]", doc).removeClass("layer-disabled");
             },
             // 打开遮罩层
