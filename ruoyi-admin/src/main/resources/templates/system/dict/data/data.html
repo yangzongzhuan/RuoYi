@@ -88,7 +88,8 @@
 						title: '字典标签',
 						formatter: function(value, row, index) {
 							var listClass = $.common.equals("default", row.listClass) || $.common.isEmpty(row.listClass) ? "" : "badge badge-" + row.listClass;
-	                    	return $.common.sprintf("<span class='%s'>%s</span>", listClass, value);
+							var cssClass = $.common.isNotEmpty(row.cssClass) ? row.cssClass : listClass;
+							return $.common.sprintf("<span class='%s'>%s</span>", cssClass, value);
 						}
 					},
 					{
