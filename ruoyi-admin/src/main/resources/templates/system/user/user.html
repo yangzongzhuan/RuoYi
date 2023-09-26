@@ -100,7 +100,7 @@
 		    if ($(this).width() < 769) {
 		        panehHidden = true;
 		    }
-		    $('body').layout({ initClosed: panehHidden, west__size: 185 });
+		    $('body').layout({ initClosed: panehHidden, west__size: 185, resizeWithWindow: false });
 	     	// 回到顶部绑定
 	    	if ($.fn.toTop !== undefined) {
 	    		var opt = {

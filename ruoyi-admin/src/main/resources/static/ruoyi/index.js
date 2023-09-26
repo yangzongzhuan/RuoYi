@@ -157,7 +157,7 @@ $(function() {
             // 显示tab对应的内容区
             $('.RuoYi_iframe').each(function() {
                 if ($(this).data('id') == currentId) {
-                    $(this).show().siblings('.RuoYi_iframe').hide();
+                    $(this).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
                 }
             });
             $(element).addClass('active').siblings('.menuTab').removeClass('active');
@@ -289,7 +289,7 @@ $(function() {
                     // 显示tab对应的内容区
                     $('.mainContent .RuoYi_iframe').each(function() {
                         if ($(this).data('id') == dataUrl) {
-                            $(this).show().siblings('.RuoYi_iframe').hide();
+                            $(this).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
                             return false;
                         }
                     });
@@ -308,7 +308,7 @@ $(function() {
 
             // 添加选项卡对应的iframe
             var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" data-refresh="' + isRefresh + '" seamless></iframe>';
-            $('.mainContent').find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
+            $('.mainContent').find('iframe.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"}).parents('.mainContent').append(str1);
 
             $.modal.loading("数据加载中，请稍候...");
 
@@ -351,7 +351,7 @@ $(function() {
 
                 $('.mainContent .RuoYi_iframe').each(function() {
                     if ($(this).data('id') == activeId) {
-                        $(this).show().siblings('.RuoYi_iframe').hide();
+                        $(this).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
                         return false;
                     }
                 });
@@ -379,7 +379,7 @@ $(function() {
                 $(this).parents('.menuTab').prev('.menuTab:last').addClass('active');
                 $('.mainContent .RuoYi_iframe').each(function() {
                     if ($(this).data('id') == activeId) {
-                        $(this).show().siblings('.RuoYi_iframe').hide();
+                        $(this).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
                         return false;
                     }
                 });
@@ -399,7 +399,7 @@ $(function() {
             		$('.menuTab[data-id="' + panelUrl + '"]').addClass('active').siblings('.menuTab').removeClass('active');
             		$('.mainContent .RuoYi_iframe').each(function() {
                         if ($(this).data('id') == panelUrl) {
-                            $(this).show().siblings('.RuoYi_iframe').hide();
+                            $(this).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
                             return false;
                         }
                     });
@@ -441,7 +441,7 @@ $(function() {
             // 显示tab对应的内容区
             $('.mainContent .RuoYi_iframe').each(function() {
                 if ($(this).data('id') == currentId) {
-                    $(this).show().siblings('.RuoYi_iframe').hide();
+                    $(this).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
                     isRefresh = $.common.nullToDefault($(this).data('refresh'), false);
                     return false;
                 }
@@ -493,7 +493,7 @@ $(function() {
             $(this).remove();
         });
         $('.page-tabs-content').children("[data-id]:first").each(function() {
-            $('.RuoYi_iframe[data-id="' + $(this).data('id') + '"]').show();
+            $('.RuoYi_iframe[data-id="' + $(this).data('id') + '"]').css({"visibility": "visible", "position": "static"});
             $(this).addClass("active");
         });
         $('.page-tabs-content').css("margin-left", "0");
