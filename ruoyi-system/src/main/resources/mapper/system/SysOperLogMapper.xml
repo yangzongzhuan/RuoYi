@@ -37,6 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectOperLogList" parameterType="SysOperLog" resultMap="SysOperLogResult">
 		<include refid="selectOperLogVo"/>
 		<where>
+			<if test="operIp != null and operIp != ''">
+				AND oper_ip like concat('%', #{operIp}, '%')
+			</if>
 			<if test="title != null and title != ''">
 				AND title like concat('%', #{title}, '%')
 			</if>
