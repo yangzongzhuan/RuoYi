@@ -29,7 +29,7 @@
                                     <tr th:fragment="fragment-cache-names" th:each="cacheName, stat : ${cacheNames}">
                                         <td>[[${stat.index + 1}]]</td>
                                         <td style="word-wrap:break-word;word-break:break-all;" th:onclick="getCacheKeys([[${cacheName}]])">[[${cacheName}]]</td>
-                                        <td style="width: 50px"><a href="#" th:onclick="clearCacheName([[${cacheName}]])" title="清空"><i class="fa fa-trash-o text-danger"></i></a></td>
+                                        <td style="width: 50px"><a href="javascript:;" th:onclick="clearCacheName([[${cacheName}]])" title="清空"><i class="fa fa-trash-o text-danger"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -57,7 +57,7 @@
                                     <tr th:fragment="fragment-cache-kyes" th:each="cacheKey, stat : ${cacheKeys}">
                                         <td>[[${stat.index + 1}]]</td>
                                         <td style="word-wrap:break-word;word-break:break-all;" th:onclick="getCacheValue([[${cacheName}]], [[${cacheKey}]])">[[${cacheKey}]]</td>
-                                        <td style="width: 50px"><a href="#" th:onclick="clearCacheKey([[${cacheName}]], [[${cacheKey}]])" title="清空"><i class="fa fa-trash-o text-danger"></i></a></td>
+                                        <td style="width: 50px"><a href="javascript:;" th:onclick="clearCacheKey([[${cacheName}]], [[${cacheKey}]])" title="清空"><i class="fa fa-trash-o text-danger"></i></a></td>
                                     </tr>
                                 </tbody>
                                 </div>

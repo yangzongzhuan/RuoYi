@@ -41,7 +41,7 @@
 				        </a>
 				        <div class="pull-left info">
 				          <p>[[${user.loginName}]]</p>
-				          <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+				          <a href="javascript:;"><i class="fa fa-circle text-success"></i> 在线</a>
 				          <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
 				        </div>
 				    </div>
@@ -58,11 +58,11 @@
                     <ul class="nav nav-second-level collapse">
 						<li th:each="cmenu : ${menu.children}">
 							<a th:if="${#lists.isEmpty(cmenu.children)}" th:class="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}" th:utext="${cmenu.menuName}" th:href="@{${cmenu.url}}" th:data-refresh="${cmenu.isRefresh == '0'}">二级菜单</a>
-							<a th:if="${not #lists.isEmpty(cmenu.children)}" href="#">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
+							<a th:if="${not #lists.isEmpty(cmenu.children)}" href="javascript:;">[[${cmenu.menuName}]]<span class="fa arrow"></span></a>
 							<ul th:if="${not #lists.isEmpty(cmenu.children)}" class="nav nav-third-level">
 								<li th:each="emenu : ${cmenu.children}">
 								    <a th:if="${#lists.isEmpty(emenu.children)}" th:class="${#strings.isEmpty(emenu.target)} ? |menuItem| : ${emenu.target}" th:text="${emenu.menuName}" th:href="@{${emenu.url}}" th:data-refresh="${emenu.isRefresh == '0'}">三级菜单</a>
-								    <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
+								    <a th:if="${not #lists.isEmpty(emenu.children)}" href="javascript:;">[[${emenu.menuName}]]<span class="fa arrow"></span></a>
 								    <ul th:if="${not #lists.isEmpty(emenu.children)}" class="nav nav-four-level">
 								      	<li th:each="fmenu : ${emenu.children}"><a th:if="${#lists.isEmpty(fmenu.children)}" th:class="${#strings.isEmpty(fmenu.target)} ? |menuItem| : ${fmenu.target}" th:text="${fmenu.menuName}" th:href="@{${fmenu.url}}" th:data-refresh="${fmenu.isRefresh == '0'}">四级菜单</a></li>
 								    </ul>
@@ -72,7 +72,7 @@
 					</ul>
                 </li>
                 <li th:if="${demoEnabled}">
-                    <a href="#"><i class="fa fa-desktop"></i><span class="nav-label">实例演示</span><span class="fa arrow"></span></a>
+                    <a href="javascript:;"><i class="fa fa-desktop"></i><span class="nav-label">实例演示</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li> <a>表单<span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level">
@@ -160,20 +160,20 @@
 							</ul>
                         </li>
                         <li>
-	                        <a href="#"><i class="fa fa-sitemap"></i>四层菜单<span class="fa arrow"></span></a>
+	                        <a href="javascript:;"><i class="fa fa-sitemap"></i>四层菜单<span class="fa arrow"></span></a>
 	                        <ul class="nav nav-third-level collapse">
 	                            <li>
-	                                <a href="#" id="damian">三级菜单1<span class="fa arrow"></span></a>
+	                                <a href="javascript:;" id="damian">三级菜单1<span class="fa arrow"></span></a>
 	                                <ul class="nav nav-third-level">
 	                                    <li>
-	                                        <a href="#">四级菜单1</a>
+	                                        <a href="javascript:;">四级菜单1</a>
 	                                    </li>
 	                                    <li>
-	                                        <a href="#">四级菜单2</a>
+	                                        <a href="javascript:;">四级菜单2</a>
 	                                    </li>
 	                                </ul>
 	                            </li>
-	                            <li><a href="#">三级菜单2</a></li>
+	                            <li><a href="javascript:;">三级菜单2</a></li>
 	                        </ul>
 	                    </li>
                     </ul>
@@ -188,14 +188,14 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="javascript:;" title="收起菜单">
                     	<i class="fa fa-bars"></i>
                     </a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.ruoyi.vip/ruoyi" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>
-                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="#" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
-	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="#" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
+                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="javascript:;" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
+	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="javascript:;" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
@@ -243,7 +243,7 @@
             <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
 
-        <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
+        <a id="ax_close_max" class="ax_close_max" href="javascript:;" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
 
         <div class="row mainContent" id="content-main" th:classappend="${mainClass}">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"

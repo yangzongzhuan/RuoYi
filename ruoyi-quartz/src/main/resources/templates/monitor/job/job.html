@@ -127,8 +127,8 @@
 		            align: 'center',
 		            formatter: function(value, row, index) {
 		                var actions = [];
-		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a> ');
+		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:;" onclick="$.operate.edit(\'' + row.jobId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+		                actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:;" onclick="$.operate.remove(\'' + row.jobId + '\')"><i class="fa fa-remove"></i>删除</a> ');
 		                var more = [];
 		                more.push("<a class='btn btn-default btn-xs " + statusFlag + "' href='javascript:void(0)' onclick='run(" + row.jobId + ")'><i class='fa fa-play-circle-o'></i> 执行一次</a> ");
 		                more.push("<a class='btn btn-default btn-xs " + detailFlag + "' href='javascript:void(0)' onclick='$.operate.detail(" + row.jobId + ")'><i class='fa fa-search'></i>任务详细</a> ");

@@ -40,7 +40,7 @@
 				</a>
 				<div class="pull-left info">
 				  <p>[[${user.loginName}]]</p>
-				  <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+				  <a href="javascript:;"><i class="fa fa-circle text-success"></i> 在线</a>
 				  <a th:href="@{logout}" style="padding-left:5px;"><i class="fa fa-sign-out text-danger"></i> 注销</a>
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 			      <a class="menu-content" th:if="${#lists.isEmpty(cmenu.children)}" th:href="@{${cmenu.url}}" th:classappend="${#strings.isEmpty(cmenu.target)} ? |menuItem| : ${cmenu.target}" th:data-refresh="${cmenu.isRefresh == '0'}">
 			        <i th:class="${cmenu.icon} + ' fa-fw'"></i> <span class="nav-label">[[${cmenu.menuName}]]</span>
 			      </a>
-			      <a class="menu-content" th:if="${not #lists.isEmpty(cmenu.children)}" href="#">
+			      <a class="menu-content" th:if="${not #lists.isEmpty(cmenu.children)}" href="javascript:;">
 			        <i th:class="${cmenu.icon} + ' fa-fw'"></i>
 			        <span class="nav-label">[[${cmenu.menuName}]]</span>
 			        <span class="fa arrow"></span>
@@ -64,7 +64,7 @@
 				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
 				        [[${emenu.menuName}]]
 				      </a>
-				      <a th:if="${not #lists.isEmpty(emenu.children)}" href="#">
+				      <a th:if="${not #lists.isEmpty(emenu.children)}" href="javascript:;">
 				        <i th:class="${emenu.icon} + ' fa-fw'"></i> 
 				        [[${emenu.menuName}]]
 				        <span class="fa arrow"></span>
@@ -93,7 +93,7 @@
 			<div class="tab-pane fade height-full" id="demo" th:if="${demoEnabled}">
 			  <ul class="nav">
 			    <li>
-			      <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li><a class="menuItem" th:href="@{/demo/form/button}">按钮</a></li>
 					<li><a class="menuItem" th:href="@{/demo/form/grid}">栅格</a></li>
@@ -119,7 +119,7 @@
 			      </ul>
 			    </li>
 			    <li>
-			      <a href="#"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li><a class="menuItem" th:href="@{/demo/table/search}">查询条件</a></li>
 					<li><a class="menuItem" th:href="@{/demo/table/footer}">数据汇总</a></li>
@@ -153,7 +153,7 @@
 			      </ul>
 			    </li>
 			    <li>
-			      <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">弹框</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-flask"></i> <span class="nav-label">弹框</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li><a class="menuItem" th:href="@{/demo/modal/dialog}">模态窗口</a></li>
 					<li><a class="menuItem" th:href="@{/demo/modal/layer}">弹层组件</a></li>
@@ -161,14 +161,14 @@
 			      </ul>
 			    </li>
 			    <li>
-			      <a href="#"><i class="fa fa-wpforms"></i> <span class="nav-label">操作</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-wpforms"></i> <span class="nav-label">操作</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li><a class="menuItem" th:href="@{/demo/operate/table}">表格</a></li>
 					<li><a class="menuItem" th:href="@{/demo/operate/other}">其他</a></li>
 			      </ul>
 			    </li>
 			    <li>
-			      <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">报表</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">报表</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li><a class="menuItem" th:href="@{/demo/report/echarts}">百度ECharts</a></li>
 					<li><a class="menuItem" th:href="@{/demo/report/peity}">peity</a></li>
@@ -177,27 +177,27 @@
 			      </ul>
 			    </li>
 			    <li>
-			      <a href="#"><i class="fa fa-book"></i> <span class="nav-label">图标</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-book"></i> <span class="nav-label">图标</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li><a class="menuItem" th:href="@{/demo/icon/fontawesome}">Font Awesome</a></li>
 					<li><a class="menuItem" th:href="@{/demo/icon/glyphicons}">Glyphicons</a></li>
 			      </ul>
 			    </li>
 			    <li>
-			      <a href="#"><i class="fa fa-navicon"></i> <span class="nav-label">四层菜单</span><span class="fa arrow"></span></a>
+			      <a href="javascript:;"><i class="fa fa-navicon"></i> <span class="nav-label">四层菜单</span><span class="fa arrow"></span></a>
 			      <ul class="nav nav-second-level collapse">
 					<li>
-						<a href="#" id="damian">三级菜单1<span class="fa arrow"></span></a>
+						<a href="javascript:;" id="damian">三级菜单1<span class="fa arrow"></span></a>
 						<ul class="nav nav-third-level collapse">
 							<li>
-								<a href="#">四级菜单1</a>
+								<a href="javascript:;">四级菜单1</a>
 							</li>
 							<li>
-								<a href="#">四级菜单2</a>
+								<a href="javascript:;">四级菜单2</a>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#">三级菜单2</a></li>
+					<li><a href="javascript:;">三级菜单2</a></li>
 			      </ul>
 			    </li>
 			  </ul>
@@ -211,7 +211,7 @@
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="#" title="收起菜单">
+                    <a class="navbar-minimalize minimalize-styl-2" style="color:#FFF;" href="javascript:;" title="收起菜单">
                     	<i class="fa fa-bars"></i>
                     </a>
                 </div>
@@ -247,8 +247,8 @@
                 <!-- 右侧栏 -->
                 <ul class="nav navbar-top-links navbar-right welcome-message">
                     <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.ruoyi.vip/ruoyi" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>
-                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="#" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
-	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="#" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
+                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="javascript:;" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
+	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="javascript:;" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
                 
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
@@ -297,7 +297,7 @@
             <a href="javascript:void(0);" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
 
-        <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
+        <a id="ax_close_max" class="ax_close_max" href="javascript:;" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
 
         <div class="row mainContent" id="content-main" th:classappend="${mainClass}">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"
