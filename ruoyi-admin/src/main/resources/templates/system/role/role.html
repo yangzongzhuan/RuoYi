@@ -91,6 +91,27 @@
 		            sortable: true
 		        },
 		        {
+		            field: 'dataScope',
+		            title: '数据权限',
+		            formatter: function(value, item, index) {
+		                if (item.dataScope == '1') {
+		                    return '<span class="badge badge-primary">全部数据权限</span>';
+		                }
+		                else if (item.dataScope == '2') {
+		                    return '<span class="badge badge-success">自定义数据权限</span>';
+		                }
+		                else if (item.dataScope == '3') {
+		                    return '<span class="badge badge-info">本部门数据权限</span>';
+		                }
+		                else if (item.dataScope == '4') {
+		                    return '<span class="badge badge-warning">本部门及以下数据权限</span>';
+		                }
+		                else if (item.dataScope == '5') {
+		                    return '<span class="badge badge-danger">仅本人数据权限</span>';
+		                }
+		            }
+		        },
+		        {
 		            field: 'roleSort',
 		            title: '显示顺序',
 		            sortable: true
