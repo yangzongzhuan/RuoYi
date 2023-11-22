@@ -137,7 +137,7 @@
 	    </div>
 	</div>
     <th:block th:include="include :: footer" />
-    <script type="text/javascript">
+    <script th:inline="javascript">
         var prefix = ctx + "demo/modal";
         
 	    $("#button-confirm").click(function(){
@@ -266,14 +266,14 @@
             		    {
             		        "alt": "默认头像",
             		        "pid": 1, //图片id
-            		        "src": "/img/profile.jpg", //原图地址
-            		        "thumb": "/img/profile.jpg" //缩略图地址
+            		        "src": ctx + "img/profile.jpg", //原图地址
+            		        "thumb": ctx + "img/profile.jpg" //缩略图地址
             		    },
             		    {
                             "alt": "打赏",
                             "pid": 2, //图片id
-                            "src": "/img/pay.png", //原图地址
-                            "thumb": "/img/pay.png" //缩略图地址
+                            "src": ctx + "img/pay.png", //原图地址
+                            "thumb": ctx + "img/pay.png" //缩略图地址
                         }
             		 ]
             };

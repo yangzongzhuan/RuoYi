@@ -21,35 +21,33 @@ body .layer-ext-moon .layui-layer-title {
     border: none;
 }
 
-body .layer-ext-moon .layui-layer-content .layui-layer-ico {
+body .layer-ext-moon .layui-layer-content .layui-layer-face {
 	height: 32px;
 	width: 32px;
 	top:18.5px;
 }
-body .layer-ext-moon .layui-layer-ico0 {
+body .layer-ext-moon .layui-icon-tips {
 	background: url(default.png) no-repeat -96px 0;
-	;
 }
-body .layer-ext-moon .layui-layer-ico1 {
+body .layer-ext-moon .layui-icon-success {
 	background: url(default.png) no-repeat -224px 0;
-	;
 }
-body .layer-ext-moon .layui-layer-ico2 {
+body .layer-ext-moon .layui-icon-error {
 	background: url(default.png) no-repeat -192px 0;
 }
-body .layer-ext-moon .layui-layer-ico3 {
+body .layer-ext-moon .layui-icon-question {
 	background: url(default.png) no-repeat -160px 0;
 }
-body .layer-ext-moon .layui-layer-ico4 {
+body .layer-ext-moon .layui-icon-lock {
 	background: url(default.png) no-repeat -320px 0;
 }
-body .layer-ext-moon .layui-layer-ico5 {
+body .layer-ext-moon .layui-icon-face-cry {
 	background: url(default.png) no-repeat -288px 0;
 }
-body .layer-ext-moon .layui-layer-ico6 {
+body .layer-ext-moon .layui-icon-face-smile {
 	background: url(default.png) -256px 0;
 }
-body .layer-ext-moon .layui-layer-ico7 {
+body .layer-ext-moon .layui-layer-download {
 	background: url(default.png) no-repeat -128px 0;
 }
 body .layer-ext-moon .layui-layer-setwin {
@@ -136,3 +134,36 @@ body .layer-ext-moon .layui-layer-btn .layui-layer-btn3 {
 body .layer-ext-moon .layui-layer-title span.layui-layer-tabnow{
 	height:47px;
 }
+
+/** 图标字体 **/
+@font-face {
+  font-family: 'layui-icon';
+  src: url('../../../../../fonts/iconfont.woff?v=282') format('woff');
+}
+
+.layui-icon{
+  font-family:"layui-icon" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* font-class */
+.layui-icon-left:before{content:"\e603"}
+.layui-icon-right:before{content:"\e602"}
+.layui-icon-refresh:before{content:"\e669"}
+.layui-icon-slider:before{content:"\e714"}
+.layui-icon-add-circle:before{content:"\e61f"}
+.layui-icon-reduce-circle:before{content:"\e616"}
+.layui-icon-refresh-1:before{content:"\e666"}
+.layui-icon-loading:before{content:"\e63d"}
+.layui-icon-loading-1:before{content:"\e63e"}
+
+/** 循环旋转动画 **/
+.layui-anim{-webkit-animation-duration: 0.3s; -webkit-animation-fill-mode: both; animation-duration: 0.3s; animation-fill-mode: both;}
+.layui-anim.layui-icon{display: inline-block;}
+.layui-anim-loop{-webkit-animation-iteration-count: infinite; animation-iteration-count: infinite;}
+.layui-trans,
+.layui-trans a{transition: all .2s; -webkit-transition: all .2s;}
+@-webkit-keyframes layui-rotate{from {-webkit-transform: rotate(0deg);} to {-webkit-transform: rotate(360deg);}}
+@keyframes layui-rotate{from {transform: rotate(0deg);} to {transform: rotate(360deg);}}
+.layui-anim-rotate{-webkit-animation-name: layui-rotate; animation-name: layui-rotate; -webkit-animation-duration: 1s; animation-duration: 1s;  -webkit-animation-timing-function: linear; animation-timing-function: linear;}

@@ -127,7 +127,7 @@ html #layuicss-layer{display: none; position: absolute; width: 1989px;}
 .layui-layer-setwin .layui-layer-maxmin:after{z-index: 0; margin: -5px 0 0 -1px;}
 .layui-layer-setwin .layui-layer-close{cursor: pointer;}
 .layui-layer-setwin .layui-layer-close:hover{opacity:0.7;}
-.layui-layer-setwin .layui-layer-close2{position:absolute; right: -28px; top: -28px; color: #fff; background-color: #787878; padding: 3px; border: 3px solid; width: 28px; height: 28px; font-size: 16px; font-weight: bolder; border-radius: 50%; margin-left: 0; *right:-18px; _display:none;}
+.layui-layer-setwin .layui-layer-close2{position:absolute; right: -28px; top: -28px; color: #fff; background-color: #787878; padding: 3px; width: 16px; height: 20px; font-size: 16px; font-weight: bolder; border-radius: 50%; margin-left: 0; *right:-18px; _display:none;}
 .layui-layer-setwin .layui-layer-close2:hover{opacity: unset; background-color: #3888f6;}
 
 /* 按钮栏 */
