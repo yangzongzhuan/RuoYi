@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-	<th:block th:include="include :: header('修改用户')" />
+	<th:block th:include="include :: header('用户详细')" />
 </head>
 <body>
     <div class="main-content">
-        <form class="form-horizontal" id="form-user-edit" th:object="${user}">
+        <form class="form-horizontal" th:object="${user}">
             <h4 class="form-header h4">基本信息</h4>
             <div class="row">
             	<div class="col-sm-6">
@@ -157,96 +157,5 @@
         </form>
     </div>
 	<th:block th:include="include :: footer" />
-	<th:block th:include="include :: select2-js" />
-	<script type="text/javascript">
-        var prefix = ctx + "system/user";
-        
-        $("#form-user-edit").validate({
-        	onkeyup: false,
-        	rules:{
-        		email:{
-                    email:true,
-                    remote: {
-                        url: prefix + "/checkEmailUnique",
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                        	"userId": function() {
-                                return $("#userId").val();
-                            },
-                			"email": function() {
-                                return $.common.trim($("#email").val());
-                            }
-                        }
-                    }
-        		},
-        		phonenumber:{
-        			isPhone:true,
-                    remote: {
-                        url: prefix + "/checkPhoneUnique",
-                        type: "post",
-                        dataType: "json",
-                        data: {
-                        	"userId": function() {
-                        		return $("#userId").val();
-                            },
-                			"phonenumber": function() {
-                                return $.common.trim($("#phonenumber").val());
-                            }
-                        }
-                    }
-        		},
-        	},
-        	messages: {
-        		"email": {
-                    remote: "Email已经存在"
-                },
-        		"phonenumber":{
-                	remote: "手机号码已经存在"
-        		}
-            },
-            focusCleanup: true
-        });
-        
-        function submitHandler() {
-	        if ($.validate.form()) {
-	        	var data = $("#form-user-edit").serializeArray();
-	        	var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
-	        	var roleIds = $.form.selectCheckeds("role");
-	        	var postIds = $.form.selectSelects("post");
-	        	data.push({"name": "status", "value": status});
-	        	data.push({"name": "roleIds", "value": roleIds});
-	        	data.push({"name": "postIds", "value": postIds});
-	        	$.operate.saveTab(prefix + "/edit", data);
-	        }
-	    }
-
-        /* 用户管理-修改-选择部门树 */
-        function selectDeptTree() {
-        	var deptId = $.common.isEmpty($("#treeId").val()) ? "100" : $("#treeId").val();
-            var url = ctx + "system/user/selectDeptTree/" + deptId;
-		    var options = {
-				title: '选择部门',
-				width: "380",
-				url: url,
-				callBack: doSubmit
-			};
-			$.modal.openOptions(options);
-		}
-		
-		function doSubmit(index, layero){
-			var body = $.modal.getChildFrame(index);
-   			$("#treeId").val(body.find('#treeId').val());
-   			$("#treeName").val(body.find('#treeName').val());
-   			$.modal.close(index);
-		}
-
-		$(function() {
-            $('#post').select2({
-                placeholder: "请选择岗位",
-                allowClear: true
-            });
-        })
-    </script>
 </body>
 </html>
