@@ -116,6 +116,7 @@
 		function queryUserList() {
 		    var options = {
 		        url: prefix + "/list",
+		        viewUrl: prefix + "/view/{id}",
 		        createUrl: prefix + "/add",
 		        updateUrl: prefix + "/edit/{id}",
 		        removeUrl: prefix + "/remove",
@@ -135,7 +136,10 @@
 		        {
 		            field: 'loginName',
 		            title: '登录名称',
-		            sortable: true
+		            sortable: true,
+		            formatter: function (value, row, index) {
+		                return '<a href="javascript:void(0)" onclick="$.operate.view(\'' + row.userId + '\')">' + value + '</a>';
+		            }
 		        },
 		        {
 		            field: 'userName',

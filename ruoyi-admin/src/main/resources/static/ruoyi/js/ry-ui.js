@@ -989,6 +989,26 @@ var table = {
                 createMenuItem(url, title);
                 closeItem(dataId);
             },
+            // 右侧弹出窗口打开
+            popupRight: function(title, url){
+                var width = 150;
+                if (top.location !== self.location) {
+                    if ($(top.window).outerWidth() < 400) {
+                        width = 50;
+                    }
+                }
+                top.layer.open({
+                    type: 2,
+                    offset: 'r',
+                    anim: 'slideLeft',
+                    move: false,
+                    title: title,
+                    shade: 0.3,
+                    shadeClose: true,
+                    area: [($(window).outerWidth() - width) + 'px', '100%'],
+                    content: url
+                });
+            },
             // 关闭选项卡
             closeTab: function (dataId) {
                 closeItem(dataId);
@@ -1194,6 +1214,12 @@ var table = {
                     url = table.options.updateUrl.replace("{id}", id);
                 }
                 return url;
+            },
+            // 右侧弹出详情
+            view: function(id){
+                table.set();
+                var url = table.options.viewUrl.replace("{id}", id);
+                $.modal.popupRight(table.options.modalName + "信息详情", url);
             },
             // 保存信息 刷新表格
             save: function(url, data, callback) {

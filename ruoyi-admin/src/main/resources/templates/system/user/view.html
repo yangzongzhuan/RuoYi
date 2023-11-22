@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改用户')" />
+</head>
+<body>
+    <div class="main-content">
+        <form class="form-horizontal" id="form-user-edit" th:object="${user}">
+            <h4 class="form-header h4">基本信息</h4>
+            <div class="row">
+            	<div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">用户名称：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{userName}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">归属部门：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{dept.deptName}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">手机号码：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{phonenumber}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">邮箱：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{email}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">登录账号：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{loginName}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">用户状态：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{status == '0' ? '正常' : '停用'}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">岗位：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext">[[${#strings.defaultString(postGroup, '无岗位')}]]</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">用户性别：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{@dict.getLabel('sys_user_sex', sex)}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            	<div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">角色：</label>
+                        <div class="col-xs-10">
+                            <p class="form-control-plaintext">[[${#strings.defaultString(roleGroup, '无角色')}]]</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h4 class="form-header h4">其他信息</h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">创建者：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{createBy}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">创建时间：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{#dates.format(createTime, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">更新者：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{updateBy}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">更新时间：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{#dates.format(updateTime, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">最后登录IP：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{loginIp}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">最后登录时间：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{#dates.format(loginDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	        <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注：</label>
+                        <div class="col-xs-10">
+                            <p class="form-control-plaintext" th:text="*{remark}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+	<th:block th:include="include :: footer" />
+	<th:block th:include="include :: select2-js" />
+	<script type="text/javascript">
+        var prefix = ctx + "system/user";
+        
+        $("#form-user-edit").validate({
+        	onkeyup: false,
+        	rules:{
+        		email:{
+                    email:true,
+                    remote: {
+                        url: prefix + "/checkEmailUnique",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                        	"userId": function() {
+                                return $("#userId").val();
+                            },
+                			"email": function() {
+                                return $.common.trim($("#email").val());
+                            }
+                        }
+                    }
+        		},
+        		phonenumber:{
+        			isPhone:true,
+                    remote: {
+                        url: prefix + "/checkPhoneUnique",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                        	"userId": function() {
+                        		return $("#userId").val();
+                            },
+                			"phonenumber": function() {
+                                return $.common.trim($("#phonenumber").val());
+                            }
+                        }
+                    }
+        		},
+        	},
+        	messages: {
+        		"email": {
+                    remote: "Email已经存在"
+                },
+        		"phonenumber":{
+                	remote: "手机号码已经存在"
+        		}
+            },
+            focusCleanup: true
+        });
+        
+        function submitHandler() {
+	        if ($.validate.form()) {
+	        	var data = $("#form-user-edit").serializeArray();
+	        	var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
+	        	var roleIds = $.form.selectCheckeds("role");
+	        	var postIds = $.form.selectSelects("post");
+	        	data.push({"name": "status", "value": status});
+	        	data.push({"name": "roleIds", "value": roleIds});
+	        	data.push({"name": "postIds", "value": postIds});
+	        	$.operate.saveTab(prefix + "/edit", data);
+	        }
+	    }
+
+        /* 用户管理-修改-选择部门树 */
+        function selectDeptTree() {
+        	var deptId = $.common.isEmpty($("#treeId").val()) ? "100" : $("#treeId").val();
+            var url = ctx + "system/user/selectDeptTree/" + deptId;
+		    var options = {
+				title: '选择部门',
+				width: "380",
+				url: url,
+				callBack: doSubmit
+			};
+			$.modal.openOptions(options);
+		}
+		
+		function doSubmit(index, layero){
+			var body = $.modal.getChildFrame(index);
+   			$("#treeId").val(body.find('#treeId').val());
+   			$("#treeName").val(body.find('#treeName').val());
+   			$.modal.close(index);
+		}
+
+		$(function() {
+            $('#post').select2({
+                placeholder: "请选择岗位",
+                allowClear: true
+            });
+        })
+    </script>
+</body>
+</html>
