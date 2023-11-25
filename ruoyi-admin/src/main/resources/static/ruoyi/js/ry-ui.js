@@ -365,7 +365,7 @@ var table = {
                 if ($.common.isNotEmpty(pageSize)) {
                     params.pageSize = pageSize;
                 }
-                if ($.common.isNotEmpty(tableId)){
+                if ($.common.isNotEmpty(tableId)) {
                     $("#" + tableId).bootstrapTable('refresh', params);
                 } else{
                     $("#" + table.options.id).bootstrapTable('refresh', params);
@@ -425,7 +425,7 @@ var table = {
                     shadeClose: true,
                     btn1: function(index, layero){
                         var file = layero.find('#file').val();
-                        if (file == '' || (!$.common.endWith(file, '.xls') && !$.common.endWith(file, '.xlsx'))){
+                        if (file == '' || (!$.common.endWith(file, '.xls') && !$.common.endWith(file, '.xlsx'))) {
                             $.modal.msgWarning("请选择后缀为 “xls”或“xlsx”的文件。");
                             return false;
                         }
@@ -806,7 +806,7 @@ var table = {
             },
             // 获取iframe页的DOM
             getChildFrame: function (index) {
-                if ($.common.isEmpty(index)){
+                if ($.common.isEmpty(index)) {
                     var index = parent.layer.getFrameIndex(window.name);
                     return parent.layer.getChildFrame('body', index);
                 } else {
@@ -815,7 +815,7 @@ var table = {
             },
             // 关闭窗体
             close: function (index) {
-                if ($.common.isEmpty(index)){
+                if ($.common.isEmpty(index)) {
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
                 } else {

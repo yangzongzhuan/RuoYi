@@ -5,6 +5,8 @@
 
 var startLayDate;
 var endLayDate;
+var isScrollToTop = parent.isScrollToTop;
+
 $(function() {
 	
     //  layer扩展皮肤
@@ -231,7 +233,7 @@ var refreshItem = function(){
 /** 关闭选项卡 */
 var closeItem = function(dataId){
 	var topWindow = $(window.parent.document);
-	if($.common.isNotEmpty(dataId)){
+	if ($.common.isNotEmpty(dataId)) {
 	    window.parent.$.modal.closeLoading();
 	    // 根据dataId关闭指定选项卡
 	    $('.menuTab[data-id="' + dataId + '"]', topWindow).remove();
@@ -241,7 +243,7 @@ var closeItem = function(dataId){
 	}
 	var panelUrl = window.frameElement.getAttribute('data-panel');
 	$('.page-tabs-content .active i', topWindow).click();
-	if($.common.isNotEmpty(panelUrl)){
+	if ($.common.isNotEmpty(panelUrl)) {
 	    $('.menuTab[data-id="' + panelUrl + '"]', topWindow).addClass('active').siblings('.menuTab').removeClass('active');
 	    $('.mainContent .RuoYi_iframe', topWindow).each(function() {
 	        if ($(this).data('id') == panelUrl) {
@@ -288,7 +290,7 @@ function createMenuItem(dataUrl, menuName, isRefresh) {
 
         // 添加选项卡对应的iframe
         var str1 = '<iframe class="RuoYi_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" data-panel="' + panelUrl + '" seamless></iframe>';
-        if (parent.isScrollToTop) {
+        if (isScrollToTop) {
             $('.mainContent', topWindow).find('iframe.RuoYi_iframe').hide().parents('.mainContent').append(str1);
         } else {
             $('.mainContent', topWindow).find('iframe.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"}).parents('.mainContent').append(str1);
@@ -363,7 +365,7 @@ function activeWindow() {
 }
 
 function openToCurrentTab(obj) {
-    if (parent.isScrollToTop) {
+    if (isScrollToTop) {
         $(obj).show().siblings('.RuoYi_iframe').hide();
     } else {
         $(obj).css({"visibility": "visible", "position": "static"}).siblings('.RuoYi_iframe').css({"visibility": "hidden", "position": "absolute"});
@@ -373,22 +375,22 @@ function openToCurrentTab(obj) {
 /** 密码规则范围验证 */
 function checkpwd(chrtype, password) {
     if (chrtype == 1) {
-        if(!$.common.numValid(password)){
+        if (!$.common.numValid(password)) {
             $.modal.alertWarning("密码只能为0-9数字");
             return false;
         }
     } else if (chrtype == 2) {
-        if(!$.common.enValid(password)){
+        if (!$.common.enValid(password)) {
             $.modal.alertWarning("密码只能为a-z和A-Z字母");
             return false;
         }
     } else if (chrtype == 3) {
-        if(!$.common.enNumValid(password)){
+        if (!$.common.enNumValid(password)) {
             $.modal.alertWarning("密码必须包含字母以及数字");
             return false;
         }
     } else if (chrtype == 4) {
-        if(!$.common.charValid(password)){
+        if (!$.common.charValid(password)) {
             $.modal.alertWarning("密码必须包含字母、数字、以及特殊符号<font color='red'>~!@#$%^&*()-=_+</font>");
             return false;
         }
@@ -398,14 +400,14 @@ function checkpwd(chrtype, password) {
 
 /** 开始时间/时分秒 */
 function beginOfTime(date) {
-    if($.common.isNotEmpty(date)) {
+    if ($.common.isNotEmpty(date)) {
         return $.common.sprintf("%s 00:00:00", date);
     }
 }
 
 /** 结束时间/时分秒 */
 function endOfTime(date) {
-    if($.common.isNotEmpty(date)) {
+    if ($.common.isNotEmpty(date)) {
         return $.common.sprintf("%s 23:59:59", date);
     }
 }

@@ -61,7 +61,7 @@ $(window).bind("load resize", function() {
         $(".slimScrollDiv").css({ "overflow": "hidden" });
         $('.navbar-static-side').fadeOut();
     } else {
-    	if($('body').hasClass('canvas-menu')) {
+    	if ($('body').hasClass('canvas-menu')) {
     	    $('body').addClass('fixed-sidebar');
     	    $('body').removeClass('canvas-menu');
     	    $("body").removeClass("mini-navbar");
@@ -118,7 +118,7 @@ function fixedSidebar() {
 
 // 设置锚点
 function setIframeUrl(href) {
-	if($.common.equals("history", mode)) {
+	if ($.common.equals("history", mode)) {
 	    storage.set('publicPath', href);
 	} else {
 	    var nowUrl = window.location.href;
@@ -353,7 +353,6 @@ $(function() {
         var panelUrl = $(this).parents('.menuTab').data('panel');
         // 当前元素处于活动状态
         if ($(this).parents('.menuTab').hasClass('active')) {
-        	syncMenuTab($('.page-tabs-content').find('.active').attr('data-id'));
 
             // 当前元素后面有同辈元素，使后面的一个元素处于活动状态
             if ($(this).parents('.menuTab').next('.menuTab').length) {
@@ -407,7 +406,7 @@ $(function() {
                     }
                 });
 
-                if($.common.isNotEmpty(panelUrl)){
+                if ($.common.isNotEmpty(panelUrl)) {
             		$('.menuTab[data-id="' + panelUrl + '"]').addClass('active').siblings('.menuTab').removeClass('active');
             		$('.mainContent .RuoYi_iframe').each(function() {
                         if ($(this).data('id') == panelUrl) {
@@ -432,7 +431,7 @@ $(function() {
             });
         }
         scrollToTab($('.menuTab.active'));
-        syncMenuTab($('.page-tabs-content').find('.active').attr('data-id'));
+        syncMenuTab($.common.isNotEmpty(panelUrl) ? panelUrl : $('.page-tabs-content').find('.active').attr('data-id'));
         return false;
     }
 
