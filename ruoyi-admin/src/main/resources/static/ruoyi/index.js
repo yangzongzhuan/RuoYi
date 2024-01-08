@@ -2,11 +2,6 @@
  * 首页方法封装处理
  * Copyright (c) 2019 ruoyi
  */
-layer.config({
-    extend: 'moon/style.css',
-    skin: 'layer-ext-moon'
-});
-
 var isMobile = false;
 var sidebarHeight = isMobile ? '100%' : '96%';
 

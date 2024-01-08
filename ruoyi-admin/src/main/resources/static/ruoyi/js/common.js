@@ -9,14 +9,6 @@ var isScrollToTop = parent.isScrollToTop;
 
 $(function() {
 	
-    //  layer扩展皮肤
-    if (window.layer !== undefined) {
-        layer.config({
-            extend: 'moon/style.css',
-            skin: 'layer-ext-moon'
-        });
-    }
-	
     // 回到顶部绑定
     if ($.fn.toTop !== undefined) {
         $('#scroll-up').toTop();
