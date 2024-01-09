@@ -42,7 +42,7 @@ $(function() {
     });
 	 
     // laydate 时间控件绑定
-    if ($(".select-time").length > 0) {
+    if ($(".select-time").length > 0 && $('#startTime').length > 0 && $('#endTime').length > 0) {
        layui.use('laydate', function() {
             var laydate = layui.laydate;
             startLayDate = laydate.render({
