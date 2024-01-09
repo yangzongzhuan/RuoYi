@@ -15,11 +15,14 @@ $.validator.setDefaults({
 });
 
 function login() {
-    $.modal.loading($("#btnSubmit").data("loading"));
     var username = $.common.trim($("input[name='username']").val());
     var password = $.common.trim($("input[name='password']").val());
     var validateCode = $("input[name='validateCode']").val();
     var rememberMe = $("input[name='rememberme']").is(':checked');
+    if($.common.isEmpty(validateCode) && captchaEnabled) {
+        $.modal.msg("请输入验证码");
+        return false;
+    }
     $.ajax({
         type: "post",
         url: ctx + "login",
@@ -29,13 +32,16 @@ function login() {
             "validateCode": validateCode,
             "rememberMe": rememberMe
         },
+        beforeSend: function () {
+            $.modal.loading($("#btnSubmit").data("loading"));
+        },
         success: function(r) {
             if (r.code == web_status.SUCCESS) {
                 location.href = ctx + 'index';
             } else {
-            	$('.imgcode').click();
-            	$(".code").val("");
-            	$.modal.msg(r.msg);
+                $('.imgcode').click();
+                $(".code").val("");
+                $.modal.msg(r.msg);
             }
             $.modal.closeLoading();
         }

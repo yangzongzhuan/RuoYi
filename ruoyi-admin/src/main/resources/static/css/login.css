@@ -150,12 +150,26 @@ body.signin {
     box-shadow: none;
 }
 
-.form-control{
-	border-radius: 1px!important;
-	padding: 6px 12px!important;
-	height: 34px!important;
+.form-control {
+    border-radius: 1px!important;
+    padding: 6px 12px!important;
+    height: 34px!important;
 }
 
-.form-control:focus{
+.form-control:focus {
     border-color: #1ab394 !important;
+}
+
+body .layer-ext-moon-msg[type="dialog"]{
+    min-width: 100px !important;
+}
+body .layer-ext-moon-msg { 
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+}
+
+body .layer-ext-moon-msg .layui-layer-content{ 
+    padding: 12px 25px;
+    text-align: center;
 }

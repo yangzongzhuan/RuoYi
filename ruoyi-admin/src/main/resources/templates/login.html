@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-<script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]]; </script>
+<script th:inline="javascript"> var ctx = [[@{/}]]; var captchaType = [[${captchaType}]]; var captchaEnabled = [[${captchaEnabled}]];</script>
 <!--[if lte IE 8]><script>window.location.href=ctx+'html/ie.html';</script><![endif]-->
 <!-- 全局js -->
 <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
