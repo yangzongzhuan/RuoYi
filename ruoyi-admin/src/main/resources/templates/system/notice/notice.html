@@ -59,6 +59,7 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
+                viewUrl: prefix + "/view/{id}",
                 createUrl: prefix + "/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
@@ -71,9 +72,12 @@
 					title : '序号' 
 				},
 				{
-					field : 'noticeTitle', 
-					title : '公告标题' 
-				},
+		            field: 'noticeTitle',
+		            title: '公告标题',
+		            formatter: function (value, row, index) {
+		                return '<a href="javascript:void(0)" onclick="$.operate.view(\'' + row.noticeId + '\')">' + value + '</a>';
+		            }
+		        },
 				{
 		            field: 'noticeType',
 		            title: '公告类型',

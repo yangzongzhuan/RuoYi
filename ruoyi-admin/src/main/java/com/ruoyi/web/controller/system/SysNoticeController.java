@@ -100,6 +100,17 @@ public class SysNoticeController extends BaseController
     }
 
     /**
+     * 查询公告详细
+     */
+    @RequiresPermissions("system:notice:list")
+    @GetMapping("/view/{noticeId}")
+    public String view(@PathVariable("noticeId") Long noticeId, ModelMap mmap)
+    {
+        mmap.put("notice", noticeService.selectNoticeById(noticeId));
+        return prefix + "/view";
+    }
+
+    /**
      * 删除公告
      */
     @RequiresPermissions("system:notice:remove")

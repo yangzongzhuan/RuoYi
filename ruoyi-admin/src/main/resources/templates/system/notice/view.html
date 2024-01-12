@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('公告详细')" />
+</head>
+<body>
+    <div class="main-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="mail-box-header">
+                    <div class="mail-tools tooltip-demo m-t-md">
+                        <h3 style="text-align: center">[[${notice.noticeTitle}]]</h3>
+                        <h5>
+                          <span class="pull-right font-noraml">发送时间：[[${#dates.format(notice.createTime, 'yyyy-MM-dd HH:mm:ss')}]] </span>
+                          <span class="font-noraml">发件人： </span>[[${notice.createBy}]]
+                        </h5>
+                    </div>
+                </div>
+                <div class="mail-box">
+                    <div class="mail-body" th:utext="${notice.noticeContent}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+</body>
+</html>
