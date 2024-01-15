@@ -136,7 +136,7 @@ public class HttpUtils
             URLConnection conn = realUrl.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
             conn.setDoOutput(true);
@@ -202,7 +202,7 @@ public class HttpUtils
             HttpsURLConnection conn = (HttpsURLConnection) console.openConnection();
             conn.setRequestProperty("accept", "*/*");
             conn.setRequestProperty("connection", "Keep-Alive");
-            conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+            conn.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
             conn.setRequestProperty("Accept-Charset", "utf-8");
             conn.setRequestProperty("contentType", "utf-8");
             conn.setDoOutput(true);
