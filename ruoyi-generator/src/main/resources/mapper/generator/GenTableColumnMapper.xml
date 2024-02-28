@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.generator.mapper.GenTableColumnMapper">
-    
+
     <resultMap type="GenTableColumn" id="GenTableColumnResult">
         <id     property="columnId"       column="column_id"      />
         <result property="tableId"        column="table_id"       />
@@ -23,28 +23,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="htmlType"       column="html_type"      />
         <result property="dictType"       column="dict_type"      />
         <result property="sort"           column="sort"           />
+        <result property="width"          column="width"          />
         <result property="createBy"       column="create_by"      />
         <result property="createTime"     column="create_time"    />
         <result property="updateBy"       column="update_by"      />
         <result property="updateTime"     column="update_time"    />
     </resultMap>
-	
+
 	<sql id="selectGenTableColumnVo">
-        select column_id, table_id, column_name, column_comment, column_type, java_type, java_field, is_pk, is_increment, is_required, is_insert, is_edit, is_list, is_query, query_type, html_type, dict_type, sort, create_by, create_time, update_by, update_time from gen_table_column
+        select column_id, table_id, column_name, column_comment, column_type, java_type, java_field, is_pk, is_increment, is_required, is_insert, is_edit, is_list, is_query, query_type, html_type, dict_type, sort, width, create_by, create_time, update_by, update_time from gen_table_column
     </sql>
-	
+
     <select id="selectGenTableColumnListByTableId" parameterType="GenTableColumn" resultMap="GenTableColumnResult">
         <include refid="selectGenTableColumnVo"/>
         where table_id = #{tableId}
         order by sort
     </select>
-    
+
     <select id="selectDbTableColumnsByName" parameterType="String" resultMap="GenTableColumnResult">
 		select column_name, (case when (is_nullable = 'no' <![CDATA[ && ]]> column_key != 'PRI') then '1' else null end) as is_required, (case when column_key = 'PRI' then '1' else '0' end) as is_pk, ordinal_position as sort, column_comment, (case when extra = 'auto_increment' then '1' else '0' end) as is_increment, column_type
 		from information_schema.columns where table_schema = (select database()) and table_name = (#{tableName})
 		order by ordinal_position
 	</select>
-    
+
     <insert id="insertGenTableColumn" parameterType="GenTableColumn" useGeneratedKeys="true" keyProperty="columnId">
         insert into gen_table_column (
 			<if test="tableId != null and tableId != ''">table_id,</if>
@@ -64,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="htmlType != null and htmlType != ''">html_type,</if>
 			<if test="dictType != null and dictType != ''">dict_type,</if>
 			<if test="sort != null">sort,</if>
+            <if test="width != null">width,</if>
 			<if test="createBy != null and createBy != ''">create_by,</if>
 			create_time
          )values(
@@ -84,11 +86,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="htmlType != null and htmlType != ''">#{htmlType},</if>
 			<if test="dictType != null and dictType != ''">#{dictType},</if>
 			<if test="sort != null">#{sort},</if>
+            <if test="width != null">#{width},</if>
 			<if test="createBy != null and createBy != ''">#{createBy},</if>
 			sysdate()
          )
     </insert>
-	 
+
     <update id="updateGenTableColumn" parameterType="GenTableColumn">
         update gen_table_column
         <set>
@@ -104,6 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             html_type = #{htmlType},
             dict_type = #{dictType},
             sort = #{sort},
+            width = #{width},
             update_by = #{updateBy},
             update_time = sysdate()
         </set>
@@ -111,14 +115,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="deleteGenTableColumnByIds" parameterType="Long">
-        delete from gen_table_column where table_id in 
+        delete from gen_table_column where table_id in
         <foreach collection="array" item="tableId" open="(" separator="," close=")">
             #{tableId}
         </foreach>
     </delete>
 
     <delete id="deleteGenTableColumns">
-        delete from gen_table_column where column_id in 
+        delete from gen_table_column where column_id in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item.columnId}
         </foreach>
