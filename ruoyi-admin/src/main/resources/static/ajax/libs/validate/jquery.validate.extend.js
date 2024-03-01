@@ -1,49 +1,53 @@
 /*this is basic form validation using for validation person's basic information author:Clara Guo data:2017/07/20*/
 $(document).ready(function(){
 	$.validator.setDefaults({       
-		  submitHandler: function(form) {    
-		 		form.submit();    
+		submitHandler: function(form) {    
+			form.submit();    
 		}       
-	});  
-	//手机号码验证身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)
-	jQuery.validator.addMethod("isPhone",function(value,element){
+	});
+	// 非法字符验证
+	jQuery.validator.addMethod("specialSign",function(value,element) {
+		var char = /^[^<>"'|\\]+$/;
+		return this.optional(element) || (char.test(value));
+	},"不能包含非法字符：< > \" ' \\\ |");
+	// 手机号码验证身份证正则合并：(^\d{15}$)|(^\d{17}([0-9]|X)$)
+	jQuery.validator.addMethod("isPhone",function(value,element) {
 		var length = value.length;
-		var phone=/^1[3-9]\d{9}$/;
+		var phone = /^1[3-9]\d{9}$/;
 		return this.optional(element)||(length == 11 && phone.test(value));
 	},"请填写正确的11位手机号");
-	//电话号码验证
-	jQuery.validator.addMethod("isTel",function(value,element){
+	// 电话号码验证
+	jQuery.validator.addMethod("isTel",function(value,element) {
 		var tel = /^(0\d{2,3}-)?\d{7,8}$/g;//区号3,4位,号码7,8位
 		return this.optional(element) || (tel.test(value));
 	},"请填写正确的座机号码");
-	//姓名校验
-	jQuery.validator.addMethod("isName",function(value,element){
-		var name=/^[\u4e00-\u9fa5]{2,6}$/;
+	// 姓名校验
+	jQuery.validator.addMethod("isName",function(value,element) {
+		var name = /^[\u4e00-\u9fa5]{2,6}$/;
 		return this.optional(element) || (name.test(value));
 	},"姓名只能用汉字,长度2-4位");
-	//校验用户名
-	jQuery.validator.addMethod("isUserName",function(value,element){
-		var userName=/^[a-zA-Z0-9]{2,13}$/;
+	// 校验用户名
+	jQuery.validator.addMethod("isUserName",function(value,element) {
+		var userName = /^[a-zA-Z0-9]{2,13}$/;
 		return this.optional(element) || (userName).test(value);
 	},'请输入数字或者字母,不包含特殊字符');
-	
-	//校验身份证
-	jQuery.validator.addMethod("isIdentity",function(value,element){
-		var id= /^(\d{15}$|^\d{18}$|^\d{17}(\d|X))$/;
+	// 校验身份证
+	jQuery.validator.addMethod("isIdentity",function(value,element) {
+		var id = /^(\d{15}$|^\d{18}$|^\d{17}(\d|X))$/;
 		return this.optional(element) || (id.test(value));
 	},"请输入正确的15或18位身份证号,末尾若为X请大写");
-	//校验二代身份证
-	jQuery.validator.addMethod("isIdentity18",function(value,element){
-		var id= /^(^\d{17}(\d|X))$/;
+	// 校验二代身份证
+	jQuery.validator.addMethod("isIdentity18",function(value,element) {
+		var id = /^(^\d{17}(\d|X))$/;
 		return this.optional(element) || (id.test(value));
 	},"请输入正确的18位身份证号，末尾若为X请大写");
-	//校验出生日期
-	jQuery.validator.addMethod("isBirth",function(value,element){
+	// 校验出生日期
+	jQuery.validator.addMethod("isBirth",function(value,element) {
 		var birth = /^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$/;
 		return this.optional(element) || (birth).test(value);
 	},"出生日期格式示例2000-01-01");
-	//校验IP地址
-	jQuery.validator.addMethod("isIp",function(value,element){
+	// 校验IP地址
+	jQuery.validator.addMethod("isIp",function(value,element) {
 		var ip = /^(?:(?:2[0-4][0-9]\.)|(?:25[0-5]\.)|(?:1[0-9][0-9]\.)|(?:[1-9][0-9]\.)|(?:[0-9]\.)){3}(?:(?:2[0-4][0-9])|(?:25[0-5])|(?:1[0-9][0-9])|(?:[1-9][0-9])|(?:[0-9]))$/;
 		return this.optional(element) || (ip).test(value);
 	},"IP地址格式示例127.0.0.1");
@@ -53,7 +57,7 @@ $(document).ready(function(){
 	jQuery.validator.addMethod("gt", function(value, element, param) {
         return value > param;
     }, $.validator.format("输入值必须大于{0}"));
-	//校验新旧密码是否相同
+	// 校验新旧密码是否相同
 	jQuery.validator.addMethod("isdiff",function(){
 		var p1=$("#pwdOld").val();
 		var p2=$("#pwdNew").val();
@@ -63,7 +67,7 @@ $(document).ready(function(){
 			 return true;
 		}
 		});
-	//校验新密码和确认密码是否相同
+	// 校验新密码和确认密码是否相同
 	jQuery.validator.addMethod("issame",function(){
 		var p3=$("#confirm_password").val();
 		var p4=$("#pwdNew").val();
@@ -73,7 +77,7 @@ $(document).ready(function(){
 			 return false;
 		}
 		});
-	//校验基础信息表单
+	// 校验基础信息表单
 	$("#basicInfoForm").validate({
 		errorElement:'span',
 		errorClass:'help-block error-mes',
@@ -133,11 +137,11 @@ $(document).ready(function(){
 		}
 	});
 	
-	//校验修改密码表单
+	// 校验修改密码表单
 	$("#modifyPwd").validate({
 		onfocusout: function(element) { $(element).valid()},
-		 debug:false, //表示校验通过后是否直接提交表单
-		 onkeyup:false, //表示按键松开时候监听验证
+		 debug:false,   // 表示校验通过后是否直接提交表单
+		 onkeyup:false, // 表示按键松开时候监听验证
 		rules:{
 			pwdOld:{
 				required:true,

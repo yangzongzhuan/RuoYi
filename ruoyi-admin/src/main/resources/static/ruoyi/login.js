@@ -8,12 +8,6 @@ $(function() {
     });
 });
 
-$.validator.setDefaults({
-    submitHandler: function() {
-        login();
-    }
-});
-
 function login() {
     var username = $.common.trim($("input[name='username']").val());
     var password = $.common.trim($("input[name='password']").val());
@@ -66,6 +60,9 @@ function validateRule() {
             password: {
                 required: icon + "请输入您的密码",
             }
+        },
+        submitHandler: function(form) {
+            login();
         }
     })
 }

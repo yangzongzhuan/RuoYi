@@ -31,9 +31,10 @@
 		$("#form-user-resetPwd").validate({
 			rules:{
 				password:{
-					required:true,
+					required: true,
 					minlength: 5,
-					maxlength: 20
+					maxlength: 20,
+					specialSign: true
 				},
 			},
 			focusCleanup: true
