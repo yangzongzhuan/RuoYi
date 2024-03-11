@@ -5,7 +5,7 @@ ruoyi:
   # 版本
   version: 4.7.8
   # 版权年份
-  copyrightYear: 2023
+  copyrightYear: 2024
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
