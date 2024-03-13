@@ -70,7 +70,7 @@ public class ShiroConstants
     /**
      * 登录记录缓存
      */
-    public static final String LOGINRECORDCACHE = "loginRecordCache";
+    public static final String LOGIN_RECORD_CACHE = "loginRecordCache";
 
     /**
      * 系统活跃用户缓存
