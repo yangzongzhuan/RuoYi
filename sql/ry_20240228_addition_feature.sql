@@ -1,0 +1,1 @@
+ alter table gen_table_column add width smallint unsigned default null comment 'UI宽度，单位:px' after sort;

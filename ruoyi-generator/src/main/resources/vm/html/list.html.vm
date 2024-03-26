@@ -22,29 +22,55 @@
 #end  
 #if($column.htmlType == "input")
                             <li>
-                                <label>${comment}：</label>
-                                <input type="text" name="${column.javaField}"/>
+                                #if($column.width && $column.width>0)
+                                    <label>${comment}：</label>
+                                    <input style="width:${column.width}px;" type="text" name="${column.javaField}"/>
+                                #else
+                                    <label>${comment}：</label>
+                                    <input type="text" name="${column.javaField}"/>
+                                #end
                             </li>
 #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && "" != $dictType)
                             <li>
-                                <label>${comment}：</label>
-                                <select name="${column.javaField}" th:with="type=${@dict.getType('${dictType}')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
+                                #if($column.width && $column.width>0)
+                                    <label>${comment}：</label>
+                                    <select  style="width:${column.width}px;" name="${column.javaField}" th:with="type=${@dict.getType('${dictType}')}">
+                                        <option value="">所有</option>
+                                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                    </select>
+                                #else
+                                    <label>${comment}：</label>
+                                    <select name="${column.javaField}" th:with="type=${@dict.getType('${dictType}')}">
+                                        <option value="">所有</option>
+                                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                    </select>
+                                #end
                             </li>
 #elseif(($column.htmlType == "select" || $column.htmlType == "radio") && $dictType)
                             <li>
-                                <label>${comment}：</label>
-                                <select name="${column.javaField}">
-                                    <option value="">所有</option>
-                                    <option value="-1">代码生成请选择字典属性</option>
-                                </select>
+                                #if($column.width && $column.width>0)
+                                    <label>${comment}：</label>
+                                    <select style="width:${column.width}px;" name="${column.javaField}">
+                                        <option value="">所有</option>
+                                        <option value="-1">代码生成请选择字典属性</option>
+                                    </select>
+                                #else
+                                    <label>${comment}：</label>
+                                    <select name="${column.javaField}">
+                                        <option value="">所有</option>
+                                        <option value="-1">代码生成请选择字典属性</option>
+                                    </select>
+                                #end
                             </li>
 #elseif($column.htmlType == "datetime" && $column.queryType != "BETWEEN")
                             <li>
-                                <label>${comment}：</label>
-                                <input type="text" class="time-input" placeholder="请选择${comment}" name="${column.javaField}"/>
+                                #if($column.width && $column.width>0)
+                                    <label>${comment}：</label>
+                                    <input style="width:${column.width}px;" type="text" class="time-input" placeholder="请选择${comment}" name="${column.javaField}"/>
+                                #else
+                                    <label>${comment}：</label>
+                                    <input type="text" class="time-input" placeholder="请选择${comment}" name="${column.javaField}"/>
+                                #end
                             </li>
 #elseif($column.htmlType == "datetime" && $column.queryType == "BETWEEN")
                             <li class="select-time">
@@ -125,6 +151,9 @@
                 {
                     field: '${javaField}',
                     title: '${comment}',
+                    #if($column.width && $column.width >0)
+                        width: $column.width,
+                    #end
                     formatter: function(value, row, index) {
                        return $.table.selectDictLabel#if($column.htmlType == "checkbox")s#end(${javaField}Datas, value);
                     }
@@ -132,6 +161,9 @@
 #elseif($column.list && "" != $javaField)
                 {
                     field: '${javaField}',
+                    #if($column.width && $column.width >0)
+                        width: $column.width,
+                    #end
                     title: '${comment}'
                 },
 #end                

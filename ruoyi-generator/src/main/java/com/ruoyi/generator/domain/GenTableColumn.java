@@ -68,6 +68,11 @@ public class GenTableColumn extends BaseEntity
     /** 排序 */
     private Integer sort;
 
+    /**
+     * UI宽度，单位:px
+     */
+    private Integer width;
+
     public void setColumnId(Long columnId)
     {
         this.columnId = columnId;
@@ -328,6 +333,14 @@ public class GenTableColumn extends BaseEntity
         return isSuperColumn(this.javaField);
     }
 
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+    
     public static boolean isSuperColumn(String javaField)
     {
         return StringUtils.equalsAnyIgnoreCase(javaField,
