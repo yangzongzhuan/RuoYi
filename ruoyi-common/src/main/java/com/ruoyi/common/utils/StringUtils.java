@@ -23,6 +23,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     /** 下划线 */
     private static final char SEPARATOR = '_';
 
+    /** 星号 */
+    private static final char ASTERISK = '*';
+
     /**
      * 获取参数不为空值
      * 
@@ -161,6 +164,49 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
     public static String trim(String str)
     {
         return (str == null ? "" : str.trim());
+    }
+
+    /**
+     * 替换指定字符串的指定区间内字符为"*"
+     *
+     * @param str 字符串
+     * @param startInclude 开始位置（包含）
+     * @param endExclude 结束位置（不包含）
+     * @return 替换后的字符串
+     */
+    public static String hide(CharSequence str, int startInclude, int endExclude)
+    {
+        if (isEmpty(str))
+        {
+            return NULLSTR;
+        }
+        final int strLength = str.length();
+        if (startInclude > strLength)
+        {
+            return NULLSTR;
+        }
+        if (endExclude > strLength)
+        {
+            endExclude = strLength;
+        }
+        if (startInclude > endExclude)
+        {
+            // 如果起始位置大于结束位置，不替换
+            return NULLSTR;
+        }
+        final char[] chars = new char[strLength];
+        for (int i = 0; i < strLength; i++)
+        {
+            if (i >= startInclude && i < endExclude)
+            {
+                chars[i] = ASTERISK;
+            }
+            else
+            {
+                chars[i] = str.charAt(i);
+            }
+        }
+        return new String(chars);
     }
 
     /**
