@@ -131,6 +131,9 @@
                     $th = $('<th style="width:36px"></th>');
                 } else {
                     $th = $('<th style="' + ((column.width) ? ('width:' + column.width + ((column.widthUnit) ? column.widthUnit : 'px')) : '') + '" class="' + column.field + '_cls"></th>');
+                    if (column.align) {
+                        $th.css("text-align", column.align);
+                    }
                 }
                 if((!target.isFixWidth)&& column.width){
                     target.isFixWidth = column.width.indexOf("px")>-1?true:false;
