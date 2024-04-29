@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.park.mapper.AdminInfoMapper">
+    
+    <resultMap type="AdminInfo" id="AdminInfoResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+    </resultMap>
+
+    <sql id="selectAdminInfoVo">
+        select id, username, password from admin_info
+    </sql>
+
+    <select id="selectAdminInfoList" parameterType="AdminInfo" resultMap="AdminInfoResult">
+        <include refid="selectAdminInfoVo"/>
+        <where>  
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+        </where>
+    </select>
+    
+    <select id="selectAdminInfoById" parameterType="Long" resultMap="AdminInfoResult">
+        <include refid="selectAdminInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAdminInfo" parameterType="AdminInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into admin_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAdminInfo" parameterType="AdminInfo">
+        update admin_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAdminInfoById" parameterType="Long">
+        delete from admin_info where id = #{id}
+    </delete>
+
+    <delete id="deleteAdminInfoByIds" parameterType="String">
+        delete from admin_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

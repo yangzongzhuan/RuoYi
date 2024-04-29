@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.park.mapper.UserInfoMapper">
+    
+    <resultMap type="UserInfo" id="UserInfoResult">
+        <result property="id"    column="id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="phone"    column="phone"    />
+    </resultMap>
+
+    <sql id="selectUserInfoVo">
+        select id, username, password, phone from user_info
+    </sql>
+
+    <select id="selectUserInfoList" parameterType="UserInfo" resultMap="UserInfoResult">
+        <include refid="selectUserInfoVo"/>
+        <where>  
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="password != null  and password != ''"> and password = #{password}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserInfoById" parameterType="Long" resultMap="UserInfoResult">
+        <include refid="selectUserInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertUserInfo" parameterType="UserInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">username,</if>
+            <if test="password != null and password != ''">password,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="password != null and password != ''">#{password},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserInfo" parameterType="UserInfo">
+        update user_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserInfoById" parameterType="Long">
+        delete from user_info where id = #{id}
+    </delete>
+
+    <delete id="deleteUserInfoByIds" parameterType="String">
+        delete from user_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
