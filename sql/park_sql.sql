@@ -1023,3 +1023,34 @@ create table gen_table_column (
                                   update_time       datetime                                   comment '更新时间',
                                   primary key (column_id)
 ) engine=innodb auto_increment=1 comment = '代码生成业务表字段';
+
+
+-- 查询用户
+-- 菜单 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('用户', '2000', '1', '/park/queryUser', 'C', '0', 'park:queryUser:view', '#', 'admin', sysdate(), '', null, '用户菜单');
+
+-- 按钮父菜单ID
+SELECT @parentId := LAST_INSERT_ID();
+
+-- 按钮 SQL
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('用户查询', @parentId, '1',  '#',  'F', '0', 'park:queryUser:list',         '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('用户新增', @parentId, '2',  '#',  'F', '0', 'park:queryUser:add',          '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('用户修改', @parentId, '3',  '#',  'F', '0', 'park:queryUser:edit',         '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('用户删除', @parentId, '4',  '#',  'F', '0', 'park:queryUser:remove',       '#', 'admin', sysdate(), '', null, '');
+
+insert into sys_menu (menu_name, parent_id, order_num, url, menu_type, visible, perms, icon, create_by, create_time, update_by, update_time, remark)
+values('用户导出', @parentId, '5',  '#',  'F', '0', 'park:queryUser:export',       '#', 'admin', sysdate(), '', null, '');
+
+
+
+
+
+

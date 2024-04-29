@@ -193,6 +193,13 @@
                 <version>${ruoyi.version}</version>
             </dependency>
 
+            <!-- 自己的模块-->
+            <dependency>
+                <groupId>com.ruoyi</groupId>
+                <artifactId>park</artifactId>
+                <version>${ruoyi.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -203,6 +210,7 @@
         <module>ruoyi-quartz</module>
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
+        <module>park</module>
     </modules>
     <packaging>pom</packaging>
 

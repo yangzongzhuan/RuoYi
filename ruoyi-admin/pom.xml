@@ -67,6 +67,12 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
+        <!-- park模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>park</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
