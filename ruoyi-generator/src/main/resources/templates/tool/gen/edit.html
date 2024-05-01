@@ -438,6 +438,15 @@
 		        	cellStyle: function(value, row, index) {
                         return { css: { "cursor": "default" } };
                     }
+		        },
+		        {
+		        	field: 'width',
+		            title: 'UI宽度',
+		            width: "5%",
+		            formatter: function (value, row, index) {
+		            	var html = $.common.sprintf("<input class='form-control' type='text' name='columns[%s].width' value='%s'>", index, value);
+		        		return html;
+		        	}
 		        }]
 		    };
 		    $.table.init(options);
