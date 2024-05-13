@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('表格虚拟滚动')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="btn-group-sm" id="toolbar" role="group">
+	        <a class="btn btn-success" onclick="loadRows()">
+	            <i class="fa fa-plus"></i> 加载10000行数据
+	        </a>
+	        <a class="btn btn-info" onclick="appendRows()">
+	            <i class="fa fa-edit"></i> 追加10000行数据
+	        </a>
+	        &nbsp;&nbsp;<span id="total" class="badge badge-success"></span>
+        </div>
+        <div class="row">
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table"></table>
+			</div>
+		</div>
+	</div>
+    <div th:include="include :: footer"></div>
+    <script>
+        var total = 0
+
+        $(function() {
+		    var options = {
+	    		data: getData(20),
+	    		height: 400,
+		        sidePagination: "client",
+		        pagination: false,
+		        showSearch: false,
+		        virtualScroll: true,
+                columns: [{
+					field : 'userId', 
+					title : '用户ID'
+				},
+				{
+					field : 'userCode', 
+					title : '用户编号'
+				},
+				{
+					field : 'userName', 
+					title : '用户姓名'
+				},
+				{
+					field : 'userPhone', 
+					title : '用户手机'
+				},
+				{
+					field : 'userEmail', 
+					title : '用户邮箱'
+				},
+				{
+				    field : 'userBalance',
+				    title : '用户余额'
+				}]
+		    };
+		    $.table.init(options);
+		});
+
+        function getData(number, isAppend) {
+            if (!isAppend) {
+                total = 0
+            }
+            var data = []
+            for (var i = total; i < total + number; i++) {
+                var randomId = 100 + ~~ (Math.random() * 100);
+                data.push({
+                    userId: i + 1,
+                    userCode: 2000000 + randomId,
+                    userName: '测试' + randomId,
+                    userPhone: '1588888888',
+                    userEmail: 'ry1@qq.com',
+                    userBalance: 10 + randomId,
+                })
+            }
+            if (isAppend) {
+                total += number
+            } else {
+                total = number
+            }
+            $('#total').text(total);
+            return data;
+        }
+
+        function loadRows() {
+            $('#bootstrap-table').bootstrapTable('load', getData(10000))
+        }
+
+        function appendRows() {
+            $('#bootstrap-table').bootstrapTable('append', getData(10000, true))
+        }
+</script>
+
+</body>
+</html>

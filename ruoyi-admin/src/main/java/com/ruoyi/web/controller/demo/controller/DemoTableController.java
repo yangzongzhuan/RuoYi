@@ -391,6 +391,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格虚拟滚动
+     */
+    @GetMapping("/virtualScroll")
+    public String virtualScroll()
+    {
+        return prefix + "/virtualScroll";
+    }
+
+    /**
      * 自定义视图分页
      */
     @GetMapping("/customView")
