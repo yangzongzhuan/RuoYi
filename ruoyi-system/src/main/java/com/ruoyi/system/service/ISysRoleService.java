@@ -118,9 +118,9 @@ public interface ISysRoleService
     /**
      * 校验角色是否有数据权限
      * 
-     * @param roleId 角色id
+     * @param roleIds 角色id
      */
-    public void checkRoleDataScope(Long roleId);
+    public void checkRoleDataScope(Long... roleIds);
 
     /**
      * 通过角色ID查询角色使用数量
