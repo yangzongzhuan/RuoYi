@@ -54,6 +54,10 @@ public class DictUtils
      */
     public static String getDictLabel(String dictType, String dictValue)
     {
+        if (StringUtils.isEmpty(dictValue))
+        {
+            return StringUtils.EMPTY;
+        }
         return getDictLabel(dictType, dictValue, SEPARATOR);
     }
 
@@ -66,6 +70,10 @@ public class DictUtils
      */
     public static String getDictValue(String dictType, String dictLabel)
     {
+        if (StringUtils.isEmpty(dictLabel))
+        {
+            return StringUtils.EMPTY;
+        }
         return getDictValue(dictType, dictLabel, SEPARATOR);
     }
 

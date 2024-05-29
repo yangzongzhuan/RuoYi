@@ -31,10 +31,10 @@ public class XssFilter implements Filter
         String tempExcludes = filterConfig.getInitParameter("excludes");
         if (StringUtils.isNotEmpty(tempExcludes))
         {
-            String[] url = tempExcludes.split(",");
-            for (int i = 0; url != null && i < url.length; i++)
+            String[] urls = tempExcludes.split(",");
+            for (String url : urls)
             {
-                excludes.add(url[i]);
+                excludes.add(url);
             }
         }
     }
