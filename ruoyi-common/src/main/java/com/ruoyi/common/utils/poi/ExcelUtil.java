@@ -471,7 +471,12 @@ public class ExcelUtil<T>
                         }
                         else if (StringUtils.isNotEmpty(attr.dictType()))
                         {
-                            val = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
+                            if (!sysDictMap.containsKey(attr.dictType() + val))
+                            {
+                                String dictValue = reverseDictByExp(Convert.toStr(val), attr.dictType(), attr.separator());
+                                sysDictMap.put(attr.dictType() + val, dictValue);
+                            }
+                            val = sysDictMap.get(attr.dictType() + val);
                         }
                         else if (!attr.handler().equals(ExcelHandlerAdapter.class))
                         {
