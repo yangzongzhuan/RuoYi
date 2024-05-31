@@ -16,6 +16,7 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.annotation.Excel.ColumnType;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.core.page.PageDomain;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
@@ -124,6 +125,22 @@ public class DemoTableController extends BaseController
         columns.add(new UserTableColumn("用户手机", "userPhone"));
         columns.add(new UserTableColumn("用户邮箱", "userEmail"));
         columns.add(new UserTableColumn("用户状态", "status"));
+    }
+    
+    private final static List<DocumentModel> documents = new ArrayList<DocumentModel>();
+    {
+        documents.add(new DocumentModel(1, "247-XW·2024-D10-0001", "新闻热线[2024]000001", "筑路千条 幸福万家——新疆“四好农村路”十年成果显著", "新疆地域广袤，农村公路是群众出行的重要选择。顾志峰介绍，2014年以来的十年间，新疆累计完成农村公路建设投资约1071亿元，累计新改建农村公路11.99万公里。截至2023年底，全疆农村公路总里程达15.6万公里，农村公路乡镇通三级及以上公路比例达到90.3%、较大人口规模自然村通硬化路比例达到91.5%，农村公路路网进一步完善，特别是南疆四地州农村路网结构得到根本性改善。"));
+        documents.add(new DocumentModel(2, "247-XW·2024-D30-0002", "新闻热线[2024]000002", "网红账号被封，央媒：如此炫富毒瘤早就该拔了", "在社交平台上分享自己的生活日常，本来无可厚非。但无底线地展示物欲、宣扬拜金，取笑甚至嘲讽工薪者的烟火生活，就会遮蔽普通人的平凡质朴和坚韧奋斗，在无形中消解芸芸众生脚踏实地、自立自强的社会正气。对这种助长金钱至上、刺激公众焦虑，既污染网络生态，又撕裂社会和谐的炫富“毒瘤”，必须坚决拔除之。在国家有关部门的部署下，近日，多个网络平台开展“不良价值导向内容专项治理”行动，对“奢靡浪费”“炫富拜金”等问题从严打击，倡导理性、文明的消费观和价值观。"));
+        documents.add(new DocumentModel(3, "CT01-XW·2024-Y-0003", "新闻热线[2024]000003", "重庆一夫妻被骗至缅甸，家属：两人已被解救，预计很快能回国", "5月25日，重庆一对夫妻在前往泰国后失联，疑被诈骗集团骗至缅甸的消息引发广泛关注。警方已对此事立案调查，而这对夫妻的亲属则每天生活在焦急和不安之中。亲属：家都瘫痪了，事情一经曝光，迅速登上了热搜，成为公众热议的话题。据了解，这对夫妻原计划是去泰国谈生意，但不幸的是，他们的泰国之行变成了一场噩梦。亲属李先生透露，4月14日，他们夫妻二人抵达泰国，不久后便疑似被人以10万元的价格卖到缅甸，目前被困在缅甸妙瓦底的一个电信诈骗园区。"));
+        documents.add(new DocumentModel(4, "CT01-XW·2024-Y-0004", "新闻热线[2024]000004", "江滨社区联合派出所、金霞消防站开展电动自行车安全隐患夜查活动", "近日，长沙市开福区江滨社区联合派出所、金霞消防站深入居民小区、单位场所，以电动车自行车火灾防范为重点，开展消防安全夜查行动。此次夜查紧紧围绕老旧居民区、“三合一”场所、沿街门店、夜间经营使用场所等场所开展监督检查，重点检查电动自行车违规停放充电、堵塞疏散通道和安全出口，架空层违规作为电动自行车停放充电场所，电动自行车违规“进楼入户”“飞线充电”，电动自行车擅自改装等五大类问题。"));
+        documents.add(new DocumentModel(5, "CT01-XW·2024-Y-0005", "新闻热线[2024]000005", "奋力建设“七个岳阳”，筑牢民生保障 奔向美好生活", "岳阳市委八届六次全会提出，坚持“1376”总体思路，着力推动高质量发展。“1”即始终牢记习近平总书记“守护好一江碧水”殷殷嘱托;“3”即在锚定“三高四新”美好蓝图中强化融入长江经济带、省域副中心、内陆地区改革开放高地三种意识;“7”即全面把握打造实力岳阳、富饶岳阳、美丽岳阳、开放岳阳、幸福岳阳、平安岳阳、新风岳阳“七个岳阳”目标任务;“6”即抓紧抓实“抓产业、促协调、优生态、扩开放、惠民生、防风险”六项重点工作。“1376”总体思路站位高远，契合实际，是岳阳深入学习贯彻落实习近平新时代中国特色社会主义思想，向着强国建设、民族复兴宏伟目标奋勇前进的行动方案、奋进号令。为全面展示岳阳锚定新坐标、攀登新高度的奋斗姿态，营造催人奋进的舆论氛围，从2月1日起，湖南日报社岳阳分社联动岳阳日报社、岳阳市广播电视台等主流媒体推出《奋力建设“七个岳阳”》系列报道。敬请关注。"));
+        documents.add(new DocumentModel(6, "CT01-XW·2024-Y-0006", "新闻热线[2024]000006", "市场状况充满挑战！极星宣布裁员全球约15%的员工", "据路透社报道，极星周五以“充满挑战的市场状况”为由，宣布计划在全球范围内裁减约450个职位。此次裁员之际，许多人都对电动汽车需求降温表示担忧，而且极星预计汽车业务最早将在2025年开始实现收支平衡。极星发言人表示：“作为该商业计划的一部分，我们需要调整我们的业务和运营规模。” “这涉及减少外部支出，遗憾的是，还包括我们的员工数量。”该公司还表示，希望减少对沃尔沃及其母公司吉利外部融资的依赖，最近还表示希望削减成本并提高电动汽车的利润率。"));
+        documents.add(new DocumentModel(7, "CT01-XW·2024-Y-0007", "新闻热线[2024]000007", "浙江隐秘富豪涉百亿非法集资案，部分资金流入新造车公司", "5月10日、11日，上海北广投资管理有限公司（下称“北广投”）非法集资案在上海黄浦区人民法院一审公开开庭审理，北广投实控人周敏、法定代表人朱江等30余名中高管被控非法吸收公众存款罪。根据财新报道，这一案件中，非法集资的资金有部分流入了两家新能源车企——爱驰汽车、万象汽车。同时，有多位投资人引述与经侦部门沟通时的说法称，该案事发时未兑付金额有130余亿元，其中去往广微控股45亿元、万象汽车63亿元、爱驰汽车15亿元。"));
+        documents.add(new DocumentModel(8, "CT01-XW·2024-Y-0008", "新闻热线[2024]000008", "特斯拉宣布Model Y升级：搭载HW4.0硬件，售价仍25.89万元起", "2月1日，特斯拉官方宣布ModelY升级。外观上，新增ModelY专属色“快银车漆”，并采用烈焰红代替中国红、星空灰代替冷光银；性能上，ModelY全系配备全新一代自动辅助驾驶硬件(HW4.0)，通过搭载超远距离双目摄像头，ModelY的最远探测距离达424米。由此，特斯拉全系车型均配备了自动辅助驾驶硬件HW4.0。在售价方面，特斯拉中国官网显示，ModelY车型依然保持原价。ModelY后轮驱动版25.89万元起、ModelY长续航版29.99万元起、ModelY高性能版售价36.39万元起。"));
+        documents.add(new DocumentModel(9, "CT01-XW·2024-D10-0009", "新闻热线[2024]000009", "华为手机归来，谁最受伤？", "低迷周期下的智能手机市场在2023年下半年迎来了华为的回归，这也给本就竞争激烈的市场环境带来了更大变数。1月29日，有消息称，华为已注册“星耀手机”品牌商标，定位中端手机市场，但上述消息并未获得华为方面确认。“目前星耀的相关信息我们看到了，但是没有获得产品信息以及启动线下铺货的通知。对于和其他品牌的二选一问题，听其他省份的经销商说过，但目前（华为渠道）这边也没有更多动作。”一位广东区域的华为核心经销商对记者说。但华为手机的反扑已经开始。在多家调研机构公布的2023年四季度智能手机出货数据中，华为手机的量正在明显上升，当季增幅在35%到47%之间。不过，从全年数据来看，并未登上前五榜单。"));
+        documents.add(new DocumentModel(10, "CT01-XW·2024-D10-0010", "新闻热线[2024]000010", "疯狂裁员的硅谷大厂：除了AI，其它都是将就", "放眼望去，近期科技企业财报形势一片大好，裁员浪潮却仍在不断蔓延。国内职场动态看脉脉，那硅谷裁员情况就得看layoff.fyi了。数据显示，2024年，103家科技企业进行了裁员，28963位员工失去了饭碗。其中，电子支付公司PayPal大笔一挥，裁掉2500人，微软则在开年就裁掉1900人。回望2023年，谷歌、Meta、亚马逊、微软均为裁员重灾区，裁员人数在一万左右。具体而言，谷歌近日披露的财报指出，2023年谷歌解雇了12000多名员工，光是在遣散费和其他费用上就花费了21亿美元。而且裁员费用还在不断增加，2024年刚过去一个月，谷歌就已经花费了7亿美元用来裁员。"));
+        documents.add(new DocumentModel(11, "CT01-XW·2024-D30-0011", "新闻热线[2024]000011", "国产手机品牌重新崛起背后：市场正在逐步恢复活力，竞争也愈发激烈", "2024年伊始，随着全球经济的逐渐复苏，手机消费市场也展现出勃勃生机。中国信通院最新数据显示，2023年中国市场手机出货量实现了6.5%的同比增长，其中5G手机增长势头更为强劲，占比高达82.8%。1月25日，国际数据公司（IDC）发布了最新手机季度跟踪报告，揭示了中国智能手机市场在2023年第四季度的出货量情况。报告显示，该季度中国智能手机市场出货量达到了约7363万台，同比增长1.2%。这是在连续十个季度同比下降后，中国智能手机市场首次实现反弹。这一积极信号表明，市场正在逐步恢复活力，各大品牌之间的竞争也愈发激烈。"));
+        documents.add(new DocumentModel(12, "CT01-XW·2024-D30-0012", "新闻热线[2024]000012", "SpaceX将于1月31日向国际空间站发射天鹅号货运飞船", "1月29日消息，美国太空探索技术公司SpaceX计划于当地时间1月30日，利用“猎鹰9号”火箭从佛罗里达州肯尼迪航天中心发射诺斯罗普·格鲁曼公司的“天鹅号”货运飞船至国际空间站。此次任务是执行NG-20商业补给，将运送约8200多磅的物资、设备及科学实验器材。"));
     }
 
     /**
@@ -409,6 +426,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 全文索引
+     */
+    @GetMapping("/textSearch")
+    public String textSearch()
+    {
+        return prefix + "/textSearch";
+    }
+
+    /**
      * 异步加载表格树
      */
     @GetMapping("/asynTree")
@@ -479,6 +505,57 @@ public class DemoTableController extends BaseController
         }
         rspData.setRows(userList.subList(pageNum, pageSize));
         rspData.setTotal(userList.size());
+        return rspData;
+    }
+
+    /**
+     * 查询全文索引数据
+     */
+    @PostMapping("/text/list")
+    @ResponseBody
+    public TableDataInfo textList(BaseEntity baseEntity)
+    {
+        TableDataInfo rspData = new TableDataInfo();
+        List<DocumentModel> documentList = new ArrayList<DocumentModel>(Arrays.asList(new DocumentModel[documents.size()]));
+        Collections.copy(documentList, documents);
+        // 查询条件过滤
+        if (StringUtils.isNotEmpty(baseEntity.getSearchValue()))
+        {
+            documentList.clear();
+            for (DocumentModel document : documents)
+            {
+                boolean indexFlag = false;
+                if (document.getTitle().contains(baseEntity.getSearchValue()))
+                {
+                    indexFlag = true;
+                    document.setTitle(document.getTitle().replace(baseEntity.getSearchValue(), "<font color=\"red\">" + baseEntity.getSearchValue() + "</font>"));
+                }
+                if (document.getContent().contains(baseEntity.getSearchValue()))
+                {
+                    indexFlag = true;
+                    document.setContent(document.getContent().replace(baseEntity.getSearchValue(), "<font color=\"red\">" + baseEntity.getSearchValue() + "</font>"));
+                }
+                if (indexFlag)
+                {
+                    documentList.add(document);
+                }
+            }
+        }
+        PageDomain pageDomain = TableSupport.buildPageRequest();
+        if (null == pageDomain.getPageNum() || null == pageDomain.getPageSize())
+        {
+            rspData.setRows(documentList);
+            rspData.setTotal(documentList.size());
+            return rspData;
+        }
+        Integer pageNum = (pageDomain.getPageNum() - 1) * 10;
+        Integer pageSize = pageDomain.getPageNum() * 10;
+        if (pageSize > documentList.size())
+        {
+            pageSize = documentList.size();
+        }
+        rspData.setRows(documentList.subList(pageNum, pageSize));
+        rspData.setTotal(documentList.size());
         return rspData;
     }
 
@@ -851,5 +928,87 @@ class AreaModel
     public void setIsTreeLeaf(Integer isTreeLeaf)
     {
         this.isTreeLeaf = isTreeLeaf;
+    }
+}
+
+class DocumentModel
+{
+    /** 编号 */
+    private int tableId;
+
+    /** 档号 */
+    private String archiveNo;
+
+    /** 文件编号 */
+    private String docNo;
+
+    /** 标题 */
+    private String title;
+
+    /** 内容 */
+    private String content;
+
+    public DocumentModel()
+    {
+
+    }
+
+    public DocumentModel(int tableId, String archiveNo, String docNo, String title, String content)
+    {
+        this.tableId = tableId;
+        this.archiveNo = archiveNo;
+        this.docNo = docNo;
+        this.title = title;
+        this.content = content;
+    }
+
+    public int getTableId()
+    {
+        return tableId;
+    }
+
+    public String getArchiveNo()
+    {
+        return archiveNo;
+    }
+
+    public String getDocNo()
+    {
+        return docNo;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public String getContent()
+    {
+        return content;
+    }
+
+    public void setTableId(int tableId)
+    {
+        this.tableId = tableId;
+    }
+
+    public void setArchiveNo(String archiveNo)
+    {
+        this.archiveNo = archiveNo;
+    }
+
+    public void setDocNo(String docNo)
+    {
+        this.docNo = docNo;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public void setContent(String content)
+    {
+        this.content = content;
     }
 }

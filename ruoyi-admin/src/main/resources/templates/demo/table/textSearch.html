@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<th:block th:include="include :: header('全文搜索')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-page-size="10" data-search-align="left"
+				       data-show-custom-view="true" data-custom-view="customViewFormatter"
+                       data-show-custom-view-button="true">
+                </table>
+			</div>
+		</div>
+	</div>
+	
+    <template id="textSearchTemplate">
+        <div class="col-sm-12">
+            <p style="margin-top:10px;line-height:1.5;">
+             <span style="color:blue;font-size:medium">%title%</span><br>
+             <span style="color:#000000;font-size:medium">%content%</span><br>
+             <span style="color:#008000;font-size:medium">
+                                        档号：<a href="javascript:void(0)" onclick="handleView('%tableId%', '%archiveNo%')">%archiveNo%</a>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%docNo%
+              </span>
+            </p>
+        </div>
+    </template>
+
+    <div th:include="include :: footer"></div>
+    <th:block th:include="include :: bootstrap-table-custom-view-js" />
+    <script th:inline="javascript">
+        var prefix = ctx + "demo/table";
+
+        $(function() {
+            var options = {
+                url: prefix + "/text/list",
+                search: true,
+		        showSearch: false,
+		        showRefresh: false,
+		        showToggle: false,
+		        showColumns: false,
+		        showExport: true,
+                columns: [{
+		            checkbox: true
+		        },
+		        {
+					field : 'tableId', 
+					title : '编号',
+					visible: false
+				},
+		        {
+					field : 'archiveNo', 
+					title : '档号'
+				},
+				{
+					field : 'docNo', 
+					title : '文件编号'
+				},
+				{
+					field : 'title', 
+					title : '标题',
+					formatter: function(value, row, index) {
+                        return $.table.tooltip(value, 20, "open");
+                    }
+				},
+				{
+					field : 'content', 
+					title : '内容',
+					formatter: function(value, row, index) {
+                        return $.table.tooltip(value, 30, "open");
+                    }
+				}]
+            };
+            $.table.init(options);
+        });
+        
+        function customViewFormatter (data) {
+            var template = $('#textSearchTemplate').html()
+            var view = ''
+	        if(data.length > 0) {
+	            $.each(data, function (i, row) {
+	                view += template.replace('%tableId%', row.tableId)
+	                .replaceAll('%archiveNo%', row.archiveNo)
+	                .replace('%title%', row.title)
+	                .replace('%docNo%', row.docNo)
+	                .replace('%content%', truncateString(row.content, 500))
+	            })
+	            return `<div class="row mx-0">${view}</div>`;
+            } else {
+                return `<div class="row mx-0"><div class="col-sm-12"><p style="margin-top:10px;line-height:1.5;"><span style="font-size:medium">没有找到记录。请检查过滤条件。</span></p></div></div>`
+            }
+          }
+        
+        function handleView(tableId, archiveNo) {
+        	alert("tableId：" + tableId + "，archiveNo：" + archiveNo);
+        }
+        
+        function truncateString(str, maxLength) {
+       	    if (str.length > maxLength) {
+       	        return str.slice(0, maxLength) + '...';
+       	    }
+       	    return str;
+       	}
+        
+        $(document).ready(function() {
+            $('.search-input').css('width', '320px');
+        });
+    </script>
+</body>
+</html>
