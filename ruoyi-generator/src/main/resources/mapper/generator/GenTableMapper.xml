@@ -134,7 +134,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="businessName != null and businessName != ''">business_name,</if>
 			<if test="functionName != null and functionName != ''">function_name,</if>
 			<if test="functionAuthor != null and functionAuthor != ''">function_author,</if>
-			<if test="formColNum != null and formColNum != ''">form_col_num,</if>
+			<if test="formColNum != null">form_col_num,</if>
 			<if test="genType != null and genType != ''">gen_type,</if>
 			<if test="genPath != null and genPath != ''">gen_path,</if>
 			<if test="remark != null and remark != ''">remark,</if>
@@ -150,6 +150,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="businessName != null and businessName != ''">#{businessName},</if>
 			<if test="functionName != null and functionName != ''">#{functionName},</if>
 			<if test="functionAuthor != null and functionAuthor != ''">#{functionAuthor},</if>
+			<if test="formColNum != null">#{formColNum},</if>
 			<if test="genType != null and genType != ''">#{genType},</if>
 			<if test="genPath != null and genPath != ''">#{genPath},</if>
 			<if test="remark != null and remark != ''">#{remark},</if>
