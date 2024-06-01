@@ -384,12 +384,12 @@ label.error {
 	position: relative;
 	padding-left: 25px;
 	padding-right: 15px;
-	padding-top: 8px;
+	padding-top: 7px;
 }
 
 .icheckbox, .icheckbox-blue, .iradio, .iradio-blue, .iradio-purple {
 	position: absolute;
-	top: 8px;
+	top: 7px;
 	left: 0
 }
 
