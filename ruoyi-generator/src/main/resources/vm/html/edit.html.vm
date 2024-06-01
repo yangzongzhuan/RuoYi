@@ -40,116 +40,141 @@
 #set($field=$column.javaField)
 #set($dictType=$column.dictType)
 #if("" != $treeParentCode && $column.javaField == $treeParentCode)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <div class="input-group">
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
 #set($BusinessName=$businessName.substring(0,1).toUpperCase() + ${businessName.substring(1)})
-                        <input id="treeId" name="${treeParentCode}" type="hidden" th:field="*{${treeParentCode}}" />
-                        <input class="form-control" type="text" onclick="select${BusinessName}Tree()" id="treeName" readonly="true" th:field="*{parentName}"#if($column.required) required#end>
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input id="treeId" name="${treeParentCode}" type="hidden" th:field="*{${treeParentCode}}" />
+                            <input class="form-control" type="text" onclick="select${BusinessName}Tree()" id="treeName" readonly="true" th:field="*{parentName}"#if($column.required) required#end>
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
 #elseif($column.htmlType == "input")
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <input name="${field}" th:field="*{${field}}" class="form-control" type="text"#if($column.required) required#end>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <input name="${field}" th:field="*{${field}}" class="form-control" type="text"#if($column.required) required#end>
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "upload")
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <input type="hidden" name="${field}" th:field="*{${field}}">
-                    <div class="file-loading">
-                        <input class="form-control file-upload" id="${field}" name="file" type="file">
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" name="${field}" th:field="*{${field}}">
+                       <div class="file-loading">
+                            <input class="form-control file-upload" id="${field}" name="file" type="file">
+                        </div>
                     </div>
                 </div>
             </div>
 #elseif($column.htmlType == "summernote")
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <input type="hidden" class="form-control" th:field="*{${field}}">
-                    <div class="summernote" id="${field}"></div>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" th:field="*{${field}}">
+                        <div class="summernote" id="${field}"></div>
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "select" && "" != $dictType)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <select name="${field}" class="form-control m-b" th:with="type=${@dict.getType('${dictType}')}"#if($column.required) required#end>
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{${field}}"></option>
-                    </select>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <select name="${field}" class="form-control" th:with="type=${@dict.getType('${dictType}')}"#if($column.required) required#end>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{${field}}"></option>
+                        </select>
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "select" && $dictType)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <select name="${field}" class="form-control m-b"#if($column.required) required#end>
-                        <option value="">所有</option>
-                    </select>
-                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                        <div class="col-sm-8">
+                            <select name="${field}" class="form-control"#if($column.required) required#end>
+                                <option value="">所有</option>
+                            </select>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "checkbox" && "" != $dictType)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8" th:with="type=${@dict.getType('${dictType}')}">
-                    <label th:each="dict : ${type}" class="check-box">
-                        <input name="${field}" type="checkbox" th:value="${dict.dictValue}" th:text="${dict.dictLabel}" th:attr="checked=${${className}.${field}.contains(dict.dictValue)?true:false}"#if($column.required) required#end>
-                    </label>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8" th:with="type=${@dict.getType('${dictType}')}">
+                        <label th:each="dict : ${type}" class="check-box">
+                            <input name="${field}" type="checkbox" th:value="${dict.dictValue}" th:text="${dict.dictLabel}" th:attr="checked=${${className}.${field}.contains(dict.dictValue)?true:false}"#if($column.required) required#end>
+                        </label>
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "checkbox" && $dictType)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <label class="check-box">
-                        <input name="${field}" type="checkbox"#if($column.required) required#end> 无
-                    </label>
-                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <label class="check-box">
+                            <input name="${field}" type="checkbox"#if($column.required) required#end> 无
+                        </label>
+                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
+                    </div>
                 </div>
             </div>
 #elseif($column.htmlType == "radio" && "" != $dictType)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <div class="radio-box" th:each="dict : ${@dict.getType('${dictType}')}">
-                        <input type="radio" th:id="${'${field}_' + dict.dictCode}" name="${field}" th:value="${dict.dictValue}" th:field="*{${field}}"#if($column.required) required#end>
-                        <label th:for="${'${field}_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <div class="radio-box" th:each="dict : ${@dict.getType('${dictType}')}">
+                            <input type="radio" th:id="${'${field}_' + dict.dictCode}" name="${field}" th:value="${dict.dictValue}" th:field="*{${field}}"#if($column.required) required#end>
+                            <label th:for="${'${field}_' + dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                        </div>
                     </div>
                 </div>
             </div>
 #elseif($column.htmlType == "radio" && $dictType)
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <div class="radio-box">
-                        <input type="radio" name="${field}" value=""#if($column.required) required#end>
-                        <label th:for="${field}" th:text="未知"></label>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <div class="radio-box">
+                            <input type="radio" name="${field}" value=""#if($column.required) required#end>
+                            <label th:for="${field}" th:text="未知"></label>
+                        </div>
+                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
                     </div>
-                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>
                 </div>
             </div>
 #elseif($column.htmlType == "datetime")
-            <div class="form-group">    
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date">
+                            <input name="${field}" th:value="${#dates.format(${className}.${field}, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text"#if($column.required) required#end>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
 #elseif($column.htmlType == "textarea")
-            <div class="form-group">
-                <label class="col-sm-3 control-label#if($column.required) is-required#end">${comment}：</label>
-                <div class="col-sm-8">
-                    <textarea name="${field}" class="form-control"#if($column.required) required#end>[[*{${field}}]]</textarea>
+            <div class="${colXsNum}">
+                <div class="form-group">
+                    <label class="${colSmNum} control-label#if($column.required) is-required#end">${comment}：</label>
+                    <div class="col-sm-8">
+                        <textarea name="${field}" class="form-control"#if($column.required) required#end>[[*{${field}}]]</textarea>
+                    </div>
                 </div>
             </div>
 #end

@@ -50,6 +50,8 @@ public class VelocityUtils
         velocityContext.put("basePackage", getPackagePrefix(packageName));
         velocityContext.put("packageName", packageName);
         velocityContext.put("author", genTable.getFunctionAuthor());
+        velocityContext.put("colXsNum", getColXsNum(genTable.getFormColNum()));
+        velocityContext.put("colSmNum", getColSmNum(genTable.getFormColNum()));
         velocityContext.put("datetime", DateUtils.getDate());
         velocityContext.put("pkColumn", genTable.getPkColumn());
         velocityContext.put("importList", getImportList(genTable));
@@ -380,5 +382,41 @@ public class VelocityUtils
             }
         }
         return num;
+    }
+
+    /**
+     * 获取表单排列网格
+     * 
+     * @param formColNum 表单布局方式
+     * @return 排列类样式
+     */
+    public static String getColXsNum(int formColNum)
+    {
+        String colXsNum = "col-xs-12";
+        if (formColNum == 2)
+        {
+            return "col-xs-6";
+        }
+        else if (formColNum == 3)
+        {
+            return "col-xs-4";
+        }
+        return colXsNum;
+    }
+
+    /**
+     * 获取表单label网格
+     * 
+     * @param formColNum 表单布局方式
+     * @return 网格类样式
+     */
+    public static String getColSmNum(int formColNum)
+    {
+        String colSmNum = "col-sm-3";
+        if (formColNum == 2 || formColNum == 3)
+        {
+            return "col-sm-4";
+        }
+        return colSmNum;
     }
 }

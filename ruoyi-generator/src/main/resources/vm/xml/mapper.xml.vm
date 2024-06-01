@@ -80,12 +80,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #end
     </select>
 #if($table.sub)
+
     <select id="select${subClassName}List" resultType="${subClassName}" resultMap="${subClassName}Result">
         select#foreach ($column in $subTable.columns) $column.columnName#if($foreach.count != $subTable.columns.size()),#end#end
         from ${subTableName}
         where ${subTableFkName} = #{${subTableFkName}}
     </select>
 #end
+
     <insert id="insert${ClassName}" parameterType="${ClassName}"#if($pkColumn.increment) useGeneratedKeys="true" keyProperty="$pkColumn.javaField"#end>
         insert into ${tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">

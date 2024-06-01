@@ -135,13 +135,13 @@
 					                </div>
 					                <div class="col-sm-6">
 					                    <div class="form-group">
-					                        <label class="col-sm-4 control-label is-required" title="分配到指定菜单下，例如 系统管理">上级菜单：<i class="fa fa-question-circle-o"></i></label>
+					                        <label class="col-sm-4 control-label is-required" title="选择表单的栅格布局方式">表单布局：<i class="fa fa-question-circle-o"></i></label>
 					                        <div class="col-sm-8">
-					                            <input id="parentMenuId" name="params[parentMenuId]" type="hidden" th:value="*{parentMenuId}"/>
-					                            <div class="input-group">
-												    <input id="parentMenuName" name="params[parentMenuName]" class="form-control" type="text" onclick="selectMenuTree()" placeholder="请选择上级菜单" maxlength="50" th:value="*{parentMenuName}" required>
-											        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-											    </div>
+					                            <select class='form-control' id="formColNum" name='formColNum' style="width: 100%">
+												    <option value="1" th:field="*{formColNum}">单列</option>
+												    <option value="2" th:field="*{formColNum}">双列</option>
+												    <option value="3" th:field="*{formColNum}">三列</option>
+												</select>
 					                        </div>
 					                    </div>
 					                </div>
@@ -153,6 +153,18 @@
 					                        <div class="col-sm-8">
                                                 <label class="radio-box"> <input type="radio" name="genType" value="0" th:field="*{genType}" /> zip压缩包 </label> 
                                                 <label class="radio-box"> <input type="radio" name="genType" value="1" th:field="*{genType}" /> 自定义路径</label> 
+					                        </div>
+					                    </div>
+					                </div>
+					                <div class="col-sm-6">
+					                    <div class="form-group">
+					                        <label class="col-sm-4 control-label is-required" title="分配到指定菜单下，例如 系统管理">上级菜单：<i class="fa fa-question-circle-o"></i></label>
+					                        <div class="col-sm-8">
+					                            <input id="parentMenuId" name="params[parentMenuId]" type="hidden" th:value="*{parentMenuId}"/>
+					                            <div class="input-group">
+												    <input id="parentMenuName" name="params[parentMenuName]" class="form-control" type="text" onclick="selectMenuTree()" placeholder="请选择上级菜单" maxlength="50" th:value="*{parentMenuName}" required>
+											        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+											    </div>
 					                        </div>
 					                    </div>
 					                </div>
