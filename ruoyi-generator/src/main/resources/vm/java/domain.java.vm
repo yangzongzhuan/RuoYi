@@ -71,9 +71,9 @@ public class ${ClassName} extends ${Entity}
     {
         return $column.javaField;
     }
-#end
-#end
 
+#end
+#end
 #if($table.sub)
     public List<${subClassName}> get${subClassName}List()
     {
