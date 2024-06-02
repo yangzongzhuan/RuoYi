@@ -89,6 +89,11 @@ public @interface Excel
     public String[] combo() default {};
 
     /**
+     * 是否从字典读数据到combo,默认不读取,如读取需要设置dictType注解.
+     */
+    public boolean comboReadDict() default false;
+
+    /**
      * 是否需要纵向合并单元格,应对需求:含有list集合单元格)
      */
     public boolean needMerge() default false;

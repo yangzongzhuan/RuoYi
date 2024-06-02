@@ -1042,17 +1042,28 @@ public class ExcelUtil<T>
             // 设置列宽
             sheet.setColumnWidth(column, (int) ((attr.width() + 0.72) * 256));
         }
-        if (StringUtils.isNotEmpty(attr.prompt()) || attr.combo().length > 0)
+        if (StringUtils.isNotEmpty(attr.prompt()) || attr.combo().length > 0 || attr.comboReadDict())
         {
-            if (attr.combo().length > 15 || StringUtils.join(attr.combo()).length() > 255)
+            String[] comboArray = attr.combo();
+            if (attr.comboReadDict())
+            {
+                if (!sysDictMap.containsKey("combo_" + attr.dictType()))
+                {
+                    String labels = DictUtils.getDictLabels(attr.dictType());
+                    sysDictMap.put("combo_" + attr.dictType(), labels);
+                }
+                String val = sysDictMap.get("combo_" + attr.dictType());
+                comboArray = StringUtils.split(val, DictUtils.SEPARATOR);
+            }
+            if (comboArray.length > 15 || StringUtils.join(comboArray).length() > 255)
             {
                 // 如果下拉数大于15或字符串长度大于255，则使用一个新sheet存储，避免生成的模板下拉值获取不到
-                setXSSFValidationWithHidden(sheet, attr.combo(), attr.prompt(), 1, 100, column, column);
+                setXSSFValidationWithHidden(sheet, comboArray, attr.prompt(), 1, 100, column, column);
             }
             else
             {
                 // 提示信息或只能选择不能输入的列内容.
-                setPromptOrValidation(sheet, attr.combo(), attr.prompt(), 1, 100, column, column);
+                setPromptOrValidation(sheet, comboArray, attr.prompt(), 1, 100, column, column);
             }
         }
     }
