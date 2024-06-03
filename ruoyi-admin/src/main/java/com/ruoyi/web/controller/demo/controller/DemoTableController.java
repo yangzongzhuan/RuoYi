@@ -227,6 +227,15 @@ public class DemoTableController extends BaseController
     }
 
     /**
+     * 表格保存状态
+     */
+    @GetMapping("/cookie")
+    public String cookie()
+    {
+        return prefix + "/cookie";
+    }
+
+    /**
      * 跳转至指定页
      */
     @GetMapping("/pageGo")
