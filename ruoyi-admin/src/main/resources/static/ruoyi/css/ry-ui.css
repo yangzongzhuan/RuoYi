@@ -1067,7 +1067,7 @@ table.rc-table-resizing thead > th > a {
 }
 
 /** 表格行拖拽样式 **/
-.reorder_rows_onDragClass td {
+.reorder-rows-on-drag-class td {
     color:yellow!important;
 	background-color:#999!important;
 	text-shadow:0 0 10px black,0 0 10px black,0 0 8px black,0 0 6px black,0 0 6px black;

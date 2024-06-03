@@ -9,7 +9,7 @@
 	<link th:href="@{/css/bootstrap.min.css?v=3.3.7}" rel="stylesheet"/>
 	<link th:href="@{/css/font-awesome.min.css?v=4.7.0}" rel="stylesheet"/>
 	<!-- bootstrap-table 表格插件样式 -->
-	<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css?v=1.18.3}" rel="stylesheet"/>
+	<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css?v=1.22.6}" rel="stylesheet"/>
 	<link th:href="@{/css/animate.min.css?v=20210831}" rel="stylesheet"/>
 	<link th:href="@{/css/style.min.css?v=20210831}" rel="stylesheet"/>
 	<link th:href="@{/ruoyi/css/ry-ui.css?v=4.7.8}" rel="stylesheet"/>
@@ -22,15 +22,15 @@
 	<script th:src="@{/js/jquery.min.js?v=3.6.3}"></script>
 	<script th:src="@{/js/bootstrap.min.js?v=3.3.7}"></script>
 	<!-- bootstrap-table 表格插件 -->
-	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=1.18.3}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.18.3}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/mobile/bootstrap-table-mobile.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=1.22.6}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.22.6}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/mobile/bootstrap-table-mobile.js?v=1.22.6}"></script>
 	<!-- jquery-validate 表单验证插件 -->
 	<script th:src="@{/ajax/libs/validate/jquery.validate.min.js?v=1.19.3}"></script>
 	<script th:src="@{/ajax/libs/validate/jquery.validate.extend.js?v=1.19.3}"></script>
 	<script th:src="@{/ajax/libs/validate/messages_zh.js?v=1.19.3}"></script>
 	<!-- bootstrap-table 表格树插件 -->
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/tree/bootstrap-table-tree.min.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/tree/bootstrap-table-tree.min.js?v=1.22.6}"></script>
 	<!-- 遮罩层 -->
 	<script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js?v=2.70.0}"></script>
     <script th:src="@{/ajax/libs/iCheck/icheck.min.js?v=1.0.3}"></script>
@@ -170,20 +170,20 @@
 
 <!-- 表格行拖拽插件 -->
 <div th:fragment="bootstrap-table-reorder-rows-js">
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.js?v=1.22.6}"></script>
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-rows/jquery.tablednd.js?v=1.0.3}"></script>
 </div>
 
 <!-- 表格列拖拽插件 -->
 <div th:fragment="bootstrap-table-reorder-columns-js">
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/jquery.dragtable.js?v=5.3.5}"></script>
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/reorder-columns/bootstrap-table-reorder-columns.js?v=1.22.6}"></script>
 </div>
 
 <!-- 表格列宽拖动插件 -->
 <div th:fragment="bootstrap-table-resizable-js">
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/jquery.resizableColumns.min.js?v=0.1.0}"></script>
-    <script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js?v=1.18.3}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/resizable/bootstrap-table-resizable.js?v=1.22.6}"></script>
 </div>
 
 <!-- 表格行内编辑插件 -->
@@ -192,31 +192,36 @@
 </div>
 <div th:fragment="bootstrap-table-editable-js">
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.min.js?v=1.5.1}"></script>
-    <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.js?v=1.18.3}"></script>
+    <script th:src="@{/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.js?v=1.22.6}"></script>
 </div>
 
 <!-- 表格导出插件 -->
 <div th:fragment="bootstrap-table-export-js">
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/bootstrap-table-export.js?v=1.22.6}"></script>
 	<script th:src="@{/ajax/libs/bootstrap-table/extensions/export/tableExport.min.js?v=1.10.24}"></script>
 </div>
 
 <!-- 表格冻结列插件 -->
 <div th:fragment="bootstrap-table-fixed-columns-js">
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/columns/bootstrap-table-fixed-columns.js?v=1.22.6}"></script>
 </div>
 
 <!-- 表格自动刷新插件 -->
 <div th:fragment="bootstrap-table-auto-refresh-js">
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/auto-refresh/bootstrap-table-auto-refresh.js?v=1.22.6}"></script>
 </div>
 
 <!-- 表格打印插件 -->
 <div th:fragment="bootstrap-table-print-js">
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/print/bootstrap-table-print.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/print/bootstrap-table-print.js?v=1.22.6}"></script>
 </div>
 
 <!-- 表格视图分页插件 -->
 <div th:fragment="bootstrap-table-custom-view-js">
-	<script th:src="@{/ajax/libs/bootstrap-table/extensions/custom-view/bootstrap-table-custom-view.js?v=1.18.3}"></script>
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/custom-view/bootstrap-table-custom-view.js?v=1.22.6}"></script>
+</div>
+
+<!-- 表格保存状态插件 -->
+<div th:fragment="bootstrap-table-cookie-js">
+	<script th:src="@{/ajax/libs/bootstrap-table/extensions/cookie/bootstrap-table-cookie.js?v=1.22.6}"></script>
 </div>
