@@ -365,6 +365,10 @@ public class Convert
      */
     public static String[] toStrArray(String str)
     {
+        if (StringUtils.isEmpty(str))
+        {
+            return new String[] {};
+        }
         return toStrArray(",", str);
     }
 
