@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 #if($table.sub)
 
     <resultMap id="${ClassName}${subClassName}Result" type="${ClassName}" extends="${ClassName}Result">
-        <collection property="${subclassName}List" ofType="${subClassName}" column="${subTableFkName}" select="select${subClassName}List" />
+        <collection property="${subclassName}List" ofType="${subClassName}" column="${pkColumn.columnName}" select="select${subClassName}List" />
     </resultMap>
 
     <resultMap type="${subClassName}" id="${subClassName}Result">
