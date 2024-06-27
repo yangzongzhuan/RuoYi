@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="updateBy"       column="update_by"         />
 		<result property="updateTime"     column="update_time"       />
 		<result property="remark"         column="remark"            />
-		<collection property="columns" javaType="java.util.List" resultMap="GenTableColumnResult" />
+		<collection  property="columns"   javaType="java.util.List"  resultMap="GenTableColumnResult" />
 	</resultMap>
 	
 	<resultMap type="GenTableColumn" id="GenTableColumnResult">
@@ -73,7 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectDbTableList" parameterType="GenTable" resultMap="GenTableResult">
 		select table_name, table_comment, create_time, update_time from information_schema.tables
 		where table_schema = (select database())
-		AND table_name NOT LIKE 'QRTZ_%' AND table_name NOT LIKE 'gen_%'
+		AND table_name NOT LIKE 'qrtz\_%' AND table_name NOT LIKE 'gen\_%'
 		AND table_name NOT IN (select table_name from gen_table)
 		<if test="tableName != null and tableName != ''">
 			AND lower(table_name) like lower(concat('%', #{tableName}, '%'))
@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectDbTableListByNames" resultMap="GenTableResult">
 		select table_name, table_comment, create_time, update_time from information_schema.tables
-		where table_name NOT LIKE 'qrtz_%' and table_name NOT LIKE 'gen_%' and table_schema = (select database())
+		where table_name NOT LIKE 'qrtz\_%' and table_name NOT LIKE 'gen\_%' and table_schema = (select database())
 		and table_name in
 	    <foreach collection="array" item="name" open="(" separator="," close=")">
  			#{name}
@@ -158,12 +158,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			sysdate()
          )
     </insert>
-
-	<update id="createTable">
+    
+    <update id="createTable">
         ${sql}
-	</update>
-
-	<update id="updateGenTable" parameterType="GenTable">
+    </update>
+    
+    <update id="updateGenTable" parameterType="GenTable">
         update gen_table
         <set>
             <if test="tableName != null">table_name = #{tableName},</if>

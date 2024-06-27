@@ -42,7 +42,7 @@ public class SysUserOnline extends BaseEntity
     /** session最后访问时间 */
     private Date lastAccessTime;
 
-    /** 超时时间，单位为分钟 */
+    /** 超时时间，单位为毫秒 */
     private Long expireTime;
 
     /** 在线状态 */
