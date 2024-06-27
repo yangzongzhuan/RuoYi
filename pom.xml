@@ -29,6 +29,7 @@
         <commons.io.version>2.13.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
+        <springdoc.version>2.5.0</springdoc.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -140,6 +141,13 @@
                 <groupId>com.github.oshi</groupId>
                 <artifactId>oshi-core</artifactId>
                 <version>${oshi.version}</version>
+            </dependency>
+
+            <!-- spring-doc -->
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
 
             <!-- io常用工具类 -->

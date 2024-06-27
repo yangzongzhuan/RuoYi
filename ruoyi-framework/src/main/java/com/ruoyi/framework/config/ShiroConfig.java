@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -25,7 +24,6 @@ import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.CipherUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
-import com.ruoyi.framework.config.properties.PermitAllUrlProperties;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.shiro.session.OnlineSessionFactory;
@@ -290,12 +288,6 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
-        // 匿名访问不鉴权注解列表
-        List<String> permitAllUrl = SpringUtils.getBean(PermitAllUrlProperties.class).getUrls();
-        if (StringUtils.isNotEmpty(permitAllUrl))
-        {
-            permitAllUrl.forEach(url -> filterChainDefinitionMap.put(url, "anon"));
-        }
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问

@@ -30,6 +30,12 @@
             <optional>true</optional> <!-- 表示依赖不会传递 -->
         </dependency>
 
+        <!-- spring-doc -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
         <!-- Mysql驱动包 -->
         <dependency>
             <groupId>com.mysql</groupId>
