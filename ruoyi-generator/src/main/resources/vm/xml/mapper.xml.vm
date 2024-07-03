@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 #if($table.sub)
 
-    <select id="select${subClassName}List" resultType="${subClassName}" resultMap="${subClassName}Result">
+    <select id="select${subClassName}List" resultMap="${subClassName}Result">
         select#foreach ($column in $subTable.columns) $column.columnName#if($foreach.count != $subTable.columns.size()),#end#end
         from ${subTableName}
         where ${subTableFkName} = #{${subTableFkName}}
