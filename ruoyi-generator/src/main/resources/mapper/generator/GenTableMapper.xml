@@ -67,6 +67,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="tableComment != null and tableComment != ''">
 				AND lower(table_comment) like lower(concat('%', #{tableComment}, '%'))
 			</if>
+			<if test="params.beginTime != null and params.beginTime != ''">
+				and date_format(create_time,'%Y%m%d') &gt;= date_format(#{params.beginTime},'%Y%m%d')
+			</if>
+			<if test="params.endTime != null and params.endTime != ''">
+				and date_format(create_time,'%Y%m%d') &lt;= date_format(#{params.endTime},'%Y%m%d')
+			</if>
 		</where>
 	</select>
 
