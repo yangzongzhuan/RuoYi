@@ -20,6 +20,8 @@ server:
   servlet:
     # 应用的访问路径
     context-path: /
+  # http请求头大小
+  max-http-header-size: 65536
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
