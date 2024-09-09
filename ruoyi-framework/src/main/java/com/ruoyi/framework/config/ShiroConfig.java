@@ -13,7 +13,6 @@ import org.apache.shiro.lang.io.ResourceUtils;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +24,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.CipherUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
 import com.ruoyi.framework.shiro.realm.UserRealm;
+import com.ruoyi.framework.shiro.rememberMe.CustomCookieRememberMeManager;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.shiro.session.OnlineSessionFactory;
 import com.ruoyi.framework.shiro.web.CustomShiroFilterFactoryBean;
@@ -361,9 +361,9 @@ public class ShiroConfig
     /**
      * 记住我
      */
-    public CookieRememberMeManager rememberMeManager()
+    public CustomCookieRememberMeManager rememberMeManager()
     {
-        CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+        CustomCookieRememberMeManager cookieRememberMeManager = new CustomCookieRememberMeManager();
         cookieRememberMeManager.setCookie(rememberMeCookie());
         if (StringUtils.isNotEmpty(cipherKey))
         {
