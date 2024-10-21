@@ -25,7 +25,7 @@
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>2.1.0</pagehelper.boot.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <oshi.version>6.6.3</oshi.version>
+        <oshi.version>6.6.5</oshi.version>
         <commons.io.version>2.16.1</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
