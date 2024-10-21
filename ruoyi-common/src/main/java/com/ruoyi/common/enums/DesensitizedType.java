@@ -23,7 +23,7 @@ public enum DesensitizedType
     /**
      * 身份证，中间10位星号替换
      */
-    ID_CARD(s -> s.replaceAll("(\\d{4})\\d{10}(\\d{4})", "$1** **** ****$2")),
+    ID_CARD(s -> s.replaceAll("(\\d{4})\\d{10}(\\d{3}[Xx]|\\d{4})", "$1** **** ****$2")),
 
     /**
      * 手机号，中间4位星号替换
