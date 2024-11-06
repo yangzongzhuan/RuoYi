@@ -29,7 +29,7 @@
         <commons.io.version>2.16.1</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
-        <springdoc.version>2.5.0</springdoc.version>
+        <springdoc.version>2.6.0</springdoc.version>
     </properties>
 
     <!-- 依赖声明 -->
