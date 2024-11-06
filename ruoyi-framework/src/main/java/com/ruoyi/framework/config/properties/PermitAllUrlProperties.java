@@ -91,9 +91,16 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
         List<String> urls = new ArrayList<>();
         for (String base : bases)
         {
-            for (String uri : uris)
+            if (uris.length > 0)
             {
-                urls.add(prefix(base) + prefix(uri));
+                for (String uri : uris)
+                {
+                    urls.add(prefix(base) + prefix(uri));
+                }
+            }
+            else
+            {
+                urls.add(prefix(base));
             }
         }
         return urls;
