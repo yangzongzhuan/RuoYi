@@ -52,7 +52,7 @@ var table = {
                     toolbar: "toolbar",
                     loadingFontSize: 13,
                     striped: false,
-                    escape: false,
+                    escape: true,
                     firstLoad: true,
                     showFooter: false,
                     search: false,
@@ -920,6 +920,7 @@ var table = {
                     fix: false,
                     area: [_width + 'px', _height + 'px'],
                     content: _url,
+                    closeBtn: $.common.isEmpty(options.closeBtn) ? 1 : options.closeBtn,
                     shadeClose: $.common.isEmpty(options.shadeClose) ? true : options.shadeClose,
                     skin: options.skin,
                     // options.btn设置为0表示不显示按钮
