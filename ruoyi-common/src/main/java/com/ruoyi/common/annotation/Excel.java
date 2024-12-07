@@ -83,7 +83,7 @@ public @interface Excel
      */
     public String prompt() default "";
 
-	/**
+    /**
      * 是否允许内容换行 
      */
     public boolean wrapText() default false;
