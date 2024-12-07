@@ -84,6 +84,11 @@ public @interface Excel
     public String prompt() default "";
 
     /**
+     * 是否允许内容换行 
+     */
+    public boolean wrapText() default false;
+
+    /**
      * 设置只能选择不能输入的列内容.
      */
     public String[] combo() default {};
