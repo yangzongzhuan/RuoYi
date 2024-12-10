@@ -260,7 +260,6 @@ var table = {
                             type: 1,
                             closeBtn: true,
                             shadeClose: true,
-                            area: ['auto', 'auto'],
                             content: "<img src='" + src + "' height='" + height + "' width='" + width + "'/>"
                         });
                     } else if ($.common.equals("blank", target)) {
