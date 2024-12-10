@@ -311,10 +311,22 @@ public class ExcelUtil<T>
      */
     public List<T> importExcel(InputStream is)
     {
+        return importExcel(is, 0);
+    }
+
+    /**
+     * 对excel表单默认第一个索引名转换成list
+     * 
+     * @param is 输入流
+     * @param titleNum 标题占用行数
+     * @return 转换后集合
+     */
+    public List<T> importExcel(InputStream is, int titleNum)
+    {
         List<T> list = null;
         try
         {
-            list = importExcel(is, 0);
+            list = importExcel(StringUtils.EMPTY, is, titleNum);
         }
         catch (Exception e)
         {
@@ -326,18 +338,6 @@ public class ExcelUtil<T>
             IOUtils.closeQuietly(is);
         }
         return list;
-    }
-
-    /**
-     * 对excel表单默认第一个索引名转换成list
-     * 
-     * @param is 输入流
-     * @param titleNum 标题占用行数
-     * @return 转换后集合
-     */
-    public List<T> importExcel(InputStream is, int titleNum) throws Exception
-    {
-        return importExcel(StringUtils.EMPTY, is, titleNum);
     }
 
     /**
