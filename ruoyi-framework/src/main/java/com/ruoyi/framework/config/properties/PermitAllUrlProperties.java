@@ -37,11 +37,15 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
         Map<String, Object> controllers = applicationContext.getBeansWithAnnotation(Controller.class);
         for (Object bean : controllers.values())
         {
-            if (!(bean instanceof Advised))
+            Class<?> beanClass;
+            if (bean instanceof Advised)
             {
-                continue;
+                beanClass = ((Advised) bean).getTargetSource().getTarget().getClass();
             }
-            Class<?> beanClass = ((Advised) bean).getTargetSource().getTarget().getClass();
+            else
+            {
+                beanClass = bean.getClass();
+            }
             RequestMapping base = beanClass.getAnnotation(RequestMapping.class);
             String[] baseUrl = {};
             if (Objects.nonNull(base))
