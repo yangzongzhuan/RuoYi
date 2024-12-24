@@ -350,11 +350,11 @@ label.error {
 	right: 42px;
 }
 
-.select2-hidden-accessible + label.error {
+.select2-hidden-accessible + label.error, select.error + label.error {
 	right: 38px;
 }
 
-.Validform_error,input.error,textarea.error,select.error,label.error+.select2-container--bootstrap .select2-selection--single {
+.Validform_error,input.error,textarea.error,select.error,select.error+label.error+.select2-container--bootstrap .select2-selection--single {
 	background-color: #fbe2e2;
 	border-color: #c66161;
 	color: #c00
