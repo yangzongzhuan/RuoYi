@@ -32,6 +32,7 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.PermissionUtils;
 import com.ruoyi.common.utils.sql.SqlUtil;
+import com.ruoyi.generator.config.GenConfig;
 import com.ruoyi.generator.domain.GenTable;
 import com.ruoyi.generator.domain.GenTableColumn;
 import com.ruoyi.generator.service.IGenTableColumnService;
@@ -259,6 +260,10 @@ public class GenController extends BaseController
     @ResponseBody
     public AjaxResult genCode(@PathVariable("tableName") String tableName)
     {
+        if (!GenConfig.isAllowOverwrite())
+        {
+            return AjaxResult.error("【系统预设】不允许生成文件覆盖到本地");
+        }
         genTableService.generatorCode(tableName);
         return AjaxResult.success();
     }
