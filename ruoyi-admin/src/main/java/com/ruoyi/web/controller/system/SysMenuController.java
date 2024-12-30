@@ -77,6 +77,7 @@ public class SysMenuController extends BaseController
     /**
      * 新增
      */
+    @RequiresPermissions("system:menu:add")
     @GetMapping("/add/{parentId}")
     public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
     {

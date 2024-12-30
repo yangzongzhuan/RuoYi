@@ -118,6 +118,7 @@ public class SysJobController extends BaseController
     /**
      * 新增调度
      */
+    @RequiresPermissions("monitor:job:add")
     @GetMapping("/add")
     public String add()
     {

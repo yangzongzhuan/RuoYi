@@ -68,19 +68,13 @@ public class SysPostController extends BaseController
     @ResponseBody
     public AjaxResult remove(String ids)
     {
-        try
-        {
-            return toAjax(postService.deletePostByIds(ids));
-        }
-        catch (Exception e)
-        {
-            return error(e.getMessage());
-        }
+        return toAjax(postService.deletePostByIds(ids));
     }
 
     /**
      * 新增岗位
      */
+    @RequiresPermissions("system:post:add")
     @GetMapping("/add")
     public String add()
     {
