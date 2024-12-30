@@ -67,6 +67,7 @@ public class SysDictTypeController extends BaseController
     /**
      * 新增字典类型
      */
+    @RequiresPermissions("system:dict:add")
     @GetMapping("/add")
     public String add()
     {
@@ -167,8 +168,7 @@ public class SysDictTypeController extends BaseController
      * 选择字典树
      */
     @GetMapping("/selectDictTree/{columnId}/{dictType}")
-    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType,
-            ModelMap mmap)
+    public String selectDeptTree(@PathVariable("columnId") Long columnId, @PathVariable("dictType") String dictType, ModelMap mmap)
     {
         mmap.put("columnId", columnId);
         mmap.put("dict", dictTypeService.selectDictTypeByType(dictType));

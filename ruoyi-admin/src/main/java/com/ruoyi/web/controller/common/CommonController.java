@@ -139,8 +139,7 @@ public class CommonController
      * 本地资源通用下载
      */
     @GetMapping("/download/resource")
-    public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response)
-            throws Exception
+    public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response) throws Exception
     {
         try
         {

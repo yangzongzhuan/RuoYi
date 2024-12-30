@@ -91,6 +91,7 @@ public class ${ClassName}Controller extends BaseController
     /**
      * 新增${functionName}
      */
+    @RequiresPermissions("${permissionPrefix}:add")
     @GetMapping("/add")
     public String add()
     {
