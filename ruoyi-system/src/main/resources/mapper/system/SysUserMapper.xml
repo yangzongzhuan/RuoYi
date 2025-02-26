@@ -170,7 +170,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update sys_user
  		<set>
  			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
- 			<if test="loginName != null and loginName != ''">login_name = #{loginName},</if>
  			<if test="userName != null and userName != ''">user_name = #{userName},</if>
  			<if test="userType != null and userType != ''">user_type = #{userType},</if>
  			<if test="email != null and email != ''">email = #{email},</if>
