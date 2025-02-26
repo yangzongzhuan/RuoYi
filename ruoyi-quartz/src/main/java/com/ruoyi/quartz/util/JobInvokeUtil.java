@@ -105,7 +105,7 @@ public class JobInvokeUtil
      */
     public static List<Object[]> getMethodParams(String invokeTarget)
     {
-        String methodStr = StringUtils.substringBetween(invokeTarget, "(", ")");
+        String methodStr = StringUtils.substringBetweenLast(invokeTarget, "(", ")");
         if (StringUtils.isEmpty(methodStr))
         {
             return null;
