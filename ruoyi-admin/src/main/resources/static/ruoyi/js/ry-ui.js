@@ -1319,16 +1319,17 @@ var table = {
                 if (result.code == web_status.SUCCESS) {
                     var parent = activeWindow();
                     if ($.common.isEmpty(parent.table)) {
-                    	$.modal.msgSuccessReload(result.msg);
+                        $.modal.msgSuccessReload(result.msg);
                     } else if (parent.table.options.type == table_type.bootstrapTable) {
-                        $.modal.close();
                         parent.$.modal.msgSuccess(result.msg);
                         parent.$.table.refresh();
                     } else if (parent.table.options.type == table_type.bootstrapTreeTable) {
-                        $.modal.close();
                         parent.$.modal.msgSuccess(result.msg);
                         parent.$.treeTable.refresh();
+                    } else {
+                        parent.$.modal.msgSuccess(result.msg);
                     }
+                    $.modal.close();
                 } else if (result.code == web_status.WARNING) {
                     $.modal.alertWarning(result.msg)
                 }  else {
