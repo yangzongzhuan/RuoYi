@@ -144,6 +144,7 @@ var table = {
                     rowStyle: options.rowStyle,                         // 通过自定义函数设置行样式
                     footerStyle: options.footerStyle,                   // 通过自定义函数设置页脚样式
                     headerStyle: options.headerStyle,                   // 通过自定义函数设置标题样式
+                    selectItemName: options.selectItemName,             // 自定义radio/checkbox的name值
                     columns: options.columns,                           // 显示列信息（*）
                     data: options.data,                                 // 被加载的数据
                     responseHandler: $.table.responseHandler,           // 在加载服务器发送来的数据之前处理函数
