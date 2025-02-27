@@ -163,7 +163,7 @@ public class SysLoginService
             // 设置permissions属性，以便数据权限匹配权限
             for (SysRole role : roles)
             {
-                if (StringUtils.equals(role.getStatus(), UserConstants.ROLE_NORMAL))
+                if (StringUtils.equals(role.getStatus(), UserConstants.ROLE_NORMAL) && !role.isAdmin())
                 {
                     Set<String> rolePerms = menuService.selectPermsByRoleId(role.getRoleId());
                     role.setPermissions(rolePerms);
