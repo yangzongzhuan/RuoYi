@@ -1448,8 +1448,7 @@ public class ExcelUtil<T>
      */
     public String encodingFilename(String filename)
     {
-        filename = UUID.randomUUID() + "_" + filename + ".xlsx";
-        return filename;
+        return UUID.randomUUID() + "_" + filename + ".xlsx";
     }
 
     /**

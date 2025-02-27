@@ -49,7 +49,7 @@ public class LogAspect
      * 处理请求前执行
      */
     @Before(value = "@annotation(controllerLog)")
-    public void boBefore(JoinPoint joinPoint, Log controllerLog)
+    public void doBefore(JoinPoint joinPoint, Log controllerLog)
     {
         TIME_THREADLOCAL.set(System.currentTimeMillis());
     }
