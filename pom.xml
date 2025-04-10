@@ -28,7 +28,7 @@
         <fastjson.version>1.2.83</fastjson.version>
         <oshi.version>6.6.5</oshi.version>
         <commons.io.version>2.16.1</commons.io.version>
-        <poi.version>4.1.2</poi.version>
+        <poi.version>5.4.0</poi.version>
         <velocity.version>2.3</velocity.version>
         <!-- override dependency version -->
         <tomcat.version>9.0.102</tomcat.version>
