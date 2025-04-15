@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
+	<meta th:content="${session.csrf_token}" name="csrf-token"/>
 	<title th:text="${title}"></title>
 	<link th:href="@{/css/bootstrap.min.css?v=3.3.7}" rel="stylesheet"/>
 	<link th:href="@{/css/font-awesome.min.css?v=4.7.0}" rel="stylesheet"/>

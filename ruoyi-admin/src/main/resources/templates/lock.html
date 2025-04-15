@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta th:content="${session.csrf_token}" name="csrf-token"/>
     <!--360浏览器优先以webkit内核解析-->
     <title>锁定屏幕</title>
     <link th:href="@{favicon.ico}" rel="shortcut icon"/>
@@ -94,7 +95,9 @@
             type: "post",
             dataType: "json",
             data: { password: password },
-            beforeSend: function() {
+            beforeSend: function(xhr) {
+            	var csrftoken = $('meta[name=csrf-token]').attr('content');
+                xhr.setRequestHeader("csrf_token", csrftoken);
             	index = layer.load(2, {shade: false});
             },
             success: function(result) {

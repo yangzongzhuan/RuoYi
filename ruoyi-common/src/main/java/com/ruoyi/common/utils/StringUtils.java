@@ -362,6 +362,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
      * 
      * @param str 字符串
      * @param sep 分隔符
+     * @return list集合
+     */
+    public static final List<String> str2List(String str, String sep)
+    {
+        return str2List(str, sep, true, false);
+    }
+
+    /**
+     * 字符串转list
+     * 
+     * @param str 字符串
+     * @param sep 分隔符
      * @param filterBlank 过滤纯空白
      * @param trim 去掉首尾空白
      * @return list集合

@@ -573,6 +573,12 @@ function _stopIt(e) {
 
 /** 设置全局ajax处理 */
 $.ajaxSetup({
+    beforeSend: function (xhr, settings) {
+        var csrftoken = $('meta[name=csrf-token]').attr('content')
+        if (($.common.equalsIgnoreCase(settings.type, "POST"))) {
+            xhr.setRequestHeader("csrf_token", csrftoken)
+        }
+    },
     complete: function(XMLHttpRequest, textStatus) {
         if (textStatus == 'timeout') {
             $.modal.alertWarning("服务器超时，请稍后再试！");
