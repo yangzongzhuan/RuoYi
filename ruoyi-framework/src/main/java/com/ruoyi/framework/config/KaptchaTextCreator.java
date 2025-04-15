@@ -21,7 +21,7 @@ public class KaptchaTextCreator extends DefaultTextCreator
         int x = random.nextInt(10);
         int y = random.nextInt(10);
         StringBuilder suChinese = new StringBuilder();
-        int randomoperands = (int) Math.round(Math.random() * 2);
+        int randomoperands = random.nextInt(3);
         if (randomoperands == 0)
         {
             result = x * y;

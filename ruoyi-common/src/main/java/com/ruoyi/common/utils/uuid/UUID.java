@@ -343,25 +343,25 @@ public final class UUID implements java.io.Serializable, Comparable<UUID>
         final StringBuilder builder = new StringBuilder(isSimple ? 32 : 36);
         // time_low
         builder.append(digits(mostSigBits >> 32, 8));
-        if (false == isSimple)
+        if (!isSimple)
         {
             builder.append('-');
         }
         // time_mid
         builder.append(digits(mostSigBits >> 16, 4));
-        if (false == isSimple)
+        if (!isSimple)
         {
             builder.append('-');
         }
         // time_high_and_version
         builder.append(digits(mostSigBits, 4));
-        if (false == isSimple)
+        if (!isSimple)
         {
             builder.append('-');
         }
         // variant_and_sequence
         builder.append(digits(leastSigBits >> 48, 4));
-        if (false == isSimple)
+        if (!isSimple)
         {
             builder.append('-');
         }
