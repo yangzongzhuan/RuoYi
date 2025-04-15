@@ -136,6 +136,13 @@ xss:
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
 
+# 防止csrf攻击
+csrf:
+  # 过滤开关
+  enabled: true
+  # 白名单（多个用逗号分隔）
+  whites: 
+
 # Swagger配置
 swagger:
   # 是否开启swagger
