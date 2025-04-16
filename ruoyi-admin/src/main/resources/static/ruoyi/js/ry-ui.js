@@ -279,7 +279,7 @@ var table = {
                             title: "信息内容",
                             area: ['400px', ''],
                             shadeClose: true,
-                            btn: ['确认'],
+                            btn: ['关闭'],
                             btnclass: ['btn btn-primary'],
                         });
                     }
@@ -775,7 +775,7 @@ var table = {
                 top.layer.alert(content, {
                     icon: $.modal.icon(type),
                     title: "系统提示",
-                    btn: ['确认'],
+                    btn: ['关闭'],
                     btnclass: ['btn btn-primary'],
                 });
             },

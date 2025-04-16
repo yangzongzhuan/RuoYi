@@ -2430,7 +2430,7 @@ LABL 0 新宋体,8,N</a:FontList>
 <a:Creator>Administrator</a:Creator>
 <a:ModificationDate>1538297540</a:ModificationDate>
 <a:Modifier>admin</a:Modifier>
-<a:Comment>帐号状态:0正常,1禁用</a:Comment>
+<a:Comment>账号状态:0正常,1禁用</a:Comment>
 <a:DefaultValue>0</a:DefaultValue>
 <a:DataType>char(1)</a:DataType>
 <a:Length>1</a:Length>

@@ -24,7 +24,7 @@ import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.ShiroUtils;
 
 /**
- * 登录帐号控制过滤器
+ * 登录账号控制过滤器
  * 
  * @author ruoyi
  */
