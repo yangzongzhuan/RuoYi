@@ -215,6 +215,7 @@ public class SysUserController extends BaseController
     @GetMapping("/resetPwd/{userId}")
     public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
     {
+        userService.checkUserDataScope(userId);
         mmap.put("user", userService.selectUserById(userId));
         return prefix + "/resetPwd";
     }
