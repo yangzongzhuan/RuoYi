@@ -63,11 +63,12 @@
 		        columns: [{
 		            checkbox: true,
 		            formatter:function (value, row, index) {
-		            	if($.common.isEmpty(value)) {
-		            		return { checked: row.flag };
-		            	} else {
-		            		return { checked: value }
-		            	}
+		                var state = row.status == '1' ? true : false;
+		                if ($.common.isEmpty(value)) {
+		                    return { checked: row.flag, disabled: state };
+		                } else {
+		                    return { checked: value, disabled: state };
+		                }
 		            }
 		        },
 		        {
