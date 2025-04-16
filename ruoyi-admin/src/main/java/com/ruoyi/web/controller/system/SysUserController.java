@@ -247,6 +247,7 @@ public class SysUserController extends BaseController
     @GetMapping("/authRole/{userId}")
     public String authRole(@PathVariable("userId") Long userId, ModelMap mmap)
     {
+        userService.checkUserDataScope(userId);
         SysUser user = userService.selectUserById(userId);
         // 获取用户所属的角色列表
         List<SysRole> roles = roleService.selectRolesByUserId(userId);
