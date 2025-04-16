@@ -51,7 +51,7 @@ create table sys_user (
   avatar            varchar(100)    default ''                 comment '头像路径',
   password          varchar(50)     default ''                 comment '密码',
   salt              varchar(20)     default ''                 comment '盐加密',
-  status            char(1)         default '0'                comment '帐号状态（0正常 1停用）',
+  status            char(1)         default '0'                comment '账号状态（0正常 1停用）',
   del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
   login_ip          varchar(128)    default ''                 comment '最后登录IP',
   login_date        datetime                                   comment '最后登录时间',
