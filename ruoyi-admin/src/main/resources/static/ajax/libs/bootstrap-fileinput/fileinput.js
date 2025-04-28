@@ -6449,7 +6449,9 @@
         otherActionButtons: '',
         textEncoding: 'UTF-8',
         preProcessUpload: null,
-        ajaxSettings: {},
+        ajaxSettings: { headers: {
+            "csrf_token": document.querySelector('meta[name="csrf-token"]').content
+        }},
         ajaxDeleteSettings: {},
         showAjaxErrorDetails: true,
         mergeAjaxCallbacks: false,
