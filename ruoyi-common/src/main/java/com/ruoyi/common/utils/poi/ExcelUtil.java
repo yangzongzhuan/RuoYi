@@ -428,7 +428,7 @@ public class ExcelUtil<T>
                     if (String.class == fieldType)
                     {
                         String s = Convert.toStr(val);
-                        if (StringUtils.endsWith(s, ".0"))
+                        if (s.matches("^\\d+\\.0$"))
                         {
                             val = StringUtils.substringBefore(s, ".0");
                         }
