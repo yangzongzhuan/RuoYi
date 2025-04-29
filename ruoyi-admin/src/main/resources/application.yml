@@ -155,4 +155,4 @@ csrf:
   # 过滤开关
   enabled: true
   # 白名单（多个用逗号分隔）
-  whites: 
+  whites: /druid
