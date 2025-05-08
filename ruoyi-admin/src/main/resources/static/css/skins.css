@@ -935,6 +935,31 @@
     background-color: #f9fafc;
 }
 
+.theme-light.skin-blue .nav:not(.navbar-toolbar)>li.selected {
+	border-right: 3px solid #1890ff;
+	margin-right: 2px;
+}
+
+.theme-light.skin-purple .nav:not(.navbar-toolbar)>li.selected{
+	border-right: 3px solid #722ed1;
+	margin-right: 2px;
+}
+
+.theme-light.skin-green .nav:not(.navbar-toolbar)>li.selected{
+	border-right: 3px solid #52c41a;
+	margin-right: 2px;
+}
+
+.theme-light.skin-red .nav:not(.navbar-toolbar)>li.selected{
+	border-right: 3px solid #f5222d;
+	margin-right: 2px;
+}
+
+.theme-light.skin-yellow .nav:not(.navbar-toolbar)>li.selected{
+	border-right: 3px solid #faad14;
+	margin-right: 2px;
+}
+
 /** 深蓝主题 theme-light **/
 /**
 .skin-blue.theme-blue .logo, .skin-white.theme-blue .logo {
@@ -1087,4 +1112,3 @@
 	background: #f39c12!important;
 	border: 1px solid #f39c12;
 }
-
