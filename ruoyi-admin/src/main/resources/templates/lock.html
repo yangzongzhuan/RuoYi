@@ -97,7 +97,7 @@
             data: { password: password },
             beforeSend: function(xhr) {
             	var csrftoken = $('meta[name=csrf-token]').attr('content');
-                xhr.setRequestHeader("csrf_token", csrftoken);
+                xhr.setRequestHeader("X-CSRF-Token", csrftoken);
             	index = layer.load(2, {shade: false});
             },
             success: function(result) {
