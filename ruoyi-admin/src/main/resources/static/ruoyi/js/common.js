@@ -576,7 +576,7 @@ $.ajaxSetup({
     beforeSend: function (xhr, settings) {
         var csrftoken = $('meta[name=csrf-token]').attr('content')
         if (($.common.equalsIgnoreCase(settings.type, "POST"))) {
-            xhr.setRequestHeader("csrf_token", csrftoken)
+            xhr.setRequestHeader("X-CSRF-Token", csrftoken)
         }
     },
     complete: function(XMLHttpRequest, textStatus) {

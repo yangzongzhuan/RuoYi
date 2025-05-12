@@ -6450,7 +6450,7 @@
         textEncoding: 'UTF-8',
         preProcessUpload: null,
         ajaxSettings: { headers: {
-            "csrf_token": document.querySelector('meta[name="csrf-token"]').content
+            "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content
         }},
         ajaxDeleteSettings: {},
         showAjaxErrorDetails: true,

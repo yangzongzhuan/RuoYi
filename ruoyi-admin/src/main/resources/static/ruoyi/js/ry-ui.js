@@ -1053,7 +1053,7 @@ var table = {
                     beforeSend: function (xhr, settings) {
                         var csrftoken = $('meta[name=csrf-token]').attr('content');
                         if ($.common.equalsIgnoreCase(settings.type, "POST")) {
-                            xhr.setRequestHeader("csrf_token", csrftoken);
+                            xhr.setRequestHeader("X-CSRF-Token", csrftoken);
                         }
                         $.modal.loading("正在处理中，请稍候...");
                     },
@@ -1237,7 +1237,7 @@ var table = {
                     beforeSend: function (xhr, settings) {
                         var csrftoken = $('meta[name=csrf-token]').attr('content');
                         if (($.common.equalsIgnoreCase(settings.type, "POST"))) {
-                            xhr.setRequestHeader("csrf_token", csrftoken);
+                            xhr.setRequestHeader("X-CSRF-Token", csrftoken);
                         }
                         $.modal.loading("正在处理中，请稍候...");
                         $.modal.disable();
@@ -1261,7 +1261,7 @@ var table = {
                     beforeSend: function (xhr, settings) {
                         var csrftoken = $('meta[name=csrf-token]').attr('content');
                         if (($.common.equalsIgnoreCase(settings.type, "POST"))) {
-                            xhr.setRequestHeader("csrf_token", csrftoken);
+                            xhr.setRequestHeader("X-CSRF-Token", csrftoken);
                         }
                         $.modal.loading("正在处理中，请稍候...");
                     },
@@ -1291,7 +1291,7 @@ var table = {
                     beforeSend: function (xhr, settings) {
                         var csrftoken = $('meta[name=csrf-token]').attr('content');
                         if (($.common.equalsIgnoreCase(settings.type, "POST"))) {
-                            xhr.setRequestHeader("csrf_token", csrftoken);
+                            xhr.setRequestHeader("X-CSRF-Token", csrftoken);
                         }
                         $.modal.loading("正在处理中，请稍候...");
                     },
