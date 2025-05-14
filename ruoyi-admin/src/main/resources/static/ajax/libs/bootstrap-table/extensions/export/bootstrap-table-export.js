@@ -32,13 +32,12 @@ Object.assign($.fn.bootstrapTable.columnDefaults, {
   forceHide: false
 })
 
-Object.assign($.fn.bootstrapTable.defaults.icons, {
-  export: {
-    bootstrap3: 'glyphicon-export icon-share',
-    bootstrap5: 'bi-download',
-    materialize: 'file_download',
-    'bootstrap-table': 'icon-download'
-  }[$.fn.bootstrapTable.theme] || 'fa-download'
+Utils.assignIcons($.fn.bootstrapTable.icons, 'export', {
+  glyphicon: 'glyphicon-export icon-share',
+  fa: 'fa-download',
+  bi: 'bi-download',
+  icon: 'icon-download',
+  'material-icons': 'file_download'
 })
 
 Object.assign($.fn.bootstrapTable.locales, {
@@ -207,7 +206,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
         const footerData = {}
         const footerHtml = []
 
-        $.each($footerRow.children(), (index, footerCell) => {
+        $footerRow.children().forEach((footerCell, index) => {
           const footerCellHtml = $(footerCell).children('.th-inner').first().html()
 
           footerData[this.columns[index].field] = footerCellHtml === '&nbsp;' ? null : footerCellHtml
@@ -219,7 +218,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
         this.$body.append(this.$body.children().last()[0].outerHTML)
         const $lastTableRow = this.$body.children().last()
 
-        $.each($lastTableRow.children(), (index, lastTableRowCell) => {
+        $lastTableRow.children().forEach((lastTableRowCell, index) => {
           $(lastTableRowCell).html(footerHtml[index])
         })
       }
