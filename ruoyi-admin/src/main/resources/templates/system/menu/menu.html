@@ -35,7 +35,10 @@
                 <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="system:menu:edit">
 		            <i class="fa fa-edit"></i> 修改
 		        </a>
-                <a class="btn btn-info" id="expandAllBtn">
+		        <a class="btn btn-info" onclick="saveSort()">
+                    <i class="fa fa-sort-amount-asc"></i> 保存排序
+                </a>
+                <a class="btn btn-default" id="expandAllBtn">
                     <i class="fa fa-exchange"></i> 展开/折叠
                 </a>
 	        </div>
@@ -52,6 +55,7 @@
 		var removeFlag = [[${@permission.hasPermi('system:menu:remove')}]];
 		var datas = [[${@dict.getType('sys_show_hide')}]];
 		var prefix = ctx + "system/menu";
+		var originalOrders = {};
 
 		$(function() {
 		    var options = {
@@ -87,14 +91,20 @@
 		            title: '排序',
 		            width: '10',
 		            widthUnit: '%',
-		            align: "left"
+		            align: "center",
+		            formatter: function(value, row, index) {
+		            	var menuIdText = $.common.sprintf("<input type='hidden' name='menuIds' value='%s'>", row.menuId);
+                    	var orderNumText = $.common.sprintf("<input type='text' name='orderNums' value='%s' class='form-control' style='display: inline-block; width:60px; text-align:center;'>", row.orderNum);
+                    	originalOrders[row.menuId] = row.orderNum;
+                    	return menuIdText + orderNumText;
+                    }
 		        },
 		        {
 		            field: 'url',
 		            title: '请求地址',
 		            width: '15',
 		            widthUnit: '%',
-		            align: "left",
+		            align: "center",
 		            formatter: function(value, row, index) {
                     	return $.table.tooltip(value);
                     }
@@ -104,7 +114,7 @@
 		            field: 'menuType',
 		            width: '10',
 		            widthUnit: '%',
-		            align: "left",
+		            align: "center",
 		            formatter: function(value, item, index) {
 		                if (item.menuType == 'M') {
 		                    return '<span class="label label-success">目录</span>';
@@ -122,7 +132,7 @@
 		            title: '可见',
 		            width: '10',
 		            widthUnit: '%',
-		            align: "left",
+		            align: "center",
 		            formatter: function(value, row, index) {
 		            	if (row.menuType == 'F') {
 		                    return '-';
@@ -135,7 +145,7 @@
 		            title: '权限标识',
 		            width: '15',
 		            widthUnit: '%',
-		            align: "left",
+		            align: "center",
 		            formatter: function(value, row, index) {
                     	return $.table.tooltip(value);
                     }
@@ -144,7 +154,7 @@
 		            title: '操作',
 		            width: '20',
 		            widthUnit: '%',
-		            align: "left",
+		            align: "center",
 		            formatter: function(value, row, index) {
 		                var actions = [];
 		                actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.menuId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
@@ -156,6 +166,25 @@
 		    };
 		    $.treeTable.init(options);
 		});
+
+		/* 保存排序-菜单 */
+		function saveSort() {
+			var changedMenuIds = [];
+			var changedOrderNums = [];
+		    $("input[name='menuIds']").each(function() {
+		        var menuId = $(this).val();
+		        var currentOrder = $(this).next("input[name='orderNums']").val();
+		        if (originalOrders[menuId] !== currentOrder) {
+		            changedMenuIds.push(menuId);
+		            changedOrderNums.push(currentOrder);
+		        }
+		    });
+		    if (changedMenuIds.length === 0) {
+		        $.modal.alertWarning("未检测到排序修改");
+		        return;
+		    }
+		    $.operate.post(prefix + "/updateSort", { "menuIds": changedMenuIds.join(","), "orderNums": changedOrderNums.join(",") });
+		}
 	</script>
 </body>
 </html>

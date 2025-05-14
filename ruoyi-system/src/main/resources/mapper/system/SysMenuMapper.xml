@@ -188,4 +188,10 @@
 		)
 	</insert>
 
+	<update id="updateMenuSort" parameterType="SysMenu">
+	    update sys_menu
+	    set order_num = #{orderNum}
+	    where menu_id = #{menuId}
+	</update>
+
 </mapper> 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
@@ -141,6 +142,17 @@ public class SysMenuController extends BaseController
         menu.setUpdateBy(getLoginName());
         AuthorizationUtils.clearAllCachedAuthorizationInfo();
         return toAjax(menuService.updateMenu(menu));
+    }
+
+    /**
+     * 保存菜单排序
+     */
+    @PostMapping("/updateSort")
+    @ResponseBody
+    public AjaxResult updateSort(@RequestParam String[] menuIds, @RequestParam String[] orderNums)
+    {
+        menuService.updateMenuSort(menuIds, orderNums);
+        return success();
     }
 
     /**
