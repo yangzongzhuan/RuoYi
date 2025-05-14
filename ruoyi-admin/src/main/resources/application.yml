@@ -153,6 +153,6 @@ xss:
 # 防止csrf攻击
 csrf:
   # 过滤开关
-  enabled: true
+  enabled: false
   # 白名单（多个用逗号分隔）
   whites: /druid
