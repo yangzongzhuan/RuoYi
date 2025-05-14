@@ -33,7 +33,7 @@ public class ShiroConstants
     public static final String ERROR = "errorMsg";
 
     /**
-     * csrf meta content
+     * csrf session content
      */
     public static final String CSRF_TOKEN = "csrf_token";
 
