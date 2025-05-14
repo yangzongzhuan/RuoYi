@@ -74,12 +74,12 @@ Object.assign($.fn.bootstrapTable.columnDefaults, {
   printFormatter: undefined
 })
 
-Object.assign($.fn.bootstrapTable.defaults.icons, {
-  print: {
-    bootstrap3: 'glyphicon-print icon-share',
-    bootstrap5: 'bi-printer',
-    'bootstrap-table': 'icon-printer'
-  }[$.fn.bootstrapTable.theme] || 'fa-print'
+Utils.assignIcons($.fn.bootstrapTable.icons, 'print', {
+  glyphicon: 'glyphicon-print icon-share',
+  fa: 'fa-print',
+  bi: 'bi-printer',
+  icon: 'icon-printer',
+  'material-icons': 'print'
 })
 
 $.BootstrapTable = class extends $.BootstrapTable {
@@ -131,15 +131,13 @@ $.BootstrapTable = class extends $.BootstrapTable {
     this.mergedCells.push({
       row: options.index,
       col,
-      rowspan: options.rowspan || 1,
-      colspan: options.colspan || 1
+      rowspan: +options.rowspan || 1,
+      colspan: +options.colspan || 1
     })
   }
 
   doPrint (data) {
-    const canPrint = column => {
-      return !column.printIgnore && column.visible
-    }
+    const canPrint = column => !column.printIgnore && column.visible
 
     const formatValue = (row, i, column) => {
       const value_ = Utils.getItemField(row, column.field, this.options.escape, column.escape)
@@ -148,7 +146,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
         [value_, row, i], value_)
 
       return typeof value === 'undefined' || value === null ?
-        this.options.undefinedText : value
+        this.options.undefinedText : $('<div>').html(value).html()
     }
 
     const buildTable = (data, columnsArray) => {
@@ -194,9 +192,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
 
         const columns = columnsArray.flat(1)
 
-        columns.sort((c1, c2) => {
-          return c1.colspanIndex - c2.colspanIndex
-        })
+        columns.sort((c1, c2) => c1.colspanIndex - c2.colspanIndex)
 
         for (let j = 0; j < columns.length; j++) {
           if (columns[j].colspanGroup > 0) continue

@@ -124,7 +124,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
     try {
       $(this.$el).dragtable('destroy')
     } catch (e) {
-      // do nothing
+      console.error(e)
     }
     $(this.$el).dragtable({
       maxMovingRows: this.options.maxMovingRows,
@@ -136,7 +136,9 @@ $.BootstrapTable = class extends $.BootstrapTable {
         const sortOrder = {}
 
         table.el.find('th').each((i, el) => {
-          sortOrder[$(el).data('field')] = i
+          if (el.dataset.field !== undefined) {
+            sortOrder[el.dataset.field] = i
+          }
         })
 
         this.columnsSortOrder = sortOrder
@@ -177,7 +179,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
         this.columns = columns
 
         filterFn() // Support <IE9
-        $.each(this.columns, (i, column) => {
+        for (const column of this.columns) {
           let found = false
           const field = column.field
 
@@ -189,7 +191,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
             }
             return true
           })
-        })
+        }
 
         this.options.columns[0] = optionsColumns
 
