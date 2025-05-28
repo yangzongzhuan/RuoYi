@@ -20,7 +20,7 @@ Utils.assignIcons($.fn.bootstrapTable.icons, 'customViewOn', {
 })
 
 Utils.assignIcons($.fn.bootstrapTable.icons, 'customViewOff', {
-  glyphicon: 'glyphicon-thumbnails',
+  glyphicon: 'glyphicon glyphicon-eye-open',
   fa: 'fa-th',
   bi: 'bi-grid',
   icon: 'grid_on',
