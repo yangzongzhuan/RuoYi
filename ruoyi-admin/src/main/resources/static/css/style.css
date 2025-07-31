@@ -476,6 +476,28 @@ body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
     top: 40px;
     font-size: 12px;
     background-color: #2f4050;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level {
+    position: relative;
+    overflow-y: overlay;
+    scrollbar-width: thin;
+    scrollbar-color: #555 #2f4050;
+}
+
+.fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+    position: absolute;
+    right: 0;
+}
+
+.fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
 }
 
 .fixed-sidebar.mini-navbar .nav li:hover>.nav-second-level, .fixed-sidebar.mini-navbar .nav li:hover>a> span.nav-label {
