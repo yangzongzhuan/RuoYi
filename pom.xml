@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <shiro.version>2.0.1</shiro.version>
+        <shiro.version>2.0.4</shiro.version>
         <mybatis-spring-boot.version>3.0.4</mybatis-spring-boot.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <druid.version>1.2.23</druid.version>
