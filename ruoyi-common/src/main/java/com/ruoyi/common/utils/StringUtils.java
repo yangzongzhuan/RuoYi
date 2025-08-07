@@ -15,6 +15,7 @@ import com.ruoyi.common.core.text.StrFormatter;
  * 
  * @author ruoyi
  */
+@SuppressWarnings("deprecation")
 public class StringUtils extends org.apache.commons.lang3.StringUtils
 {
     /** 空字符串 */
