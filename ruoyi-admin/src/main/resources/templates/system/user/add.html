@@ -232,10 +232,17 @@
         	var treeId = $("#treeId").val();
         	var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
         	var url = ctx + "system/user/selectDeptTree/" + deptId;
+            var btn = ['<i class="fa fa-check"></i> 确认', '<i class="fa fa-trash-o"></i> 清除', '<i class="fa fa-close"></i> 关闭'];
 			var options = {
 				title: '选择部门',
 				width: "380",
 				url: url,
+				btn: btn,
+				btn2: function(index, layero) {
+				    $("#treeId").val("");
+				    $("#treeName").val("");
+				    $.modal.close(index);
+				},
 				callBack: doSubmit
 			};
 			$.modal.openOptions(options);
