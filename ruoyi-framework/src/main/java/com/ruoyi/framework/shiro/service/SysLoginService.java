@@ -179,10 +179,6 @@ public class SysLoginService
      */
     public void recordLoginInfo(Long userId)
     {
-        SysUser user = new SysUser();
-        user.setUserId(userId);
-        user.setLoginIp(ShiroUtils.getIp());
-        user.setLoginDate(DateUtils.getNowDate());
-        userService.updateUserInfo(user);
+        userService.updateLoginInfo(userId, ShiroUtils.getIp(), DateUtils.getNowDate());
     }
 }
