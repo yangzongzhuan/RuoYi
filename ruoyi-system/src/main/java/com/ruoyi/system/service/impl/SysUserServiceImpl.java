@@ -324,7 +324,7 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public int resetUserPwd(SysUser user)
     {
-        return updateUserInfo(user);
+        return userMapper.resetUserPwd(user.getUserId(), user.getPassword(), user.getSalt());
     }
 
     /**
@@ -544,6 +544,7 @@ public class SysUserServiceImpl implements ISysUserService
                     checkUserDataScope(u.getUserId());
                     deptService.checkDeptDataScope(user.getDeptId());
                     user.setUserId(u.getUserId());
+                    user.setDeptId(u.getDeptId());
                     user.setUpdateBy(operName);
                     userMapper.updateUser(user);
                     successNum++;
@@ -589,6 +590,6 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public int changeStatus(SysUser user)
     {
-        return userMapper.updateUser(user);
+        return userMapper.updateUserStatus(user.getUserId(), user.getStatus());
     }
 }
