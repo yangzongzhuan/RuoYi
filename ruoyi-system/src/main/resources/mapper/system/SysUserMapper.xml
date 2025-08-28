@@ -171,7 +171,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="resetUserPwd" parameterType="SysUser">
- 		update sys_user SET password = #{password}, salt = #{salt}, update_time = sysdate() where user_id = #{userId}
+ 		update sys_user SET pwd_update_date = sysdate(), password = #{password}, salt = #{salt}, update_time = sysdate() where user_id = #{userId}
 	</update>
 	
 	<update id="updateUserStatus" parameterType="SysUser">
