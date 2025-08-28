@@ -102,6 +102,25 @@ public interface SysUserMapper
     public int updateUserAvatar(@Param("userId") Long userId, @Param("avatar") String avatar);
 
     /**
+     * 修改用户状态
+     * 
+     * @param userId 用户ID
+     * @param status 状态
+     * @return 结果
+     */
+    public int updateUserStatus(@Param("userId") Long userId, @Param("status") String status);
+
+    /**
+     * 重置用户密码
+     * 
+     * @param userId 用户ID
+     * @param password 密码
+     * @param salt 盐
+     * @return 结果
+     */
+    public int resetUserPwd(@Param("userId") Long userId, @Param("password") String password, @Param("salt") String salt);
+
+    /**
      * 更新用户登录信息（IP和登录时间）
      * 
      * @param userId 用户ID
