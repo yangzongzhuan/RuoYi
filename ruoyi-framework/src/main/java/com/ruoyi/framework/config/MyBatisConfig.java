@@ -39,20 +39,20 @@ public class MyBatisConfig
 
     public static String setTypeAliasesPackage(String typeAliasesPackage)
     {
-        ResourcePatternResolver resolver = (ResourcePatternResolver) new PathMatchingResourcePatternResolver();
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resolver);
-        List<String> allResult = new ArrayList<String>();
+        List<String> allResult = new ArrayList<>();
         try
         {
             for (String aliasesPackage : typeAliasesPackage.split(","))
             {
-                List<String> result = new ArrayList<String>();
+                List<String> result = new ArrayList<>();
                 aliasesPackage = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX
                         + ClassUtils.convertClassNameToResourcePath(aliasesPackage.trim()) + "/" + DEFAULT_RESOURCE_PATTERN;
                 Resource[] resources = resolver.getResources(aliasesPackage);
                 if (resources != null && resources.length > 0)
                 {
-                    MetadataReader metadataReader = null;
+                    MetadataReader metadataReader;
                     for (Resource resource : resources)
                     {
                         if (resource.isReadable())
@@ -69,15 +69,15 @@ public class MyBatisConfig
                         }
                     }
                 }
-                if (result.size() > 0)
+                if (!result.isEmpty())
                 {
-                    HashSet<String> hashResult = new HashSet<String>(result);
+                    HashSet<String> hashResult = new HashSet<>(result);
                     allResult.addAll(hashResult);
                 }
             }
-            if (allResult.size() > 0)
+            if (!allResult.isEmpty())
             {
-                typeAliasesPackage = String.join(",", (String[]) allResult.toArray(new String[0]));
+                typeAliasesPackage = String.join(",", allResult.toArray(new String[0]));
             }
             else
             {
