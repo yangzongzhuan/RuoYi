@@ -56,9 +56,10 @@ public class OnlineSessionFilter extends AccessControlFilter
                 {
                     onlineSession.setUserId(user.getUserId());
                     onlineSession.setLoginName(user.getLoginName());
-					onlineSession.setAvatar(user.getAvatar());
+                    onlineSession.setAvatar(user.getAvatar());
                     onlineSession.setDeptName(user.getDept().getDeptName());
                     onlineSession.markAttributeChanged();
+                    onlineSessionDAO.update(onlineSession);
                 }
             }
 
