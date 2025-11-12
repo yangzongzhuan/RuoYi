@@ -7,7 +7,7 @@
 	<meta name="description" content="">
 	<meta th:content="${session.csrf_token}" name="csrf-token"/>
 	<title th:text="${title}"></title>
-	<link th:href="@{/css/bootstrap.min.css?v=3.3.7}" rel="stylesheet"/>
+	<link th:href="@{/css/bootstrap.min.css?v=3.4.1}" rel="stylesheet"/>
 	<link th:href="@{/css/font-awesome.min.css?v=4.7.0}" rel="stylesheet"/>
 	<!-- bootstrap-table 表格插件样式 -->
 	<link th:href="@{/ajax/libs/bootstrap-table/bootstrap-table.min.css?v=1.24.1}" rel="stylesheet"/>
@@ -21,7 +21,7 @@
     <script th:inline="javascript"> var ctx = [[@{/}]]; var lockscreen = [[${session.lockscreen}]]; if(lockscreen){window.top.location=ctx+"lockscreen";} </script>
     <a id="scroll-up" href="javascript:;" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>
 	<script th:src="@{/js/jquery.min.js?v=3.7.1}"></script>
-	<script th:src="@{/js/bootstrap.min.js?v=3.3.7}"></script>
+	<script th:src="@{/js/bootstrap.min.js?v=3.4.1}"></script>
 	<!-- bootstrap-table 表格插件 -->
 	<script th:src="@{/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=1.24.1}"></script>
 	<script th:src="@{/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=1.24.1}"></script>
