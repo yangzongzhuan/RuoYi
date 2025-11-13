@@ -1238,18 +1238,36 @@ public class ExcelUtil<T>
     public void setXSSFValidationWithHidden(Sheet sheet, String[] textlist, String promptContent, int firstRow, int endRow, int firstCol, int endCol)
     {
         String hideSheetName = "combo_" + firstCol + "_" + endCol;
-        Sheet hideSheet = wb.createSheet(hideSheetName); // 用于存储 下拉菜单数据
-        for (int i = 0; i < textlist.length; i++)
+        Sheet hideSheet = null;
+        String hideSheetDataName = hideSheetName + "_data";
+        Name name = wb.getName(hideSheetDataName);
+        if (name != null)
         {
-            hideSheet.createRow(i).createCell(0).setCellValue(textlist[i]);
+            // 名称已存在，尝试从名称的引用中找到sheet名称
+            String refersToFormula = name.getRefersToFormula();
+            if (StringUtils.isNotEmpty(refersToFormula) && refersToFormula.contains("!"))
+            {
+                String sheetNameFromFormula = refersToFormula.substring(0, refersToFormula.indexOf("!"));
+                hideSheet = wb.getSheet(sheetNameFromFormula);
+            }
         }
-        // 创建名称，可被其他单元格引用
-        Name name = wb.createName();
-        name.setNameName(hideSheetName + "_data");
-        name.setRefersToFormula(hideSheetName + "!$A$1:$A$" + textlist.length);
+
+        if (hideSheet == null)
+        {
+            hideSheet = wb.createSheet(hideSheetName); // 用于存储 下拉菜单数据
+            for (int i = 0; i < textlist.length; i++)
+            {
+                hideSheet.createRow(i).createCell(0).setCellValue(textlist[i]);
+            }
+            // 创建名称，可被其他单元格引用
+            name = wb.createName();
+            name.setNameName(hideSheetDataName);
+            name.setRefersToFormula(hideSheetName + "!$A$1:$A$" + textlist.length);
+        }
+
         DataValidationHelper helper = sheet.getDataValidationHelper();
         // 加载下拉列表内容
-        DataValidationConstraint constraint = helper.createFormulaListConstraint(hideSheetName + "_data");
+        DataValidationConstraint constraint = helper.createFormulaListConstraint(hideSheetDataName);
         // 设置数据有效性加载在哪个单元格上,四个参数分别是：起始行、终止行、起始列、终止列
         CellRangeAddressList regions = new CellRangeAddressList(firstRow, endRow, firstCol, endCol);
         // 数据有效性对象
@@ -1656,7 +1674,8 @@ public class ExcelUtil<T>
         {
             this.sheet = wb.createSheet();
             this.createTitle();
-            wb.setSheetName(index, sheetName + index);
+            int actualIndex = wb.getSheetIndex(this.sheet);
+            wb.setSheetName(actualIndex, sheetName + index);
         }
     }
 
