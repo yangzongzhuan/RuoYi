@@ -174,12 +174,12 @@ public class ExcelUtil<T>
     /**
      * 对象的子列表方法
      */
-    private Method subMethod;
+    private Map<String, Method> subMethods = new HashMap<>();
 
     /**
      * 对象的子列表属性
      */
-    private List<Field> subFields;
+    private Map<String, List<Field>> subFieldsMap = new HashMap<>();
 
     /**
      * 统计列表
@@ -252,7 +252,7 @@ public class ExcelUtil<T>
             int titleLastCol = this.fields.size() - 1;
             if (isSubList())
             {
-                titleLastCol = titleLastCol + subFields.size() - 1;
+                titleLastCol = titleLastCol + subFieldsMap.values().size() - 1;
             }
             Row titleRow = sheet.createRow(rownum == 0 ? rownum++ : 0);
             titleRow.setHeightInPoints(30);
@@ -272,16 +272,17 @@ public class ExcelUtil<T>
         {
             Row subRow = sheet.createRow(rownum);
             int column = 0;
-            int subFieldSize = subFields != null ? subFields.size() : 0;
             for (Object[] objects : fields)
             {
                 Field field = (Field) objects[0];
                 Excel attr = (Excel) objects[1];
+                CellStyle cellStyle = styles.get(StringUtils.format("header_{}_{}", attr.headerColor(), attr.headerBackgroundColor()));
                 if (Collection.class.isAssignableFrom(field.getType()))
                 {
                     Cell cell = subRow.createCell(column);
                     cell.setCellValue(attr.name());
-                    cell.setCellStyle(styles.get(StringUtils.format("header_{}_{}", attr.headerColor(), attr.headerBackgroundColor())));
+                    cell.setCellStyle(cellStyle);
+                    int subFieldSize = subFieldsMap != null ? subFieldsMap.get(field.getName()).size() : 0;
                     if (subFieldSize > 1)
                     {
                         CellRangeAddress cellAddress = new CellRangeAddress(rownum, rownum, column, column + subFieldSize - 1);
@@ -293,7 +294,7 @@ public class ExcelUtil<T>
                 {
                     Cell cell = subRow.createCell(column++);
                     cell.setCellValue(attr.name());
-                    cell.setCellStyle(styles.get(StringUtils.format("header_{}_{}", attr.headerColor(), attr.headerBackgroundColor())));
+                    cell.setCellStyle(cellStyle);
                 }
             }
             rownum++;
@@ -697,7 +698,8 @@ public class ExcelUtil<T>
                 Excel excel = (Excel) os[1];
                 if (Collection.class.isAssignableFrom(field.getType()))
                 {
-                    for (Field subField : subFields)
+                    List<Field> currentSubFields = subFieldsMap.get(field.getName());
+                    for (Field subField : currentSubFields)
                     {
                         Excel subExcel = subField.getAnnotation(Excel.class);
                         this.createHeadCell(subExcel, row, column++);
@@ -747,6 +749,7 @@ public class ExcelUtil<T>
                         if (subList != null && !subList.isEmpty())
                         {
                             int subIndex = 0;
+                            List<Field> currentSubFields = subFieldsMap.get(field.getName());
                             for (Object subVo : subList)
                             {
                                 Row subRow = sheet.getRow(currentRowNum + subIndex);
@@ -756,14 +759,14 @@ public class ExcelUtil<T>
                                 }
 
                                 int subColumn = column;
-                                for (Field subField : subFields)
+                                for (Field subField : currentSubFields)
                                 {
                                     Excel subExcel = subField.getAnnotation(Excel.class);
                                     addCell(subExcel, subRow, (T) subVo, subField, subColumn++);
                                 }
                                 subIndex++;
                             }
-                            column += subFields.size();
+                            column += currentSubFields.size();
                         }
                     }
                     catch (Exception e)
@@ -1131,7 +1134,7 @@ public class ExcelUtil<T>
             {
                 // 创建cell
                 cell = row.createCell(column);
-                if (isSubListValue(vo) && getListCellValue(vo).size() > 1 && attr.needMerge())
+                if (isSubListValue(vo) && getListCellValue(vo) > 1 && attr.needMerge())
                 {
                     if (subMergedLastRowNum >= subMergedFirstRowNum)
                     {
@@ -1602,10 +1605,11 @@ public class ExcelUtil<T>
             }
             if (Collection.class.isAssignableFrom(field.getType()))
             {
-                subMethod = getSubMethod(field.getName(), clazz);
+                String fieldName = field.getName();
+                subMethods.put(fieldName, getSubMethod(fieldName, clazz));
                 ParameterizedType pt = (ParameterizedType) field.getGenericType();
                 Class<?> subClass = (Class<?>) pt.getActualTypeArguments()[0];
-                this.subFields = FieldUtils.getFieldsListWithAnnotation(subClass, Excel.class);
+                subFieldsMap.put(fieldName, FieldUtils.getFieldsListWithAnnotation(subClass, Excel.class));
             }
         }
 
@@ -1858,7 +1862,7 @@ public class ExcelUtil<T>
      */
     public boolean isSubList()
     {
-        return StringUtils.isNotNull(subFields) && subFields.size() > 0;
+        return !StringUtils.isEmpty(subFieldsMap);
     }
 
     /**
@@ -1866,24 +1870,32 @@ public class ExcelUtil<T>
      */
     public boolean isSubListValue(T vo)
     {
-        return StringUtils.isNotNull(subFields) && subFields.size() > 0 && StringUtils.isNotNull(getListCellValue(vo)) && getListCellValue(vo).size() > 0;
+        return !StringUtils.isEmpty(subFieldsMap) && getListCellValue(vo) > 0;
     }
 
     /**
      * 获取集合的值
      */
-    public Collection<?> getListCellValue(Object obj)
+    public int getListCellValue(Object obj)
     {
-        Object value;
+        Collection<?> value;
+        int max = 0;
         try
         {
-            value = subMethod.invoke(obj, new Object[] {});
+            for (String s : subMethods.keySet())
+            {
+                value = (Collection<?>) subMethods.get(s).invoke(obj);
+                if (value.size() > max)
+                {
+                    max = value.size();
+                }
+            }
         }
         catch (Exception e)
         {
-            return new ArrayList<Object>();
+            return 0;
         }
-        return (Collection<?>) value;
+        return max;
     }
 
     /**
