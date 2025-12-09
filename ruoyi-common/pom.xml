@@ -83,10 +83,10 @@
             <artifactId>poi-ooxml</artifactId>
         </dependency>
 
-        <!-- yml解析器 -->
+        <!-- 解析客户端操作系统、浏览器等 -->
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
+            <groupId>nl.basjes.parse.useragent</groupId>
+            <artifactId>yauaa</artifactId>
         </dependency>
 
         <!-- servlet包 -->

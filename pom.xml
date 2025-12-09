@@ -21,7 +21,7 @@
         <shiro.version>1.13.0</shiro.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <druid.version>1.2.27</druid.version>
-        <bitwalker.version>1.21</bitwalker.version>
+        <yauaa.version>7.32.0</yauaa.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <swagger.version>3.0.0</swagger.version>
         <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
@@ -134,9 +134,9 @@
 
             <!-- 解析客户端操作系统、浏览器等 -->
             <dependency>
-                <groupId>eu.bitwalker</groupId>
-                <artifactId>UserAgentUtils</artifactId>
-                <version>${bitwalker.version}</version>
+                <groupId>nl.basjes.parse.useragent</groupId>
+                <artifactId>yauaa</artifactId>
+                <version>${yauaa.version}</version>
             </dependency>
 
             <!-- pagehelper 分页插件 -->
