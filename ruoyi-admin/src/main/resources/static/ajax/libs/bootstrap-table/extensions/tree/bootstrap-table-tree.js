@@ -171,6 +171,9 @@
             target.data_obj = {};
             // 设置请求分页参数
             if (options.pagination) {
+                if (target.lastAjaxParams) {
+                    parms = $.extend({}, target.lastAjaxParams, parms);
+                }
                 var params = {};
                 params.offset = options.pageSize * (options.pageNumber - 1);
                 params.limit = options.pageSize;
