@@ -18,7 +18,7 @@
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <shiro.version>2.0.6</shiro.version>
-        <mybatis-spring-boot.version>3.0.4</mybatis-spring-boot.version>
+        <mybatis-spring-boot.version>3.0.5</mybatis-spring-boot.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <druid.version>1.2.27</druid.version>
         <yauaa.version>7.32.0</yauaa.version>
