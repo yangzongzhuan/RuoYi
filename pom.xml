@@ -28,6 +28,7 @@
         <oshi.version>6.9.1</oshi.version>
         <commons.io.version>2.21.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
+        <quartz.version>2.5.2</quartz.version>
         <velocity.version>2.3</velocity.version>
         <springdoc.version>2.8.14</springdoc.version>
     </properties>
@@ -40,7 +41,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.5.4</version>
+                <version>3.5.8</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -169,6 +170,13 @@
                 <groupId>org.apache.velocity</groupId>
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- 定时任务 -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
             </dependency>
 
             <!-- 阿里JSON解析器 -->
