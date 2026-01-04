@@ -455,7 +455,7 @@ public class SysUserServiceImpl implements ISysUserService
     @Override
     public void checkUserDataScope(Long userId)
     {
-        if (!SysUser.isAdmin(ShiroUtils.getUserId()))
+        if (!ShiroUtils.isAdmin())
         {
             SysUser user = new SysUser();
             user.setUserId(userId);
