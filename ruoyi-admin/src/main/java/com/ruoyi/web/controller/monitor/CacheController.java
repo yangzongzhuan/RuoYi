@@ -36,29 +36,29 @@ public class CacheController extends BaseController
 
     @RequiresPermissions("monitor:cache:view")
     @PostMapping("/getNames")
-    public String getCacheNames(String fragment, ModelMap mmap)
+    public String getCacheNames(ModelMap mmap)
     {
         mmap.put("cacheNames", cacheService.getCacheNames());
-        return prefix + "/cache::" + fragment;
+        return prefix + "/cache::fragment-cache-names";
     }
 
     @RequiresPermissions("monitor:cache:view")
     @PostMapping("/getKeys")
-    public String getCacheKeys(String fragment, String cacheName, ModelMap mmap)
+    public String getCacheKeys(String cacheName, ModelMap mmap)
     {
         mmap.put("cacheName", cacheName);
         mmap.put("cacheKeys", cacheService.getCacheKeys(cacheName));
-        return prefix + "/cache::" + fragment;
+        return prefix + "/cache::fragment-cache-kyes";
     }
 
     @RequiresPermissions("monitor:cache:view")
     @PostMapping("/getValue")
-    public String getCacheValue(String fragment, String cacheName, String cacheKey, ModelMap mmap)
+    public String getCacheValue(String cacheName, String cacheKey, ModelMap mmap)
     {
         mmap.put("cacheName", cacheName);
         mmap.put("cacheKey", cacheKey);
         mmap.put("cacheValue", cacheService.getCacheValue(cacheName, cacheKey));
-        return prefix + "/cache::" + fragment;
+        return prefix + "/cache::fragment-cache-value";
     }
 
     @RequiresPermissions("monitor:cache:view")

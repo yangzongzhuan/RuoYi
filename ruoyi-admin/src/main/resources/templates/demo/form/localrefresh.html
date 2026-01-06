@@ -48,8 +48,7 @@
 				type: "post",
 				url: ctx + "demo/form/localrefresh/task",
 				data: {
-					"taskName": $("#task-name").val(),
-					"fragment":'fragment-tasklist'
+					"taskName": $("#task-name").val()
 				},
 				success: function(data) {
 					$("#tasklist").html(data);
