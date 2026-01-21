@@ -16,7 +16,11 @@ public class AuthorizationUtils
      */
     public static void clearAllCachedAuthorizationInfo()
     {
-        getUserRealm().clearAllCachedAuthorizationInfo();
+        UserRealm ur = getUserRealm();
+        if (ur != null)
+        {
+            ur.clearAllCachedAuthorizationInfo();
+        }
     }
 
     /**
@@ -25,6 +29,10 @@ public class AuthorizationUtils
     public static UserRealm getUserRealm()
     {
         RealmSecurityManager rsm = (RealmSecurityManager) SecurityUtils.getSecurityManager();
+        if (rsm.getRealms().isEmpty()) 
+        {
+            return null;
+        }
         return (UserRealm) rsm.getRealms().iterator().next();
     }
 }
