@@ -2,6 +2,7 @@ package com.ruoyi.common.utils;
 
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,7 +13,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
  * 时间工具类
- *
+ * 
  * @author ruoyi
  */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils
@@ -28,13 +29,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
     public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
     private static String[] parsePatterns = {
-            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM", 
             "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
             "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
 
     /**
      * 获取当前Date型日期
-     *
+     * 
      * @return Date() 当前日期
      */
     public static Date getNowDate()
@@ -44,7 +45,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd
-     *
+     * 
      * @return String
      */
     public static String getDate()
@@ -74,14 +75,14 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 
     public static final String parseDateToStr(final String format, final Date date)
     {
-        return DateFormatUtils.format(date, format);
+        return new SimpleDateFormat(format).format(date);
     }
 
     public static final Date dateTime(final String format, final String ts)
     {
         try
         {
-            return parseDate(ts, format);
+            return new SimpleDateFormat(format).parse(ts);
         }
         catch (ParseException e)
         {
@@ -184,6 +185,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
     public static Date toDate(LocalDate temporalAccessor)
     {
         LocalDateTime localDateTime = LocalDateTime.of(temporalAccessor, LocalTime.of(0, 0, 0));
-        return toDate(localDateTime);
+        ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
+        return Date.from(zdt.toInstant());
     }
 }
