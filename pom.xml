@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <spring-boot.version>2.5.15</spring-boot.version>
-        <shiro.version>1.13.0</shiro.version>
+        <shiro.version>2.1.0</shiro.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <druid.version>1.2.27</druid.version>
         <yauaa.version>7.32.0</yauaa.version>
