@@ -17,20 +17,20 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
-        <shiro.version>2.0.6</shiro.version>
+        <shiro.version>2.1.0</shiro.version>
         <mybatis-spring-boot.version>3.0.5</mybatis-spring-boot.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <druid.version>1.2.27</druid.version>
-        <yauaa.version>7.32.0</yauaa.version>
+        <yauaa.version>8.1.0</yauaa.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>2.1.1</pagehelper.boot.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <oshi.version>6.9.1</oshi.version>
+        <oshi.version>6.10.0</oshi.version>
         <commons.io.version>2.21.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
         <quartz.version>2.5.2</quartz.version>
         <velocity.version>2.3</velocity.version>
-        <springdoc.version>2.8.14</springdoc.version>
+        <springdoc.version>2.8.16</springdoc.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -41,7 +41,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.5.8</version>
+                <version>3.5.11</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
