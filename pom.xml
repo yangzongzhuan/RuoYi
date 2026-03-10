@@ -111,18 +111,6 @@
                 <version>${mybatis-spring-boot.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.mysql</groupId>
-                <artifactId>mysql-connector-j</artifactId>
-                <version>8.1.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.servlet</groupId>
-                <artifactId>jakarta.servlet-api</artifactId>
-                <version>6.0.0</version>
-            </dependency>
-
             <!-- 解析客户端操作系统、浏览器等 -->
             <dependency>
                 <groupId>nl.basjes.parse.useragent</groupId>
