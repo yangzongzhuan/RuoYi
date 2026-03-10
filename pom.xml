@@ -17,10 +17,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+        <spring-boot.version>3.5.11</spring-boot.version>
         <shiro.version>2.1.0</shiro.version>
         <mybatis-spring-boot.version>3.0.5</mybatis-spring-boot.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
-        <druid.version>1.2.27</druid.version>
+        <druid.version>1.2.28</druid.version>
         <yauaa.version>8.1.0</yauaa.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>2.1.1</pagehelper.boot.version>
@@ -40,7 +41,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.5.11</version>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -247,7 +248,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${spring-boot.version}</version>
             </plugin>
         </plugins>
     </build>

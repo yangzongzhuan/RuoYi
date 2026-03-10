@@ -53,7 +53,7 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager
         {
             return false;
         }
-        if (attributeKeyStr.startsWith("javax.servlet"))
+        if (attributeKeyStr.startsWith("javax.servlet") || attributeKeyStr.startsWith("jakarta.servlet"))
         {
             return false;
         }
