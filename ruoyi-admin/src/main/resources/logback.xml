@@ -75,6 +75,8 @@
 	<logger name="com.ruoyi" level="info" />
 	<!-- Spring日志级别控制  -->
 	<logger name="org.springframework" level="warn" />
+	<!-- Thymeleaf日志级别控制  -->
+	<Logger name="org.thymeleaf" level="error"/>
 
 	<root level="info">
 		<appender-ref ref="console" />
