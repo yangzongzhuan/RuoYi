@@ -21,6 +21,16 @@
 * 前后端分离版本，请移步[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)，微服务版本，请移步[RuoYi-Cloud](https://gitee.com/y_project/RuoYi-Cloud)
 * 阿里云折扣场：[点我进入](http://aly.ruoyi.vip)，腾讯云秒杀场：[点我进入](http://txy.ruoyi.vip)&nbsp;&nbsp;
 
+## 版本分支
+
+RuoYi 框架提供 Spring Boot 2.x / 3.x / 4.x 多版本分支的并行维护。
+
+| 名称              | 说明                      | 地址                                                |
+| :---------------- | :------------------------ | :-------------------------------------------------- |
+| master 默认分支   | Spring Boot 4.x (JDK 17+) | https://gitee.com/y_project/RuoYi                   |
+| springboot3 分支  | Spring Boot 3.x (JDK 17+) | https://gitee.com/y_project/RuoYi/tree/springboot3  |
+| springboot2 分支  | Spring Boot 2.x (JDK 8+)  | https://gitee.com/y_project/RuoYi/tree/springboot2  |
+
 ## 内置功能
 
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
