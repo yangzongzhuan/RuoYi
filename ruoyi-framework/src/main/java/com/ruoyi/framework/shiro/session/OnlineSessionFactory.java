@@ -1,6 +1,5 @@
 package com.ruoyi.framework.shiro.session;
 
-import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionContext;
 import org.apache.shiro.session.mgt.SessionFactory;
@@ -8,6 +7,7 @@ import org.apache.shiro.web.session.mgt.WebSessionContext;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.common.utils.http.UserAgentUtils;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * 自定义sessionFactory会话

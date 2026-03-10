@@ -55,9 +55,6 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: static/i18n/messages
-  jackson:
-    time-zone: GMT+8
-    date-format: yyyy-MM-dd HH:mm:ss
   profiles:
     active: druid
   # 文件上传
@@ -127,6 +124,20 @@ shiro:
     # 是否开启记住我
     enabled: true
 
+# Springdoc配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    tags-sorter: alpha
+  group-configs:
+    - group: 'default'
+      display-name: '测试模块'
+      paths-to-match: '/**'
+      packages-to-scan: com.ruoyi.web.controller.tool
+
 # 防止XSS攻击
 xss:
   # 过滤开关
@@ -142,8 +153,3 @@ csrf:
   enabled: false
   # 白名单（多个用逗号分隔）
   whites: /druid
-
-# Swagger配置
-swagger:
-  # 是否开启swagger
-  enabled: true

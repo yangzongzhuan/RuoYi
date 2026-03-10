@@ -1,10 +1,10 @@
 package com.ruoyi.framework.shiro.web.filter.csrf;
 
 import java.util.List;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.core.text.Convert;

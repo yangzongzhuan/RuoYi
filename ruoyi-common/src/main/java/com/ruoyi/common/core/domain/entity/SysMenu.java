@@ -2,7 +2,7 @@ package com.ruoyi.common.core.domain.entity;
 
 import java.util.List;
 import java.util.ArrayList;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.domain.BaseEntity;

@@ -1,10 +1,8 @@
 package com.ruoyi.framework.shiro.service;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.annotation.PostConstruct;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,8 +12,10 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.exception.user.UserPasswordNotMatchException;
 import com.ruoyi.common.exception.user.UserPasswordRetryLimitExceedException;
 import com.ruoyi.common.utils.MessageUtils;
+import com.ruoyi.common.utils.security.Md5Utils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
+import jakarta.annotation.PostConstruct;
 
 /**
  * 登录密码方法
@@ -80,6 +80,6 @@ public class SysPasswordService
 
     public String encryptPassword(String loginName, String password, String salt)
     {
-        return new Md5Hash(loginName + password + salt).toHex();
+        return Md5Utils.hash(loginName + password + salt);
     }
 }
