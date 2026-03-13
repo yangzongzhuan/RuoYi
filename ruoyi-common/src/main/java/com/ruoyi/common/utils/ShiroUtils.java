@@ -47,6 +47,10 @@ public class ShiroUtils
     {
         Subject subject = getSubject();
         PrincipalCollection principalCollection = subject.getPrincipals();
+        if (principalCollection.getRealmNames().isEmpty())
+        {
+            return;
+        }
         String realmName = principalCollection.getRealmNames().iterator().next();
         PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(user, realmName);
         // 重新加载Principal
