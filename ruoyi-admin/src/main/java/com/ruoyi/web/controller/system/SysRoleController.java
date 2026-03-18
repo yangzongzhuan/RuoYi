@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.Ztree;
@@ -23,6 +24,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.util.AuthorizationUtils;
 import com.ruoyi.system.domain.SysUserRole;
 import com.ruoyi.system.service.ISysDeptService;
+import com.ruoyi.system.service.ISysMenuService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
 
@@ -45,6 +47,9 @@ public class SysRoleController extends BaseController
 
     @Autowired
     private ISysDeptService deptService;
+
+    @Autowired
+    private ISysMenuService menuService;
 
     @RequiresPermissions("system:role:view")
     @GetMapping()
@@ -322,5 +327,28 @@ public class SysRoleController extends BaseController
     {
         List<Ztree> ztrees = deptService.roleDeptTreeData(role);
         return ztrees;
+    }
+
+    /**
+     * 查看角色详情
+     */
+    @RequiresPermissions("system:role:list")
+    @GetMapping("/view/{roleId}")
+    public String view(@PathVariable("roleId") Long roleId, ModelMap mmap)
+    {
+        roleService.checkRoleDataScope(roleId);
+        SysRole role = roleService.selectRoleById(roleId);
+        mmap.put("role", role);
+        // 菜单权限
+        mmap.put("menuTree", menuService.roleMenuTreeData(role, getUserId()));
+        // 数据权限部门：仅自定义数据权限时传已勾选部门节点
+        if (Constants.Dept.DATA_SCOPE_CUSTOM.equals(role.getDataScope()))
+        {
+            List<Ztree> deptTree = deptService.roleDeptTreeData(role);
+            mmap.put("deptTree", deptTree);
+        }
+        // 关联用户数量
+        mmap.put("userCount", roleService.countUserRoleByRoleId(roleId));
+        return prefix + "/view";
     }
 }

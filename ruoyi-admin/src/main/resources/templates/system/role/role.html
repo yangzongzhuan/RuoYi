@@ -71,6 +71,7 @@
 		        updateUrl: prefix + "/edit/{id}",
 		        removeUrl: prefix + "/remove",
 		        exportUrl: prefix + "/export",
+		        viewUrl: prefix + "/view/{id}",
 		        sortName: "roleSort",
 		        modalName: "角色",
 		        columns: [{
@@ -83,7 +84,10 @@
 		        {
 		            field: 'roleName',
 		            title: '角色名称',
-		            sortable: true
+		            sortable: true,
+		            formatter: function(value, row, index) {
+		                return '<a href="javascript:void(0)" onclick="$.operate.view(\'' + row.roleId + '\')">' + value + '</a>';
+		            }
 		        },
 		        {
 		            field: 'roleKey',

@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.annotation.DataScope;
+import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.context.PermissionContextHolder;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -25,31 +26,6 @@ import com.ruoyi.common.utils.StringUtils;
 @Component
 public class DataScopeAspect
 {
-    /**
-     * 全部数据权限
-     */
-    public static final String DATA_SCOPE_ALL = "1";
-
-    /**
-     * 自定数据权限
-     */
-    public static final String DATA_SCOPE_CUSTOM = "2";
-
-    /**
-     * 部门数据权限
-     */
-    public static final String DATA_SCOPE_DEPT = "3";
-
-    /**
-     * 部门及以下数据权限
-     */
-    public static final String DATA_SCOPE_DEPT_AND_CHILD = "4";
-
-    /**
-     * 仅本人数据权限
-     */
-    public static final String DATA_SCOPE_SELF = "5";
-
     /**
      * 数据权限过滤关键字
      */
@@ -92,7 +68,7 @@ public class DataScopeAspect
         List<String> conditions = new ArrayList<String>();
         List<String> scopeCustomIds = new ArrayList<String>();
         user.getRoles().forEach(role -> {
-            if (DATA_SCOPE_CUSTOM.equals(role.getDataScope()) && StringUtils.equals(role.getStatus(), UserConstants.ROLE_NORMAL) && (StringUtils.isEmpty(permission) || StringUtils.containsAny(role.getPermissions(), Convert.toStrArray(permission))))
+            if (Constants.Dept.DATA_SCOPE_CUSTOM.equals(role.getDataScope()) && StringUtils.equals(role.getStatus(), UserConstants.ROLE_NORMAL) && (StringUtils.isEmpty(permission) || StringUtils.containsAny(role.getPermissions(), Convert.toStrArray(permission))))
             {
                 scopeCustomIds.add(Convert.toStr(role.getRoleId()));
             }
@@ -109,13 +85,13 @@ public class DataScopeAspect
             {
                 continue;
             }
-            if (DATA_SCOPE_ALL.equals(dataScope))
+            if (Constants.Dept.DATA_SCOPE_ALL.equals(dataScope))
             {
                 sqlString = new StringBuilder();
                 conditions.add(dataScope);
                 break;
             }
-            else if (DATA_SCOPE_CUSTOM.equals(dataScope))
+            else if (Constants.Dept.DATA_SCOPE_CUSTOM.equals(dataScope))
             {
                 if (scopeCustomIds.size() > 1)
                 {
@@ -127,15 +103,15 @@ public class DataScopeAspect
                     sqlString.append(StringUtils.format(" OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", deptAlias, role.getRoleId()));
                 }
             }
-            else if (DATA_SCOPE_DEPT.equals(dataScope))
+            else if (Constants.Dept.DATA_SCOPE_DEPT.equals(dataScope))
             {
                 sqlString.append(StringUtils.format(" OR {}.dept_id = {} ", deptAlias, user.getDeptId()));
             }
-            else if (DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope))
+            else if (Constants.Dept.DATA_SCOPE_DEPT_AND_CHILD.equals(dataScope))
             {
                 sqlString.append(StringUtils.format(" OR {}.dept_id IN ( SELECT dept_id FROM sys_dept WHERE dept_id = {} or find_in_set( {} , ancestors ) )", deptAlias, user.getDeptId(), user.getDeptId()));
             }
-            else if (DATA_SCOPE_SELF.equals(dataScope))
+            else if (Constants.Dept.DATA_SCOPE_SELF.equals(dataScope))
             {
                 if (StringUtils.isNotBlank(userAlias))
                 {
