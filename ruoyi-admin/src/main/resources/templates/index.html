@@ -250,7 +250,7 @@
 
         <div class="row mainContent" id="content-main" th:classappend="${mainClass}">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"
-                th:src="@{/system/main}" frameborder="0" seamless></iframe>
+                frameborder="0" seamless></iframe>
         </div>
 
         <div th:if="${footer}" class="footer">
@@ -330,9 +330,15 @@ function applyPath(url) {
 	}
 }
 
-// 默认激活页签
+// 默认激活页签（首页）
 function tabActive() {
-    $('.menuTab[data-id="' + ctx + 'system/main"]').addClass('active');
+    var $mainTab = $('.menuTab[data-id="' + ctx + 'system/main"]');
+    $mainTab.addClass('active');
+    // 懒加载：首次激活首页时才设置 src 并显示
+    var $mainIframe = $('.mainContent .RuoYi_iframe[data-id="' + ctx + 'system/main"]');
+    if ($mainIframe.length) {
+        openToCurrentTab($mainIframe[0]);
+    }
 }
 
 $(function() {
