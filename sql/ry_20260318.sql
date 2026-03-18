@@ -630,6 +630,8 @@ create table sys_job_log (
   job_message         varchar(500)                              comment '日志信息',
   status              char(1)        default '0'                comment '执行状态（0正常 1失败）',
   exception_info      varchar(2000)  default ''                 comment '异常信息',
+  start_time          datetime                                  comment '执行开始时间',
+  end_time            datetime                                  comment '执行结束时间',
   create_time         datetime                                  comment '创建时间',
   primary key (job_log_id)
 ) engine=innodb comment = '定时任务调度日志表';
