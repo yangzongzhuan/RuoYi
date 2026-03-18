@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('角色详情')" />
+    <style>.perm-tree{margin:0;padding:0;list-style:none;font-size:13px;display:flex;flex-wrap:wrap;gap:0}.tree-group{display:inline-block;vertical-align:top;margin:0 10px 12px 0;min-width:130px}.tree-group-title{font-weight:600;color:#fff;padding:4px 10px;background:#337ab7;border-radius:3px 3px 0 0;white-space:nowrap;font-size:12px}.tree-group-title i{margin-right:4px}.tree-group-body{border:1px solid #d0e4f5;border-top:0;border-radius:0 0 3px 3px;padding:4px 8px;background:#f7fbff}.tree-children{margin:0;padding:0;list-style:none}.tree-item{line-height:22px;color:#444;white-space:nowrap;font-size:12px}.tree-sub-group{margin-top:4px}.tree-sub-title{font-weight:600;color:#555;font-size:12px;line-height:22px;border-bottom:1px dashed #ddd;margin-bottom:1px}.tree-sub-title i{color:#f0ad4e;margin-right:3px}.tree-sub-children{padding-left:10px}.tree-item .icon-check{color:#5cb85c;margin-right:3px}.tree-item .icon-perm{color:#aaa;margin-right:3px;font-size:10px}.user-search-bar{margin:10px 0 14px 0}.user-search-inner{position:relative;display:flex;align-items:center;max-width:420px;border:1px solid #c8dff5;border-radius:20px;background:#fff;padding:0 12px;transition:border-color .2s,box-shadow .2s}.user-search-inner:focus-within{border-color:#337ab7;box-shadow:0 0 0 2px rgba(51,122,183,.12)}.user-search-icon{color:#aaa;font-size:13px;margin-right:8px;flex-shrink:0}.user-search-inner input{flex:1;border:0;outline:0;font-size:13px;line-height:34px;background:transparent;color:#333}.user-search-inner input::placeholder{color:#bbb}.user-search-clear{cursor:pointer;color:#bbb;font-size:14px;margin-left:6px;flex-shrink:0;line-height:1}.user-search-clear:hover{color:#888}.user-search-count{font-size:12px;color:#888;margin-left:10px;white-space:nowrap;flex-shrink:0}.user-card.hidden{display:none}.user-card mark{background:#fff3cd;color:#333;padding:0;border-radius:2px}#userTableWrap{margin-top:4px}.user-card-grid{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}.user-card{width:240px;border:1px solid #dce8f5;border-radius:5px;padding:14px 16px;background:#f7fbff;font-size:13px;line-height:24px;position:relative}.user-card .user-avatar{width:42px;height:42px;border-radius:50%;background:#337ab7;color:#fff;font-size:18px;font-weight:bold;text-align:center;line-height:42px;display:inline-block;margin-right:10px;vertical-align:middle;flex-shrink:0}.user-card .user-name{font-weight:600;font-size:14px;vertical-align:middle}.user-card .user-meta{color:#555;margin-top:8px}.user-card .user-meta span{display:block}.user-card .user-status{position:absolute;top:10px;right:10px;font-size:11px;padding:1px 7px;border-radius:10px}.user-card .user-status.normal{background:#dff0d8;color:#3c763d}.user-card .user-status.disable{background:#f2dede;color:#a94442}.dept-tree{margin:0;padding:0;list-style:none;font-size:13px}.dept-tree li{line-height:26px}.dept-tag{display:inline-block;padding:2px 10px;border-radius:3px;font-size:12px;background:#dff0d8;color:#3c763d;border:1px solid #d6e9c6;margin:2px 0}.dept-tag i{margin-right:3px}.dept-ancestor{color:#999;font-size:12px}.dept-ancestor i{margin-right:2px}.dept-children{padding-left:16px;border-left:1px dashed #d6e9c6;margin-left:8px}.perm-empty{color:#999;font-style:italic;font-size:13px}#menuTableWrap{background-color:#f9f9f9;border-radius:4px;border:1px solid #eee;margin-top:10px}#menuTableWrap .form-group{margin-bottom:0}#menuTableWrap .perm-tree{max-height:300px;overflow-y:auto;padding:10px;background-color:#fff;border:1px solid #ddd;border-radius:3px}#loadMoreBtn{padding:6px 20px;border:1px solid #dcdcdc;background:#f8f9fa;color:#666;border-radius:4px;transition:all .3s}#loadMoreBtn:hover{background:#e9ecef;border-color:#c8d0d7}#loadMoreBtn:disabled{opacity:.6;cursor:not-allowed}#loadingMore{color:#888}</style>
+</head>
+<body>
+    <div class="main-content">
+        <form class="form-horizontal" th:object="${role}">
+            <h4 class="form-header h4">基本信息</h4>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">角色名称：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{roleName}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">权限字符：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{roleKey}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">角色状态：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext">
+                                <span th:if="*{status == '0'}" class="badge badge-success">正常</span>
+                                <span th:if="*{status != '0'}" class="badge badge-danger">停用</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">数据范围：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext">
+                                <span th:if="*{dataScope == '1'}" class="badge badge-primary">全部数据权限</span>
+                                <span th:if="*{dataScope == '2'}" class="badge badge-success">自定义数据权限</span>
+                                <span th:if="*{dataScope == '3'}" class="badge badge-info">本部门数据权限</span>
+                                <span th:if="*{dataScope == '4'}" class="badge badge-warning">本部门及以下数据权限</span>
+                                <span th:if="*{dataScope == '5'}" class="badge badge-danger">仅本人数据权限</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">创建者：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{#strings.defaultString(createBy,'-')}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">创建时间：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext"
+                               th:text="*{createTime != null ? #dates.format(createTime,'yyyy-MM-dd HH:mm:ss') : '-'}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">更新者：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext" th:text="*{#strings.defaultString(updateBy,'-')}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">更新时间：</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext"
+                               th:text="*{updateTime != null ? #dates.format(updateTime,'yyyy-MM-dd HH:mm:ss') : '-'}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">备注：</label>
+                        <div class="col-xs-10">
+                            <p class="form-control-plaintext" th:text="*{#strings.defaultString(remark,'-')}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="form-header h4">数据权限</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">数据范围：</label>
+                        <div class="col-xs-10">
+                            <p class="form-control-plaintext">
+                                <span th:if="*{dataScope == '1'}">全部数据权限 &mdash; 可查看系统内所有数据</span>
+                                <span th:if="*{dataScope == '2'}">自定义数据权限 &mdash; 仅可查看下方勾选部门的数据</span>
+                                <span th:if="*{dataScope == '3'}">本部门数据权限 &mdash; 仅可查看本部门数据</span>
+                                <span th:if="*{dataScope == '4'}">本部门及以下数据权限 &mdash; 可查看本部门及其下级部门数据</span>
+                                <span th:if="*{dataScope == '5'}">仅本人数据权限 &mdash; 仅可查看本人数据</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" th:if="*{dataScope == '2'}">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">自定义部门：</label>
+                        <div class="col-xs-10" style="padding-top:6px;">
+                            <div id="deptPermArea"><span class="perm-empty">加载中...</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="form-header h4">菜单权限</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">已分配菜单：</label>
+                        <div class="col-xs-10" style="padding-top:6px;">
+                            <strong id="menuCountBadge">0</strong> 个菜单权限
+                            &nbsp;
+                            <a href="javascript:void(0);"
+                               class="btn btn-info btn-xs"
+                               id="btnToggleMenus"
+                               onclick="toggleMenuList()">
+                                <i class="fa fa-list"></i> 查看已分配菜单
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 内嵌菜单权限树（展开/收起） -->
+            <div id="menuTableWrap" style="display:none; padding: 0 15px 10px 15px;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div style="padding-top:6px;">
+                                <ul class="perm-tree" id="menuPermTree">
+                                    <li class="perm-empty">加载中...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="form-header h4">关联用户</h4>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">已分配用户数：</label>
+                        <div class="col-xs-10" style="padding-top:6px;">
+                            <strong id="userCountBadge" th:text="${userCount}">0</strong> 个关联用户 
+                            &nbsp;
+                            <a href="javascript:void(0);"
+                               class="btn btn-info btn-xs"
+                               id="btnToggleUsers"
+                               onclick="toggleUserList()">
+                                <i class="fa fa-users"></i> 查看已分配用户
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 内嵌用户列表（展开/收起） -->
+            <div id="userTableWrap" style="display:none; padding: 0 15px 10px 15px;">
+                <!-- 搜索栏 -->
+                <div class="user-search-bar" id="userSearchBar" style="display:none;">
+                    <div class="user-search-inner">
+                        <i class="fa fa-search user-search-icon"></i>
+                        <input type="text" id="userSearchInput"
+                               placeholder="搜索用户名、登录名、手机号..."
+                               oninput="filterUserCards(this.value)"
+                               autocomplete="off"/>
+                        <span class="user-search-clear" id="userSearchClear"
+                              onclick="clearUserSearch()" style="display:none;">
+                            <i class="fa fa-times-circle"></i>
+                        </span>
+                        <span class="user-search-count" id="userSearchCount"></span>
+                    </div>
+                </div>
+
+                <span id="userLoadingTip" style="display:none; color:#999; font-size:13px;">
+                    <i class="fa fa-spinner fa-spin"></i> 加载中...
+                </span>
+                <span id="userEmptyTip" style="display:none; color:#999; font-style:italic; font-size:13px;">
+                    该角色暂无分配用户
+                </span>
+                <div class="user-card-grid" id="userCardGrid"></div>
+                <!-- 加载更多按钮 -->
+                <div id="loadMoreWrap" style="display:none; text-align:center; padding:20px 0;">
+                    <button id="loadMoreBtn" class="btn btn-default btn-sm" onclick="loadMoreUsers()">
+                        <i class="fa fa-refresh"></i> 加载更多
+                    </button>
+                    <div id="loadingMore" style="display:none; color:#888; font-size:13px; margin-top:5px;">
+                        <i class="fa fa-spinner fa-spin"></i> 正在加载...
+                    </div>
+                </div>
+                <div id="userNoMatchTip" style="display:none; padding:20px 0; text-align:center; color:#999; font-size:13px;">
+                    <i class="fa fa-search" style="font-size:24px; display:block; margin-bottom:6px; color:#ccc;"></i>
+                    未找到匹配的用户
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var ctx       = [[@{/}]];
+        var roleId    = [[${role.roleId}]];
+        var menuNodes = [[${menuTree}]];
+        var deptNodes = [[${deptTree != null ? deptTree : '[]'}]];
+        var pageNum = 1;        // 当前页码
+        var pageSize = 100;     // 每页显示数量
+        var totalUsers = 0;     // 用户总数
+        var isLoading = false;  // 防止重复加载
+        var hasMore = true;     // 是否还有更多数据
+        var allUsers = [];      // 存储所有已加载的用户数据（用于搜索筛选）
+
+        function buildTree(nodes) {
+            var map = {}, roots = [];
+            nodes.forEach(function(n) {
+                map[n.id] = {
+                    id: n.id, pId: n.pId,
+                    title: n.title || n.name,
+                    checked: n.checked,
+                    children: []
+                };
+            });
+            nodes.forEach(function(n) {
+                var node = map[n.id];
+                if (n.pId && map[n.pId]) {
+                    map[n.pId].children.push(node);
+                } else {
+                    roots.push(node);
+                }
+            });
+            return roots;
+        }
+
+        /* 判断节点或其后代中是否存在任意 checked 节点 */
+        function hasChecked(node) {
+            if (node.checked) return true;
+            return node.children.some(function(c) { return hasChecked(c); });
+        }
+
+        /* 菜单权限树渲染 */
+        function renderMenuTree(nodes) {
+            var roots = buildTree(nodes).filter(function(r) { return hasChecked(r); });
+            if (roots.length === 0) {
+                return '<li class="perm-empty">暂无菜单权限</li>';
+            }
+            var html = '';
+            roots.forEach(function(root) {
+                html += '<li class="tree-group">';
+                html += '<div class="tree-group-title"><i class="fa fa-th-list"></i>' + root.title + '</div>';
+                html += '<div class="tree-group-body">';
+                html += renderMenuLevel(root.children);
+                html += '</div></li>';
+            });
+            return html;
+        }
+
+        function renderMenuLevel(children) {
+            if (!children || children.length === 0) return '';
+            var visible = children.filter(function(c) { return hasChecked(c); });
+            if (visible.length === 0) return '';
+
+            var html = '<ul class="tree-children">';
+            visible.forEach(function(node) {
+                var hasKids = node.children && node.children.length > 0;
+                var kidChecked = hasKids && node.children.some(function(c) { return hasChecked(c); });
+
+                if (hasKids && kidChecked) {
+                    // 中间层：子分组标题 + 递归渲染子节点
+                    html += '<li class="tree-item tree-sub-group">';
+                    html += '<div class="tree-sub-title"><i class="fa fa-folder-open"></i>' + node.title + '</div>';
+                    html += '<div class="tree-sub-children">' + renderMenuLevel(node.children) + '</div>';
+                    html += '</li>';
+                } else {
+                    // 叶子节点（按钮权限、无下级菜单页面等）
+                    var icon = node.checked
+                        ? '<i class="fa fa-check icon-check"></i>'
+                        : '<i class="fa fa-minus icon-perm"></i>';
+                    html += '<li class="tree-item">' + icon + node.title + '</li>';
+                }
+            });
+            html += '</ul>';
+            return html;
+        }
+
+        /* 部门权限树渲染 */
+        function renderDeptTree(nodes) {
+            if (!nodes || nodes.length === 0) {
+                return '<span class="perm-empty">暂无自定义部门权限</span>';
+            }
+            var roots = buildTree(nodes);
+            var anyChecked = nodes.some(function(n) { return n.checked; });
+            if (!anyChecked) {
+                return '<span class="perm-empty">暂无自定义部门权限</span>';
+            }
+            return '<ul class="dept-tree">' + renderDeptLevel(roots) + '</ul>';
+        }
+
+        function renderDeptLevel(nodes) {
+            var html = '';
+            nodes.forEach(function(node) {
+                if (!hasChecked(node)) return;
+                html += '<li>';
+                if (node.checked) {
+                    html += '<span class="dept-tag"><i class="fa fa-building-o"></i>' + node.title + '</span>';
+                } else {
+                    // 未勾选的祖先节点，淡色展示作为路径提示
+                    html += '<span class="dept-ancestor"><i class="fa fa-angle-right"></i>' + node.title + '</span>';
+                }
+                if (node.children && node.children.length > 0) {
+                    var inner = renderDeptLevel(node.children);
+                    if (inner) {
+                        html += '<div class="dept-children"><ul class="dept-tree">' + inner + '</ul></div>';
+                    }
+                }
+                html += '</li>';
+            });
+            return html;
+        }
+
+        /* 初始化 */
+        $(function() {
+            // 渲染菜单树
+            var menuTreeHtml = renderMenuTree(menuNodes);
+            $('#menuPermTree').html(menuTreeHtml);
+            
+            // 初始化菜单数量
+            updateMenuCount();
+            
+            // 渲染部门树
+            if ($('#deptPermArea').length) {
+                $('#deptPermArea').html(renderDeptTree(deptNodes));
+            }
+        });
+        
+        /* 菜单权限：展开 / 收起内嵌菜单树 */
+        var menuLoaded = false;
+        var menuListVisible = false;
+        
+        function toggleMenuList() {
+            var $wrap = $('#menuTableWrap');
+            var $btn  = $('#btnToggleMenus');
+            if (menuListVisible) {
+                $wrap.slideUp(150);
+                $btn.html('<i class="fa fa-list"></i> 查看已分配菜单');
+                menuListVisible = false;
+            } else {
+                $wrap.slideDown(150);
+                $btn.html('<i class="fa fa-list"></i> 收起菜单列表');
+                menuListVisible = true;
+                if (!menuLoaded) { 
+                    // 菜单树已经在页面加载时渲染，这里只需要标记为已加载
+                    menuLoaded = true;
+                    // 计算并更新菜单数量
+                    updateMenuCount();
+                }
+            }
+        }
+        
+        /* 计算并更新菜单权限数量 */
+        function updateMenuCount() {
+            var $menuTree = $('#menuPermTree');
+            var menuCount = 0;
+            
+            // 计算已分配的菜单数量
+            if (menuNodes && Array.isArray(menuNodes)) {
+                // 只计算被选中的节点
+                menuCount = menuNodes.filter(function(node) {
+                    return node.checked === true;
+                }).length;
+            }
+            
+            // 更新显示
+            $('#menuCountBadge').text(menuCount);
+        }
+
+        /* 关联用户：展开 / 收起内嵌用户卡片列表 */
+        var userLoaded = false;
+        var userListVisible = false;
+
+        function toggleUserList() {
+            var $wrap = $('#userTableWrap');
+            var $btn  = $('#btnToggleUsers');
+            if (userListVisible) {
+                $wrap.slideUp(150);
+                $btn.html('<i class="fa fa-users"></i> 查看已分配用户');
+                userListVisible = false;
+            } else {
+                $wrap.slideDown(150);
+                $btn.html('<i class="fa fa-users"></i> 收起用户列表');
+                userListVisible = true;
+                if (!userLoaded) { loadUserCards(); }
+            }
+        }
+
+        function loadUserCards() {
+            var $grid    = $('#userCardGrid');
+            var $loading = $('#userLoadingTip');
+            var $empty   = $('#userEmptyTip');
+            var $loadMoreWrap = $('#loadMoreWrap');
+        
+            // 重置状态
+            $grid.empty();
+            allUsers = [];
+            pageNum = 1;
+            hasMore = true;
+            $loadMoreWrap.hide();
+            
+            $loading.show();
+            $empty.hide();
+            $('#userSearchBar').hide();
+            $('#userNoMatchTip').hide();
+        
+            // 获取用户总数
+            totalUsers = parseInt($('#userCountBadge').text()) || 0;
+            
+            if (totalUsers === 0) {
+                $loading.hide();
+                $empty.show();
+                return;
+            }
+        
+            // 第一次加载
+            loadUsersAjax();
+        }
+
+        /* 用户搜索 / 筛选 */
+        function filterUserCards(keyword) {
+            var kw = $.trim(keyword).toLowerCase();
+            var $cards = $('#userCardGrid .user-card');
+            var totalLoaded = $cards.length;
+            var $clear = $('#userSearchClear');
+        
+            $clear.toggle(kw.length > 0);
+        
+            if (kw === '') {
+                $cards.removeClass('hidden');
+                updateSearchCount(totalLoaded, allUsers.length);
+                $('#userNoMatchTip').hide();
+                return;
+            }
+        
+            var matched = 0;
+            $cards.each(function() {
+                var search = $(this).data('search') || '';
+                if (search.indexOf(kw) !== -1) {
+                    $(this).removeClass('hidden');
+                    matched++;
+                } else {
+                    $(this).addClass('hidden');
+                }
+            });
+        
+            updateSearchCount(matched, totalLoaded);
+            $('#userNoMatchTip').toggle(matched === 0);
+        }
+
+        function updateSearchCount(matched, total) {
+            var kw = $.trim($('#userSearchInput').val());
+            var totalAllUsers = allUsers.length;
+            
+            if (kw) {
+                $('#userSearchCount').text('找到 ' + matched + ' 人 (已加载 ' + totalAllUsers + '/' + totalUsers + ' 人)');
+            } else {
+                $('#userSearchCount').text('已加载 ' + totalAllUsers + '/' + totalUsers + ' 人');
+            }
+        }
+
+        function clearUserSearch() {
+            $('#userSearchInput').val('').focus();
+            filterUserCards('');
+        }
+        
+        
+        /* 加载用户的AJAX请求 */
+        function loadUsersAjax() {
+            if (isLoading || !hasMore) return;
+            
+            isLoading = true;
+            $('#loadingMore').show();
+            $('#loadMoreBtn').prop('disabled', true);
+            
+            $.ajax({
+                url  : ctx + 'system/role/authUser/allocatedList',
+                type : 'POST',
+                data : { 
+                    roleId: roleId, 
+                    pageNum: pageNum,
+                    pageSize: pageSize
+                },
+                success: function(res) {
+                    isLoading = false;
+                    $('#loadingMore').hide();
+                    $('#loadMoreBtn').prop('disabled', false);
+                    
+                    var rows = (res && res.rows) ? res.rows : [];
+                    var total = res.total || 0;
+                    
+                    // 更新用户总数
+                    if (total > 0 && total !== totalUsers) {
+                        totalUsers = total;
+                        $('#userCountBadge').text(total);
+                    }
+                    
+                    if (rows.length === 0 && pageNum === 1) {
+                        // 第一页就没有数据
+                        $('#userLoadingTip').hide();
+                        $('#userEmptyTip').show();
+                        return;
+                    }
+                    
+                    // 渲染用户卡片
+                    renderUserCards(rows);
+                    
+                    // 添加到所有用户列表（用于搜索）
+                    allUsers = allUsers.concat(rows);
+                    
+                    // 判断是否还有更多数据
+                    var loadedCount = (pageNum - 1) * pageSize + rows.length;
+                    hasMore = loadedCount < totalUsers;
+                    
+                    if (hasMore) {
+                        $('#loadMoreWrap').show();
+                    } else {
+                        $('#loadMoreWrap').hide();
+                    }
+                    
+                    // 更新页面状态
+                    pageNum++;
+                    
+                    // 第一次加载完成时显示搜索栏
+                    if (pageNum === 2) {
+                        $('#userLoadingTip').hide();
+                        $('#userSearchBar').show();
+                        updateSearchCount(rows.length, loadedCount);
+                    } else {
+                        updateSearchCount(rows.length, loadedCount);
+                    }
+                    
+                    userLoaded = true;
+                },
+                error: function() {
+                    isLoading = false;
+                    $('#loadingMore').hide();
+                    $('#loadMoreBtn').prop('disabled', false);
+                    
+                    if (pageNum === 1) {
+                        $('#userLoadingTip').hide();
+                        $('#userEmptyTip').text('加载失败，请重试').show();
+                    } else {
+                        alert('加载失败，请重试');
+                    }
+                }
+            });
+        }
+        
+        /* 渲染用户卡片 */
+        function renderUserCards(users) {
+            var $grid = $('#userCardGrid');
+            
+            users.forEach(function(u) {
+                var initial  = (u.userName || u.loginName || '?').charAt(0).toUpperCase();
+                var statusHtml = u.status === '0'
+                    ? '<span class="user-status normal">正常</span>'
+                    : '<span class="user-status disable">停用</span>';
+                
+                // 搜索关键词
+                var searchKey = [u.userName || '', u.loginName || '', u.phonenumber || ''].join('|').toLowerCase();
+                
+                var card = [
+                    '<div class="user-card" data-search="' + searchKey + '">',
+                    statusHtml,
+                    '<div style="display:flex;align-items:center;margin-bottom:4px;">',
+                    '  <span class="user-avatar">' + initial + '</span>',
+                    '  <span class="user-name">' + (u.userName || '-') + '</span>',
+                    '</div>',
+                    '<div class="user-meta">',
+                    '  <span><i class="fa fa-user-o" style="width:14px;color:#888"></i> ' + (u.loginName || '-') + '</span>',
+                    '  <span><i class="fa fa-phone"  style="width:14px;color:#888"></i> ' + (u.phonenumber || '-') + '</span>',
+                    '  <span><i class="fa fa-envelope-o" style="width:14px;color:#888"></i> ' + (u.email || '-') + '</span>',
+                    '</div>',
+                    '</div>'
+                ].join('');
+                
+                $grid.append(card);
+            });
+        }
+        
+        /* 加载更多用户 */
+        function loadMoreUsers() {
+            if (!isLoading && hasMore) {
+                loadUsersAjax();
+            }
+        }
+        
+    </script>
+</body>
+</html>
