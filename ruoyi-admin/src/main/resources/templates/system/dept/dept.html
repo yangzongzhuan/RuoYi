@@ -35,6 +35,9 @@
                 <a class="btn btn-primary" onclick="$.operate.edit()" shiro:hasPermission="system:dept:edit">
 		            <i class="fa fa-edit"></i> 修改
 		        </a>
+                <a class="btn btn-warning" onclick="saveSort()">
+                    <i class="fa fa-sort-amount-asc"></i> 保存排序
+                </a>
                 <a class="btn btn-info" id="expandAllBtn">
                     <i class="fa fa-exchange"></i> 展开/折叠
                 </a>
@@ -51,6 +54,7 @@
 		var removeFlag = [[${@permission.hasPermi('system:dept:remove')}]];
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/dept"
+		var originalOrders = {};
 
 		$(function() {
 		    var options = {
@@ -74,7 +78,13 @@
 		        {
 		            field: 'orderNum',
 		            title: '排序',
-		            align: "left"
+		            align: "left",
+		            formatter: function(value, row, index) {
+		                var deptIdText = $.common.sprintf("<input type='hidden' name='deptIds' value='%s'>", row.deptId);
+		                var orderNumText = $.common.sprintf("<input type='text' name='orderNums' value='%s' class='form-control' style='display:inline-block;width:60px;text-align:center;'>", row.orderNum);
+		                originalOrders[row.deptId] = row.orderNum;
+		                return deptIdText + orderNumText;
+		            }
 		        },
 		        {
 		            field: 'status',
@@ -107,6 +117,25 @@
 		    };
 		    $.treeTable.init(options);
 		});
+
+		/* 保存排序-部门 */
+		function saveSort() {
+			var changedDeptIds = [];
+			var changedOrderNums = [];
+		    $("input[name='deptIds']").each(function() {
+		        var deptId = $(this).val();
+		        var currentOrder = $(this).next("input[name='orderNums']").val();
+		        if (String(originalOrders[deptId]) !== String(currentOrder)) {
+		            changedDeptIds.push(deptId);
+		            changedOrderNums.push(currentOrder);
+		        }
+		    });
+		    if (changedDeptIds.length === 0) {
+		        $.modal.alertWarning("未检测到排序修改");
+		        return;
+		    }
+		    $.operate.post(prefix + "/updateSort", { "deptIds": changedDeptIds.join(","), "orderNums": changedOrderNums.join(",") });
+		}
 	</script>
 </body>
 </html>
