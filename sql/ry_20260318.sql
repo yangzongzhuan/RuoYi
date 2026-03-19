@@ -588,6 +588,7 @@ create table sys_user_online (
   start_timestamp   datetime                                comment 'session创建时间',
   last_access_time  datetime                                comment 'session最后访问时间',
   expire_time       int(5)        default 0                 comment '超时时间，单位为分钟',
+  session_data      blob          default null              comment '序列化的Session数据，用于服务重启后恢复会话',
   primary key (sessionId)
 ) engine=innodb comment = '在线用户记录';
 
