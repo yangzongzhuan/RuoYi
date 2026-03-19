@@ -1,4 +1,4 @@
-package com.ruoyi.framework.shiro.session;
+package com.ruoyi.common.core.session;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
