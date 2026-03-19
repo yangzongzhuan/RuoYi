@@ -1,69 +1,152 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<th:block th:include="include :: header('操作日志详细')" />
-	<th:block th:include="include :: jsonview-css" />
+    <th:block th:include="include :: header('操作日志详细')" />
+    <th:block th:include="include :: jsonview-css" />
+    <style>.method-tag{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:700;margin-right:6px;vertical-align:middle}.method-GET{background:#e8f5e9;color:#27ae60}.method-POST{background:#e3f2fd;color:#1565c0}.method-PUT{background:#fff3e0;color:#e65100}.method-DELETE{background:#ffebee;color:#c62828}.error-msg{background:#fff8f8;border-left:3px solid #e74c3c;border-radius:3px;padding:8px 12px;color:#c0392b;font-size:12px;line-height:1.7;word-break:break-all;white-space:pre-wrap}.code-wrap{background:#f7f9fb;border:1px solid #e8ecf0;border-radius:4px;overflow:auto;max-height:260px}.code-wrap pre{margin:0;padding:12px 14px;font-size:12px;line-height:1.6;font-family:Consolas,'SFMono-Regular',monospace;color:#444}.code-action{display:flex;justify-content:flex-end;padding:8px 18px 0}.btn-copy{font-size:12px;color:#888;background:0;border:1px solid #dde1e7;border-radius:3px;padding:2px 10px;cursor:pointer}.btn-copy:hover{background:#f0f2f5}.mono{font-family:Consolas,'SFMono-Regular',monospace;font-size:12px;color:#555}</style>
 </head>
 <body class="white-bg">
-	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
-	<form class="form-horizontal m-t" id="signupForm">
-		<div class="form-group">
-			<label class="col-sm-2 control-label">操作模块：</label>
-			<div class="form-control-static" th:text="${operLog.title} + ' / ' + ${@dict.getLabel('sys_oper_type',operLog.businessType)}">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">登录信息：</label>
-			<div class="form-control-static" th:text="${operLog.operName} + ' / ' + ${operLog.deptName} + ' / ' + ${operLog.operIp}+ ' / ' + ${operLog.operLocation}">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">请求地址：</label>
-			<div class="form-control-static" th:text="${operLog.requestMethod} + ' - ' + ${operLog.operUrl} + '  ' + '(' + '耗时' + ${operLog.costTime} + '毫秒)'">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">操作方法：</label>
-			<div class="form-control-static" th:text="${operLog.method}">
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">请求参数：</label>
-			<div class="form-control-static"><pre id="operParam"></pre></div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">返回参数：</label>
-			<div class="form-control-static"><pre id="jsonResult"></pre></div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label">状态：</label>
-			<div class="form-control-static" th:class="${operLog.status == 0 ? 'label label-primary' : 'label label-danger'}" th:text="${operLog.status == 0 ? '正常' : '异常'}">
-			</div>
-		</div>
-		<div class="form-group" th:style="'display:' + ${operLog.status == 0 ? 'none' : 'block'}">
-			<label class="col-sm-2 control-label">异常信息：</label>
-			<div class="form-control-static" th:text="${operLog.errorMsg}">
-			</div>
-		</div>
-	</form>
+<div class="wrapper wrapper-content">
+<div class="detail-wrap">
+
+    <!-- 基本信息 -->
+    <div class="detail-card">
+        <div class="detail-card-title"><i class="fa fa-info-circle"></i>基本信息</div>
+        <table class="detail-table">
+            <tr>
+                <th>操作模块</th>
+                <td th:text="${operLog.title}">-</td>
+                <th>业务类型</th>
+                <td th:text="${@dict.getLabel('sys_oper_type', operLog.businessType)}">-</td>
+            </tr>
+            <tr>
+                <th>操作时间</th>
+                <td th:text="${#dates.format(operLog.operTime,'yyyy-MM-dd HH:mm:ss')}">-</td>
+                <th>执行状态</th>
+                <td>
+                    <span th:if="${operLog.status == 0}" class="tag-ok"><i class="fa fa-check"></i> 正常</span>
+                    <span th:if="${operLog.status != 0}" class="tag-err"><i class="fa fa-times"></i> 异常</span>
+                </td>
+            </tr>
+        </table>
     </div>
-    <th:block th:include="include :: footer" />
-    <th:block th:include="include :: jsonview-js" />
-    <script th:inline="javascript">
-	    $(function() {
-	    	var operParam = [[${operLog.operParam}]];
-	    	if ($.common.isNotEmpty(operParam) && operParam.length < 2000) {
-	    		$("#operParam").JSONView(operParam);
-	    	} else {
-	    		$("#operParam").text(operParam);
-	    	}
-	    	var jsonResult = [[${operLog.jsonResult}]];
-	    	if ($.common.isNotEmpty(jsonResult) && jsonResult.length < 2000) {
-	    		$("#jsonResult").JSONView(jsonResult);
-	    	} else {
-	    		$("#jsonResult").text(jsonResult);
-	    	}
-	    });
-    </script>
+
+    <!-- 操作人员 -->
+    <div class="detail-card">
+        <div class="detail-card-title"><i class="fa fa-user-o"></i>操作人员</div>
+        <table class="detail-table">
+            <tr>
+                <th>操作人员</th>
+                <td th:text="${operLog.operName}">-</td>
+            </tr>
+            <tr th:if="${not #strings.isEmpty(operLog.deptName)}">
+                <th>所属部门</th>
+                <td th:text="${operLog.deptName}">-</td>
+            </tr>
+            <tr>
+                <th>操作地址</th>
+                <td><span th:text="${operLog.operIp}">-</span>&nbsp;&nbsp;<span style="color:#999;" th:text="${operLog.operLocation}"></span></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 请求信息 -->
+    <div class="detail-card">
+        <div class="detail-card-title"><i class="fa fa-exchange"></i>请求信息</div>
+        <table class="detail-table">
+            <tr>
+                <th>请求地址</th>
+                <td>
+                    <span th:class="${'method-tag method-' + operLog.requestMethod}" th:text="${operLog.requestMethod}">POST</span>
+                    <span th:text="${operLog.operUrl}">-</span>
+                </td>
+            </tr>
+            <tr>
+                <th>操作方法</th>
+                <td class="mono" th:text="${operLog.method}">-</td>
+            </tr>
+            <tr>
+                <th>消耗时间</th>
+                <td><span th:text="${operLog.costTime}">0</span> 毫秒</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 请求参数 -->
+    <div class="detail-card">
+        <div class="detail-card-title"><i class="fa fa-arrow-circle-up"></i>请求参数</div>
+        <div class="code-action">
+            <button class="btn-copy" onclick="copyCode('operParam')"><i class="fa fa-copy"></i> 复制</button>
+        </div>
+        <div style="padding: 6px 18px 14px;">
+            <div class="code-wrap"><pre id="operParam"></pre></div>
+        </div>
+    </div>
+
+    <!-- 返回参数 -->
+    <div class="detail-card">
+        <div class="detail-card-title"><i class="fa fa-arrow-circle-down"></i>返回参数</div>
+        <div class="code-action">
+            <button class="btn-copy" onclick="copyCode('jsonResult')"><i class="fa fa-copy"></i> 复制</button>
+        </div>
+        <div style="padding: 6px 18px 14px;">
+            <div class="code-wrap"><pre id="jsonResult"></pre></div>
+        </div>
+    </div>
+
+    <!-- 异常信息（仅异常时显示） -->
+    <div class="detail-card" th:if="${operLog.status != 0}">
+        <div class="detail-card-title" style="color:#c0392b;"><i class="fa fa-warning"></i>异常信息</div>
+        <div style="padding: 12px 18px;">
+            <div class="error-msg" th:text="${operLog.errorMsg}">-</div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<th:block th:include="include :: footer" />
+<th:block th:include="include :: jsonview-js" />
+<script th:inline="javascript">
+    $(function() {
+        var operParam = [[${operLog.operParam}]];
+        if ($.common.isNotEmpty(operParam) && operParam.length < 2000) {
+            $("#operParam").JSONView(operParam);
+        } else {
+            $("#operParam").text(operParam || '（无参数）');
+        }
+        var jsonResult = [[${operLog.jsonResult}]];
+        if ($.common.isNotEmpty(jsonResult) && jsonResult.length < 2000) {
+            $("#jsonResult").JSONView(jsonResult);
+        } else {
+            $("#jsonResult").text(jsonResult || '（无返回数据）');
+        }
+    });
+
+    function copyCode(id) {
+        var text = document.getElementById(id).innerText || '';
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(function() { showToast('已复制'); });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            showToast('已复制');
+        }
+    }
+
+    function showToast(msg) {
+        var t = document.createElement('div');
+        t.textContent = msg;
+        t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);' +
+            'background:rgba(0,0,0,0.7);color:#fff;padding:6px 18px;border-radius:16px;' +
+            'font-size:12px;z-index:9999;pointer-events:none;';
+        document.body.appendChild(t);
+        setTimeout(function(){ document.body.removeChild(t); }, 1800);
+    }
+</script>
 </body>
 </html>
