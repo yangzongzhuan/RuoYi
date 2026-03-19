@@ -1,27 +1,58 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('公告详细')" />
+    <th:block th:include="include :: header('公告详情')" />
+    <style>body.white-bg{background:#f5f6f8;font-family:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif}.notice-page{max-width:760px;margin:0 auto;padding:32px 24px 60px;animation:fadeUp .35s ease both}@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}.notice-type-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 12px;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}.type-notify{background:#fff8e6;color:#b7791f;border-left:3px solid #d97706}.type-announce{background:#e8f5e9;color:#276749;border-left:3px solid #38a169}.notice-title{font-size:22px;font-weight:700;color:#1a202c;line-height:1.45;margin:0 0 16px;letter-spacing:-0.2px}.notice-meta{display:flex;align-items:center;flex-wrap:wrap;gap:16px;padding:12px 0;border-top:1px solid #e9ecef;border-bottom:1px solid #e9ecef;margin-bottom:28px}.meta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#718096}.meta-item i{font-size:12px;color:#a0aec0}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}.status-ok{background:#38a169}.status-off{background:#e53e3e}.notice-divider{display:flex;align-items:center;gap:12px;margin-bottom:24px}.notice-divider::before,.notice-divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,#dee2e6,transparent)}.notice-divider-dot{width:6px;height:6px;border-radius:50%;background:#cbd5e0}.notice-body{background:#fff;border-radius:6px;padding:28px 32px;box-shadow:0 1px 4px rgba(0,0,0,0.06),0 0 0 1px rgba(0,0,0,0.04);min-height:160px}.notice-content{font-size:14px;line-height:1.85;color:#2d3748;word-break:break-word}.notice-content p{margin:0 0 1em}.notice-content h1,.notice-content h2,.notice-content h3{font-weight:700;color:#1a202c;margin:1.4em 0 .6em}.notice-content h1{font-size:18px}.notice-content h2{font-size:16px}.notice-content h3{font-size:14px}.notice-content a{color:#3182ce;text-decoration:underline}.notice-content a:hover{color:#2b6cb0}.notice-content img{max-width:100%;border-radius:4px;margin:8px 0}.notice-content ul,.notice-content ol{padding-left:20px;margin:0 0 1em}.notice-content li{margin-bottom:4px}.notice-content blockquote{border-left:3px solid #cbd5e0;margin:1em 0;padding:6px 16px;color:#718096;background:#f7fafc}.notice-content table{border-collapse:collapse;width:100%;margin:1em 0;font-size:13px}.notice-content table th,.notice-content table td{border:1px solid #e2e8f0;padding:7px 12px}.notice-content table th{background:#f7fafc;font-weight:600}.notice-empty{text-align:center;padding:40px 0;color:#a0aec0;font-size:13px}.notice-empty i{font-size:28px;display:block;margin-bottom:10px}</style>
 </head>
-<body>
-    <div class="main-content">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="mail-box-header">
-                    <div class="mail-tools tooltip-demo m-t-md">
-                        <h3 style="text-align: center">[[${notice.noticeTitle}]]</h3>
-                        <h5>
-                          <span class="pull-right font-noraml">发送时间：[[${#dates.format(notice.createTime, 'yyyy-MM-dd HH:mm:ss')}]] </span>
-                          <span class="font-noraml">发件人： </span>[[${notice.createBy}]]
-                        </h5>
-                    </div>
-                </div>
-                <div class="mail-box">
-                    <div class="mail-body" th:utext="${notice.noticeContent}"></div>
-                </div>
-            </div>
+<body class="white-bg">
+<div class="notice-page">
+
+    <div th:switch="${notice.noticeType}">
+        <span th:case="'1'" class="notice-type-tag type-notify">
+            <i class="fa fa-bell-o"></i> 通知
+        </span>
+        <span th:case="'2'" class="notice-type-tag type-announce">
+            <i class="fa fa-bullhorn"></i> 公告
+        </span>
+        <span th:case="*" class="notice-type-tag type-notify">
+            <i class="fa fa-file-text-o"></i> 消息
+        </span>
+    </div>
+
+    <h1 class="notice-title" th:text="${notice.noticeTitle}">公告标题</h1>
+
+    <div class="notice-meta">
+        <span class="meta-item">
+            <i class="fa fa-user-o"></i>
+            <span th:text="${notice.createBy}">发布人</span>
+        </span>
+        <span class="meta-item">
+            <i class="fa fa-clock-o"></i>
+            <span th:text="${#dates.format(notice.createTime, 'yyyy-MM-dd HH:mm:ss')}">发布时间</span>
+        </span>
+        <span class="meta-item">
+            <span th:class="${notice.status == '0'} ? 'status-dot status-ok' : 'status-dot status-off'"></span>
+            <span th:text="${notice.status == '0'} ? '正常' : '已关闭'">状态</span>
+        </span>
+    </div>
+
+    <div class="notice-divider">
+        <span class="notice-divider-dot"></span>
+        <span class="notice-divider-dot"></span>
+        <span class="notice-divider-dot"></span>
+    </div>
+
+    <div class="notice-body">
+        <div class="notice-content"
+             th:if="${not #strings.isEmpty(notice.noticeContent)}"
+             th:utext="${notice.noticeContent}">
+        </div>
+        <div class="notice-empty" th:if="${#strings.isEmpty(notice.noticeContent)}">
+            <i class="fa fa-file-o"></i>暂无内容
         </div>
     </div>
-    <th:block th:include="include :: footer" />
+
+</div>
+<th:block th:include="include :: footer" />
 </body>
 </html>

@@ -15,6 +15,8 @@
     <link th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css}" rel="stylesheet"/>
     <link th:href="@{/ruoyi/css/ry-ui.css?v=4.8.2}" rel="stylesheet"/>
+    <style type="text/css">#noticeItems li a{transition:background .15s;border-radius:2px}#noticeItems li a:hover{background:#f7f9fb;text-decoration:none}#noticeItems li a:active{background:#eef2f7}#noticeItems li a:focus{background:transparent;outline:0}#noticeList .mark-all-read{font-size:12px;color:#5b9bd5;text-decoration:none;padding:2px 8px;border-radius:3px;transition:background 0.15s}#noticeList .mark-all-read:hover{background:#eef5fc;color:#2b7cc1}#noticeList .mark-all-read:active{background:#eef5fc;color:#2b7cc1}#noticeList .mark-all-read:focus{outline:none;background:transparent}
+</style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" th:classappend="${isMobile} ? 'canvas-menu'" style="overflow: hidden">
 <div id="wrapper">
@@ -199,6 +201,19 @@
                     <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.ruoyi.vip/ruoyi" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>
                     <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="javascript:;" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
 	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="javascript:;" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
+                    <li class="dropdown" id="noticeDropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" style="position:relative;" data-hover="dropdown">
+                            <i class="fa fa-bell-o"></i> 消息
+                            <span id="noticeBadge" style="display:none;position:absolute;top:8px;right:-4px;background:#e74c3c;color:#fff;border-radius:50%;width:16px;height:16px;font-size:10px;line-height:16px;text-align:center;font-style:normal;"></span>
+                        </a>
+                        <ul class="dropdown-menu" id="noticeList" style="width:320px;padding:0;left:auto;right:0;">
+                            <li style="padding:10px 16px;background:#f7f9fb;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;">
+                                <span style="font-size:13px;font-weight:600;color:#333;">通知公告</span>
+                                <a href="javascript:void(0)" onclick="markAllRead()" class="mark-all-read">全部已读</a>
+                            </li>
+                            <li id="noticeItems"><div style="padding:20px;text-align:center;color:#aaa;font-size:12px;"><i class="fa fa-spinner fa-spin"></i> 加载中...</div></li>
+                        </ul>
+                    </li>
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
@@ -392,7 +407,123 @@ $(function() {
 		});
 	}
 	$("[data-toggle='tooltip']").tooltip();
+	/* 页面加载时拉取公告 */
+	loadNoticeTop();
 });
+
+/* 加载顶部公告列表 */
+function loadNoticeTop() {
+	$.ajax({
+		url: ctx + "system/notice/listTop",
+		type: "get",
+		dataType: "json",
+		success: function(res) {
+			if (res.code !== 0 || !res.data || res.data.length === 0) {
+				$("#noticeItems").html('<div style="padding:24px;text-align:center;color:#bbb;font-size:12px;"><i class=\"fa fa-inbox\"></i><br>暂无公告</div>');
+				return;
+			}
+			var list = res.data;
+			var unread = (res.unreadCount !== undefined && res.unreadCount !== null) ? res.unreadCount : list.length;
+			if (unread > 0) {
+				$("#noticeBadge").text(unread).show();
+			} else {
+				$("#noticeBadge").hide();
+			}
+			var html = '';
+			for (var i = 0; i < list.length; i++) {
+				var n = list[i];
+				var typeClass = n.noticeType === '1' ? 'warning' : 'success';
+				var typeLabel = n.noticeType === '1' ? '通知' : '公告';
+				var isRead = n.isRead === true || n.isRead === 'true' || n.read === true || n.read === 'true';
+				var aColor     = isRead ? '#999' : '#333';
+				var titleColor = isRead ? 'color:#999;' : '';
+				var readAttr   = isRead ? ' data-read="1"' : '';
+				var badgeHtml  = isRead
+					? '<span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600;background:#e9ecef;color:#aaa;">' + typeLabel + '</span>'
+					: '<span class="badge badge-' + typeClass + '" style="flex-shrink:0;">' + typeLabel + '</span>';
+				html += '<li id="notice-item-' + n.noticeId + '"' + readAttr + ' style="border-bottom:1px solid #f5f5f5;">';
+				html += '<a href="javascript:void(0)" onclick="previewNotice(' + n.noticeId + ')" style="display:flex;align-items:center;padding:10px 16px;gap:10px;text-decoration:none;color:' + aColor + ';">';
+				html += badgeHtml;
+				html += '<span style="flex:1;font-size:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;' + titleColor + '" title="' + (n.noticeTitle||'') + '">' + (n.noticeTitle||'') + '</span>';
+				html += '<span style="font-size:11px;color:#bbb;flex-shrink:0;">' + (n.createTime ? n.createTime.substring(0,10) : '') + '</span>';
+				html += '</a></li>';
+			}
+			$("#noticeItems").html(html);
+		},
+		error: function() {
+			$("#noticeItems").html('<div style="padding:20px;text-align:center;color:#e74c3c;font-size:12px;">加载失败</div>');
+		}
+	});
+}
+
+/* 预览公告 */
+function previewNotice(noticeId) {
+	var url = ctx + "system/notice/view/" + noticeId;
+	// 先立即更新样式并标记已读
+	var $item = $("#notice-item-" + noticeId);
+	$item.attr("data-read", "1");
+	$item.find("a").css("color", "#999");
+	$item.find("span").css("color", "#999");
+	var $badge = $item.find(".badge");
+	if ($badge.length) {
+		$badge.replaceWith('<span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600;background:#e9ecef;color:#aaa;">' + $badge.text() + '</span>');
+	}
+	// 用 data-read 属性计数未读
+	var unread = $("#noticeItems li:not([data-read])").length;
+	if (unread > 0) {
+		$("#noticeBadge").text(unread).show();
+	} else {
+		$("#noticeBadge").hide();
+	}
+	// 异步通知后端记录已读（fire and forget）
+	$.post(ctx + "system/notice/markRead", { noticeId: noticeId });
+	var _layerIdx;
+	_layerIdx = top.layer.open({
+		type: 2,
+		offset: 'r',
+		anim: 'slideLeft',
+		move: false,
+		title: false,
+		closeBtn: 0,
+		shade: [0.25, '#1a202c'],
+		shadeClose: true,
+		area: ['600px', '100%'],
+		content: url,
+		success: function(layero) {
+			// 去掉 layer 默认 padding，让内容完全填满
+			layero.css({ 'border-radius': '0', 'border': 'none' });
+			layero.find('.layui-layer-content').css({ 'border-radius': '0' });
+			// 悬浮关闭按钮，紧贴面板左边缘外侧
+			var $btn = $('<button id="noticeCloseBtn" style="position:fixed;top:20px;right:608px;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #e2e8f0;box-shadow:0 2px 10px rgba(0,0,0,0.12);cursor:pointer;font-size:13px;color:#718096;line-height:1;z-index:19891017;transition:all 0.18s;"><i class="fa fa-times"></i></button>');
+			$btn.hover(
+				function(){ $(this).css({'background':'#f7fafc','color':'#2d3748','border-color':'#cbd5e0'}); },
+				function(){ $(this).css({'background':'#fff','color':'#718096','border-color':'#e2e8f0'}); }
+			);
+			$btn.on('click', function(){ top.layer.close(_layerIdx); });
+			$('body', top.document).append($btn);
+		},
+		end: function() {
+			$('body', top.document).find('#noticeCloseBtn').remove();
+		}
+	});
+}
+
+function markAllRead() {
+	var ids = [];
+	$("#noticeItems li").each(function() {
+		var id = $(this).attr("id").replace("notice-item-", "");
+		if (id) ids.push(id);
+		$(this).attr("data-read", "1");
+		$(this).find("a").css("color", "#999");
+		$(this).find("span").css("color", "#999");
+		var $b = $(this).find(".badge");
+		$b.replaceWith('<span style="flex-shrink:0;display:inline-block;padding:2px 6px;border-radius:3px;font-size:11px;font-weight:600;background:#e9ecef;color:#aaa;">' + $b.text() + '</span>');
+	});
+	$("#noticeBadge").hide();
+	if (ids.length > 0) {
+		$.post(ctx + "system/notice/markReadAll", { ids: ids.join(",") });
+	}
+}
 </script>
 </body>
 </html>

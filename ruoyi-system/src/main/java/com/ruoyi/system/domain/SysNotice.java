@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.xss.Xss;
 
@@ -30,6 +31,10 @@ public class SysNotice extends BaseEntity
 
     /** 公告状态（0正常 1关闭） */
     private String status;
+
+    /** 是否已读 */
+    @JsonProperty("isRead")
+    private boolean isRead;
 
     public Long getNoticeId()
     {
@@ -82,6 +87,16 @@ public class SysNotice extends BaseEntity
     public String getStatus()
     {
         return status;
+    }
+
+    public boolean getIsRead()
+    {
+        return isRead;
+    }
+
+    public void setIsRead(boolean isRead)
+    {
+        this.isRead = isRead;
     }
 
     @Override

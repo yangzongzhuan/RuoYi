@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysNoticeReadMapper">
+
+    <resultMap type="SysNoticeRead" id="SysNoticeReadResult">
+        <id     property="readId"   column="read_id"     />
+        <result property="noticeId" column="notice_id"   />
+        <result property="userId"   column="user_id"     />
+        <result property="readTime" column="read_time"   />
+    </resultMap>
+
+    <!-- 新增已读记录 -->
+    <insert id="insertNoticeRead" parameterType="SysNoticeRead">
+        insert ignore into sys_notice_read (notice_id, user_id, read_time)
+        values (#{noticeId}, #{userId}, sysdate())
+    </insert>
+
+    <!-- 查询未读数量：正常状态公告 减去 当前用户已读数 -->
+    <select id="selectUnreadCount" resultType="int">
+        select count(*) from sys_notice n
+        where n.status = '0' and not exists (select 1 from sys_notice_read r where r.notice_id = n.notice_id and r.user_id = #{userId})
+    </select>
+
+    <!-- 查询是否已读 -->
+    <select id="selectIsRead" resultType="int">
+        select count(*) from sys_notice_read where notice_id = #{noticeId} and user_id = #{userId}
+    </select>
+
+    <!-- 查询带已读状态的公告列表（直接在SQL中限制条数） -->
+    <select id="selectNoticeListWithReadStatus" resultType="SysNotice">
+        select
+            n.notice_id    as noticeId,
+            n.notice_title as noticeTitle,
+            n.notice_type  as noticeType,
+            n.status,
+            n.create_by    as createBy,
+            n.create_time  as createTime,
+            case when r.notice_id is not null then true else false end as isRead
+        from sys_notice n
+        left join sys_notice_read r
+            on r.notice_id = n.notice_id and r.user_id = #{userId}
+        where n.status = '0'
+        order by n.notice_id desc
+        limit #{limit}
+    </select>
+
+    <!-- 批量标记已读 -->
+    <insert id="insertNoticeReadBatch">
+        insert ignore into sys_notice_read (notice_id, user_id, read_time)
+        values
+        <foreach collection="noticeIds" item="noticeId" separator=",">
+            (#{noticeId}, #{userId}, sysdate())
+        </foreach>
+    </insert>
+
+    <!-- 删除公告时清理已读记录 -->
+    <delete id="deleteByNoticeIds">
+        delete from sys_notice_read where notice_id in
+        <foreach collection="noticeIds" item="noticeId" open="(" separator="," close=")">
+            #{noticeId}
+        </foreach>
+    </delete>
+
+</mapper>
