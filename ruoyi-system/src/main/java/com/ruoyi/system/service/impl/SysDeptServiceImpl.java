@@ -324,4 +324,30 @@ public class SysDeptServiceImpl implements ISysDeptService
             }
         }
     }
+
+    /**
+     * 保存部门排序
+     *
+     * @param deptIds 部门ID数组
+     * @param orderNums 排序数组
+     */
+    @Override
+    @Transactional
+    public void updateDeptSort(String[] deptIds, String[] orderNums)
+    {
+        try
+        {
+            for (int i = 0; i < deptIds.length; i++)
+            {
+                SysDept dept = new SysDept();
+                dept.setDeptId(Convert.toLong(deptIds[i]));
+                dept.setOrderNum(Convert.toInt(orderNums[i]));
+                deptMapper.updateDeptSort(dept);
+            }
+        }
+        catch (Exception e)
+        {
+            throw new ServiceException("保存排序异常，请联系管理员");
+        }
+    }
 }
