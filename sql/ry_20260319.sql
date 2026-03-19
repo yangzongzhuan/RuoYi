@@ -588,6 +588,7 @@ create table sys_user_online (
   start_timestamp   datetime                                comment 'session创建时间',
   last_access_time  datetime                                comment 'session最后访问时间',
   expire_time       int(5)        default 0                 comment '超时时间，单位为分钟',
+  session_data      blob          default null              comment '序列化的Session数据，用于服务重启后恢复会话',
   primary key (sessionId)
 ) engine=innodb comment = '在线用户记录';
 
@@ -664,7 +665,21 @@ insert into sys_notice values('3', '若依开源框架介绍', '1', '<p><span st
 
 
 -- ----------------------------
--- 19、代码生成业务表
+-- 19、公告已读记录表
+-- ----------------------------
+drop table if exists sys_notice_read;
+create table sys_notice_read (
+  read_id          bigint(20)       not null auto_increment    comment '已读主键',
+  notice_id        int(4)           not null                   comment '公告id',
+  user_id          bigint(20)       not null                   comment '用户id',
+  read_time        datetime         not null                   comment '阅读时间',
+  primary key (read_id),
+  unique key uk_user_notice (user_id, notice_id)   comment '同一用户同一公告只记录一次'
+) engine=innodb auto_increment=1 comment='公告已读记录表';
+
+
+-- ----------------------------
+-- 20、代码生成业务表
 -- ----------------------------
 drop table if exists gen_table;
 create table gen_table (
@@ -694,7 +709,7 @@ create table gen_table (
 
 
 -- ----------------------------
--- 20、代码生成业务表字段
+-- 21、代码生成业务表字段
 -- ----------------------------
 drop table if exists gen_table_column;
 create table gen_table_column (
