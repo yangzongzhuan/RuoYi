@@ -124,8 +124,7 @@ public interface SysMenuMapper
     /**
      * 保存菜单排序
      * 
-     * @param menuIds 菜单ID
-     * @param orderNums 排序ID
+     * @param menu 菜单信息
      */
     public void updateMenuSort(SysMenu menu);
 
