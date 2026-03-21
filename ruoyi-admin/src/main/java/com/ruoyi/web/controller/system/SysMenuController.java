@@ -147,6 +147,8 @@ public class SysMenuController extends BaseController
     /**
      * 保存菜单排序
      */
+    @Log(title = "保存菜单排序", businessType = BusinessType.UPDATE)
+    @RequiresPermissions("system:menu:edit")
     @PostMapping("/updateSort")
     @ResponseBody
     public AjaxResult updateSort(@RequestParam String[] menuIds, @RequestParam String[] orderNums)
