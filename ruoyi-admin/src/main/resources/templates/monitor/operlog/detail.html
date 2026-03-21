@@ -3,7 +3,7 @@
 <head>
     <th:block th:include="include :: header('操作日志详细')" />
     <th:block th:include="include :: jsonview-css" />
-    <style>.method-tag{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:700;margin-right:6px;vertical-align:middle}.method-GET{background:#e8f5e9;color:#27ae60}.method-POST{background:#e3f2fd;color:#1565c0}.method-PUT{background:#fff3e0;color:#e65100}.method-DELETE{background:#ffebee;color:#c62828}.error-msg{background:#fff8f8;border-left:3px solid #e74c3c;border-radius:3px;padding:8px 12px;color:#c0392b;font-size:12px;line-height:1.7;word-break:break-all;white-space:pre-wrap}.code-wrap{background:#f7f9fb;border:1px solid #e8ecf0;border-radius:4px;overflow:auto;max-height:260px}.code-wrap pre{margin:0;padding:12px 14px;font-size:12px;line-height:1.6;font-family:Consolas,'SFMono-Regular',monospace;color:#444}.code-action{display:flex;justify-content:flex-end;padding:8px 18px 0}.btn-copy{font-size:12px;color:#888;background:0;border:1px solid #dde1e7;border-radius:3px;padding:2px 10px;cursor:pointer}.btn-copy:hover{background:#f0f2f5}.mono{font-family:Consolas,'SFMono-Regular',monospace;font-size:12px;color:#555}</style>
+    <style type="text/css">.method-tag{display:inline-block;padding:1px 8px;border-radius:3px;font-size:11px;font-weight:700;margin-right:6px;vertical-align:middle}.method-GET{background:#e8f5e9;color:#27ae60}.method-POST{background:#e3f2fd;color:#1565c0}.method-PUT{background:#fff3e0;color:#e65100}.method-DELETE{background:#ffebee;color:#c62828}.error-msg{background:#fff8f8;border-left:3px solid #e74c3c;border-radius:3px;padding:8px 12px;color:#c0392b;font-size:12px;line-height:1.7;word-break:break-all;white-space:pre-wrap}.code-wrap{background:#f7f9fb;border:1px solid #e8ecf0;border-radius:4px;overflow:hidden;max-height:260px;position:relative}.code-wrap pre{margin:0;padding:12px 14px;font-size:12px;line-height:1.6;font-family:Consolas,'SFMono-Regular',monospace;color:#444;white-space:pre-wrap;word-break:break-all;overflow:auto;max-height:240px;display:block}.code-action{position:absolute;top:8px;right:12px;z-index:10;margin:0;padding:0}.btn-copy{font-size:12px;color:#666;background:rgba(255,255,255,0.9);border:1px solid #dde1e7;border-radius:3px;padding:2px 10px;cursor:pointer}.btn-copy:hover{background:#fff;border-color:#409eff}.mono{font-family:Consolas,'SFMono-Regular',monospace;font-size:12px;color:#555}</style>
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content">
@@ -75,22 +75,26 @@
     <!-- 请求参数 -->
     <div class="detail-card">
         <div class="detail-card-title"><i class="fa fa-arrow-circle-up"></i>请求参数</div>
-        <div class="code-action">
-            <button class="btn-copy" onclick="copyCode('operParam')"><i class="fa fa-copy"></i> 复制</button>
-        </div>
         <div style="padding: 6px 18px 14px;">
-            <div class="code-wrap"><pre id="operParam"></pre></div>
+            <div class="code-wrap">
+                <div class="code-action">
+                    <button class="btn-copy" onclick="copyCode('operParam')"><i class="fa fa-copy"></i> 复制</button>
+                </div>
+                <pre id="operParam"></pre>
+            </div>
         </div>
     </div>
 
     <!-- 返回参数 -->
     <div class="detail-card">
         <div class="detail-card-title"><i class="fa fa-arrow-circle-down"></i>返回参数</div>
-        <div class="code-action">
-            <button class="btn-copy" onclick="copyCode('jsonResult')"><i class="fa fa-copy"></i> 复制</button>
-        </div>
         <div style="padding: 6px 18px 14px;">
-            <div class="code-wrap"><pre id="jsonResult"></pre></div>
+            <div class="code-wrap">
+                <div class="code-action">
+                    <button class="btn-copy" onclick="copyCode('jsonResult')"><i class="fa fa-copy"></i> 复制</button>
+                </div>
+                <pre id="jsonResult"></pre>
+            </div>
         </div>
     </div>
 
