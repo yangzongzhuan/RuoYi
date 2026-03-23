@@ -7,7 +7,6 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.utils.bean.BeanUtils;
 
 /**
  * shiro 工具类
@@ -33,14 +32,12 @@ public class ShiroUtils
 
     public static SysUser getSysUser()
     {
-        SysUser user = null;
         Object obj = getSubject().getPrincipal();
         if (StringUtils.isNotNull(obj))
         {
-            user = new SysUser();
-            BeanUtils.copyBeanProp(user, obj);
+            return (SysUser) obj;
         }
-        return user;
+        return null;
     }
 
     public static void setSysUser(SysUser user)
