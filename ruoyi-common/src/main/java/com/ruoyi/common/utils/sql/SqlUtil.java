@@ -13,7 +13,7 @@ public class SqlUtil
     /**
      * 定义常用的 sql关键字
      */
-    public static String SQL_REGEX = "\u000B|and |extractvalue|updatexml|sleep|information_schema|exec |insert |select |delete |update |drop |count |chr |mid |master |truncate |char |declare |or |union |like |+|/*|user()";
+    public static String SQL_REGEX = "\u000B|%0A|and |extractvalue|updatexml|sleep|information_schema|exec |insert |select |delete |update |drop |count |chr |mid |master |truncate |char |declare |or |union |like |+|/*|user()";
 
     /**
      * 仅支持字母、数字、下划线、空格、逗号、小数点（支持多个字段排序）
@@ -58,12 +58,13 @@ public class SqlUtil
         {
             return;
         }
+        String normalizedValue = value.replaceAll("\\p{Z}|\\s", "");
         String[] sqlKeywords = StringUtils.split(SQL_REGEX, "\\|");
         for (String sqlKeyword : sqlKeywords)
         {
-            if (StringUtils.indexOfIgnoreCase(value, sqlKeyword) > -1)
+            if (StringUtils.indexOfIgnoreCase(normalizedValue, sqlKeyword) > -1)
             {
-                throw new UtilException("参数存在SQL注入风险");
+                throw new UtilException("请求参数包含敏感关键词'" + sqlKeyword + "'，可能存在安全风险");
             }
         }
     }
