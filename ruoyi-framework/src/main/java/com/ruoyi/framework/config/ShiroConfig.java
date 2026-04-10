@@ -15,6 +15,7 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.CipherUtils;
 import com.ruoyi.common.utils.spring.SpringUtils;
+import com.ruoyi.framework.config.properties.PermitAllUrlProperties;
 import com.ruoyi.framework.shiro.realm.UserRealm;
 import com.ruoyi.framework.shiro.rememberMe.CustomCookieRememberMeManager;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
@@ -142,6 +144,9 @@ public class ShiroConfig
      */
     @Value("${csrf.whites: ''}")
     private String csrfWhites;
+
+    @Autowired
+    private PermitAllUrlProperties permitAllUrl;
 
     /**
      * 缓存管理器 使用Ehcache实现
@@ -312,6 +317,8 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
+        // 匿名访问不鉴权注解列表
+        permitAllUrl.getUrls().forEach(url -> filterChainDefinitionMap.put(url, "anon"));
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问
