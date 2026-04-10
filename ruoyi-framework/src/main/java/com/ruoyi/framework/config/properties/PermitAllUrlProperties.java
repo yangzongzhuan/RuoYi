@@ -3,19 +3,19 @@ package com.ruoyi.framework.config.properties;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import org.springframework.aop.framework.Advised;
+import java.util.regex.Pattern;
+import org.apache.commons.lang3.RegExUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.AnnotatedElementUtils;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ruoyi.common.annotation.Anonymous;
 
@@ -27,85 +27,47 @@ import com.ruoyi.common.annotation.Anonymous;
 @Configuration
 public class PermitAllUrlProperties implements InitializingBean, ApplicationContextAware
 {
-    private List<String> urls = new ArrayList<>();
+    private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
+
+    private static final String ASTERISK = "*";
 
     private ApplicationContext applicationContext;
+
+    private List<String> urls = new ArrayList<>();
 
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        Map<String, Object> controllers = applicationContext.getBeansWithAnnotation(Controller.class);
-        for (Object bean : controllers.values())
+        String basePackage = AutoConfigurationPackages.get(applicationContext.getAutowireCapableBeanFactory()).get(0);
+
+        ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);
+        scanner.addIncludeFilter(new AnnotationTypeFilter(Controller.class));
+        for (BeanDefinition bd : scanner.findCandidateComponents(basePackage))
         {
-            Class<?> beanClass;
-            if (bean instanceof Advised)
+            Class<?> beanClass = Class.forName(bd.getBeanClassName());
+            RequestMapping base = beanClass.getAnnotation(RequestMapping.class);
+            String[] baseUrl = base != null ? base.value() : new String[] {};
+            boolean classAnonymous = beanClass.isAnnotationPresent(Anonymous.class);
+            for (Method method : beanClass.getDeclaredMethods())
             {
-                beanClass = ((Advised) bean).getTargetSource().getTarget().getClass();
-            }
-            else
-            {
-                beanClass = bean.getClass();
-            }
-            // 处理类级别的匿名访问注解
-            if (beanClass.isAnnotationPresent(Anonymous.class))
-            {
-                RequestMapping baseMapping = beanClass.getAnnotation(RequestMapping.class);
-                if (Objects.nonNull(baseMapping))
+                boolean methodAnonymous = method.isAnnotationPresent(Anonymous.class);
+                if (!classAnonymous && !methodAnonymous)
                 {
-                    String[] baseUrl = baseMapping.value();
-                    for (String url : baseUrl)
-                    {
-                        urls.add(prefix(url) + "/*");
-                    }
                     continue;
                 }
-            }
-
-            // 处理方法级别的匿名访问注解
-            Method[] methods = beanClass.getDeclaredMethods();
-            for (Method method : methods)
-            {
-                if (method.isAnnotationPresent(Anonymous.class))
+                RequestMapping mapping = AnnotatedElementUtils.findMergedAnnotation(method, RequestMapping.class);
+                if (mapping != null && mapping.value().length > 0)
                 {
-                    RequestMapping baseMapping = beanClass.getAnnotation(RequestMapping.class);
-                    String[] baseUrl = {};
-                    if (Objects.nonNull(baseMapping))
-                    {
-                        baseUrl = baseMapping.value();
-                    }
-                    if (method.isAnnotationPresent(RequestMapping.class))
-                    {
-                        RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
-                        String[] uri = requestMapping.value();
-                        urls.addAll(rebuildUrl(baseUrl, uri));
-                    }
-                    else if (method.isAnnotationPresent(GetMapping.class))
-                    {
-                        GetMapping requestMapping = method.getAnnotation(GetMapping.class);
-                        String[] uri = requestMapping.value();
-                        urls.addAll(rebuildUrl(baseUrl, uri));
-                    }
-                    else if (method.isAnnotationPresent(PostMapping.class))
-                    {
-                        PostMapping requestMapping = method.getAnnotation(PostMapping.class);
-                        String[] uri = requestMapping.value();
-                        urls.addAll(rebuildUrl(baseUrl, uri));
-                    }
-                    else if (method.isAnnotationPresent(PutMapping.class))
-                    {
-                        PutMapping requestMapping = method.getAnnotation(PutMapping.class);
-                        String[] uri = requestMapping.value();
-                        urls.addAll(rebuildUrl(baseUrl, uri));
-                    }
-                    else if (method.isAnnotationPresent(DeleteMapping.class))
-                    {
-                        DeleteMapping requestMapping = method.getAnnotation(DeleteMapping.class);
-                        String[] uri = requestMapping.value();
-                        urls.addAll(rebuildUrl(baseUrl, uri));
-                    }
+                    urls.addAll(rebuildUrl(baseUrl, mapping.value()));
                 }
             }
         }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) throws BeansException
+    {
+        this.applicationContext = context;
     }
 
     private List<String> rebuildUrl(String[] bases, String[] uris)
@@ -113,16 +75,9 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
         List<String> urls = new ArrayList<>();
         for (String base : bases)
         {
-            if (uris.length > 0)
+            for (String uri : uris)
             {
-                for (String uri : uris)
-                {
-                    urls.add(prefix(base) + prefix(uri));
-                }
-            }
-            else
-            {
-                urls.add(prefix(base));
+                urls.add(prefix(base) + prefix(RegExUtils.replaceAll(uri, PATTERN, ASTERISK)));
             }
         }
         return urls;
@@ -131,12 +86,6 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
     private String prefix(String seg)
     {
         return seg.startsWith("/") ? seg : "/" + seg;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext context) throws BeansException
-    {
-        this.applicationContext = context;
     }
 
     public List<String> getUrls()
