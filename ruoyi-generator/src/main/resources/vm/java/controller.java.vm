@@ -86,6 +86,20 @@ public class ${ClassName}Controller extends BaseController
         ExcelUtil<${ClassName}> util = new ExcelUtil<${ClassName}>(${ClassName}.class);
         return util.exportExcel(list, "${functionName}数据");
     }
+#if($genView)
+
+    /**
+     * 查看${functionName}详情
+     */
+    @RequiresPermissions("${permissionPrefix}:view")
+    @GetMapping("/view/{${pkColumn.javaField}}")
+    public String view(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField}, ModelMap mmap)
+    {
+        ${ClassName} ${className} = ${className}Service.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField});
+        mmap.put("${className}", ${className});
+        return prefix + "/view";
+    }
+#end
 
 #if($table.crud || $table.sub)
     /**

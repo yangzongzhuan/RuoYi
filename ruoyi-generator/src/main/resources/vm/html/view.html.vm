@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('${functionName}详细')" />
+</head>
+<body>
+    <div class="main-content">
+        <form class="form-horizontal" th:object="${${className}}">
+            <h4 class="form-header h4">基本信息</h4>
+#set($i = 0)
+#foreach($column in $columns)
+#if(!$column.pk && $column.list)
+#set($dictType=$column.dictType)
+#set($javaField=$column.javaField)
+#set($parentheseIndex=$column.columnComment.indexOf("（"))
+#if($parentheseIndex != -1)
+#set($comment=$column.columnComment.substring(0, $parentheseIndex))
+#else
+#set($comment=$column.columnComment)
+#end
+#if($i % 2 == 0)
+            <div class="row">
+#end
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">${comment}：</label>
+                        <div class="col-sm-8">
+#if("" != $dictType)
+                            <p class="form-control-plaintext" th:text="*{@dict.getLabel('${dictType}', ${javaField})}"></p>
+#elseif($column.javaType == "Date")
+                            <p class="form-control-plaintext" th:text="*{#dates.format(${javaField}, 'yyyy-MM-dd HH:mm:ss')}"></p>
+#else
+                            <p class="form-control-plaintext" th:text="*{${javaField}}"></p>
+#end
+                        </div>
+                    </div>
+                </div>
+#set($i = $i + 1)
+#if($i % 2 == 0)
+            </div>
+#end
+#end
+#end
+#if($i % 2 != 0)
+            </div>
+#end
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+</body>
+</html>
