@@ -98,6 +98,9 @@ public class GenTable extends BaseEntity
     /** 上级菜单名称字段 */
     private String parentMenuName;
 
+    /** 是否生成详情页 */
+    private boolean isView;
+
     public Long getTableId()
     {
         return tableId;
@@ -336,6 +339,16 @@ public class GenTable extends BaseEntity
     public void setParentMenuName(String parentMenuName)
     {
         this.parentMenuName = parentMenuName;
+    }
+
+    public boolean isView()
+    {
+        return isView;
+    }
+
+    public void setView(boolean isView)
+    {
+        this.isView = isView;
     }
 
     public boolean isSub()

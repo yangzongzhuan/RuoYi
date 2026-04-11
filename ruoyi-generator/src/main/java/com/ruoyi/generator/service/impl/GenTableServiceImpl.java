@@ -219,7 +219,7 @@ public class GenTableServiceImpl implements IGenTableService
         VelocityContext context = VelocityUtils.prepareContext(table);
 
         // 获取模板列表
-        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        List<String> templates = VelocityUtils.getTemplateList(table);
         for (String template : templates)
         {
             // 渲染模板
@@ -267,7 +267,7 @@ public class GenTableServiceImpl implements IGenTableService
         VelocityContext context = VelocityUtils.prepareContext(table);
 
         // 获取模板列表
-        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        List<String> templates = VelocityUtils.getTemplateList(table);
         for (String template : templates)
         {
             if (!StringUtils.contains(template, "sql.vm"))
@@ -380,7 +380,7 @@ public class GenTableServiceImpl implements IGenTableService
         VelocityContext context = VelocityUtils.prepareContext(table);
 
         // 获取模板列表
-        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        List<String> templates = VelocityUtils.getTemplateList(table);
         for (String template : templates)
         {
             // 渲染模板
@@ -506,12 +506,14 @@ public class GenTableServiceImpl implements IGenTableService
             String treeName = paramsObj.getString(GenConstants.TREE_NAME);
             String parentMenuId = paramsObj.getString(GenConstants.PARENT_MENU_ID);
             String parentMenuName = paramsObj.getString(GenConstants.PARENT_MENU_NAME);
+            boolean isView = paramsObj.getBooleanValue(GenConstants.GEN_VIEW);
 
             genTable.setTreeCode(treeCode);
             genTable.setTreeParentCode(treeParentCode);
             genTable.setTreeName(treeName);
             genTable.setParentMenuId(parentMenuId);
             genTable.setParentMenuName(parentMenuName);
+            genTable.setView(isView);
         }
     }
 
