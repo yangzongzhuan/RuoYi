@@ -369,7 +369,7 @@ public class VelocityUtils
      */
     public static boolean genView(JSONObject paramsObj)
     {
-        if (paramsObj.containsKey(GenConstants.GEN_VIEW))
+        if (StringUtils.isNotNull(paramsObj) && paramsObj.containsKey(GenConstants.GEN_VIEW))
         {
             return paramsObj.getBoolean(GenConstants.GEN_VIEW);
         }
