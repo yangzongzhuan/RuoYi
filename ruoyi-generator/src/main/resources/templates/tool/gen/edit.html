@@ -4,7 +4,7 @@
 	<th:block th:include="include :: header('修改生成信息')" />
 	<th:block th:include="include :: select2-css" />
 	<style type="text/css">
-	    .select-table table{table-layout:fixed;}.table>thead>tr>th{text-align:center;}.select-table .table td{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.form-control{padding:3px 6px 4px;height:30px;}.icheckbox-blue{top:0px;left:6px;}.form-control.select2-hidden-accessible{position:static!important;}.select-table table label.error{position: inherit;}select + label.error{z-index:1;right:40px;}
+	    .select-table table{table-layout:fixed;}.table>thead>tr>th{text-align:center;}.select-table .table td{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.form-control{padding:3px 6px 4px;height:30px;}.table .icheckbox-blue{top:0px;left:6px;}.form-control.select2-hidden-accessible{position:static!important;}.select-table table label.error{position: inherit;}select + label.error{z-index:1;right:40px;}
 	</style>
 </head>
 <body class="gray-bg" style="font: 14px Helvetica Neue, Helvetica, PingFang SC, 微软雅黑, Tahoma, Arial, sans-serif !important;">
@@ -146,6 +146,18 @@
 					                    </div>
 					                </div>
 					            </div>
+					            <div class="row">
+								    <div class="col-sm-12">
+								        <div class="form-group">
+								            <label class="col-sm-2 control-label">扩展功能：</label>
+								            <div class="col-sm-10">
+								                <label class="check-box">
+								                    <input type="checkbox" name="params[genView]" value="1" th:checked="${table.view}"> 生成详情页
+								                </label>
+								            </div>
+								        </div>
+								    </div>
+								</div>
 					            <div class="row">
 					                <div class="col-sm-6">
 					                    <div class="form-group">
