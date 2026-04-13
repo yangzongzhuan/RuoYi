@@ -1,6 +1,7 @@
 package com.ruoyi.system.service;
 
 import java.util.List;
+import java.util.Map;
 import com.ruoyi.system.domain.SysNotice;
 
 /**
@@ -49,4 +50,13 @@ public interface ISysNoticeReadService
      * @param ids 公告ID字符串（逗号分隔）
      */
     public void deleteByNoticeIds(String ids);
+
+    /**
+     * 查询已阅读某公告的用户列表
+     *
+     * @param noticeId  公告ID
+     * @param searchValue 搜索值
+     * @return 已读用户列表
+     */
+    public List<Map<String, Object>> selectReadUsersByNoticeId(Long noticeId, String searchValue);
 }
