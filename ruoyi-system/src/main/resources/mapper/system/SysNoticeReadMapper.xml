@@ -63,4 +63,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
+    <!-- 查询已阅读某公告的用户列表，支持按登录名/用户名模糊筛选 -->
+    <select id="selectReadUsersByNoticeId" resultType="java.util.Map">
+        select
+            u.user_id      as userId,
+            u.login_name   as loginName,
+            u.user_name    as userName,
+            d.dept_name    as deptName,
+            u.phonenumber  as phonenumber,
+            r.read_time    as readTime
+        from sys_notice_read r
+        inner join sys_user u on u.user_id = r.user_id and u.del_flag = '0'
+        left join sys_dept d on d.dept_id = u.dept_id
+        where r.notice_id = #{noticeId}
+        <if test="searchValue != null and searchValue != ''">
+            and (
+                u.login_name like concat('%', #{searchValue}, '%')
+                or u.user_name like concat('%', #{searchValue}, '%')
+            )
+        </if>
+        order by r.read_time desc
+    </select>
+
 </mapper>
