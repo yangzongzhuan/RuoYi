@@ -10,7 +10,7 @@
     <name>ruoyi</name>
     <url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
-    
+
     <properties>
         <ruoyi.version>4.8.3</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -31,6 +31,7 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <springdoc.version>3.0.2</springdoc.version>
+        <agent4j.version>1.0</agent4j.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -52,7 +53,7 @@
                 <artifactId>druid-spring-boot-4-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            
+
             <!-- 验证码 -->
             <dependency>
                 <groupId>pro.fessional</groupId>
@@ -165,6 +166,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ink.icoding.llm</groupId>
+                <artifactId>agent4j</artifactId>
+                <version>${agent4j.version}</version>
             </dependency>
 
             <!-- 定时任务-->
