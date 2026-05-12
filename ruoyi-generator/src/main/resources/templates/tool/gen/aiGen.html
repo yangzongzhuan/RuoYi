@@ -505,7 +505,7 @@
                 }
                 if (saved.apiKey) document.getElementById('apiKey').value = saved.apiKey;
                 if (saved.modelName) document.getElementById('modelName').value = saved.modelName;
-                if (saved.workingDir) document.getElementById('workingDir').value = saved.workingDir;
+                // if (saved.workingDir) document.getElementById('workingDir').value = saved.workingDir;
                 if (saved.protocol) document.getElementById('apiProtocol').value = saved.protocol;
             } catch(e) {}
         }
@@ -515,7 +515,7 @@
                 baseUrl: getBaseUrl(),
                 apiKey: document.getElementById('apiKey').value,
                 modelName: document.getElementById('modelName').value,
-                workingDir: document.getElementById('workingDir').value,
+                // workingDir: document.getElementById('workingDir').value,
                 protocol: document.getElementById('apiProtocol').value
             };
             localStorage.setItem(STORAGE_KEY + '_config', JSON.stringify(cfg));
@@ -946,7 +946,7 @@
                 modelName: document.getElementById('modelName').value,
                 message: msg,
                 history: collectHistory(5),
-                workingDir: document.getElementById('workingDir').value
+                // workingDir: document.getElementById('workingDir').value
             };
 
             // 使用 fetch + ReadableStream 处理 SSE (因为是 POST)
