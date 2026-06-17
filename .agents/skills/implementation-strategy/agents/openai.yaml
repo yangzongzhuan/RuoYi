@@ -1,0 +1,4 @@
+interface:
+  display_name: "实现策略"
+  short_description: "选择兼容性明确的实现方案"
+  default_prompt: "使用 $implementation-strategy 在编辑运行时代码前选择实现方式和兼容性边界。"

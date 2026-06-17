@@ -1,0 +1,4 @@
+interface:
+  display_name: "Harness 初始化"
+  short_description: "运行 fact-first harness 填充流程"
+  default_prompt: "使用 $harness-init 运行 scan-facts，填充包含 practices 在内的 harness artifacts，并检查一致性。"

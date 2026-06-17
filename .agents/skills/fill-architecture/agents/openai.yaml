@@ -1,0 +1,4 @@
+interface:
+  display_name: "填充 Architecture"
+  short_description: "从 facts 填充 ARCHITECTURE.md"
+  default_prompt: "使用 $fill-architecture 从 .harnesskit/facts.md 和已核对的仓库路径更新 ARCHITECTURE.md。"

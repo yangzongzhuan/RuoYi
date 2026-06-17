@@ -1,0 +1,4 @@
+interface:
+  display_name: "PR 草稿总结"
+  short_description: "起草仓库可用的 PR 标题和描述"
+  default_prompt: "使用 $pr-draft-summary 为当前变更生成 PR-ready summary block、标题和 draft description。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "填充 Practices"
+  short_description: "填充判断指导文档"
+  default_prompt: "使用 $fill-practices 从 .harnesskit/facts.md 和已核对的仓库证据更新 docs/practices/*.md。"

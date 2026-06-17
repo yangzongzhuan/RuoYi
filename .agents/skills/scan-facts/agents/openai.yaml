@@ -1,0 +1,4 @@
+interface:
+  display_name: "扫描 Facts"
+  short_description: "把仓库证据扫描进 facts 快照"
+  default_prompt: "使用 $scan-facts 从已核对仓库证据刷新 .harnesskit/facts.md，且不更新其他 harness artifacts。"

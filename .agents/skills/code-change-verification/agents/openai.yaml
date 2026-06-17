@@ -1,0 +1,4 @@
+interface:
+  display_name: "代码变更验证"
+  short_description: "运行必需的本地验证栈"
+  default_prompt: "使用 $code-change-verification 运行必需的本地验证栈，并报告任何失败。"

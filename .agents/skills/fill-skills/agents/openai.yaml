@@ -1,0 +1,4 @@
+interface:
+  display_name: "填充 Skills"
+  short_description: "填充 generated skill placeholders"
+  default_prompt: "使用 $fill-skills 从 .harnesskit/facts.md 和已核对的仓库证据更新 generated skills。"
