@@ -25,7 +25,7 @@
         <yauaa.version>8.1.1</yauaa.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>2.1.1</pagehelper.boot.version>
-        <fastjson.version>1.2.83</fastjson.version>
+        <fastjson.version>1.2.84</fastjson.version>
         <oshi.version>7.3.0</oshi.version>
         <commons.io.version>2.22.0</commons.io.version>
         <poi.version>4.1.2</poi.version>
