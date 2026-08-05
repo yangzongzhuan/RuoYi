@@ -494,6 +494,7 @@ function loadNoticeTop() {
 			var html = '';
 			for (var i = 0; i < list.length; i++) {
 				var n = list[i];
+				var noticeTitle = $.common.escapeHtml(n.noticeTitle) || '';
 				var typeClass = n.noticeType === '1' ? 'warning' : 'success';
 				var typeLabel = n.noticeType === '1' ? '通知' : '公告';
 				var isRead = n.isRead === true || n.isRead === 'true' || n.read === true || n.read === 'true';
@@ -506,7 +507,7 @@ function loadNoticeTop() {
 				html += '<li id="notice-item-' + n.noticeId + '"' + readAttr + ' style="border-bottom:1px solid #f5f5f5;">';
 				html += '<a href="javascript:void(0)" onclick="previewNotice(' + n.noticeId + ')" style="display:flex;align-items:center;padding:10px 16px;gap:10px;text-decoration:none;color:' + aColor + ';">';
 				html += badgeHtml;
-				html += '<span style="flex:1;font-size:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;' + titleColor + '" title="' + (n.noticeTitle||'') + '">' + (n.noticeTitle||'') + '</span>';
+				html += '<span style="flex:1;font-size:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;' + titleColor + '" title="' + noticeTitle + '">' + noticeTitle + '</span>';
 				html += '<span style="font-size:11px;color:#bbb;flex-shrink:0;">' + (n.createTime ? n.createTime.substring(0,10) : '') + '</span>';
 				html += '</a></li>';
 			}

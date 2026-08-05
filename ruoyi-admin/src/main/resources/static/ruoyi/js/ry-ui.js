@@ -160,7 +160,7 @@ var table = {
             getOptionsIds: function(separator) {
                 var _separator = $.common.isEmpty(separator) ? "," : separator;
                 var optionsIds = "";  
-                $.each(table.config, function(key, value){
+                $.each(table.config, function(key, value) {
                     optionsIds += "#" + key + _separator;
                 });
                 return optionsIds.substring(0, optionsIds.length - 1);
@@ -425,7 +425,7 @@ var table = {
                     btn: ['<i class="fa fa-check"></i> 导入', '<i class="fa fa-remove"></i> 取消'],
                     // 弹层外区域关闭
                     shadeClose: true,
-                    btn1: function(index, layero){
+                    btn1: function(index, layero) {
                         var file = layero.find('#file').val();
                         if (file == '' || (!$.common.endWith(file, '.xls') && !$.common.endWith(file, '.xlsx'))) {
                             $.modal.msgWarning("请选择后缀为 “xls”或“xlsx”的文件。");
@@ -903,7 +903,7 @@ var table = {
                     }
                 }
                 var btnCallback = {};
-                if (options.btn instanceof Array){
+                if (options.btn instanceof Array) {
                     for (var i = 1, len = options.btn.length; i < len; i++) {
                         var btn = options["btn" + (i + 1)];
                         if (btn) {
@@ -1034,7 +1034,7 @@ var table = {
             },
             // 关闭遮罩层
             closeLoading: function () {
-                setTimeout(function(){
+                setTimeout(function() {
                     $.unblockUI();
                 }, 50);
             },
@@ -1224,7 +1224,7 @@ var table = {
                 return url;
             },
             // 右侧弹出详情
-            view: function(id){
+            view: function(id) {
                 table.set();
                 var url = table.options.viewUrl.replace("{id}", id);
                 $.modal.popupRight(table.options.modalName + "信息详情", url);
@@ -1452,7 +1452,7 @@ var table = {
                     var node = tree.getNodesByParam("id", treeId, null)[0];
                     $.tree.selectByIdName(treeId, node);
                     // 回调tree方法
-                    if (typeof(options.callBack) === "function"){
+                    if (typeof(options.callBack) === "function") {
                         options.callBack(tree);
                     }
                 });
@@ -1541,7 +1541,7 @@ var table = {
             // 不允许根父节点选择
             notAllowParents: function(_tree) {
                 var nodes = _tree.getSelectedNodes();
-                if (nodes.length == 0){
+                if (nodes.length == 0) {
                     $.modal.msgError("请选择节点后提交");
                     return false;
                 }
@@ -1772,25 +1772,30 @@ var table = {
                 return navigator.userAgent.match(/(Android|iPhone|SymbianOS|Windows Phone|iPad|iPod)/i);
             },
             // 数字正则表达式，只能为0-9数字
-            numValid : function(text){
+            numValid: function(text) {
                 var patten = new RegExp(/^[0-9]+$/);
                 return patten.test(text);
             },
             // 英文正则表达式，只能为a-z和A-Z字母
-            enValid : function(text){
+            enValid: function(text) {
                 var patten = new RegExp(/^[a-zA-Z]+$/);
                 return patten.test(text);
             },
             // 英文、数字正则表达式，必须包含（字母，数字）
-            enNumValid : function(text){
+            enNumValid: function(text) {
                 var patten = new RegExp(/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/);
                 return patten.test(text);
             },
             // 英文、数字、特殊字符正则表达式，必须包含（字母，数字，特殊字符!@#$%^&*()-=_+）
-            charValid : function(text){
+            charValid: function(text) {
                 var patten = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#\$%\^&\*\(\)\-=_\+])[A-Za-z\d~!@#\$%\^&\*\(\)\-=_\+]{6,}$/);
                 return patten.test(text);
             },
+            escapeHtml: function(text) {
+                if (!text) return '';
+                var map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+                return String(text).replace(/[&<>"']/g, function(ch) { return map[ch]; });
+            }
         }
     });
 })(jQuery);
