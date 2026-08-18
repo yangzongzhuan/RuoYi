@@ -1010,13 +1010,13 @@ public class ExcelUtil<T>
                 style.cloneStyleFrom(styles.get("data"));
                 style.setAlignment(HorizontalAlignment.CENTER);
                 style.setVerticalAlignment(VerticalAlignment.CENTER);
-                style.setFillForegroundColor(excel.headerBackgroundColor().index);
+                style.setFillForegroundColor(excel.headerBackgroundColor().getIndex());
                 style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
                 Font headerFont = wb.createFont();
                 headerFont.setFontName("Arial");
                 headerFont.setFontHeightInPoints((short) 10);
                 headerFont.setBold(true);
-                headerFont.setColor(excel.headerColor().index);
+                headerFont.setColor(excel.headerColor().getIndex());
                 style.setFont(headerFont);
                 // 设置表格头单元格文本形式
                 DataFormat dataFormat = wb.createDataFormat();
@@ -1088,7 +1088,7 @@ public class ExcelUtil<T>
             Font dataFont = wb.createFont();
             dataFont.setFontName("Arial");
             dataFont.setFontHeightInPoints((short) 10);
-            dataFont.setColor(excel.color().index);
+            dataFont.setColor(excel.color().getIndex());
             style.setFont(dataFont);
             if (ColumnType.TEXT == excel.cellType())
             {
