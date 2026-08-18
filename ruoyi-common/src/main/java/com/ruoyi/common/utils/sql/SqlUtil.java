@@ -1,5 +1,6 @@
 package com.ruoyi.common.utils.sql;
 
+import java.util.regex.Pattern;
 import com.ruoyi.common.exception.UtilException;
 import com.ruoyi.common.utils.StringUtils;
 
@@ -62,10 +63,38 @@ public class SqlUtil
         String[] sqlKeywords = StringUtils.split(SQL_REGEX, "\\|");
         for (String sqlKeyword : sqlKeywords)
         {
-            if (StringUtils.indexOfIgnoreCase(normalizedValue, sqlKeyword) > -1)
+            if (containsKeyword(value, normalizedValue, sqlKeyword))
             {
                 throw new UtilException("请求参数包含敏感关键词'" + sqlKeyword + "'，可能存在安全风险");
             }
         }
+    }
+
+    /**
+     * 检查 SQL 关键词，允许关键词内部包含空白字符，避免通过空白拆分绕过检测。
+     */
+    private static boolean containsKeyword(String value, String normalizedValue, String sqlKeyword)
+    {
+        if (StringUtils.isBlank(sqlKeyword))
+        {
+            return StringUtils.contains(value, sqlKeyword);
+        }
+        if (sqlKeyword.endsWith(" "))
+        {
+            String keyword = sqlKeyword.trim();
+            StringBuilder regex = new StringBuilder();
+            for (int i = 0; i < keyword.length(); i++)
+            {
+                if (i > 0)
+                {
+                    regex.append("[\\p{Z}\\s]*");
+                }
+                regex.append(Pattern.quote(String.valueOf(keyword.charAt(i))));
+            }
+            regex.append("[\\p{Z}\\s]+");
+            return Pattern.compile(regex.toString(), Pattern.CASE_INSENSITIVE).matcher(value).find();
+        }
+        String normalizedKeyword = sqlKeyword.replaceAll("\\p{Z}|\\s", "");
+        return StringUtils.indexOfIgnoreCase(normalizedValue, normalizedKeyword) > -1;
     }
 }
