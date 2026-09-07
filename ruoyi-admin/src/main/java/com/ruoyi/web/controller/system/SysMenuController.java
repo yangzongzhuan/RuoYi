@@ -59,7 +59,7 @@ public class SysMenuController extends BaseController
      */
     @Log(title = "菜单管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:menu:remove")
-    @GetMapping("/remove/{menuId}")
+    @PostMapping("/remove/{menuId}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("menuId") Long menuId)
     {

@@ -146,7 +146,7 @@ public class SysDeptController extends BaseController
      */
     @Log(title = "部门管理", businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dept:remove")
-    @GetMapping("/remove/{deptId}")
+    @PostMapping("/remove/{deptId}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("deptId") Long deptId)
     {

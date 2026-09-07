@@ -1118,7 +1118,7 @@ var table = {
                 $.modal.confirm("确定删除该条" + table.options.modalName + "信息吗？", function() {
                     var url = $.common.isEmpty(id) ? table.options.removeUrl : table.options.removeUrl.replace("{id}", id);
                     if (table.options.type == table_type.bootstrapTreeTable) {
-                        $.operate.get(url);
+                        $.operate.post(url);
                     } else {
                         var data = { "ids": id };
                         $.operate.submit(url, "post", "json", data);
