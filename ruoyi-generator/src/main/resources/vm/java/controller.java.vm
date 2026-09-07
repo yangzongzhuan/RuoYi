@@ -180,7 +180,7 @@ public class ${ClassName}Controller extends BaseController
      */
     @RequiresPermissions("${permissionPrefix}:remove")
     @Log(title = "${functionName}", businessType = BusinessType.DELETE)
-    @GetMapping("/remove/{${pkColumn.javaField}}")
+    @PostMapping("/remove/{${pkColumn.javaField}}")
     @ResponseBody
     public AjaxResult remove(@PathVariable("${pkColumn.javaField}") ${pkColumn.javaType} ${pkColumn.javaField})
     {
