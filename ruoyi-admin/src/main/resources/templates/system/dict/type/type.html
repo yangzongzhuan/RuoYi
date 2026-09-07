@@ -226,9 +226,9 @@
 
 				var labelHtml = r.dictLabel;
 				if (r.listClass && r.listClass !== 'default') {
-					labelHtml = '<span class="badge badge-' + r.listClass + '">' + r.dictLabel + '</span>';
+					labelHtml = '<span class="badge badge-' + $.common.escapeHtml(r.listClass) + '">' + r.dictLabel + '</span>';
 				} else if (r.cssClass) {
-					labelHtml = '<span class="' + r.cssClass + '">' + r.dictLabel + '</span>';
+					labelHtml = '<span class="' + $.common.escapeHtml(r.cssClass) + '">' + r.dictLabel + '</span>';
 				}
 
 				html += '<div class="dict-card-wrap"><div class="dict-card">';
