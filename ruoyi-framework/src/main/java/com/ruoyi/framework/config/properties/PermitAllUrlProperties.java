@@ -56,9 +56,10 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
                     continue;
                 }
                 RequestMapping mapping = AnnotatedElementUtils.findMergedAnnotation(method, RequestMapping.class);
-                if (mapping != null && mapping.value().length > 0)
+                if (mapping != null)
                 {
-                    urls.addAll(rebuildUrl(baseUrl, mapping.value()));
+                    String[] methodUrl = mapping.value().length > 0 ? mapping.value() : new String[] { "" };
+                    urls.addAll(rebuildUrl(baseUrl.length > 0 ? baseUrl : new String[] { "" }, methodUrl));
                 }
             }
         }
@@ -77,7 +78,8 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
         {
             for (String uri : uris)
             {
-                urls.add(prefix(base) + prefix(RegExUtils.replaceAll(uri, PATTERN, ASTERISK)));
+                String url = prefix(base) + prefix(RegExUtils.replaceAll(uri, PATTERN, ASTERISK));
+                urls.add(url.length() > 0 ? url : "/");
             }
         }
         return urls;
@@ -85,7 +87,7 @@ public class PermitAllUrlProperties implements InitializingBean, ApplicationCont
 
     private String prefix(String seg)
     {
-        return seg.startsWith("/") ? seg : "/" + seg;
+        return seg.length() == 0 || seg.startsWith("/") ? seg : "/" + seg;
     }
 
     public List<String> getUrls()
