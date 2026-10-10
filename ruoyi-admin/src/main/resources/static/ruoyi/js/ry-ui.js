@@ -1440,6 +1440,9 @@ var table = {
                     data: options.data
                 };
                 $.get(options.url, function(data) {
+                    if (!$.isArray(data)) {
+                        data = [];
+                    }
                     var treeId = $("#treeId").val();
                     tree = $.fn.zTree.init($("#" + options.id), setting, data);
                     $._tree = tree;
