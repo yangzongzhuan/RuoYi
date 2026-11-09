@@ -22,15 +22,15 @@
         <mybatis-spring-boot.version>3.0.5</mybatis-spring-boot.version>
         <thymeleaf.extras.shiro.version>2.1.0</thymeleaf.extras.shiro.version>
         <druid.version>1.2.28</druid.version>
-        <yauaa.version>8.2.0</yauaa.version>
+        <yauaa.version>8.3.0</yauaa.version>
         <kaptcha.version>2.3.3</kaptcha.version>
         <pagehelper.boot.version>2.1.1</pagehelper.boot.version>
-        <fastjson.version>1.2.84</fastjson.version>
-        <oshi.version>7.4.4</oshi.version>
+        <fastjson.version>2.0.66</fastjson.version>
+        <oshi.version>7.7.3</oshi.version>
         <commons.io.version>2.22.0</commons.io.version>
-        <poi.version>5.5.1</poi.version>
-        <velocity.version>2.3</velocity.version>
-        <springdoc.version>2.9.0</springdoc.version>
+        <poi.version>6.0.0</poi.version>
+        <velocity.version>2.4.1</velocity.version>
+        <springdoc.version>2.10.0</springdoc.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -162,8 +162,8 @@
 
             <!-- 阿里JSON解析器 -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
 
