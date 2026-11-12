@@ -80,12 +80,4 @@ public interface GenTableMapper
      * @return 结果
      */
     public int deleteGenTableByIds(Long[] ids);
-
-    /**
-     * 创建表
-     *
-     * @param sql
-     * @return 结果
-     */
-    public int createTable(String sql);
 }
