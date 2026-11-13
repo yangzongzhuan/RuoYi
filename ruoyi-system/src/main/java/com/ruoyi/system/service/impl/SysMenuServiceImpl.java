@@ -8,7 +8,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -367,6 +369,31 @@ public class SysMenuServiceImpl implements ISysMenuService
             return UserConstants.NOT_UNIQUE;
         }
         return UserConstants.UNIQUE;
+    }
+
+    /**
+     * 校验上级菜单是否为自己或自己的子菜单
+     *
+     * @param menu 菜单信息
+     * @return 结果
+     */
+    @Override
+    public boolean checkParentCycle(SysMenu menu)
+    {
+        Long menuId = menu.getMenuId();
+        Long parentId = menu.getParentId();
+        Map<Long, Long> parentMap = menuMapper.selectMenuList(new SysMenu()).stream().collect(Collectors.toMap(SysMenu::getMenuId, SysMenu::getParentId, (v1, v2) -> v1));
+        Set<Long> visited = new HashSet<>();
+        Long currentId = parentId;
+        while (StringUtils.isNotNull(currentId) && visited.add(currentId))
+        {
+            if (menuId.equals(currentId))
+            {
+                return true;
+            }
+            currentId = parentMap.get(currentId);
+        }
+        return false;
     }
 
     /**
