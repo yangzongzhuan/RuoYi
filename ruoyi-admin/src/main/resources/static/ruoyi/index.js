@@ -270,7 +270,7 @@ $(function() {
         // 获取标识数据
         var dataUrl = $(this).attr('href'),
         dataIndex = $(this).data('index'),
-        menuName = $(this).data('title') || $.trim($(this).text()),
+        menuName = $.common.escapeHtml($(this).data('title') || $.trim($(this).text())),
         isRefresh = $(this).data("refresh"),
         flag = true;
 

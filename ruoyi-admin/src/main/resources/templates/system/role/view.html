@@ -584,25 +584,29 @@
             var $grid = $('#userCardGrid');
             
             users.forEach(function(u) {
-                var initial  = (u.userName || u.loginName || '?').charAt(0).toUpperCase();
+                var userName    = $.common.escapeHtml(u.userName) || '-';
+                var loginName   = $.common.escapeHtml(u.loginName) || '-';
+                var phonenumber = $.common.escapeHtml(u.phonenumber) || '-';
+                var email       = $.common.escapeHtml(u.email) || '-';
+                var initial  = (userName || loginName || '?').charAt(0).toUpperCase();
                 var statusHtml = u.status === '0'
                     ? '<span class="user-status normal">正常</span>'
                     : '<span class="user-status disable">停用</span>';
                 
                 // 搜索关键词
-                var searchKey = [u.userName || '', u.loginName || '', u.phonenumber || ''].join('|').toLowerCase();
+                var searchKey = [userName || '', loginName || '', phonenumber || ''].join('|').toLowerCase();
                 
                 var card = [
                     '<div class="user-card" data-search="' + searchKey + '">',
                     statusHtml,
                     '<div style="display:flex;align-items:center;margin-bottom:4px;">',
                     '  <span class="user-avatar">' + initial + '</span>',
-                    '  <span class="user-name">' + (u.userName || '-') + '</span>',
+                    '  <span class="user-name">' + (userName || '-') + '</span>',
                     '</div>',
                     '<div class="user-meta">',
-                    '  <span><i class="fa fa-user-o" style="width:14px;color:#888"></i> ' + (u.loginName || '-') + '</span>',
-                    '  <span><i class="fa fa-phone"  style="width:14px;color:#888"></i> ' + (u.phonenumber || '-') + '</span>',
-                    '  <span><i class="fa fa-envelope-o" style="width:14px;color:#888"></i> ' + (u.email || '-') + '</span>',
+                    '  <span><i class="fa fa-user-o" style="width:14px;color:#888"></i> ' + (loginName || '-') + '</span>',
+                    '  <span><i class="fa fa-phone"  style="width:14px;color:#888"></i> ' + (phonenumber || '-') + '</span>',
+                    '  <span><i class="fa fa-envelope-o" style="width:14px;color:#888"></i> ' + (email || '-') + '</span>',
                     '</div>',
                     '</div>'
                 ].join('');

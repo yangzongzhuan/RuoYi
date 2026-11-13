@@ -248,6 +248,7 @@ var closeItem = function(dataId){
 
 /** 创建选项卡 */
 function createMenuItem(dataUrl, menuName, isRefresh) {
+    menuName = $.common.escapeHtml(menuName);
     var panelUrl = window.frameElement.getAttribute('data-id'),
     dataIndex = $.common.random(1, 100),
     flag = true;
