@@ -79,10 +79,12 @@
 		            width: '20',
 		            widthUnit: '%',
 		            formatter: function(value, row, index) {
-		                if ($.common.isEmpty(row.icon)) {
-		                    return row.menuName;
+		                var icon = $.common.escapeHtml(row.icon || '');
+		                var menuName = $.common.escapeHtml(row.menuName || '');
+		                if ($.common.isEmpty(icon)) {
+		                    return menuName;
 		                } else {
-		                    return '<i class="' + row.icon + '"></i> <span class="nav-label">' + row.menuName + '</span>';
+		                    return '<i class="' + icon + '"></i> <span class="nav-label">' + menuName + '</span>';
 		                }
 		            }
 		        },
