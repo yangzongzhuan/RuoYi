@@ -75,6 +75,7 @@ public class SysJob extends BaseEntity implements Serializable
         this.jobName = jobName;
     }
 
+    @Size(min = 0, max = 64, message = "任务组名不能超过64个字符")
     public String getJobGroup()
     {
         return jobGroup;

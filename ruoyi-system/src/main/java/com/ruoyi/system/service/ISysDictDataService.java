@@ -36,6 +36,14 @@ public interface ISysDictDataService
     public SysDictData selectDictDataById(Long dictCode);
 
     /**
+     * 校验字典数据在同类型内是否唯一（字典值类型内唯一）
+     * 
+     * @param dictData 字典数据信息
+     * @return 结果
+     */
+    public boolean checkDictDataUnique(SysDictData dictData);
+
+    /**
      * 批量删除字典数据
      * 
      * @param ids 需要删除的数据
