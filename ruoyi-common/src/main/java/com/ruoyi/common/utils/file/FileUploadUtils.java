@@ -3,6 +3,7 @@ package com.ruoyi.common.utils.file;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Objects;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -196,25 +197,21 @@ public class FileUploadUtils
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension))
         {
-            if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION)
+            if (Arrays.equals(allowedExtension, MimeTypeUtils.IMAGE_EXTENSION))
             {
-                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension, fileName);
             }
-            else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION)
+            else if (Arrays.equals(allowedExtension, MimeTypeUtils.FLASH_EXTENSION))
             {
-                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension, fileName);
             }
-            else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION)
+            else if (Arrays.equals(allowedExtension, MimeTypeUtils.MEDIA_EXTENSION))
             {
-                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension, fileName);
             }
-            else if (allowedExtension == MimeTypeUtils.VIDEO_EXTENSION)
+            else if (Arrays.equals(allowedExtension, MimeTypeUtils.VIDEO_EXTENSION))
             {
-                throw new InvalidExtensionException.InvalidVideoExtensionException(allowedExtension, extension,
-                        fileName);
+                throw new InvalidExtensionException.InvalidVideoExtensionException(allowedExtension, extension, fileName);
             }
             else
             {
