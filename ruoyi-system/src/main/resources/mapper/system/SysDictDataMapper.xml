@@ -55,8 +55,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where dict_code = #{dictCode}
 	</select>
 	
+	<select id="checkDictDataUnique" parameterType="SysDictData" resultMap="SysDictDataResult">
+		<include refid="selectDictDataVo"/>
+		where dict_type = #{dictType} and dict_value = #{dictValue} limit 1
+	</select>
+	
 	<select id="countDictDataByType" resultType="Integer">
-	    select count(1) from sys_dict_data where dict_type=#{dictType}  
+	    select count(1) from sys_dict_data where dict_type = #{dictType}  
 	</select>
 	
 	<delete id="deleteDictDataById" parameterType="Long">

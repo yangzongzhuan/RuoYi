@@ -4,10 +4,9 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.subject.ImmutablePrincipalCollection;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.common.utils.bean.BeanUtils;
 
 /**
  * shiro 工具类
@@ -33,14 +32,12 @@ public class ShiroUtils
 
     public static SysUser getSysUser()
     {
-        SysUser user = null;
         Object obj = getSubject().getPrincipal();
         if (StringUtils.isNotNull(obj))
         {
-            user = new SysUser();
-            BeanUtils.copyBeanProp(user, obj);
+            return (SysUser) obj;
         }
-        return user;
+        return null;
     }
 
     public static void setSysUser(SysUser user)
@@ -48,7 +45,7 @@ public class ShiroUtils
         Subject subject = getSubject();
         PrincipalCollection principalCollection = subject.getPrincipals();
         String realmName = principalCollection.getRealmNames().iterator().next();
-        PrincipalCollection newPrincipalCollection = new SimplePrincipalCollection(user, realmName);
+        PrincipalCollection newPrincipalCollection = ImmutablePrincipalCollection.ofSinglePrincipal(user, realmName);
         // 重新加载Principal
         subject.runAs(newPrincipalCollection);
     }

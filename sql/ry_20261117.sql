@@ -108,7 +108,7 @@ create table sys_role (
   role_name         varchar(30)     not null                   comment '角色名称',
   role_key          varchar(100)    not null                   comment '角色权限字符串',
   role_sort         int(4)          not null                   comment '显示顺序',
-  data_scope        char(1)         default '1'                comment '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
+  data_scope        char(1)         default '1'                comment '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限 5：仅本人数据权限）',
   status            char(1)         not null                   comment '角色状态（0正常 1停用）',
   del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
   create_by         varchar(64)     default ''                 comment '创建者',
@@ -487,7 +487,8 @@ create table sys_dict_data
   update_by        varchar(64)     default ''                 comment '更新者',
   update_time      datetime                                   comment '更新时间',
   remark           varchar(500)    default null               comment '备注',
-  primary key (dict_code)
+  primary key (dict_code),
+  unique key uk_dict_type_value (dict_type, dict_value)
 ) engine=innodb auto_increment=100 comment = '字典数据表';
 
 insert into sys_dict_data values(1,  1,  '男',       '0',       'sys_user_sex',        '',   '',        'Y', '0', 'admin', sysdate(), '', null, '性别男');
@@ -588,6 +589,7 @@ create table sys_user_online (
   start_timestamp   datetime                                comment 'session创建时间',
   last_access_time  datetime                                comment 'session最后访问时间',
   expire_time       int(5)        default 0                 comment '超时时间，单位为分钟',
+  session_data      blob          default null              comment '序列化的Session数据，用于服务重启后恢复会话',
   primary key (sessionId)
 ) engine=innodb comment = '在线用户记录';
 
@@ -630,6 +632,8 @@ create table sys_job_log (
   job_message         varchar(500)                              comment '日志信息',
   status              char(1)        default '0'                comment '执行状态（0正常 1失败）',
   exception_info      varchar(2000)  default ''                 comment '异常信息',
+  start_time          datetime                                  comment '执行开始时间',
+  end_time            datetime                                  comment '执行结束时间',
   create_time         datetime                                  comment '创建时间',
   primary key (job_log_id)
 ) engine=innodb comment = '定时任务调度日志表';
@@ -662,7 +666,21 @@ insert into sys_notice values('3', '若依开源框架介绍', '1', '<p><span st
 
 
 -- ----------------------------
--- 19、代码生成业务表
+-- 19、公告已读记录表
+-- ----------------------------
+drop table if exists sys_notice_read;
+create table sys_notice_read (
+  read_id          bigint(20)       not null auto_increment    comment '已读主键',
+  notice_id        int(4)           not null                   comment '公告id',
+  user_id          bigint(20)       not null                   comment '用户id',
+  read_time        datetime         not null                   comment '阅读时间',
+  primary key (read_id),
+  unique key uk_user_notice (user_id, notice_id)   comment '同一用户同一公告只记录一次'
+) engine=innodb auto_increment=1 comment='公告已读记录表';
+
+
+-- ----------------------------
+-- 20、代码生成业务表
 -- ----------------------------
 drop table if exists gen_table;
 create table gen_table (
@@ -692,7 +710,7 @@ create table gen_table (
 
 
 -- ----------------------------
--- 20、代码生成业务表字段
+-- 21、代码生成业务表字段
 -- ----------------------------
 drop table if exists gen_table_column;
 create table gen_table_column (

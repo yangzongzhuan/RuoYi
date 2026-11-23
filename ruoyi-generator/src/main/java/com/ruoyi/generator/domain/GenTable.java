@@ -1,8 +1,8 @@
 package com.ruoyi.generator.domain;
 
 import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.apache.commons.lang3.ArrayUtils;
 import com.ruoyi.common.constant.GenConstants;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -97,6 +97,9 @@ public class GenTable extends BaseEntity
 
     /** 上级菜单名称字段 */
     private String parentMenuName;
+
+    /** 是否生成详情页 */
+    private boolean isView;
 
     public Long getTableId()
     {
@@ -336,6 +339,16 @@ public class GenTable extends BaseEntity
     public void setParentMenuName(String parentMenuName)
     {
         this.parentMenuName = parentMenuName;
+    }
+
+    public boolean isView()
+    {
+        return isView;
+    }
+
+    public void setView(boolean isView)
+    {
+        this.isView = isView;
     }
 
     public boolean isSub()

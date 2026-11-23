@@ -114,4 +114,11 @@ public interface SysDeptMapper
      * @return 子部门数
      */
     public int selectNormalChildrenDeptById(Long deptId);
+
+    /**
+     * 保存部门排序
+     *
+     * @param dept 部门信息（含deptId和orderNum）
+     */
+    public void updateDeptSort(SysDept dept);
 }

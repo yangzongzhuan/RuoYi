@@ -3,13 +3,13 @@ package com.ruoyi.common.utils.security;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.constant.PermissionConstants;
 import com.ruoyi.common.utils.MessageUtils;
+import com.ruoyi.common.utils.StringUtils;
 
 /**
  * permission 工具类

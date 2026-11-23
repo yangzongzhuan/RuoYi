@@ -15,8 +15,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.ImmutablePrincipalCollection;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,7 +137,7 @@ public class UserRealm extends AuthorizingRealm
      */
     public void clearCachedAuthorizationInfo(Object principal)
     {
-        SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
+        PrincipalCollection principals = ImmutablePrincipalCollection.ofSinglePrincipal(principal, getName());
         this.clearCachedAuthorizationInfo(principals);
     }
 
@@ -149,10 +149,7 @@ public class UserRealm extends AuthorizingRealm
         Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
         if (cache != null)
         {
-            for (Object key : cache.keys())
-            {
-                cache.remove(key);
-            }
+            cache.clear();
         }
     }
 }

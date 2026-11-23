@@ -45,6 +45,14 @@ public interface SysDictDataMapper
     public SysDictData selectDictDataById(Long dictCode);
 
     /**
+     * 查询字典数据（按类型内字典值查重）
+     * 
+     * @param dictData 字典数据信息
+     * @return 字典数据集合信息
+     */
+    public SysDictData checkDictDataUnique(SysDictData dictData);
+
+    /**
      * 查询字典数据
      * 
      * @param dictType 字典类型

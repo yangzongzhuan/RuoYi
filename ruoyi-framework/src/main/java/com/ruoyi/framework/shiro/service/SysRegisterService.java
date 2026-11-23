@@ -6,6 +6,7 @@ import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.model.RegisterBody;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.MessageUtils;
 import com.ruoyi.common.utils.ServletUtils;
@@ -32,9 +33,11 @@ public class SysRegisterService
     /**
      * 注册
      */
-    public String register(SysUser user)
+    public String register(RegisterBody registerBody)
     {
-        String msg = "", loginName = user.getLoginName(), password = user.getPassword();
+        String msg = "", loginName = registerBody.getUsername(), password = registerBody.getPassword();
+        SysUser user = new SysUser();
+        user.setLoginName(loginName);
 
         if (ShiroConstants.CAPTCHA_ERROR.equals(ServletUtils.getRequest().getAttribute(ShiroConstants.CURRENT_CAPTCHA)))
         {

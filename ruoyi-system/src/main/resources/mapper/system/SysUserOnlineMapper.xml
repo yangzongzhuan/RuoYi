@@ -16,10 +16,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="startTimestamp"    column="start_timestamp"   />
 		<result property="lastAccessTime"    column="last_access_time"  />
 		<result property="expireTime"        column="expire_time"       />
+		<result property="sessionData"       column="session_data"      />
 	</resultMap>
-	
+
 	<sql id="selectOnlineVo">
-       select sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, start_timestamp, last_access_time, expire_time 
+       select sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, start_timestamp, last_access_time, expire_time, session_data
 	   from sys_user_online
     </sql>
     
@@ -29,8 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="saveOnline" parameterType="SysUserOnline">
-		replace into sys_user_online(sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, start_timestamp, last_access_time, expire_time)
-        values (#{sessionId}, #{loginName}, #{deptName}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{status}, #{startTimestamp}, #{lastAccessTime}, #{expireTime})
+		replace into sys_user_online(sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, start_timestamp, last_access_time, expire_time, session_data)
+        values (#{sessionId}, #{loginName}, #{deptName}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{status}, #{startTimestamp}, #{lastAccessTime}, #{expireTime}, #{sessionData,jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler})
 	</insert>
 	
  	<delete id="deleteOnlineById" parameterType="String">

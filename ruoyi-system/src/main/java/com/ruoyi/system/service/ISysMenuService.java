@@ -144,4 +144,13 @@ public interface ISysMenuService
      * @return 结果
      */
     public boolean checkMenuNameUnique(SysMenu menu);
+
+    /**
+     * 校验上级菜单是否为自己或自己的子菜单
+     *
+     * @param menu 菜单信息
+     * @return 结果
+     */
+    public boolean checkParentCycle(SysMenu menu);
 }
+

@@ -2,7 +2,7 @@ package com.ruoyi.quartz.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
@@ -75,6 +75,7 @@ public class SysJob extends BaseEntity implements Serializable
         this.jobName = jobName;
     }
 
+    @Size(min = 0, max = 64, message = "任务组名不能超过64个字符")
     public String getJobGroup()
     {
         return jobGroup;

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.common.core.domain.model.RegisterBody;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.shiro.service.SysRegisterService;
 import com.ruoyi.system.service.ISysConfigService;
@@ -34,13 +34,13 @@ public class SysRegisterController extends BaseController
 
     @PostMapping("/register")
     @ResponseBody
-    public AjaxResult ajaxRegister(SysUser user)
+    public AjaxResult ajaxRegister(RegisterBody registerBody)
     {
         if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser"))))
         {
             return error("当前系统没有开启注册功能！");
         }
-        String msg = registerService.register(user);
+        String msg = registerService.register(registerBody);
         return StringUtils.isEmpty(msg) ? success() : error(msg);
     }
 }

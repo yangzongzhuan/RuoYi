@@ -68,6 +68,10 @@ $(window).bind("load resize", function() {
 });
 
 function openToCurrentTab(obj) {
+    // 懒加载：若 iframe 还没有 src（如首页初始 iframe），激活时赋值
+    if (!$(obj).attr('src') && $(obj).data('id')) {
+        $(obj).attr('src', $(obj).data('id'));
+    }
     if (isScrollToTop) {
         $(obj).show().siblings('.RuoYi_iframe').hide();
     } else {
@@ -266,7 +270,7 @@ $(function() {
         // 获取标识数据
         var dataUrl = $(this).attr('href'),
         dataIndex = $(this).data('index'),
-        menuName = $(this).data('title') || $.trim($(this).text()),
+        menuName = $.common.escapeHtml($(this).data('title') || $.trim($(this).text())),
         isRefresh = $(this).data("refresh"),
         flag = true;
 

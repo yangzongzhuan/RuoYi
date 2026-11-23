@@ -1,6 +1,7 @@
 package com.ruoyi.common.core.domain;
 
 import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Ztree树结构实体类
@@ -15,6 +16,7 @@ public class Ztree implements Serializable
     private Long id;
 
     /** 节点父ID */
+    @JsonProperty("pId")
     private Long pId;
 
     /** 节点名称 */

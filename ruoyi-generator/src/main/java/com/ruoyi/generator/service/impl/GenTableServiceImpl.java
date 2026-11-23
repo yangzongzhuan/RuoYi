@@ -21,8 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.constant.GenConstants;
 import com.ruoyi.common.core.text.CharsetKit;
@@ -152,18 +152,6 @@ public class GenTableServiceImpl implements IGenTableService
     }
 
     /**
-     * 创建表
-     *
-     * @param sql 创建表语句
-     * @return 结果
-     */
-    @Override
-    public boolean createTable(String sql)
-    {
-        return genTableMapper.createTable(sql) == 0;
-    }
-
-    /**
      * 导入表结构
      *
      * @param tableList 导入表列表
@@ -219,7 +207,7 @@ public class GenTableServiceImpl implements IGenTableService
         VelocityContext context = VelocityUtils.prepareContext(table);
 
         // 获取模板列表
-        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        List<String> templates = VelocityUtils.getTemplateList(table);
         for (String template : templates)
         {
             // 渲染模板
@@ -267,7 +255,7 @@ public class GenTableServiceImpl implements IGenTableService
         VelocityContext context = VelocityUtils.prepareContext(table);
 
         // 获取模板列表
-        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        List<String> templates = VelocityUtils.getTemplateList(table);
         for (String template : templates)
         {
             if (!StringUtils.contains(template, "sql.vm"))
@@ -380,7 +368,7 @@ public class GenTableServiceImpl implements IGenTableService
         VelocityContext context = VelocityUtils.prepareContext(table);
 
         // 获取模板列表
-        List<String> templates = VelocityUtils.getTemplateList(table.getTplCategory());
+        List<String> templates = VelocityUtils.getTemplateList(table);
         for (String template : templates)
         {
             // 渲染模板
@@ -506,12 +494,14 @@ public class GenTableServiceImpl implements IGenTableService
             String treeName = paramsObj.getString(GenConstants.TREE_NAME);
             String parentMenuId = paramsObj.getString(GenConstants.PARENT_MENU_ID);
             String parentMenuName = paramsObj.getString(GenConstants.PARENT_MENU_NAME);
+            boolean isView = paramsObj.getBooleanValue(GenConstants.GEN_VIEW);
 
             genTable.setTreeCode(treeCode);
             genTable.setTreeParentCode(treeParentCode);
             genTable.setTreeName(treeName);
             genTable.setParentMenuId(parentMenuId);
             genTable.setParentMenuName(parentMenuName);
+            genTable.setView(isView);
         }
     }
 

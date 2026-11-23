@@ -2,9 +2,12 @@ package com.ruoyi.common.utils;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.cache.jcache.JCacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ruoyi.common.utils.spring.SpringUtils;
@@ -125,12 +128,8 @@ public class CacheUtils
     public static void removeAll(String cacheName)
     {
         Cache<String, Object> cache = getCache(cacheName);
-        Set<String> keys = cache.keys();
-        for (Iterator<String> it = keys.iterator(); it.hasNext();)
-        {
-            cache.remove(it.next());
-        }
-        logger.info("清理缓存： {} => {}", cacheName, keys);
+        cache.clear();
+        logger.info("清理缓存： {}", cacheName);
     }
 
     /**
@@ -192,6 +191,19 @@ public class CacheUtils
      */
     public static String[] getCacheNames()
     {
-        return ((EhCacheManager) cacheManager).getCacheManager().getCacheNames();
+        return StreamSupport.stream(((JCacheManager) cacheManager).getCacheManager().getCacheNames().spliterator(), false).toArray(String[]::new);
+    }
+
+    public static Set<String> getCacheKeys(String cacheName)
+    {
+        javax.cache.Cache<?, ?> cache = ((JCacheManager) cacheManager).getCacheManager().getCache(cacheName);
+        if (cache == null)
+        {
+            return new TreeSet<>();
+        }
+        return StreamSupport.stream(cache.spliterator(), false)
+                .filter(e -> e != null && e.getKey() != null)
+                .map(e -> e.getKey().toString()) 
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

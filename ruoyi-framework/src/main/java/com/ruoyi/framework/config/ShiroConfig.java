@@ -1,26 +1,23 @@
 package com.ruoyi.framework.config;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.URI;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import javax.servlet.Filter;
-import org.apache.commons.io.IOUtils;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.codec.Base64;
+import org.apache.shiro.cache.jcache.JCacheManager;
 import org.apache.shiro.config.ConfigurationException;
-import org.apache.shiro.io.ResourceUtils;
+import org.apache.shiro.lang.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.security.CipherUtils;
@@ -40,6 +37,7 @@ import com.ruoyi.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
 import com.ruoyi.framework.shiro.web.session.OnlineWebSessionManager;
 import com.ruoyi.framework.shiro.web.session.SpringSessionValidationScheduler;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import jakarta.servlet.Filter;
 
 /**
  * 权限配置加载
@@ -145,56 +143,36 @@ public class ShiroConfig
     @Value("${csrf.whites: ''}")
     private String csrfWhites;
 
-    /**
-     * 缓存管理器 使用Ehcache实现
-     */
-    @Bean
-    public EhCacheManager getEhCacheManager()
-    {
-        net.sf.ehcache.CacheManager cacheManager = net.sf.ehcache.CacheManager.getCacheManager("ruoyi");
-        EhCacheManager em = new EhCacheManager();
-        if (StringUtils.isNull(cacheManager))
-        {
-            em.setCacheManager(new net.sf.ehcache.CacheManager(getCacheManagerConfigFileInputStream()));
-            return em;
-        }
-        else
-        {
-            em.setCacheManager(cacheManager);
-            return em;
-        }
-    }
+    @Autowired
+    private PermitAllUrlProperties permitAllUrl;
 
     /**
-     * 返回配置文件流 避免ehcache配置文件一直被占用，无法完全销毁项目重新部署
+     * 缓存管理器 使用JCache(EhCache 3.x)实现
      */
-    protected InputStream getCacheManagerConfigFileInputStream()
+    @Bean
+    public JCacheManager getCacheManager()
     {
-        String configFile = "classpath:ehcache/ehcache-shiro.xml";
-        InputStream inputStream = null;
+        JCacheManager jCacheManager = new JCacheManager();
         try
         {
-            inputStream = ResourceUtils.getInputStreamForPath(configFile);
-            byte[] b = IOUtils.toByteArray(inputStream);
-            InputStream in = new ByteArrayInputStream(b);
-            return in;
+            // 加载EhCache 3.x XML配置文件
+            URI uri = new ClassPathResource("ehcache/ehcache-shiro.xml").getURI();
+            javax.cache.spi.CachingProvider cachingProvider = javax.cache.Caching.getCachingProvider();
+            javax.cache.CacheManager cacheManager = cachingProvider.getCacheManager(uri, getClass().getClassLoader());
+            jCacheManager.setCacheManager(cacheManager);
         }
         catch (IOException e)
         {
-            throw new ConfigurationException(
-                    "Unable to obtain input stream for cacheManagerConfigFile [" + configFile + "]", e);
+            throw new ConfigurationException("Unable to load JCache configuration file [ehcache/ehcache-shiro.xml]", e);
         }
-        finally
-        {
-            IOUtils.closeQuietly(inputStream);
-        }
+        return jCacheManager;
     }
 
     /**
      * 自定义Realm
      */
     @Bean
-    public UserRealm userRealm(EhCacheManager cacheManager)
+    public UserRealm userRealm(JCacheManager cacheManager)
     {
         UserRealm userRealm = new UserRealm();
         userRealm.setAuthorizationCacheName(Constants.SYS_AUTH_CACHE);
@@ -230,7 +208,7 @@ public class ShiroConfig
     {
         OnlineWebSessionManager manager = new OnlineWebSessionManager();
         // 加入缓存管理器
-        manager.setCacheManager(getEhCacheManager());
+        manager.setCacheManager(getCacheManager());
         // 删除过期的session
         manager.setDeleteInvalidSessions(true);
         // 设置全局session超时时间
@@ -260,7 +238,7 @@ public class ShiroConfig
         // 记住我
         securityManager.setRememberMeManager(rememberMe ? rememberMeManager() : null);
         // 注入缓存管理器;
-        securityManager.setCacheManager(getEhCacheManager());
+        securityManager.setCacheManager(getCacheManager());
         // session管理器
         securityManager.setSessionManager(sessionManager());
         return securityManager;
@@ -315,11 +293,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
         // 匿名访问不鉴权注解列表
-        List<String> permitAllUrl = SpringUtils.getBean(PermitAllUrlProperties.class).getUrls();
-        if (StringUtils.isNotEmpty(permitAllUrl))
-        {
-            permitAllUrl.forEach(url -> filterChainDefinitionMap.put(url, "anon"));
-        }
+        permitAllUrl.getUrls().forEach(url -> filterChainDefinitionMap.put(url, "anon"));
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问
@@ -415,7 +389,7 @@ public class ShiroConfig
     public KickoutSessionFilter kickoutSessionFilter()
     {
         KickoutSessionFilter kickoutSessionFilter = new KickoutSessionFilter();
-        kickoutSessionFilter.setCacheManager(getEhCacheManager());
+        kickoutSessionFilter.setCacheManager(getCacheManager());
         kickoutSessionFilter.setSessionManager(sessionManager());
         // 同一个用户最大的会话数，默认-1无限制；比如2的意思是同一个用户允许最多同时两个人登录
         kickoutSessionFilter.setMaxSession(maxSession);

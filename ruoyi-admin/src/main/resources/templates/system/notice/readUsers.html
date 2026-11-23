@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('已读用户')" />
+</head>
+<body class="gray-bg">
+    <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "system/notice";
+        var noticeId = [[${notice.noticeId}]];
+
+        $(function() {
+            var options = {
+                url: prefix + "/readUsers/list",
+                search: true,
+                showSearch: false,
+                queryParams: queryParams,
+                columns: [
+                    {
+                        field: 'loginName',
+                        title: '登录名称'
+                    },
+                    {
+                        field: 'userName',
+                        title: '用户名称'
+                    },
+                    {
+                        field: 'deptName',
+                        title: '所属部门',
+                        align: 'center'
+                    },
+                    {
+                        field: 'phonenumber',
+                        title: '手机号码',
+                        align: 'center'
+                    },
+                    {
+                        field: 'readTime',
+                        title: '阅读时间',
+                        align: 'center',
+                        sortable: true,
+                        formatter: function(value, row, index) {
+                            return $.common.dateFormat(value, 'yyyy-MM-dd HH:mm:ss');
+                        }
+                    }
+                ]
+            };
+            $.table.init(options);
+        });
+
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.noticeId = noticeId;
+            return search;
+        }
+    </script>
+</body>
+</html>

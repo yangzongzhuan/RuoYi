@@ -2,8 +2,8 @@ package com.ruoyi.framework.interceptor.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.annotation.RepeatSubmit;
 import com.ruoyi.common.json.JSON;

@@ -1,6 +1,6 @@
 package com.ruoyi.common.config;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.ServletUtils;
 

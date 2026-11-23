@@ -3,9 +3,11 @@ package com.ruoyi.system.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.core.domain.entity.SysDictData;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.utils.DictUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.mapper.SysDictDataMapper;
 import com.ruoyi.system.service.ISysDictDataService;
 
@@ -55,6 +57,24 @@ public class SysDictDataServiceImpl implements ISysDictDataService
     public SysDictData selectDictDataById(Long dictCode)
     {
         return dictDataMapper.selectDictDataById(dictCode);
+    }
+
+    /**
+     * 校验字典数据在同类型内是否唯一（字典值类型内唯一）
+     * 
+     * @param dictData 字典数据信息
+     * @return 结果
+     */
+    @Override
+    public boolean checkDictDataUnique(SysDictData dictData)
+    {
+        Long dictCode = StringUtils.isNull(dictData.getDictCode()) ? -1L : dictData.getDictCode();
+        SysDictData data = dictDataMapper.checkDictDataUnique(dictData);
+        if (StringUtils.isNotNull(data) && data.getDictCode().longValue() != dictCode.longValue())
+        {
+            return UserConstants.NOT_UNIQUE;
+        }
+        return UserConstants.UNIQUE;
     }
 
     /**

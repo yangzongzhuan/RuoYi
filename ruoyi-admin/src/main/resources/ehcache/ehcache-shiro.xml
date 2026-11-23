@@ -1,91 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ehcache name="ruoyi" updateCheck="false">
+<config xmlns="http://www.ehcache.org/v3"
+        xmlns:jsr107="http://www.ehcache.org/v3/jsr107">
 
-    <!-- 磁盘缓存位置 -->
-    <diskStore path="java.io.tmpdir"/>
-    
-    <!-- maxEntriesLocalHeap:堆内存中最大缓存对象数，0没有限制 -->
-    <!-- maxElementsInMemory： 在内存中缓存的element的最大数目。-->
-    <!-- eternal:elements是否永久有效，如果为true，timeouts将被忽略，element将永不过期 -->
-    <!-- timeToIdleSeconds:失效前的空闲秒数，当eternal为false时，这个属性才有效，0为不限制 -->
-    <!-- timeToLiveSeconds:失效前的存活秒数，创建时间到失效时间的间隔为存活时间，当eternal为false时，这个属性才有效，0为不限制 -->
-    <!-- overflowToDisk： 如果内存中数据超过内存限制，是否要缓存到磁盘上 -->
-    <!-- statistics：是否收集统计信息。如果需要监控缓存使用情况，应该打开这个选项。默认为关闭（统计会影响性能）。设置statistics="true"开启统计 -->
-    
-    <!-- 默认缓存 -->
-    <defaultCache
-            maxEntriesLocalHeap="1000"
-            eternal="false"
-            timeToIdleSeconds="3600"
-            timeToLiveSeconds="3600"
-            overflowToDisk="false">
-    </defaultCache>
+    <!-- 默认配置 -->
+    <service>
+        <jsr107:defaults enable-management="false" enable-statistics="false">
+            <jsr107:cache name="sys-cache" template="defaultCache"/>
+            <jsr107:cache name="sys-config" template="defaultCache"/>
+            <jsr107:cache name="sys-dict" template="defaultCache"/>
+            <jsr107:cache name="sys-authCache" template="authCache"/>
+            <jsr107:cache name="sys-userCache" template="userCache"/>
+            <jsr107:cache name="loginRecordCache" template="loginRecordTemplate"/>
+            <jsr107:cache name="shiro-activeSessionCache" template="sessionCache"/>
+        </jsr107:defaults>
+    </service>
 
-    <!-- 登录记录缓存 锁定10分钟 -->
-    <cache name="loginRecordCache"
-           maxEntriesLocalHeap="2000"
-           eternal="false"
-           timeToIdleSeconds="600"
-           timeToLiveSeconds="0"
-           overflowToDisk="false"
-           statistics="false">
-    </cache>
+    <!-- 默认缓存模板：永久有效 -->
+    <cache-template name="defaultCache">
+        <heap unit="entries">1000</heap>
+    </cache-template>
 
-    <!-- 系统活跃用户缓存 -->
-    <cache name="sys-userCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           statistics="false">
-    </cache>
-    
-    <!-- 系统用户授权缓存  没必要过期 -->
-    <cache name="sys-authCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           memoryStoreEvictionPolicy="LRU"
-           statistics="false"/>
-    
-    <!-- 系统缓存 -->
-    <cache name="sys-cache"
-           maxEntriesLocalHeap="1000"
-           eternal="true"
-           overflowToDisk="true"
-           statistics="false">
-    </cache>
-    
-    <!-- 系统参数缓存 -->
-    <cache name="sys-config"
-           maxEntriesLocalHeap="1000"
-           eternal="true"
-           overflowToDisk="true"
-           statistics="false">
-    </cache>
-    
-    <!-- 系统字典缓存 -->
-    <cache name="sys-dict"
-           maxEntriesLocalHeap="1000"
-           eternal="true"
-           overflowToDisk="true"
-           statistics="false">
-    </cache>
-    
-    <!-- 系统会话缓存 -->
-    <cache name="shiro-activeSessionCache"
-           maxEntriesLocalHeap="10000"
-           overflowToDisk="false"
-           eternal="false"
-           diskPersistent="false"
-           timeToLiveSeconds="0"
-           timeToIdleSeconds="0"
-           statistics="false"/>
-    
-</ehcache>
-	
+    <!-- 用户授权缓存模板：无过期 -->
+    <cache-template name="authCache">
+        <heap unit="entries">10000</heap>
+    </cache-template>
+
+    <!-- 系统活跃用户缓存模板 -->
+    <cache-template name="userCache">
+        <heap unit="entries">10000</heap>
+    </cache-template>
+
+    <!-- 登录记录缓存模板：锁定10分钟 -->
+    <cache-template name="loginRecordTemplate">
+        <expiry>
+            <tti unit="minutes">10</tti>
+        </expiry>
+        <heap unit="entries">2000</heap>
+    </cache-template>
+
+    <!-- 系统会话缓存模板 -->
+    <cache-template name="sessionCache">
+        <heap unit="entries">10000</heap>
+    </cache-template>
+
+</config>

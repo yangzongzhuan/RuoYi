@@ -2,8 +2,8 @@ package com.ruoyi.framework.aspectj;
 
 import java.util.Collection;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -16,8 +16,8 @@ import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.support.spring.PropertyPreFilters;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.filter.PropertyPreFilter;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.text.Convert;
@@ -160,7 +160,7 @@ public class LogAspect
         // 是否需要保存response，参数和值
         if (log.isSaveResponseData() && StringUtils.isNotNull(jsonResult))
         {
-            operLog.setJsonResult(StringUtils.substring(JSONObject.toJSONString(jsonResult), 0, 2000));
+            operLog.setJsonResult(StringUtils.substring(JSON.toJSONString(jsonResult), 0, 2000));
         }
     }
 
@@ -175,7 +175,7 @@ public class LogAspect
         Map<String, String[]> map = ServletUtils.getRequest().getParameterMap();
         if (StringUtils.isNotEmpty(map))
         {
-            String params = JSONObject.toJSONString(map, excludePropertyPreFilter(excludeParamNames));
+            String params = JSON.toJSONString(map, excludePropertyPreFilter(excludeParamNames));
             operLog.setOperParam(StringUtils.substring(params, 0, PARAM_MAX_LENGTH));
         }
         else
@@ -192,9 +192,10 @@ public class LogAspect
     /**
      * 忽略敏感属性
      */
-    public PropertyPreFilters.MySimplePropertyPreFilter excludePropertyPreFilter(String[] excludeParamNames)
+    public PropertyPreFilter excludePropertyPreFilter(String[] excludeParamNames)
     {
-        return new PropertyPreFilters().addFilter().addExcludes(ArrayUtils.addAll(EXCLUDE_PROPERTIES, excludeParamNames));
+        String[] excludes = ArrayUtils.addAll(EXCLUDE_PROPERTIES, excludeParamNames);
+        return (writer, source, name) -> !ArrayUtils.contains(excludes, name);
     }
 
     /**
@@ -211,7 +212,7 @@ public class LogAspect
                 {
                     try
                     {
-                        Object jsonObj = JSONObject.toJSONString(o, excludePropertyPreFilter(excludeParamNames));
+                        String jsonObj = JSON.toJSONString(o, excludePropertyPreFilter(excludeParamNames));
                         params.append(jsonObj).append(" ");
                         if (params.length() >= PARAM_MAX_LENGTH)
                         {

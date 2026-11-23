@@ -155,4 +155,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
 	</update>
 
+	<update id="updateDeptSort" parameterType="SysDept">
+		update sys_dept set order_num = #{orderNum} where dept_id = #{deptId}
+	</update>
+
 </mapper> 

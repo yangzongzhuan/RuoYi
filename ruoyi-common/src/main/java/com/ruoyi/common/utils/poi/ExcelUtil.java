@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -105,6 +105,11 @@ public class ExcelUtil<T>
      * 用于dictType属性数据存储，避免重复查缓存
      */
     public Map<String, String> sysDictMap = new HashMap<String, String>();
+
+    /**
+     * 单元格样式缓存
+     */
+    private Map<String, CellStyle> cellStyleCache = new HashMap<String, CellStyle>();
 
     /**
      * Excel sheet最大行数，默认65536
@@ -418,7 +423,7 @@ public class ExcelUtil<T>
                     Object val = this.getCellValue(row, entry.getKey());
 
                     // 如果不存在实例则新建.
-                    entity = (entity == null ? clazz.newInstance() : entity);
+                    entity = (entity == null ? clazz.getDeclaredConstructor().newInstance() : entity);
                     // 从map中得到对应列的field.
                     Field field = (Field) entry.getValue()[0];
                     Excel attr = (Excel) entry.getValue()[1];
@@ -578,6 +583,117 @@ public class ExcelUtil<T>
         response.setCharacterEncoding("utf-8");
         this.init(list, sheetName, title, Type.EXPORT);
         exportExcel(response);
+    }
+
+    /**
+     * 多 Sheet 导出 —— 将多个不同类型的数据集合写入同一 Excel，直接输出到 HttpServletResponse
+     *
+     * @param response HTTP 响应
+     * @param sheets   Sheet 描述列表
+     */
+    public static void exportMultiSheet(HttpServletResponse response, List<ExcelSheet<?>> sheets)
+    {
+        if (sheets == null || sheets.isEmpty())
+        {
+            return;
+        }
+        SXSSFWorkbook wb = buildWorkbook(sheets);
+        try
+        {
+            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+            response.setCharacterEncoding("utf-8");
+            wb.write(response.getOutputStream());
+        }
+        catch (Exception e)
+        {
+            log.error("多Sheet导出Excel异常{}", e.getMessage());
+        }
+        finally
+        {
+            IOUtils.closeQuietly(wb);
+        }
+    }
+
+    /**
+     * 多 Sheet 导出 —— 将多个不同类型的数据集合写入同一 Excel，生成文件并返回下载地址
+     *
+     * @param sheets Sheet 描述列表
+     * @return AjaxResult（含文件下载地址）
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static AjaxResult exportMultiSheet(List<ExcelSheet<?>> sheets)
+    {
+        if (sheets == null || sheets.isEmpty())
+        {
+            return AjaxResult.error("导出数据不能为空");
+        }
+        SXSSFWorkbook wb = buildWorkbook(sheets);
+        OutputStream out = null;
+        try
+        {
+            ExcelUtil firstUtil = new ExcelUtil(sheets.get(0).getClazz());
+            String filename = firstUtil.encodingFilename(sheets.get(0).getSheetName());
+            out = new FileOutputStream(firstUtil.getAbsoluteFile(filename));
+            wb.write(out);
+            return AjaxResult.success(filename);
+        }
+        catch (Exception e)
+        {
+            log.error("多Sheet导出Excel异常{}", e.getMessage());
+            throw new UtilException("导出Excel失败，请联系网站管理员！");
+        }
+        finally
+        {
+            IOUtils.closeQuietly(wb);
+            IOUtils.closeQuietly(out);
+        }
+    }
+
+    /**
+     * 构建多 Sheet Workbook —— 创建 SXSSFWorkbook 并将所有 Sheet 数据写入
+     *
+     * @param sheets Sheet 描述列表
+     * @return 已写入所有 Sheet 数据的 SXSSFWorkbook
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private static SXSSFWorkbook buildWorkbook(List<ExcelSheet<?>> sheets)
+    {
+        SXSSFWorkbook wb = new SXSSFWorkbook(500);
+        for (ExcelSheet<?> excelSheet : sheets)
+        {
+            ExcelUtil util = new ExcelUtil(excelSheet.getClazz());
+            util.initWithWorkbook(wb, excelSheet.getList(), excelSheet.getSheetName(), excelSheet.getTitle());
+            util.writeSheet();
+        }
+        return wb;
+    }
+
+    /**
+     * 使用外部传入的 Workbook 初始化（多 Sheet 导出专用）
+     * 与 init() 的区别：不新建 Workbook，而是在已有 wb 上追加新 Sheet
+     *
+     * @param wb        已有工作簿
+     * @param list      数据集合
+     * @param sheetName Sheet 名称
+     * @param title     大标题（可为空）
+     */
+    public void initWithWorkbook(SXSSFWorkbook wb, List<T> list, String sheetName, String title)
+    {
+        if (list == null)
+        {
+            list = new ArrayList<T>();
+        }
+        this.list      = list;
+        this.sheetName = sheetName;
+        this.title     = title != null ? title : "";
+        this.type      = Type.EXPORT;
+        this.rownum    = 0;
+        this.wb        = wb;
+        this.sheet     = wb.createSheet(sheetName);
+        createExcelField();
+        this.styles    = createStyles(wb);
+        createTitle();
+        createSubHead();
     }
 
     /**
@@ -894,13 +1010,13 @@ public class ExcelUtil<T>
                 style.cloneStyleFrom(styles.get("data"));
                 style.setAlignment(HorizontalAlignment.CENTER);
                 style.setVerticalAlignment(VerticalAlignment.CENTER);
-                style.setFillForegroundColor(excel.headerBackgroundColor().index);
+                style.setFillForegroundColor(excel.headerBackgroundColor().getIndex());
                 style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
                 Font headerFont = wb.createFont();
                 headerFont.setFontName("Arial");
                 headerFont.setFontHeightInPoints((short) 10);
                 headerFont.setBold(true);
-                headerFont.setColor(excel.headerColor().index);
+                headerFont.setColor(excel.headerColor().getIndex());
                 style.setFont(headerFont);
                 // 设置表格头单元格文本形式
                 DataFormat dataFormat = wb.createDataFormat();
@@ -972,7 +1088,7 @@ public class ExcelUtil<T>
             Font dataFont = wb.createFont();
             dataFont.setFontName("Arial");
             dataFont.setFontHeightInPoints((short) 10);
-            dataFont.setColor(excel.color().index);
+            dataFont.setColor(excel.color().getIndex());
             style.setFont(dataFont);
             if (ColumnType.TEXT == excel.cellType())
             {
@@ -1124,6 +1240,7 @@ public class ExcelUtil<T>
     /**
      * 添加单元格
      */
+    @SuppressWarnings("deprecation")
     public Cell addCell(Excel attr, Row row, T vo, Field field, int column)
     {
         Cell cell = null;
@@ -1201,9 +1318,16 @@ public class ExcelUtil<T>
      */
     private CellStyle createCellStyle(CellStyle cellStyle, String format)
     {
+        String key = cellStyle.getIndex() + "|" + format;
+        CellStyle cached = cellStyleCache.get(key);
+        if (cached != null)
+        {
+            return cached;
+        }
         CellStyle style = wb.createCellStyle();
         style.cloneStyleFrom(cellStyle);
         style.setDataFormat(wb.getCreationHelper().createDataFormat().getFormat(format));
+        cellStyleCache.put(key, style);
         return style;
     }
 
@@ -1425,7 +1549,7 @@ public class ExcelUtil<T>
     {
         try
         {
-            Object instance = excel.handler().newInstance();
+            Object instance = excel.handler().getDeclaredConstructor().newInstance();
             Method formatMethod = excel.handler().getMethod("format", new Class[] { Object.class, String[].class, Cell.class, Workbook.class });
             value = formatMethod.invoke(instance, value, excel.args(), cell, this.wb);
         }

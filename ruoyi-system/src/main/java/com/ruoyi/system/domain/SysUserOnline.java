@@ -4,6 +4,7 @@ import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.core.domain.BaseEntity;
+import com.ruoyi.common.core.session.OnlineSession;
 import com.ruoyi.common.enums.OnlineStatus;
 
 /**
@@ -47,6 +48,12 @@ public class SysUserOnline extends BaseEntity
 
     /** 在线状态 */
     private OnlineStatus status = OnlineStatus.on_line;
+
+    /** 备份的当前用户会话 */
+    private OnlineSession session;
+
+    /** 序列化的Session数据\uff0c用于服务重吏后恢复会话 */
+    private byte[] sessionData;
 
     public String getSessionId()
     {
@@ -157,8 +164,28 @@ public class SysUserOnline extends BaseEntity
     {
         this.status = status;
     }
-    
-	@Override
+
+    public OnlineSession getSession()
+    {
+        return session;
+    }
+
+    public void setSession(OnlineSession session)
+    {
+        this.session = session;
+    }
+
+    public byte[] getSessionData()
+    {
+        return sessionData;
+    }
+
+    public void setSessionData(byte[] sessionData)
+    {
+        this.sessionData = sessionData;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("sessionId", getSessionId())

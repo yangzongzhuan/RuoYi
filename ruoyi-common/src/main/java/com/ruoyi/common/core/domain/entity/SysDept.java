@@ -1,9 +1,9 @@
 package com.ruoyi.common.core.domain.entity;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -107,6 +107,7 @@ public class SysDept extends BaseEntity
         this.orderNum = orderNum;
     }
 
+    @Size(min = 0, max = 20, message = "负责人长度不能超过20个字符")
     public String getLeader()
     {
         return leader;

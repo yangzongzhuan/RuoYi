@@ -1182,6 +1182,89 @@ table.rc-table-resizing thead > th > a {
     height: 100% !important;
 }
 
+/* 设置详细样式 */
+.detail-wrap {
+    max-width: 860px;
+    margin: 20px auto;
+    padding: 0 16px 32px;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 13px;
+    color: #333;
+}
+
+/* 详细分组卡片 */
+.detail-card {
+    background: #fff;
+    border: 1px solid #e8ecf0;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    overflow: hidden;
+}
+.detail-card-title {
+    padding: 10px 18px;
+    background: #f7f9fb;
+    border-bottom: 1px solid #e8ecf0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+.detail-card-title i {
+    margin-right: 6px;
+    color: #888;
+}
+
+/* 详细表格行 */
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.detail-table tr {
+    border-bottom: 1px solid #f0f2f5;
+}
+.detail-table tr:last-child {
+    border-bottom: none;
+}
+.detail-table th {
+    width: 110px;
+    padding: 11px 18px;
+    text-align: right;
+    color: #888;
+    font-weight: normal;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.detail-table td {
+    padding: 11px 18px 11px 0;
+    color: #333;
+    vertical-align: top;
+    word-break: break-all;
+}
+
+.detail-table tr td+th {
+    border-left:1px solid #f0f2f5;
+    padding-left:18px
+}
+
+/* 详细状态标签 */
+.tag-ok {
+    display: inline-block;
+    padding: 2px 10px;
+    background: #f0faf4;
+    color: #27ae60;
+    border: 1px solid #b7dfca;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.tag-err {
+    display: inline-block;
+    padding: 2px 10px;
+    background: #fff5f5;
+    color: #e74c3c;
+    border: 1px solid #f5c6c6;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
 /* 设置滚动条样式 */
 ::-webkit-scrollbar {
    width:10px!important;
