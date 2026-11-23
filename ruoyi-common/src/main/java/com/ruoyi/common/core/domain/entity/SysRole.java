@@ -110,6 +110,7 @@ public class SysRole extends BaseEntity
 
     @NotBlank(message = "权限字符不能为空")
     @Size(min = 0, max = 100, message = "权限字符长度不能超过100个字符")
+    @Pattern(regexp = "^[a-zA-Z0-9:_|-]*$", message = "权限字符只能包含字母、数字、冒号、下划线和横竖线")
     public String getRoleKey()
     {
         return roleKey;
