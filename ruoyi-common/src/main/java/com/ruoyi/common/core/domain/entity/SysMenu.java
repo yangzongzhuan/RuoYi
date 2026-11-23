@@ -161,6 +161,7 @@ public class SysMenu extends BaseEntity
     }
 
     @Size(min = 0, max = 100, message = "权限标识长度不能超过100个字符")
+    @Pattern(regexp = "^[a-zA-Z0-9:_|-]*$", message = "权限标识只能包含字母、数字、冒号、下划线和横竖线")
     public String getPerms()
     {
         return perms;
